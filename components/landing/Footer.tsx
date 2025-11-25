@@ -43,10 +43,19 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <h4 className="font-semibold mb-4">Contact</h4>
-          <p className="text-slate-400">Mombasa, Kenya</p>
-          <p className="text-teal-500 font-medium">+254 710 584581</p>
-          <p className="text-slate-400">info@corbantechnologies.org</p>
+          <h3 className="text-2xl font-bold">
+            Corban<span className="text-teal-500">.</span>
+          </h3>
+          <p className="text-slate-400 mt-4">
+            Corban Innovation Hub
+            <br />
+            Mombasa, Kenya
+          </p>
+          <p className="text-slate-400 text-sm mt-2">
+            P.O. Box 10541-80101
+            <br />
+            info@corbantechnologies.org
+          </p>
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-6 mt-12 text-center text-slate-500 text-sm">

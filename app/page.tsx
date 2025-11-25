@@ -45,31 +45,31 @@ export default function Home() {
         <div className="absolute inset-0 bg-grid-white/5" />
         <div className="max-w-7xl mx-auto px-6 text-center relative z-10 pt-20">
           <Badge className="mb-6 bg-teal-900/50 text-teal-300 border-teal-800">
-            FinTech for East Africa
+            Technology Partner • Mombasa, Kenya
           </Badge>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter max-w-5xl mx-auto leading-tight">
-            Digital Infrastructure for East Africa’s Financial Future
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter max-w-6xl mx-auto leading-tight">
+            Building Tomorrow’s Businesses with Secure, Intelligent Technology
           </h1>
-          <p className="mt-8 text-lg md:text-xl text-slate-300 max-w-3xl mx-auto">
-            We engineer secure, compliant FinTech platforms that power SACCOs,
-            microfinance institutions, and growing enterprises across Kenya and
-            beyond.
+          <p className="mt-8 text-lg md:text-xl text-slate-300 max-w-4xl mx-auto leading-relaxed">
+            From cloud infrastructure and CCTV systems to AI-powered analytics
+            and East Africa’s leading SACCO platform — we deliver end-to-end
+            digital solutions that grow with you.
           </p>
           <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
             <Button
               asChild
               size="lg"
-              className="bg-teal-600 hover:bg-teal-700 text-lg px-8"
+              className="bg-teal-600 hover:bg-teal-700 text-lg px-10"
             >
-              <Link href="/sacco-platform">Explore SACCO Platform</Link>
+              <Link href="/sacco-platform">Explore SACCO Platform →</Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="border-slate-600 hover:bg-slate-800 text-lg px-8"
+              className="border-slate-600 hover:bg-slate-800 text-lg px-10"
             >
-              <Link href="/services">View All Services</Link>
+              <Link href="/services">See All Services</Link>
             </Button>
           </div>
         </div>
@@ -92,6 +92,27 @@ export default function Home() {
               </p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="py-20 bg-slate-900/40">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <Badge className="mb-4">Flagship Product</Badge>
+              <h2 className="text-4xl font-bold mb-6">
+                Kenya’s Leading SACCO Management Platform
+              </h2>
+              <p className="text-lg text-slate-300 mb-8">
+                Trusted by growing SACCOs to manage members, loans, dividends,
+                and CBK compliance — all in one secure system.
+              </p>
+              <Button asChild>
+                <Link href="/sacco-platform">Learn More →</Link>
+              </Button>
+            </div>
+            <div className="bg-gray-300 border-2 border-dashed rounded-xl w-full h-96" />
+          </div>
         </div>
       </section>
 
