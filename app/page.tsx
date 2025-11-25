@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Banknote, Globe, Cloud, Shield, Network, Brain } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const services = [
   {
@@ -111,7 +112,13 @@ export default function Home() {
                 <Link href="/sacco-platform">Learn More →</Link>
               </Button>
             </div>
-            <div className="bg-gray-300 border-2 border-dashed rounded-xl w-full h-96" />
+            <Image
+              src="/memberNoBg.png"
+              alt="Sacco Platform Mockup"
+              width={1000}
+              height={1000}
+              className="w-full"
+            />
           </div>
         </div>
       </section>
