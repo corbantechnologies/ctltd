@@ -56,7 +56,7 @@ export default function SaccoPlatform() {
             Fully digital, CBK-compliant core system trusted by 7+ SACCOs and
             growing.
           </p>
-          <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
+          {/* <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
             <Button
               size="lg"
               className="bg-teal-600 hover:bg-teal-700 text-lg px-10"
@@ -70,13 +70,14 @@ export default function SaccoPlatform() {
               </Link>
             </Button>
             <Button
+              asChild
               size="lg"
               variant="outline"
               className="border-slate-600 hover:bg-slate-800"
             >
               <Link href="#pricing">View Pricing →</Link>
             </Button>
-          </div>
+          </div> */}
         </div>
       </section>
 
