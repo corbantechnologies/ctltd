@@ -1,14 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  Check,
-  Phone,
-  Shield,
-  Users,
-  TrendingUp,
-} from "lucide-react";
+import { Check, Phone, Shield, Users, TrendingUp } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function SaccoPlatform() {
   const features = [
@@ -87,8 +82,13 @@ export default function SaccoPlatform() {
       <section className="py-20 bg-slate-900/50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-96" />{" "}
-            {/* Replace with real screenshot */}
+            <Image
+              src="/adminNoBg.png"
+              alt="Sacco Platform Mockup"
+              width={1000}
+              height={1000}
+              className="w-full"
+            />
             <div className="space-y-6">
               <h2 className="text-4xl font-bold">
                 One platform. Every SACCO function.

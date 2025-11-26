@@ -17,19 +17,26 @@ export default function Contact() {
         <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-semibold mb-4">Contact Info</h3>
-              <p className="text-slate-400">Westlands, Nairobi, Kenya</p>
-              <p className="text-teal-500 text-xl font-medium mt-2">
-                +254 7XX XXX XXX
+              <h3 className="text-2xl font-bold">
+                Corban<span className="text-teal-500">.</span>
+              </h3>
+              <p className="text-slate-400 mt-4">
+                Corban Innovation Hub
+                <br />
+                Mombasa, Kenya
               </p>
-              <p className="text-slate-400">hello@corbantech.co.ke</p>
+              <p className="text-slate-400 text-sm mt-2">
+                P.O. Box 10541-80101
+                <br />
+                info@corbantechnologies.org
+              </p>
             </div>
             <div>
               <Button
                 asChild
                 className="w-full bg-green-600 hover:bg-green-700"
               >
-                <a href="https://wa.me/2547XXXXXXXX">Chat on WhatsApp</a>
+                <a href="https://wa.me/254710584581">Chat on WhatsApp</a>
               </Button>
             </div>
           </div>

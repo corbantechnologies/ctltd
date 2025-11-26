@@ -3,35 +3,35 @@ import { Banknote, Globe, Cloud, Shield, Network, Brain } from "lucide-react";
 
 const allServices = [
   {
-    icon: <Banknote className="w-12 h-12" />,
-    title: "SACCO SaaS Platform",
-    desc: "Complete digital transformation for Kenyan SACCOs.",
-    link: "/sacco-platform",
+    icon: <Banknote className="w-10 h-10 text-teal-500" />,
+    title: "SACCO Management Platform",
+    desc: "Kenya’s most trusted digital core for SACCOs — member management, loans, CBK reporting, mobile + USSD.",
+    featured: true,
   },
   {
-    icon: <Globe className="w-12 h-12" />,
+    icon: <Globe className="w-10 h-10 text-teal-500" />,
     title: "Web & Mobile Development",
-    desc: "Next.js, React Native, Flutter — pixel-perfect, high-performance apps.",
+    desc: "Modern websites, PWAs, native iOS/Android apps built for performance and scale.",
   },
   {
-    icon: <Cloud className="w-12 h-12" />,
-    title: "Cloud Platforms",
-    desc: "AWS, Azure, private cloud — migration, scaling, 24/7 management.",
+    icon: <Cloud className="w-10 h-10 text-teal-500" />,
+    title: "Cloud Platform Solutions",
+    desc: "Migration, hosting, dedicated segments, 24/7 management — AWS, Azure, private cloud.",
   },
   {
-    icon: <Shield className="w-12 h-12" />,
-    title: "Cybersecurity",
-    desc: "Penetration testing, compliance, monitoring, incident response.",
-  },
-  {
-    icon: <Network className="w-12 h-12" />,
+    icon: <Network className="w-10 h-10 text-teal-500" />,
     title: "IoT & Networking",
-    desc: "CCTV, structured cabling, enterprise Wi-Fi, private LTE.",
+    desc: "CCTV systems, structured cabling, enterprise Wi-Fi, smart IoT deployments across Kenya.",
   },
   {
-    icon: <Brain className="w-12 h-12" />,
-    title: "AI & Data Intelligence",
-    desc: "Credit scoring, fraud detection, predictive analytics.",
+    icon: <Shield className="w-10 h-10 text-teal-500" />,
+    title: "Cybersecurity",
+    desc: "Threat assessments, monitoring, penetration testing, compliance & training.",
+  },
+  {
+    icon: <Brain className="w-10 h-10 text-teal-500" />,
+    title: "AI & Machine Learning",
+    desc: "Predictive models, automation agents, data analytics, computer vision.",
   },
 ];
 

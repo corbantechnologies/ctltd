@@ -4,7 +4,6 @@ import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
 
-
 export default function RootLayout({
   children,
 }: {
@@ -15,11 +14,11 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
         <title>
-          Corban Technologies LTD | FinTech & Digital Infrastructure
+          Corban Technologies LTD | Technology Solutions – Mombasa, Kenya
         </title>
         <meta
           name="description"
-          content="Secure SACCO platforms, enterprise cloud, cybersecurity, and AI solutions for East Africa."
+          content="SACCO platforms, cloud, cybersecurity, IoT, AI, web & mobile development — full-stack technology partner based in Mombasa, Kenya."
         />
       </head>
       <body className="min-h-screen bg-[#0F172A] text-white antialiased">
