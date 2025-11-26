@@ -11,8 +11,8 @@ export default function SaccoPlatform() {
     "Savings, shares & loan accounts",
     "Instant loan processing & guarantor workflow",
     "Automated dividends & financial reporting",
-    "CBK & SASRA compliant statements",
-    "Member mobile app (Android + USSD *XXX#)",
+    // "CBK & SASRA compliant statements",
+    "Member web portal",
     "Real-time dashboard for management",
     "Bulk SMS & email notifications",
     "Credit scoring engine (coming Q1 2026)",
@@ -21,15 +21,15 @@ export default function SaccoPlatform() {
   const pricing = [
     {
       name: "Starter",
-      price: "KES 29,000/mo",
+      price: "KES 30,000/annually",
       sacoos: "1 SACCO",
-      users: "Up to 2,000 members",
+      users: "Up to 1,000 members",
     },
     {
       name: "Growth",
-      price: "KES 59,000/mo",
+      price: "KES 60,000/annually",
       sacoos: "1 SACCO",
-      users: "2,000 – 10,000 members",
+      users: "1,000 – 5,000 members",
       popular: true,
     },
     {
@@ -58,16 +58,18 @@ export default function SaccoPlatform() {
           </p>
           <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
             <Button
-              asChild
               size="lg"
               className="bg-teal-600 hover:bg-teal-700 text-lg px-10"
             >
-              <Link href="https://calendly.com/corban-tech/demo">
+              <Phone className="mr-2 w-5 h-5" />
+              <Link
+                href="https://calendar.app.google/NVBGSFXxVqm2gGi9A"
+                target="_blank"
+              >
                 Book Free Demo
               </Link>
             </Button>
             <Button
-              asChild
               size="lg"
               variant="outline"
               className="border-slate-600 hover:bg-slate-800"
@@ -197,8 +199,11 @@ export default function SaccoPlatform() {
               className="bg-teal-600 hover:bg-teal-700 text-lg px-10"
             >
               <Phone className="mr-2 w-5 h-5" />
-              <Link href="https://calendly.com/corban-tech/demo">
-                Book Free Demo (15 mins)
+              <Link
+                href="https://calendar.app.google/NVBGSFXxVqm2gGi9A"
+                target="_blank"
+              >
+                Book Free Demo
               </Link>
             </Button>
           </div>
