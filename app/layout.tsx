@@ -1,3 +1,5 @@
+"use client";
+
 import "./globals.css";
 import GrainOverlay from "@/components/landing/GrainOverlay";
 import Navbar from "@/components/landing/Navbar";
@@ -21,8 +23,7 @@ export default function RootLayout({
           content="SACCO platforms, cloud, cybersecurity, IoT, AI, web & mobile development — full-stack technology partner based in Mombasa, Kenya."
         />
       </head>
-      <body className="min-h-screen bg-[#0F172A] text-white antialiased">
-        <GrainOverlay />
+      <body className="min-h-screen selection:bg-corporate-primary selection:text-white antialiased">
         <Navbar />
         <main className="relative">{children}</main>
         <Footer />
