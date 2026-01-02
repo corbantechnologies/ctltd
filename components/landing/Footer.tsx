@@ -10,7 +10,7 @@ export default function Footer() {
       {/* Decorative background element */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-corporate-primary to-transparent opacity-30"></div>
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+      <div className="mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
         {/* Company Info */}
         <div className="space-y-6">
           <Link
@@ -31,19 +31,14 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-4">
             <a
-              href="#"
+              href="https://x.com/corbantechltd"
               className="p-2.5 rounded-full bg-white border border-slate-200 text-black hover:bg-corporate-primary hover:text-white hover:border-corporate-primary transition-all shadow-md"
             >
               <Twitter className="w-4 h-4" />
             </a>
+
             <a
-              href="#"
-              className="p-2.5 rounded-full bg-white border border-slate-200 text-black hover:bg-corporate-primary hover:text-white hover:border-corporate-primary transition-all shadow-md"
-            >
-              <Linkedin className="w-4 h-4" />
-            </a>
-            <a
-              href="#"
+              href="https://github.com/corbantechnologies"
               className="p-2.5 rounded-full bg-white border border-slate-200 text-black hover:bg-corporate-primary hover:text-white hover:border-corporate-primary transition-all shadow-md"
             >
               <Github className="w-4 h-4" />
@@ -57,7 +52,7 @@ export default function Footer() {
             Company
           </h4>
           <ul className="space-y-4">
-            {["About Us", "Our Team", "Careers", "Contact"].map((item) => (
+            {["About", "Products", "Contact"].map((item) => (
               <li key={item}>
                 <a
                   href={`/${item.toLowerCase().replace(" ", "-")}`}
@@ -77,7 +72,7 @@ export default function Footer() {
           </h4>
           <ul className="space-y-4">
             {[
-              { name: "SACCO Platform", href: "/sacco-platform" },
+              { name: "SACCO Platform", href: "/products/sacco-platform" },
               { name: "Web & Mobile Dev", href: "/services" },
               { name: "Cloud Infrastructure", href: "/services" },
               { name: "Cybersecurity", href: "/services" },
@@ -120,7 +115,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-6 text-black">
+      <div className="mx-auto px-6 mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-6 text-black">
         <p className="text-xs font-black">
           © {currentYear} Corban Technologies LTD. All rights reserved.
         </p>
