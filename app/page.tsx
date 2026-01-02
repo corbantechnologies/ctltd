@@ -18,14 +18,14 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-12">
         <div className="absolute inset-0 bg-grid-white opacity-40" />
 
         {/* Animated Background Elements */}
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-orange-100/50 rounded-full blur-[120px] animate-pulse-slow" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-orange-50/50 rounded-full blur-[100px] animate-pulse-slow delay-1000" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+        <div className="mx-auto px-6 relative z-10 text-center">
           <Badge className="mb-6 bg-orange-100 text-corporate-primary border-orange-200 font-black uppercase tracking-widest py-2 px-4 shadow-sm">
             Mombasa&apos;s Leading Tech Partner
           </Badge>
@@ -66,7 +66,7 @@ export default function Home() {
 
       {/* Trust & Performance Metrics */}
       <section className="py-24 bg-corporate-secondary border-y border-black/5">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="mx-auto px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
             {[
               { label: "Active SACCOs", value: "50+" },
@@ -89,7 +89,7 @@ export default function Home() {
 
       {/* Flagship Product Showcase */}
       <section className="py-32 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div className="mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="relative group">
             <div className="absolute -inset-4 bg-gradient-to-tr from-corporate-primary/20 to-orange-100/20 rounded-[40px] blur-2xl group-hover:opacity-100 transition-opacity" />
             <div className="relative bg-orange-50 border border-orange-100 rounded-[32px] p-8 overflow-hidden shadow-2xl">
@@ -170,7 +170,7 @@ export default function Home() {
 
       {/* Services/Capabilities Grid */}
       <section className="py-32 bg-orange-50/50">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
             <h2 className="text-3xl md:text-5xl font-black text-black tracking-tighter">
               Versatile Expertise.

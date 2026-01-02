@@ -24,7 +24,6 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen selection:bg-corporate-primary selection:text-white antialiased">
-        <GrainOverlay />
         <Navbar />
         <main className="relative">{children}</main>
         <Footer />

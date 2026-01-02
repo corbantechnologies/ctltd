@@ -47,7 +47,7 @@ export default function ProductDetailPage() {
       {/* Project Hero */}
       <section className="relative pt-40 pb-20 overflow-hidden border-b border-black/5">
         <div className="absolute inset-0 bg-grid-white pointer-events-none opacity-40" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="mx-auto px-6 relative z-10">
           <Link
             href="/products"
             className="inline-flex items-center gap-2 text-corporate-foreground opacity-40 hover:opacity-100 hover:text-corporate-primary transition-all font-black uppercase tracking-widest text-[10px] mb-8 group"
@@ -106,7 +106,7 @@ export default function ProductDetailPage() {
 
       {/* Project Content */}
       <section className="py-24 bg-corporate-secondary">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             {/* Main Content */}
             <div className="lg:col-span-8 space-y-16">
@@ -206,7 +206,7 @@ export default function ProductDetailPage() {
       </section>
 
       {/* Visual Showcase (Optional/Future) */}
-      <section className="py-24 bg-white border-t border-black/5">
+      {/* <section className="py-24 bg-white border-t border-black/5">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-black text-corporate-foreground tracking-tighter mb-16">
             The Engineering{" "}
@@ -216,7 +216,6 @@ export default function ProductDetailPage() {
             <div className="absolute inset-0 bg-grid-white opacity-40 group-hover:scale-110 transition-transform duration-[2s]" />
             <div className="absolute inset-0 flex items-center justify-center p-20">
               <div className="relative w-full h-full max-w-4xl mx-auto flex items-center justify-center">
-                {/* Dynamic Visual depending on project */}
                 <div className="text-center space-y-6">
                   <div className="w-20 h-20 rounded-3xl bg-orange-100 flex items-center justify-center text-corporate-primary mx-auto shadow-xl group-hover:rotate-12 transition-transform">
                     <Globe className="w-10 h-10" />
@@ -229,7 +228,7 @@ export default function ProductDetailPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
