@@ -105,7 +105,7 @@ export default function Home() {
                 {/* Mockup Placeholder */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Image
-                    src="/logo.png"
+                    src="/projects/sacco.png"
                     alt="Sacco Dashboard"
                     width={300}
                     height={80}
