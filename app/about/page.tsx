@@ -14,7 +14,7 @@ export default function About() {
       {/* About Hero */}
       <section className="relative pt-40 pb-24 overflow-hidden border-b border-black/5">
         <div className="absolute inset-0 bg-grid-white pointer-events-none opacity-40" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center lg:text-left">
+        <div className="mx-auto px-6 relative z-10 text-center lg:text-left">
           <Badge className="mb-4 bg-orange-100 text-corporate-primary border-orange-200 font-black uppercase tracking-widest py-2 px-6 shadow-sm">
             Our Mission
           </Badge>
