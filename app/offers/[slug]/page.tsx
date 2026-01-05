@@ -163,7 +163,7 @@ export default function OfferDetail({ params }: PageProps) {
                           {addon.description}
                         </p>
                       </div>
-                      <Badge className="bg-white border-black/10 text-corporate-foreground font-black py-4 px-6 rounded-2xl w-fit">
+                      <Badge className="bg-white border-black/10 text-corporate-foreground font-black py-4 px-6 rounded-2xl w-fit whitespace-normal text-center">
                         {addon.note}
                       </Badge>
                     </div>
