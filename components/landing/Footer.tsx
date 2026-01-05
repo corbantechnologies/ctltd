@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, MapPin, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail, MapPin, Github, Twitter } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -52,16 +52,18 @@ export default function Footer() {
             Company
           </h4>
           <ul className="space-y-4">
-            {["About", "Products", "Contact"].map((item) => (
-              <li key={item}>
-                <a
-                  href={`/${item.toLowerCase().replace(" ", "-")}`}
-                  className="text-black hover:text-corporate-primary text-sm font-black transition-colors"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
+            {["Products", "Offers", "Services", "Contact", "About"].map(
+              (item) => (
+                <li key={item}>
+                  <Link
+                    href={`/${item.toLowerCase().replace(" ", "-")}`}
+                    className="text-black hover:text-corporate-primary text-sm font-black transition-colors"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              )
+            )}
           </ul>
         </div>
 
