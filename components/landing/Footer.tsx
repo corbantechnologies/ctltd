@@ -52,14 +52,14 @@ export default function Footer() {
             Company
           </h4>
           <ul className="space-y-4">
-            {["About", "Products", "Contact"].map((item) => (
+            {["Products", "Offers", "Contact", "About"].map((item) => (
               <li key={item}>
-                <a
+                <Link
                   href={`/${item.toLowerCase().replace(" ", "-")}`}
                   className="text-black hover:text-corporate-primary text-sm font-black transition-colors"
                 >
                   {item}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
