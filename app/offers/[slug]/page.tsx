@@ -16,6 +16,8 @@ import {
 import Link from "next/link";
 import { offers } from "@/offers/offers";
 import { notFound } from "next/navigation";
+import { useState } from "react";
+import { ClaimOfferModal } from "@/components/offers/ClaimOfferModal";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -24,6 +26,7 @@ interface PageProps {
 export default function OfferDetail({ params }: PageProps) {
   const resolvedParams = use(params);
   const offer = offers.find((o) => o.slug === resolvedParams.slug);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (!offer) {
     notFound();
@@ -31,6 +34,12 @@ export default function OfferDetail({ params }: PageProps) {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <ClaimOfferModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        offerTitle={offer.title}
+        offerSlug={offer.slug}
+      />
       {/* Header / Back Link */}
       <div className="fixed top-24 left-6 z-50">
         <Button
@@ -212,7 +221,10 @@ export default function OfferDetail({ params }: PageProps) {
                 </div>
 
                 <div className="space-y-4">
-                  <Button className="w-full bg-corporate-primary hover:bg-orange-600 text-white rounded-[24px] py-10 text-xl font-black shadow-2xl shadow-orange-500/30 transition-all hover:scale-[1.02] active:scale-95 group">
+                  <Button
+                    onClick={() => setIsModalOpen(true)}
+                    className="w-full bg-corporate-primary hover:bg-orange-600 text-white rounded-[24px] py-10 text-xl font-black shadow-2xl shadow-orange-500/30 transition-all hover:scale-[1.02] active:scale-95 group"
+                  >
                     Claim This Offer
                     <ArrowRight className="w-6 h-6 ml-2 transition-transform group-hover:translate-x-1" />
                   </Button>
