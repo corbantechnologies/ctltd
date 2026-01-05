@@ -5,8 +5,9 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const BUSINESS_EMAIL = "info@corbantechnologies.org";
-const FROM_EMAIL = "business@corbantechnologies.org";
+const BUSINESS_EMAIL = process.env.BUSINESS_EMAIL || "";
+const FROM_EMAIL = process.env.FROM_EMAIL || "";
+const ALTERNATE_EMAIL = process.env.ALTERNATE_EMAIL || "";
 
 export async function POST(req: Request) {
   try {
@@ -15,7 +16,7 @@ export async function POST(req: Request) {
     // 1. Send notification to Business Team
     await resend.emails.send({
       from: `Offers Portal <${FROM_EMAIL}>`,
-      to: [BUSINESS_EMAIL],
+      to: [BUSINESS_EMAIL, ALTERNATE_EMAIL],
       subject: `New Offer Claim: ${offerTitle} from ${userName}`,
       react: OffersNotificationTemplate({
         userName,
