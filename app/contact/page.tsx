@@ -21,12 +21,19 @@ export default function Contact() {
     setSuccess(false);
 
     const formData = new FormData(e.currentTarget);
+    const data = {
+      type: "contact",
+      userName: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
 
     try {
-      const response = await fetch("https://formspree.io/f/xldkklev", {
+      const response = await fetch("/api/send", {
         method: "POST",
-        body: formData,
+        body: JSON.stringify(data),
         headers: {
+          "Content-Type": "application/json",
           Accept: "application/json",
         },
       });
@@ -210,12 +217,6 @@ export default function Contact() {
                       required
                     />
                   </div>
-                  <input
-                    type="hidden"
-                    name="_next"
-                    value="https://corbantechnologies.org/thank-you"
-                  />
-                  <input type="hidden" name="_captcha" value="false" />
 
                   <Button
                     type="submit"
