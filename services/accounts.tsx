@@ -46,7 +46,7 @@ export const getAccount = async (
 
 export const forgotPassword = async (data: forgotPassword): Promise<any> => {
   const response: AxiosResponse<any> = await apiActions.post(
-    `/api/v1/auth/password/reset/`,
+    `/api/v1/auth/password/forgot/`,
     data
   );
   return response.data;
@@ -54,7 +54,7 @@ export const forgotPassword = async (data: forgotPassword): Promise<any> => {
 
 export const resetPassword = async (data: resetPassword): Promise<any> => {
   const response: AxiosResponse<any> = await apiActions.post(
-    `/api/v1/auth/password/reset/confirm/`,
+    `/api/v1/auth/password/reset/`,
     data
   );
   return response.data;

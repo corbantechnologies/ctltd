@@ -17,29 +17,35 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { ChevronLeft, Loader2, Mail, Send } from "lucide-react";
 import { forgotPassword } from "@/services/accounts";
+import { useFormik } from "formik";
+import { ForgotPasswordSchema } from "@/validation";
 
 export default function ForgotPassword() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
   const [submitted, setSubmitted] = useState<boolean>(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: ForgotPasswordSchema,
+    onSubmit: async (values) => {
+      setLoading(true);
 
-    try {
-      await forgotPassword({ email });
-      setSubmitted(true);
-      toast.success("Reset code sent to your email!");
-    } catch (error: any) {
-      toast.error(
-        error.response?.data?.message ||
-          "Failed to send reset code. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+      try {
+        await forgotPassword({ email: values.email });
+        setSubmitted(true);
+        toast.success("Reset code sent to your email!");
+      } catch (error: any) {
+        toast.error(
+          error.response?.data?.message ||
+            "Failed to send reset code. Please try again."
+        );
+      } finally {
+        setLoading(false);
+      }
+    },
+  });
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-white px-4">
@@ -51,7 +57,7 @@ export default function ForgotPassword() {
       <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8">
           <Badge className="mb-4 bg-orange-100 text-corporate-primary border-orange-200 font-black uppercase tracking-widest py-1.5 px-4 shadow-sm">
-            Corban Technology
+            Corban Technologies LTD
           </Badge>
           <h1 className="text-4xl font-black tracking-tighter text-black mb-2">
             Recover <span className="text-corporate-primary">Access.</span>
@@ -74,7 +80,7 @@ export default function ForgotPassword() {
           </CardHeader>
           <CardContent className="px-8 pb-8">
             {!submitted ? (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={formik.handleSubmit} className="space-y-6">
                 <div className="space-y-2">
                   <label className="text-sm font-black uppercase tracking-widest text-black/40 ml-1">
                     Email Address
@@ -84,14 +90,25 @@ export default function ForgotPassword() {
                       <Mail className="h-5 w-5 text-black/20 group-focus-within:text-corporate-primary transition-colors" />
                     </div>
                     <Input
+                      name="email"
                       type="email"
                       required
                       placeholder="name@company.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="pl-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all"
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      className={`pl-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all ${
+                        formik.touched.email && formik.errors.email
+                          ? "border-red-500"
+                          : ""
+                      }`}
                     />
                   </div>
+                  {formik.touched.email && formik.errors.email && (
+                    <p className="text-xs text-red-500 font-bold ml-1">
+                      {formik.errors.email}
+                    </p>
+                  )}
                 </div>
 
                 <Button
@@ -119,7 +136,8 @@ export default function ForgotPassword() {
                     <Mail className="w-6 h-6" />
                   </div>
                   <p className="text-sm font-bold text-black/70">
-                    Instructions have been sent to <strong>{email}</strong>
+                    Instructions have been sent to{" "}
+                    <strong>{formik.values.email}</strong>
                   </p>
                 </div>
                 <Button
@@ -148,7 +166,7 @@ export default function ForgotPassword() {
           </CardContent>
           <CardFooter className="bg-orange-50/50 border-t border-black/5 py-6 flex flex-col items-center">
             <p className="text-sm font-bold text-black/40">
-              Corban Technology Recovery Service
+              Corban Technologies LTD Recovery Service
             </p>
           </CardFooter>
         </Card>

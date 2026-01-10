@@ -26,57 +26,57 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { resetPassword } from "@/services/accounts";
+import { useFormik } from "formik";
+import { ResetPasswordSchema } from "@/validation";
 
 export default function ResetPassword() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
-  const [code, setCode] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      code: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: ResetPasswordSchema,
+    onSubmit: async (values) => {
+      setLoading(true);
 
-    if (password !== passwordConfirmation) {
-      toast.error("Passwords do not match");
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      await resetPassword({
-        email,
-        code,
-        password,
-        password_confirmation: passwordConfirmation,
-      });
-      toast.success("Password reset successfully! You can now login.");
-      router.push("/login");
-    } catch (error: any) {
-      toast.error(
-        error.response?.data?.message ||
-          "Failed to reset password. Please check your data."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+      try {
+        await resetPassword({
+          email: values.email,
+          code: values.code,
+          password: values.password,
+          password_confirmation: values.confirmPassword,
+        });
+        toast.success("Password reset successfully! You can now login.");
+        router.push("/login");
+      } catch (error: any) {
+        toast.error(
+          error.response?.data?.message ||
+            "Failed to reset password. Please check your data."
+        );
+      } finally {
+        setLoading(false);
+      }
+    },
+  });
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-white px-4">
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 bg-grid-white opacity-40" />
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-orange-100/30 rounded-full blur-[120px] animate-pulse-slow" />
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-orange-100/30 rounded-full blur-[120px] animate-pulse-slow" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-orange-50/40 rounded-full blur-[100px] animate-pulse-slow delay-1000" />
 
       <div className="relative z-10 w-full max-w-md my-12">
         <div className="text-center mb-8">
           <Badge className="mb-4 bg-orange-100 text-corporate-primary border-orange-200 font-black uppercase tracking-widest py-1.5 px-4 shadow-sm">
-            Corban Technology
+            Corban Technologies LTD
           </Badge>
           <h1 className="text-4xl font-black tracking-tighter text-black mb-2">
             Reset <span className="text-corporate-primary">Password.</span>
@@ -96,7 +96,7 @@ export default function ResetPassword() {
             </CardDescription>
           </CardHeader>
           <CardContent className="px-8 pb-8">
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={formik.handleSubmit} className="space-y-5">
               <div className="space-y-2">
                 <label className="text-sm font-black uppercase tracking-widest text-black/40 ml-1">
                   Email Address
@@ -106,14 +106,25 @@ export default function ResetPassword() {
                     <Mail className="h-5 w-5 text-black/20 group-focus-within:text-corporate-primary transition-colors" />
                   </div>
                   <Input
+                    name="email"
                     type="email"
                     required
                     placeholder="name@company.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="pl-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={`pl-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all ${
+                      formik.touched.email && formik.errors.email
+                        ? "border-red-500"
+                        : ""
+                    }`}
                   />
                 </div>
+                {formik.touched.email && formik.errors.email && (
+                  <p className="text-xs text-red-500 font-bold ml-1">
+                    {formik.errors.email}
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -125,14 +136,25 @@ export default function ResetPassword() {
                     <KeyRound className="h-5 w-5 text-black/20 group-focus-within:text-corporate-primary transition-colors" />
                   </div>
                   <Input
+                    name="code"
                     type="text"
                     required
                     placeholder="Enter 6-digit code"
-                    value={code}
-                    onChange={(e) => setCode(e.target.value)}
-                    className="pl-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all tracking-[0.2em]"
+                    value={formik.values.code}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={`pl-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all tracking-[0.2em] ${
+                      formik.touched.code && formik.errors.code
+                        ? "border-red-500"
+                        : ""
+                    }`}
                   />
                 </div>
+                {formik.touched.code && formik.errors.code && (
+                  <p className="text-xs text-red-500 font-bold ml-1">
+                    {formik.errors.code}
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -144,12 +166,18 @@ export default function ResetPassword() {
                     <Lock className="h-5 w-5 text-black/20 group-focus-within:text-corporate-primary transition-colors" />
                   </div>
                   <Input
+                    name="password"
                     type={showPassword ? "text" : "password"}
                     required
                     placeholder="Min. 8 characters"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 pr-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={`pl-10 pr-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all ${
+                      formik.touched.password && formik.errors.password
+                        ? "border-red-500"
+                        : ""
+                    }`}
                   />
                   <button
                     type="button"
@@ -163,6 +191,11 @@ export default function ResetPassword() {
                     )}
                   </button>
                 </div>
+                {formik.touched.password && formik.errors.password && (
+                  <p className="text-xs text-red-500 font-bold ml-1">
+                    {formik.errors.password}
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -174,14 +207,27 @@ export default function ResetPassword() {
                     <ShieldCheck className="h-5 w-5 text-black/20 group-focus-within:text-corporate-primary transition-colors" />
                   </div>
                   <Input
+                    name="confirmPassword"
                     type={showPassword ? "text" : "password"}
                     required
                     placeholder="Repeat new password"
-                    value={passwordConfirmation}
-                    onChange={(e) => setPasswordConfirmation(e.target.value)}
-                    className="pl-10 pr-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all"
+                    value={formik.values.confirmPassword}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={`pl-10 pr-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all ${
+                      formik.touched.confirmPassword &&
+                      formik.errors.confirmPassword
+                        ? "border-red-500"
+                        : ""
+                    }`}
                   />
                 </div>
+                {formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword && (
+                    <p className="text-xs text-red-500 font-bold ml-1">
+                      {formik.errors.confirmPassword}
+                    </p>
+                  )}
               </div>
 
               <Button
@@ -202,12 +248,12 @@ export default function ResetPassword() {
           </CardContent>
           <CardFooter className="bg-orange-50/50 border-t border-black/5 py-6 flex flex-col items-center">
             <p className="text-sm font-bold text-black/40">
-              Corban Technology Credential Vault
+              Corban Technologies LTD Credential Vault
             </p>
           </CardFooter>
         </Card>
 
-        <div className="mt-8 text-center text-sm font-bold text-black/40">
+        {/* <div className="mt-8 text-center text-sm font-bold text-black/40">
           Didn&apos;t get a code?{" "}
           <Link
             href="/forgot-password"
@@ -215,7 +261,7 @@ export default function ResetPassword() {
           >
             Resend Code
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

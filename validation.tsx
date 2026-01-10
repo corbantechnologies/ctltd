@@ -25,6 +25,8 @@ const LoginSchema = Yup.object().shape({
 });
 
 const ResetPasswordSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Required"),
+  code: Yup.string().required("Code is required"),
   password: Yup.string()
     .min(5, "Password cannot be less than 5 characters")
     .required("This field is required")
@@ -37,4 +39,13 @@ const ResetPasswordSchema = Yup.object().shape({
     .oneOf([Yup.ref("password")], "Confirm Password does not match"),
 });
 
-export { RegistrationSchema, LoginSchema, ResetPasswordSchema };
+const ForgotPasswordSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Required"),
+});
+
+export {
+  RegistrationSchema,
+  LoginSchema,
+  ResetPasswordSchema,
+  ForgotPasswordSchema,
+};

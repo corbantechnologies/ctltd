@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Eye, EyeOff, Loader2, Lock, Mail } from "lucide-react";
+import { useFormik } from "formik";
+import { LoginSchema } from "@/validation";
 
 interface CustomUser extends User {
   is_director?: boolean;
@@ -32,44 +34,48 @@ interface CustomSession extends Session {
 
 export default function Login() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: LoginSchema,
+    onSubmit: async (values) => {
+      setLoading(true);
 
-    const response = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
+      const response = await signIn("credentials", {
+        redirect: false,
+        email: values.email,
+        password: values.password,
+      });
 
-    const session = (await getSession()) as CustomSession | null;
+      const session = (await getSession()) as CustomSession | null;
 
-    setLoading(false);
+      setLoading(false);
 
-    if (response?.error) {
-      toast.error("Invalid email or password");
-    } else {
-      toast.success("Login successful! Redirecting...");
-
-      if (session?.user?.is_director === true) {
-        router.push("/director/dashboard");
-      } else if (session?.user?.is_employee === true) {
-        router.push("/employee/dashboard");
-      } else if (session?.user?.is_finance === true) {
-        router.push("/finance/dashboard");
-      } else if (session?.user?.is_superuser === true) {
-        router.push("/superuser/dashboard");
+      if (response?.error) {
+        toast.error("Invalid email or password");
       } else {
-        router.push("/");
+        toast.success("Login successful! Redirecting...");
+
+        if (session?.user?.is_director === true) {
+          router.push("/director/dashboard");
+        } else if (session?.user?.is_employee === true) {
+          router.push("/employee/dashboard");
+        } else if (session?.user?.is_finance === true) {
+          router.push("/finance/dashboard");
+        } else if (session?.user?.is_superuser === true) {
+          router.push("/superuser/dashboard");
+        } else {
+          router.push("/");
+        }
       }
-    }
-  };
+    },
+  });
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-white px-4">
@@ -81,7 +87,7 @@ export default function Login() {
       <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8">
           <Badge className="mb-4 bg-orange-100 text-corporate-primary border-orange-200 font-black uppercase tracking-widest py-1.5 px-4 shadow-sm">
-            Corban Technology
+            Corban Technologies LTD
           </Badge>
           <h1 className="text-4xl font-black tracking-tighter text-black mb-2">
             Welcome <span className="text-corporate-primary">Back.</span>
@@ -101,7 +107,7 @@ export default function Login() {
             </CardDescription>
           </CardHeader>
           <CardContent className="px-8 pb-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={formik.handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <label className="text-sm font-black uppercase tracking-widest text-black/40 ml-1">
                   Email Address
@@ -111,14 +117,25 @@ export default function Login() {
                     <Mail className="h-5 w-5 text-black/20 group-focus-within:text-corporate-primary transition-colors" />
                   </div>
                   <Input
+                    name="email"
                     type="email"
                     required
                     placeholder="name@company.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="pl-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={`pl-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all ${
+                      formik.touched.email && formik.errors.email
+                        ? "border-red-500"
+                        : ""
+                    }`}
                   />
                 </div>
+                {formik.touched.email && formik.errors.email && (
+                  <p className="text-xs text-red-500 font-bold ml-1">
+                    {formik.errors.email}
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -139,12 +156,18 @@ export default function Login() {
                     <Lock className="h-5 w-5 text-black/20 group-focus-within:text-corporate-primary transition-colors" />
                   </div>
                   <Input
+                    name="password"
                     type={showPassword ? "text" : "password"}
                     required
                     placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 pr-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={`pl-10 pr-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all ${
+                      formik.touched.password && formik.errors.password
+                        ? "border-red-500"
+                        : ""
+                    }`}
                   />
                   <button
                     type="button"
@@ -158,6 +181,11 @@ export default function Login() {
                     )}
                   </button>
                 </div>
+                {formik.touched.password && formik.errors.password && (
+                  <p className="text-xs text-red-500 font-bold ml-1">
+                    {formik.errors.password}
+                  </p>
+                )}
               </div>
 
               <Button
@@ -178,12 +206,12 @@ export default function Login() {
           </CardContent>
           <CardFooter className="bg-orange-50/50 border-t border-black/5 py-6 flex flex-col items-center">
             <p className="text-sm font-bold text-black/40">
-              Corban Technology Enterprise Security
+              Corban Technologies LTD Enterprise Security
             </p>
           </CardFooter>
         </Card>
 
-        <div className="mt-8 text-center">
+        {/* <div className="mt-8 text-center">
           <p className="text-sm font-bold text-black/60">
             Need assistance?{" "}
             <Link
@@ -193,7 +221,7 @@ export default function Login() {
               Contact Support
             </Link>
           </p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
