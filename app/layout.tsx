@@ -1,10 +1,11 @@
 "use client";
 
 import "./globals.css";
-import GrainOverlay from "@/components/landing/GrainOverlay";
-import Navbar from "@/components/landing/Navbar";
-import Footer from "@/components/landing/Footer";
-import WhatsAppButton from "@/components/landing/WhatsAppButton";
+
+import NextAuthProvider from "@/providers/NextAuthProvider";
+import TanstackQueryProvider from "@/providers/TanstackQueryProvider";
+import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from "react-hot-toast";
 
 export default function RootLayout({
   children,
@@ -24,10 +25,15 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen selection:bg-corporate-primary selection:text-white antialiased">
-        <Navbar />
-        <main className="relative">{children}</main>
-        <Footer />
-        <WhatsAppButton />
+        <Toaster position="top-center" />
+        <NextAuthProvider>
+          <TanstackQueryProvider>
+           
+            <main className="relative">{children}</main>
+            
+          </TanstackQueryProvider>
+        </NextAuthProvider>
+        <Analytics />
       </body>
     </html>
   );
