@@ -1,9 +1,7 @@
 "use client";
 
 import "./globals.css";
-import Navbar from "@/components/landing/Navbar";
-import Footer from "@/components/landing/Footer";
-import WhatsAppButton from "@/components/landing/WhatsAppButton";
+
 import NextAuthProvider from "@/providers/NextAuthProvider";
 import TanstackQueryProvider from "@/providers/TanstackQueryProvider";
 import { Analytics } from "@vercel/analytics/react";
@@ -30,10 +28,9 @@ export default function RootLayout({
         <Toaster position="top-center" />
         <NextAuthProvider>
           <TanstackQueryProvider>
-            <Navbar />
+           
             <main className="relative">{children}</main>
-            <Footer />
-            <WhatsAppButton />
+            
           </TanstackQueryProvider>
         </NextAuthProvider>
         <Analytics />

@@ -64,7 +64,7 @@ export default function NotFound() {
 
         <div className="mt-12 pt-12 border-t border-black/5">
           <p className="text-sm font-black text-black/20 uppercase tracking-[0.2em]">
-            Corban Technology Infrastructure
+            Corban Technologies LTD Infrastructure
           </p>
         </div>
       </div>
