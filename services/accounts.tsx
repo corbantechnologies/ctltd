@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
 
-interface User {
+export interface User {
   username: string;
   email: string;
   first_name: string;
@@ -21,11 +22,11 @@ interface User {
   is_staff: boolean;
 }
 
-interface forgotPassword {
+export interface forgotPassword {
   email: string;
 }
 
-interface resetPassword {
+export interface resetPassword {
   email: string;
   code: string;
   password: string;
@@ -43,16 +44,16 @@ export const getAccount = async (
   return response.data;
 };
 
-export const forgotPassword = async (data: forgotPassword): Promise<User> => {
-  const response: AxiosResponse<User> = await apiActions.post(
+export const forgotPassword = async (data: forgotPassword): Promise<any> => {
+  const response: AxiosResponse<any> = await apiActions.post(
     `/api/v1/auth/password/reset/`,
     data
   );
   return response.data;
 };
 
-export const resetPassword = async (data: resetPassword): Promise<User> => {
-  const response: AxiosResponse<User> = await apiActions.post(
+export const resetPassword = async (data: resetPassword): Promise<any> => {
+  const response: AxiosResponse<any> = await apiActions.post(
     `/api/v1/auth/password/reset/confirm/`,
     data
   );
