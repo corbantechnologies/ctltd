@@ -27,6 +27,8 @@ interface updateCOA {
   name: string;
 }
 
+// finance responsibilities
+
 export const createCOA = async (
   data: createCOA,
   headers: { headers: { Authorization: string } }
@@ -34,27 +36,6 @@ export const createCOA = async (
   const response: AxiosResponse<COA> = await apiActions.post(
     `/api/v1/coa/`,
     data,
-    headers
-  );
-  return response.data;
-};
-
-export const getCOAs = async (headers: {
-  headers: { Authorization: string };
-}): Promise<COA[]> => {
-  const response: AxiosResponse<PaginatedResponse<COA>> = await apiActions.get(
-    `/api/v1/coa/`,
-    headers
-  );
-  return response.data.results || [];
-};
-
-export const getCOA = async (
-  reference: string,
-  headers: { headers: { Authorization: string } }
-): Promise<COA> => {
-  const response: AxiosResponse<COA> = await apiActions.get(
-    `/api/v1/coa/${reference}/`,
     headers
   );
   return response.data;
@@ -78,6 +59,29 @@ export const deleteCOA = async (
   headers: { headers: { Authorization: string } }
 ): Promise<COA> => {
   const response: AxiosResponse<COA> = await apiActions.delete(
+    `/api/v1/coa/${reference}/`,
+    headers
+  );
+  return response.data;
+};
+
+// All can read
+
+export const getCOAs = async (headers: {
+  headers: { Authorization: string };
+}): Promise<COA[]> => {
+  const response: AxiosResponse<PaginatedResponse<COA>> = await apiActions.get(
+    `/api/v1/coa/`,
+    headers
+  );
+  return response.data.results || [];
+};
+
+export const getCOA = async (
+  reference: string,
+  headers: { headers: { Authorization: string } }
+): Promise<COA> => {
+  const response: AxiosResponse<COA> = await apiActions.get(
     `/api/v1/coa/${reference}/`,
     headers
   );
