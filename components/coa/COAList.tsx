@@ -347,9 +347,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               className="w-10 h-10 p-0 rounded-xl border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
-              style={{
-                ["--hover-bg" as any]: primaryColor,
-              }}
+              style={{ "--hover-bg": primaryColor } as CSSWithVariables}
             >
               <ChevronLeft className="w-4 h-4" />
             </Button>
@@ -403,9 +401,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               className="w-10 h-10 p-0 rounded-xl border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
-              style={{
-                ["--hover-bg" as any]: primaryColor,
-              }}
+              style={{ "--hover-bg": primaryColor } as CSSWithVariables}
             >
               <ChevronRight className="w-4 h-4" />
             </Button>

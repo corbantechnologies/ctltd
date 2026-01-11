@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -268,9 +269,11 @@ export default function BooksList({
                         <div>
                           <p
                             className="text-sm font-black text-black transition-colors"
-                            style={{
-                              ["--group-hover-text" as any]: primaryColor,
-                            }}
+                            style={
+                              {
+                                "--group-hover-text": primaryColor,
+                              } as CSSWithVariables
+                            }
                           >
                             {book.name}
                           </p>

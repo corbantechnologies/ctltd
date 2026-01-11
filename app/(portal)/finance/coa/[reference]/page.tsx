@@ -12,11 +12,11 @@ import {
   ArrowUpDown,
   Activity,
   ArrowLeft,
+  X,
 } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -82,21 +82,13 @@ export default function FinanceCOADetailPage() {
           </div>
         </div>
 
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button className="h-14 px-8 bg-black hover:bg-[#045138] text-white rounded-2xl font-black text-sm transition-all shadow-xl active:scale-95 group">
-              <Edit3 className="w-5 h-5 mr-2" />
-              Update Account
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl p-0 border-none bg-transparent shadow-none">
-            <UpdateCOA
-              coa={{ name: coa.name, code: coa.code, reference: coa.reference }}
-              rolePrefix="finance"
-              onSuccess={() => setOpen(false)}
-            />
-          </DialogContent>
-        </Dialog>
+        <Button
+          onClick={() => setOpen(true)}
+          className="h-14 px-8 bg-black hover:bg-[#045138] text-white rounded-2xl font-black text-sm transition-all shadow-xl active:scale-95 group"
+        >
+          <Edit3 className="w-5 h-5 mr-2" />
+          Update Account
+        </Button>
       </div>
 
       {/* Stats Cards */}
@@ -163,6 +155,29 @@ export default function FinanceCOADetailPage() {
           coaReference={coa.reference}
         />
       </div>
+
+      {/* Manual Modal Implementation */}
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            onClick={() => setOpen(false)}
+          />
+          <div className="relative w-full max-w-2xl transform transition-all">
+            <button
+              onClick={() => setOpen(false)}
+              className="absolute -top-12 right-0 p-2 text-white/60 hover:text-white transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <UpdateCOA
+              coa={{ name: coa.name, code: coa.code, reference: coa.reference }}
+              rolePrefix="finance"
+              onSuccess={() => setOpen(false)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

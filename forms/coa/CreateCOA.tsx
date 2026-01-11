@@ -18,6 +18,7 @@ import { toast } from "react-hot-toast";
 import { Loader2, FileText, Plus } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface CreateCOAProps {
   rolePrefix?: string;
@@ -30,6 +31,7 @@ export default function CreateCOA({
 }: CreateCOAProps) {
   const header = useAxiosAuth();
   const router = useRouter();
+  const queryClient = useQueryClient();
   const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
 
   const formik = useFormik({
@@ -45,6 +47,7 @@ export default function CreateCOA({
       try {
         await createCOA(values, header);
         toast.success("Account created successfully");
+        queryClient.invalidateQueries({ queryKey: ["coas"] });
         resetForm();
         if (onSuccess) onSuccess();
         router.refresh();
@@ -149,7 +152,7 @@ export default function CreateCOA({
               id="name"
               name="name"
               type="text"
-              placeholder="e.g. Cash in Bank"
+              placeholder="e.g. Liabilitiess"
               className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}

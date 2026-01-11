@@ -18,6 +18,7 @@ import { toast } from "react-hot-toast";
 import { Loader2, Edit3, Save } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface UpdateCOAProps {
   coa: {
@@ -36,6 +37,7 @@ export default function UpdateCOA({
 }: UpdateCOAProps) {
   const header = useAxiosAuth();
   const router = useRouter();
+  const queryClient = useQueryClient();
   const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
 
   const formik = useFormik({
@@ -48,6 +50,8 @@ export default function UpdateCOA({
       try {
         await updateCOA(coa.reference, { name: values.name }, header);
         toast.success("Account updated successfully");
+        queryClient.invalidateQueries({ queryKey: ["coas"] });
+        queryClient.invalidateQueries({ queryKey: ["coa", coa.reference] });
         if (onSuccess) onSuccess();
         router.refresh();
       } catch (error: any) {

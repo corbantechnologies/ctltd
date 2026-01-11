@@ -70,12 +70,6 @@ export default function Navbar() {
       show: isDirector || isFinance,
     },
     {
-      name: "Books",
-      href: `/${rolePrefix}/books`,
-      icon: FileText,
-      show: isFinance,
-    },
-    {
       name: "Journals",
       href: `/${rolePrefix}/journals`,
       icon: FileText,
