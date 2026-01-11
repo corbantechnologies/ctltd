@@ -71,7 +71,7 @@ export default function CreatePartner({
   });
 
   return (
-    <Card className="w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
+    <Card className="w-full border-black/5 shadow-2xl rounded-[32px] bg-white/80 backdrop-blur-xl">
       <CardHeader
         className="p-8 border-b border-black/5"
         style={{ backgroundColor: `${primaryColor}0D` }}
