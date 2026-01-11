@@ -216,7 +216,7 @@ export default function JournalsDetailPage() {
             <p className="text-3xl font-black text-black tracking-tight">
               {new Intl.NumberFormat("en-KE", {
                 style: "currency",
-                currency: "KES",
+                currency: journal.currency,
               }).format(totalDebit)}
             </p>
           </CardContent>
@@ -229,7 +229,7 @@ export default function JournalsDetailPage() {
             <p className="text-3xl font-black text-black tracking-tight">
               {new Intl.NumberFormat("en-KE", {
                 style: "currency",
-                currency: "KES",
+                currency: journal.currency,
               }).format(totalCredit)}
             </p>
           </CardContent>
@@ -258,7 +258,7 @@ export default function JournalsDetailPage() {
                   Diff:{" "}
                   {new Intl.NumberFormat("en-KE", {
                     style: "currency",
-                    currency: "KES",
+                    currency: journal.currency,
                   }).format(Math.abs(totalDebit - totalCredit))}
                 </Badge>
               )}

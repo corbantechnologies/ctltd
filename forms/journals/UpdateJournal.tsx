@@ -63,7 +63,7 @@ export default function UpdateJournal({
           header
         );
         toast.success("Journal batch updated successfully");
-        window.location.reload();
+        router.refresh()
         onClose?.();
       } catch (error: any) {
         toast.error(
