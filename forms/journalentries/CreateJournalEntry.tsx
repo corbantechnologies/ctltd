@@ -93,10 +93,9 @@ export default function CreateJournalEntry({
 
         await createJournalEntry(formData, header);
         toast.success("Journal entry recorded");
-
+        window.location.reload();
         resetForm();
         if (onSuccess) onSuccess();
-        router.refresh();
       } catch (error: any) {
         toast.error(error?.response?.data?.message || "Failed to record entry");
       } finally {
