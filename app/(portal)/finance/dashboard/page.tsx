@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-  Briefcase,
   Layers,
   Settings2,
   Users,
@@ -19,6 +18,7 @@ import {
   BookOpen,
   X,
   Building2,
+  Briefcase,
 } from "lucide-react";
 
 export default function FinanceDashboard() {
@@ -73,9 +73,6 @@ export default function FinanceDashboard() {
                     <h3 className="font-bold text-black text-sm">
                       {division.name}
                     </h3>
-                    <p className="text-[10px] uppercase font-bold text-black/40">
-                      {division.location || "Main HQ"}
-                    </p>
                   </div>
                 </CardContent>
               </Card>

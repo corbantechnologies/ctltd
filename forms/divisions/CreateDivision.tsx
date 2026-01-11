@@ -34,6 +34,7 @@ export default function CreateDivision() {
         await createDivision(values, header);
         toast.success("Division created successfully");
         resetForm();
+        window.location.reload();
         router.refresh();
       } catch (error: any) {
         toast.error(

@@ -49,6 +49,7 @@ export default function CreateJournal({
         await createJournal(values, header);
         toast.success("Journal created successfully");
         resetForm();
+        window.location.reload();
         if (onSuccess) onSuccess();
         router.refresh();
       } catch (error: any) {

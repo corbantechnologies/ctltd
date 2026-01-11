@@ -90,6 +90,7 @@ export default function CreateJournalEntry({
         await createJournalEntry(formData, header);
         toast.success("Journal entry recorded");
         resetForm();
+        window.location.reload();
         if (onSuccess) onSuccess();
         router.refresh();
       } catch (error: any) {

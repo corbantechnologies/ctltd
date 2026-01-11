@@ -21,13 +21,23 @@ import { useRouter } from "next/navigation";
 import { useFetchPartnerTypes } from "@/hooks/partnertypes/actions";
 import { useFetchDivisions } from "@/hooks/divisions/actions";
 
-export default function CreatePartner() {
+interface CreatePartnerProps {
+  rolePrefix?: string;
+  onSuccess?: () => void;
+}
+
+export default function CreatePartner({
+  rolePrefix = "finance",
+  onSuccess,
+}: CreatePartnerProps) {
   const header = useAxiosAuth();
   const router = useRouter();
   const { data: partnerTypes, isLoading: isLoadingTypes } =
     useFetchPartnerTypes();
   const { data: divisions, isLoading: isLoadingDivisions } =
     useFetchDivisions();
+
+  const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
 
   const formik = useFormik({
     initialValues: {
@@ -48,6 +58,7 @@ export default function CreatePartner() {
         await createPartner(values, header);
         toast.success("Partner registered successfully");
         resetForm();
+        if (onSuccess) onSuccess();
         router.refresh();
       } catch (error: any) {
         toast.error(
@@ -60,10 +71,19 @@ export default function CreatePartner() {
   });
 
   return (
-    <Card className="w-full max-w-4xl border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
-      <CardHeader className="bg-orange-50/50 p-8 border-b border-black/5">
+    <Card className="w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
+      <CardHeader
+        className="p-8 border-b border-black/5"
+        style={{ backgroundColor: `${primaryColor}0D` }}
+      >
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-12 h-12 rounded-2xl bg-corporate-primary flex items-center justify-center text-white shadow-lg shadow-orange-500/30">
+          <div
+            className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
+            style={{
+              backgroundColor: primaryColor,
+              boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
+            }}
+          >
             <UserPlus className="w-6 h-6" />
           </div>
           <div>
@@ -91,7 +111,10 @@ export default function CreatePartner() {
                 id="name"
                 name="name"
                 placeholder="Full Entity Name"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
+                className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
+                style={{
+                  color: primaryColor,
+                }}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
@@ -115,7 +138,10 @@ export default function CreatePartner() {
                 name="email"
                 type="email"
                 placeholder="contact@entity.com"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
+                className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
+                style={{
+                  color: primaryColor,
+                }}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
@@ -158,7 +184,10 @@ export default function CreatePartner() {
                 id="partner_type"
                 name="partner_type"
                 disabled={isLoadingTypes}
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 py-2 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 transition-all appearance-none"
+                className="flex h-14 w-full rounded-2xl border border-black/5 bg-black/5 px-5 py-2 text-sm font-bold transition-all appearance-none"
+                style={{
+                  color: primaryColor,
+                }}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.partner_type}
@@ -188,7 +217,10 @@ export default function CreatePartner() {
                 id="division"
                 name="division"
                 disabled={isLoadingDivisions}
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 py-2 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 transition-all appearance-none"
+                className="flex h-14 w-full rounded-2xl border border-black/5 bg-black/5 px-5 py-2 text-sm font-bold transition-all appearance-none"
+                style={{
+                  color: primaryColor,
+                }}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.division}
@@ -291,12 +323,19 @@ export default function CreatePartner() {
             />
           </div>
 
-          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-2xl border border-black/5">
+          <div
+            className="flex items-center gap-3 p-4 rounded-2xl border border-black/5"
+            style={{ backgroundColor: `${primaryColor}0D` }}
+          >
             <input
               id="is_active"
               name="is_active"
               type="checkbox"
-              className="w-5 h-5 rounded-lg border-black/5 text-corporate-primary focus:ring-corporate-primary/20"
+              className="w-5 h-5 rounded-lg border-black/5 focus:ring-0"
+              style={{
+                accentColor: primaryColor,
+                color: primaryColor,
+              }}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               checked={formik.values.is_active}
@@ -313,7 +352,11 @@ export default function CreatePartner() {
             <Button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 bg-black hover:bg-corporate-primary text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
+              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
+              style={{
+                backgroundColor: primaryColor,
+                boxShadow: `0 10px 20px -5px ${primaryColor}4D`,
+              }}
             >
               {formik.isSubmitting ? (
                 <Loader2 className="w-6 h-6 animate-spin" />

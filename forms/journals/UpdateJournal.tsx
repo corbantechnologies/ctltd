@@ -51,6 +51,7 @@ export default function UpdateJournal({ journal }: UpdateJournalProps) {
           header
         );
         toast.success("Journal batch updated successfully");
+        window.location.reload();
         router.refresh();
       } catch (error: any) {
         toast.error(

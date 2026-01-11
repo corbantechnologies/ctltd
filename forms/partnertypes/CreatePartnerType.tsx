@@ -45,6 +45,7 @@ export default function CreatePartnerType({
       try {
         await createPartnerType(values, header);
         toast.success("Partner type created successfully");
+        window.location.reload();
         resetForm();
         if (onSuccess) onSuccess();
         router.refresh();
