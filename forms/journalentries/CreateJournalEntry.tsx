@@ -149,7 +149,7 @@ export default function CreateJournalEntry({
       <CardContent className="p-8">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
           {/* Contextual Mapping */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 p-6 bg-orange-50/20 rounded-3xl border border-black/5">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-orange-50/20 rounded-3xl border border-black/5">
             <div className="space-y-2">
               <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                 Journal Batch <span className="text-red-500">*</span>
@@ -165,7 +165,7 @@ export default function CreateJournalEntry({
                 <option value="">Select Batch...</option>
                 {journals?.map((j) => (
                   <option key={j.reference} value={j.code}>
-                    {j.description.substring(0, 20)}
+                    {j.description}
                   </option>
                 ))}
               </select>
@@ -238,7 +238,7 @@ export default function CreateJournalEntry({
                 <option value="">Select Division</option>
                 {divisions?.map((d) => (
                   <option key={d.reference} value={d.name}>
-                    {d.name}
+                   {d.code} - {d.name}
                   </option>
                 ))}
               </select>
