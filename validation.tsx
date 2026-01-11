@@ -101,18 +101,48 @@ const JournalSchema = Yup.object().shape({
 });
 
 const JournalEntrySchema = Yup.object().shape({
-  journal: Yup.string().required("Journal is required"),
-  book: Yup.string().required("Book is required"),
+  journal: Yup.string().required("Journal batch is required"),
+  book: Yup.string().required("Account book is required"),
   partner: Yup.string().nullable(),
   division: Yup.string().required("Division is required"),
-  debit: Yup.number().min(0).default(0),
-  credit: Yup.number().min(0).default(0),
+
+  // Debit depends on credit
+  debit: Yup.number()
+    .min(0, "Debit cannot be negative")
+    .when("credit", {
+      is: (val: number) => Number(val) > 0,
+      then: (schema) =>
+        schema
+          .max(0, "Cannot enter both debit and credit")
+          .test(
+            "debit-required-if-no-credit",
+            "Enter debit or credit amount",
+            function (value) {
+              return Number(value) > 0 || Number(this.parent.credit) > 0;
+            }
+          ),
+      otherwise: (schema) =>
+        schema
+          .required("Enter debit or credit amount")
+          .test(
+            "debit-required-if-no-credit",
+            "Enter debit or credit amount",
+            function (value) {
+              return Number(value) > 0 || Number(this.parent.credit) > 0;
+            }
+          ),
+    }),
+
+  credit: Yup.number().min(0, "Credit cannot be negative").default(0),
+
   currency: Yup.string().required("Currency is required"),
   exchange_rate: Yup.number().min(0).default(1),
   payment_method: Yup.string().required("Payment method is required"),
   is_intercompany: Yup.boolean().default(false),
-  notes: Yup.string(),
-  project: Yup.string(),
+  source_document: Yup.string().nullable(),
+  document_number: Yup.string().nullable(),
+  notes: Yup.string().nullable(),
+  project: Yup.string().nullable(),
 });
 
 export {
