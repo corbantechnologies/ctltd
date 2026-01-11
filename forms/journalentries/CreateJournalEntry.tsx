@@ -341,6 +341,7 @@ export default function CreateJournalEntry() {
                 id="document_file"
                 name="document_file"
                 type="file"
+                accept=".pdf, .doc, .docx"
                 className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5 py-3 text-xs"
                 onChange={(event) => {
                   formik.setFieldValue(
