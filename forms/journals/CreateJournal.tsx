@@ -35,7 +35,6 @@ export default function CreateJournal({
   className,
 }: CreateJournalProps) {
   const header = useAxiosAuth();
-  const router = useRouter();
   const { data: journalTypes, isLoading: isLoadingTypes } =
     useFetchJournalTypes();
 
@@ -53,10 +52,9 @@ export default function CreateJournal({
       try {
         await createJournal(values, header);
         toast.success("Journal created successfully");
+        window.location.reload();
         resetForm();
-
         if (onSuccess) onSuccess();
-        router.refresh();
       } catch (error: any) {
         toast.error(
           error?.response?.data?.message || "Failed to create journal"
