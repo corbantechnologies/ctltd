@@ -386,8 +386,8 @@ export default function JournalsDetailPage() {
 
       {/* Manual Modal for Update Journal */}
       {openUpdateJournal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-3xl animate-in zoom-in-95 duration-200">
+        <div className="flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full animate-in zoom-in-95 duration-200">
             <Button
               onClick={() => setOpenUpdateJournal(false)}
               className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-white text-black shadow-lg hover:bg-red-50 hover:text-red-600 z-10"
