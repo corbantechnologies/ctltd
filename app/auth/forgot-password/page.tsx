@@ -156,7 +156,7 @@ export default function ForgotPassword() {
                   variant="ghost"
                   className="w-full text-black/40 hover:text-black font-black flex items-center justify-center gap-2"
                 >
-                  <Link href="/login">
+                  <Link href="/auth/login">
                     <ChevronLeft className="w-4 h-4" />
                     Back to Login
                   </Link>
