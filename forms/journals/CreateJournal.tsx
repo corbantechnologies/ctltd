@@ -182,11 +182,6 @@ export default function CreateJournal({
                 <option value="EUR">EUR</option>
                 <option value="GBP">GBP</option>
               </select>
-              {formik.touched.currency && formik.errors.currency && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                  {formik.errors.currency}
-                </p>
-              )}
             </div>
           </div>
 
