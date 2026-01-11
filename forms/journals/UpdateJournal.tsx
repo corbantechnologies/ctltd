@@ -3,7 +3,6 @@
 
 import { updateJournal } from "@/services/journals";
 import { useFormik } from "formik";
-import { JournalSchema } from "@/validation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,6 +31,10 @@ interface UpdateJournalProps {
   className?: string;
 }
 
+/* -------------------------------------------------------------
+   NO VALIDATION SCHEMA – form always submits when the button is
+   pressed (you can add server-side checks in the API if you need)
+   ------------------------------------------------------------- */
 export default function UpdateJournal({
   journal,
   onClose,
@@ -47,7 +50,7 @@ export default function UpdateJournal({
       currency: journal.currency,
     },
     enableReinitialize: true,
-    validationSchema: JournalSchema,
+    // ----> NO validationSchema <----
     onSubmit: async (values, { setSubmitting }) => {
       try {
         await updateJournal(
@@ -60,8 +63,8 @@ export default function UpdateJournal({
           header
         );
         toast.success("Journal batch updated successfully");
-
-        router.refresh();
+        window.location.reload();
+        onClose?.();
       } catch (error: any) {
         toast.error(
           error?.response?.data?.message || "Failed to update journal batch"
@@ -104,7 +107,9 @@ export default function UpdateJournal({
           )}
         </div>
       </CardHeader>
+
       <CardContent className="p-8">
+        {/* Static info */}
         <div className="grid grid-cols-2 gap-4 mb-6">
           <div className="p-4 bg-black/5 rounded-2xl border border-black/5">
             <p className="text-[10px] font-black uppercase tracking-widest text-black/40 mb-1">
@@ -120,6 +125,7 @@ export default function UpdateJournal({
           </div>
         </div>
 
+        {/* Editable fields */}
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <Label
@@ -137,11 +143,6 @@ export default function UpdateJournal({
               onBlur={formik.handleBlur}
               value={formik.values.date}
             />
-            {formik.touched.date && formik.errors.date && (
-              <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                {formik.errors.date}
-              </p>
-            )}
           </div>
 
           <div className="space-y-2">
@@ -159,16 +160,11 @@ export default function UpdateJournal({
               onBlur={formik.handleBlur}
               value={formik.values.description}
             />
-            {formik.touched.description && formik.errors.description && (
-              <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                {formik.errors.description}
-              </p>
-            )}
           </div>
 
           <div className="space-y-2">
             <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
-              Currency <span className="text-red-500">*</span>
+              Currency
             </Label>
             <select
               name="currency"
