@@ -12,7 +12,7 @@ interface Partner {
   email: string;
   tax_pin: string;
   currency: string;
-  wht_rate: string;
+  wht_rate: number;
   payment_terms: string;
   is_active: boolean;
   created_at: string;
@@ -29,7 +29,7 @@ interface createPartner {
   email: string;
   tax_pin: string;
   currency: string; // defaults to KES
-  wht_rate: string; // defaults to 0.00
+  wht_rate: number; // defaults to 0.00
   payment_terms: string; // nullable
   is_active: boolean; // defaults to true
   partner_type: string; // partner type name
@@ -42,7 +42,7 @@ interface updatePartner {
   email?: string;
   tax_pin?: string;
   currency?: string;
-  wht_rate?: string;
+  wht_rate?: number;
   payment_terms?: string;
   is_active?: boolean;
   partner_type?: string;
