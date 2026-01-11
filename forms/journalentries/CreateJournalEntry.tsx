@@ -19,7 +19,6 @@ import { toast } from "react-hot-toast";
 import { Loader2, Receipt, Plus, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
-import { useFetchJournals } from "@/hooks/journals/actions";
 import { useFetchBooks } from "@/hooks/books/actions";
 import { useFetchPartners } from "@/hooks/partners/actions";
 import { useFetchDivisions } from "@/hooks/divisions/actions";
@@ -40,11 +39,9 @@ export default function CreateJournalEntry({
   className,
 }: CreateJournalEntryProps) {
   const header = useAxiosAuth();
-  const router = useRouter();
 
   const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
 
-  const { data: journals, isLoading: isLoadingJournals } = useFetchJournals();
   const { data: books, isLoading: isLoadingBooks } = useFetchBooks();
   const { data: partners, isLoading: isLoadingPartners } = useFetchPartners();
   const { data: divisions, isLoading: isLoadingDivisions } =
@@ -153,21 +150,13 @@ export default function CreateJournalEntry({
               <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                 Journal Batch <span className="text-red-500">*</span>
               </Label>
-              <select
+              <Input
+                type="text"
                 name="journal"
-                disabled={isLoadingJournals}
+                value={journalReference}
+                disabled
                 className="flex h-12 w-full rounded-xl border border-black/5 bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.journal}
-              >
-                <option value="">Select Batch...</option>
-                {journals?.map((j) => (
-                  <option key={j.reference} value={j.code}>
-                    {j.description}
-                  </option>
-                ))}
-              </select>
+              />
               {formik.touched.journal && formik.errors.journal && (
                 <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
                   {formik.errors.journal}
@@ -237,7 +226,7 @@ export default function CreateJournalEntry({
                 <option value="">Select Division</option>
                 {divisions?.map((d) => (
                   <option key={d.reference} value={d.name}>
-                   {d.code} - {d.name}
+                    {d.code} - {d.name}
                   </option>
                 ))}
               </select>

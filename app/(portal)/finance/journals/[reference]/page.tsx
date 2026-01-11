@@ -366,7 +366,7 @@ export default function JournalsDetailPage() {
         <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
           <CreateJournalEntry
             rolePrefix="finance"
-            journalReference={reference as string}
+            journalReference={journal.code}
             onSuccess={() => setOpenAddEntry(false)}
             onClose={() => setOpenAddEntry(false)}
             className="min-h-screen border-none shadow-none rounded-none"
