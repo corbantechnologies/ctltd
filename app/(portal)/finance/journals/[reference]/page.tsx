@@ -18,7 +18,6 @@ import {
   FileText,
   Plus,
   Receipt,
-  X,
   Edit2,
   Lock,
 } from "lucide-react";
@@ -364,43 +363,25 @@ export default function JournalsDetailPage() {
 
       {/* Manual Modal Implementation for Create Journal Entry */}
       {openAddEntry && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-0 md:p-6 overflow-y-auto animate-in fade-in duration-300">
-          <div className="relative w-full h-full md:h-auto md:max-w-5xl md:max-h-[90vh] bg-white rounded-none md:rounded-3xl shadow-2xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-300">
-            {/* Close Button - Top right, always visible */}
-            <Button
-              onClick={() => setOpenAddEntry(false)}
-              variant="ghost"
-              size="icon"
-              className="absolute top-4 right-4 z-50 bg-white/80 hover:bg-red-50 text-black hover:text-red-600 rounded-full shadow-md"
-            >
-              <X className="h-6 w-6" />
-            </Button>
-
-            {/* Scrollable content */}
-            <div className="flex-1 overflow-y-auto p-6 md:p-8">
-              <CreateJournalEntry
-                rolePrefix="finance"
-                journalReference={reference as string}
-                onSuccess={() => setOpenAddEntry(false)}
-              />
-            </div>
-          </div>
+        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
+          <CreateJournalEntry
+            rolePrefix="finance"
+            journalReference={reference as string}
+            onSuccess={() => setOpenAddEntry(false)}
+            onClose={() => setOpenAddEntry(false)}
+            className="min-h-screen border-none shadow-none rounded-none"
+          />
         </div>
       )}
 
       {/* Manual Modal for Update Journal */}
       {openUpdateJournal && (
-        <div className="flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full animate-in zoom-in-95 duration-200">
-            <Button
-              onClick={() => setOpenUpdateJournal(false)}
-              className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-white text-black shadow-lg hover:bg-red-50 hover:text-red-600 z-10"
-              size="icon"
-            >
-              <X className="w-5 h-5" />
-            </Button>
-            <UpdateJournal journal={journal} />
-          </div>
+        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
+          <UpdateJournal
+            journal={journal}
+            onClose={() => setOpenUpdateJournal(false)}
+            className="min-h-screen border-none shadow-none rounded-none"
+          />
         </div>
       )}
     </div>

@@ -12,7 +12,6 @@ import {
   ArrowUpDown,
   Activity,
   ArrowLeft,
-  X,
   BookPlus,
 } from "lucide-react";
 import Link from "next/link";
@@ -171,43 +170,27 @@ export default function FinanceCOADetailPage() {
 
       {/* Manual Modal Implementation */}
       {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-            onClick={() => setOpen(false)}
+        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
+          <UpdateCOA
+            coa={{ name: coa.name, code: coa.code, reference: coa.reference }}
+            rolePrefix="finance"
+            onSuccess={() => setOpen(false)}
+            onClose={() => setOpen(false)}
+            className="min-h-screen border-none shadow-none rounded-none"
           />
-          <div className="relative w-full max-w-2xl transform transition-all">
-            <button
-              onClick={() => setOpen(false)}
-              className="absolute -top-12 right-0 p-2 text-white/60 hover:text-white transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </button>
-            <UpdateCOA
-              coa={{ name: coa.name, code: coa.code, reference: coa.reference }}
-              rolePrefix="finance"
-              onSuccess={() => setOpen(false)}
-            />
-          </div>
         </div>
       )}
 
-      {/* Manual Modal for Create Book */}
+      {/* Manual Modal Implementation for Create Book */}
       {openCreateBook && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
-          <div className="relative w-full max-w-4xl my-8 animate-in zoom-in-95 duration-200">
-            <button
-              onClick={() => setOpenCreateBook(false)}
-              className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-white text-black shadow-lg hover:bg-red-50 hover:text-red-600 z-10"
-            >
-              <X className="w-6 h-6" />
-            </button>
-            <CreateBook
-              rolePrefix="finance"
-              initialCOA={coa.name}
-              onSuccess={() => setOpenCreateBook(false)}
-            />
-          </div>
+        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
+          <CreateBook
+            rolePrefix="finance"
+            initialCOA={coa.name}
+            onSuccess={() => setOpenCreateBook(false)}
+            onClose={() => setOpenCreateBook(false)}
+            className="min-h-screen border-none shadow-none rounded-none"
+          />
         </div>
       )}
     </div>

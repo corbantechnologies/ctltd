@@ -15,7 +15,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { toast } from "react-hot-toast";
-import { Loader2, Edit3, Save } from "lucide-react";
+import { Loader2, Edit3, Save, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
@@ -28,12 +28,16 @@ interface UpdateCOAProps {
   };
   rolePrefix?: string;
   onSuccess?: () => void;
+  onClose?: () => void;
+  className?: string;
 }
 
 export default function UpdateCOA({
   coa,
   rolePrefix = "finance",
   onSuccess,
+  onClose,
+  className,
 }: UpdateCOAProps) {
   const header = useAxiosAuth();
   const router = useRouter();
@@ -66,7 +70,9 @@ export default function UpdateCOA({
   });
 
   return (
-    <Card className="w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
+    <Card
+      className={`w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
+    >
       <CardHeader
         className="p-8 border-b border-black/5"
         style={{ backgroundColor: `${primaryColor}0D` }}
@@ -89,6 +95,19 @@ export default function UpdateCOA({
               Refine Classification
             </CardDescription>
           </div>
+          {onClose && (
+            <div className="ml-auto">
+              <Button
+                type="button"
+                onClick={onClose}
+                variant="ghost"
+                size="icon"
+                className="hover:bg-red-50 hover:text-red-500 rounded-full text-black/40"
+              >
+                <X className="w-5 h-5" />
+              </Button>
+            </div>
+          )}
         </div>
       </CardHeader>
       <CardContent className="p-8">
