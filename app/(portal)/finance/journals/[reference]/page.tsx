@@ -360,7 +360,7 @@ export default function JournalsDetailPage() {
 
       {/* Manual Modal Implementation for Create Journal Entry */}
       {openAddEntry && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 py-6 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
           <div className="relative w-full max-w-5xl my-8 animate-in zoom-in-95 duration-200">
             <Button
               onClick={() => setOpenAddEntry(false)}

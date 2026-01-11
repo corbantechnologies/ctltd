@@ -111,8 +111,6 @@ const JournalEntrySchema = Yup.object().shape({
   exchange_rate: Yup.number().min(0).default(1),
   payment_method: Yup.string().required("Payment method is required"),
   is_intercompany: Yup.boolean().default(false),
-  source_document: Yup.string().required("Source document is required"),
-  document_number: Yup.string().required("Document number is required"),
   notes: Yup.string(),
   project: Yup.string(),
 });
