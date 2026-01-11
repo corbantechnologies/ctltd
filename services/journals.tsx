@@ -10,6 +10,7 @@ interface Journal {
   journal_type: string;
   date: string;
   description: string;
+  currency: string;
   is_posted: boolean;
   status: string;
   created_by: string;
@@ -23,12 +24,14 @@ interface createJournal {
   journal_type: string;
   date: string;
   description: string;
+  currency: string;
 }
 
 interface updateJournal {
   journal_type?: string;
   date?: string;
   description?: string;
+  currency?: string;
 }
 
 // finance responsibilities

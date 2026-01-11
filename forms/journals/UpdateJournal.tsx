@@ -25,6 +25,7 @@ interface UpdateJournalProps {
     reference: string;
     date: string;
     description: string;
+    currency: string;
     journal_type: string;
   };
   onClose?: () => void;
@@ -43,6 +44,7 @@ export default function UpdateJournal({
     initialValues: {
       date: new Date(journal.date).toISOString().split("T")[0],
       description: journal.description,
+      currency: journal.currency,
     },
     enableReinitialize: true,
     validationSchema: JournalSchema,
@@ -53,6 +55,7 @@ export default function UpdateJournal({
           {
             description: values.description,
             date: values.date,
+            currency: values.currency,
           },
           header
         );
@@ -71,7 +74,7 @@ export default function UpdateJournal({
 
   return (
     <Card
-      className={`w-full max-w-2xl border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
+      className={`mx-auto border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
     >
       <CardHeader className="bg-orange-50/50 p-8 border-b border-black/5">
         <div className="flex items-center gap-4 mb-4">
@@ -159,6 +162,29 @@ export default function UpdateJournal({
             {formik.touched.description && formik.errors.description && (
               <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
                 {formik.errors.description}
+              </p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+              Currency <span className="text-red-500">*</span>
+            </Label>
+            <select
+              name="currency"
+              className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.currency}
+            >
+              <option value="KES">KES</option>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+            </select>
+            {formik.touched.currency && formik.errors.currency && (
+              <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                {formik.errors.currency}
               </p>
             )}
           </div>
