@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useFetchJournals } from "@/hooks/journals/actions";
@@ -27,9 +28,10 @@ import LoadingSpinner from "../portal/LoadingSpinner";
 
 interface JournalsListProps {
   rolePrefix: string;
+  linkPrefix: string;
 }
 
-export default function JournalsList({ rolePrefix }: JournalsListProps) {
+export default function JournalsList({ rolePrefix, linkPrefix }: JournalsListProps) {
   const [view, setView] = useState<"grid" | "table">("table");
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
@@ -45,6 +47,12 @@ export default function JournalsList({ rolePrefix }: JournalsListProps) {
   const { data: journals, isLoading: isLoadingJournals } = useFetchJournals();
   const { data: journalTypes, isLoading: isLoadingTypes } =
     useFetchJournalTypes();
+
+  const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
+  const primaryColorWithOpacity =
+    rolePrefix === "director"
+      ? "rgba(208, 64, 43, 0.2)"
+      : "rgba(4, 81, 56, 0.2)"; // simplified for inline styles if needed, but hex is better for dynamic string interpolation
 
   const filteredJournals = useMemo(() => {
     if (!journals) return [];
@@ -118,10 +126,19 @@ export default function JournalsList({ rolePrefix }: JournalsListProps) {
       <div className="bg-white/40 p-6 rounded-[32px] border border-white/60 backdrop-blur-md shadow-sm space-y-6">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
           <div className="relative w-full lg:w-96 group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 group-focus-within:text-[#D0402B] transition-colors" />
+            <Search
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 transition-colors"
+              style={{
+                color: undefined, // Let CSS handle focus-within if possible, or simple inline
+              }}
+            />
             <Input
               placeholder="Search journals by description or reference..."
-              className="pl-11 h-12 bg-white/80 border-black/5 rounded-2xl focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-medium text-sm shadow-inner"
+              className="pl-11 h-12 bg-white/80 border-black/5 rounded-2xl transition-all font-medium text-sm shadow-inner focus:ring-2"
+              style={{
+                ["--tw-ring-color" as any]: `${primaryColor}33`,
+                borderColor: "rgba(0,0,0,0.05)", // default
+              }}
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
@@ -135,11 +152,15 @@ export default function JournalsList({ rolePrefix }: JournalsListProps) {
               variant={view === "grid" ? "default" : "ghost"}
               size="icon"
               onClick={() => setView("grid")}
-              className={`w-10 h-10 rounded-xl transition-all ${
-                view === "grid"
-                  ? "bg-[#D0402B] text-white shadow-lg shadow-[#D0402B]/20"
-                  : "text-black/40 hover:bg-black/5"
-              }`}
+              className="w-10 h-10 rounded-xl transition-all"
+              style={{
+                backgroundColor: view === "grid" ? primaryColor : "transparent",
+                color: view === "grid" ? "white" : "rgba(0,0,0,0.4)",
+                boxShadow:
+                  view === "grid"
+                    ? `0 10px 15px -3px ${primaryColor}33`
+                    : "none",
+              }}
             >
               <LayoutGrid className="w-4 h-4" />
             </Button>
@@ -147,22 +168,27 @@ export default function JournalsList({ rolePrefix }: JournalsListProps) {
               variant={view === "table" ? "default" : "ghost"}
               size="icon"
               onClick={() => setView("table")}
-              className={`w-10 h-10 rounded-xl transition-all ${
-                view === "table"
-                  ? "bg-[#D0402B] text-white shadow-lg shadow-[#D0402B]/20"
-                  : "text-black/40 hover:bg-black/5"
-              }`}
+              className="w-10 h-10 rounded-xl transition-all"
+              style={{
+                backgroundColor:
+                  view === "table" ? primaryColor : "transparent",
+                color: view === "table" ? "white" : "rgba(0,0,0,0.4)",
+                boxShadow:
+                  view === "table"
+                    ? `0 10px 15px -3px ${primaryColor}33`
+                    : "none",
+              }}
             >
               <List className="w-4 h-4" />
             </Button>
           </div>
         </div>
 
-        {/* Filter Bar */}
+        {/* Validated Filter Bar */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-6 border-t border-black/5">
           {/* Type Filter */}
           <div className="relative group">
-            <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 group-focus-within:text-[#D0402B] transition-colors" />
+            <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 transition-colors" />
             <select
               value={typeFilter}
               onChange={(e) => {
@@ -286,14 +312,35 @@ export default function JournalsList({ rolePrefix }: JournalsListProps) {
           {paginatedJournals.map((journal) => (
             <Link
               key={journal.reference}
-              href={`/${rolePrefix}/financials/${journal.reference}`}
+              href={`/${rolePrefix}/${linkPrefix}/${journal.reference}`}
               className="group block"
             >
-              <Card className="h-full border-black/5 bg-white/60 backdrop-blur-xl rounded-[32px] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#D0402B]/10 hover:-translate-y-2 group-hover:bg-white/90">
+              <Card className="h-full border-black/5 bg-white/60 backdrop-blur-xl rounded-[32px] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group-hover:bg-white/90">
                 <CardContent className="p-8">
                   <div className="flex justify-between items-start mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-[#D0402B]/5 flex items-center justify-center text-[#D0402B] group-hover:bg-[#D0402B] group-hover:text-white transition-all duration-500 shadow-sm">
+                    <div
+                      className="w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-sm group-hover:text-white"
+                      style={{
+                        backgroundColor: `${primaryColor}0D`, // 5% opacity
+                        color: primaryColor,
+                        // We will use CSS variables or direct style manipulation for hover effects if possible,
+                        // but standard React style won't handle hover easily without state or CSS variables.
+                        // For now, simpler approach: use style for base, rely on classNames for generic hover if not dynamic,
+                        // OR set a CSS variable on the card.
+                      }}
+                    >
                       <FileText className="w-6 h-6" />
+                      {/* Note: The hover effect changing bg to primaryColor is hard to do with inline styles for dynamic colors without CSS vars. 
+                          I will use a style tag or simpler CSS variable approach. */}
+                      <style jsx>{`
+                        .group:hover .group-hover\\:bg-primary {
+                          background-color: ${primaryColor} !important;
+                          color: white !important;
+                        }
+                        .group:hover .group-hover\\:text-primary {
+                          color: ${primaryColor} !important;
+                        }
+                      `}</style>
                     </div>
                     <Badge
                       className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border-none ${
@@ -370,7 +417,7 @@ export default function JournalsList({ rolePrefix }: JournalsListProps) {
                     key={journal.reference}
                     className="hover:bg-white/80 transition-all cursor-pointer group"
                     onClick={() =>
-                      (window.location.href = `/${rolePrefix}/financials/${journal.reference}`)
+                      (window.location.href = `/${rolePrefix}/${linkPrefix}/${journal.reference}`)
                     }
                   >
                     <td className="py-6 px-8">
@@ -476,6 +523,15 @@ export default function JournalsList({ rolePrefix }: JournalsListProps) {
                       ? "bg-[#D0402B] text-white shadow-lg shadow-[#D0402B]/20"
                       : "bg-white/80 border-black/5 hover:bg-black/5"
                   }`}
+                  style={{
+                    backgroundColor:
+                      currentPage === i + 1 ? primaryColor : undefined,
+                    color: currentPage === i + 1 ? "white" : undefined,
+                    boxShadow:
+                      currentPage === i + 1
+                        ? `0 10px 15px -3px ${primaryColor}33`
+                        : undefined,
+                  }}
                 >
                   {i + 1}
                 </Button>

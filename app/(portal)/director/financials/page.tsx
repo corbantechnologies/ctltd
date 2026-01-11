@@ -59,7 +59,7 @@ export default function FinancialsPage() {
           </div>
         </div>
 
-        <JournalsList rolePrefix="director" />
+        <JournalsList rolePrefix="director" linkPrefix="financials" />
       </div>
     </div>
   );

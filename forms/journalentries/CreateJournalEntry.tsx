@@ -24,9 +24,21 @@ import { useFetchBooks } from "@/hooks/books/actions";
 import { useFetchPartners } from "@/hooks/partners/actions";
 import { useFetchDivisions } from "@/hooks/divisions/actions";
 
-export default function CreateJournalEntry() {
+interface CreateJournalEntryProps {
+  rolePrefix?: string;
+  journalReference?: string;
+  onSuccess?: () => void;
+}
+
+export default function CreateJournalEntry({
+  rolePrefix = "finance",
+  journalReference,
+  onSuccess,
+}: CreateJournalEntryProps) {
   const header = useAxiosAuth();
   const router = useRouter();
+
+  const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
 
   const { data: journals, isLoading: isLoadingJournals } = useFetchJournals();
   const { data: books, isLoading: isLoadingBooks } = useFetchBooks();
@@ -36,7 +48,7 @@ export default function CreateJournalEntry() {
 
   const formik = useFormik({
     initialValues: {
-      journal: "",
+      journal: journalReference || "",
       book: "",
       partner: "",
       division: "",
@@ -52,6 +64,7 @@ export default function CreateJournalEntry() {
       notes: "",
       project: "",
     },
+    enableReinitialize: true,
     validationSchema: JournalEntrySchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
@@ -66,10 +79,10 @@ export default function CreateJournalEntry() {
         formData.append("exchange_rate", values.exchange_rate.toString());
         formData.append("payment_method", values.payment_method);
         formData.append("is_intercompany", values.is_intercompany.toString());
-        formData.append("source_document", values.source_document);
-        formData.append("document_number", values.document_number);
-        formData.append("notes", values.notes);
-        formData.append("project", values.project);
+        formData.append("source_document", values.source_document || "");
+        formData.append("document_number", values.document_number || "");
+        formData.append("notes", values.notes || "");
+        formData.append("project", values.project || "");
         if (values.document_file) {
           formData.append("document_file", values.document_file);
         }
@@ -77,6 +90,7 @@ export default function CreateJournalEntry() {
         await createJournalEntry(formData, header);
         toast.success("Journal entry recorded");
         resetForm();
+        if (onSuccess) onSuccess();
         router.refresh();
       } catch (error: any) {
         toast.error(error?.response?.data?.message || "Failed to record entry");
@@ -87,10 +101,19 @@ export default function CreateJournalEntry() {
   });
 
   return (
-    <Card className="w-full max-w-5xl border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
-      <CardHeader className="bg-orange-50/50 p-8 border-b border-black/5">
+    <Card className="w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
+      <CardHeader
+        className="p-8 border-b border-black/5"
+        style={{ backgroundColor: `${primaryColor}0D` }}
+      >
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-12 h-12 rounded-2xl bg-corporate-primary flex items-center justify-center text-white shadow-lg shadow-orange-500/30">
+          <div
+            className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
+            style={{
+              backgroundColor: primaryColor,
+              boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
+            }}
+          >
             <Receipt className="w-6 h-6" />
           </div>
           <div>
@@ -389,7 +412,11 @@ export default function CreateJournalEntry() {
           <Button
             type="submit"
             disabled={formik.isSubmitting}
-            className="w-full h-16 bg-black hover:bg-corporate-primary text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
+            className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
+            style={{
+              backgroundColor: primaryColor,
+              boxShadow: `0 10px 20px -5px ${primaryColor}4D`,
+            }}
           >
             {formik.isSubmitting ? (
               <Loader2 className="w-6 h-6 animate-spin" />

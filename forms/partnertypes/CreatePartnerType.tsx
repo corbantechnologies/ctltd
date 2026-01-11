@@ -20,9 +20,19 @@ import { Loader2, Users, Plus } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 
-export default function CreatePartnerType() {
+interface CreatePartnerTypeProps {
+  rolePrefix?: string;
+  onSuccess?: () => void;
+}
+
+export default function CreatePartnerType({
+  rolePrefix = "finance",
+  onSuccess,
+}: CreatePartnerTypeProps) {
   const header = useAxiosAuth();
   const router = useRouter();
+
+  const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
 
   const formik = useFormik({
     initialValues: {
@@ -36,6 +46,7 @@ export default function CreatePartnerType() {
         await createPartnerType(values, header);
         toast.success("Partner type created successfully");
         resetForm();
+        if (onSuccess) onSuccess();
         router.refresh();
       } catch (error: any) {
         toast.error(
@@ -48,10 +59,19 @@ export default function CreatePartnerType() {
   });
 
   return (
-    <Card className="w-full max-w-2xl border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
-      <CardHeader className="bg-orange-50/50 p-8 border-b border-black/5">
+    <Card className="w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
+      <CardHeader
+        className="p-8 border-b border-black/5"
+        style={{ backgroundColor: `${primaryColor}0D` }}
+      >
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-12 h-12 rounded-2xl bg-corporate-primary flex items-center justify-center text-white shadow-lg shadow-orange-500/30">
+          <div
+            className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
+            style={{
+              backgroundColor: primaryColor,
+              boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
+            }}
+          >
             <Users className="w-6 h-6" />
           </div>
           <div>
@@ -130,7 +150,11 @@ export default function CreatePartnerType() {
             <Button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 bg-black hover:bg-corporate-primary text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
+              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
+              style={{
+                backgroundColor: primaryColor,
+                boxShadow: `0 10px 20px -5px ${primaryColor}4D`,
+              }}
             >
               {formik.isSubmitting ? (
                 <Loader2 className="w-6 h-6 animate-spin" />
