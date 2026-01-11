@@ -49,7 +49,6 @@ export default function FinancePartnersPage() {
         </Button>
       </div>
       <PartnersList rolePrefix="finance" />
-      Manual Modal Implementation
       {openCreatePartner && (
         <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
           <CreatePartner
