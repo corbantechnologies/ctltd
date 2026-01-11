@@ -57,6 +57,8 @@ export default function CreateBook({
       try {
         await createBook(values, header);
         toast.success("Account Book created successfully");
+                router.refresh();
+
         // reload
         queryClient.invalidateQueries({ queryKey: ["books"] });
         queryClient.invalidateQueries({ queryKey: ["coas"] }); // Refresh COA list as books are nested
@@ -73,7 +75,6 @@ export default function CreateBook({
 
         resetForm();
         if (onSuccess) onSuccess();
-        router.refresh();
       } catch (error: any) {
         toast.error(error?.response?.data?.message || "Failed to create book");
       } finally {
