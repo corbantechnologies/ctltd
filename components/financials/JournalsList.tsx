@@ -1,6 +1,7 @@
 "use client";
 
 import { useFetchJournals } from "@/hooks/journals/actions";
+import { useFetchJournalTypes } from "@/hooks/journaltypes/actions";
 import {
   FileText,
   Search,
@@ -13,6 +14,8 @@ import {
   CheckCircle2,
   Clock,
   History,
+  Filter,
+  X,
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useMemo } from "react";
@@ -29,20 +32,67 @@ interface JournalsListProps {
 export default function JournalsList({ rolePrefix }: JournalsListProps) {
   const [view, setView] = useState<"grid" | "table">("table");
   const [searchQuery, setSearchQuery] = useState("");
+  const [typeFilter, setTypeFilter] = useState("all");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState("all");
+  const [selectedYear, setSelectedYear] = useState(
+    new Date().getFullYear().toString()
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  const { data: journals, isLoading } = useFetchJournals();
+  const { data: journals, isLoading: isLoadingJournals } = useFetchJournals();
+  const { data: journalTypes, isLoading: isLoadingTypes } =
+    useFetchJournalTypes();
 
   const filteredJournals = useMemo(() => {
     if (!journals) return [];
-    return journals.filter(
-      (journal) =>
+    return journals.filter((journal) => {
+      const journalDate = new Date(journal.date);
+
+      // Text Search
+      const matchesSearch =
         journal.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         journal.reference.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        journal.journal_type.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [journals, searchQuery]);
+        journal.journal_type.toLowerCase().includes(searchQuery.toLowerCase());
+
+      // Type Filter
+      const matchesType =
+        typeFilter === "all" || journal.journal_type === typeFilter;
+
+      // Date Range Filter
+      const matchesDateRange =
+        (!startDate || journalDate >= new Date(startDate)) &&
+        (!endDate || journalDate <= new Date(endDate));
+
+      // Month Filter
+      const matchesMonth =
+        selectedMonth === "all" ||
+        journalDate.getMonth() === parseInt(selectedMonth);
+
+      // Year Filter
+      const matchesYear =
+        selectedYear === "all" ||
+        journalDate.getFullYear() === parseInt(selectedYear);
+
+      return (
+        matchesSearch &&
+        matchesType &&
+        matchesDateRange &&
+        matchesMonth &&
+        matchesYear
+      );
+    });
+  }, [
+    journals,
+    searchQuery,
+    typeFilter,
+    startDate,
+    endDate,
+    selectedMonth,
+    selectedYear,
+  ]);
 
   const totalPages = Math.ceil(filteredJournals.length / itemsPerPage);
   const paginatedJournals = filteredJournals.slice(
@@ -50,50 +100,183 @@ export default function JournalsList({ rolePrefix }: JournalsListProps) {
     currentPage * itemsPerPage
   );
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoadingJournals || isLoadingTypes) return <LoadingSpinner />;
+
+  const clearFilters = () => {
+    setSearchQuery("");
+    setTypeFilter("all");
+    setStartDate("");
+    setEndDate("");
+    setSelectedMonth("all");
+    setSelectedYear(new Date().getFullYear().toString());
+    setCurrentPage(1);
+  };
 
   return (
     <div className="space-y-6">
       {/* Controls Section */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white/40 p-4 rounded-[24px] border border-white/60 backdrop-blur-md shadow-sm">
-        <div className="relative w-full md:w-96 group">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 group-focus-within:text-[#D0402B] transition-colors" />
-          <Input
-            placeholder="Search journals by description or reference..."
-            className="pl-11 h-12 bg-white/80 border-black/5 rounded-2xl focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-medium text-sm shadow-inner"
-            value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-              setCurrentPage(1);
-            }}
-          />
+      <div className="bg-white/40 p-6 rounded-[32px] border border-white/60 backdrop-blur-md shadow-sm space-y-6">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+          <div className="relative w-full lg:w-96 group">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 group-focus-within:text-[#D0402B] transition-colors" />
+            <Input
+              placeholder="Search journals by description or reference..."
+              className="pl-11 h-12 bg-white/80 border-black/5 rounded-2xl focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-medium text-sm shadow-inner"
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setCurrentPage(1);
+              }}
+            />
+          </div>
+
+          <div className="flex items-center gap-2 bg-white/80 p-1.5 rounded-2xl border border-black/5 shadow-sm">
+            <Button
+              variant={view === "grid" ? "default" : "ghost"}
+              size="icon"
+              onClick={() => setView("grid")}
+              className={`w-10 h-10 rounded-xl transition-all ${
+                view === "grid"
+                  ? "bg-[#D0402B] text-white shadow-lg shadow-[#D0402B]/20"
+                  : "text-black/40 hover:bg-black/5"
+              }`}
+            >
+              <LayoutGrid className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={view === "table" ? "default" : "ghost"}
+              size="icon"
+              onClick={() => setView("table")}
+              className={`w-10 h-10 rounded-xl transition-all ${
+                view === "table"
+                  ? "bg-[#D0402B] text-white shadow-lg shadow-[#D0402B]/20"
+                  : "text-black/40 hover:bg-black/5"
+              }`}
+            >
+              <List className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2 bg-white/80 p-1.5 rounded-2xl border border-black/5 shadow-sm">
-          <Button
-            variant={view === "grid" ? "default" : "ghost"}
-            size="icon"
-            onClick={() => setView("grid")}
-            className={`w-10 h-10 rounded-xl transition-all ${
-              view === "grid"
-                ? "bg-[#D0402B] text-white shadow-lg shadow-[#D0402B]/20"
-                : "text-black/40 hover:bg-black/5"
-            }`}
-          >
-            <LayoutGrid className="w-4 h-4" />
-          </Button>
-          <Button
-            variant={view === "table" ? "default" : "ghost"}
-            size="icon"
-            onClick={() => setView("table")}
-            className={`w-10 h-10 rounded-xl transition-all ${
-              view === "table"
-                ? "bg-[#D0402B] text-white shadow-lg shadow-[#D0402B]/20"
-                : "text-black/40 hover:bg-black/5"
-            }`}
-          >
-            <List className="w-4 h-4" />
-          </Button>
+        {/* Filter Bar */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-6 border-t border-black/5">
+          {/* Type Filter */}
+          <div className="relative group">
+            <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 group-focus-within:text-[#D0402B] transition-colors" />
+            <select
+              value={typeFilter}
+              onChange={(e) => {
+                setTypeFilter(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="w-full h-12 pl-11 pr-4 rounded-xl border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-black text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white"
+            >
+              <option value="all">All Journal Types</option>
+              {journalTypes?.map((type) => (
+                <option key={type.reference} value={type.name}>
+                  {type.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Date Range Start */}
+          <div className="relative group">
+            <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 group-focus-within:text-[#D0402B] transition-colors" />
+            <Input
+              type="date"
+              value={startDate}
+              onChange={(e) => {
+                setStartDate(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="pl-11 h-12 bg-white/80 border-black/5 rounded-xl focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-bold text-[10px] uppercase tracking-widest shadow-sm"
+              title="Start Date"
+            />
+          </div>
+
+          {/* Date Range End */}
+          <div className="relative group">
+            <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 group-focus-within:text-[#D0402B] transition-colors" />
+            <Input
+              type="date"
+              value={endDate}
+              onChange={(e) => {
+                setEndDate(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="pl-11 h-12 bg-white/80 border-black/5 rounded-xl focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-bold text-[10px] uppercase tracking-widest shadow-sm"
+              title="End Date"
+            />
+          </div>
+
+          {/* Month/Year Controls */}
+          <div className="flex gap-2">
+            <select
+              value={selectedMonth}
+              onChange={(e) => {
+                setSelectedMonth(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="flex-1 h-12 px-4 rounded-xl border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-black text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white"
+            >
+              <option value="all">Every Month</option>
+              {[
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+              ].map((month, idx) => (
+                <option key={month} value={idx}>
+                  {month}
+                </option>
+              ))}
+            </select>
+
+            <select
+              value={selectedYear}
+              onChange={(e) => {
+                setSelectedYear(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="w-24 h-12 px-2 rounded-xl border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-black text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white text-center"
+              title="Filter by Year"
+            >
+              <option value="all">Year</option>
+              {[...Array(5)].map((_, i) => {
+                const year = new Date().getFullYear() - i;
+                return (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                );
+              })}
+            </select>
+
+            {(searchQuery ||
+              typeFilter !== "all" ||
+              startDate ||
+              endDate ||
+              selectedMonth !== "all" ||
+              selectedYear !== "all") && (
+              <Button
+                variant="outline"
+                onClick={clearFilters}
+                className="h-12 w-12 p-0 rounded-xl border-black/5 bg-white/80 hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-all text-black/40 shadow-sm"
+                title="Clear Filters"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            )}
+          </div>
         </div>
       </div>
 
@@ -311,7 +494,7 @@ export default function JournalsList({ rolePrefix }: JournalsListProps) {
         </div>
       )}
 
-      {filteredJournals.length === 0 && !isLoading && (
+      {filteredJournals.length === 0 && !isLoadingJournals && (
         <div className="py-24 text-center bg-white/40 rounded-[40px] border border-dashed border-black/10">
           <div className="w-20 h-20 rounded-3xl bg-black/5 flex items-center justify-center text-black/10 mx-auto mb-6">
             <History className="w-10 h-10" />
