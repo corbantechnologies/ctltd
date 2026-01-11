@@ -21,33 +21,34 @@ import { useRouter } from "next/navigation";
 
 interface UpdateCOAProps {
   coa: {
-    name: string;
     code: string;
+    name: string;
     reference: string;
   };
+  rolePrefix?: string;
+  onSuccess?: () => void;
 }
 
-export default function UpdateCOA({ coa }: UpdateCOAProps) {
+export default function UpdateCOA({
+  coa,
+  rolePrefix = "finance",
+  onSuccess,
+}: UpdateCOAProps) {
   const header = useAxiosAuth();
   const router = useRouter();
+  const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
 
   const formik = useFormik({
     initialValues: {
       name: coa.name,
-      // For COA update, the service only expects name, but we use the schema which might expect more.
-      // However, the service interface updateCOA only has name.
-      // Let's adjust initialValues to match what we have.
-      code: coa.code,
-      normal_balance: "DEBIT", // These won't be sent if we only send name to the service
-      order: 0,
     },
     enableReinitialize: true,
     validationSchema: COASchema,
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        // Based on the interface updateCOA { name: string }
         await updateCOA(coa.reference, { name: values.name }, header);
         toast.success("Account updated successfully");
+        if (onSuccess) onSuccess();
         router.refresh();
       } catch (error: any) {
         toast.error(
@@ -60,10 +61,19 @@ export default function UpdateCOA({ coa }: UpdateCOAProps) {
   });
 
   return (
-    <Card className="w-full max-w-2xl border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
-      <CardHeader className="bg-orange-50/50 p-8 border-b border-black/5">
+    <Card className="w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
+      <CardHeader
+        className="p-8 border-b border-black/5"
+        style={{ backgroundColor: `${primaryColor}0D` }}
+      >
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-12 h-12 rounded-2xl bg-black flex items-center justify-center text-white shadow-lg">
+          <div
+            className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
+            style={{
+              backgroundColor: primaryColor,
+              boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
+            }}
+          >
             <Edit3 className="w-6 h-6" />
           </div>
           <div>
@@ -97,10 +107,11 @@ export default function UpdateCOA({ coa }: UpdateCOAProps) {
               name="name"
               type="text"
               placeholder="e.g. Cash in Bank"
-              className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white focus:ring-corporate-primary/20 transition-all font-bold px-5"
+              className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
+              style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
             />
             {formik.touched.name && formik.errors.name && (
               <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
@@ -113,7 +124,11 @@ export default function UpdateCOA({ coa }: UpdateCOAProps) {
             <Button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
+              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
+              style={{
+                backgroundColor: primaryColor,
+                boxShadow: `0 10px 20px -5px ${primaryColor}4D`,
+              }}
             >
               {formik.isSubmitting ? (
                 <Loader2 className="w-6 h-6 animate-spin" />

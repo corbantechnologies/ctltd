@@ -1,6 +1,5 @@
 "use client";
 
-import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -21,6 +20,10 @@ import { useState, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Book } from "@/services/books";
+
+type CSSWithVariables = React.CSSProperties & {
+  [key: string]: string | number;
+};
 
 interface BooksListProps {
   books: Book[];
@@ -55,6 +58,8 @@ export default function BooksList({
     return filteredBooks.slice(start, start + itemsPerPage);
   }, [filteredBooks, currentPage]);
 
+  const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
+
   if (!books || books.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center p-12 bg-black/5 rounded-[32px] border-2 border-dashed border-black/10">
@@ -74,7 +79,10 @@ export default function BooksList({
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-white/50 backdrop-blur-xl p-4 rounded-[24px] border border-black/5 shadow-sm">
         <div className="flex flex-col md:flex-row items-center gap-4 w-full lg:w-auto">
           <div className="relative w-full md:w-80">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20" />
+            <Search
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20"
+              style={{ color: searchQuery ? primaryColor : undefined }}
+            />
             <Input
               placeholder="Search books..."
               value={searchQuery}
@@ -92,9 +100,14 @@ export default function BooksList({
             onClick={() => setView("grid")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
               view === "grid"
-                ? "bg-white text-[#D0402B] shadow-sm"
+                ? "bg-white shadow-sm"
                 : "text-black/40 hover:text-black"
             }`}
+            style={
+              {
+                color: view === "grid" ? primaryColor : undefined,
+              } as CSSWithVariables
+            }
           >
             <LayoutGrid className="w-3.5 h-3.5" />
             Grid
@@ -103,9 +116,14 @@ export default function BooksList({
             onClick={() => setView("table")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
               view === "table"
-                ? "bg-white text-[#D0402B] shadow-sm"
+                ? "bg-white shadow-sm"
                 : "text-black/40 hover:text-black"
             }`}
+            style={
+              {
+                color: view === "table" ? primaryColor : undefined,
+              } as CSSWithVariables
+            }
           >
             <List className="w-3.5 h-3.5" />
             Table
@@ -152,10 +170,18 @@ export default function BooksList({
                   </div>
 
                   <div className="mb-6 flex-1">
-                    <h3 className="text-lg font-black text-black tracking-tight group-hover:text-[#D0402B] transition-colors line-clamp-2">
+                    <h3
+                      className="text-lg font-black text-black tracking-tight transition-colors line-clamp-2"
+                      style={
+                        { "--hover-text": primaryColor } as CSSWithVariables
+                      }
+                    >
                       {book.name}
                     </h3>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-[#D0402B] mt-1">
+                    <p
+                      className="text-[10px] font-black uppercase tracking-widest mt-1"
+                      style={{ color: primaryColor } as CSSWithVariables}
+                    >
                       {book.code}
                     </p>
                   </div>
@@ -183,7 +209,14 @@ export default function BooksList({
                           </Badge>
                         )}
                       </div>
-                      <ArrowRight className="w-4 h-4 text-black/20 group-hover:text-[#D0402B] group-hover:translate-x-1 transition-all" />
+                      <ArrowRight
+                        className="w-4 h-4 text-black/20 transition-all"
+                        style={
+                          {
+                            "--group-hover-text": primaryColor,
+                          } as CSSWithVariables
+                        }
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -218,7 +251,10 @@ export default function BooksList({
                 {paginatedBooks.map((book) => (
                   <tr
                     key={book.reference}
-                    className="hover:bg-[#D0402B]/5 transition-colors group"
+                    className="transition-colors group"
+                    style={
+                      { "--hover-bg": `${primaryColor}0D` } as CSSWithVariables
+                    }
                   >
                     <td className="py-6 px-8">
                       <div className="flex items-center gap-3">
@@ -230,7 +266,12 @@ export default function BooksList({
                           )}
                         </div>
                         <div>
-                          <p className="text-sm font-black text-black group-hover:text-[#D0402B] transition-colors">
+                          <p
+                            className="text-sm font-black text-black transition-colors"
+                            style={{
+                              ["--group-hover-text" as any]: primaryColor,
+                            }}
+                          >
                             {book.name}
                           </p>
                           <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
@@ -286,7 +327,10 @@ export default function BooksList({
                       >
                         <Button
                           variant="ghost"
-                          className="h-10 w-10 p-0 rounded-xl hover:bg-[#D0402B] hover:text-white transition-all"
+                          className="h-10 w-10 p-0 rounded-xl hover:text-white transition-all duration-300"
+                          style={
+                            { "--hover-bg": primaryColor } as CSSWithVariables
+                          }
                         >
                           <ArrowRight className="w-4 h-4" />
                         </Button>
@@ -313,7 +357,8 @@ export default function BooksList({
               variant="outline"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              className="w-10 h-10 p-0 rounded-xl border-black/5 bg-white shadow-sm hover:bg-[#D0402B] hover:text-white transition-all disabled:opacity-30"
+              className="w-10 h-10 p-0 rounded-xl border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              style={{ ["--hover-bg" as any]: primaryColor }}
             >
               <ChevronLeft className="w-4 h-4" />
             </Button>
@@ -332,9 +377,19 @@ export default function BooksList({
                       onClick={() => setCurrentPage(page)}
                       className={`w-10 h-10 rounded-xl text-[10px] font-black transition-all ${
                         currentPage === page
-                          ? "bg-[#D0402B] text-white shadow-lg shadow-[#D0402B]/20"
+                          ? "text-white shadow-lg"
                           : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
                       }`}
+                      style={
+                        {
+                          backgroundColor:
+                            currentPage === page ? primaryColor : undefined,
+                          boxShadow:
+                            currentPage === page
+                              ? `0 10px 15px -3px ${primaryColor}33`
+                              : undefined,
+                        } as CSSWithVariables
+                      }
                     >
                       {page}
                     </button>
@@ -356,7 +411,8 @@ export default function BooksList({
               variant="outline"
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              className="w-10 h-10 p-0 rounded-xl border-black/5 bg-white shadow-sm hover:bg-[#D0402B] hover:text-white transition-all disabled:opacity-30"
+              className="w-10 h-10 p-0 rounded-xl border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              style={{ ["--hover-bg" as any]: primaryColor }}
             >
               <ChevronRight className="w-4 h-4" />
             </Button>

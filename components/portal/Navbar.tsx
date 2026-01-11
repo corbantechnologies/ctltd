@@ -62,12 +62,7 @@ export default function Navbar() {
       icon: Database,
       show: isDirector,
     },
-    {
-      name: "Partners",
-      href: `/${rolePrefix}/partners`,
-      icon: FileText,
-      show: isDirector || isFinance,
-    },
+
     {
       name: "COA",
       href: `/${rolePrefix}/coa`,
@@ -75,10 +70,28 @@ export default function Navbar() {
       show: isDirector || isFinance,
     },
     {
+      name: "Books",
+      href: `/${rolePrefix}/books`,
+      icon: FileText,
+      show: isFinance,
+    },
+    {
+      name: "Journals",
+      href: `/${rolePrefix}/journals`,
+      icon: FileText,
+      show: isFinance,
+    },
+    {
+      name: "Partners",
+      href: `/${rolePrefix}/partners`,
+      icon: FileText,
+      show: isDirector || isFinance,
+    },
+    {
       name: "Financials",
       href: `/${rolePrefix}/financials`,
       icon: FileText,
-      show: isDirector || isFinance,
+      show: isDirector,
     },
   ];
 

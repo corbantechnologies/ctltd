@@ -22,6 +22,10 @@ import { useState, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+type CSSWithVariables = React.CSSProperties & {
+  [key: string]: string | number;
+};
+
 interface COAListProps {
   rolePrefix: string;
 }
@@ -51,6 +55,8 @@ export default function COAList({ rolePrefix }: COAListProps) {
     return filteredCOAs.slice(start, start + itemsPerPage);
   }, [filteredCOAs, currentPage]);
 
+  const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -75,7 +81,14 @@ export default function COAList({ rolePrefix }: COAListProps) {
         <div className="flex flex-col md:flex-row items-center gap-4 w-full lg:w-auto">
           {/* Search */}
           <div className="relative w-full md:w-80">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20" />
+            <Search
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20"
+              style={
+                {
+                  color: searchQuery ? primaryColor : undefined,
+                } as CSSWithVariables
+              }
+            />
             <Input
               placeholder="Search by name or code..."
               value={searchQuery}
@@ -93,9 +106,14 @@ export default function COAList({ rolePrefix }: COAListProps) {
             onClick={() => setView("grid")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
               view === "grid"
-                ? "bg-white text-[#D0402B] shadow-sm"
+                ? "bg-white shadow-sm"
                 : "text-black/40 hover:text-black"
             }`}
+            style={
+              {
+                color: view === "grid" ? primaryColor : undefined,
+              } as CSSWithVariables
+            }
           >
             <LayoutGrid className="w-3.5 h-3.5" />
             Grid
@@ -104,9 +122,14 @@ export default function COAList({ rolePrefix }: COAListProps) {
             onClick={() => setView("table")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
               view === "table"
-                ? "bg-white text-[#D0402B] shadow-sm"
+                ? "bg-white shadow-sm"
                 : "text-black/40 hover:text-black"
             }`}
+            style={
+              {
+                color: view === "table" ? primaryColor : undefined,
+              } as CSSWithVariables
+            }
           >
             <List className="w-3.5 h-3.5" />
             Table
@@ -132,7 +155,16 @@ export default function COAList({ rolePrefix }: COAListProps) {
               <Card className="border-black/5 shadow-sm hover:shadow-2xl transition-all duration-500 rounded-[28px] overflow-hidden bg-white/80 backdrop-blur-xl group-hover:-translate-y-1">
                 <CardContent className="p-6">
                   <div className="flex justify-between items-start mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-[#D0402B]/10 flex items-center justify-center text-[#D0402B] group-hover:bg-[#D0402B] group-hover:text-white transition-all duration-500 shadow-inner">
+                    <div
+                      className="w-12 h-12 rounded-2xl flex items-center justify-center group-hover:text-white transition-all duration-500 shadow-inner"
+                      style={
+                        {
+                          backgroundColor: `${primaryColor}1A`, // 10% opacity
+                          color: primaryColor,
+                          "--hover-bg": primaryColor,
+                        } as CSSWithVariables
+                      }
+                    >
                       <Hash className="w-6 h-6" />
                     </div>
                     {coa.is_active ? (
@@ -147,11 +179,21 @@ export default function COAList({ rolePrefix }: COAListProps) {
                   </div>
 
                   <div className="mb-6">
-                    <h3 className="text-xl font-black text-black tracking-tight group-hover:text-[#D0402B] transition-colors line-clamp-1">
+                    <h3
+                      className="text-xl font-black text-black tracking-tight transition-colors line-clamp-1"
+                      style={
+                        {
+                          "--hover-text": primaryColor,
+                        } as CSSWithVariables
+                      }
+                    >
                       {coa.name}
                     </h3>
                     <div className="flex items-center gap-2 mt-1">
-                      <p className="text-[10px] font-black uppercase tracking-widest text-[#D0402B]">
+                      <p
+                        className="text-[10px] font-black uppercase tracking-widest"
+                        style={{ color: primaryColor } as CSSWithVariables}
+                      >
                         CODE: {coa.code}
                       </p>
                       <span className="w-1 h-1 rounded-full bg-black/10" />
@@ -202,15 +244,33 @@ export default function COAList({ rolePrefix }: COAListProps) {
                 {paginatedCOAs.map((coa) => (
                   <tr
                     key={coa.reference}
-                    className="hover:bg-[#D0402B]/5 transition-colors group"
+                    className="transition-colors group"
+                    style={
+                      { "--hover-bg": `${primaryColor}0D` } as CSSWithVariables
+                    } // 5% opacity
                   >
                     <td className="py-6 px-8">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/30 group-hover:bg-[#D0402B]/20 group-hover:text-[#D0402B] transition-all">
+                        <div
+                          className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold"
+                          style={
+                            {
+                              "--group-hover-bg": `${primaryColor}33`, // 20% opacity
+                              "--group-hover-text": primaryColor,
+                            } as CSSWithVariables
+                          }
+                        >
                           <Hash className="w-5 h-5" />
                         </div>
                         <div>
-                          <p className="text-sm font-black text-black group-hover:text-[#D0402B] transition-colors">
+                          <p
+                            className="text-sm font-black text-black transition-colors"
+                            style={
+                              {
+                                "--group-hover-text": primaryColor,
+                              } as CSSWithVariables
+                            }
+                          >
                             {coa.name}
                           </p>
                           <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
@@ -253,7 +313,12 @@ export default function COAList({ rolePrefix }: COAListProps) {
                       <Link href={`/${rolePrefix}/coa/${coa.reference}`}>
                         <Button
                           variant="ghost"
-                          className="h-10 w-10 p-0 rounded-xl hover:bg-[#D0402B] hover:text-white transition-all"
+                          className="h-10 w-10 p-0 rounded-xl hover:text-white transition-all duration-300"
+                          style={
+                            {
+                              "--hover-bg": primaryColor,
+                            } as CSSWithVariables
+                          }
                         >
                           <ArrowRight className="w-4 h-4" />
                         </Button>
@@ -281,7 +346,10 @@ export default function COAList({ rolePrefix }: COAListProps) {
               variant="outline"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              className="w-10 h-10 p-0 rounded-xl border-black/5 bg-white shadow-sm hover:bg-[#D0402B] hover:text-white transition-all disabled:opacity-30"
+              className="w-10 h-10 p-0 rounded-xl border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              style={{
+                ["--hover-bg" as any]: primaryColor,
+              }}
             >
               <ChevronLeft className="w-4 h-4" />
             </Button>
@@ -300,9 +368,19 @@ export default function COAList({ rolePrefix }: COAListProps) {
                       onClick={() => setCurrentPage(page)}
                       className={`w-10 h-10 rounded-xl text-[10px] font-black transition-all ${
                         currentPage === page
-                          ? "bg-[#D0402B] text-white shadow-lg shadow-[#D0402B]/20"
+                          ? "text-white shadow-lg"
                           : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
                       }`}
+                      style={
+                        {
+                          backgroundColor:
+                            currentPage === page ? primaryColor : undefined,
+                          boxShadow:
+                            currentPage === page
+                              ? `0 10px 15px -3px ${primaryColor}33`
+                              : undefined,
+                        } as CSSWithVariables
+                      }
                     >
                       {page}
                     </button>
@@ -324,7 +402,10 @@ export default function COAList({ rolePrefix }: COAListProps) {
               variant="outline"
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              className="w-10 h-10 p-0 rounded-xl border-black/5 bg-white shadow-sm hover:bg-[#D0402B] hover:text-white transition-all disabled:opacity-30"
+              className="w-10 h-10 p-0 rounded-xl border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              style={{
+                ["--hover-bg" as any]: primaryColor,
+              }}
             >
               <ChevronRight className="w-4 h-4" />
             </Button>
