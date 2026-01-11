@@ -106,7 +106,7 @@ export default function CreateJournalEntry() {
       <CardContent className="p-8">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
           {/* Contextual Mapping */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6 bg-orange-50/20 rounded-3xl border border-black/5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 p-6 bg-orange-50/20 rounded-3xl border border-black/5">
             <div className="space-y-2">
               <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                 Journal Batch
@@ -185,6 +185,19 @@ export default function CreateJournalEntry() {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div className="space-y-2">
+              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+                Project
+              </Label>
+              <Input
+                name="project"
+                placeholder="PROJ-001"
+                className="h-12 rounded-xl border-black/5 bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20"
+                onChange={formik.handleChange}
+                value={formik.values.project}
+              />
             </div>
           </div>
 
@@ -265,7 +278,7 @@ export default function CreateJournalEntry() {
           </div>
 
           {/* Documentation */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="space-y-2">
               <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                 Payment Method
@@ -314,6 +327,27 @@ export default function CreateJournalEntry() {
                 className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
                 onChange={formik.handleChange}
                 value={formik.values.document_number}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label
+                htmlFor="document_file"
+                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+              >
+                Supporting File
+              </Label>
+              <input
+                id="document_file"
+                name="document_file"
+                type="file"
+                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5 py-3 text-xs"
+                onChange={(event) => {
+                  formik.setFieldValue(
+                    "document_file",
+                    event.currentTarget.files?.[0] || null
+                  );
+                }}
               />
             </div>
           </div>
