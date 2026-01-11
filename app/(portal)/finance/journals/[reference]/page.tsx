@@ -15,7 +15,6 @@ import {
   Calendar,
   CheckCircle2,
   Clock,
-  Download,
   FileText,
   Plus,
   Receipt,
