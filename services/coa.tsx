@@ -3,6 +3,7 @@
 import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
 import { PaginatedResponse } from "./general";
+import { Book } from "./books";
 
 interface COA {
   code: string;
@@ -13,6 +14,7 @@ interface COA {
   reference: string;
   created_at: string;
   updated_at: string;
+  books: Book[];
 }
 
 interface createCOA {
@@ -46,7 +48,6 @@ export const updateCOA = async (
   data: updateCOA,
   headers: { headers: { Authorization: string } }
 ): Promise<COA> => {
-
   const response: AxiosResponse<COA> = await apiActions.patch(
     `/api/v1/coa/${reference}/`,
     data,
@@ -65,7 +66,6 @@ export const deleteCOA = async (
   );
   return response.data;
 };
-
 
 // All can read
 
@@ -89,7 +89,3 @@ export const getCOA = async (
   );
   return response.data;
 };
-
-
-
-

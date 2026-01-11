@@ -3,6 +3,7 @@
 import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
 import { PaginatedResponse } from "./general";
+import { JournalEntry } from "./journalentries";
 
 interface Book {
   code: string;
@@ -16,7 +17,10 @@ interface Book {
   created_at: string;
   updated_at: string;
   reference: string;
+  journal_entries: JournalEntry[];
 }
+
+export type { Book };
 
 interface createBook {
   code: string; //has to be unique

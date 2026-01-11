@@ -2,7 +2,7 @@
 
 import { useFetchAccount } from "@/hooks/accounts/actions";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
-import DivisionsList from "@/components/portal/director/DivisionsList";
+import DivisionsList from "@/components/divisions/DivisionsList";
 import CreateDivisionModal from "@/forms/divisions/CreateDivisionModal";
 import { Building2 } from "lucide-react";
 

@@ -3,6 +3,7 @@
 import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
 import { PaginatedResponse } from "./general";
+import { JournalEntry } from "./journalentries";
 
 interface Partner {
   code: string;
@@ -19,6 +20,7 @@ interface Partner {
   reference: string;
   partner_type: string;
   division: string;
+  journal_entries: JournalEntry[];
 }
 
 interface createPartner {

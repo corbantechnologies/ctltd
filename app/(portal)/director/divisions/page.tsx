@@ -1,6 +1,6 @@
 "use client";
 
-import DivisionsList from "@/components/portal/director/DivisionsList";
+import DivisionsList from "@/components/divisions/DivisionsList";
 import CreateDivisionModal from "@/forms/divisions/CreateDivisionModal";
 import { Database } from "lucide-react";
 
