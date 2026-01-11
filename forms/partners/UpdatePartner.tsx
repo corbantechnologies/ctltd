@@ -28,7 +28,7 @@ interface UpdatePartnerProps {
     email: string;
     tax_pin: string;
     currency: string;
-    wht_rate: string;
+    wht_rate: number;
     payment_terms: string;
     is_active: boolean;
     reference: string;
@@ -60,7 +60,7 @@ export default function UpdatePartner({
       email: partner.email,
       tax_pin: partner.tax_pin,
       currency: partner.currency,
-      wht_rate: parseFloat(partner.wht_rate) || 0,
+      wht_rate: partner.wht_rate,
       payment_terms: partner.payment_terms || "",
       is_active: partner.is_active,
       partner_type: partner.partner_type,
@@ -74,7 +74,7 @@ export default function UpdatePartner({
           partner.reference,
           {
             ...values,
-            wht_rate: values.wht_rate.toString(),
+            wht_rate: values.wht_rate,
           },
           header
         );
