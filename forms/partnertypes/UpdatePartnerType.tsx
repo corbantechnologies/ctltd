@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { updateDivision } from "@/services/divisions";
+import { updatePartnerType } from "@/services/partnertypes";
 import { useFormik } from "formik";
-import { DivisionSchema } from "@/validation";
+import { PartnerTypeSchema } from "@/validation";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Card,
   CardContent,
@@ -19,33 +19,44 @@ import { Loader2, Edit3, Save } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 
-interface UpdateDivisionProps {
-  division: {
+interface UpdatePartnerTypeProps {
+  partnerType: {
     name: string;
+    description: string;
     is_active: boolean;
     reference: string;
   };
 }
 
-export default function UpdateDivision({ division }: UpdateDivisionProps) {
+export default function UpdatePartnerType({
+  partnerType,
+}: UpdatePartnerTypeProps) {
   const header = useAxiosAuth();
   const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
-      name: division.name,
-      is_active: division.is_active,
+      name: partnerType.name,
+      description: partnerType.description,
+      is_active: partnerType.is_active,
     },
     enableReinitialize: true,
-    validationSchema: DivisionSchema,
+    validationSchema: PartnerTypeSchema,
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        await updateDivision(division.reference, values, header);
-        toast.success("Division updated successfully");
+        await updatePartnerType(
+          partnerType.reference,
+          {
+            description: values.description,
+            is_active: values.is_active,
+          },
+          header
+        );
+        toast.success("Partner type updated successfully");
         router.refresh();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to update division"
+          error?.response?.data?.message || "Failed to update partner type"
         );
       } finally {
         setSubmitting(false);
@@ -62,38 +73,39 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
           </div>
           <div>
             <CardTitle className="text-2xl font-black text-black tracking-tight">
-              Update Division
+              Update Category
             </CardTitle>
             <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
-              Refine Infrastructure
+              Refine Ecosystem
             </CardDescription>
           </div>
         </div>
       </CardHeader>
       <CardContent className="p-8">
+        <div className="mb-6 p-4 bg-black/5 rounded-2xl border border-black/5">
+          <p className="text-[10px] font-black uppercase tracking-widest text-black/40 mb-1">
+            Category Name (Read-only)
+          </p>
+          <p className="font-bold text-black">{partnerType.name}</p>
+        </div>
+
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <Label
-              htmlFor="name"
+              htmlFor="description"
               className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
             >
-              Division Name
+              Description
             </Label>
-            <Input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="e.g. Sales, Marketing, HR"
-              className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white focus:ring-corporate-primary/20 transition-all font-bold px-5"
+            <Textarea
+              id="description"
+              name="description"
+              placeholder="Refine the purpose of this partner type..."
+              className="min-h-[120px] rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold p-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.name}
+              value={formik.values.description}
             />
-            {formik.touched.name && formik.errors.name && (
-              <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                {formik.errors.name}
-              </p>
-            )}
           </div>
 
           <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-2xl border border-black/5 transition-colors">
@@ -110,7 +122,7 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
               htmlFor="is_active"
               className="text-sm font-black text-black"
             >
-              Keep Division Active
+              Keep Category Active
             </Label>
           </div>
 
@@ -118,7 +130,7 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
             <Button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded-[20px] font-black text-lg transition-all shadow-xl hover:shadow-black/10 active:scale-[0.98] group"
+              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
             >
               {formik.isSubmitting ? (
                 <Loader2 className="w-6 h-6 animate-spin" />

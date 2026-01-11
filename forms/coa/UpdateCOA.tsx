@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { updateDivision } from "@/services/divisions";
+import { updateCOA } from "@/services/coa";
 import { useFormik } from "formik";
-import { DivisionSchema } from "@/validation";
+import { COASchema } from "@/validation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,33 +19,39 @@ import { Loader2, Edit3, Save } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 
-interface UpdateDivisionProps {
-  division: {
+interface UpdateCOAProps {
+  coa: {
     name: string;
-    is_active: boolean;
+    code: string;
     reference: string;
   };
 }
 
-export default function UpdateDivision({ division }: UpdateDivisionProps) {
+export default function UpdateCOA({ coa }: UpdateCOAProps) {
   const header = useAxiosAuth();
   const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
-      name: division.name,
-      is_active: division.is_active,
+      name: coa.name,
+      // For COA update, the service only expects name, but we use the schema which might expect more.
+      // However, the service interface updateCOA only has name.
+      // Let's adjust initialValues to match what we have.
+      code: coa.code,
+      normal_balance: "DEBIT", // These won't be sent if we only send name to the service
+      order: 0,
     },
     enableReinitialize: true,
-    validationSchema: DivisionSchema,
+    validationSchema: COASchema,
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        await updateDivision(division.reference, values, header);
-        toast.success("Division updated successfully");
+        // Based on the interface updateCOA { name: string }
+        await updateCOA(coa.reference, { name: values.name }, header);
+        toast.success("Account updated successfully");
         router.refresh();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to update division"
+          error?.response?.data?.message || "Failed to update account"
         );
       } finally {
         setSubmitting(false);
@@ -62,28 +68,35 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
           </div>
           <div>
             <CardTitle className="text-2xl font-black text-black tracking-tight">
-              Update Division
+              Update Account
             </CardTitle>
             <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
-              Refine Infrastructure
+              Refine Classification
             </CardDescription>
           </div>
         </div>
       </CardHeader>
       <CardContent className="p-8">
+        <div className="mb-6 p-4 bg-black/5 rounded-2xl border border-black/5">
+          <p className="text-[10px] font-black uppercase tracking-widest text-black/40 mb-1">
+            Account Code (Read-only)
+          </p>
+          <p className="font-bold text-black">{coa.code}</p>
+        </div>
+
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <Label
               htmlFor="name"
               className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
             >
-              Division Name
+              Account Name
             </Label>
             <Input
               id="name"
               name="name"
               type="text"
-              placeholder="e.g. Sales, Marketing, HR"
+              placeholder="e.g. Cash in Bank"
               className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white focus:ring-corporate-primary/20 transition-all font-bold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -96,29 +109,11 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
             )}
           </div>
 
-          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-2xl border border-black/5 transition-colors">
-            <input
-              id="is_active"
-              name="is_active"
-              type="checkbox"
-              className="w-5 h-5 rounded-lg border-black/5 text-corporate-primary focus:ring-corporate-primary/20"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              checked={formik.values.is_active}
-            />
-            <Label
-              htmlFor="is_active"
-              className="text-sm font-black text-black"
-            >
-              Keep Division Active
-            </Label>
-          </div>
-
           <div className="pt-4">
             <Button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded-[20px] font-black text-lg transition-all shadow-xl hover:shadow-black/10 active:scale-[0.98] group"
+              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
             >
               {formik.isSubmitting ? (
                 <Loader2 className="w-6 h-6 animate-spin" />

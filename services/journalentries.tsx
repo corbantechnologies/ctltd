@@ -32,10 +32,10 @@ interface createJournalEntry {
   book: string;
   partner: string | null;
   division: string;
-  debit: string;
-  credit: string;
+  debit: number;
+  credit: number;
   currency: string;
-  exchange_rate: string;
+  exchange_rate: number;
   payment_method: string;
   is_intercompany: boolean;
   source_document: string;

@@ -43,18 +43,6 @@ export const createJournal = async (
   return response.data;
 };
 
-export const postJournal = async (
-  reference: string,
-  headers: { headers: { Authorization: string } }
-): Promise<Journal> => {
-  const response: AxiosResponse<Journal> = await apiActions.patch(
-    `/api/v1/journals/${reference}/`,
-    { is_posted: true },
-    headers
-  );
-  return response.data;
-};
-
 export const updateJournal = async (
   reference: string,
   data: updateJournal,
@@ -63,6 +51,19 @@ export const updateJournal = async (
   const response: AxiosResponse<Journal> = await apiActions.patch(
     `/api/v1/journals/${reference}/`,
     data,
+    headers
+  );
+  return response.data;
+};
+
+// to be used to close/post a journal only after all entries are created
+export const postJournal = async (
+  reference: string,
+  headers: { headers: { Authorization: string } }
+): Promise<Journal> => {
+  const response: AxiosResponse<Journal> = await apiActions.patch(
+    `/api/v1/journals/${reference}/`,
+    { is_posted: true },
     headers
   );
   return response.data;

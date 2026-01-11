@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { updateDivision } from "@/services/divisions";
+import { createPartnerType } from "@/services/partnertypes";
 import { useFormik } from "formik";
-import { DivisionSchema } from "@/validation";
+import { PartnerTypeSchema } from "@/validation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Card,
   CardContent,
@@ -15,37 +16,30 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { toast } from "react-hot-toast";
-import { Loader2, Edit3, Save } from "lucide-react";
+import { Loader2, Users, Plus } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 
-interface UpdateDivisionProps {
-  division: {
-    name: string;
-    is_active: boolean;
-    reference: string;
-  };
-}
-
-export default function UpdateDivision({ division }: UpdateDivisionProps) {
+export default function CreatePartnerType() {
   const header = useAxiosAuth();
   const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
-      name: division.name,
-      is_active: division.is_active,
+      name: "",
+      description: "",
+      is_active: true,
     },
-    enableReinitialize: true,
-    validationSchema: DivisionSchema,
-    onSubmit: async (values, { setSubmitting }) => {
+    validationSchema: PartnerTypeSchema,
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
-        await updateDivision(division.reference, values, header);
-        toast.success("Division updated successfully");
+        await createPartnerType(values, header);
+        toast.success("Partner type created successfully");
+        resetForm();
         router.refresh();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to update division"
+          error?.response?.data?.message || "Failed to create partner type"
         );
       } finally {
         setSubmitting(false);
@@ -57,15 +51,15 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
     <Card className="w-full max-w-2xl border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
       <CardHeader className="bg-orange-50/50 p-8 border-b border-black/5">
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-12 h-12 rounded-2xl bg-black flex items-center justify-center text-white shadow-lg">
-            <Edit3 className="w-6 h-6" />
+          <div className="w-12 h-12 rounded-2xl bg-corporate-primary flex items-center justify-center text-white shadow-lg shadow-orange-500/30">
+            <Users className="w-6 h-6" />
           </div>
           <div>
             <CardTitle className="text-2xl font-black text-black tracking-tight">
-              Update Division
+              New Partner Category
             </CardTitle>
             <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
-              Refine Infrastructure
+              Ecosystem Configuration
             </CardDescription>
           </div>
         </div>
@@ -77,13 +71,13 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
               htmlFor="name"
               className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
             >
-              Division Name
+              Category Name
             </Label>
             <Input
               id="name"
               name="name"
               type="text"
-              placeholder="e.g. Sales, Marketing, HR"
+              placeholder="e.g. Vendor, Client, Contractor"
               className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white focus:ring-corporate-primary/20 transition-all font-bold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -96,7 +90,25 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
             )}
           </div>
 
-          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-2xl border border-black/5 transition-colors">
+          <div className="space-y-2">
+            <Label
+              htmlFor="description"
+              className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+            >
+              Description
+            </Label>
+            <Textarea
+              id="description"
+              name="description"
+              placeholder="Define the purpose of this partner type..."
+              className="min-h-[120px] rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold p-5"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.description}
+            />
+          </div>
+
+          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-2xl border border-black/5">
             <input
               id="is_active"
               name="is_active"
@@ -110,7 +122,7 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
               htmlFor="is_active"
               className="text-sm font-black text-black"
             >
-              Keep Division Active
+              Activate Category
             </Label>
           </div>
 
@@ -118,14 +130,14 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
             <Button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded-[20px] font-black text-lg transition-all shadow-xl hover:shadow-black/10 active:scale-[0.98] group"
+              className="w-full h-16 bg-black hover:bg-corporate-primary text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
             >
               {formik.isSubmitting ? (
                 <Loader2 className="w-6 h-6 animate-spin" />
               ) : (
                 <div className="flex items-center gap-3">
-                  <Save className="w-5 h-5" />
-                  Save Changes
+                  <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
+                  Define Category
                 </div>
               )}
             </Button>

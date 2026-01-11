@@ -46,6 +46,7 @@ export const updateCOA = async (
   data: updateCOA,
   headers: { headers: { Authorization: string } }
 ): Promise<COA> => {
+
   const response: AxiosResponse<COA> = await apiActions.patch(
     `/api/v1/coa/${reference}/`,
     data,
@@ -64,6 +65,7 @@ export const deleteCOA = async (
   );
   return response.data;
 };
+
 
 // All can read
 
@@ -87,3 +89,7 @@ export const getCOA = async (
   );
   return response.data;
 };
+
+
+
+
