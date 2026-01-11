@@ -452,12 +452,6 @@ export default function CreateJournalEntry({
               Intercompany Transaction
             </Label>
           </div>
-          <div className="bg-red-50 p-4 rounded-xl text-red-600 text-xs">
-            {Object.keys(formik.errors).length > 0 && (
-              <pre>{JSON.stringify(formik.errors, null, 2)}</pre>
-            )}
-            {formik.isValid ? "Form is valid" : "Form is INVALID"}
-          </div>
           <Button
             type="submit"
             disabled={formik.isSubmitting}
