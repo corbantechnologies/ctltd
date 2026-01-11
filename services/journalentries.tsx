@@ -27,6 +27,8 @@ interface JournalEntry {
   reference: string;
 }
 
+export type { JournalEntry };
+
 interface createJournalEntry {
   journal: string;
   book: string;

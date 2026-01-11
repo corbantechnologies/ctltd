@@ -3,6 +3,7 @@
 import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
 import { PaginatedResponse } from "./general";
+import { JournalEntry } from "./journalentries";
 
 interface Division {
   name: string;
@@ -11,7 +12,9 @@ interface Division {
   created_at: string;
   updated_at: string;
   reference: string;
+  journal_entries: JournalEntry[]
 }
+
 
 interface createDivision {
   name: string; //errors expected if the name is not unique
