@@ -57,7 +57,7 @@ export default function CreateBook({
       try {
         await createBook(values, header);
         toast.success("Account Book created successfully");
-                router.refresh();
+        router.refresh();
 
         // reload
         queryClient.invalidateQueries({ queryKey: ["books"] });
