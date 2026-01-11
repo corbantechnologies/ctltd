@@ -6,7 +6,7 @@ export default function PortalLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#EFE5D9]">
       <Navbar />
       <main className="p-6">{children}</main>
     </div>

@@ -74,6 +74,12 @@ export default function Navbar() {
       icon: FileText,
       show: isDirector || isFinance,
     },
+    {
+      name: "Financials",
+      href: `/${rolePrefix}/financials`,
+      icon: FileText,
+      show: isDirector || isFinance,
+    },
   ];
 
   return (
