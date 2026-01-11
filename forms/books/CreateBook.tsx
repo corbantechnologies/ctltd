@@ -58,7 +58,6 @@ export default function CreateBook({
         await createBook(values, header);
         toast.success("Account Book created successfully");
         // reload
-        window.location.reload();
         queryClient.invalidateQueries({ queryKey: ["books"] });
         queryClient.invalidateQueries({ queryKey: ["coas"] }); // Refresh COA list as books are nested
         if (initialCOA) {
