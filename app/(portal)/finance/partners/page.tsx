@@ -54,7 +54,7 @@ export default function FinancePartnersPage() {
 
       {/* Manual Modal Implementation */}
       {openCreatePartner && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 py-6 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="relative w-full  my-8 animate-in zoom-in-95 duration-200">
             <Button
               onClick={() => setOpenCreatePartner(false)}
