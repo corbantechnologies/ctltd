@@ -33,7 +33,7 @@ interface createPartner {
   payment_terms: string; // nullable
   is_active: boolean; // defaults to true
   partner_type: string; // partner type name
-  division: string; //division name: optional
+  division: string; //required
 }
 
 interface updatePartner {

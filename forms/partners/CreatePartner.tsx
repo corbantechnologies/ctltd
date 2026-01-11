@@ -57,6 +57,7 @@ export default function CreatePartner({
       try {
         await createPartner(values, header);
         toast.success("Partner registered successfully");
+        window.location.reload();
         resetForm();
         if (onSuccess) onSuccess();
         router.refresh();
@@ -225,7 +226,7 @@ export default function CreatePartner({
                 onBlur={formik.handleBlur}
                 value={formik.values.division}
               >
-                <option value="">Global / None</option>
+                <option value="">Select Division...</option>
                 {divisions?.map((div) => (
                   <option key={div.reference} value={div.name}>
                     {div.name}
