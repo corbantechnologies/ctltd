@@ -256,7 +256,7 @@ export default function ResetPassword() {
         {/* <div className="mt-8 text-center text-sm font-bold text-black/40">
           Didn&apos;t get a code?{" "}
           <Link
-            href="/forgot-password"
+            href="/auth/forgot-password"
             className="text-corporate-primary hover:underline font-black"
           >
             Resend Code

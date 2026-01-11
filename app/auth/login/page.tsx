@@ -144,7 +144,7 @@ export default function Login() {
                     Password
                   </label>
                   <Link
-                    href="/forgot-password"
+                    href="/auth/forgot-password"
                     title="Forgot Password"
                     className="text-xs font-black text-corporate-primary hover:underline"
                   >

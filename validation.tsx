@@ -43,9 +43,119 @@ const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
 });
 
+const DivisionSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  is_active: Yup.boolean().default(true),
+});
+
+const COASchema = Yup.object().shape({
+  code: Yup.string().required("Code is required"),
+  name: Yup.string().required("Name is required"),
+  normal_balance: Yup.string()
+    .oneOf(["DEBIT", "CREDIT"], "Must be DEBIT or CREDIT")
+    .required("Normal balance is required"),
+  order: Yup.number().required("Order is required"),
+  is_active: Yup.boolean().default(true),
+});
+
+const BookSchema = Yup.object().shape({
+  code: Yup.string().required("Code is required"),
+  name: Yup.string().required("Name is required"),
+  account_type: Yup.string().required("Account type is required"),
+  is_active: Yup.boolean().default(true),
+  is_bank: Yup.boolean().default(false),
+  is_tax: Yup.boolean().default(false),
+  is_cash: Yup.boolean().default(false),
+  description: Yup.string(),
+});
+
+const PartnerTypeSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  description: Yup.string(),
+  is_active: Yup.boolean().default(true),
+});
+
+const PartnerSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  phone: Yup.string(),
+  email: Yup.string().email("Invalid email"),
+  tax_pin: Yup.string(),
+  currency: Yup.string().default("KES"),
+  wht_rate: Yup.number().min(0).max(100),
+  payment_terms: Yup.string(),
+  is_active: Yup.boolean().default(true),
+  partner_type: Yup.string().required("Partner type is required"),
+  division: Yup.string(),
+});
+
+const JournalTypeSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  description: Yup.string(),
+  is_active: Yup.boolean().default(true),
+});
+
+const JournalSchema = Yup.object().shape({
+  journal_type: Yup.string().required("Journal type is required"),
+  date: Yup.date().required("Date is required"),
+  description: Yup.string().required("Description is required"),
+});
+
+const JournalEntrySchema = Yup.object().shape({
+  journal: Yup.string().required("Journal batch is required"),
+  book: Yup.string().required("Account book is required"),
+  partner: Yup.string().nullable(),
+  division: Yup.string().required("Division is required"),
+
+  // Debit depends on credit
+  debit: Yup.number()
+    .min(0, "Debit cannot be negative")
+    .when("credit", {
+      is: (val: number) => Number(val) > 0,
+      then: (schema) =>
+        schema
+          .max(0, "Cannot enter both debit and credit")
+          .test(
+            "debit-required-if-no-credit",
+            "Enter debit or credit amount",
+            function (value) {
+              return Number(value) > 0 || Number(this.parent.credit) > 0;
+            }
+          ),
+      otherwise: (schema) =>
+        schema
+          .required("Enter debit or credit amount")
+          .test(
+            "debit-required-if-no-credit",
+            "Enter debit or credit amount",
+            function (value) {
+              return Number(value) > 0 || Number(this.parent.credit) > 0;
+            }
+          ),
+    }),
+
+  credit: Yup.number().min(0, "Credit cannot be negative").default(0),
+
+  currency: Yup.string().required("Currency is required"),
+  exchange_rate: Yup.number().min(0).default(1),
+  payment_method: Yup.string().required("Payment method is required"),
+  is_intercompany: Yup.boolean().default(false),
+  source_document: Yup.string().nullable(),
+  document_number: Yup.string().nullable(),
+  notes: Yup.string().nullable(),
+  project: Yup.string().nullable(),
+});
+
 export {
   RegistrationSchema,
   LoginSchema,
   ResetPasswordSchema,
   ForgotPasswordSchema,
+  DivisionSchema,
+  COASchema,
+  BookSchema,
+  PartnerTypeSchema,
+  PartnerSchema,
+  JournalTypeSchema,
+  JournalSchema,
+  JournalEntrySchema,
 };
