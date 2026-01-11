@@ -57,7 +57,7 @@ export default function CreatePartner({
       try {
         await createPartner(values, header);
         toast.success("Partner registered successfully");
-        window.location.reload();
+
         resetForm();
         if (onSuccess) onSuccess();
         router.refresh();

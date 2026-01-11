@@ -37,7 +37,7 @@ export default function CreateDivisionModal() {
         await createDivision(values, header);
         toast.success("Division created successfully");
         resetForm();
-        window.location.reload();
+
         setOpen(false);
         router.refresh();
       } catch (error) {
