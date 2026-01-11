@@ -194,15 +194,11 @@ export default function FinanceCOADetailPage() {
 
       {/* Manual Modal for Create Book */}
       {openCreateBook && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-            onClick={() => setOpenCreateBook(false)}
-          />
-          <div className="relative w-full max-w-3xl transform transition-all">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
+          <div className="relative w-full max-w-4xl my-8 animate-in zoom-in-95 duration-200">
             <button
               onClick={() => setOpenCreateBook(false)}
-              className="absolute -top-12 right-0 p-2 text-white/60 hover:text-white transition-colors"
+              className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-white text-black shadow-lg hover:bg-red-50 hover:text-red-600 z-10"
             >
               <X className="w-6 h-6" />
             </button>
