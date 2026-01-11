@@ -13,8 +13,10 @@ import {
   Activity,
   ArrowLeft,
   X,
+  BookPlus,
 } from "lucide-react";
 import Link from "next/link";
+import CreateBook from "@/forms/books/CreateBook";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -24,6 +26,7 @@ export default function FinanceCOADetailPage() {
   const { reference } = useParams();
   const { isLoading, data: coa } = useFetchCOA(reference as string);
   const [open, setOpen] = useState(false);
+  const [openCreateBook, setOpenCreateBook] = useState(false);
 
   if (isLoading) return <LoadingSpinner />;
   if (!coa)
@@ -82,13 +85,23 @@ export default function FinanceCOADetailPage() {
           </div>
         </div>
 
-        <Button
-          onClick={() => setOpen(true)}
-          className="h-14 px-8 bg-black hover:bg-[#045138] text-white rounded-2xl font-black text-sm transition-all shadow-xl active:scale-95 group"
-        >
-          <Edit3 className="w-5 h-5 mr-2" />
-          Update Account
-        </Button>
+        <div className="flex items-center gap-3">
+          <Button
+            onClick={() => setOpenCreateBook(true)}
+            className="h-14 px-6 bg-white border border-black/5 hover:bg-black/5 text-black rounded-2xl font-black text-sm transition-all shadow-sm active:scale-95 group"
+          >
+            <BookPlus className="w-5 h-5 mr-2 group-hover:text-[#045138] transition-colors" />
+            Add Ledger Book
+          </Button>
+
+          <Button
+            onClick={() => setOpen(true)}
+            className="h-14 px-8 bg-black hover:bg-[#045138] text-white rounded-2xl font-black text-sm transition-all shadow-xl active:scale-95 group"
+          >
+            <Edit3 className="w-5 h-5 mr-2" />
+            Update Account
+          </Button>
+        </div>
       </div>
 
       {/* Stats Cards */}
@@ -174,6 +187,29 @@ export default function FinanceCOADetailPage() {
               coa={{ name: coa.name, code: coa.code, reference: coa.reference }}
               rolePrefix="finance"
               onSuccess={() => setOpen(false)}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Manual Modal for Create Book */}
+      {openCreateBook && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            onClick={() => setOpenCreateBook(false)}
+          />
+          <div className="relative w-full max-w-3xl transform transition-all">
+            <button
+              onClick={() => setOpenCreateBook(false)}
+              className="absolute -top-12 right-0 p-2 text-white/60 hover:text-white transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <CreateBook
+              rolePrefix="finance"
+              initialCOA={coa.name}
+              onSuccess={() => setOpenCreateBook(false)}
             />
           </div>
         </div>
