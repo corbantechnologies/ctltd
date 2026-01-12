@@ -249,10 +249,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                         </div>
                       </TableCell>
                       <TableCell className="py-6 px-8">
-                        <div className="space-y-1">
-                          <Building2 className="w-3 h-3 opacity-50" />
-                          {partner.division}
-                        </div>
+                        {partner.division}
                       </TableCell>
                       <TableCell className="py-6 px-8">
                         <Badge
