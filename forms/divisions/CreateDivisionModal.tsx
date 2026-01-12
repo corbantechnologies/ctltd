@@ -41,7 +41,6 @@ export default function CreateDivisionModal() {
 
         setOpen(false);
       } catch (error) {
-        console.log(error);
         const errorMessage =
           (error as any)?.response?.data?.message ||
           "Failed to create division";
