@@ -31,7 +31,7 @@ export default function FiscalYearsPage() {
       </div>
 
       <div className="pt-8 border-t border-gray-100">
-        <FinancialYearsList rolePrefix="finance" />
+        <FinancialYearsList rolePrefix="director" />
       </div>
     </div>
   );

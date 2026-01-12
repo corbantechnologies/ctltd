@@ -30,20 +30,19 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Card, CardContent } from "@/components/ui/card";
-import { toast } from "react-hot-toast";
+import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
 
 export default function JournalsDetailPage() {
   const { reference, journal_reference } = useParams();
   const router = useRouter();
-  const header = useAxiosAuth();
+  const {data: fiscalYear} = useFetchFinancialYear(reference as string);
   const {
     isLoading,
     data: journal,
-    refetch: refetchJournal,
   } = useFetchJournal(journal_reference as string);
   const [openAddEntry, setOpenAddEntry] = useState(false);
   const [openUpdateJournal, setOpenUpdateJournal] = useState(false);
-  const [isPosting, setIsPosting] = useState(false);
+
 
   // Calculate totals
   const totalDebit =
@@ -58,29 +57,6 @@ export default function JournalsDetailPage() {
     ) || 0;
   const isBalanced = Math.abs(totalDebit - totalCredit) < 0.01;
 
-  const handlePostJournal = async () => {
-    if (!journal) return;
-    if (!isBalanced) {
-      toast.error("Journal MUST be balanced before posting");
-      return;
-    }
-    if (journal.journal_entries.length === 0) {
-      toast.error("Cannot post an empty journal");
-      return;
-    }
-
-    try {
-      setIsPosting(true);
-      await postJournal(journal.reference, header);
-      toast.success("Journal posted successfully");
-      refetchJournal();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      toast.error(error?.response?.data?.message || "Failed to post journal");
-    } finally {
-      setIsPosting(false);
-    }
-  };
 
   if (isLoading) return <LoadingSpinner />;
   if (!journal)
@@ -109,7 +85,7 @@ export default function JournalsDetailPage() {
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink href={`/director/fiscal-years/${reference}`}>
-              {reference}
+              {fiscalYear?.code}
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -122,7 +98,7 @@ export default function JournalsDetailPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{journal.reference}</BreadcrumbPage>
+            <BreadcrumbPage>{journal.description}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -180,46 +156,6 @@ export default function JournalsDetailPage() {
             </div>
           </div>
         </div>
-
-        {/* Action Buttons */}
-        {!journal.is_posted && (
-          <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-            <Button
-              // onClick={() => setOpenUpdateJournal(true)} // Implement Update Modal if needed
-              variant="outline"
-              className="h-12 border-black/5 bg-white hover:bg-black/5 font-black uppercase text-xs tracking-widest rounded-xl"
-              onClick={() => setOpenUpdateJournal(true)}
-            >
-              <Edit2 className="w-4 h-4 mr-2" />
-              Edit Details
-            </Button>
-            <Button
-              onClick={() => setOpenAddEntry(true)}
-              className="h-12 bg-white border border-black/5 text-black hover:bg-black/5 font-black uppercase text-xs tracking-widest rounded-xl shadow-sm"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Add Entry
-            </Button>
-            <Button
-              onClick={handlePostJournal}
-              disabled={isPosting || !isBalanced}
-              className={`h-12 font-black uppercase text-xs tracking-widest rounded-xl shadow-lg transition-all ${
-                !isBalanced
-                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  : "bg-[#045138] hover:bg-black text-white"
-              }`}
-            >
-              {isPosting ? (
-                <LoadingSpinner />
-              ) : (
-                <div className="flex items-center">
-                  <Lock className="w-4 h-4 mr-2" />
-                  Finalize & Post
-                </div>
-              )}
-            </Button>
-          </div>
-        )}
       </div>
 
       {/* Stats Cards */}

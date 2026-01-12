@@ -148,7 +148,7 @@ export default function FiscalYearDetail() {
 
         <FiscalYearJournals
           journals={fiscalYear.journals || []}
-          rolePrefix="finance"
+          rolePrefix="director"
           fiscalYearReference={reference as string}
         />
       </div>

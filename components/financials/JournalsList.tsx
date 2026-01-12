@@ -312,7 +312,7 @@ export default function JournalsList({ rolePrefix, linkPrefix }: JournalsListPro
           {paginatedJournals.map((journal) => (
             <Link
               key={journal.reference}
-              href={`/${rolePrefix}/${linkPrefix}/${journal.reference}`}
+              href={`/${rolePrefix}/fiscal-years/${linkPrefix}/${journal.reference}`}
               className="group block"
             >
               <Card className="h-full border-black/5 bg-white/60 backdrop-blur-xl rounded-[32px] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group-hover:bg-white/90">

@@ -1,10 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import JournalsList from "@/components/financials/JournalsList";
-import CreateJournal from "@/forms/journals/CreateJournal";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,9 +9,12 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { useParams } from "next/navigation";
+import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
+import FiscalYearJournals from "@/components/financialyears/FiscalYearJournals";
 
 export default function FinanceJournalsPage() {
   const { reference } = useParams();
+  const { data: fiscalYear } = useFetchFinancialYear(reference as string);
 
   return (
     <div className="space-y-8 pb-12">
@@ -37,7 +35,7 @@ export default function FinanceJournalsPage() {
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink href={`/director/fiscal-years/${reference}`}>
-              {reference}
+              {fiscalYear?.code}
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -58,7 +56,11 @@ export default function FinanceJournalsPage() {
         </div>
       </div>
 
-      <JournalsList rolePrefix="finance" linkPrefix="journals" />
+      <FiscalYearJournals
+        journals={fiscalYear?.journals || []}
+        rolePrefix="director"
+        fiscalYearReference={reference as string}
+      />
     </div>
   );
 }

@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { useParams } from "next/navigation";
 import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
+import FiscalYearJournals from "@/components/financialyears/FiscalYearJournals";
 
 export default function FinanceJournalsPage() {
   const { reference } = useParams();
@@ -66,7 +67,11 @@ export default function FinanceJournalsPage() {
         </Button>
       </div>
 
-      <JournalsList rolePrefix="finance" linkPrefix="journals" />
+      <FiscalYearJournals
+        journals={fiscalYear?.journals || []}
+        rolePrefix="finance"
+        fiscalYearReference={reference as string}
+      />
 
       {/* Manual Modal Implementation for Create Journal */}
       {openCreateJournal && (
