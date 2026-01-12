@@ -22,7 +22,7 @@ import { useState, useEffect } from "react";
 export default function Navbar() {
   const pathname = usePathname();
   const { data: account, isLoading } = useFetchAccount();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const isDirector = account?.is_director;
   const isFinance = account?.is_finance;
@@ -36,18 +36,10 @@ export default function Navbar() {
         ? "employee"
         : "portal";
 
-  // Close menu on navigation or resize
+  // Close menu on navigation
   useEffect(() => {
-    setMobileMenuOpen(false);
+    setMenuOpen(false);
   }, [pathname]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) setMobileMenuOpen(false);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const navItems = [
     {
@@ -62,7 +54,6 @@ export default function Navbar() {
       icon: Database,
       show: isDirector,
     },
-
     {
       name: "COA",
       href: `/${rolePrefix}/coa`,
@@ -75,7 +66,6 @@ export default function Navbar() {
       icon: FileText,
       show: isDirector || isFinance,
     },
-
     {
       name: "Partners",
       href: `/${rolePrefix}/partners`,
@@ -110,38 +100,7 @@ export default function Navbar() {
 
           {/* Controls & Nav */}
           <div className="flex items-center gap-2">
-            {/* Desktop Navigation Links */}
-            <div className="hidden md:flex items-center gap-1 bg-orange-50/50 p-1 rounded-xl border border-black/5 mr-2">
-              {navItems
-                .filter((item) => item.show)
-                .map((item) => {
-                  const isActive = pathname === item.href;
-                  return (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className={cn(
-                        "flex items-center gap-2 px-4 py-2 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all",
-                        isActive
-                          ? "bg-white text-corporate-primary shadow-sm border border-black/5"
-                          : "text-black/40 hover:text-black hover:bg-white/50"
-                      )}
-                    >
-                      <item.icon
-                        className={cn(
-                          "w-3.5 h-3.5",
-                          isActive ? "text-corporate-primary" : "text-black/20"
-                        )}
-                      />
-                      {item.name}
-                    </Link>
-                  );
-                })}
-            </div>
-
-            <div className="h-8 w-[1px] bg-black/5 mx-1 hidden md:block" />
-
-            {/* Desktop Account Info & Logout */}
+            {/* Account Info - Visible on larger screens */}
             <div className="flex items-center gap-3">
               <div className="hidden sm:flex flex-col items-end mr-1">
                 <span className="text-sm font-black text-black leading-none">
@@ -155,22 +114,12 @@ export default function Navbar() {
               </div>
 
               <div className="flex items-center gap-2">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="hidden md:flex rounded-xl border-black/5 bg-orange-50/50 hover:bg-orange-100/50 hover:border-corporate-primary/30 text-black/40 hover:text-corporate-primary transition-all group"
-                  onClick={() => signOut({ callbackUrl: "/auth/login" })}
-                  title="Logout"
-                >
-                  <LogOut className="w-4 h-4" />
-                </Button>
-
-                {/* Mobile Menu Toggle */}
+                {/* Global Menu Toggle */}
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="md:hidden rounded-xl text-black hover:bg-orange-50"
-                  onClick={() => setMobileMenuOpen(true)}
+                  className="rounded-xl text-black hover:bg-orange-50"
+                  onClick={() => setMenuOpen(true)}
                 >
                   <Menu className="w-6 h-6" />
                 </Button>
@@ -180,22 +129,22 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Backdrop */}
+      {/* Menu Backdrop */}
       <div
         className={cn(
-          "fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] transition-opacity md:hidden",
-          mobileMenuOpen
+          "fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] transition-opacity",
+          menuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         )}
-        onClick={() => setMobileMenuOpen(false)}
+        onClick={() => setMenuOpen(false)}
       />
 
-      {/* Mobile Menu Drawer */}
+      {/* Side Menu Drawer */}
       <aside
         className={cn(
-          "fixed right-0 top-0 h-full w-[300px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden",
-          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          "fixed right-0 top-0 h-full w-[300px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-in-out",
+          menuOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
         <div className="flex flex-col h-full">
@@ -212,13 +161,13 @@ export default function Navbar() {
               variant="ghost"
               size="icon"
               className="rounded-xl hover:bg-orange-50"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => setMenuOpen(false)}
             >
               <X className="w-6 h-6" />
             </Button>
           </div>
 
-          {/* User Info (Mobile) */}
+          {/* User Info inside Drawer */}
           <div className="p-6 bg-orange-50/30">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-2xl bg-orange-100 flex items-center justify-center text-corporate-primary font-black text-lg">
