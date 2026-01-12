@@ -51,7 +51,7 @@ export default function CreateCOA({
       try {
         await createCOA(values, header);
         toast.success("Account created successfully");
-        router.refresh();
+        window.location.reload();
         queryClient.invalidateQueries({ queryKey: ["coas"] });
         resetForm();
         if (onSuccess) onSuccess();

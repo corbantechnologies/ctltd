@@ -45,10 +45,10 @@ export default function CreateJournalType({
       try {
         await createJournalType(values, header);
         toast.success("Journal type defined successfully");
+        window.location.reload();
         resetForm();
 
         if (onSuccess) onSuccess();
-        router.refresh();
       } catch (error: any) {
         toast.error(
           error?.response?.data?.message || "Failed to define journal type"

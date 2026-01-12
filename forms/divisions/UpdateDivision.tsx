@@ -42,8 +42,7 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
       try {
         await updateDivision(division.reference, values, header);
         toast.success("Division updated successfully");
-
-        router.refresh();
+        window.location.reload();
       } catch (error: any) {
         toast.error(
           error?.response?.data?.message || "Failed to update division"
