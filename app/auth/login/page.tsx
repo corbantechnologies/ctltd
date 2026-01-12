@@ -69,7 +69,8 @@ export default function Login() {
         } else if (session?.user?.is_finance === true) {
           router.push("/finance/dashboard");
         } else if (session?.user?.is_superuser === true) {
-          router.push("/superuser/dashboard");
+          // TODO: Add superuser dashboard
+          router.push("/director/dashboard");
         } else {
           router.push("/");
         }
