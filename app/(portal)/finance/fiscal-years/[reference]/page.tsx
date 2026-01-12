@@ -3,18 +3,18 @@
 import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
 import FiscalYearJournals from "@/components/financialyears/FiscalYearJournals";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
-import {
-  CalendarRange,
-  ChevronRight,
-  Edit3,
-  Calendar,
-  Activity,
-  ArrowLeft,
-} from "lucide-react";
-import Link from "next/link";
+import { CalendarRange, Edit3, Calendar, Activity } from "lucide-react";
 import { useParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 export default function FiscalYearDetail() {
   const { reference } = useParams();
@@ -35,17 +35,25 @@ export default function FiscalYearDetail() {
       {/* Breadcrumbs & Actions */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div className="space-y-4">
-          <nav className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-gray-400">
-            <Link
-              href="/finance/fiscal-years"
-              className="hover:text-[#045138] transition-colors flex items-center gap-1"
-            >
-              <ArrowLeft className="w-3 h-3" />
-              Fiscal Years
-            </Link>
-            <ChevronRight className="w-3 h-3 opacity-30" />
-            <span className="text-black">{fiscalYear.code}</span>
-          </nav>
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/finance/dashboard">
+                  Dashboard
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/finance/fiscal-years">
+                  Fiscal Years
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>{fiscalYear.code}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
 
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-2xl bg-[#045138] flex items-center justify-center text-white shadow-xl shadow-[#045138]/20">

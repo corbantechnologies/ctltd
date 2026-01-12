@@ -100,8 +100,22 @@ export default function JournalsDetailPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink href="/finance/journals">
-              Journals Hub
+            <BreadcrumbLink href="/finance/fiscal-years">
+              Fiscal Years
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href={`/finance/fiscal-years/${reference}`}>
+              {reference}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink
+              href={`/finance/fiscal-years/${reference}/journals`}
+            >
+              Journals
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
