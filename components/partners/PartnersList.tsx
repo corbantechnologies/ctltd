@@ -35,13 +35,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import Link from "next/link";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 
 interface PartnersListProps {
   rolePrefix: string;
@@ -93,28 +87,27 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
 
         <div className="flex items-center gap-3 w-full md:w-auto">
           {/* Type Filter */}
-          <Select value={typeFilter} onValueChange={setTypeFilter}>
-            <SelectTrigger className="h-12 w-[180px] bg-white border-black/5 rounded-2xl font-bold text-xs uppercase tracking-wide">
-              <SelectValue placeholder="All Categories" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Categories</SelectItem>
-              {partnerTypes?.map((type) => (
-                <SelectItem key={type.reference} value={type.name}>
-                  {type.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          {/* Type Filter */}
+          <select
+            value={typeFilter}
+            onChange={(e) => setTypeFilter(e.target.value)}
+            className="h-12 w-[180px] bg-white border border-black/5 rounded-2xl font-bold text-xs uppercase tracking-wide px-3 outline-none focus:ring-1 focus:ring-black/10 cursor-pointer"
+          >
+            <option value="all">All Categories</option>
+            {partnerTypes?.map((type) => (
+              <option key={type.reference} value={type.name}>
+                {type.name}
+              </option>
+            ))}
+          </select>
 
           {/* View Toggle */}
           <div className="flex bg-white rounded-2xl p-1 border border-black/5">
             <Button
               onClick={() => setView("grid")}
               variant="ghost"
-              className={`h-10 w-10 rounded-xl p-0 transition-all ${
-                view === "grid" ? "text-white shadow-md" : "text-black/40"
-              }`}
+              className={`h-10 w-10 rounded-xl p-0 transition-all ${view === "grid" ? "text-white shadow-md" : "text-black/40"
+                }`}
               style={{
                 backgroundColor: view === "grid" ? primaryColor : "transparent",
               }}
@@ -124,9 +117,8 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
             <Button
               onClick={() => setView("table")}
               variant="ghost"
-              className={`h-10 w-10 rounded-xl p-0 transition-all ${
-                view === "table" ? "text-white shadow-md" : "text-black/40"
-              }`}
+              className={`h-10 w-10 rounded-xl p-0 transition-all ${view === "table" ? "text-white shadow-md" : "text-black/40"
+                }`}
               style={{
                 backgroundColor:
                   view === "table" ? primaryColor : "transparent",
@@ -160,11 +152,10 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                       <Users className="w-7 h-7" />
                     </div>
                     <Badge
-                      className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border-none ${
-                        partner.is_active
+                      className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border-none ${partner.is_active
                           ? "bg-green-500/10 text-green-600"
                           : "bg-red-500/10 text-red-600"
-                      }`}
+                        }`}
                     >
                       {partner.is_active ? "Active" : "Inactive"}
                     </Badge>
