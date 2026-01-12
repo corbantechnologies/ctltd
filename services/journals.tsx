@@ -20,6 +20,8 @@ interface Journal {
   journal_entries: JournalEntry[];
 }
 
+export type { Journal };
+
 interface createJournal {
   journal_type: string;
   date: string;
