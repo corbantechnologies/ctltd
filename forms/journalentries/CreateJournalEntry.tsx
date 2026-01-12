@@ -179,7 +179,7 @@ export default function CreateJournalEntry({
                 <option value="">Select Account...</option>
                 {books?.map((b) => (
                   <option key={b.code} value={b.name}>
-                    {b.name}
+                    {b.code} - {b.name}
                   </option>
                 ))}
               </select>
