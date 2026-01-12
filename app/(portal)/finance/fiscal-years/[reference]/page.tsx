@@ -44,7 +44,7 @@ export default function FiscalYearDetail() {
               Fiscal Years
             </Link>
             <ChevronRight className="w-3 h-3 opacity-30" />
-            <span className="text-gray-300">{fiscalYear.code}</span>
+            <span className="text-black">{fiscalYear.code}</span>
           </nav>
 
           <div className="flex items-center gap-4">
@@ -77,14 +77,6 @@ export default function FiscalYearDetail() {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="flex items-center gap-3">
-          {/* Add actions here if needed, e.g. Close Year */}
-          <Button className="h-14 px-8 bg-black hover:bg-[#045138] text-white rounded-2xl font-black text-sm transition-all shadow-xl active:scale-95 group">
-            <Edit3 className="w-5 h-5 mr-2" />
-            Edit Period
-          </Button>
         </div>
       </div>
 
@@ -140,7 +132,7 @@ export default function FiscalYearDetail() {
       <div className="space-y-6">
         <div className="flex items-center gap-4">
           <div className="flex-1 h-px bg-gray-100" />
-          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-gray-300">
+          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-black">
             Period Journal Entries
           </h2>
           <div className="flex-1 h-px bg-gray-100" />
