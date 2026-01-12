@@ -185,6 +185,13 @@ export default function JournalsDetailPage() {
         {!journal.is_posted && (
           <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
             <Button
+              onClick={() => setOpenAddEntry(true)}
+              className="h-12 bg-[#D0402B] border border-black/5 text-white hover:bg-black/5 font-black uppercase text-xs tracking-widest rounded-xl shadow-sm"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              Add Entry
+            </Button>
+            <Button
               // onClick={() => setOpenUpdateJournal(true)} // Implement Update Modal if needed
               variant="outline"
               className="h-12 border-black/5 bg-white hover:bg-black/5 font-black uppercase text-xs tracking-widest rounded-xl"
@@ -193,13 +200,7 @@ export default function JournalsDetailPage() {
               <Edit2 className="w-4 h-4 mr-2" />
               Edit Details
             </Button>
-            <Button
-              onClick={() => setOpenAddEntry(true)}
-              className="h-12 bg-white border border-black/5 text-black hover:bg-black/5 font-black uppercase text-xs tracking-widest rounded-xl shadow-sm"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Add Entry
-            </Button>
+
             <Button
               onClick={handlePostJournal}
               disabled={isPosting || !isBalanced}
