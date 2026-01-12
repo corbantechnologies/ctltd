@@ -181,10 +181,10 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                   </div>
 
                   <div className="space-y-3 pt-4 border-t border-black/5">
-                    <div className="flex items-center gap-3 text-sm text-black/60">
+                    {/* <div className="flex items-center gap-3 text-sm text-black/60">
                       <Mail className="w-4 h-4 opacity-50" />
                       <span className="truncate">{partner.email}</span>
-                    </div>
+                    </div> */}
                     <div className="flex items-center gap-3 text-sm text-black/60">
                       <Building2 className="w-4 h-4 opacity-50" />
                       <span className="truncate">
@@ -211,7 +211,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                       Entity
                     </TableHead>
                     <TableHead className="py-6 px-8 text-[10px] font-black text-black/40 uppercase tracking-widest">
-                      Details
+                      Division
                     </TableHead>
                     <TableHead className="py-6 px-8 text-[10px] font-black text-black/40 uppercase tracking-widest">
                       Category
@@ -250,14 +250,8 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                       </TableCell>
                       <TableCell className="py-6 px-8">
                         <div className="space-y-1">
-                          <div className="flex items-center gap-2 text-sm font-medium text-black/70">
-                            <Mail className="w-3 h-3 opacity-50" />
-                            {partner.email}
-                          </div>
-                          <div className="flex items-center gap-2 text-sm font-medium text-black/70">
-                            <Phone className="w-3 h-3 opacity-50" />
-                            {partner.phone}
-                          </div>
+                          <Building2 className="w-3 h-3 opacity-50" />
+                          {partner.division}
                         </div>
                       </TableCell>
                       <TableCell className="py-6 px-8">
