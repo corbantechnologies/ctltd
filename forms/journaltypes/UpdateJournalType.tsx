@@ -53,8 +53,7 @@ export default function UpdateJournalType({
           header
         );
         toast.success("Journal type updated successfully");
-
-        router.refresh();
+        window.location.reload();
       } catch (error: any) {
         toast.error(
           error?.response?.data?.message || "Failed to update journal type"

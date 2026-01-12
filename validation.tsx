@@ -95,9 +95,11 @@ const JournalTypeSchema = Yup.object().shape({
 });
 
 const JournalSchema = Yup.object().shape({
+  financial_year: Yup.string().required("Financial year is required"),
   journal_type: Yup.string().required("Journal type is required"),
   date: Yup.date().required("Date is required"),
   description: Yup.string().required("Description is required"),
+  currency: Yup.string().required("Currency is required"),
 });
 
 const JournalEntrySchema = Yup.object().shape({

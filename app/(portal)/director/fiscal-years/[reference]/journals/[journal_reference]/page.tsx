@@ -18,7 +18,6 @@ import {
   FileText,
   Plus,
   Receipt,
-  X,
   Edit2,
   Lock,
 } from "lucide-react";
@@ -31,20 +30,19 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Card, CardContent } from "@/components/ui/card";
-import { toast } from "react-hot-toast";
+import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
 
 export default function JournalsDetailPage() {
-  const { reference } = useParams();
+  const { reference, journal_reference } = useParams();
   const router = useRouter();
-  const header = useAxiosAuth();
+  const {data: fiscalYear} = useFetchFinancialYear(reference as string);
   const {
     isLoading,
     data: journal,
-    refetch: refetchJournal,
-  } = useFetchJournal(reference as string);
+  } = useFetchJournal(journal_reference as string);
   const [openAddEntry, setOpenAddEntry] = useState(false);
   const [openUpdateJournal, setOpenUpdateJournal] = useState(false);
-  const [isPosting, setIsPosting] = useState(false);
+
 
   // Calculate totals
   const totalDebit =
@@ -59,29 +57,6 @@ export default function JournalsDetailPage() {
     ) || 0;
   const isBalanced = Math.abs(totalDebit - totalCredit) < 0.01;
 
-  const handlePostJournal = async () => {
-    if (!journal) return;
-    if (!isBalanced) {
-      toast.error("Journal MUST be balanced before posting");
-      return;
-    }
-    if (journal.journal_entries.length === 0) {
-      toast.error("Cannot post an empty journal");
-      return;
-    }
-
-    try {
-      setIsPosting(true);
-      await postJournal(journal.reference, header);
-      toast.success("Journal posted successfully");
-      refetchJournal();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      toast.error(error?.response?.data?.message || "Failed to post journal");
-    } finally {
-      setIsPosting(false);
-    }
-  };
 
   if (isLoading) return <LoadingSpinner />;
   if (!journal)
@@ -97,17 +72,33 @@ export default function JournalsDetailPage() {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/finance/dashboard">Dashboard</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/finance/journals">
-              Journals Hub
+            <BreadcrumbLink href="/director/dashboard">
+              Dashboard
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{journal.reference}</BreadcrumbPage>
+            <BreadcrumbLink href="/director/fiscal-years">
+              Fiscal Years
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href={`/director/fiscal-years/${reference}`}>
+              {fiscalYear?.code}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink
+              href={`/director/fiscal-years/${reference}/journals`}
+            >
+              Journals
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{journal.description}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -165,46 +156,6 @@ export default function JournalsDetailPage() {
             </div>
           </div>
         </div>
-
-        {/* Action Buttons */}
-        {!journal.is_posted && (
-          <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-            <Button
-              // onClick={() => setOpenUpdateJournal(true)} // Implement Update Modal if needed
-              variant="outline"
-              className="h-12 border-black/5 bg-white hover:bg-black/5 font-black uppercase text-xs tracking-widest rounded-xl"
-              onClick={() => setOpenUpdateJournal(true)}
-            >
-              <Edit2 className="w-4 h-4 mr-2" />
-              Edit Details
-            </Button>
-            <Button
-              onClick={() => setOpenAddEntry(true)}
-              className="h-12 bg-white border border-black/5 text-black hover:bg-black/5 font-black uppercase text-xs tracking-widest rounded-xl shadow-sm"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Add Entry
-            </Button>
-            <Button
-              onClick={handlePostJournal}
-              disabled={isPosting || !isBalanced}
-              className={`h-12 font-black uppercase text-xs tracking-widest rounded-xl shadow-lg transition-all ${
-                !isBalanced
-                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  : "bg-[#045138] hover:bg-black text-white"
-              }`}
-            >
-              {isPosting ? (
-                <LoadingSpinner />
-              ) : (
-                <div className="flex items-center">
-                  <Lock className="w-4 h-4 mr-2" />
-                  Finalize & Post
-                </div>
-              )}
-            </Button>
-          </div>
-        )}
       </div>
 
       {/* Stats Cards */}
@@ -217,7 +168,7 @@ export default function JournalsDetailPage() {
             <p className="text-3xl font-black text-black tracking-tight">
               {new Intl.NumberFormat("en-KE", {
                 style: "currency",
-                currency: "KES",
+                currency: journal.currency,
               }).format(totalDebit)}
             </p>
           </CardContent>
@@ -230,7 +181,7 @@ export default function JournalsDetailPage() {
             <p className="text-3xl font-black text-black tracking-tight">
               {new Intl.NumberFormat("en-KE", {
                 style: "currency",
-                currency: "KES",
+                currency: journal.currency,
               }).format(totalCredit)}
             </p>
           </CardContent>
@@ -259,7 +210,7 @@ export default function JournalsDetailPage() {
                   Diff:{" "}
                   {new Intl.NumberFormat("en-KE", {
                     style: "currency",
-                    currency: "KES",
+                    currency: journal.currency,
                   }).format(Math.abs(totalDebit - totalCredit))}
                 </Badge>
               )}
@@ -364,43 +315,25 @@ export default function JournalsDetailPage() {
 
       {/* Manual Modal Implementation for Create Journal Entry */}
       {openAddEntry && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-0 md:p-6 overflow-y-auto animate-in fade-in duration-300">
-          <div className="relative w-full h-full md:h-auto md:max-w-5xl md:max-h-[90vh] bg-white rounded-none md:rounded-3xl shadow-2xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-300">
-            {/* Close Button - Top right, always visible */}
-            <Button
-              onClick={() => setOpenAddEntry(false)}
-              variant="ghost"
-              size="icon"
-              className="absolute top-4 right-4 z-50 bg-white/80 hover:bg-red-50 text-black hover:text-red-600 rounded-full shadow-md"
-            >
-              <X className="h-6 w-6" />
-            </Button>
-
-            {/* Scrollable content */}
-            <div className="flex-1 overflow-y-auto p-6 md:p-8">
-              <CreateJournalEntry
-                rolePrefix="finance"
-                journalReference={reference as string}
-                onSuccess={() => setOpenAddEntry(false)}
-              />
-            </div>
-          </div>
+        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
+          <CreateJournalEntry
+            rolePrefix="finance"
+            journalReference={journal.code}
+            onSuccess={() => setOpenAddEntry(false)}
+            onClose={() => setOpenAddEntry(false)}
+            className="min-h-screen border-none shadow-none rounded-none"
+          />
         </div>
       )}
 
       {/* Manual Modal for Update Journal */}
       {openUpdateJournal && (
-        <div className="flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full animate-in zoom-in-95 duration-200">
-            <Button
-              onClick={() => setOpenUpdateJournal(false)}
-              className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-white text-black shadow-lg hover:bg-red-50 hover:text-red-600 z-10"
-              size="icon"
-            >
-              <X className="w-5 h-5" />
-            </Button>
-            <UpdateJournal journal={journal} />
-          </div>
+        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
+          <UpdateJournal
+            journal={journal}
+            onClose={() => setOpenUpdateJournal(false)}
+            className="min-h-screen border-none shadow-none rounded-none"
+          />
         </div>
       )}
     </div>

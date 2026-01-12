@@ -53,8 +53,7 @@ export default function UpdatePartnerType({
           header
         );
         toast.success("Partner type updated successfully");
-
-        router.refresh();
+        window.location.reload();
       } catch (error: any) {
         toast.error(
           error?.response?.data?.message || "Failed to update partner type"

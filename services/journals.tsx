@@ -7,9 +7,11 @@ import { JournalEntry } from "./journalentries";
 
 interface Journal {
   code: string;
+  financial_year: string;
   journal_type: string;
   date: string;
   description: string;
+  currency: string;
   is_posted: boolean;
   status: string;
   created_by: string;
@@ -19,16 +21,21 @@ interface Journal {
   journal_entries: JournalEntry[];
 }
 
+export type { Journal };
+
 interface createJournal {
+  financial_year: string;
   journal_type: string;
   date: string;
   description: string;
+  currency: string;
 }
 
 interface updateJournal {
   journal_type?: string;
   date?: string;
   description?: string;
+  currency?: string;
 }
 
 // finance responsibilities

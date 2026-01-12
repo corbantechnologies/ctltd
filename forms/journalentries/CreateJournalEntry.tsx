@@ -16,10 +16,9 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { toast } from "react-hot-toast";
-import { Loader2, Receipt, Plus } from "lucide-react";
+import { Loader2, Receipt, Plus, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
-import { useFetchJournals } from "@/hooks/journals/actions";
 import { useFetchBooks } from "@/hooks/books/actions";
 import { useFetchPartners } from "@/hooks/partners/actions";
 import { useFetchDivisions } from "@/hooks/divisions/actions";
@@ -28,19 +27,21 @@ interface CreateJournalEntryProps {
   rolePrefix?: string;
   journalReference?: string;
   onSuccess?: () => void;
+  onClose?: () => void;
+  className?: string;
 }
 
 export default function CreateJournalEntry({
   rolePrefix = "finance",
   journalReference,
   onSuccess,
+  onClose,
+  className,
 }: CreateJournalEntryProps) {
   const header = useAxiosAuth();
-  const router = useRouter();
 
   const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
 
-  const { data: journals, isLoading: isLoadingJournals } = useFetchJournals();
   const { data: books, isLoading: isLoadingBooks } = useFetchBooks();
   const { data: partners, isLoading: isLoadingPartners } = useFetchPartners();
   const { data: divisions, isLoading: isLoadingDivisions } =
@@ -89,10 +90,9 @@ export default function CreateJournalEntry({
 
         await createJournalEntry(formData, header);
         toast.success("Journal entry recorded");
-
+        window.location.reload();
         resetForm();
         if (onSuccess) onSuccess();
-        router.refresh();
       } catch (error: any) {
         toast.error(error?.response?.data?.message || "Failed to record entry");
       } finally {
@@ -102,54 +102,61 @@ export default function CreateJournalEntry({
   });
 
   return (
-    <Card className="w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
+    <Card
+      className={`w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
+    >
       <CardHeader
         className="p-8 border-b border-black/5"
         style={{ backgroundColor: `${primaryColor}0D` }}
       >
-        <div className="flex items-center gap-4 mb-4">
-          <div
-            className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
-            style={{
-              backgroundColor: primaryColor,
-              boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
-            }}
-          >
-            <Receipt className="w-6 h-6" />
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center gap-4">
+            <div
+              className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
+              style={{
+                backgroundColor: primaryColor,
+                boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
+              }}
+            >
+              <Receipt className="w-6 h-6" />
+            </div>
+            <div>
+              <CardTitle className="text-2xl font-black text-black tracking-tight">
+                New Transaction Entry
+              </CardTitle>
+              <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+                Single Entry Point
+              </CardDescription>
+            </div>
           </div>
-          <div>
-            <CardTitle className="text-2xl font-black text-black tracking-tight">
-              New Transaction Entry
-            </CardTitle>
-            <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
-              Single Entry Point
-            </CardDescription>
-          </div>
+          {onClose && (
+            <Button
+              type="button"
+              onClick={onClose}
+              variant="ghost"
+              size="icon"
+              className="hover:bg-red-50 hover:text-red-500 rounded-full"
+            >
+              <X className="w-5 h-5" />
+            </Button>
+          )}
         </div>
       </CardHeader>
       <CardContent className="p-8">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
           {/* Contextual Mapping */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 p-6 bg-orange-50/20 rounded-3xl border border-black/5">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-orange-50/20 rounded-3xl border border-black/5">
             <div className="space-y-2">
               <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                 Journal Batch <span className="text-red-500">*</span>
               </Label>
-              <select
+              <Input
+                type="text"
                 name="journal"
-                disabled={isLoadingJournals}
+                value={journalReference}
+                disabled
                 className="flex h-12 w-full rounded-xl border border-black/5 bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.journal}
-              >
-                <option value="">Select Batch...</option>
-                {journals?.map((j) => (
-                  <option key={j.reference} value={j.code}>
-                    {j.description.substring(0, 20)}
-                  </option>
-                ))}
-              </select>
+              />
               {formik.touched.journal && formik.errors.journal && (
                 <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
                   {formik.errors.journal}
@@ -219,7 +226,7 @@ export default function CreateJournalEntry({
                 <option value="">Select Division</option>
                 {divisions?.map((d) => (
                   <option key={d.reference} value={d.name}>
-                    {d.name}
+                    {d.code} - {d.name}
                   </option>
                 ))}
               </select>

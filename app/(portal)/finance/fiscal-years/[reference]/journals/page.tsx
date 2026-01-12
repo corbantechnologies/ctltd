@@ -4,7 +4,7 @@ import { useState } from "react";
 import JournalsList from "@/components/financials/JournalsList";
 import CreateJournal from "@/forms/journals/CreateJournal";
 import { Button } from "@/components/ui/button";
-import { Plus, X } from "lucide-react";
+import { Plus } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -13,8 +13,13 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { useParams } from "next/navigation";
+import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
+import FiscalYearJournals from "@/components/financialyears/FiscalYearJournals";
 
 export default function FinanceJournalsPage() {
+  const { reference } = useParams();
+  const { data: fiscalYear } = useFetchFinancialYear(reference as string);
   const [openCreateJournal, setOpenCreateJournal] = useState(false);
 
   return (
@@ -27,7 +32,19 @@ export default function FinanceJournalsPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Journals Hub</BreadcrumbPage>
+            <BreadcrumbLink href="/finance/fiscal-years">
+              Fiscal Years
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href={`/finance/fiscal-years/${reference}`}>
+              {fiscalYear?.code}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Journals</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -50,24 +67,22 @@ export default function FinanceJournalsPage() {
         </Button>
       </div>
 
-      <JournalsList rolePrefix="finance" linkPrefix="journals" />
+      <FiscalYearJournals
+        journals={fiscalYear?.journals || []}
+        rolePrefix="finance"
+        fiscalYearReference={reference as string}
+      />
 
       {/* Manual Modal Implementation for Create Journal */}
       {openCreateJournal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-3xl animate-in zoom-in-95 duration-200">
-            <Button
-              onClick={() => setOpenCreateJournal(false)}
-              className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-white text-black shadow-lg hover:bg-red-50 hover:text-red-600 z-10"
-              size="icon"
-            >
-              <X className="w-5 h-5" />
-            </Button>
-            <CreateJournal
-              rolePrefix="finance"
-              onSuccess={() => setOpenCreateJournal(false)}
-            />
-          </div>
+        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
+          <CreateJournal
+            fiscalYear={fiscalYear?.code}
+            rolePrefix="finance"
+            onSuccess={() => setOpenCreateJournal(false)}
+            onClose={() => setOpenCreateJournal(false)}
+            className="min-h-screen border-none shadow-none rounded-none"
+          />
         </div>
       )}
     </div>

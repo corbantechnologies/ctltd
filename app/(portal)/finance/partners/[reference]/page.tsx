@@ -10,12 +10,10 @@ import { Badge } from "@/components/ui/badge";
 import {
   ArrowLeft,
   Mail,
-  Phone,
   Building2,
   Calendar,
   CreditCard,
   Edit2,
-  X,
   Receipt,
   FileText,
 } from "lucide-react";
@@ -251,21 +249,14 @@ export default function PartnerDetailPage() {
 
       {/* Manual Modal Implementation for Update Partner */}
       {openUpdatePartner && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
-          <div className="relative w-full max-w-4xl my-8 animate-in zoom-in-95 duration-200">
-            <Button
-              onClick={() => setOpenUpdatePartner(false)}
-              className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-white text-black shadow-lg hover:bg-red-50 hover:text-red-600 z-10"
-              size="icon"
-            >
-              <X className="w-5 h-5" />
-            </Button>
-            <UpdatePartner
-              partner={partner}
-              rolePrefix="finance"
-              onSuccess={() => setOpenUpdatePartner(false)}
-            />
-          </div>
+        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
+          <UpdatePartner
+            partner={partner}
+            rolePrefix="finance"
+            onSuccess={() => setOpenUpdatePartner(false)}
+            onClose={() => setOpenUpdatePartner(false)}
+            className="min-h-screen border-none shadow-none rounded-none"
+          />
         </div>
       )}
     </div>

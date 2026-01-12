@@ -3,7 +3,6 @@
 
 import { createJournal } from "@/services/journals";
 import { useFormik } from "formik";
-import { JournalSchema } from "@/validation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,45 +15,54 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { toast } from "react-hot-toast";
-import { Loader2, Book, Plus } from "lucide-react";
+import { Loader2, Book, Plus, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 import { useFetchJournalTypes } from "@/hooks/journaltypes/actions";
 
 interface CreateJournalProps {
+  fiscalYear?: string;
   rolePrefix?: string;
   onSuccess?: () => void;
+  onClose?: () => void;
+  className?: string;
 }
 
 export default function CreateJournal({
+  fiscalYear,
   rolePrefix = "finance",
   onSuccess,
+  onClose,
+  className,
 }: CreateJournalProps) {
   const header = useAxiosAuth();
   const router = useRouter();
-  const { data: journalTypes, isLoading: isLoadingTypes } =
-    useFetchJournalTypes();
 
   const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
+
+  const { data: journalTypes, isLoading: isLoadingTypes } =
+    useFetchJournalTypes();
 
   const formik = useFormik({
     initialValues: {
       date: new Date().toISOString().split("T")[0],
       description: "",
       journal_type: "",
+      currency: "",
+      financial_year: fiscalYear || "",
     },
-    validationSchema: JournalSchema,
-    onSubmit: async (values, { setSubmitting, resetForm }) => {
+    enableReinitialize: true,
+    // No validationSchema – using native HTML required instead
+    onSubmit: async (values, { setSubmitting }) => {
       try {
         await createJournal(values, header);
-        toast.success("Journal created successfully");
-        resetForm();
-
+        toast.success("Journal batch created successfully");
+        window.location.reload();
         if (onSuccess) onSuccess();
-        router.refresh();
       } catch (error: any) {
+        console.error("Create error:", error);
         toast.error(
-          error?.response?.data?.message || "Failed to create journal"
+          error?.response?.data?.message || "Failed to create journal batch"
         );
       } finally {
         setSubmitting(false);
@@ -63,73 +71,101 @@ export default function CreateJournal({
   });
 
   return (
-    <Card className="w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
-      <CardHeader
-        className="p-8 border-b border-black/5"
-        style={{ backgroundColor: `${primaryColor}0D` }}
-      >
-        <div className="flex items-center gap-4 mb-4">
-          <div
-            className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
-            style={{
-              backgroundColor: primaryColor,
-              boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
-            }}
-          >
-            <Book className="w-6 h-6" />
+    <Card
+      className={`mx-auto w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
+    >
+      <CardHeader className="p-8 border-b border-black/5 bg-gradient-to-r from-white to-gray-50/50">
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center gap-4">
+            <div
+              className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
+              style={{
+                backgroundColor: primaryColor,
+                boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
+              }}
+            >
+              <Book className="w-6 h-6" />
+            </div>
+            <div>
+              <CardTitle className="text-2xl font-black text-black tracking-tight">
+                New Journal Batch
+              </CardTitle>
+              <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+                Transaction Container
+              </CardDescription>
+            </div>
           </div>
-          <div>
-            <CardTitle className="text-2xl font-black text-black tracking-tight">
-              New Journal Batch
-            </CardTitle>
-            <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
-              Transaction Container
-            </CardDescription>
-          </div>
+          {onClose && (
+            <Button
+              type="button"
+              onClick={onClose}
+              variant="ghost"
+              size="icon"
+              className="hover:bg-red-50 hover:text-red-500 rounded-full text-black/40"
+            >
+              <X className="w-5 h-5" />
+            </Button>
+          )}
         </div>
       </CardHeader>
+
       <CardContent className="p-8">
-        <form onSubmit={formik.handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form onSubmit={formik.handleSubmit} className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="space-y-2">
+              <Label
+                htmlFor="financial_year"
+                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
+              >
+                Financial Year{" "}
+                <span className="text-red-500 text-xs font-bold">*</span>
+              </Label>
+              <Input
+                id="financial_year"
+                name="financial_year"
+                type="text"
+                required
+                placeholder="e.g., FY2025/2026"
+                className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
+                onChange={formik.handleChange}
+                value={formik.values.financial_year}
+              />
+            </div>
+
             <div className="space-y-2">
               <Label
                 htmlFor="date"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
               >
-                Transaction Date
+                Transaction Date{" "}
+                <span className="text-red-500 text-xs font-bold">*</span>
               </Label>
               <Input
                 id="date"
                 name="date"
                 type="date"
+                required
                 className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 value={formik.values.date}
-                style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
               />
-              {formik.touched.date && formik.errors.date && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                  {formik.errors.date}
-                </p>
-              )}
             </div>
 
             <div className="space-y-2">
               <Label
                 htmlFor="journal_type"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
               >
-                Journal Category
+                Journal Category{" "}
+                <span className="text-red-500 text-xs font-bold">*</span>
               </Label>
               <select
                 id="journal_type"
                 name="journal_type"
+                required
                 disabled={isLoadingTypes}
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-black/5 px-5 py-2 text-sm font-bold focus:ring-2 transition-all appearance-none"
-                style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
+                className="flex h-14 w-full rounded-2xl border border-black/5 bg-black/5 px-5 py-2 text-sm font-bold focus:ring-2 focus:ring-[#045138]/30 appearance-none"
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 value={formik.values.journal_type}
               >
                 <option value="">Select Category...</option>
@@ -139,39 +175,51 @@ export default function CreateJournal({
                   </option>
                 ))}
               </select>
-              {formik.touched.journal_type && formik.errors.journal_type && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                  {formik.errors.journal_type}
-                </p>
-              )}
             </div>
           </div>
 
           <div className="space-y-2">
             <Label
               htmlFor="description"
-              className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+              className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
             >
-              Batch Narrative
+              Batch Narrative{" "}
+              <span className="text-red-500 text-xs font-bold">*</span>
             </Label>
             <Textarea
               id="description"
               name="description"
-              placeholder="Provide a comprehensive narrative for this journal batch..."
+              required
+              placeholder="Provide a clear description of this journal batch (e.g., 'January 2026 sales and expenses')"
               className="min-h-[120px] rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold p-5"
               onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
               value={formik.values.description}
-              style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
             />
-            {formik.touched.description && formik.errors.description && (
-              <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                {formik.errors.description}
-              </p>
-            )}
           </div>
 
-          <div className="pt-4">
+          <div className="space-y-2">
+            <Label
+              htmlFor="currency"
+              className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
+            >
+              Currency <span className="text-red-500 text-xs font-bold">*</span>
+            </Label>
+            <select
+              name="currency"
+              required
+              className="flex h-14 w-full rounded-2xl border border-black/5 bg-black/5 px-5 text-sm font-bold focus:ring-2 focus:ring-[#045138]/30 appearance-none"
+              onChange={formik.handleChange}
+              value={formik.values.currency}
+            >
+              <option value="">Select Currency...</option>
+              <option value="KES">KES</option>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+            </select>
+          </div>
+
+          <div className="pt-6">
             <Button
               type="submit"
               disabled={formik.isSubmitting}

@@ -15,7 +15,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { toast } from "react-hot-toast";
-import { Loader2, UserPlus, ShieldCheck } from "lucide-react";
+import { Loader2, UserPlus, ShieldCheck, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 import { useFetchPartnerTypes } from "@/hooks/partnertypes/actions";
@@ -24,11 +24,15 @@ import { useFetchDivisions } from "@/hooks/divisions/actions";
 interface CreatePartnerProps {
   rolePrefix?: string;
   onSuccess?: () => void;
+  onClose?: () => void;
+  className?: string;
 }
 
 export default function CreatePartner({
   rolePrefix = "finance",
   onSuccess,
+  onClose,
+  className,
 }: CreatePartnerProps) {
   const header = useAxiosAuth();
   const router = useRouter();
@@ -57,10 +61,9 @@ export default function CreatePartner({
       try {
         await createPartner(values, header);
         toast.success("Partner registered successfully");
-
+        window.location.reload();
         resetForm();
         if (onSuccess) onSuccess();
-        router.refresh();
       } catch (error: any) {
         toast.error(
           error?.response?.data?.message || "Failed to register partner"
@@ -72,29 +75,44 @@ export default function CreatePartner({
   });
 
   return (
-    <Card className="w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
+    <Card
+      className={`w-full border-black/5 shadow-2xl rounded-[32px] bg-white/80 backdrop-blur-xl ${className}`}
+    >
       <CardHeader
         className="p-8 border-b border-black/5"
         style={{ backgroundColor: `${primaryColor}0D` }}
       >
-        <div className="flex items-center gap-4 mb-4">
-          <div
-            className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
-            style={{
-              backgroundColor: primaryColor,
-              boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
-            }}
-          >
-            <UserPlus className="w-6 h-6" />
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center gap-4">
+            <div
+              className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
+              style={{
+                backgroundColor: primaryColor,
+                boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
+              }}
+            >
+              <UserPlus className="w-6 h-6" />
+            </div>
+            <div>
+              <CardTitle className="text-2xl font-black text-black tracking-tight">
+                Register New Partner
+              </CardTitle>
+              <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+                Ecosystem Relationship Hub
+              </CardDescription>
+            </div>
           </div>
-          <div>
-            <CardTitle className="text-2xl font-black text-black tracking-tight">
-              Register New Partner
-            </CardTitle>
-            <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
-              Ecosystem Relationship Hub
-            </CardDescription>
-          </div>
+          {onClose && (
+            <Button
+              type="button"
+              onClick={onClose}
+              variant="ghost"
+              size="icon"
+              className="hover:bg-red-50 hover:text-red-500 rounded-full"
+            >
+              <X className="w-5 h-5" />
+            </Button>
+          )}
         </div>
       </CardHeader>
       <CardContent className="p-8">

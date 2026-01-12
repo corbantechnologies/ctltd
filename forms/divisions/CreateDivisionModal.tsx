@@ -36,10 +36,10 @@ export default function CreateDivisionModal() {
       try {
         await createDivision(values, header);
         toast.success("Division created successfully");
+        window.location.reload();
         resetForm();
 
         setOpen(false);
-        router.refresh();
       } catch (error) {
         const errorMessage =
           (error as any)?.response?.data?.message ||
