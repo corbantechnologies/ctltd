@@ -31,11 +31,13 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "react-hot-toast";
+import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
 
 export default function JournalsDetailPage() {
   const { reference, journal_reference } = useParams();
   const router = useRouter();
   const header = useAxiosAuth();
+  const { data: fiscalYear } = useFetchFinancialYear(reference as string);
   const {
     isLoading,
     data: journal,
@@ -107,7 +109,7 @@ export default function JournalsDetailPage() {
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink href={`/finance/fiscal-years/${reference}`}>
-              {reference}
+              {fiscalYear?.code}
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -120,7 +122,7 @@ export default function JournalsDetailPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{journal.reference}</BreadcrumbPage>
+            <BreadcrumbPage>{journal.description}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
