@@ -155,7 +155,7 @@ export default function FiscalYearDetail() {
         <div className="flex items-center gap-4">
           <div className="flex-1 h-px bg-gray-100" />
           <h2 className="text-xs font-black uppercase tracking-[0.3em] text-black">
-            Period Journal Entries
+            Period Journals
           </h2>
           <div className="flex-1 h-px bg-gray-100" />
         </div>
