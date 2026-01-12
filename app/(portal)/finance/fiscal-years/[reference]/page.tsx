@@ -3,7 +3,7 @@
 import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
 import FiscalYearJournals from "@/components/financialyears/FiscalYearJournals";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
-import { CalendarRange, Edit3, Calendar, Activity } from "lucide-react";
+import { CalendarRange, Edit3, Calendar, Activity, Plus } from "lucide-react";
 import { useParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,12 +15,15 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import CreateJournal from "@/forms/journals/CreateJournal";
+import { useState } from "react";
 
 export default function FiscalYearDetail() {
   const { reference } = useParams();
   const { isLoading, data: fiscalYear } = useFetchFinancialYear(
     reference as string
   );
+  const [openCreateJournal, setOpenCreateJournal] = useState(false);
 
   if (isLoading) return <LoadingSpinner />;
   if (!fiscalYear)
@@ -86,6 +89,17 @@ export default function FiscalYearDetail() {
             </div>
           </div>
         </div>
+
+        {/* create journal */}
+        {fiscalYear.is_active === true && (
+          <Button
+            onClick={() => setOpenCreateJournal(true)}
+            className="h-12 px-6 bg-[#045138] hover:bg-black text-white rounded-2xl font-black text-sm uppercase tracking-wider transition-all shadow-lg active:scale-95 flex items-center gap-2"
+          >
+            <Plus className="w-4 h-4" />
+            New Journal Batch
+          </Button>
+        )}
       </div>
 
       {/* Stats Cards */}
@@ -152,6 +166,19 @@ export default function FiscalYearDetail() {
           fiscalYearReference={reference as string}
         />
       </div>
+
+      {/* Manual Modal Implementation for Create Journal */}
+      {openCreateJournal && (
+        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
+          <CreateJournal
+            fiscalYear={fiscalYear?.code}
+            rolePrefix="finance"
+            onSuccess={() => setOpenCreateJournal(false)}
+            onClose={() => setOpenCreateJournal(false)}
+            className="min-h-screen border-none shadow-none rounded-none"
+          />
+        </div>
+      )}
     </div>
   );
 }

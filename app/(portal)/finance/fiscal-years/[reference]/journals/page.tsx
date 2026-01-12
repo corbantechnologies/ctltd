@@ -14,9 +14,11 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { useParams } from "next/navigation";
+import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
 
 export default function FinanceJournalsPage() {
   const { reference } = useParams();
+  const { data: fiscalYear } = useFetchFinancialYear(reference as string);
   const [openCreateJournal, setOpenCreateJournal] = useState(false);
 
   return (
@@ -36,7 +38,7 @@ export default function FinanceJournalsPage() {
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink href={`/finance/fiscal-years/${reference}`}>
-              {reference}
+              {fiscalYear?.code}
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -70,6 +72,7 @@ export default function FinanceJournalsPage() {
       {openCreateJournal && (
         <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
           <CreateJournal
+            fiscalYear={fiscalYear?.code}
             rolePrefix="finance"
             onSuccess={() => setOpenCreateJournal(false)}
             onClose={() => setOpenCreateJournal(false)}

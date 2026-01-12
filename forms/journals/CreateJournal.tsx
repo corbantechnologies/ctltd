@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation";
 import { useFetchJournalTypes } from "@/hooks/journaltypes/actions";
 
 interface CreateJournalProps {
+  fiscalYear?: string;
   rolePrefix?: string;
   onSuccess?: () => void;
   onClose?: () => void;
@@ -29,6 +30,7 @@ interface CreateJournalProps {
 }
 
 export default function CreateJournal({
+  fiscalYear,
   rolePrefix = "finance",
   onSuccess,
   onClose,
@@ -46,6 +48,7 @@ export default function CreateJournal({
       description: "",
       journal_type: "",
       currency: "",
+      financial_year: fiscalYear || "",
     },
     validationSchema: JournalSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
@@ -109,6 +112,30 @@ export default function CreateJournal({
       <CardContent className="p-8">
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="space-y-2">
+              <Label
+                htmlFor="financial_year"
+                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+              >
+                Financial Year
+              </Label>
+              <Input
+                id="financial_year"
+                name="financial_year"
+                type="text"
+                className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.financial_year}
+                style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
+              />
+              {formik.touched.financial_year &&
+                formik.errors.financial_year && (
+                  <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                    {formik.errors.financial_year}
+                  </p>
+                )}
+            </div>
             <div className="space-y-2">
               <Label
                 htmlFor="date"
