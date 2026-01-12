@@ -29,11 +29,13 @@ import LoadingSpinner from "@/components/portal/LoadingSpinner";
 interface FiscalYearJournalsProps {
   journals: Journal[];
   rolePrefix: string;
+  fiscalYearReference: string;
 }
 
 export default function FiscalYearJournals({
   journals,
   rolePrefix,
+  fiscalYearReference,
 }: FiscalYearJournalsProps) {
   const [view, setView] = useState<"grid" | "table">("table");
   const [searchQuery, setSearchQuery] = useState("");
@@ -221,7 +223,7 @@ export default function FiscalYearJournals({
           {paginatedJournals.map((journal) => (
             <Link
               key={journal.reference}
-              href={`/${rolePrefix}/finance/journals/${journal.reference}`}
+              href={`/${rolePrefix}/fiscal-years/${fiscalYearReference}/journals/${journal.reference}`}
               className="group block"
             >
               <Card className="h-full border-gray-100 bg-white rounded-[32px] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group-hover:bg-white">
@@ -325,7 +327,7 @@ export default function FiscalYearJournals({
                     key={journal.reference}
                     className="hover:bg-gray-50/50 transition-all cursor-pointer group"
                     onClick={() =>
-                      (window.location.href = `/${rolePrefix}/finance/journals/${journal.reference}`)
+                      (window.location.href = `/${rolePrefix}/fiscal-years/${fiscalYearReference}/journals/${journal.reference}`)
                     }
                   >
                     <td className="py-6 px-8">

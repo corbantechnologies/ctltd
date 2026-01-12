@@ -33,14 +33,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "react-hot-toast";
 
 export default function JournalsDetailPage() {
-  const { reference } = useParams();
+  const { reference, journal_reference } = useParams();
   const router = useRouter();
   const header = useAxiosAuth();
   const {
     isLoading,
     data: journal,
     refetch: refetchJournal,
-  } = useFetchJournal(reference as string);
+  } = useFetchJournal(journal_reference as string);
   const [openAddEntry, setOpenAddEntry] = useState(false);
   const [openUpdateJournal, setOpenUpdateJournal] = useState(false);
   const [isPosting, setIsPosting] = useState(false);

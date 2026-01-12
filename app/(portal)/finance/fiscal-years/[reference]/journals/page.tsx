@@ -13,8 +13,10 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { useParams } from "next/navigation";
 
 export default function FinanceJournalsPage() {
+  const { reference } = useParams();
   const [openCreateJournal, setOpenCreateJournal] = useState(false);
 
   return (

@@ -7,6 +7,7 @@ import { JournalEntry } from "./journalentries";
 
 interface Journal {
   code: string;
+  financial_year: string;
   journal_type: string;
   date: string;
   description: string;
@@ -23,6 +24,7 @@ interface Journal {
 export type { Journal };
 
 interface createJournal {
+  financial_year: string;
   journal_type: string;
   date: string;
   description: string;
