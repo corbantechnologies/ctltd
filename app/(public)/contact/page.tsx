@@ -44,14 +44,14 @@ export default function Contact() {
       } else {
         const errorData = await response.json();
         throw new Error(
-          errorData.message || "Something went wrong. Please try again."
+          errorData.message || "Something went wrong. Please try again.",
         );
       }
     } catch (err) {
       setError(
         err instanceof Error
           ? err.message
-          : "Submission failed. Check your connection."
+          : "Submission failed. Check your connection.",
       );
     } finally {
       setLoading(false);
@@ -168,6 +168,13 @@ export default function Contact() {
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-8">
+                  {/* Honeypot field - hidden from users */}
+                  <Input
+                    name="website_url"
+                    className="hidden absolute opacity-0 w-0 h-0 p-0 m-0 -z-50"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-3">
                       <Label
