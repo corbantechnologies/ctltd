@@ -134,15 +134,15 @@ export default function FinanceCOADetailPage() {
           >
             <div className="flex items-center gap-4">
               <div
-                className={`w-12 h-12 rounded-2xl ${stat.bg} ${stat.color} flex items-center justify-center`}
+                className={`w-12 h-12 rounded-2xl ${stat.bg} ${stat.color} flex items-center justify-center shrink-0`}
               >
                 <stat.icon className="w-6 h-6" />
               </div>
-              <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-black/30 mb-1">
+              <div className="min-w-0 flex-1">
+                <p className="text-[10px] font-black uppercase tracking-widest text-black/30 mb-1 truncate">
                   {stat.label}
                 </p>
-                <p className="text-lg font-black text-black tracking-tight">
+                <p className="text-lg font-black text-black tracking-tight truncate">
                   {stat.value}
                 </p>
               </div>
