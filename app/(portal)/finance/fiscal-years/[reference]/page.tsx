@@ -1,12 +1,14 @@
 "use client";
 
 import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
+import { useFetchJournalTypes } from "@/hooks/journaltypes/actions";
 import FiscalYearJournals from "@/components/financialyears/FiscalYearJournals";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
-import { CalendarRange, Edit3, Calendar, Activity, Plus } from "lucide-react";
+import { CalendarRange, Edit3, Calendar, Activity, Plus, BookOpen, ArrowRight } from "lucide-react";
 import { useParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -23,15 +25,22 @@ export default function FiscalYearDetail() {
   const { isLoading, data: fiscalYear } = useFetchFinancialYear(
     reference as string
   );
+  const { data: journalTypes, isLoading: isLoadingTypes } = useFetchJournalTypes();
   const [openCreateJournal, setOpenCreateJournal] = useState(false);
+  const [selectedJournalType, setSelectedJournalType] = useState<string | undefined>();
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading || isLoadingTypes) return <LoadingSpinner />;
   if (!fiscalYear)
     return (
       <div className="p-12 text-center font-black text-gray-300">
         Fiscal Year not found.
       </div>
     );
+
+  const handleCreateJournal = (type?: string) => {
+    setSelectedJournalType(type);
+    setOpenCreateJournal(true);
+  };
 
   return (
     <div className="space-y-12 pb-12">
@@ -93,7 +102,7 @@ export default function FiscalYearDetail() {
         {/* create journal */}
         {fiscalYear.is_active === true && (
           <Button
-            onClick={() => setOpenCreateJournal(true)}
+            onClick={() => handleCreateJournal()}
             className="h-12 px-6 bg-[#045138] hover:bg-black text-white rounded-2xl font-black text-sm uppercase tracking-wider transition-all shadow-lg active:scale-95 flex items-center gap-2"
           >
             <Plus className="w-4 h-4" />
@@ -150,6 +159,42 @@ export default function FiscalYearDetail() {
         ))}
       </div>
 
+      {/* Journal Types Section */}
+      <div className="space-y-6">
+        <div className="flex items-center gap-4">
+          <div className="flex-1 h-px bg-gray-100" />
+          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-black">
+            Journal Types
+          </h2>
+          <div className="flex-1 h-px bg-gray-100" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {journalTypes?.map((type) => (
+            <Card
+              key={type.reference}
+              onClick={() => handleCreateJournal(type.name)}
+              className="group cursor-pointer border-black/5 hover:border-[#045138] hover:shadow-xl transition-all duration-300 bg-white/60 backdrop-blur-xl rounded-2xl"
+            >
+              <CardContent className="p-6 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#045138]/5 group-hover:bg-[#045138] flex items-center justify-center text-[#045138] group-hover:text-white transition-colors duration-300">
+                    <BookOpen className="w-5 h-5" />
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="font-bold text-black text-sm group-hover:text-[#045138] transition-colors">{type.name}</h3>
+                    <p className="text-[10px] font-bold text-black/40 uppercase tracking-wider">Create Entry</p>
+                  </div>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-black/5 group-hover:bg-[#045138]/10 flex items-center justify-center text-black/40 group-hover:text-[#045138] transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0">
+                  <ArrowRight className="w-4 h-4" />
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
       {/* Associated Journals Section */}
       <div className="space-y-6">
         <div className="flex items-center gap-4">
@@ -172,6 +217,7 @@ export default function FiscalYearDetail() {
         <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
           <CreateJournal
             fiscalYear={fiscalYear?.code}
+            initialJournalType={selectedJournalType}
             rolePrefix="finance"
             onSuccess={() => setOpenCreateJournal(false)}
             onClose={() => setOpenCreateJournal(false)}

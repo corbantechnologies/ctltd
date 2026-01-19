@@ -22,6 +22,7 @@ import { useFetchJournalTypes } from "@/hooks/journaltypes/actions";
 
 interface CreateJournalProps {
   fiscalYear?: string;
+  initialJournalType?: string;
   rolePrefix?: string;
   onSuccess?: () => void;
   onClose?: () => void;
@@ -30,6 +31,7 @@ interface CreateJournalProps {
 
 export default function CreateJournal({
   fiscalYear,
+  initialJournalType,
   rolePrefix = "finance",
   onSuccess,
   onClose,
@@ -47,7 +49,7 @@ export default function CreateJournal({
     initialValues: {
       date: new Date().toISOString().split("T")[0],
       description: "",
-      journal_type: "",
+      journal_type: initialJournalType || "",
       currency: "",
       financial_year: fiscalYear || "",
     },
