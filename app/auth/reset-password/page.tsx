@@ -54,7 +54,7 @@ export default function ResetPassword() {
           password_confirmation: values.confirmPassword,
         });
         toast.success("Password reset successfully! You can now login.");
-        router.push("/login");
+        router.push("/auth/login");
       } catch (error: any) {
         toast.error(
           error.response?.data?.message ||
