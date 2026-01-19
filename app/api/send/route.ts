@@ -5,13 +5,12 @@ import { ContactNotificationTemplate } from "@/components/templates/contact-noti
 import { ContactTemplate } from "@/components/templates/contact-template";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-const BUSINESS_EMAIL = process.env.BUSINESS_EMAIL || "";
-const FROM_EMAIL = process.env.FROM_EMAIL || "";
-const ALTERNATE_EMAIL = process.env.ALTERNATE_EMAIL || "";
-
 export async function POST(req: Request) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const BUSINESS_EMAIL = process.env.BUSINESS_EMAIL || "";
+  const FROM_EMAIL = process.env.FROM_EMAIL || "";
+  const ALTERNATE_EMAIL = process.env.ALTERNATE_EMAIL || "";
+
   try {
     const body = await req.json();
     const { 
