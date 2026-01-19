@@ -4,7 +4,10 @@ import { useState } from "react";
 import { useFetchDivisions } from "@/hooks/divisions/actions";
 import { useFetchJournalTypes } from "@/hooks/journaltypes/actions";
 import { useFetchPartnerTypes } from "@/hooks/partnertypes/actions";
-import { useFetchCOAs } from "@/hooks/coa/actions"; // analytics
+import { useFetchCOAs } from "@/hooks/coa/actions";
+import { useFetchBooks } from "@/hooks/books/actions";
+import { useFetchFinancialYears } from "@/hooks/financialyears/actions";
+import { useFetchJournalEntries } from "@/hooks/journalentries/actions";
 import CreateJournalType from "@/forms/journaltypes/CreateJournalType";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CreatePartnerType from "@/forms/partnertypes/CreatePartnerType";
@@ -21,16 +24,19 @@ import {
   X,
   Building2,
   Briefcase,
+  CalendarRange,
+  Book,
+  ScrollText,
 } from "lucide-react";
 
 export default function FinanceDashboard() {
-  const { data: divisions, isLoading: isLoadingDivisions } =
-    useFetchDivisions();
-  const { data: journalTypes, isLoading: isLoadingJournalTypes } =
-    useFetchJournalTypes();
-  const { data: partnerTypes, isLoading: isLoadingPartnerTypes } =
-    useFetchPartnerTypes();
+  const { data: divisions, isLoading: isLoadingDivisions } = useFetchDivisions();
+  const { data: journalTypes, isLoading: isLoadingJournalTypes } = useFetchJournalTypes();
+  const { data: partnerTypes, isLoading: isLoadingPartnerTypes } = useFetchPartnerTypes();
   const { data: coas } = useFetchCOAs();
+  const { data: books } = useFetchBooks();
+  const { data: years } = useFetchFinancialYears();
+  const { data: entries } = useFetchJournalEntries();
 
   const [openCreateJournalType, setOpenCreateJournalType] = useState(false);
   const [openCreatePartnerType, setOpenCreatePartnerType] = useState(false);
@@ -47,6 +53,30 @@ export default function FinanceDashboard() {
       description: "Operational Units",
     },
     {
+      label: "Active Fiscal Year",
+      value: years?.find((y: any) => y.is_active)?.code || "N/A",
+      icon: CalendarRange,
+      description: `${years?.length || 0} Years Configured`,
+    },
+    {
+      label: "Chart of Accounts",
+      value: coas?.length || 0,
+      icon: Layers,
+      description: "Active Ledgers",
+    },
+    {
+      label: "Ledger Books",
+      value: books?.length || 0,
+      icon: Book,
+      description: "Sub-accounts",
+    },
+    {
+      label: "Journal Entries",
+      value: entries?.length || 0,
+      icon: ScrollText,
+      description: "Total Transactions",
+    },
+    {
       label: "Journal Types",
       value: journalTypes?.length || 0,
       icon: BookOpen,
@@ -57,12 +87,6 @@ export default function FinanceDashboard() {
       value: partnerTypes?.length || 0,
       icon: Users,
       description: "Entity Classifications",
-    },
-    {
-      label: "Chart of Accounts",
-      value: coas?.length || 0,
-      icon: Layers,
-      description: "Active Ledgers",
     },
   ];
 
