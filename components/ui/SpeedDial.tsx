@@ -42,7 +42,7 @@ export default function SpeedDial({ actions }: SpeedDialProps) {
                                         <action.icon className="h-5 w-5" />
                                     </Button>
                                 </TooltipTrigger>
-                                <TooltipContent side="left" className="font-bold">
+                                <TooltipContent side="left" className="font-bold text-black bg-white">
                                     {action.label}
                                 </TooltipContent>
                             </Tooltip>
