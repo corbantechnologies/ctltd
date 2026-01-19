@@ -5,7 +5,7 @@ const projects = [
     shortDescription:
       "Comprehensive financial management system for small and medium SACCOs in Kenya.",
     website: null,
-    imagePlaceholder: "/projects/sacco.png",
+    imagePlaceholder: "/projects/mmsacco.png",
     techStack: ["Next.js", "Django REST Framework", "PostgreSQL"],
     featured: true,
     highlights: [

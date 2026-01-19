@@ -105,11 +105,11 @@ export default function Home() {
                 {/* Mockup Placeholder */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Image
-                    src="/sacco.png"
+                    src="/mmsacco.png"
                     alt="Sacco Dashboard"
                     width={300}
                     height={80}
-                    className="opacity-20 grayscale brightness-0"
+                    // className="opacity-20 grayscale brightness-0"
                   />
                 </div>
               </div>
