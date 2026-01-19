@@ -45,7 +45,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
       (coa) =>
         coa.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         coa.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        coa.reference.toLowerCase().includes(searchQuery.toLowerCase())
+        coa.reference.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   }, [coas, searchQuery]);
 
@@ -242,89 +242,97 @@ export default function COAList({ rolePrefix }: COAListProps) {
               </thead>
               <tbody className="divide-y divide-black/5">
                 {paginatedCOAs.map((coa) => (
-                  <tr
+                  <Link
                     key={coa.reference}
-                    className="transition-colors group"
-                    style={
-                      { "--hover-bg": `${primaryColor}0D` } as CSSWithVariables
-                    } // 5% opacity
+                    href={`/${rolePrefix}/coa/${coa.reference}`}
+                    className="group"
                   >
-                    <td className="py-6 px-8">
-                      <div className="flex items-center gap-3">
-                        <div
-                          className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold"
-                          style={
-                            {
-                              "--group-hover-bg": `${primaryColor}33`, // 20% opacity
-                              "--group-hover-text": primaryColor,
-                            } as CSSWithVariables
-                          }
-                        >
-                          <Hash className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <p
-                            className="text-sm font-black text-black transition-colors"
+                    <tr
+                      key={coa.reference}
+                      className="transition-colors group"
+                      style={
+                        {
+                          "--hover-bg": `${primaryColor}0D`,
+                        } as CSSWithVariables
+                      } // 5% opacity
+                    >
+                      <td className="py-6 px-8">
+                        <div className="flex items-center gap-3">
+                          <div
+                            className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold"
                             style={
                               {
+                                "--group-hover-bg": `${primaryColor}33`, // 20% opacity
                                 "--group-hover-text": primaryColor,
                               } as CSSWithVariables
                             }
                           >
-                            {coa.name}
-                          </p>
-                          <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
-                            {coa.reference}
-                          </p>
+                            <Hash className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <p
+                              className="text-sm font-black text-black transition-colors"
+                              style={
+                                {
+                                  "--group-hover-text": primaryColor,
+                                } as CSSWithVariables
+                              }
+                            >
+                              {coa.name}
+                            </p>
+                            <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
+                              {coa.reference}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td className="py-6 px-8">
-                      <Badge className="bg-black text-white border-none font-black text-[9px] uppercase tracking-widest px-3 py-1 rounded-lg">
-                        {coa.code}
-                      </Badge>
-                    </td>
-                    <td className="py-6 px-8">
-                      <div className="flex items-center gap-2">
-                        <ArrowUpDown className="w-3 h-3 text-black/30" />
-                        <span className="text-[10px] font-black uppercase tracking-widest text-black/60">
-                          {coa.normal_balance}
-                        </span>
-                      </div>
-                    </td>
-                    <td className="py-6 px-8">
-                      {coa.is_active ? (
-                        <div className="flex items-center gap-2 text-green-600">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                          <span className="text-[10px] font-black uppercase tracking-widest">
-                            Active
+                      </td>
+                      <td className="py-6 px-8">
+                        <Badge className="bg-black text-white border-none font-black text-[9px] uppercase tracking-widest px-3 py-1 rounded-lg">
+                          {coa.code}
+                        </Badge>
+                      </td>
+                      <td className="py-6 px-8">
+                        <div className="flex items-center gap-2">
+                          <ArrowUpDown className="w-3 h-3 text-black/30" />
+                          <span className="text-[10px] font-black uppercase tracking-widest text-black/60">
+                            {coa.normal_balance}
                           </span>
                         </div>
-                      ) : (
-                        <div className="flex items-center gap-2 text-black/30">
-                          <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
-                          <span className="text-[10px] font-black uppercase tracking-widest">
-                            Inactive
-                          </span>
-                        </div>
-                      )}
-                    </td>
-                    <td className="py-6 px-8 text-right">
-                      <Link href={`/${rolePrefix}/coa/${coa.reference}`}>
-                        <Button
-                          variant="ghost"
-                          className="h-10 w-10 p-0 rounded-xl hover:text-white transition-all duration-300"
-                          style={
-                            {
-                              "--hover-bg": primaryColor,
-                            } as CSSWithVariables
-                          }
-                        >
-                          <ArrowRight className="w-4 h-4" />
-                        </Button>
-                      </Link>
-                    </td>
-                  </tr>
+                      </td>
+                      <td className="py-6 px-8">
+                        {coa.is_active ? (
+                          <div className="flex items-center gap-2 text-green-600">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                            <span className="text-[10px] font-black uppercase tracking-widest">
+                              Active
+                            </span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-2 text-black/30">
+                            <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
+                            <span className="text-[10px] font-black uppercase tracking-widest">
+                              Inactive
+                            </span>
+                          </div>
+                        )}
+                      </td>
+                      <td className="py-6 px-8 text-right">
+                        <Link href={`/${rolePrefix}/coa/${coa.reference}`}>
+                          <Button
+                            variant="ghost"
+                            className="h-10 w-10 p-0 rounded-xl hover:text-white transition-all duration-300"
+                            style={
+                              {
+                                "--hover-bg": primaryColor,
+                              } as CSSWithVariables
+                            }
+                          >
+                            <ArrowRight className="w-4 h-4" />
+                          </Button>
+                        </Link>
+                      </td>
+                    </tr>
+                  </Link>
                 ))}
               </tbody>
             </table>

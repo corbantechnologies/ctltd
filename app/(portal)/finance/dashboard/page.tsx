@@ -71,53 +71,53 @@ export default function FinanceDashboard() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-black text-black tracking-tighter">
+          <h1 className="text-2xl font-black text-black tracking-tighter">
             Finance Portal
           </h1>
-          <p className="text-black/60 font-medium mt-1">
+          <p className="text-sm text-black/60 font-medium mt-1">
             Overview and system configuration
           </p>
         </div>
       </div>
 
-      <Tabs defaultValue="overview" className="space-y-8">
-        <TabsList className="bg-white/50 backdrop-blur-md p-1 rounded-2xl border border-black/5">
+      <Tabs defaultValue="overview" className="space-y-6">
+        <TabsList className="bg-white/50 backdrop-blur-md p-1 rounded-xl border border-black/5 h-auto">
           <TabsTrigger
             value="overview"
-            className="rounded-xl px-6 py-3 font-bold data-[state=active]:bg-[#045138] data-[state=active]:text-white transition-all"
+            className="rounded-lg px-4 py-2 text-sm font-bold data-[state=active]:bg-[#045138] data-[state=active]:text-white transition-all"
           >
             Overview
           </TabsTrigger>
           <TabsTrigger
             value="configuration"
-            className="rounded-xl px-6 py-3 font-bold data-[state=active]:bg-[#045138] data-[state=active]:text-white transition-all"
+            className="rounded-lg px-4 py-2 text-sm font-bold data-[state=active]:bg-[#045138] data-[state=active]:text-white transition-all"
           >
             Configuration
           </TabsTrigger>
         </TabsList>
 
         {/* Overview Tab (Analytics) */}
-        <TabsContent value="overview" className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <TabsContent value="overview" className="space-y-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {stats.map((stat, i) => (
               <Card
                 key={i}
-                className="border-none shadow-xl shadow-black/5 bg-white/80 backdrop-blur-xl rounded-[32px] overflow-hidden"
+                className="border-none shadow-lg shadow-black/5 bg-white/80 backdrop-blur-xl rounded-2xl overflow-hidden"
               >
-                <CardContent className="p-8 relative">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#045138]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                  <div className="relative z-10 flex flex-col gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-[#045138]/10 flex items-center justify-center text-[#045138]">
-                      <stat.icon className="w-6 h-6" />
+                <CardContent className="p-5 relative">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-[#045138]/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
+                  <div className="relative z-10 flex flex-col gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#045138]/10 flex items-center justify-center text-[#045138]">
+                      <stat.icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-black/40 font-black uppercase tracking-widest text-[10px] mb-1">
+                      <p className="text-black/40 font-black uppercase tracking-widest text-[9px] mb-1">
                         {stat.label}
                       </p>
-                      <h3 className="text-4xl font-black text-black tracking-tighter">
+                      <h3 className="text-2xl md:text-3xl font-black text-black tracking-tighter">
                         {stat.value}
                       </h3>
-                      <p className="text-sm font-bold text-black/40 mt-2">
+                      <p className="text-xs font-bold text-black/40 mt-1">
                         {stat.description}
                       </p>
                     </div>
@@ -127,22 +127,22 @@ export default function FinanceDashboard() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <Card className="border-none shadow-xl shadow-black/5 bg-[#045138] rounded-[32px] text-white p-8 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <Card className="border-none shadow-lg shadow-black/5 bg-[#045138] rounded-2xl text-white p-6 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
               <div className="relative z-10 space-y-4">
-                <h3 className="text-2xl font-black">Quick Actions</h3>
-                <div className="flex flex-wrap gap-4">
+                <h3 className="text-xl font-black">Quick Actions</h3>
+                <div className="flex flex-wrap gap-3">
                   <Button
                     onClick={() => setOpenCreateJournalType(true)}
-                    className="bg-white text-[#045138] hover:bg-white/90 font-bold rounded-xl h-12 px-6"
+                    className="bg-white text-[#045138] hover:bg-white/90 font-bold rounded-lg h-10 px-4 text-sm"
                   >
                     <Plus className="w-4 h-4 mr-2" /> Add Journal Type
                   </Button>
                   <Button
                     onClick={() => setOpenCreatePartnerType(true)}
                     variant="outline"
-                    className="border-white/20 text-white hover:bg-white/10 font-bold rounded-xl h-12 px-6"
+                    className="border-white/20 text-white hover:bg-white/10 font-bold rounded-lg h-10 px-4 text-sm"
                   >
                     <Plus className="w-4 h-4 mr-2" /> Add Partner Type
                   </Button>
@@ -155,32 +155,35 @@ export default function FinanceDashboard() {
         {/* Configuration Tab */}
         <TabsContent
           value="configuration"
-          className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500"
+          className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Divisions Section */}
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-black text-black flex items-center gap-2">
-                  <Building2 className="w-5 h-5 text-[#045138]" />
+                <h2 className="text-lg font-black text-black flex items-center gap-2">
+                  <Building2 className="w-4 h-4 text-[#045138]" />
                   Divisions
                 </h2>
-                <Badge variant="secondary" className="bg-black/5 text-black">
+                <Badge
+                  variant="secondary"
+                  className="bg-black/5 text-black text-xs"
+                >
                   {divisions?.length || 0}
                 </Badge>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {divisions?.map((division) => (
                   <Card
                     key={division.reference}
-                    className="group border-black/5 hover:border-[#045138]/20 bg-white/60 backdrop-blur-xl transition-all shadow-sm hover:shadow-md rounded-2xl"
+                    className="group border-black/5 hover:border-[#045138]/20 bg-white/60 backdrop-blur-xl transition-all shadow-sm hover:shadow-md rounded-xl"
                   >
-                    <CardContent className="p-4 flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-[#045138]/5 flex items-center justify-center text-[#045138] group-hover:bg-[#045138] group-hover:text-white transition-colors">
-                        <Layers className="w-5 h-5" />
+                    <CardContent className="p-3 flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-[#045138]/5 flex items-center justify-center text-[#045138] group-hover:bg-[#045138] group-hover:text-white transition-colors">
+                        <Layers className="w-4 h-4" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-black text-sm">
+                        <h3 className="font-bold text-black text-xs md:text-sm">
                           {division.name}
                         </h3>
                       </div>
@@ -191,35 +194,35 @@ export default function FinanceDashboard() {
             </div>
 
             {/* Journal Types Section */}
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-black text-black flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-[#045138]" />
+                <h2 className="text-lg font-black text-black flex items-center gap-2">
+                  <BookOpen className="w-4 h-4 text-[#045138]" />
                   Journal Types
                 </h2>
                 <Button
                   size="sm"
                   onClick={() => setOpenCreateJournalType(true)}
-                  className="h-8 bg-[#045138]/10 hover:bg-[#045138] text-[#045138] hover:text-white border-none rounded-lg text-xs font-black uppercase tracking-wider"
+                  className="h-7 bg-[#045138]/10 hover:bg-[#045138] text-[#045138] hover:text-white border-none rounded-md text-[10px] font-black uppercase tracking-wider px-2"
                 >
                   <Plus className="w-3 h-3 mr-1" /> New
                 </Button>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {journalTypes?.map((type) => (
                   <Card
                     key={type.reference}
-                    className="group border-black/5 hover:border-[#045138]/20 bg-white/60 backdrop-blur-xl transition-all shadow-sm hover:shadow-md rounded-2xl"
+                    className="group border-black/5 hover:border-[#045138]/20 bg-white/60 backdrop-blur-xl transition-all shadow-sm hover:shadow-md rounded-xl"
                   >
-                    <CardContent className="p-4 flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-[#045138]/5 flex items-center justify-center text-[#045138] group-hover:bg-[#045138] group-hover:text-white transition-colors">
-                        <Settings2 className="w-5 h-5" />
+                    <CardContent className="p-3 flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-[#045138]/5 flex items-center justify-center text-[#045138] group-hover:bg-[#045138] group-hover:text-white transition-colors">
+                        <Settings2 className="w-4 h-4" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-black text-sm">
+                        <h3 className="font-bold text-black text-xs md:text-sm">
                           {type.name}
                         </h3>
-                        <p className="text-[10px] font-bold text-black/40 line-clamp-1">
+                        <p className="text-[9px] font-bold text-black/40 line-clamp-1">
                           {type.description}
                         </p>
                       </div>
@@ -230,35 +233,35 @@ export default function FinanceDashboard() {
             </div>
 
             {/* Partner Types Section */}
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-black text-black flex items-center gap-2">
-                  <Users className="w-5 h-5 text-[#045138]" />
+                <h2 className="text-lg font-black text-black flex items-center gap-2">
+                  <Users className="w-4 h-4 text-[#045138]" />
                   Partner Types
                 </h2>
                 <Button
                   size="sm"
                   onClick={() => setOpenCreatePartnerType(true)}
-                  className="h-8 bg-[#045138]/10 hover:bg-[#045138] text-[#045138] hover:text-white border-none rounded-lg text-xs font-black uppercase tracking-wider"
+                  className="h-7 bg-[#045138]/10 hover:bg-[#045138] text-[#045138] hover:text-white border-none rounded-md text-[10px] font-black uppercase tracking-wider px-2"
                 >
                   <Plus className="w-3 h-3 mr-1" /> New
                 </Button>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {partnerTypes?.map((type) => (
                   <Card
                     key={type.reference}
-                    className="group border-black/5 hover:border-[#045138]/20 bg-white/60 backdrop-blur-xl transition-all shadow-sm hover:shadow-md rounded-2xl"
+                    className="group border-black/5 hover:border-[#045138]/20 bg-white/60 backdrop-blur-xl transition-all shadow-sm hover:shadow-md rounded-xl"
                   >
-                    <CardContent className="p-4 flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-[#045138]/5 flex items-center justify-center text-[#045138] group-hover:bg-[#045138] group-hover:text-white transition-colors">
-                        <Briefcase className="w-5 h-5" />
+                    <CardContent className="p-3 flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-[#045138]/5 flex items-center justify-center text-[#045138] group-hover:bg-[#045138] group-hover:text-white transition-colors">
+                        <Briefcase className="w-4 h-4" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-black text-sm">
+                        <h3 className="font-bold text-black text-xs md:text-sm">
                           {type.name}
                         </h3>
-                        <p className="text-[10px] font-bold text-black/40 line-clamp-1">
+                        <p className="text-[9px] font-bold text-black/40 line-clamp-1">
                           {type.description}
                         </p>
                       </div>
