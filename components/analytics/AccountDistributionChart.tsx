@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 interface ChartData {
     name: string;
     value: number;
+    [key: string]: any;
 }
 
 interface AccountDistributionChartProps {
