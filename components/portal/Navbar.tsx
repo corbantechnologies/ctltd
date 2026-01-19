@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import { useFetchAccount } from "@/hooks/accounts/actions";
+import { useFetchFinancialYears } from "@/hooks/financialyears/actions";
 import { Button } from "@/components/ui/button";
 import {
   LogOut,
@@ -41,6 +42,10 @@ export default function Navbar() {
     setMenuOpen(false);
   }, [pathname]);
 
+  // Fetch financial years to find active one for direct linking
+  const { data: years } = useFetchFinancialYears();
+  const activeYear = years?.find((y: any) => y.is_active);
+
   const navItems = [
     {
       name: "Dashboard",
@@ -61,8 +66,11 @@ export default function Navbar() {
       show: isDirector || isFinance,
     },
     {
-      name: "Fiscal Years",
-      href: `/${rolePrefix}/fiscal-years`,
+      name: "Fiscal Year",
+      // If there is an active year, link directly to it. Otherwise, link to the list.
+      href: activeYear
+        ? `/${rolePrefix}/fiscal-years/${activeYear.reference}`
+        : `/${rolePrefix}/fiscal-years`,
       icon: FileText,
       show: isDirector || isFinance,
     },

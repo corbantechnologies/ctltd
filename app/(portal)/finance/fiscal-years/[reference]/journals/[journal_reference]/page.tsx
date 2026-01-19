@@ -140,11 +140,10 @@ export default function JournalsDetailPage() {
               <ArrowLeft className="w-4 h-4" />
             </Button>
             <Badge
-              className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border-none ${
-                journal.is_posted
+              className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border-none ${journal.is_posted
                   ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
                   : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
-              }`}
+                }`}
             >
               {journal.is_posted ? (
                 <div className="flex items-center gap-2">
@@ -204,11 +203,10 @@ export default function JournalsDetailPage() {
             <Button
               onClick={handlePostJournal}
               disabled={isPosting || !isBalanced}
-              className={`h-12 font-black uppercase text-xs tracking-widest rounded-xl shadow-lg transition-all ${
-                !isBalanced
+              className={`h-12 font-black uppercase text-xs tracking-widest rounded-xl shadow-lg transition-all ${!isBalanced
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                   : "bg-[#045138] hover:bg-black text-white"
-              }`}
+                }`}
             >
               {isPosting ? (
                 <LoadingSpinner />
@@ -230,7 +228,7 @@ export default function JournalsDetailPage() {
             <p className="text-[10px] font-black uppercase tracking-widest text-black/40 mb-2">
               Total Debit
             </p>
-            <p className="text-3xl font-black text-black tracking-tight">
+            <p className="text-xl lg:text-3xl font-black text-black tracking-tight truncate" title={new Intl.NumberFormat("en-KE", { style: "currency", currency: journal.currency }).format(totalDebit)}>
               {new Intl.NumberFormat("en-KE", {
                 style: "currency",
                 currency: journal.currency,
@@ -243,7 +241,7 @@ export default function JournalsDetailPage() {
             <p className="text-[10px] font-black uppercase tracking-widest text-black/40 mb-2">
               Total Credit
             </p>
-            <p className="text-3xl font-black text-black tracking-tight">
+            <p className="text-xl lg:text-3xl font-black text-black tracking-tight truncate" title={new Intl.NumberFormat("en-KE", { style: "currency", currency: journal.currency }).format(totalCredit)}>
               {new Intl.NumberFormat("en-KE", {
                 style: "currency",
                 currency: journal.currency,
@@ -252,26 +250,24 @@ export default function JournalsDetailPage() {
           </CardContent>
         </Card>
         <Card
-          className={`border-black/5 backdrop-blur-xl rounded-[24px] shadow-sm transition-colors ${
-            isBalanced
+          className={`border-black/5 backdrop-blur-xl rounded-[24px] shadow-sm transition-colors ${isBalanced
               ? "bg-[#045138]/5 border-[#045138]/20"
               : "bg-red-500/5 border-red-500/20"
-          }`}
+            }`}
         >
           <CardContent className="p-6">
             <p className="text-[10px] font-black uppercase tracking-widest text-black/40 mb-2">
               Balance Status
             </p>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-3">
               <p
-                className={`text-3xl font-black tracking-tight ${
-                  isBalanced ? "text-[#045138]" : "text-red-600"
-                }`}
+                className={`text-xl lg:text-3xl font-black tracking-tight ${isBalanced ? "text-[#045138]" : "text-red-600"
+                  }`}
               >
                 {isBalanced ? "Balanced" : "Unbalanced"}
               </p>
               {!isBalanced && (
-                <Badge className="bg-red-500 text-white border-none">
+                <Badge className="bg-red-500 text-white border-none w-fit">
                   Diff:{" "}
                   {new Intl.NumberFormat("en-KE", {
                     style: "currency",
@@ -350,17 +346,17 @@ export default function JournalsDetailPage() {
                     <td className="py-4 px-6 text-right font-mono text-black/80">
                       {parseFloat(entry.debit) > 0
                         ? new Intl.NumberFormat("en-KE", {
-                            style: "decimal",
-                            minimumFractionDigits: 2,
-                          }).format(parseFloat(entry.debit))
+                          style: "decimal",
+                          minimumFractionDigits: 2,
+                        }).format(parseFloat(entry.debit))
                         : "—"}
                     </td>
                     <td className="py-4 px-6 text-right font-mono text-black/80">
                       {parseFloat(entry.credit) > 0
                         ? new Intl.NumberFormat("en-KE", {
-                            style: "decimal",
-                            minimumFractionDigits: 2,
-                          }).format(parseFloat(entry.credit))
+                          style: "decimal",
+                          minimumFractionDigits: 2,
+                        }).format(parseFloat(entry.credit))
                         : "—"}
                     </td>
                   </tr>
