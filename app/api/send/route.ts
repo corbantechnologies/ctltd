@@ -22,8 +22,16 @@ export async function POST(req: Request) {
       email, 
       offerTitle, 
       offerSlug,
-      message 
+      message,
+      website_url, // Honeypot field
     } = body;
+
+    // Honeypot Check (Spam Prevention)
+    if (website_url) {
+      console.log("Spam attempt blocked (Honeypot):", { ip: req.headers.get("x-forwarded-for"), website_url });
+      // Return success to fool the bot (Shadow Ban)
+      return NextResponse.json({ success: true });
+    }
 
     if (type === "offer") {
       // 1. Send notification to Business Team

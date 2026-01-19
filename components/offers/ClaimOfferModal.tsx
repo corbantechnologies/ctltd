@@ -32,6 +32,7 @@ export function ClaimOfferModal({
     phone: "",
     whatsapp: "",
     email: "",
+    website_url: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -197,6 +198,17 @@ export function ClaimOfferModal({
             <p className="text-center text-[10px] font-black uppercase tracking-[0.2em] opacity-30 italic">
               Our team will contact you within 24 hours.
             </p>
+            {/* Honeypot field */}
+            <Input
+              name="website_url"
+              className="hidden absolute opacity-0 w-0 h-0 p-0 m-0 -z-50"
+              tabIndex={-1}
+              autoComplete="off"
+              value={formData.website_url}
+              onChange={(e) =>
+                setFormData({ ...formData, website_url: e.target.value })
+              }
+            />
           </form>
         </div>
       </DialogContent>
