@@ -17,10 +17,10 @@ export default function COAPage() {
               Financial Architecture
             </p>
           </div>
-          <h1 className="text-3xl font-black text-black tracking-tighter italic">
+          <h1 className="text-2xl font-black text-black tracking-tighter italic">
             Chart of <span className="text-[#D0402B]">Accounts</span>
           </h1>
-          <p className="text-black/40 font-bold mt-1 text-sm max-w-md">
+          <p className="text-black/40 font-bold mt-1 text-xs max-w-md">
             The foundational structure of your financial entity. Organize and
             oversee all general ledger accounts.
           </p>

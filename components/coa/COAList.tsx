@@ -223,19 +223,19 @@ export default function COAList({ rolePrefix }: COAListProps) {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/10 bg-black/5">
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Account Name
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Code
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Type / Balance
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Status
                   </th>
-                  <th className="text-right py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-right py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Actions
                   </th>
                 </tr>
@@ -256,10 +256,10 @@ export default function COAList({ rolePrefix }: COAListProps) {
                         } as CSSWithVariables
                       } // 5% opacity
                     >
-                      <td className="py-6 px-8">
+                      <td className="py-3 px-4">
                         <div className="flex items-center gap-3">
                           <div
-                            className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold"
+                            className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold"
                             style={
                               {
                                 "--group-hover-bg": `${primaryColor}33`, // 20% opacity
@@ -267,11 +267,11 @@ export default function COAList({ rolePrefix }: COAListProps) {
                               } as CSSWithVariables
                             }
                           >
-                            <Hash className="w-5 h-5" />
+                            <Hash className="w-4 h-4" />
                           </div>
                           <div>
                             <p
-                              className="text-sm font-black text-black transition-colors"
+                              className="text-xs font-black text-black transition-colors"
                               style={
                                 {
                                   "--group-hover-text": primaryColor,
@@ -280,54 +280,54 @@ export default function COAList({ rolePrefix }: COAListProps) {
                             >
                               {coa.name}
                             </p>
-                            <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
+                            <p className="text-[9px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
                               {coa.reference}
                             </p>
                           </div>
                         </div>
                       </td>
-                      <td className="py-6 px-8">
-                        <Badge className="bg-black text-white border-none font-black text-[9px] uppercase tracking-widest px-3 py-1 rounded-lg">
+                      <td className="py-3 px-4">
+                        <Badge className="bg-black text-white border-none font-black text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-md">
                           {coa.code}
                         </Badge>
                       </td>
-                      <td className="py-6 px-8">
+                      <td className="py-3 px-4">
                         <div className="flex items-center gap-2">
                           <ArrowUpDown className="w-3 h-3 text-black/30" />
-                          <span className="text-[10px] font-black uppercase tracking-widest text-black/60">
+                          <span className="text-[9px] font-black uppercase tracking-widest text-black/60">
                             {coa.normal_balance}
                           </span>
                         </div>
                       </td>
-                      <td className="py-6 px-8">
+                      <td className="py-3 px-4">
                         {coa.is_active ? (
                           <div className="flex items-center gap-2 text-green-600">
                             <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">
+                            <span className="text-[9px] font-black uppercase tracking-widest">
                               Active
                             </span>
                           </div>
                         ) : (
                           <div className="flex items-center gap-2 text-black/30">
                             <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">
+                            <span className="text-[9px] font-black uppercase tracking-widest">
                               Inactive
                             </span>
                           </div>
                         )}
                       </td>
-                      <td className="py-6 px-8 text-right">
+                      <td className="py-3 px-4 text-right">
                         <Link href={`/${rolePrefix}/coa/${coa.reference}`}>
                           <Button
                             variant="ghost"
-                            className="h-10 w-10 p-0 rounded-xl hover:text-white transition-all duration-300"
+                            className="h-8 w-8 p-0 rounded-lg hover:text-white transition-all duration-300"
                             style={
                               {
                                 "--hover-bg": primaryColor,
                               } as CSSWithVariables
                             }
                           >
-                            <ArrowRight className="w-4 h-4" />
+                            <ArrowRight className="w-3.5 h-3.5" />
                           </Button>
                         </Link>
                       </td>

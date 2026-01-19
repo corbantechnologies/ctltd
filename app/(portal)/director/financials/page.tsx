@@ -17,10 +17,10 @@ export default function FinancialsPage() {
               Fiscal Management
             </p>
           </div>
-          <h1 className="text-4xl font-black text-black tracking-tighter italic">
+          <h1 className="text-2xl font-black text-black tracking-tighter italic">
             Financial <span className="text-[#D0402B]">Operations</span>
           </h1>
-          <p className="text-black/40 font-bold mt-1 text-sm max-w-md">
+          <p className="text-black/40 font-bold mt-1 text-xs max-w-md">
             Comprehensive oversight of ledger journals, transaction records, and
             fiscal summaries.
           </p>
@@ -43,16 +43,16 @@ export default function FinancialsPage() {
 
       {/* Main Content Area */}
       <div className="pt-8 border-t border-black/5">
-        <div className="mb-8">
+        <div className="mb-6">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
-              <Receipt className="w-5 h-5" />
+            <div className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/40">
+              <Receipt className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-2xl font-black text-black tracking-tight italic">
+              <h2 className="text-lg font-black text-black tracking-tight italic">
                 Journal <span className="text-[#D0402B]">Ledgers</span>
               </h2>
-              <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
+              <p className="text-[9px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
                 Chronological fiscal records and movement tracking
               </p>
             </div>

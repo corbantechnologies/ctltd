@@ -22,10 +22,10 @@ export default function FinanceCOAPage() {
               Ledger Management
             </p>
           </div>
-          <h1 className="text-3xl font-black text-black tracking-tighter italic">
+          <h1 className="text-2xl font-black text-black tracking-tighter italic">
             Chart of <span className="text-[#045138]">Accounts</span>
           </h1>
-          <p className="text-black/40 font-bold mt-1 text-sm max-w-md">
+          <p className="text-black/40 font-bold mt-1 text-xs max-w-md">
             The technical backbone of fiscal operations. Create and manage the
             financial classification system.
           </p>
@@ -33,9 +33,9 @@ export default function FinanceCOAPage() {
 
         <Button
           onClick={() => setOpen(true)}
-          className="h-14 px-8 bg-black hover:bg-[#045138] text-white rounded-2xl font-black text-sm transition-all shadow-xl active:scale-95 group"
+          className="h-12 px-6 bg-black hover:bg-[#045138] text-white rounded-xl font-black text-xs transition-all shadow-xl active:scale-95 group"
         >
-          <Plus className="w-5 h-5 mr-2 group-hover:rotate-90 transition-transform" />
+          <Plus className="w-4 h-4 mr-2 group-hover:rotate-90 transition-transform" />
           Register New Account
         </Button>
       </div>

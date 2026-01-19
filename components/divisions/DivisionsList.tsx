@@ -42,7 +42,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
     return divisions.filter(
       (division) =>
         division.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        division.reference.toLowerCase().includes(searchQuery.toLowerCase())
+        division.reference.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   }, [divisions, searchQuery]);
 
@@ -101,10 +101,11 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
         <div className="flex items-center gap-2 bg-black/5 p-1.5 rounded-xl self-end lg:self-auto">
           <button
             onClick={() => setView("grid")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === "grid"
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
+              view === "grid"
                 ? "bg-white shadow-sm"
                 : "text-black/40 hover:text-black"
-              }`}
+            }`}
             style={
               {
                 color: view === "grid" ? primaryColor : undefined,
@@ -116,10 +117,11 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
           </button>
           <button
             onClick={() => setView("table")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === "table"
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
+              view === "table"
                 ? "bg-white shadow-sm"
                 : "text-black/40 hover:text-black"
-              }`}
+            }`}
             style={
               {
                 color: view === "table" ? primaryColor : undefined,
@@ -209,16 +211,16 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/10 bg-black/5">
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Division Name
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Reference
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Status
                   </th>
-                  <th className="text-right py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-right py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Actions
                   </th>
                 </tr>
@@ -232,10 +234,10 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                       { "--hover-bg": `${primaryColor}0D` } as CSSWithVariables
                     }
                   >
-                    <td className="py-6 px-8">
+                    <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
                         <div
-                          className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold"
+                          className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold"
                           style={
                             {
                               "--group-hover-bg": `${primaryColor}33`,
@@ -243,10 +245,10 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                             } as CSSWithVariables
                           }
                         >
-                          <Layers className="w-5 h-5" />
+                          <Layers className="w-4 h-4" />
                         </div>
                         <p
-                          className="text-sm font-black text-black transition-colors"
+                          className="text-xs font-black text-black transition-colors"
                           style={
                             {
                               "--group-hover-text": primaryColor,
@@ -257,42 +259,42 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                         </p>
                       </div>
                     </td>
-                    <td className="py-6 px-8">
-                      <Badge className="bg-black text-white border-none font-black text-[9px] uppercase tracking-widest px-3 py-1 rounded-lg">
+                    <td className="py-3 px-4">
+                      <Badge className="bg-black text-white border-none font-black text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-md">
                         {division.reference}
                       </Badge>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-3 px-4">
                       {division.is_active ? (
                         <div className="flex items-center gap-2 text-green-600">
                           <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                          <span className="text-[10px] font-black uppercase tracking-widest">
+                          <span className="text-[9px] font-black uppercase tracking-widest">
                             Active
                           </span>
                         </div>
                       ) : (
                         <div className="flex items-center gap-2 text-black/30">
                           <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
-                          <span className="text-[10px] font-black uppercase tracking-widest">
+                          <span className="text-[9px] font-black uppercase tracking-widest">
                             Inactive
                           </span>
                         </div>
                       )}
                     </td>
-                    <td className="py-6 px-8 text-right">
+                    <td className="py-3 px-4 text-right">
                       <Link
                         href={`/${rolePrefix}/divisions/${division.reference}`}
                       >
                         <Button
                           variant="ghost"
-                          className="h-10 w-10 p-0 rounded-xl hover:text-white transition-all duration-300"
+                          className="h-8 w-8 p-0 rounded-lg hover:text-white transition-all duration-300"
                           style={
                             {
                               "--hover-bg": primaryColor,
                             } as CSSWithVariables
                           }
                         >
-                          <ArrowRight className="w-4 h-4" />
+                          <ArrowRight className="w-3.5 h-3.5" />
                         </Button>
                       </Link>
                     </td>
@@ -308,8 +310,9 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
       {totalPages > 1 && (
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/50 backdrop-blur-xl p-6 rounded-[24px] border border-black/5">
           <p className="text-[10px] font-black uppercase tracking-widest text-black/30">
-            Showing <span className="text-black">{paginatedDivisions.length}</span>{" "}
-            of <span className="text-black">{filteredDivisions.length}</span>{" "}
+            Showing{" "}
+            <span className="text-black">{paginatedDivisions.length}</span> of{" "}
+            <span className="text-black">{filteredDivisions.length}</span>{" "}
             divisions
           </p>
 
@@ -336,10 +339,11 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-10 h-10 rounded-xl text-[10px] font-black transition-all ${currentPage === page
+                      className={`w-10 h-10 rounded-xl text-[10px] font-black transition-all ${
+                        currentPage === page
                           ? "text-white shadow-lg"
                           : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
-                        }`}
+                      }`}
                       style={
                         {
                           backgroundColor:

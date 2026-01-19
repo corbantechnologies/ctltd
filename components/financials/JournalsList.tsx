@@ -31,7 +31,10 @@ interface JournalsListProps {
   linkPrefix: string;
 }
 
-export default function JournalsList({ rolePrefix, linkPrefix }: JournalsListProps) {
+export default function JournalsList({
+  rolePrefix,
+  linkPrefix,
+}: JournalsListProps) {
   const [view, setView] = useState<"grid" | "table">("table");
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
@@ -39,7 +42,7 @@ export default function JournalsList({ rolePrefix, linkPrefix }: JournalsListPro
   const [endDate, setEndDate] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("all");
   const [selectedYear, setSelectedYear] = useState(
-    new Date().getFullYear().toString()
+    new Date().getFullYear().toString(),
   );
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -105,7 +108,7 @@ export default function JournalsList({ rolePrefix, linkPrefix }: JournalsListPro
   const totalPages = Math.ceil(filteredJournals.length / itemsPerPage);
   const paginatedJournals = filteredJournals.slice(
     (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    currentPage * itemsPerPage,
   );
 
   if (isLoadingJournals || isLoadingTypes) return <LoadingSpinner />;
@@ -394,19 +397,19 @@ export default function JournalsList({ rolePrefix, linkPrefix }: JournalsListPro
             <table className="w-full">
               <thead>
                 <tr className="bg-black/5 border-b border-black/5">
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Posting Date
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Journal Description
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Type
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Status
                   </th>
-                  <th className="text-right py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40 text-center">
+                  <th className="text-right py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40 text-center">
                     Reference
                   </th>
                 </tr>
@@ -420,58 +423,58 @@ export default function JournalsList({ rolePrefix, linkPrefix }: JournalsListPro
                       (window.location.href = `/${rolePrefix}/${linkPrefix}/${journal.reference}`)
                     }
                   >
-                    <td className="py-6 px-8">
+                    <td className="py-3 px-4">
                       <div className="flex flex-col">
-                        <span className="text-base font-black text-black">
+                        <span className="text-xs font-black text-black">
                           {new Date(journal.date).toLocaleDateString()}
                         </span>
-                        <span className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
+                        <span className="text-[9px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
                           Automated Entry
                         </span>
                       </div>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/40 group-hover:bg-[#D0402B]/10 group-hover:text-[#D0402B] transition-all">
                           <FileText className="w-4 h-4" />
                         </div>
-                        <span className="text-base font-bold text-black group-hover:text-[#D0402B] transition-colors">
+                        <span className="text-xs font-bold text-black group-hover:text-[#D0402B] transition-colors">
                           {journal.description}
                         </span>
                       </div>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-3 px-4">
                       <Badge
                         variant="outline"
-                        className="bg-white/50 border-black/5 text-black/60 font-black text-[9px] uppercase px-3 py-1 rounded-full"
+                        className="bg-white/50 border-black/5 text-black/60 font-black text-[9px] uppercase px-2 py-0.5 rounded-full"
                       >
                         {journal.journal_type}
                       </Badge>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-3 px-4">
                       <div className="flex items-center gap-2">
                         {journal.is_posted ? (
                           <div className="flex items-center gap-2 text-green-600">
-                            <CheckCircle2 className="w-4 h-4" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">
+                            <CheckCircle2 className="w-3 h-3" />
+                            <span className="text-[9px] font-black uppercase tracking-widest">
                               POSTED
                             </span>
                           </div>
                         ) : (
                           <div className="flex items-center gap-2 text-orange-600">
-                            <Clock className="w-4 h-4" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">
+                            <Clock className="w-3 h-3" />
+                            <span className="text-[9px] font-black uppercase tracking-widest">
                               PENDING
                             </span>
                           </div>
                         )}
                       </div>
                     </td>
-                    <td className="py-6 px-8 text-right">
-                      <div className="flex items-center justify-end gap-4 font-mono font-bold text-sm text-black/40 group-hover:text-black">
+                    <td className="py-3 px-4 text-right">
+                      <div className="flex items-center justify-end gap-4 font-mono font-bold text-xs text-black/40 group-hover:text-black">
                         {journal.reference}
                         <div className="w-8 h-8 rounded-xl bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-lg hover:bg-[#D0402B]">
-                          <ArrowUpRight className="w-4 h-4" />
+                          <ArrowUpRight className="w-3.5 h-3.5" />
                         </div>
                       </div>
                     </td>

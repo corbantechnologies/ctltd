@@ -36,7 +36,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-
 interface PartnersListProps {
   rolePrefix: string;
 }
@@ -106,8 +105,9 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
             <Button
               onClick={() => setView("grid")}
               variant="ghost"
-              className={`h-10 w-10 rounded-xl p-0 transition-all ${view === "grid" ? "text-white shadow-md" : "text-black/40"
-                }`}
+              className={`h-10 w-10 rounded-xl p-0 transition-all ${
+                view === "grid" ? "text-white shadow-md" : "text-black/40"
+              }`}
               style={{
                 backgroundColor: view === "grid" ? primaryColor : "transparent",
               }}
@@ -117,8 +117,9 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
             <Button
               onClick={() => setView("table")}
               variant="ghost"
-              className={`h-10 w-10 rounded-xl p-0 transition-all ${view === "table" ? "text-white shadow-md" : "text-black/40"
-                }`}
+              className={`h-10 w-10 rounded-xl p-0 transition-all ${
+                view === "table" ? "text-white shadow-md" : "text-black/40"
+              }`}
               style={{
                 backgroundColor:
                   view === "table" ? primaryColor : "transparent",
@@ -152,10 +153,11 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                       <Users className="w-7 h-7" />
                     </div>
                     <Badge
-                      className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border-none ${partner.is_active
+                      className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border-none ${
+                        partner.is_active
                           ? "bg-green-500/10 text-green-600"
                           : "bg-red-500/10 text-red-600"
-                        }`}
+                      }`}
                     >
                       {partner.is_active ? "Active" : "Inactive"}
                     </Badge>
@@ -198,16 +200,16 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
               <Table>
                 <TableHeader className="bg-black/5">
                   <TableRow className="hover:bg-transparent border-black/5">
-                    <TableHead className="py-6 px-8 text-[10px] font-black text-black/40 uppercase tracking-widest">
+                    <TableHead className="py-3 px-4 text-[9px] font-black text-black/40 uppercase tracking-widest">
                       Entity
                     </TableHead>
-                    <TableHead className="py-6 px-8 text-[10px] font-black text-black/40 uppercase tracking-widest">
+                    <TableHead className="py-3 px-4 text-[9px] font-black text-black/40 uppercase tracking-widest">
                       Division
                     </TableHead>
-                    <TableHead className="py-6 px-8 text-[10px] font-black text-black/40 uppercase tracking-widest">
+                    <TableHead className="py-3 px-4 text-[9px] font-black text-black/40 uppercase tracking-widest">
                       Category
                     </TableHead>
-                    <TableHead className="py-6 px-8 text-[10px] font-black text-black/40 uppercase tracking-widest">
+                    <TableHead className="py-3 px-4 text-[9px] font-black text-black/40 uppercase tracking-widest">
                       Status
                     </TableHead>
                   </TableRow>
@@ -221,43 +223,43 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                         (window.location.href = `/${rolePrefix}/partners/${partner.reference}`)
                       }
                     >
-                      <TableCell className="py-6 px-8">
-                        <div className="flex items-center gap-4">
+                      <TableCell className="py-3 px-4">
+                        <div className="flex items-center gap-3">
                           <div
-                            className="w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-110"
+                            className="w-8 h-8 rounded-lg flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-110"
                             style={{ backgroundColor: primaryColor }}
                           >
-                            <Users className="w-5 h-5" />
+                            <Users className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="font-bold text-black text-base">
+                            <div className="font-bold text-black text-xs">
                               {partner.name}
                             </div>
-                            <div className="text-[10px] uppercase font-bold text-black/40 tracking-wider">
+                            <div className="text-[9px] uppercase font-bold text-black/40 tracking-wider">
                               {partner.reference}
                             </div>
                           </div>
                         </div>
                       </TableCell>
-                      <TableCell className="py-6 px-8">
+                      <TableCell className="py-3 px-4 text-xs">
                         {partner.division}
                       </TableCell>
-                      <TableCell className="py-6 px-8">
+                      <TableCell className="py-3 px-4">
                         <Badge
                           variant="secondary"
-                          className="bg-white border border-black/5 text-black/70 font-bold"
+                          className="bg-white border border-black/5 text-black/70 font-bold text-[9px]"
                         >
                           {partner.partner_type}
                         </Badge>
                       </TableCell>
-                      <TableCell className="py-6 px-8">
+                      <TableCell className="py-3 px-4">
                         {partner.is_active ? (
-                          <div className="flex items-center gap-2 text-xs font-black text-green-600 uppercase tracking-wider">
-                            <CheckCircle2 className="w-4 h-4" /> Active
+                          <div className="flex items-center gap-2 text-[9px] font-black text-green-600 uppercase tracking-wider">
+                            <CheckCircle2 className="w-3 h-3" /> Active
                           </div>
                         ) : (
-                          <div className="flex items-center gap-2 text-xs font-black text-red-600 uppercase tracking-wider">
-                            <AlertCircle className="w-4 h-4" /> Inactive
+                          <div className="flex items-center gap-2 text-[9px] font-black text-red-600 uppercase tracking-wider">
+                            <AlertCircle className="w-3 h-3" /> Inactive
                           </div>
                         )}
                       </TableCell>

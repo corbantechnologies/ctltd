@@ -10,17 +10,17 @@ export default function FiscalYearsPage() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-[#045138] flex items-center justify-center text-white shadow-lg shadow-[#045138]/20">
+            <div className="w-8 h-8 rounded-lg bg-[#D0402B] flex items-center justify-center text-white shadow-lg shadow-[#D0402B]/20">
               <CalendarRange className="w-4 h-4" />
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#045138]">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D0402B]">
               Period Management
             </p>
           </div>
-          <h1 className="text-3xl font-black text-black tracking-tighter italic">
-            Fiscal <span className="text-[#045138]">Years</span>
+          <h1 className="text-2xl font-black text-black tracking-tighter italic">
+            Fiscal <span className="text-[#D0402B]">Years</span>
           </h1>
-          <p className="text-gray-400 font-bold mt-1 text-sm max-w-md">
+          <p className="text-gray-400 font-bold mt-1 text-xs max-w-md">
             The temporal backbone of financial reporting. View and manage fiscal
             periods.
           </p>

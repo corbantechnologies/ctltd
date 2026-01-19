@@ -17,10 +17,10 @@ export default function DivisionsPage() {
               Management Layer
             </p>
           </div>
-          <h1 className="text-3xl font-black text-black tracking-tighter italic">
+          <h1 className="text-2xl font-black text-black tracking-tighter italic">
             Corporate <span className="text-[#D0402B]">Divisions</span>
           </h1>
-          <p className="text-black/40 font-bold mt-1 text-sm max-w-md">
+          <p className="text-black/40 font-bold mt-1 text-xs max-w-md">
             Organize business units and define operational boundaries.
           </p>
         </div>

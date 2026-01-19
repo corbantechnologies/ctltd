@@ -39,7 +39,7 @@ export default function FinancialYearsList({
     return financialYears.filter(
       (year) =>
         year.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        year.reference.toLowerCase().includes(searchQuery.toLowerCase())
+        year.reference.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   }, [financialYears, searchQuery]);
 
@@ -206,16 +206,16 @@ export default function FinancialYearsList({
             <table className="w-full">
               <thead>
                 <tr className="border-b border-gray-100 bg-gray-50/50">
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-gray-400">
                     Fiscal Code
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-gray-400">
                     Period
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-gray-400">
                     Status
                   </th>
-                  <th className="text-right py-5 px-8 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="text-right py-3 px-4 text-[9px] font-black uppercase tracking-widest text-gray-400">
                     Actions
                   </th>
                 </tr>
@@ -226,64 +226,67 @@ export default function FinancialYearsList({
                     key={year.reference}
                     className="transition-colors group hover:bg-gray-50/50"
                   >
-                    <td className="py-6 px-8">
-                      <Link href={`/${rolePrefix}/fiscal-years/${year.reference}`} className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 transition-all font-bold group-hover:bg-white group-hover:shadow-sm">
-                          <CalendarRange className="w-5 h-5" />
+                    <td className="py-3 px-4">
+                      <Link
+                        href={`/${rolePrefix}/fiscal-years/${year.reference}`}
+                        className="flex items-center gap-3"
+                      >
+                        <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 transition-all font-bold group-hover:bg-white group-hover:shadow-sm">
+                          <CalendarRange className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="text-sm font-black text-black transition-colors">
+                          <p className="text-xs font-black text-black transition-colors">
                             {year.code}
                           </p>
-                          <p className="text-[10px] font-bold text-gray-300 uppercase tracking-widest mt-0.5">
+                          <p className="text-[9px] font-bold text-gray-300 uppercase tracking-widest mt-0.5">
                             {year.reference}
                           </p>
                         </div>
                       </Link>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-3 px-4">
                       <div className="flex items-center gap-2">
                         <Badge
                           variant="outline"
-                          className="bg-white text-gray-600 border-gray-200 font-bold text-[10px]"
+                          className="bg-white text-gray-600 border-gray-200 font-bold text-[9px]"
                         >
                           {new Date(year.start_date).toLocaleDateString()}
                         </Badge>
                         <span className="text-gray-300">-</span>
                         <Badge
                           variant="outline"
-                          className="bg-white text-gray-600 border-gray-200 font-bold text-[10px]"
+                          className="bg-white text-gray-600 border-gray-200 font-bold text-[9px]"
                         >
                           {new Date(year.end_date).toLocaleDateString()}
                         </Badge>
                       </div>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-3 px-4">
                       {year.is_active ? (
                         <div className="flex items-center gap-2 text-green-600">
                           <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                          <span className="text-[10px] font-black uppercase tracking-widest">
+                          <span className="text-[9px] font-black uppercase tracking-widest">
                             Active
                           </span>
                         </div>
                       ) : (
                         <div className="flex items-center gap-2 text-gray-400">
                           <div className="w-1.5 h-1.5 rounded-full bg-gray-300" />
-                          <span className="text-[10px] font-black uppercase tracking-widest">
+                          <span className="text-[9px] font-black uppercase tracking-widest">
                             Closed
                           </span>
                         </div>
                       )}
                     </td>
-                    <td className="py-6 px-8 text-right">
+                    <td className="py-3 px-4 text-right">
                       <Link
                         href={`/${rolePrefix}/fiscal-years/${year.reference}`}
                       >
                         <Button
                           variant="ghost"
-                          className="h-10 w-10 p-0 rounded-xl hover:bg-white hover:shadow-sm hover:text-black transition-all duration-300 text-gray-300"
+                          className="h-8 w-8 p-0 rounded-lg hover:bg-white hover:shadow-sm hover:text-black transition-all duration-300 text-gray-300"
                         >
-                          <ArrowRight className="w-4 h-4 text-black" />
+                          <ArrowRight className="w-3.5 h-3.5 text-black" />
                         </Button>
                       </Link>
                     </td>

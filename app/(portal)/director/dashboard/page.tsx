@@ -26,10 +26,10 @@ export default function DirectorDashboard() {
               Administrative Portal
             </p>
           </div>
-          <h1 className="text-3xl font-black text-black tracking-tighter italic">
+          <h1 className="text-2xl font-black text-black tracking-tighter italic">
             Director <span className="text-[#D0402B]">Dashboard</span>
           </h1>
-          <p className="text-black/40 font-bold mt-1 text-sm max-w-md">
+          <p className="text-black/40 font-bold mt-1 text-xs max-w-md">
             Welcome, {account?.first_name} {account?.last_name}. Oversee
             corporate infrastructure and division management.
           </p>
@@ -39,8 +39,8 @@ export default function DirectorDashboard() {
 
       {/* Divisions Section */}
       <div className="space-y-6 pt-6">
-        <div className="flex items-center justify-between border-b border-black/5 pb-6">
-          <h2 className="text-2xl font-black text-black tracking-tight">
+        <div className="flex items-center justify-between border-b border-black/5 pb-4">
+          <h2 className="text-lg font-black text-black tracking-tight">
             Corporate Divisions
           </h2>
           <p className="text-[10px] font-black uppercase tracking-widest text-black/40">

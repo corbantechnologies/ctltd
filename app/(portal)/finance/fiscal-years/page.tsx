@@ -17,10 +17,10 @@ export default function FiscalYearsPage() {
               Period Management
             </p>
           </div>
-          <h1 className="text-3xl font-black text-black tracking-tighter italic">
+          <h1 className="text-2xl font-black text-black tracking-tighter italic">
             Fiscal <span className="text-[#045138]">Years</span>
           </h1>
-          <p className="text-gray-400 font-bold mt-1 text-sm max-w-md">
+          <p className="text-gray-400 font-bold mt-1 text-xs max-w-md">
             The temporal backbone of financial reporting. View and manage fiscal
             periods.
           </p>

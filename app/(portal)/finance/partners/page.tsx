@@ -33,16 +33,16 @@ export default function FinancePartnersPage() {
       </Breadcrumb>
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-black tracking-tighter">
+          <h1 className="text-2xl font-black text-black tracking-tighter">
             Operational Partners
           </h1>
-          <p className="text-black/60 font-medium mt-1">
+          <p className="text-xs text-black/60 font-medium mt-1">
             Manage vendors, clients, and internal entities
           </p>
         </div>
         <Button
           onClick={() => setOpenCreatePartner(true)}
-          className="h-12 px-6 bg-[#045138] hover:bg-black text-white rounded-2xl font-black text-sm uppercase tracking-wider transition-all shadow-lg active:scale-95 flex items-center gap-2"
+          className="h-10 px-4 bg-[#045138] hover:bg-black text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all shadow-lg active:scale-95 flex items-center gap-2"
         >
           <Plus className="w-4 h-4" />
           Register Partner
