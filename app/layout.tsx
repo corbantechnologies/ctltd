@@ -5,6 +5,7 @@ import "./globals.css";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 import TanstackQueryProvider from "@/providers/TanstackQueryProvider";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "react-hot-toast";
 
 export default function RootLayout({
@@ -34,6 +35,7 @@ export default function RootLayout({
           </TanstackQueryProvider>
         </NextAuthProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
