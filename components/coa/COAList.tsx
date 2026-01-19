@@ -18,6 +18,7 @@ import {
   ArrowUpDown,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,7 @@ interface COAListProps {
 }
 
 export default function COAList({ rolePrefix }: COAListProps) {
+  const router = useRouter();
   const [view, setView] = useState<"grid" | "table">("table");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -104,11 +106,10 @@ export default function COAList({ rolePrefix }: COAListProps) {
         <div className="flex items-center gap-2 bg-black/5 p-1.5 rounded-xl self-end lg:self-auto">
           <button
             onClick={() => setView("grid")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
-              view === "grid"
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === "grid"
                 ? "bg-white shadow-sm"
                 : "text-black/40 hover:text-black"
-            }`}
+              }`}
             style={
               {
                 color: view === "grid" ? primaryColor : undefined,
@@ -120,11 +121,10 @@ export default function COAList({ rolePrefix }: COAListProps) {
           </button>
           <button
             onClick={() => setView("table")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
-              view === "table"
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === "table"
                 ? "bg-white shadow-sm"
                 : "text-black/40 hover:text-black"
-            }`}
+              }`}
             style={
               {
                 color: view === "table" ? primaryColor : undefined,
@@ -242,97 +242,92 @@ export default function COAList({ rolePrefix }: COAListProps) {
               </thead>
               <tbody className="divide-y divide-black/5">
                 {paginatedCOAs.map((coa) => (
-                  <Link
+                  <tr
                     key={coa.reference}
-                    href={`/${rolePrefix}/coa/${coa.reference}`}
-                    className="group"
+                    onClick={() => router.push(`/${rolePrefix}/coa/${coa.reference}`)}
+                    className="transition-colors group cursor-pointer"
+                    style={
+                      {
+                        "--hover-bg": `${primaryColor}0D`,
+                      } as CSSWithVariables
+                    } // 5% opacity
                   >
-                    <tr
-                      key={coa.reference}
-                      className="transition-colors group"
-                      style={
-                        {
-                          "--hover-bg": `${primaryColor}0D`,
-                        } as CSSWithVariables
-                      } // 5% opacity
-                    >
-                      <td className="py-6 px-8">
-                        <div className="flex items-center gap-3">
-                          <div
-                            className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold"
+                    <td className="py-6 px-8">
+                      <div className="flex items-center gap-3">
+                        <div
+                          className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold"
+                          style={
+                            {
+                              "--group-hover-bg": `${primaryColor}33`, // 20% opacity
+                              "--group-hover-text": primaryColor,
+                            } as CSSWithVariables
+                          }
+                        >
+                          <Hash className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p
+                            className="text-sm font-black text-black transition-colors"
                             style={
                               {
-                                "--group-hover-bg": `${primaryColor}33`, // 20% opacity
                                 "--group-hover-text": primaryColor,
                               } as CSSWithVariables
                             }
                           >
-                            <Hash className="w-5 h-5" />
-                          </div>
-                          <div>
-                            <p
-                              className="text-sm font-black text-black transition-colors"
-                              style={
-                                {
-                                  "--group-hover-text": primaryColor,
-                                } as CSSWithVariables
-                              }
-                            >
-                              {coa.name}
-                            </p>
-                            <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
-                              {coa.reference}
-                            </p>
-                          </div>
+                            {coa.name}
+                          </p>
+                          <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
+                            {coa.reference}
+                          </p>
                         </div>
-                      </td>
-                      <td className="py-6 px-8">
-                        <Badge className="bg-black text-white border-none font-black text-[9px] uppercase tracking-widest px-3 py-1 rounded-lg">
-                          {coa.code}
-                        </Badge>
-                      </td>
-                      <td className="py-6 px-8">
-                        <div className="flex items-center gap-2">
-                          <ArrowUpDown className="w-3 h-3 text-black/30" />
-                          <span className="text-[10px] font-black uppercase tracking-widest text-black/60">
-                            {coa.normal_balance}
+                      </div>
+                    </td>
+                    <td className="py-6 px-8">
+                      <Badge className="bg-black text-white border-none font-black text-[9px] uppercase tracking-widest px-3 py-1 rounded-lg">
+                        {coa.code}
+                      </Badge>
+                    </td>
+                    <td className="py-6 px-8">
+                      <div className="flex items-center gap-2">
+                        <ArrowUpDown className="w-3 h-3 text-black/30" />
+                        <span className="text-[10px] font-black uppercase tracking-widest text-black/60">
+                          {coa.normal_balance}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="py-6 px-8">
+                      {coa.is_active ? (
+                        <div className="flex items-center gap-2 text-green-600">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                          <span className="text-[10px] font-black uppercase tracking-widest">
+                            Active
                           </span>
                         </div>
-                      </td>
-                      <td className="py-6 px-8">
-                        {coa.is_active ? (
-                          <div className="flex items-center gap-2 text-green-600">
-                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">
-                              Active
-                            </span>
-                          </div>
-                        ) : (
-                          <div className="flex items-center gap-2 text-black/30">
-                            <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">
-                              Inactive
-                            </span>
-                          </div>
-                        )}
-                      </td>
-                      <td className="py-6 px-8 text-right">
-                        <Link href={`/${rolePrefix}/coa/${coa.reference}`}>
-                          <Button
-                            variant="ghost"
-                            className="h-10 w-10 p-0 rounded-xl hover:text-white transition-all duration-300"
-                            style={
-                              {
-                                "--hover-bg": primaryColor,
-                              } as CSSWithVariables
-                            }
-                          >
-                            <ArrowRight className="w-4 h-4" />
-                          </Button>
-                        </Link>
-                      </td>
-                    </tr>
-                  </Link>
+                      ) : (
+                        <div className="flex items-center gap-2 text-black/30">
+                          <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
+                          <span className="text-[10px] font-black uppercase tracking-widest">
+                            Inactive
+                          </span>
+                        </div>
+                      )}
+                    </td>
+                    <td className="py-6 px-8 text-right">
+                      <Link href={`/${rolePrefix}/coa/${coa.reference}`} onClick={(e) => e.stopPropagation()}>
+                        <Button
+                          variant="ghost"
+                          className="h-10 w-10 p-0 rounded-xl hover:text-white transition-all duration-300"
+                          style={
+                            {
+                              "--hover-bg": primaryColor,
+                            } as CSSWithVariables
+                          }
+                        >
+                          <ArrowRight className="w-4 h-4" />
+                        </Button>
+                      </Link>
+                    </td>
+                  </tr>
                 ))}
               </tbody>
             </table>
@@ -372,11 +367,10 @@ export default function COAList({ rolePrefix }: COAListProps) {
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-10 h-10 rounded-xl text-[10px] font-black transition-all ${
-                        currentPage === page
+                      className={`w-10 h-10 rounded-xl text-[10px] font-black transition-all ${currentPage === page
                           ? "text-white shadow-lg"
                           : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
-                      }`}
+                        }`}
                       style={
                         {
                           backgroundColor:
