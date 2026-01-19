@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { GlobalSearch } from "@/components/navigation/GlobalSearch";
-import SpeedDial from "@/components/ui/SpeedDial";
+
 import AccountDistributionChart from "@/components/analytics/AccountDistributionChart";
 import RecentActivityFeed from "@/components/analytics/RecentActivityFeed";
 import {
@@ -302,20 +302,7 @@ export default function FinanceDashboard() {
         </TabsContent>
       </Tabs>
 
-      <SpeedDial
-        actions={[
-          {
-            icon: Settings2,
-            label: "New Journal Type",
-            onClick: () => setOpenCreateJournalType(true),
-          },
-          {
-            icon: Users,
-            label: "New Partner Type",
-            onClick: () => setOpenCreatePartnerType(true),
-          },
-        ]}
-      />
+
 
       {/* Manual Modals */}
       {openCreateJournalType && (
