@@ -43,7 +43,7 @@ export default function FiscalYearDetail() {
   };
 
   return (
-    <div className="space-y-12 pb-12">
+    <div className="space-y-8 pb-12">
       {/* Breadcrumbs & Actions */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div className="space-y-4">
@@ -159,57 +159,53 @@ export default function FiscalYearDetail() {
         ))}
       </div>
 
-      {/* Journal Types Section */}
-      <div className="space-y-6">
-        <div className="flex items-center gap-4">
-          <div className="flex-1 h-px bg-gray-100" />
-          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-black">
-            Journal Types
-          </h2>
-          <div className="flex-1 h-px bg-gray-100" />
+      {/* Main Layout Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 pt-4">
+
+        {/* Associated Journals Section (Left - 3/4) */}
+        <div className="lg:col-span-3 space-y-6 order-2 lg:order-1">
+          <div className="flex items-center gap-4">
+            <h2 className="text-xl font-black text-black tracking-tight">
+              Period Journals
+            </h2>
+            <div className="flex-1 h-px bg-gray-100" />
+          </div>
+
+          <FiscalYearJournals
+            journals={fiscalYear.journals || []}
+            rolePrefix="finance"
+            fiscalYearReference={reference as string}
+          />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {journalTypes?.map((type) => (
-            <Card
-              key={type.reference}
-              onClick={() => handleCreateJournal(type.name)}
-              className="group cursor-pointer border-black/5 hover:border-[#045138] hover:shadow-xl transition-all duration-300 bg-white/60 backdrop-blur-xl rounded-2xl"
-            >
-              <CardContent className="p-6 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#045138]/5 group-hover:bg-[#045138] flex items-center justify-center text-[#045138] group-hover:text-white transition-colors duration-300">
-                    <BookOpen className="w-5 h-5" />
+        {/* Journal Types List (Right - 1/4) */}
+        <div className="lg:col-span-1 space-y-4 order-1 lg:order-2">
+          <div className="flex items-center gap-2 mb-2">
+            <h3 className="text-sm font-black uppercase tracking-widest text-black/40">Quick Entry</h3>
+            <div className="flex-1 h-px bg-gray-100" />
+          </div>
+
+          <div className="space-y-3 sticky top-6">
+            {journalTypes?.map((type) => (
+              <Card
+                key={type.reference}
+                onClick={() => handleCreateJournal(type.name)}
+                className="group cursor-pointer border-none shadow-sm hover:shadow-md transition-all duration-200 bg-white rounded-xl overflow-hidden"
+              >
+                <CardContent className="p-4 flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-[#045138]/5 group-hover:bg-[#045138] flex items-center justify-center text-[#045138] group-hover:text-white transition-colors duration-200 flex-shrink-0">
+                    <BookOpen className="w-4 h-4" />
                   </div>
-                  <div className="space-y-1">
-                    <h3 className="font-bold text-black text-sm group-hover:text-[#045138] transition-colors">{type.name}</h3>
-                    <p className="text-[10px] font-bold text-black/40 uppercase tracking-wider">Create Entry</p>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-black text-xs truncate group-hover:text-[#045138] transition-colors">{type.name}</h3>
                   </div>
-                </div>
-                <div className="w-8 h-8 rounded-full bg-black/5 group-hover:bg-[#045138]/10 flex items-center justify-center text-black/40 group-hover:text-[#045138] transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0">
-                  <ArrowRight className="w-4 h-4" />
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-
-      {/* Associated Journals Section */}
-      <div className="space-y-6">
-        <div className="flex items-center gap-4">
-          <div className="flex-1 h-px bg-gray-100" />
-          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-black">
-            Period Journals
-          </h2>
-          <div className="flex-1 h-px bg-gray-100" />
+                  <ArrowRight className="w-3 h-3 text-gray-300 group-hover:text-[#045138] transition-colors" />
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
 
-        <FiscalYearJournals
-          journals={fiscalYear.journals || []}
-          rolePrefix="finance"
-          fiscalYearReference={reference as string}
-        />
       </div>
 
       {/* Manual Modal Implementation for Create Journal */}
