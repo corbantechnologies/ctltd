@@ -62,6 +62,7 @@ export default function DirectorDashboard() {
 
   return (
     <div className="space-y-12 pb-12">
+      {/* Ctrl + K */}
       <GlobalSearch role="director" />
       {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
