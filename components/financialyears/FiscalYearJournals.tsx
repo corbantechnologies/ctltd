@@ -332,7 +332,7 @@ export default function FiscalYearJournals({
                   >
                     <td className="py-6 px-8">
                       <div className="flex flex-col">
-                        <span className="text-base font-black text-black">
+                        <span className="text-base font-semibold text-black">
                           {new Date(journal.date).toLocaleDateString()}
                         </span>
                         <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">
@@ -353,7 +353,7 @@ export default function FiscalYearJournals({
                     <td className="py-6 px-8">
                       <Badge
                         variant="outline"
-                        className="bg-white border-gray-200 text-gray-600 font-black text-[9px] uppercase px-3 py-1 rounded-full"
+                        className="bg-white border-gray-200 text-gray-600 font-semibold text-[9px] uppercase px-3 py-1 rounded-full"
                       >
                         {journal.journal_type}
                       </Badge>
@@ -363,14 +363,14 @@ export default function FiscalYearJournals({
                         {journal.is_posted ? (
                           <div className="flex items-center gap-2 text-green-600">
                             <CheckCircle2 className="w-4 h-4" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">
+                            <span className="text-[10px] font-semibold uppercase tracking-widest">
                               POSTED
                             </span>
                           </div>
                         ) : (
                           <div className="flex items-center gap-2 text-orange-600">
                             <Clock className="w-4 h-4" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">
+                            <span className="text-[10px] font-semibold uppercase tracking-widest">
                               PENDING
                             </span>
                           </div>
