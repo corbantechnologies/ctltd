@@ -15,6 +15,10 @@ import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { GlobalSearch } from "@/components/navigation/GlobalSearch";
+import SpeedDial from "@/components/ui/SpeedDial";
+import AccountDistributionChart from "@/components/analytics/AccountDistributionChart";
+import RecentActivityFeed from "@/components/analytics/RecentActivityFeed";
 import {
   Layers,
   Settings2,
@@ -92,6 +96,7 @@ export default function FinanceDashboard() {
 
   return (
     <div className="space-y-8 pb-12">
+      <GlobalSearch role="finance" />
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -151,8 +156,10 @@ export default function FinanceDashboard() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <Card className="border-none shadow-xl shadow-black/5 bg-[#045138] rounded-[32px] text-white p-8 relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <AccountDistributionChart data={coas || []} />
+            <RecentActivityFeed entries={entries || []} />
+            <Card className="col-span-1 border-none shadow-xl shadow-black/5 bg-[#045138] rounded-[32px] text-white p-8 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
               <div className="relative z-10 space-y-4">
                 <h3 className="text-2xl font-black">Quick Actions</h3>
@@ -294,6 +301,21 @@ export default function FinanceDashboard() {
           </div>
         </TabsContent>
       </Tabs>
+
+      <SpeedDial
+        actions={[
+          {
+            icon: Settings2,
+            label: "New Journal Type",
+            onClick: () => setOpenCreateJournalType(true),
+          },
+          {
+            icon: Users,
+            label: "New Partner Type",
+            onClick: () => setOpenCreatePartnerType(true),
+          },
+        ]}
+      />
 
       {/* Manual Modals */}
       {openCreateJournalType && (
