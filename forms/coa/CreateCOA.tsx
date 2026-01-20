@@ -51,10 +51,10 @@ export default function CreateCOA({
       try {
         await createCOA(values, header);
         toast.success("Account created successfully");
-        window.location.reload();
         queryClient.invalidateQueries({ queryKey: ["coas"] });
         resetForm();
         if (onSuccess) onSuccess();
+        router.refresh();
       } catch (error: any) {
         toast.error(
           error?.response?.data?.message || "Failed to create account"

@@ -59,7 +59,7 @@ export default function CreateJournal({
       try {
         await createJournal(values, header);
         toast.success("Journal batch created successfully");
-        window.location.reload();
+        router.refresh();
         if (onSuccess) onSuccess();
       } catch (error: any) {
         console.error("Create error:", error);

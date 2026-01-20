@@ -54,10 +54,10 @@ export default function UpdateCOA({
       try {
         await updateCOA(coa.reference, { name: values.name }, header);
         toast.success("Account updated successfully");
-        window.location.reload();
         queryClient.invalidateQueries({ queryKey: ["coas"] });
         queryClient.invalidateQueries({ queryKey: ["coa", coa.reference] });
         if (onSuccess) onSuccess();
+        router.refresh();
       } catch (error: any) {
         toast.error(
           error?.response?.data?.message || "Failed to update account"
