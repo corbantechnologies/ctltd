@@ -60,7 +60,7 @@ export default function UpdateCOA({
         router.refresh();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to update account"
+          error?.response?.data?.message || "Failed to update account",
         );
       } finally {
         setSubmitting(false);

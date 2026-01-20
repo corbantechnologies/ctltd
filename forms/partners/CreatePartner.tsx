@@ -20,6 +20,7 @@ import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 import { useFetchPartnerTypes } from "@/hooks/partnertypes/actions";
 import { useFetchDivisions } from "@/hooks/divisions/actions";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface CreatePartnerProps {
   rolePrefix?: string;
@@ -36,6 +37,7 @@ export default function CreatePartner({
 }: CreatePartnerProps) {
   const header = useAxiosAuth();
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { data: partnerTypes, isLoading: isLoadingTypes } =
     useFetchPartnerTypes();
   const { data: divisions, isLoading: isLoadingDivisions } =
@@ -61,12 +63,13 @@ export default function CreatePartner({
       try {
         await createPartner(values, header);
         toast.success("Partner registered successfully");
+        queryClient.invalidateQueries({ queryKey: ["partners"] });
         resetForm();
         router.refresh();
         if (onSuccess) onSuccess();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to register partner"
+          error?.response?.data?.message || "Failed to register partner",
         );
       } finally {
         setSubmitting(false);

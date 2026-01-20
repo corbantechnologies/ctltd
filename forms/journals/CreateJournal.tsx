@@ -19,6 +19,7 @@ import { Loader2, Book, Plus, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 import { useFetchJournalTypes } from "@/hooks/journaltypes/actions";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface CreateJournalProps {
   fiscalYear?: string;
@@ -39,6 +40,7 @@ export default function CreateJournal({
 }: CreateJournalProps) {
   const header = useAxiosAuth();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
 
@@ -59,12 +61,13 @@ export default function CreateJournal({
       try {
         await createJournal(values, header);
         toast.success("Journal batch created successfully");
+        queryClient.invalidateQueries({ queryKey: ["journals"] });
         router.refresh();
         if (onSuccess) onSuccess();
       } catch (error: any) {
         console.error("Create error:", error);
         toast.error(
-          error?.response?.data?.message || "Failed to create journal batch"
+          error?.response?.data?.message || "Failed to create journal batch",
         );
       } finally {
         setSubmitting(false);

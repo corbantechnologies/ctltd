@@ -18,6 +18,7 @@ import { toast } from "react-hot-toast";
 import { Loader2, Edit3, Save } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface UpdatePartnerTypeProps {
   partnerType: {
@@ -33,6 +34,7 @@ export default function UpdatePartnerType({
 }: UpdatePartnerTypeProps) {
   const header = useAxiosAuth();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const formik = useFormik({
     initialValues: {
@@ -50,13 +52,14 @@ export default function UpdatePartnerType({
             description: values.description,
             is_active: values.is_active,
           },
-          header
+          header,
         );
         toast.success("Partner type updated successfully");
+        queryClient.invalidateQueries({ queryKey: ["partner_types"] });
         router.refresh();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to update partner type"
+          error?.response?.data?.message || "Failed to update partner type",
         );
       } finally {
         setSubmitting(false);

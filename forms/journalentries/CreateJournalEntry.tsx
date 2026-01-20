@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation";
 import { useFetchBooks } from "@/hooks/books/actions";
 import { useFetchPartners } from "@/hooks/partners/actions";
 import { useFetchDivisions } from "@/hooks/divisions/actions";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface CreateJournalEntryProps {
   rolePrefix?: string;
@@ -40,6 +41,7 @@ export default function CreateJournalEntry({
 }: CreateJournalEntryProps) {
   const header = useAxiosAuth();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
 
@@ -91,6 +93,13 @@ export default function CreateJournalEntry({
 
         await createJournalEntry(formData, header);
         toast.success("Journal entry recorded");
+        queryClient.invalidateQueries({ queryKey: ["journal_entries"] });
+        queryClient.invalidateQueries({ queryKey: ["journals"] });
+        if (journalReference) {
+          queryClient.invalidateQueries({
+            queryKey: ["journal", journalReference],
+          });
+        }
         resetForm();
         if (onSuccess) onSuccess();
         router.refresh();
@@ -361,6 +370,7 @@ export default function CreateJournalEntry({
                 onBlur={formik.handleBlur}
                 value={formik.values.payment_method}
               >
+                <option value="">Select Payment Method</option>
                 <option value="BANK_TRANSFER">BANK TRANSFER</option>
                 <option value="CASH">CASH</option>
                 <option value="CHEQUE">CHEQUE</option>

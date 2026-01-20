@@ -20,10 +20,12 @@ import { Loader2, Database, Shield, Plus } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function CreateDivisionModal() {
   const header = useAxiosAuth();
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
 
   const formik = useFormik({
@@ -36,6 +38,7 @@ export default function CreateDivisionModal() {
       try {
         await createDivision(values, header);
         toast.success("Division created successfully");
+        queryClient.invalidateQueries({ queryKey: ["divisions"] });
         router.refresh();
         resetForm();
         setOpen(false);

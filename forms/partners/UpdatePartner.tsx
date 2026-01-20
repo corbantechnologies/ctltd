@@ -20,6 +20,7 @@ import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 import { useFetchPartnerTypes } from "@/hooks/partnertypes/actions";
 import { useFetchDivisions } from "@/hooks/divisions/actions";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface UpdatePartnerProps {
   partner: {
@@ -50,6 +51,7 @@ export default function UpdatePartner({
 }: UpdatePartnerProps) {
   const header = useAxiosAuth();
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { data: partnerTypes, isLoading: isLoadingTypes } =
     useFetchPartnerTypes();
   const { data: divisions, isLoading: isLoadingDivisions } =
@@ -80,14 +82,18 @@ export default function UpdatePartner({
             ...values,
             wht_rate: values.wht_rate,
           },
-          header
+          header,
         );
         toast.success("Partner updated successfully");
+        queryClient.invalidateQueries({ queryKey: ["partners"] });
+        queryClient.invalidateQueries({
+          queryKey: ["partner", partner.reference],
+        });
         router.refresh();
         if (onSuccess) onSuccess();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to update partner"
+          error?.response?.data?.message || "Failed to update partner",
         );
       } finally {
         setSubmitting(false);

@@ -18,10 +18,12 @@ import { toast } from "react-hot-toast";
 import { Loader2, Database, Shield } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function CreateDivision() {
   const header = useAxiosAuth();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const formik = useFormik({
     initialValues: {
@@ -33,6 +35,7 @@ export default function CreateDivision() {
       try {
         await createDivision(values, header);
         toast.success("Division created successfully");
+        queryClient.invalidateQueries({ queryKey: ["divisions"] });
         resetForm();
         router.refresh();
       } catch (error: any) {

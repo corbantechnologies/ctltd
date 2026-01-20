@@ -18,6 +18,7 @@ import { toast } from "react-hot-toast";
 import { Loader2, Edit3, Save } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface UpdateDivisionProps {
   division: {
@@ -30,6 +31,7 @@ interface UpdateDivisionProps {
 export default function UpdateDivision({ division }: UpdateDivisionProps) {
   const header = useAxiosAuth();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const formik = useFormik({
     initialValues: {
@@ -45,7 +47,7 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
         router.refresh();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to update division"
+          error?.response?.data?.message || "Failed to update division",
         );
       } finally {
         setSubmitting(false);
