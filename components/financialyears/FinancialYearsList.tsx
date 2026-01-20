@@ -71,12 +71,12 @@ export default function FinancialYearsList({
   return (
     <div className="space-y-6">
       {/* Controls Bar */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-white p-4 rounded-[24px] border border-gray-100 shadow-sm">
-        <div className="flex flex-col md:flex-row items-center gap-4 w-full lg:w-auto">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-white/50 backdrop-blur-xl p-3 rounded-2xl border border-black/5 shadow-sm">
+        <div className="flex flex-col md:flex-row items-center gap-3 w-full lg:w-auto">
           {/* Search */}
           <div className="relative w-full md:w-80">
             <Search
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-black/20"
               style={{ color: searchQuery ? primaryColor : undefined }}
             />
             <Input
@@ -86,7 +86,7 @@ export default function FinancialYearsList({
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              className="pl-11 h-12 rounded-xl border-gray-100 bg-gray-50 focus:bg-white transition-all font-bold text-xs focus:ring-1"
+              className="pl-9 h-10 rounded-xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold text-xs focus:ring-1"
               style={
                 {
                   "--tw-ring-color": primaryColor,
@@ -96,14 +96,13 @@ export default function FinancialYearsList({
           </div>
         </div>
 
-        <div className="flex items-center gap-2 bg-gray-50 p-1.5 rounded-xl self-end lg:self-auto">
+        <div className="flex items-center gap-1.5 bg-black/5 p-1 rounded-xl self-end lg:self-auto">
           <button
             onClick={() => setView("grid")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
-              view === "grid"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === "grid"
                 ? "bg-white shadow-sm text-black"
-                : "text-gray-400 hover:text-black"
-            }`}
+                : "text-black/40 hover:text-black"
+              }`}
             style={{ color: view === "grid" ? primaryColor : undefined }}
           >
             <LayoutGrid className="w-3.5 h-3.5" />
@@ -111,11 +110,10 @@ export default function FinancialYearsList({
           </button>
           <button
             onClick={() => setView("table")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
-              view === "table"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === "table"
                 ? "bg-white shadow-sm text-black"
-                : "text-gray-400 hover:text-black"
-            }`}
+                : "text-black/40 hover:text-black"
+              }`}
             style={{ color: view === "table" ? primaryColor : undefined }}
           >
             <List className="w-3.5 h-3.5" />
@@ -139,61 +137,47 @@ export default function FinancialYearsList({
               href={`/${rolePrefix}/fiscal-years/${year.reference}`}
               className="group"
             >
-              <Card className="border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 rounded-[28px] overflow-hidden bg-white group-hover:-translate-y-1">
-                <CardContent className="p-6">
-                  <div className="flex justify-between items-start mb-6">
+              <Card className="border-black/5 shadow-sm hover:shadow-2xl transition-all duration-300 rounded-2xl overflow-hidden bg-white/80 backdrop-blur-xl group-hover:-translate-y-1">
+                <CardContent className="p-5">
+                  <div className="flex justify-between items-start mb-4">
                     <div
-                      className="w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-inner"
+                      className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 shadow-inner"
                       style={{
                         backgroundColor: `${primaryColor}1A`, // 10% opacity
                         color: primaryColor,
                       }}
                     >
-                      <CalendarRange className="w-6 h-6" />
+                      <CalendarRange className="w-5 h-5" />
                     </div>
                     {year.is_active ? (
-                      <Badge className="bg-green-50 text-green-600 border-none font-black text-[10px] uppercase tracking-wider px-3 py-1 rounded-full border border-green-100">
+                      <Badge className="bg-green-500/10 text-green-600 border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full">
                         Active
                       </Badge>
                     ) : (
-                      <Badge className="bg-gray-50 text-gray-400 border-none font-black text-[10px] uppercase tracking-wider px-3 py-1 rounded-full border border-gray-100">
+                      <Badge className="bg-black/5 text-black/40 border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full">
                         Closed
                       </Badge>
                     )}
                   </div>
 
-                  <div className="mb-6">
-                    <h3 className="text-xl font-black text-black tracking-tight transition-colors line-clamp-1 group-hover:text-opacity-80">
+                  <div className="mb-4">
+                    <h3 className="text-base font-black text-black tracking-tight transition-colors line-clamp-1 group-hover:text-opacity-80">
                       {year.code}
                     </h3>
                     <div className="flex items-center gap-2 mt-2">
-                      <div className="flex flex-col">
-                        <span className="text-[9px] font-black uppercase tracking-widest text-gray-400">
-                          Start Date
-                        </span>
-                        <span className="text-xs font-bold text-gray-600">
-                          {new Date(year.start_date).toLocaleDateString()}
-                        </span>
-                      </div>
-                      <span className="w-px h-8 bg-gray-100 mx-2" />
-                      <div className="flex flex-col">
-                        <span className="text-[9px] font-black uppercase tracking-widest text-gray-400">
-                          End Date
-                        </span>
-                        <span className="text-xs font-bold text-gray-600">
-                          {new Date(year.end_date).toLocaleDateString()}
-                        </span>
-                      </div>
+                      <span className="text-[9px] font-bold text-black/40">
+                        {new Date(year.start_date).toLocaleDateString()} - {new Date(year.end_date).toLocaleDateString()}
+                      </span>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">
+                  <div className="flex items-center justify-between pt-3 border-t border-black/5">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-black/40">
                         view details
                       </span>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-black group-hover:text-[#D0402B] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-3.5 h-3.5 text-black/20 group-hover:text-[#D0402B] group-hover:translate-x-1 transition-all" />
                   </div>
                 </CardContent>
               </Card>
@@ -201,89 +185,89 @@ export default function FinancialYearsList({
           ))}
         </div>
       ) : (
-        <div className="bg-white border border-gray-100 rounded-[32px] overflow-hidden shadow-sm">
+        <div className="bg-white/50 backdrop-blur-xl border border-black/5 rounded-2xl overflow-hidden shadow-xl shadow-black/5">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-100 bg-gray-50/50">
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                <tr className="border-b border-black/10 bg-black/5">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Fiscal Code
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Period
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Status
                   </th>
-                  <th className="text-right py-5 px-8 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="text-right py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-black/5">
                 {paginatedYears.map((year) => (
                   <tr
                     key={year.reference}
-                    className="transition-colors group hover:bg-gray-50/50"
+                    className="transition-colors group hover:bg-black/5"
                   >
-                    <td className="py-6 px-8">
+                    <td className="py-3 px-4">
                       <Link href={`/${rolePrefix}/fiscal-years/${year.reference}`} className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 transition-all font-bold group-hover:bg-white group-hover:shadow-sm">
-                          <CalendarRange className="w-5 h-5" />
+                        <div className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold group-hover:bg-white group-hover:shadow-sm">
+                          <CalendarRange className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="text-sm font-black text-black transition-colors">
+                          <p className="text-sm font-bold text-black transition-colors">
                             {year.code}
                           </p>
-                          <p className="text-[10px] font-bold text-gray-300 uppercase tracking-widest mt-0.5">
+                          <p className="text-[9px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
                             {year.reference}
                           </p>
                         </div>
                       </Link>
                     </td>
-                    <td className="py-6 px-8">
-                      <div className="flex items-center gap-2">
+                    <td className="py-3 px-4">
+                      <div className="flex items-center gap-1.5">
                         <Badge
                           variant="outline"
-                          className="bg-white text-gray-600 border-gray-200 font-bold text-[10px]"
+                          className="bg-white text-black/60 border-black/10 font-bold text-[9px] py-0 px-2"
                         >
                           {new Date(year.start_date).toLocaleDateString()}
                         </Badge>
-                        <span className="text-gray-300">-</span>
+                        <span className="text-black/20">-</span>
                         <Badge
                           variant="outline"
-                          className="bg-white text-gray-600 border-gray-200 font-bold text-[10px]"
+                          className="bg-white text-black/60 border-black/10 font-bold text-[9px] py-0 px-2"
                         >
                           {new Date(year.end_date).toLocaleDateString()}
                         </Badge>
                       </div>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-3 px-4">
                       {year.is_active ? (
-                        <div className="flex items-center gap-2 text-green-600">
+                        <div className="flex items-center gap-1.5 text-green-600">
                           <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                          <span className="text-[10px] font-black uppercase tracking-widest">
+                          <span className="text-[9px] font-bold uppercase tracking-widest">
                             Active
                           </span>
                         </div>
                       ) : (
-                        <div className="flex items-center gap-2 text-gray-400">
-                          <div className="w-1.5 h-1.5 rounded-full bg-gray-300" />
-                          <span className="text-[10px] font-black uppercase tracking-widest">
+                        <div className="flex items-center gap-1.5 text-black/30">
+                          <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
+                          <span className="text-[9px] font-bold uppercase tracking-widest">
                             Closed
                           </span>
                         </div>
                       )}
                     </td>
-                    <td className="py-6 px-8 text-right">
+                    <td className="py-3 px-4 text-right">
                       <Link
                         href={`/${rolePrefix}/fiscal-years/${year.reference}`}
                       >
                         <Button
                           variant="ghost"
-                          className="h-10 w-10 p-0 rounded-xl hover:bg-white hover:shadow-sm hover:text-black transition-all duration-300 text-gray-300"
+                          className="h-8 w-8 p-0 rounded-lg hover:bg-white hover:shadow-sm hover:text-black transition-all duration-300 text-black/30"
                         >
-                          <ArrowRight className="w-4 h-4 text-black" />
+                          <ArrowRight className="w-3.5 h-3.5" />
                         </Button>
                       </Link>
                     </td>
@@ -297,23 +281,24 @@ export default function FinancialYearsList({
 
       {/* Pagination Controls */}
       {totalPages > 1 && (
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-6 rounded-[24px] border border-gray-100 shadow-sm">
-          <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/50 backdrop-blur-xl p-4 rounded-2xl border border-black/5">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-black/30">
             Showing <span className="text-black">{paginatedYears.length}</span>{" "}
             of <span className="text-black">{filteredYears.length}</span> years
           </p>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <Button
               variant="outline"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              className="w-10 h-10 p-0 rounded-xl border-gray-100 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-black hover:border-gray-300"
+              className="w-8 h-8 p-0 rounded-lg border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              style={{ "--hover-bg": primaryColor } as React.CSSProperties}
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-3.5 h-3.5" />
             </Button>
 
-            <div className="flex items-center gap-1 px-4">
+            <div className="flex items-center gap-1 px-2">
               {[...Array(totalPages)].map((_, i) => {
                 const page = i + 1;
                 if (
@@ -325,19 +310,18 @@ export default function FinancialYearsList({
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-10 h-10 rounded-xl text-[10px] font-black transition-all ${
-                        currentPage === page
-                          ? "text-white shadow-lg"
-                          : "bg-white border border-gray-100 text-gray-400 hover:text-black shadow-sm"
-                      }`}
+                      className={`w-8 h-8 rounded-lg text-[10px] font-black transition-all ${currentPage === page
+                          ? "text-white shadow-md"
+                          : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
+                        }`}
                       style={{
                         backgroundColor:
                           currentPage === page ? primaryColor : undefined,
                         boxShadow:
                           currentPage === page
-                            ? `0 10px 15px -3px ${primaryColor}33`
+                            ? `0 4px 6px -1px ${primaryColor}33`
                             : undefined,
-                      }}
+                      } as React.CSSProperties}
                     >
                       {page}
                     </button>
@@ -347,7 +331,7 @@ export default function FinancialYearsList({
                   return (
                     <MoreHorizontal
                       key={page}
-                      className="w-4 h-4 text-gray-300"
+                      className="w-3 h-3 text-black/20"
                     />
                   );
                 }
@@ -359,9 +343,10 @@ export default function FinancialYearsList({
               variant="outline"
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              className="w-10 h-10 p-0 rounded-xl border-gray-100 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-black hover:border-gray-300"
+              className="w-8 h-8 p-0 rounded-lg border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              style={{ "--hover-bg": primaryColor } as React.CSSProperties}
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-3.5 h-3.5" />
             </Button>
           </div>
         </div>

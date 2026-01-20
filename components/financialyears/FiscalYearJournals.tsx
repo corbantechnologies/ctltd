@@ -313,9 +313,6 @@ export default function FiscalYearJournals({
                   <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-gray-400">
                     Status
                   </th>
-                  <th className="text-right py-3 px-4 text-[9px] font-black uppercase tracking-widest text-gray-400 text-center">
-                    Reference
-                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -372,14 +369,6 @@ export default function FiscalYearJournals({
                             </span>
                           </div>
                         )}
-                      </div>
-                    </td>
-                    <td className="py-3 px-4 text-right">
-                      <div className="flex items-center justify-end gap-3 font-mono font-bold text-xs text-gray-400 group-hover:text-black">
-                        {journal.reference}
-                        <div className="w-7 h-7 rounded-lg bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-md hover:bg-gray-800">
-                          <ArrowUpRight className="w-3.5 h-3.5" />
-                        </div>
                       </div>
                     </td>
                   </tr>

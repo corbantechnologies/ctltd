@@ -33,6 +33,11 @@ import {
   Briefcase,
   AlertCircle,
   CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  MoreHorizontal,
+  LayoutGrid, // replacing generic Grid if needed or just alias/using existing? The other files used LayoutGrid. The current file uses Grid. I'll stick to Grid if it works, or add LayoutGrid if I want to match others. Actually passing Grid is fine if current code uses it.
+  ArrowRight, // often used in table actions
 } from "lucide-react";
 import Link from "next/link";
 
@@ -45,6 +50,8 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
   const [view, setView] = useState<"grid" | "table">("table");
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const { data: partners, isLoading: isLoadingPartners } = useFetchPartners();
   const { data: partnerTypes, isLoading: isLoadingTypes } =
@@ -65,33 +72,44 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
       typeFilter === "all" || partner.partner_type === typeFilter;
 
     return matchesSearch && matchesType;
-  });
+  }) || [];
+
+  const totalPages = Math.ceil(filteredPartners.length / itemsPerPage);
+  const paginatedPartners = filteredPartners.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <div className="space-y-6">
       {/* Controls Bar */}
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white/50 backdrop-blur-xl p-4 rounded-[24px] border border-black/5 shadow-sm">
+      <div className="flex flex-col lg:flex-row gap-4 items-center justify-between bg-white/50 backdrop-blur-xl p-3 rounded-2xl border border-black/5 shadow-sm">
         {/* Search */}
         <div className="relative w-full md:w-96 group">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/40 group-focus-within:text-black transition-colors" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-black/40 group-focus-within:text-black transition-colors" />
           <Input
-            placeholder="Search partners by name, email, or ref..."
-            className="pl-11 h-12 bg-white border-black/5 rounded-2xl focus:ring-0 focus:border-black/20 transition-all font-medium"
+            placeholder="Search partners..."
+            className="pl-9 h-10 bg-white border-black/5 rounded-xl focus:ring-0 focus:border-black/20 transition-all font-bold text-xs"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setCurrentPage(1);
+            }}
             style={{
               boxShadow: "none",
             }}
           />
         </div>
 
-        <div className="flex items-center gap-3 w-full md:w-auto">
-          {/* Type Filter */}
+        <div className="flex items-center gap-1.5 w-full md:w-auto">
           {/* Type Filter */}
           <select
             value={typeFilter}
-            onChange={(e) => setTypeFilter(e.target.value)}
-            className="h-12 w-[180px] bg-white border border-black/5 rounded-2xl font-bold text-xs uppercase tracking-wide px-3 outline-none focus:ring-1 focus:ring-black/10 cursor-pointer"
+            onChange={(e) => {
+              setTypeFilter(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="h-10 w-[180px] bg-white border border-black/5 rounded-xl font-bold text-[10px] uppercase tracking-wide px-3 outline-none focus:ring-1 focus:ring-black/10 cursor-pointer"
           >
             <option value="all">All Categories</option>
             {partnerTypes?.map((type) => (
@@ -102,29 +120,29 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
           </select>
 
           {/* View Toggle */}
-          <div className="flex bg-white rounded-2xl p-1 border border-black/5">
+          <div className="flex gap-1.5 items-center bg-black/5 rounded-xl p-1">
             <Button
               onClick={() => setView("grid")}
               variant="ghost"
-              className={`h-10 w-10 rounded-xl p-0 transition-all ${view === "grid" ? "text-white shadow-md" : "text-black/40"
+              className={`h-8 w-8 rounded-lg p-0 transition-all ${view === "grid" ? "text-white shadow-sm" : "text-black/40 hover:text-black"
                 }`}
               style={{
                 backgroundColor: view === "grid" ? primaryColor : "transparent",
               }}
             >
-              <Grid className="w-4 h-4" />
+              <Grid className="w-3.5 h-3.5" />
             </Button>
             <Button
               onClick={() => setView("table")}
               variant="ghost"
-              className={`h-10 w-10 rounded-xl p-0 transition-all ${view === "table" ? "text-white shadow-md" : "text-black/40"
+              className={`h-8 w-8 rounded-lg p-0 transition-all ${view === "table" ? "text-white shadow-sm" : "text-black/40 hover:text-black"
                 }`}
               style={{
                 backgroundColor:
                   view === "table" ? primaryColor : "transparent",
               }}
             >
-              <List className="w-4 h-4" />
+              <List className="w-3.5 h-3.5" />
             </Button>
           </div>
         </div>
@@ -133,28 +151,28 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
       {/* Grid View */}
       {view === "grid" && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredPartners?.map((partner) => (
+          {paginatedPartners.map((partner) => (
             <Link
               key={partner.reference}
               href={`/${rolePrefix}/partners/${partner.reference}`}
               className="group block"
             >
-              <Card className="h-full border-black/5 bg-white/60 backdrop-blur-xl rounded-[32px] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group-hover:bg-white/90">
-                <CardContent className="p-6 space-y-6">
+              <Card className="h-full border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group-hover:bg-white/90">
+                <CardContent className="p-5 space-y-4">
                   <div className="flex justify-between items-start">
                     <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+                      className="w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-md transition-transform duration-300 group-hover:scale-105"
                       style={{
                         backgroundColor: primaryColor,
-                        boxShadow: `0 10px 20px -5px ${primaryColor}4D`,
+                        boxShadow: `0 4px 10px -2px ${primaryColor}4D`,
                       }}
                     >
-                      <Users className="w-7 h-7" />
+                      <Users className="w-5 h-5" />
                     </div>
                     <Badge
-                      className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border-none ${partner.is_active
-                          ? "bg-green-500/10 text-green-600"
-                          : "bg-red-500/10 text-red-600"
+                      className={`px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border-none ${partner.is_active
+                        ? "bg-green-500/10 text-green-600"
+                        : "bg-red-500/10 text-red-600"
                         }`}
                     >
                       {partner.is_active ? "Active" : "Inactive"}
@@ -162,23 +180,19 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                   </div>
 
                   <div>
-                    <h3 className="text-lg font-black text-black tracking-tight mb-1 line-clamp-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-black group-hover:to-black/60 transition-all">
+                    <h3 className="text-base font-black text-black tracking-tight mb-1 line-clamp-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-black group-hover:to-black/60 transition-all">
                       {partner.name}
                     </h3>
-                    <div className="flex items-center gap-2 text-xs font-bold text-black/40 uppercase tracking-wider">
+                    <div className="flex items-center gap-2 text-[9px] font-bold text-black/40 uppercase tracking-wider">
                       <Briefcase className="w-3 h-3" />
                       {partner.partner_type}
                     </div>
                   </div>
 
-                  <div className="space-y-3 pt-4 border-t border-black/5">
-                    {/* <div className="flex items-center gap-3 text-sm text-black/60">
-                      <Mail className="w-4 h-4 opacity-50" />
-                      <span className="truncate">{partner.email}</span>
-                    </div> */}
-                    <div className="flex items-center gap-3 text-sm text-black/60">
-                      <Building2 className="w-4 h-4 opacity-50" />
-                      <span className="truncate">
+                  <div className="space-y-3 pt-3 border-t border-black/5">
+                    <div className="flex items-center gap-2 text-xs text-black/60">
+                      <Building2 className="w-3.5 h-3.5 opacity-50" />
+                      <span className="truncate text-xs font-bold">
                         {partner.division || "Global"}
                       </span>
                     </div>
@@ -192,82 +206,156 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
 
       {/* Table View */}
       {view === "table" && (
-        <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[32px] overflow-hidden shadow-sm">
-          <CardContent className="p-0">
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader className="bg-black/5">
-                  <TableRow className="hover:bg-transparent border-black/5">
-                    <TableHead className="py-6 px-8 text-[10px] font-black text-black/40 uppercase tracking-widest">
-                      Entity
-                    </TableHead>
-                    <TableHead className="py-6 px-8 text-[10px] font-black text-black/40 uppercase tracking-widest">
-                      Division
-                    </TableHead>
-                    <TableHead className="py-6 px-8 text-[10px] font-black text-black/40 uppercase tracking-widest">
-                      Category
-                    </TableHead>
-                    <TableHead className="py-6 px-8 text-[10px] font-black text-black/40 uppercase tracking-widest">
-                      Status
-                    </TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredPartners?.map((partner) => (
-                    <TableRow
-                      key={partner.reference}
-                      className="hover:bg-white/50 border-black/5 transition-colors cursor-pointer group"
-                      onClick={() =>
-                        (window.location.href = `/${rolePrefix}/partners/${partner.reference}`)
-                      }
-                    >
-                      <TableCell className="py-6 px-8">
-                        <div className="flex items-center gap-4">
-                          <div
-                            className="w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-110"
-                            style={{ backgroundColor: primaryColor }}
-                          >
-                            <Users className="w-5 h-5" />
+        <div className="bg-white/50 backdrop-blur-xl border border-black/5 rounded-2xl overflow-hidden shadow-xl shadow-black/5">
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader className="bg-black/5">
+                <TableRow className="hover:bg-transparent border-black/5">
+                  <TableHead className="py-3 px-4 text-[9px] font-black text-black/40 uppercase tracking-widest">
+                    Entity
+                  </TableHead>
+                  <TableHead className="py-3 px-4 text-[9px] font-black text-black/40 uppercase tracking-widest">
+                    Division
+                  </TableHead>
+                  <TableHead className="py-3 px-4 text-[9px] font-black text-black/40 uppercase tracking-widest">
+                    Category
+                  </TableHead>
+                  <TableHead className="py-3 px-4 text-[9px] font-black text-black/40 uppercase tracking-widest">
+                    Status
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {paginatedPartners.map((partner) => (
+                  <TableRow
+                    key={partner.reference}
+                    className="hover:bg-white/50 border-black/5 transition-colors cursor-pointer group"
+                    onClick={() =>
+                      (window.location.href = `/${rolePrefix}/partners/${partner.reference}`)
+                    }
+                  >
+                    <TableCell className="py-3 px-4">
+                      <div className="flex items-center gap-3">
+                        <div
+                          className="w-8 h-8 rounded-lg flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105"
+                          style={{ backgroundColor: primaryColor }}
+                        >
+                          <Users className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <div className="font-bold text-black text-sm">
+                            {partner.name}
                           </div>
-                          <div>
-                            <div className="font-bold text-black text-base">
-                              {partner.name}
-                            </div>
-                            <div className="text-[10px] uppercase font-bold text-black/40 tracking-wider">
-                              {partner.reference}
-                            </div>
+                          <div className="text-[9px] uppercase font-bold text-black/30 tracking-wider">
+                            {partner.reference}
                           </div>
                         </div>
-                      </TableCell>
-                      <TableCell className="py-6 px-8">
-                        {partner.division}
-                      </TableCell>
-                      <TableCell className="py-6 px-8">
-                        <Badge
-                          variant="secondary"
-                          className="bg-white border border-black/5 text-black/70 font-bold"
-                        >
-                          {partner.partner_type}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="py-6 px-8">
-                        {partner.is_active ? (
-                          <div className="flex items-center gap-2 text-xs font-black text-green-600 uppercase tracking-wider">
-                            <CheckCircle2 className="w-4 h-4" /> Active
-                          </div>
-                        ) : (
-                          <div className="flex items-center gap-2 text-xs font-black text-red-600 uppercase tracking-wider">
-                            <AlertCircle className="w-4 h-4" /> Inactive
-                          </div>
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                      </div>
+                    </TableCell>
+                    <TableCell className="py-3 px-4 text-xs font-bold text-black/70">
+                      {partner.division}
+                    </TableCell>
+                    <TableCell className="py-3 px-4">
+                      <Badge
+                        variant="secondary"
+                        className="bg-white border border-black/5 text-black/70 font-bold text-[9px]"
+                      >
+                        {partner.partner_type}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="py-3 px-4">
+                      {partner.is_active ? (
+                        <div className="flex items-center gap-1.5 text-[9px] font-black text-green-600 uppercase tracking-wider">
+                          <CheckCircle2 className="w-3.5 h-3.5" /> Active
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-1.5 text-[9px] font-black text-red-600 uppercase tracking-wider">
+                          <AlertCircle className="w-3.5 h-3.5" /> Inactive
+                        </div>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+      )}
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/50 backdrop-blur-xl p-4 rounded-2xl border border-black/5">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-black/30">
+            Showing <span className="text-black">{paginatedPartners.length}</span>{" "}
+            of <span className="text-black">{filteredPartners.length}</span>{" "}
+            partners
+          </p>
+
+          <div className="flex items-center gap-1.5">
+            <Button
+              variant="outline"
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              className="w-8 h-8 p-0 rounded-lg border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              style={{ "--hover-bg": primaryColor } as React.CSSProperties}
+            >
+              <ChevronLeft className="w-3.5 h-3.5" />
+            </Button>
+
+            <div className="flex items-center gap-1 px-2">
+              {[...Array(totalPages)].map((_, i) => {
+                const page = i + 1;
+                if (
+                  page === 1 ||
+                  page === totalPages ||
+                  (page >= currentPage - 1 && page <= currentPage + 1)
+                ) {
+                  return (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`w-8 h-8 rounded-lg text-[10px] font-black transition-all ${currentPage === page
+                        ? "text-white shadow-md"
+                        : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
+                        }`}
+                      style={
+                        {
+                          backgroundColor:
+                            currentPage === page ? primaryColor : undefined,
+                          boxShadow:
+                            currentPage === page
+                              ? `0 4px 6px -1px ${primaryColor}33`
+                              : undefined,
+                        } as React.CSSProperties
+                      }
+                    >
+                      {page}
+                    </button>
+                  );
+                }
+                if (page === currentPage - 2 || page === currentPage + 2) {
+                  return (
+                    <MoreHorizontal
+                      key={page}
+                      className="w-3 h-3 text-black/20"
+                    />
+                  );
+                }
+                return null;
+              })}
             </div>
-          </CardContent>
-        </Card>
+
+            <Button
+              variant="outline"
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              className="w-8 h-8 p-0 rounded-lg border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              style={{ "--hover-bg": primaryColor } as React.CSSProperties}
+            >
+              <ChevronRight className="w-3.5 h-3.5" />
+            </Button>
+          </div>
+        </div>
       )}
 
       {/* Empty State */}
