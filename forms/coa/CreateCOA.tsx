@@ -57,7 +57,7 @@ export default function CreateCOA({
         router.refresh();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to create account"
+          error?.response?.data?.message || "Failed to create account",
         );
       } finally {
         setSubmitting(false);

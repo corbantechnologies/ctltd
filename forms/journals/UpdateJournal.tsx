@@ -18,6 +18,7 @@ import { toast } from "react-hot-toast";
 import { Loader2, Edit3, Save, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface UpdateJournalProps {
   journal: {
@@ -42,6 +43,7 @@ export default function UpdateJournal({
 }: UpdateJournalProps) {
   const header = useAxiosAuth();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const formik = useFormik({
     initialValues: {
@@ -60,14 +62,18 @@ export default function UpdateJournal({
             date: values.date,
             currency: values.currency,
           },
-          header
+          header,
         );
         toast.success("Journal batch updated successfully");
-        router.refresh()
+        queryClient.invalidateQueries({ queryKey: ["journals"] });
+        queryClient.invalidateQueries({
+          queryKey: ["journal", journal.reference],
+        });
+        router.refresh();
         onClose?.();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to update journal batch"
+          error?.response?.data?.message || "Failed to update journal batch",
         );
       } finally {
         setSubmitting(false);

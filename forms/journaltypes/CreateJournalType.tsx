@@ -19,6 +19,7 @@ import { toast } from "react-hot-toast";
 import { Loader2, Settings2, Plus } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface CreateJournalTypeProps {
   rolePrefix?: string;
@@ -31,6 +32,7 @@ export default function CreateJournalType({
 }: CreateJournalTypeProps) {
   const header = useAxiosAuth();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
 
@@ -45,12 +47,13 @@ export default function CreateJournalType({
       try {
         await createJournalType(values, header);
         toast.success("Journal type defined successfully");
+        queryClient.invalidateQueries({ queryKey: ["journal_types"] });
         resetForm();
         router.refresh();
         if (onSuccess) onSuccess();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to define journal type"
+          error?.response?.data?.message || "Failed to define journal type",
         );
       } finally {
         setSubmitting(false);
