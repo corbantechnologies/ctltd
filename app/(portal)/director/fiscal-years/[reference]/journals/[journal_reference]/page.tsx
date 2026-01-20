@@ -136,9 +136,6 @@ export default function JournalsDetailPage() {
             </h1>
             <div className="flex flex-wrap gap-4 text-sm font-bold text-black/40">
               <span className="flex items-center gap-2 bg-white/50 px-3 py-1 rounded-lg border border-black/5">
-                <FileText className="w-4 h-4" /> {journal.reference}
-              </span>
-              <span className="flex items-center gap-2 bg-white/50 px-3 py-1 rounded-lg border border-black/5">
                 <Calendar className="w-4 h-4" />
                 {new Date(journal.date).toLocaleDateString(undefined, {
                   weekday: "long",
