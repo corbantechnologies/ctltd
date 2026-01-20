@@ -88,12 +88,9 @@ export default function PartnerDetailPage() {
             <h1 className="text-xl font-bold text-black tracking-tighter mb-2">
               {partner.name}
             </h1>
-            <div className="flex flex-wrap gap-4 text-sm font-bold text-black/40">
+            <div className="flex flex-wrap gap-4 text-sm font-bold ">
               <span className="flex items-center gap-2 bg-white/50 px-3 py-1 rounded-lg border border-black/5">
                 <Building2 className="w-4 h-4" /> {partner.partner_type}
-              </span>
-              <span className="flex items-center gap-2 bg-white/50 px-3 py-1 rounded-lg border border-black/5">
-                <FileText className="w-4 h-4" /> {partner.reference}
               </span>
               {(partner.division || "Global") && (
                 <span className="bg-[#045138]/10 text-[#045138] px-3 py-1 rounded-lg uppercase tracking-wider text-[10px]">
@@ -117,7 +114,7 @@ export default function PartnerDetailPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[24px] shadow-sm">
           <CardHeader className="p-6 pb-2">
-            <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-black/40 flex items-center gap-2">
+            <CardTitle className="text-[10px] font-bold uppercase tracking-widest  flex items-center gap-2">
               <Mail className="w-3 h-3" /> Contact Info
             </CardTitle>
           </CardHeader>
@@ -128,17 +125,17 @@ export default function PartnerDetailPage() {
         </Card>
         <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[24px] shadow-sm">
           <CardHeader className="p-6 pb-2">
-            <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-black/40 flex items-center gap-2">
+            <CardTitle className="text-[10px] font-bold uppercase tracking-widest  flex items-center gap-2">
               <CreditCard className="w-3 h-3" /> Financial Meta
             </CardTitle>
           </CardHeader>
           <CardContent className="p-6 pt-2 space-y-2">
             <div className="flex justify-between items-center">
-              <span className="text-xs font-bold text-black/40">Currency</span>
+              <span className="text-xs font-bold ">Currency</span>
               <span className="font-bold text-black">{partner.currency}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-xs font-bold text-black/40">Tax PIN</span>
+              <span className="text-xs font-bold ">Tax PIN</span>
               <span className="font-bold text-black font-mono">
                 {partner.tax_pin || "N/A"}
               </span>
@@ -147,13 +144,13 @@ export default function PartnerDetailPage() {
         </Card>
         <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[24px] shadow-sm">
           <CardHeader className="p-6 pb-2">
-            <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-black/40 flex items-center gap-2">
+            <CardTitle className="text-[10px] font-bold uppercase tracking-widest  flex items-center gap-2">
               <Calendar className="w-3 h-3" /> Terms & Status
             </CardTitle>
           </CardHeader>
           <CardContent className="p-6 pt-2 space-y-2">
             <div className="flex justify-between items-center">
-              <span className="text-xs font-bold text-black/40">WHT Rate</span>
+              <span className="text-xs font-bold ">WHT Rate</span>
               <span className="font-bold text-black">{partner.wht_rate}%</span>
             </div>
             <div className="text-xs font-bold text-black/60 truncate mt-1">
@@ -179,16 +176,13 @@ export default function PartnerDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="bg-black/5 border-b border-black/5 text-left">
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="p-4 text-[10px] font-bold uppercase tracking-widest ">
                     Book & Date
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">
-                    Description / Notes
-                  </th>
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">
+                  <th className="p-4 text-[10px] font-bold uppercase tracking-widest  text-right">
                     Debit
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">
+                  <th className="p-4 text-[10px] font-bold uppercase tracking-widest  text-right">
                     Credit
                   </th>
                 </tr>
@@ -199,23 +193,15 @@ export default function PartnerDetailPage() {
                     key={entry.reference}
                     className="hover:bg-white/50 transition-colors"
                   >
-                    <td className="py-4 px-6">
+                    <td className="p-4">
                       <div className="font-bold text-black">{entry.book}</div>
-                      <div className="text-[10px] uppercase text-black/40 tracking-wider">
+                      <div className="text-[10px] uppercase  tracking-wider">
                         {entry.created_at
                           ? new Date(entry.created_at).toLocaleDateString()
                           : "—"}
                       </div>
                     </td>
-                    <td className="py-4 px-6 max-w-xs truncate">
-                      <div className="text-black/80 truncate">
-                        {entry.notes || "—"}
-                      </div>
-                      <div className="text-[10px] font-bold text-[#045138] uppercase tracking-wider mt-0.5">
-                        {entry.reference}
-                      </div>
-                    </td>
-                    <td className="py-4 px-6 text-right font-mono text-black/80">
+                    <td className="p-4 text-right font-mono text-black/80">
                       {parseFloat(entry.debit) > 0
                         ? new Intl.NumberFormat("en-KE", {
                             style: "decimal",
@@ -223,7 +209,7 @@ export default function PartnerDetailPage() {
                           }).format(parseFloat(entry.debit))
                         : "—"}
                     </td>
-                    <td className="py-4 px-6 text-right font-mono text-black/80">
+                    <td className="p-4 text-right font-mono text-black/80">
                       {parseFloat(entry.credit) > 0
                         ? new Intl.NumberFormat("en-KE", {
                             style: "decimal",
@@ -236,7 +222,7 @@ export default function PartnerDetailPage() {
                 {(!partner.journal_entries ||
                   partner.journal_entries.length === 0) && (
                   <tr>
-                    <td colSpan={4} className="py-12 text-center text-black/30">
+                    <td colSpan={4} className="py-12 text-center">
                       No transactions recorded yet.
                     </td>
                   </tr>
