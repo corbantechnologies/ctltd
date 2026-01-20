@@ -30,6 +30,7 @@ interface CreateJournalEntryProps {
   onSuccess?: () => void;
   onClose?: () => void;
   className?: string;
+  refetch?: () => void;
 }
 
 export default function CreateJournalEntry({
@@ -37,6 +38,7 @@ export default function CreateJournalEntry({
   journalReference,
   onSuccess,
   onClose,
+  refetch,
   className,
 }: CreateJournalEntryProps) {
   const header = useAxiosAuth();
@@ -93,6 +95,7 @@ export default function CreateJournalEntry({
 
         await createJournalEntry(formData, header);
         toast.success("Journal entry recorded");
+        refetch?.();
         queryClient.invalidateQueries({ queryKey: ["journal_entries"] });
         queryClient.invalidateQueries({ queryKey: ["journals"] });
         if (journalReference) {

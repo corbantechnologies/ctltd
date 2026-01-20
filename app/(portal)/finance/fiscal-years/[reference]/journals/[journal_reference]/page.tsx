@@ -379,6 +379,7 @@ export default function JournalsDetailPage() {
             journalReference={journal.code}
             onSuccess={() => setOpenAddEntry(false)}
             onClose={() => setOpenAddEntry(false)}
+            refetch={refetchJournal}
             className="min-h-screen border-none shadow-none rounded-none"
           />
         </div>
