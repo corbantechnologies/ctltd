@@ -315,9 +315,6 @@ export default function JournalsDetailPage() {
                   <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">
                     Partner / Division
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">
-                    Details
-                  </th>
                   <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">
                     Debit
                   </th>
@@ -334,9 +331,6 @@ export default function JournalsDetailPage() {
                   >
                     <td className="py-4 px-6">
                       <div className="font-bold text-black">{entry.book}</div>
-                      <div className="text-[10px] uppercase text-black/40 tracking-wider">
-                        {entry.code}
-                      </div>
                     </td>
                     <td className="py-4 px-6">
                       <div className="font-bold text-black">
@@ -345,16 +339,6 @@ export default function JournalsDetailPage() {
                       <div className="text-[10px] text-black/40">
                         {entry.division}
                       </div>
-                    </td>
-                    <td className="py-4 px-6 max-w-xs truncate">
-                      <div className="text-black/80 truncate">
-                        {entry.notes || "No notes"}
-                      </div>
-                      {(entry.source_document || entry.document_number) && (
-                        <div className="text-[10px] font-bold text-[#045138] uppercase tracking-wider mt-0.5">
-                          {entry.source_document} #{entry.document_number}
-                        </div>
-                      )}
                     </td>
                     <td className="py-4 px-6 text-right font-mono text-black/80">
                       {parseFloat(entry.debit) > 0
