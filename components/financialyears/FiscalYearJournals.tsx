@@ -323,14 +323,14 @@ export default function FiscalYearJournals({
                       (window.location.href = `/${rolePrefix}/fiscal-years/${fiscalYearReference}/journals/${journal.reference}`)
                     }
                   >
-                    <td className="p-2">
+                    <td className="p-6">
                       <div className="flex flex-col">
                         <span className="text-xs text-black">
                           {new Date(journal.date).toLocaleDateString()}
                         </span>
                       </div>
                     </td>
-                    <td className="p-2">
+                    <td className="p-6">
                       <div className="flex items-center gap-3">
                         <div className="w-7 h-7 rounded-md bg-gray-50 flex items-center justify-center text-gray-400 group-hover:text-black transition-all">
                           <FileText className="w-3.5 h-3.5" />
@@ -340,7 +340,7 @@ export default function FiscalYearJournals({
                         </span>
                       </div>
                     </td>
-                    <td className="p-2">
+                    <td className="p-6">
                       <Badge
                         variant="outline"
                         className="bg-white border-gray-200 text-gray-600 text-xs uppercase px-2 py-0.5 rounded-full"
@@ -348,7 +348,7 @@ export default function FiscalYearJournals({
                         {journal.journal_type}
                       </Badge>
                     </td>
-                    <td className="p-2">
+                    <td className="p-6">
                       <div className="flex items-center gap-2">
                         {journal.is_posted ? (
                           <div className="flex items-center gap-1.5 text-green-600">
