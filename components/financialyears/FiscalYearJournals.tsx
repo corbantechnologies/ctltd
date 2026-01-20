@@ -314,7 +314,7 @@ export default function FiscalYearJournals({
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-gray-300">
                 {paginatedJournals.map((journal) => (
                   <tr
                     key={journal.reference}
