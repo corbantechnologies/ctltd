@@ -19,13 +19,13 @@ import {
 export default function FiscalYearDetail() {
   const { reference } = useParams();
   const { isLoading, data: fiscalYear } = useFetchFinancialYear(
-    reference as string
+    reference as string,
   );
 
   if (isLoading) return <LoadingSpinner />;
   if (!fiscalYear)
     return (
-      <div className="p-12 text-center font-black text-gray-300">
+      <div className="p-12 text-center font-bold text-gray-300">
         Fiscal Year not found.
       </div>
     );
@@ -60,24 +60,24 @@ export default function FiscalYearDetail() {
               <CalendarRange className="w-7 h-7" />
             </div>
             <div>
-              <h1 className="text-4xl font-black text-black tracking-tighter italic leading-none">
+              <h1 className="text-xl font-bold text-black tracking-tighter italic leading-none">
                 {fiscalYear.code}
               </h1>
               <div className="flex items-center gap-3 mt-2">
-                <Badge className="bg-black text-white border-none font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded-lg">
+                <Badge className="bg-black text-white border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-lg">
                   REF: {fiscalYear.reference}
                 </Badge>
                 {fiscalYear.is_active ? (
                   <div className="flex items-center gap-1.5 text-green-600 bg-green-50 px-3 py-1 rounded-full border border-green-100">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">
+                    <span className="text-[10px] font-bold uppercase tracking-widest">
                       Active
                     </span>
                   </div>
                 ) : (
                   <div className="flex items-center gap-1.5 text-gray-400 bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
                     <div className="w-1.5 h-1.5 rounded-full bg-gray-300" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">
+                    <span className="text-[10px] font-bold uppercase tracking-widest">
                       Closed
                     </span>
                   </div>
@@ -124,10 +124,10 @@ export default function FiscalYearDetail() {
                 <stat.icon className="w-6 h-6" />
               </div>
               <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">
                   {stat.label}
                 </p>
-                <p className="text-lg font-black text-black tracking-tight">
+                <p className="text-lg font-bold text-black tracking-tight">
                   {stat.value}
                 </p>
               </div>
@@ -140,7 +140,7 @@ export default function FiscalYearDetail() {
       <div className="space-y-6">
         <div className="flex items-center gap-4">
           <div className="flex-1 h-px bg-gray-100" />
-          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-black">
+          <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-black">
             Period Journal Entries
           </h2>
           <div className="flex-1 h-px bg-gray-100" />

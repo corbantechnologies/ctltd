@@ -68,11 +68,11 @@ export default function PartnerDetailPage() {
             <div className="w-8 h-8 rounded-lg bg-[#D0402B] flex items-center justify-center text-white shadow-lg shadow-[#D0402B]/20">
               <UserCircle className="w-4 h-4" />
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D0402B]">
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#D0402B]">
               Partner Insights
             </p>
           </div>
-          <h1 className="text-4xl font-black text-black tracking-tighter">
+          <h1 className="text-xl font-bold text-black tracking-tighter">
             {partner?.name}
           </h1>
           <p className="text-black/40 font-bold mt-1 text-sm">
@@ -82,11 +82,11 @@ export default function PartnerDetailPage() {
 
         <div className="flex items-center gap-2">
           {partner?.is_active ? (
-            <Badge className="bg-green-500/10 text-green-600 border-none font-black text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
+            <Badge className="bg-green-500/10 text-green-600 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
               Active Partnership
             </Badge>
           ) : (
-            <Badge className="bg-black/5 text-black/40 border-none font-black text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
+            <Badge className="bg-black/5 text-black/40 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
               Suspended
             </Badge>
           )}
@@ -102,7 +102,7 @@ export default function PartnerDetailPage() {
                 <Mail className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Official Email
                 </p>
                 <p className="text-sm font-bold text-black truncate max-w-[150px]">
@@ -120,7 +120,7 @@ export default function PartnerDetailPage() {
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Contact Line
                 </p>
                 <p className="text-base tracking-tight font-bold text-black italic">
@@ -138,7 +138,7 @@ export default function PartnerDetailPage() {
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Tax PIN
                 </p>
                 <p className="text-base tracking-tight font-bold text-black uppercase">
@@ -156,7 +156,7 @@ export default function PartnerDetailPage() {
                 <Building className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Division
                 </p>
                 <p className="text-base tracking-tight font-bold text-black">
@@ -177,7 +177,7 @@ export default function PartnerDetailPage() {
                 <History className="w-5 h-5" />
               </div>
               <div>
-                <CardTitle className="text-xl font-black text-black tracking-tight">
+                <CardTitle className="text-xl font-bold text-black tracking-tight">
                   Financial Engagement
                 </CardTitle>
                 <CardDescription className="text-black/30 font-bold uppercase text-[9px] tracking-widest mt-0.5">
@@ -192,22 +192,22 @@ export default function PartnerDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/5 bg-black/5">
-                  <th className="text-left py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Post Date
                   </th>
-                  <th className="text-left py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Reference
                   </th>
-                  <th className="text-left py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Batch
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Debit
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Credit
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40 text-center">
+                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40 text-center">
                     Actions
                   </th>
                 </tr>
@@ -237,7 +237,7 @@ export default function PartnerDetailPage() {
                         </div>
                       </td>
                       <td className="py-5 px-8">
-                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-black text-[9px] uppercase tracking-widest px-2.5 py-1">
+                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-widest px-2.5 py-1">
                           {entry.journal}
                         </Badge>
                       </td>
@@ -273,7 +273,7 @@ export default function PartnerDetailPage() {
                         <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/20 mb-3">
                           <History className="w-6 h-6" />
                         </div>
-                        <p className="text-xs font-black text-black/30 uppercase tracking-widest">
+                        <p className="text-xs font-bold text-black/30 uppercase tracking-widest">
                           No financial records recorded
                         </p>
                       </div>

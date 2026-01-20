@@ -30,7 +30,7 @@ export default function FinanceCOADetailPage() {
   if (isLoading) return <LoadingSpinner />;
   if (!coa)
     return (
-      <div className="p-12 text-center font-black text-black/20">
+      <div className="p-12 text-center font-bold text-black/20">
         Account not found.
       </div>
     );
@@ -40,7 +40,7 @@ export default function FinanceCOADetailPage() {
       {/* Breadcrumbs & Actions */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div className="space-y-4">
-          <nav className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-black/40">
+          <nav className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black/40">
             <Link
               href="/finance/coa"
               className="hover:text-[#045138] transition-colors flex items-center gap-1"
@@ -57,24 +57,24 @@ export default function FinanceCOADetailPage() {
               <Database className="w-7 h-7" />
             </div>
             <div>
-              <h1 className="text-4xl font-black text-black tracking-tighter italic leading-none">
+              <h1 className="text-xl font-bold text-black tracking-tighter italic leading-none">
                 {coa.name}
               </h1>
               <div className="flex items-center gap-3 mt-2">
-                <Badge className="bg-black text-white border-none font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded-lg">
+                <Badge className="bg-black text-white border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-lg">
                   CODE: {coa.code}
                 </Badge>
                 {coa.is_active ? (
                   <div className="flex items-center gap-1.5 text-green-600 bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">
+                    <span className="text-[10px] font-bold uppercase tracking-widest">
                       Active
                     </span>
                   </div>
                 ) : (
                   <div className="flex items-center gap-1.5 text-black/40 bg-black/5 px-3 py-1 rounded-full border border-black/10">
                     <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">
+                    <span className="text-[10px] font-bold uppercase tracking-widest">
                       Inactive
                     </span>
                   </div>
@@ -87,7 +87,7 @@ export default function FinanceCOADetailPage() {
         <div className="flex items-center gap-3">
           <Button
             onClick={() => setOpenCreateBook(true)}
-            className="h-14 px-6 bg-white border border-black/5 hover:bg-black/5 text-black rounded-2xl font-black text-sm transition-all shadow-sm active:scale-95 group"
+            className="h-14 px-6 bg-white border border-black/5 hover:bg-black/5 text-black rounded-2xl font-bold text-sm transition-all shadow-sm active:scale-95 group"
           >
             <BookPlus className="w-5 h-5 mr-2 group-hover:text-[#045138] transition-colors" />
             Add Ledger Book
@@ -95,7 +95,7 @@ export default function FinanceCOADetailPage() {
 
           <Button
             onClick={() => setOpen(true)}
-            className="h-14 px-8 bg-black hover:bg-[#045138] text-white rounded-2xl font-black text-sm transition-all shadow-xl active:scale-95 group"
+            className="h-14 px-8 bg-black hover:bg-[#045138] text-white rounded-2xl font-bold text-sm transition-all shadow-xl active:scale-95 group"
           >
             <Edit3 className="w-5 h-5 mr-2" />
             Update Account
@@ -139,10 +139,10 @@ export default function FinanceCOADetailPage() {
                 <stat.icon className="w-6 h-6" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-[10px] font-black uppercase tracking-widest text-black/30 mb-1 truncate">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-black/30 mb-1 truncate">
                   {stat.label}
                 </p>
-                <p className="text-lg font-black text-black tracking-tight truncate">
+                <p className="text-lg font-bold text-black tracking-tight truncate">
                   {stat.value}
                 </p>
               </div>
@@ -155,7 +155,7 @@ export default function FinanceCOADetailPage() {
       <div className="space-y-6">
         <div className="flex items-center gap-4">
           <div className="flex-1 h-px bg-black/5" />
-          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-black/20">
+          <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-black/20">
             Associated Ledger Books
           </h2>
           <div className="flex-1 h-px bg-black/5" />

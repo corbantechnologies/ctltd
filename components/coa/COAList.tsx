@@ -69,7 +69,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
         <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center text-black/20 mb-4 shadow-sm">
           <Database className="w-8 h-8" />
         </div>
-        <p className="text-sm font-black text-black/40 uppercase tracking-widest">
+        <p className="text-sm font-bold text-black/40 uppercase tracking-widest">
           No accounts registered in COA
         </p>
       </div>
@@ -79,12 +79,12 @@ export default function COAList({ rolePrefix }: COAListProps) {
   return (
     <div className="space-y-6">
       {/* Controls Bar */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-white/50 backdrop-blur-xl p-4 rounded-[24px] border border-black/5 shadow-sm">
-        <div className="flex flex-col md:flex-row items-center gap-4 w-full lg:w-auto">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-white/50 backdrop-blur-xl p-3 rounded-2xl border border-black/5 shadow-sm">
+        <div className="flex flex-col md:flex-row items-center gap-3 w-full lg:w-auto">
           {/* Search */}
           <div className="relative w-full md:w-80">
             <Search
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-black/20"
               style={
                 {
                   color: searchQuery ? primaryColor : undefined,
@@ -98,18 +98,19 @@ export default function COAList({ rolePrefix }: COAListProps) {
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              className="pl-11 h-12 rounded-xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold text-xs"
+              className="pl-9 h-10 rounded-xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold text-xs"
             />
           </div>
         </div>
 
-        <div className="flex items-center gap-2 bg-black/5 p-1.5 rounded-xl self-end lg:self-auto">
+        <div className="flex items-center gap-1.5 bg-black/5 p-1 rounded-xl self-end lg:self-auto">
           <button
             onClick={() => setView("grid")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === "grid"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
+              view === "grid"
                 ? "bg-white shadow-sm"
                 : "text-black/40 hover:text-black"
-              }`}
+            }`}
             style={
               {
                 color: view === "grid" ? primaryColor : undefined,
@@ -121,10 +122,11 @@ export default function COAList({ rolePrefix }: COAListProps) {
           </button>
           <button
             onClick={() => setView("table")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === "table"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
+              view === "table"
                 ? "bg-white shadow-sm"
                 : "text-black/40 hover:text-black"
-              }`}
+            }`}
             style={
               {
                 color: view === "table" ? primaryColor : undefined,
@@ -140,7 +142,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
       {/* Content Rendering */}
       {paginatedCOAs.length === 0 ? (
         <div className="py-20 text-center">
-          <p className="text-sm font-black text-black/20 uppercase tracking-[0.2em]">
+          <p className="text-sm font-bold text-black/20 uppercase tracking-[0.2em]">
             No accounts match your criteria
           </p>
         </div>
@@ -152,11 +154,11 @@ export default function COAList({ rolePrefix }: COAListProps) {
               href={`/${rolePrefix}/coa/${coa.reference}`}
               className="group"
             >
-              <Card className="border-black/5 shadow-sm hover:shadow-2xl transition-all duration-500 rounded-[28px] overflow-hidden bg-white/80 backdrop-blur-xl group-hover:-translate-y-1">
-                <CardContent className="p-6">
-                  <div className="flex justify-between items-start mb-6">
+              <Card className="border-black/5 shadow-sm hover:shadow-2xl transition-all duration-300 rounded-2xl overflow-hidden bg-white/80 backdrop-blur-xl group-hover:-translate-y-1">
+                <CardContent className="p-5">
+                  <div className="flex justify-between items-start mb-4">
                     <div
-                      className="w-12 h-12 rounded-2xl flex items-center justify-center group-hover:text-white transition-all duration-500 shadow-inner"
+                      className="w-10 h-10 rounded-xl flex items-center justify-center group-hover:text-white transition-all duration-300 shadow-inner"
                       style={
                         {
                           backgroundColor: `${primaryColor}1A`, // 10% opacity
@@ -165,22 +167,22 @@ export default function COAList({ rolePrefix }: COAListProps) {
                         } as CSSWithVariables
                       }
                     >
-                      <Hash className="w-6 h-6" />
+                      <Hash className="w-5 h-5" />
                     </div>
                     {coa.is_active ? (
-                      <Badge className="bg-green-500/10 text-green-600 border-none font-black text-[10px] uppercase tracking-wider px-3 py-1 rounded-full">
+                      <Badge className="bg-green-500/10 text-green-600 border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full">
                         Active
                       </Badge>
                     ) : (
-                      <Badge className="bg-black/5 text-black/40 border-none font-black text-[10px] uppercase tracking-wider px-3 py-1 rounded-full">
+                      <Badge className="bg-black/5 text-black/40 border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full">
                         Inactive
                       </Badge>
                     )}
                   </div>
 
-                  <div className="mb-6">
+                  <div className="mb-4">
                     <h3
-                      className="text-xl font-black text-black tracking-tight transition-colors line-clamp-1"
+                      className="text-base font-bold text-black tracking-tight transition-colors line-clamp-1"
                       style={
                         {
                           "--hover-text": primaryColor,
@@ -191,26 +193,26 @@ export default function COAList({ rolePrefix }: COAListProps) {
                     </h3>
                     <div className="flex items-center gap-2 mt-1">
                       <p
-                        className="text-[10px] font-black uppercase tracking-widest"
+                        className="text-[9px] font-bold uppercase tracking-widest"
                         style={{ color: primaryColor } as CSSWithVariables}
                       >
                         CODE: {coa.code}
                       </p>
                       <span className="w-1 h-1 rounded-full bg-black/10" />
-                      <p className="text-[10px] font-black uppercase tracking-widest text-black/30">
+                      <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                         REF: {coa.reference}
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-black/5">
-                    <div className="flex items-center gap-2">
-                      <Activity className="w-3.5 h-3.5 text-black/20" />
-                      <span className="text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <div className="flex items-center justify-between pt-3 border-t border-black/5">
+                    <div className="flex items-center gap-1.5">
+                      <Activity className="w-3 h-3 text-black/20" />
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-black/40">
                         {coa.normal_balance} Balance
                       </span>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-black/20 group-hover:text-[#D0402B] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-3.5 h-3.5 text-black/20 group-hover:text-[#D0402B] group-hover:translate-x-1 transition-all" />
                   </div>
                 </CardContent>
               </Card>
@@ -218,24 +220,24 @@ export default function COAList({ rolePrefix }: COAListProps) {
           ))}
         </div>
       ) : (
-        <div className="bg-white/50 backdrop-blur-xl border border-black/5 rounded-[32px] overflow-hidden shadow-xl shadow-black/5">
+        <div className="bg-white/50 backdrop-blur-xl border border-black/5 rounded-2xl overflow-hidden shadow-xl shadow-black/5">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/10 bg-black/5">
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Account Name
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Code
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Type / Balance
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Status
                   </th>
-                  <th className="text-right py-5 px-8 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-right py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Actions
                   </th>
                 </tr>
@@ -244,7 +246,9 @@ export default function COAList({ rolePrefix }: COAListProps) {
                 {paginatedCOAs.map((coa) => (
                   <tr
                     key={coa.reference}
-                    onClick={() => router.push(`/${rolePrefix}/coa/${coa.reference}`)}
+                    onClick={() =>
+                      router.push(`/${rolePrefix}/coa/${coa.reference}`)
+                    }
                     className="transition-colors group cursor-pointer"
                     style={
                       {
@@ -252,10 +256,10 @@ export default function COAList({ rolePrefix }: COAListProps) {
                       } as CSSWithVariables
                     } // 5% opacity
                   >
-                    <td className="py-6 px-8">
+                    <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
                         <div
-                          className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold"
+                          className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold"
                           style={
                             {
                               "--group-hover-bg": `${primaryColor}33`, // 20% opacity
@@ -263,11 +267,11 @@ export default function COAList({ rolePrefix }: COAListProps) {
                             } as CSSWithVariables
                           }
                         >
-                          <Hash className="w-5 h-5" />
+                          <Hash className="w-4 h-4" />
                         </div>
                         <div>
                           <p
-                            className="text-sm font-black text-black transition-colors"
+                            className="text-sm font-bold text-black transition-colors"
                             style={
                               {
                                 "--group-hover-text": primaryColor,
@@ -276,54 +280,57 @@ export default function COAList({ rolePrefix }: COAListProps) {
                           >
                             {coa.name}
                           </p>
-                          <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
+                          <p className="text-[9px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
                             {coa.reference}
                           </p>
                         </div>
                       </div>
                     </td>
-                    <td className="py-6 px-8">
-                      <Badge className="bg-black text-white border-none font-black text-[9px] uppercase tracking-widest px-3 py-1 rounded-lg">
+                    <td className="py-3 px-4">
+                      <Badge className="bg-black text-white border-none font-bold text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-full">
                         {coa.code}
                       </Badge>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-3 px-4">
                       <div className="flex items-center gap-2">
                         <ArrowUpDown className="w-3 h-3 text-black/30" />
-                        <span className="text-[10px] font-black uppercase tracking-widest text-black/60">
+                        <span className="text-[9px] font-bold uppercase tracking-widest text-black/60">
                           {coa.normal_balance}
                         </span>
                       </div>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-3 px-4">
                       {coa.is_active ? (
-                        <div className="flex items-center gap-2 text-green-600">
+                        <div className="flex items-center gap-1.5 text-green-600">
                           <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                          <span className="text-[10px] font-black uppercase tracking-widest">
+                          <span className="text-[9px] font-bold uppercase tracking-widest">
                             Active
                           </span>
                         </div>
                       ) : (
-                        <div className="flex items-center gap-2 text-black/30">
+                        <div className="flex items-center gap-1.5 text-black/30">
                           <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
-                          <span className="text-[10px] font-black uppercase tracking-widest">
+                          <span className="text-[9px] font-bold uppercase tracking-widest">
                             Inactive
                           </span>
                         </div>
                       )}
                     </td>
-                    <td className="py-6 px-8 text-right">
-                      <Link href={`/${rolePrefix}/coa/${coa.reference}`} onClick={(e) => e.stopPropagation()}>
+                    <td className="py-3 px-4 text-right">
+                      <Link
+                        href={`/${rolePrefix}/coa/${coa.reference}`}
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <Button
                           variant="ghost"
-                          className="h-10 w-10 p-0 rounded-xl hover:text-white transition-all duration-300"
+                          className="h-8 w-8 p-0 rounded-lg hover:text-white transition-all duration-300"
                           style={
                             {
                               "--hover-bg": primaryColor,
                             } as CSSWithVariables
                           }
                         >
-                          <ArrowRight className="w-4 h-4" />
+                          <ArrowRight className="w-3.5 h-3.5" />
                         </Button>
                       </Link>
                     </td>
@@ -337,25 +344,25 @@ export default function COAList({ rolePrefix }: COAListProps) {
 
       {/* Pagination Controls */}
       {totalPages > 1 && (
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/50 backdrop-blur-xl p-6 rounded-[24px] border border-black/5">
-          <p className="text-[10px] font-black uppercase tracking-widest text-black/30">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/50 backdrop-blur-xl p-4 rounded-2xl border border-black/5">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-black/30">
             Showing <span className="text-black">{paginatedCOAs.length}</span>{" "}
             of <span className="text-black">{filteredCOAs.length}</span>{" "}
             accounts
           </p>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <Button
               variant="outline"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              className="w-10 h-10 p-0 rounded-xl border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              className="w-8 h-8 p-0 rounded-lg border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
               style={{ "--hover-bg": primaryColor } as CSSWithVariables}
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-3.5 h-3.5" />
             </Button>
 
-            <div className="flex items-center gap-1 px-4">
+            <div className="flex items-center gap-1 px-2">
               {[...Array(totalPages)].map((_, i) => {
                 const page = i + 1;
                 if (
@@ -367,17 +374,18 @@ export default function COAList({ rolePrefix }: COAListProps) {
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-10 h-10 rounded-xl text-[10px] font-black transition-all ${currentPage === page
-                          ? "text-white shadow-lg"
+                      className={`w-8 h-8 rounded-lg text-[10px] font-bold transition-all ${
+                        currentPage === page
+                          ? "text-white shadow-md"
                           : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
-                        }`}
+                      }`}
                       style={
                         {
                           backgroundColor:
                             currentPage === page ? primaryColor : undefined,
                           boxShadow:
                             currentPage === page
-                              ? `0 10px 15px -3px ${primaryColor}33`
+                              ? `0 4px 6px -1px ${primaryColor}33`
                               : undefined,
                         } as CSSWithVariables
                       }
@@ -390,7 +398,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
                   return (
                     <MoreHorizontal
                       key={page}
-                      className="w-4 h-4 text-black/20"
+                      className="w-3 h-3 text-black/20"
                     />
                   );
                 }
@@ -402,10 +410,10 @@ export default function COAList({ rolePrefix }: COAListProps) {
               variant="outline"
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              className="w-10 h-10 p-0 rounded-xl border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              className="w-8 h-8 p-0 rounded-lg border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
               style={{ "--hover-bg": primaryColor } as CSSWithVariables}
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-3.5 h-3.5" />
             </Button>
           </div>
         </div>

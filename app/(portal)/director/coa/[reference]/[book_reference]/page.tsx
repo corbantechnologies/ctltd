@@ -81,11 +81,11 @@ export default function BookDetailPage() {
                 <BookIcon className="w-4 h-4" />
               )}
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D0402B]">
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#D0402B]">
               Ledger Account Deep-Dive
             </p>
           </div>
-          <h1 className="text-4xl font-black text-black tracking-tighter">
+          <h1 className="text-xl font-bold text-black tracking-tighter">
             {book?.name}
           </h1>
           <p className="text-black/40 font-bold mt-1 text-sm italic">
@@ -96,11 +96,11 @@ export default function BookDetailPage() {
 
         <div className="flex items-center gap-2">
           {book?.is_active ? (
-            <Badge className="bg-green-500/10 text-green-600 border-none font-black text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
+            <Badge className="bg-green-500/10 text-green-600 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
               Active Ledger
             </Badge>
           ) : (
-            <Badge className="bg-black/5 text-black/40 border-none font-black text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
+            <Badge className="bg-black/5 text-black/40 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
               Retired
             </Badge>
           )}
@@ -116,10 +116,10 @@ export default function BookDetailPage() {
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Registry Code
                 </p>
-                <p className="text-base font-black text-black tracking-tight">
+                <p className="text-base font-bold text-black tracking-tight">
                   {book?.code}
                 </p>
               </div>
@@ -134,12 +134,12 @@ export default function BookDetailPage() {
                 <Activity className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Tax Compliance
                 </p>
                 <div className="flex items-center gap-2">
                   {book?.is_tax ? (
-                    <Badge className="bg-orange-500/10 text-orange-600 border-none text-[10px] font-black px-2 py-0.5 rounded-full">
+                    <Badge className="bg-orange-500/10 text-orange-600 border-none text-[10px] font-bold px-2 py-0.5 rounded-full">
                       TAXABLE
                     </Badge>
                   ) : (
@@ -160,7 +160,7 @@ export default function BookDetailPage() {
                 <Landmark className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Financial Channel
                 </p>
                 <p className="text-xs font-bold text-black">
@@ -182,7 +182,7 @@ export default function BookDetailPage() {
                 <Receipt className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Internal Ref
                 </p>
                 <p className="text-xs font-mono font-bold text-black truncate max-w-[120px]">
@@ -203,7 +203,7 @@ export default function BookDetailPage() {
                 <History className="w-5 h-5" />
               </div>
               <div>
-                <CardTitle className="text-xl font-black text-black tracking-tight">
+                <CardTitle className="text-xl font-bold text-black tracking-tight">
                   Ledger History
                 </CardTitle>
                 <CardDescription className="text-black/30 font-bold uppercase text-[9px] tracking-widest mt-0.5">
@@ -218,22 +218,22 @@ export default function BookDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/5 bg-black/5">
-                  <th className="text-left py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Post Date
                   </th>
-                  <th className="text-left py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Reference
                   </th>
-                  <th className="text-left py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Partner / Branch
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Debit
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Credit
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40 text-center">
+                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40 text-center">
                     Actions
                   </th>
                 </tr>
@@ -262,7 +262,7 @@ export default function BookDetailPage() {
                         </div>
                       </td>
                       <td className="py-5 px-8">
-                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-black text-[9px] uppercase tracking-widest px-2.5 py-1">
+                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-widest px-2.5 py-1">
                           {entry.division || "Entity Core"}
                         </Badge>
                       </td>
@@ -298,7 +298,7 @@ export default function BookDetailPage() {
                         <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/20 mb-3">
                           <History className="w-6 h-6" />
                         </div>
-                        <p className="text-xs font-black text-black/30 uppercase tracking-widest">
+                        <p className="text-xs font-bold text-black/30 uppercase tracking-widest">
                           No financial history detected
                         </p>
                       </div>

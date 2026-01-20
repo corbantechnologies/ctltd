@@ -45,12 +45,12 @@ export default function JournalDetailPage() {
   const totalDebit =
     journal?.journal_entries?.reduce(
       (sum, entry) => sum + parseFloat(entry.debit),
-      0
+      0,
     ) || 0;
   const totalCredit =
     journal?.journal_entries?.reduce(
       (sum, entry) => sum + parseFloat(entry.credit),
-      0
+      0,
     ) || 0;
 
   return (
@@ -84,11 +84,11 @@ export default function JournalDetailPage() {
             <div className="w-8 h-8 rounded-lg bg-[#D0402B] flex items-center justify-center text-white shadow-lg shadow-[#D0402B]/20">
               <FileText className="w-4 h-4" />
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D0402B]">
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#D0402B]">
               Journal Detail Analysis
             </p>
           </div>
-          <h1 className="text-4xl font-black text-black tracking-tighter italic">
+          <h1 className="text-xl font-bold text-black tracking-tighter italic">
             {journal?.description || "Financial Record"}
           </h1>
           <p className="text-black/40 font-bold mt-1 text-sm italic">
@@ -98,11 +98,11 @@ export default function JournalDetailPage() {
 
         <div className="flex items-center gap-2">
           {journal?.is_posted ? (
-            <Badge className="bg-green-500/10 text-green-600 border-none font-black text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
+            <Badge className="bg-green-500/10 text-green-600 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
               <CheckCircle2 className="w-3 h-3 mr-2" /> Posted to Ledger
             </Badge>
           ) : (
-            <Badge className="bg-orange-500/10 text-orange-600 border-none font-black text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl text-center">
+            <Badge className="bg-orange-500/10 text-orange-600 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl text-center">
               <Clock className="w-3 h-3 mr-2" /> Pending Finalization
             </Badge>
           )}
@@ -118,10 +118,10 @@ export default function JournalDetailPage() {
                 <Calendar className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Fiscal Date
                 </p>
-                <p className="text-base font-black text-black tracking-tight">
+                <p className="text-base font-bold text-black tracking-tight">
                   {new Date(journal?.date || "").toLocaleDateString()}
                 </p>
               </div>
@@ -136,10 +136,10 @@ export default function JournalDetailPage() {
                 <User className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Created By
                 </p>
-                <p className="text-base font-black text-black tracking-tight uppercase truncate max-w-[120px]">
+                <p className="text-base font-bold text-black tracking-tight uppercase truncate max-w-[120px]">
                   {journal?.created_by || "System"}
                 </p>
               </div>
@@ -154,10 +154,10 @@ export default function JournalDetailPage() {
                 <ArrowUpRight className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Total Debit
                 </p>
-                <p className="text-base font-black text-green-600 tracking-tight">
+                <p className="text-base font-bold text-green-600 tracking-tight">
                   KES{" "}
                   {totalDebit.toLocaleString(undefined, {
                     minimumFractionDigits: 2,
@@ -175,10 +175,10 @@ export default function JournalDetailPage() {
                 <ArrowRight className="w-5 h-5 translate-y-0.5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Total Credit
                 </p>
-                <p className="text-base font-black text-[#D0402B] tracking-tight">
+                <p className="text-base font-bold text-[#D0402B] tracking-tight">
                   KES{" "}
                   {totalCredit.toLocaleString(undefined, {
                     minimumFractionDigits: 2,
@@ -198,7 +198,7 @@ export default function JournalDetailPage() {
               <History className="w-5 h-5" />
             </div>
             <div>
-              <CardTitle className="text-xl font-black text-black tracking-tight italic">
+              <CardTitle className="text-xl font-bold text-black tracking-tight italic">
                 Journal <span className="text-[#D0402B]">Entries</span>
               </CardTitle>
               <CardDescription className="text-black/30 font-bold uppercase text-[9px] tracking-widest mt-0.5">
@@ -206,7 +206,7 @@ export default function JournalDetailPage() {
               </CardDescription>
             </div>
           </div>
-          <Badge className="bg-black/5 text-black border-none font-black text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-xl">
+          <Badge className="bg-black/5 text-black border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-xl">
             {journal?.journal_entries?.length || 0} Line Items
           </Badge>
         </CardHeader>
@@ -215,22 +215,22 @@ export default function JournalDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/5 bg-black/5">
-                  <th className="text-left py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Ledger Book
                   </th>
-                  <th className="text-left py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Division
                   </th>
-                  <th className="text-left py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Partner
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Debit
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Credit
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-black uppercase tracking-widest text-black/40 text-center">
+                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40 text-center">
                     Explore
                   </th>
                 </tr>
@@ -249,7 +249,7 @@ export default function JournalDetailPage() {
                             <Receipt className="w-4 h-4" />
                           </div>
                           <div>
-                            <p className="text-base font-black text-black group-hover:text-[#D0402B] transition-colors">
+                            <p className="text-base font-bold text-black group-hover:text-[#D0402B] transition-colors">
                               {entry.book}
                             </p>
                             <p className="text-[9px] font-bold text-black/30 uppercase tracking-widest">
@@ -259,7 +259,7 @@ export default function JournalDetailPage() {
                         </div>
                       </td>
                       <td className="py-5 px-8">
-                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-black text-[9px] uppercase tracking-widest px-2.5 py-1">
+                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-widest px-2.5 py-1">
                           {entry.division || "Entity Core"}
                         </Badge>
                       </td>
@@ -273,7 +273,7 @@ export default function JournalDetailPage() {
                         </p>
                       </td>
                       <td className="py-5 px-8 text-right underline decoration-green-500/20 underline-offset-4 pointer-events-none">
-                        <p className="text-base font-black text-green-600">
+                        <p className="text-base font-bold text-green-600">
                           {entry.currency}{" "}
                           {parseFloat(entry.debit).toLocaleString(undefined, {
                             minimumFractionDigits: 2,
@@ -281,7 +281,7 @@ export default function JournalDetailPage() {
                         </p>
                       </td>
                       <td className="py-5 px-8 text-right underline decoration-[#D0402B]/20 underline-offset-4">
-                        <p className="text-base font-black text-[#D0402B]">
+                        <p className="text-base font-bold text-[#D0402B]">
                           {entry.currency}{" "}
                           {parseFloat(entry.credit).toLocaleString(undefined, {
                             minimumFractionDigits: 2,
@@ -305,7 +305,7 @@ export default function JournalDetailPage() {
                     <td colSpan={6} className="py-20 text-center">
                       <div className="flex flex-col items-center justify-center text-black/10">
                         <History className="w-12 h-12 mb-4" />
-                        <p className="text-xs font-black uppercase tracking-[0.2em]">
+                        <p className="text-xs font-bold uppercase tracking-[0.2em]">
                           No transactional movements found
                         </p>
                       </div>
@@ -325,7 +325,7 @@ export default function JournalDetailPage() {
             <div className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/40">
               <FileText className="w-4 h-4" />
             </div>
-            <h4 className="text-sm font-black uppercase tracking-widest text-black/60 italic">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-black/60 italic">
               Administrative Records &{" "}
               <span className="text-[#D0402B]">Annotations</span>
             </h4>

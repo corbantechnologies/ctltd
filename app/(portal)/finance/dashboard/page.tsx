@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -34,9 +35,12 @@ import {
 } from "lucide-react";
 
 export default function FinanceDashboard() {
-  const { data: divisions, isLoading: isLoadingDivisions } = useFetchDivisions();
-  const { data: journalTypes, isLoading: isLoadingJournalTypes } = useFetchJournalTypes();
-  const { data: partnerTypes, isLoading: isLoadingPartnerTypes } = useFetchPartnerTypes();
+  const { data: divisions, isLoading: isLoadingDivisions } =
+    useFetchDivisions();
+  const { data: journalTypes, isLoading: isLoadingJournalTypes } =
+    useFetchJournalTypes();
+  const { data: partnerTypes, isLoading: isLoadingPartnerTypes } =
+    useFetchPartnerTypes();
   const { data: coas } = useFetchCOAs();
   const { data: books } = useFetchBooks();
   const { data: years } = useFetchFinancialYears();
@@ -95,58 +99,58 @@ export default function FinanceDashboard() {
   ];
 
   return (
-    <div className="space-y-8 pb-12">
+    <div className="space-y-6 pb-6">
       <GlobalSearch role="finance" />
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-black text-black tracking-tighter">
+          <h1 className="text-xl font-bold text-black tracking-tighter">
             Finance Portal
           </h1>
-          <p className="text-black/60 font-medium mt-1">
+          <p className="text-black/60 font-medium italic text-xs mt-0.5">
             Overview and system configuration
           </p>
         </div>
       </div>
 
-      <Tabs defaultValue="overview" className="space-y-8">
-        <TabsList className="bg-white/50 backdrop-blur-md p-1 rounded-2xl border border-black/5">
+      <Tabs defaultValue="overview" className="space-y-6">
+        <TabsList className="bg-white/50 backdrop-blur-md p-1 rounded-xl border border-black/5 h-auto">
           <TabsTrigger
             value="overview"
-            className="rounded-xl px-6 py-3 font-bold data-[state=active]:bg-[#045138] data-[state=active]:text-white transition-all"
+            className="rounded-lg px-4 py-2 text-xs font-bold data-[state=active]:bg-[#045138] data-[state=active]:text-white transition-all"
           >
             Overview
           </TabsTrigger>
           <TabsTrigger
             value="configuration"
-            className="rounded-xl px-6 py-3 font-bold data-[state=active]:bg-[#045138] data-[state=active]:text-white transition-all"
+            className="rounded-lg px-4 py-2 text-xs font-bold data-[state=active]:bg-[#045138] data-[state=active]:text-white transition-all"
           >
             Configuration
           </TabsTrigger>
         </TabsList>
 
         {/* Overview Tab (Analytics) */}
-        <TabsContent value="overview" className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <TabsContent value="overview" className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {stats.map((stat, i) => (
               <Card
                 key={i}
-                className="border-none shadow-xl shadow-black/5 bg-white/80 backdrop-blur-xl rounded-[32px] overflow-hidden"
+                className="border-none shadow-xl shadow-black/5 bg-white/80 backdrop-blur-xl rounded overflow-hidden"
               >
-                <CardContent className="p-8 relative">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#045138]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                  <div className="relative z-10 flex flex-col gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-[#045138]/10 flex items-center justify-center text-[#045138]">
-                      <stat.icon className="w-6 h-6" />
+                <CardContent className="p-4 relative">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-[#045138]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                  <div className="relative z-10 flex flex-col gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#045138]/10 flex items-center justify-center text-[#045138]">
+                      <stat.icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-black/40 font-black uppercase tracking-widest text-[10px] mb-1">
+                      <p className="text-black font-medium uppercase tracking-widest text-[9px] mb-1">
                         {stat.label}
                       </p>
-                      <h3 className="text-4xl font-black text-black tracking-tighter">
+                      <h3 className="text-xl font-semibold text-black tracking-tighter">
                         {stat.value}
                       </h3>
-                      <p className="text-sm font-bold text-black/40 mt-2">
+                      <p className="font-normal italic text-xs mt-1">
                         {stat.description}
                       </p>
                     </div>
@@ -162,7 +166,7 @@ export default function FinanceDashboard() {
             <Card className="col-span-1 border-none shadow-xl shadow-black/5 bg-[#045138] rounded-[32px] text-white p-8 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
               <div className="relative z-10 space-y-4">
-                <h3 className="text-2xl font-black">Quick Actions</h3>
+                <h3 className="text-xl font-bold">Quick Actions</h3>
                 <div className="flex flex-wrap gap-4">
                   <Button
                     onClick={() => setOpenCreateJournalType(true)}
@@ -192,7 +196,7 @@ export default function FinanceDashboard() {
             {/* Divisions Section */}
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-black text-black flex items-center gap-2">
+                <h2 className="font-bold text-black flex items-center gap-2">
                   <Building2 className="w-5 h-5 text-[#045138]" />
                   Divisions
                 </h2>
@@ -211,7 +215,7 @@ export default function FinanceDashboard() {
                         <Layers className="w-5 h-5" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-black text-sm">
+                        <h3 className="font-semibold text-black text-sm">
                           {division.name}
                         </h3>
                       </div>
@@ -224,14 +228,14 @@ export default function FinanceDashboard() {
             {/* Journal Types Section */}
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-black text-black flex items-center gap-2">
+                <h2 className="font-bold text-black flex items-center gap-2">
                   <BookOpen className="w-5 h-5 text-[#045138]" />
                   Journal Types
                 </h2>
                 <Button
                   size="sm"
                   onClick={() => setOpenCreateJournalType(true)}
-                  className="h-8 bg-[#045138]/10 hover:bg-[#045138] text-[#045138] hover:text-white border-none rounded-lg text-xs font-black uppercase tracking-wider"
+                  className="h-8 bg-[#045138]/10 hover:bg-[#045138] text-[#045138] hover:text-white border-none rounded-lg text-xs font-semibold uppercase tracking-wider"
                 >
                   <Plus className="w-3 h-3 mr-1" /> New
                 </Button>
@@ -247,10 +251,10 @@ export default function FinanceDashboard() {
                         <Settings2 className="w-5 h-5" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-black text-sm">
+                        <h3 className="font-semibold text-black text-sm">
                           {type.name}
                         </h3>
-                        <p className="text-[10px] font-bold text-black/40 line-clamp-1">
+                        <p className="text-xs font-medium line-clamp-1">
                           {type.description}
                         </p>
                       </div>
@@ -263,14 +267,14 @@ export default function FinanceDashboard() {
             {/* Partner Types Section */}
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-black text-black flex items-center gap-2">
+                <h2 className="font-bold text-black flex items-center gap-2">
                   <Users className="w-5 h-5 text-[#045138]" />
                   Partner Types
                 </h2>
                 <Button
                   size="sm"
                   onClick={() => setOpenCreatePartnerType(true)}
-                  className="h-8 bg-[#045138]/10 hover:bg-[#045138] text-[#045138] hover:text-white border-none rounded-lg text-xs font-black uppercase tracking-wider"
+                  className="h-8 bg-[#045138]/10 hover:bg-[#045138] text-[#045138] hover:text-white border-none rounded-lg text-xs font-semibold uppercase tracking-wider"
                 >
                   <Plus className="w-3 h-3 mr-1" /> New
                 </Button>
@@ -286,10 +290,10 @@ export default function FinanceDashboard() {
                         <Briefcase className="w-5 h-5" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-black text-sm">
+                        <h3 className="font-semibold text-black text-sm">
                           {type.name}
                         </h3>
-                        <p className="text-[10px] font-bold text-black/40 line-clamp-1">
+                        <p className="text-xs font-medium line-clamp-1">
                           {type.description}
                         </p>
                       </div>
@@ -301,8 +305,6 @@ export default function FinanceDashboard() {
           </div>
         </TabsContent>
       </Tabs>
-
-
 
       {/* Manual Modals */}
       {openCreateJournalType && (

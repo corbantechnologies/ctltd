@@ -44,7 +44,9 @@ export default function Navbar() {
 
   // Fetch financial years to find active one for direct linking
   const { data: years } = useFetchFinancialYears();
-  const activeYear = years?.find((y: any) => y.is_active);
+  const activeYear = years?.find(
+    (y: { is_active: boolean; reference: string }) => y.is_active,
+  );
 
   const navItems = [
     {
@@ -111,12 +113,12 @@ export default function Navbar() {
             {/* Account Info - Visible on larger screens */}
             <div className="flex items-center gap-3">
               <div className="hidden sm:flex flex-col items-end mr-1">
-                <span className="text-sm font-black text-black leading-none">
+                <span className="text-sm font-bold text-black leading-none">
                   {isLoading
                     ? "..."
                     : `${account?.first_name} ${account?.last_name}`}
                 </span>
-                <span className="text-[10px] uppercase font-black tracking-widest text-corporate-primary">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-corporate-primary">
                   {isDirector ? "Director" : isFinance ? "Finance" : "Portal"}
                 </span>
               </div>
@@ -143,7 +145,7 @@ export default function Navbar() {
           "fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] transition-opacity",
           menuOpen
             ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+            : "opacity-0 pointer-events-none",
         )}
         onClick={() => setMenuOpen(false)}
       />
@@ -152,7 +154,7 @@ export default function Navbar() {
       <aside
         className={cn(
           "fixed right-0 top-0 h-full w-[300px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-in-out",
-          menuOpen ? "translate-x-0" : "translate-x-full"
+          menuOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
         <div className="flex flex-col h-full">
@@ -178,15 +180,15 @@ export default function Navbar() {
           {/* User Info inside Drawer */}
           <div className="p-6 bg-orange-50/30">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-orange-100 flex items-center justify-center text-corporate-primary font-black text-lg">
+              <div className="w-12 h-12 rounded-2xl bg-orange-100 flex items-center justify-center text-corporate-primary font-bold text-lg">
                 {account?.first_name?.[0]}
                 {account?.last_name?.[0]}
               </div>
               <div>
-                <p className="font-black text-black leading-tight">
+                <p className="font-bold text-black leading-tight">
                   {account?.first_name} {account?.last_name}
                 </p>
-                <p className="text-[10px] font-black uppercase tracking-widest text-corporate-primary mt-1">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-corporate-primary mt-1">
                   {isDirector ? "Director" : isFinance ? "Finance" : "Portal"}
                 </p>
               </div>
@@ -195,7 +197,7 @@ export default function Navbar() {
 
           {/* Drawer Links */}
           <div className="flex-1 overflow-y-auto p-4 space-y-2">
-            <div className="px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-black/30">
+            <div className="px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-black/30">
               Navigation
             </div>
             {navItems
@@ -207,10 +209,10 @@ export default function Navbar() {
                     key={item.name}
                     href={item.href}
                     className={cn(
-                      "flex items-center justify-between p-4 rounded-2xl font-black text-sm transition-all group",
+                      "flex items-center justify-between p-4 rounded-2xl font-bold text-sm transition-all group",
                       isActive
                         ? "bg-orange-50 text-corporate-primary"
-                        : "text-black/60 hover:bg-orange-50/50 hover:text-black"
+                        : "text-black/60 hover:bg-orange-50/50 hover:text-black",
                     )}
                   >
                     <div className="flex items-center gap-4">
@@ -219,7 +221,7 @@ export default function Navbar() {
                           "w-10 h-10 rounded-xl flex items-center justify-center transition-colors",
                           isActive
                             ? "bg-white shadow-sm"
-                            : "bg-black/5 shadow-none"
+                            : "bg-black/5 shadow-none",
                         )}
                       >
                         <item.icon className="w-5 h-5" />
@@ -229,7 +231,7 @@ export default function Navbar() {
                     <ChevronRight
                       className={cn(
                         "w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity",
-                        isActive && "opacity-100"
+                        isActive && "opacity-100",
                       )}
                     />
                   </Link>
@@ -241,7 +243,7 @@ export default function Navbar() {
           <div className="p-6 border-t border-black/5">
             <Button
               variant="outline"
-              className="w-full h-14 bg-black hover:bg-red-600 text-white hover:text-white rounded-2xl font-black flex items-center justify-center gap-3 transition-all border-none"
+              className="w-full h-14 bg-black hover:bg-red-600 text-white hover:text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all border-none"
               onClick={() => signOut({ callbackUrl: "/auth/login" })}
             >
               <LogOut className="w-5 h-5" />

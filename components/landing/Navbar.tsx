@@ -40,7 +40,7 @@ export default function Navbar() {
           "fixed top-0 w-full z-50 transition-all duration-300 border-b",
           scrolled
             ? "bg-white/95 backdrop-blur-xl border-black/5 py-3 shadow-md"
-            : "bg-transparent border-transparent py-5"
+            : "bg-transparent border-transparent py-5",
         )}
       >
         <div className="mx-auto px-6 flex justify-between items-center">
@@ -68,13 +68,13 @@ export default function Navbar() {
                   "text-sm transition-colors duration-200 font-extrabold tracking-widest uppercase",
                   scrolled
                     ? "text-black hover:text-corporate-primary"
-                    : "text-black hover:text-corporate-primary"
+                    : "text-black hover:text-corporate-primary",
                 )}
               >
                 {item.name}
               </Link>
             ))}
-            <button className="bg-corporate-primary hover:bg-orange-600 text-white font-black rounded px-4 py-4 h-auto transition-all active:scale-95 shadow shadow-orange-500/30 uppercase tracking-tighter flex items-center gap-2">
+            <button className="bg-corporate-primary hover:bg-orange-600 text-white font-bold rounded px-4 py-4 h-auto transition-all active:scale-95 shadow shadow-orange-500/30 uppercase tracking-tighter flex items-center gap-2">
               Get in Touch <ChevronRight className="w-5 h-5 stroke-[3px]" />
             </button>
           </div>
@@ -96,7 +96,7 @@ export default function Navbar() {
           "fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 lg:hidden",
           mobileMenuOpen
             ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+            : "opacity-0 pointer-events-none",
         )}
         onClick={() => setMobileMenuOpen(false)}
       />
@@ -105,7 +105,7 @@ export default function Navbar() {
       <div
         className={cn(
           "fixed right-0 top-0 h-full w-[300px] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out lg:hidden",
-          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          mobileMenuOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
         {/* Header with Logo and Close Button */}
@@ -133,7 +133,7 @@ export default function Navbar() {
               key={item.name}
               href={item.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="group flex items-center justify-between text-xl font-black text-black hover:text-corporate-primary transition-colors"
+              className="group flex items-center justify-between text-xl font-bold text-black hover:text-corporate-primary transition-colors"
             >
               {item.name}
               <ChevronRight className="w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity text-corporate-primary" />
@@ -142,7 +142,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setMobileMenuOpen(false)}
-            className="bg-corporate-primary hover:bg-orange-600 text-white w-full mt-6 font-black py-4 rounded-xl shadow-lg transition-all active:scale-95 uppercase tracking-tighter"
+            className="bg-corporate-primary hover:bg-orange-600 text-white w-full mt-6 font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 uppercase tracking-tighter"
           >
             <Link
               href="/contact"
