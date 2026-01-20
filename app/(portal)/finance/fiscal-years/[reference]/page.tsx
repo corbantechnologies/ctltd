@@ -6,7 +6,6 @@ import FiscalYearJournals from "@/components/financialyears/FiscalYearJournals";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import {
   CalendarRange,
-  Edit3,
   Calendar,
   Activity,
   Plus,
@@ -14,7 +13,6 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { useParams } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -27,6 +25,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import CreateJournal from "@/forms/journals/CreateJournal";
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function FiscalYearDetail() {
   const { reference } = useParams();
@@ -39,6 +38,7 @@ export default function FiscalYearDetail() {
   const [selectedJournalType, setSelectedJournalType] = useState<
     string | undefined
   >();
+  const queryClient = useQueryClient();
 
   if (isLoading || isLoadingTypes) return <LoadingSpinner />;
   if (!fiscalYear)
@@ -168,9 +168,9 @@ export default function FiscalYearDetail() {
       </div>
 
       {/* Main Layout Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 pt-2">
-        {/* Associated Journals Section (Left - 3/4) */}
-        <div className="lg:col-span-3 space-y-4 order-2 lg:order-1">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 pt-2">
+        {/* Associated Journals Section (Left - 4/5) */}
+        <div className="lg:col-span-4 space-y-4 order-2 lg:order-1">
           <div className="flex items-center gap-3">
             <h2 className="text-lg font-bold text-black tracking-tight">
               Period Journals
