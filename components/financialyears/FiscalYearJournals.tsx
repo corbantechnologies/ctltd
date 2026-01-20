@@ -295,21 +295,21 @@ export default function FiscalYearJournals({
         </div>
       ) : (
         /* Table View */
-        <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-lg shadow-gray-100/50">
+        <div className="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-lg shadow-gray-100/50">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="bg-gray-50/50 border-b border-gray-100">
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-gray-400">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest ">
                     Posting Date
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-gray-400">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest ">
                     Journal Description
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-gray-400">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest ">
                     Type
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-gray-400">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest ">
                     Status
                   </th>
                 </tr>
@@ -323,35 +323,32 @@ export default function FiscalYearJournals({
                       (window.location.href = `/${rolePrefix}/fiscal-years/${fiscalYearReference}/journals/${journal.reference}`)
                     }
                   >
-                    <td className="py-3 px-4">
+                    <td className="p-2">
                       <div className="flex flex-col">
-                        <span className="text-sm font-semibold text-black">
+                        <span className="text-xs text-black">
                           {new Date(journal.date).toLocaleDateString()}
-                        </span>
-                        <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
-                          Auto
                         </span>
                       </div>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="p-2">
                       <div className="flex items-center gap-3">
                         <div className="w-7 h-7 rounded-md bg-gray-50 flex items-center justify-center text-gray-400 group-hover:text-black transition-all">
                           <FileText className="w-3.5 h-3.5" />
                         </div>
-                        <span className="text-sm font-bold text-black transition-colors">
+                        <span className="text-xs text-black transition-colors">
                           {journal.description}
                         </span>
                       </div>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="p-2">
                       <Badge
                         variant="outline"
-                        className="bg-white border-gray-200 text-gray-600 font-semibold text-[9px] uppercase px-2 py-0.5 rounded-full"
+                        className="bg-white border-gray-200 text-gray-600 text-xs uppercase px-2 py-0.5 rounded-full"
                       >
                         {journal.journal_type}
                       </Badge>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="p-2">
                       <div className="flex items-center gap-2">
                         {journal.is_posted ? (
                           <div className="flex items-center gap-1.5 text-green-600">
