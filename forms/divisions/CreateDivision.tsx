@@ -33,12 +33,11 @@ export default function CreateDivision() {
       try {
         await createDivision(values, header);
         toast.success("Division created successfully");
-        window.location.reload();
         resetForm();
-
+        router.refresh();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to create division"
+          error?.response?.data?.message || "Failed to create division",
         );
       } finally {
         setSubmitting(false);

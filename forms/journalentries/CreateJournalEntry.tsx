@@ -39,6 +39,7 @@ export default function CreateJournalEntry({
   className,
 }: CreateJournalEntryProps) {
   const header = useAxiosAuth();
+  const router = useRouter();
 
   const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
 
@@ -90,9 +91,9 @@ export default function CreateJournalEntry({
 
         await createJournalEntry(formData, header);
         toast.success("Journal entry recorded");
-        window.location.reload();
         resetForm();
         if (onSuccess) onSuccess();
+        router.refresh();
       } catch (error: any) {
         toast.error(error?.response?.data?.message || "Failed to record entry");
       } finally {
@@ -360,8 +361,8 @@ export default function CreateJournalEntry({
                 onBlur={formik.handleBlur}
                 value={formik.values.payment_method}
               >
-                <option value="CASH">CASH</option>
                 <option value="BANK_TRANSFER">BANK TRANSFER</option>
+                <option value="CASH">CASH</option>
                 <option value="CHEQUE">CHEQUE</option>
                 <option value="MOBILE_MONEY">MPESA / MOBILE</option>
               </select>
@@ -374,15 +375,20 @@ export default function CreateJournalEntry({
               >
                 Source Doc Type
               </Label>
-              <Input
-                id="source_document"
+              <select
                 name="source_document"
-                placeholder="e.g. INVOICE, RECEIPT"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
+                className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.source_document}
-              />
+              >
+                <option value="">Select Source Document</option>
+                <option value="KRA_SALES_RECEIPT">KRA SALES RECEIPT</option>
+                <option value="INVOICE">INVOICE</option>
+                <option value="RECEIPT">RECEIPT</option>
+                <option value="CHEQUE">CHEQUE</option>
+                <option value="MOBILE_MONEY">MPESA / MOBILE</option>
+              </select>
             </div>
 
             <div className="space-y-2">
@@ -419,7 +425,7 @@ export default function CreateJournalEntry({
                 onChange={(event) => {
                   formik.setFieldValue(
                     "document_file",
-                    event.currentTarget.files?.[0] || null
+                    event.currentTarget.files?.[0] || null,
                   );
                 }}
               />

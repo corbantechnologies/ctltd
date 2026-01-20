@@ -83,7 +83,7 @@ export default function UpdatePartner({
           header
         );
         toast.success("Partner updated successfully");
-        window.location.reload();
+        router.refresh();
         if (onSuccess) onSuccess();
       } catch (error: any) {
         toast.error(

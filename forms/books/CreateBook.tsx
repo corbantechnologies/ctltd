@@ -61,11 +61,10 @@ export default function CreateBook({
       try {
         await createBook(values, header);
         toast.success("Account Book created successfully");
-        window.location.reload();
-
         // reload
         queryClient.invalidateQueries({ queryKey: ["books"] });
         queryClient.invalidateQueries({ queryKey: ["coas"] }); // Refresh COA list as books are nested
+        router.refresh();
         if (initialCOA) {
           // If we have an initial COA (likely from detail page), invalidate specific COA query
           // We'd need the reference for this, assuming initialCOA passed is the name or we can find it.
