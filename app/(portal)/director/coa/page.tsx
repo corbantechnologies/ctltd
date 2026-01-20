@@ -13,11 +13,11 @@ export default function COAPage() {
             <div className="w-6 h-6 rounded-md bg-[#D0402B] flex items-center justify-center text-white shadow-md shadow-[#D0402B]/20">
               <Database className="w-3 h-3" />
             </div>
-            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[#D0402B]">
+            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#D0402B]">
               Financial Architecture
             </p>
           </div>
-          <h1 className="text-xl font-black text-black tracking-tighter italic">
+          <h1 className="text-xl font-bold text-black tracking-tighter italic">
             Chart of <span className="text-[#D0402B]">Accounts</span>
           </h1>
           <p className="text-black/40 font-bold mt-0.5 text-xs max-w-md">

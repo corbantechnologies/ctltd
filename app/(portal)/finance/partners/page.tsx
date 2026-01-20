@@ -33,7 +33,7 @@ export default function FinancePartnersPage() {
       </Breadcrumb>
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-black text-black tracking-tighter">
+          <h1 className="text-xl font-bold text-black tracking-tighter">
             Operational Partners
           </h1>
           <p className="text-black/60 font-bold text-xs mt-0.5">

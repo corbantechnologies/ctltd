@@ -35,33 +35,30 @@ import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
 export default function JournalsDetailPage() {
   const { reference, journal_reference } = useParams();
   const router = useRouter();
-  const {data: fiscalYear} = useFetchFinancialYear(reference as string);
-  const {
-    isLoading,
-    data: journal,
-  } = useFetchJournal(journal_reference as string);
+  const { data: fiscalYear } = useFetchFinancialYear(reference as string);
+  const { isLoading, data: journal } = useFetchJournal(
+    journal_reference as string,
+  );
   const [openAddEntry, setOpenAddEntry] = useState(false);
   const [openUpdateJournal, setOpenUpdateJournal] = useState(false);
-
 
   // Calculate totals
   const totalDebit =
     journal?.journal_entries?.reduce(
       (sum, entry) => sum + parseFloat(entry.debit),
-      0
+      0,
     ) || 0;
   const totalCredit =
     journal?.journal_entries?.reduce(
       (sum, entry) => sum + parseFloat(entry.credit),
-      0
+      0,
     ) || 0;
   const isBalanced = Math.abs(totalDebit - totalCredit) < 0.01;
-
 
   if (isLoading) return <LoadingSpinner />;
   if (!journal)
     return (
-      <div className="p-12 text-center font-black text-black/20">
+      <div className="p-12 text-center font-bold text-black/20">
         Journal not found.
       </div>
     );
@@ -116,7 +113,7 @@ export default function JournalsDetailPage() {
               <ArrowLeft className="w-4 h-4" />
             </Button>
             <Badge
-              className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border-none ${
+              className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${
                 journal.is_posted
                   ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
                   : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
@@ -134,7 +131,7 @@ export default function JournalsDetailPage() {
             </Badge>
           </div>
           <div>
-            <h1 className="text-4xl font-black text-black tracking-tighter mb-2">
+            <h1 className="text-xl font-bold text-black tracking-tighter mb-2">
               {journal.description || "Untitled Journal Batch"}
             </h1>
             <div className="flex flex-wrap gap-4 text-sm font-bold text-black/40">
@@ -162,10 +159,10 @@ export default function JournalsDetailPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[24px] shadow-sm">
           <CardContent className="p-6">
-            <p className="text-[10px] font-black uppercase tracking-widest text-black/40 mb-2">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
               Total Debit
             </p>
-            <p className="text-3xl font-black text-black tracking-tight">
+            <p className="text-xl font-bold text-black tracking-tight">
               {new Intl.NumberFormat("en-KE", {
                 style: "currency",
                 currency: journal.currency,
@@ -175,10 +172,10 @@ export default function JournalsDetailPage() {
         </Card>
         <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[24px] shadow-sm">
           <CardContent className="p-6">
-            <p className="text-[10px] font-black uppercase tracking-widest text-black/40 mb-2">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
               Total Credit
             </p>
-            <p className="text-3xl font-black text-black tracking-tight">
+            <p className="text-xl font-bold text-black tracking-tight">
               {new Intl.NumberFormat("en-KE", {
                 style: "currency",
                 currency: journal.currency,
@@ -194,12 +191,12 @@ export default function JournalsDetailPage() {
           }`}
         >
           <CardContent className="p-6">
-            <p className="text-[10px] font-black uppercase tracking-widest text-black/40 mb-2">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
               Balance Status
             </p>
             <div className="flex items-center gap-3">
               <p
-                className={`text-3xl font-black tracking-tight ${
+                className={`text-xl font-bold tracking-tight ${
                   isBalanced ? "text-[#045138]" : "text-red-600"
                 }`}
               >
@@ -222,7 +219,7 @@ export default function JournalsDetailPage() {
       {/* Entries List */}
       <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[32px] overflow-hidden shadow-xl shadow-black/5 pb-24">
         <div className="p-8 border-b border-black/5 flex justify-between items-center">
-          <h3 className="text-xl font-black text-black tracking-tight flex items-center gap-3">
+          <h3 className="text-xl font-bold text-black tracking-tight flex items-center gap-3">
             <Receipt className="w-5 h-5 text-[#045138]" />
             Transaction Entries
           </h3>
@@ -235,19 +232,19 @@ export default function JournalsDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="bg-black/5 border-b border-black/5 text-left">
-                  <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">
                     Account Book
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">
                     Partner / Division
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-black/40">
+                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">
                     Details
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-black/40 text-right">
+                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">
                     Debit
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-black/40 text-right">
+                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">
                     Credit
                   </th>
                 </tr>

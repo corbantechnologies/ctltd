@@ -4,7 +4,15 @@ import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
 import { useFetchJournalTypes } from "@/hooks/journaltypes/actions";
 import FiscalYearJournals from "@/components/financialyears/FiscalYearJournals";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
-import { CalendarRange, Edit3, Calendar, Activity, Plus, BookOpen, ArrowRight } from "lucide-react";
+import {
+  CalendarRange,
+  Edit3,
+  Calendar,
+  Activity,
+  Plus,
+  BookOpen,
+  ArrowRight,
+} from "lucide-react";
 import { useParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,16 +31,19 @@ import { useState } from "react";
 export default function FiscalYearDetail() {
   const { reference } = useParams();
   const { isLoading, data: fiscalYear } = useFetchFinancialYear(
-    reference as string
+    reference as string,
   );
-  const { data: journalTypes, isLoading: isLoadingTypes } = useFetchJournalTypes();
+  const { data: journalTypes, isLoading: isLoadingTypes } =
+    useFetchJournalTypes();
   const [openCreateJournal, setOpenCreateJournal] = useState(false);
-  const [selectedJournalType, setSelectedJournalType] = useState<string | undefined>();
+  const [selectedJournalType, setSelectedJournalType] = useState<
+    string | undefined
+  >();
 
   if (isLoading || isLoadingTypes) return <LoadingSpinner />;
   if (!fiscalYear)
     return (
-      <div className="p-12 text-center font-black text-gray-300">
+      <div className="p-12 text-center font-bold text-gray-300">
         Fiscal Year not found.
       </div>
     );
@@ -72,7 +83,7 @@ export default function FiscalYearDetail() {
               <CalendarRange className="w-5 h-5" />
             </div>
             <div>
-              <h1 className="text-2xl font-black text-black tracking-tighter italic leading-none">
+              <h1 className="text-xl font-bold text-black tracking-tighter italic leading-none">
                 {fiscalYear.code}
               </h1>
               <div className="flex items-center gap-2 mt-1">
@@ -150,7 +161,7 @@ export default function FiscalYearDetail() {
                 <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">
                   {stat.label}
                 </p>
-                <p className="text-base font-black text-black tracking-tight">
+                <p className="text-base font-bold text-black tracking-tight">
                   {stat.value}
                 </p>
               </div>
@@ -161,7 +172,6 @@ export default function FiscalYearDetail() {
 
       {/* Main Layout Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 pt-2">
-
         {/* Associated Journals Section (Left - 3/4) */}
         <div className="lg:col-span-3 space-y-4 order-2 lg:order-1">
           <div className="flex items-center gap-3">
@@ -181,7 +191,9 @@ export default function FiscalYearDetail() {
         {/* Journal Types List (Right - 1/4) */}
         <div className="lg:col-span-1 space-y-3 order-1 lg:order-2">
           <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-[10px] font-bold uppercase tracking-widest text-black/40">Quick Entry</h3>
+            <h3 className="text-[10px] font-bold uppercase tracking-widest text-black/40">
+              Quick Entry
+            </h3>
             <div className="flex-1 h-px bg-gray-100" />
           </div>
 
@@ -197,7 +209,9 @@ export default function FiscalYearDetail() {
                     <BookOpen className="w-3.5 h-3.5" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-black text-xs truncate group-hover:text-[#045138] transition-colors">{type.name}</h3>
+                    <h3 className="font-bold text-black text-xs truncate group-hover:text-[#045138] transition-colors">
+                      {type.name}
+                    </h3>
                   </div>
                   <ArrowRight className="w-3 h-3 text-gray-300 group-hover:text-[#045138] transition-colors" />
                 </CardContent>
@@ -205,7 +219,6 @@ export default function FiscalYearDetail() {
             ))}
           </div>
         </div>
-
       </div>
 
       {/* Manual Modal Implementation for Create Journal */}

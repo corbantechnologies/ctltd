@@ -14,13 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   Grid,
@@ -28,19 +22,14 @@ import {
   Search,
   Users,
   Building2,
-  Mail,
-  Phone,
   Briefcase,
   AlertCircle,
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
   MoreHorizontal,
-  LayoutGrid, // replacing generic Grid if needed or just alias/using existing? The other files used LayoutGrid. The current file uses Grid. I'll stick to Grid if it works, or add LayoutGrid if I want to match others. Actually passing Grid is fine if current code uses it.
-  ArrowRight, // often used in table actions
 } from "lucide-react";
 import Link from "next/link";
-
 
 interface PartnersListProps {
   rolePrefix: string;
@@ -62,22 +51,23 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
   if (isLoadingPartners || isLoadingTypes) return <LoadingSpinner />;
 
   // Filter Logic
-  const filteredPartners = partners?.filter((partner) => {
-    const matchesSearch =
-      partner.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      partner.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      partner.reference.toLowerCase().includes(searchQuery.toLowerCase());
+  const filteredPartners =
+    partners?.filter((partner) => {
+      const matchesSearch =
+        partner.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        partner.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        partner.reference.toLowerCase().includes(searchQuery.toLowerCase());
 
-    const matchesType =
-      typeFilter === "all" || partner.partner_type === typeFilter;
+      const matchesType =
+        typeFilter === "all" || partner.partner_type === typeFilter;
 
-    return matchesSearch && matchesType;
-  }) || [];
+      return matchesSearch && matchesType;
+    }) || [];
 
   const totalPages = Math.ceil(filteredPartners.length / itemsPerPage);
   const paginatedPartners = filteredPartners.slice(
     (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    currentPage * itemsPerPage,
   );
 
   return (
@@ -124,8 +114,11 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
             <Button
               onClick={() => setView("grid")}
               variant="ghost"
-              className={`h-8 w-8 rounded-lg p-0 transition-all ${view === "grid" ? "text-white shadow-sm" : "text-black/40 hover:text-black"
-                }`}
+              className={`h-8 w-8 rounded-lg p-0 transition-all ${
+                view === "grid"
+                  ? "text-white shadow-sm"
+                  : "text-black/40 hover:text-black"
+              }`}
               style={{
                 backgroundColor: view === "grid" ? primaryColor : "transparent",
               }}
@@ -135,8 +128,11 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
             <Button
               onClick={() => setView("table")}
               variant="ghost"
-              className={`h-8 w-8 rounded-lg p-0 transition-all ${view === "table" ? "text-white shadow-sm" : "text-black/40 hover:text-black"
-                }`}
+              className={`h-8 w-8 rounded-lg p-0 transition-all ${
+                view === "table"
+                  ? "text-white shadow-sm"
+                  : "text-black/40 hover:text-black"
+              }`}
               style={{
                 backgroundColor:
                   view === "table" ? primaryColor : "transparent",
@@ -170,17 +166,18 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                       <Users className="w-5 h-5" />
                     </div>
                     <Badge
-                      className={`px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border-none ${partner.is_active
-                        ? "bg-green-500/10 text-green-600"
-                        : "bg-red-500/10 text-red-600"
-                        }`}
+                      className={`px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border-none ${
+                        partner.is_active
+                          ? "bg-green-500/10 text-green-600"
+                          : "bg-red-500/10 text-red-600"
+                      }`}
                     >
                       {partner.is_active ? "Active" : "Inactive"}
                     </Badge>
                   </div>
 
                   <div>
-                    <h3 className="text-base font-black text-black tracking-tight mb-1 line-clamp-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-black group-hover:to-black/60 transition-all">
+                    <h3 className="text-base font-bold text-black tracking-tight mb-1 line-clamp-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-black group-hover:to-black/60 transition-all">
                       {partner.name}
                     </h3>
                     <div className="flex items-center gap-2 text-[9px] font-bold text-black/40 uppercase tracking-wider">
@@ -211,16 +208,16 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
             <Table>
               <TableHeader className="bg-black/5">
                 <TableRow className="hover:bg-transparent border-black/5">
-                  <TableHead className="py-3 px-4 text-[9px] font-black text-black/40 uppercase tracking-widest">
+                  <TableHead className="py-3 px-4 text-[9px] font-bold text-black/40 uppercase tracking-widest">
                     Entity
                   </TableHead>
-                  <TableHead className="py-3 px-4 text-[9px] font-black text-black/40 uppercase tracking-widest">
+                  <TableHead className="py-3 px-4 text-[9px] font-bold text-black/40 uppercase tracking-widest">
                     Division
                   </TableHead>
-                  <TableHead className="py-3 px-4 text-[9px] font-black text-black/40 uppercase tracking-widest">
+                  <TableHead className="py-3 px-4 text-[9px] font-bold text-black/40 uppercase tracking-widest">
                     Category
                   </TableHead>
-                  <TableHead className="py-3 px-4 text-[9px] font-black text-black/40 uppercase tracking-widest">
+                  <TableHead className="py-3 px-4 text-[9px] font-bold text-black/40 uppercase tracking-widest">
                     Status
                   </TableHead>
                 </TableRow>
@@ -265,11 +262,11 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                     </TableCell>
                     <TableCell className="py-3 px-4">
                       {partner.is_active ? (
-                        <div className="flex items-center gap-1.5 text-[9px] font-black text-green-600 uppercase tracking-wider">
+                        <div className="flex items-center gap-1.5 text-[9px] font-bold text-green-600 uppercase tracking-wider">
                           <CheckCircle2 className="w-3.5 h-3.5" /> Active
                         </div>
                       ) : (
-                        <div className="flex items-center gap-1.5 text-[9px] font-black text-red-600 uppercase tracking-wider">
+                        <div className="flex items-center gap-1.5 text-[9px] font-bold text-red-600 uppercase tracking-wider">
                           <AlertCircle className="w-3.5 h-3.5" /> Inactive
                         </div>
                       )}
@@ -286,8 +283,9 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
       {totalPages > 1 && (
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/50 backdrop-blur-xl p-4 rounded-2xl border border-black/5">
           <p className="text-[10px] font-bold uppercase tracking-widest text-black/30">
-            Showing <span className="text-black">{paginatedPartners.length}</span>{" "}
-            of <span className="text-black">{filteredPartners.length}</span>{" "}
+            Showing{" "}
+            <span className="text-black">{paginatedPartners.length}</span> of{" "}
+            <span className="text-black">{filteredPartners.length}</span>{" "}
             partners
           </p>
 
@@ -314,10 +312,11 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-8 h-8 rounded-lg text-[10px] font-black transition-all ${currentPage === page
-                        ? "text-white shadow-md"
-                        : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
-                        }`}
+                      className={`w-8 h-8 rounded-lg text-[10px] font-bold transition-all ${
+                        currentPage === page
+                          ? "text-white shadow-md"
+                          : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
+                      }`}
                       style={
                         {
                           backgroundColor:
@@ -364,7 +363,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
           <div className="w-16 h-16 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4">
             <Search className="w-8 h-8 text-black/20" />
           </div>
-          <h3 className="text-xl font-black text-black/30 tracking-tight">
+          <h3 className="text-xl font-bold text-black/30 tracking-tight">
             No partners found
           </h3>
           <p className="text-black/20 font-medium mt-1">

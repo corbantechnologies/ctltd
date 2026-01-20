@@ -39,7 +39,7 @@ export default function FinancialYearsList({
     return financialYears.filter(
       (year) =>
         year.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        year.reference.toLowerCase().includes(searchQuery.toLowerCase())
+        year.reference.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   }, [financialYears, searchQuery]);
 
@@ -61,7 +61,7 @@ export default function FinancialYearsList({
         <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center text-gray-400 mb-4 shadow-sm border border-gray-100">
           <CalendarRange className="w-8 h-8" />
         </div>
-        <p className="text-sm font-black text-gray-400 uppercase tracking-widest">
+        <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">
           No fiscal years registered
         </p>
       </div>
@@ -99,10 +99,11 @@ export default function FinancialYearsList({
         <div className="flex items-center gap-1.5 bg-black/5 p-1 rounded-xl self-end lg:self-auto">
           <button
             onClick={() => setView("grid")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === "grid"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
+              view === "grid"
                 ? "bg-white shadow-sm text-black"
                 : "text-black/40 hover:text-black"
-              }`}
+            }`}
             style={{ color: view === "grid" ? primaryColor : undefined }}
           >
             <LayoutGrid className="w-3.5 h-3.5" />
@@ -110,10 +111,11 @@ export default function FinancialYearsList({
           </button>
           <button
             onClick={() => setView("table")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === "table"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
+              view === "table"
                 ? "bg-white shadow-sm text-black"
                 : "text-black/40 hover:text-black"
-              }`}
+            }`}
             style={{ color: view === "table" ? primaryColor : undefined }}
           >
             <List className="w-3.5 h-3.5" />
@@ -125,7 +127,7 @@ export default function FinancialYearsList({
       {/* Content Rendering */}
       {paginatedYears.length === 0 ? (
         <div className="py-20 text-center">
-          <p className="text-sm font-black text-gray-300 uppercase tracking-[0.2em]">
+          <p className="text-sm font-bold text-gray-300 uppercase tracking-[0.2em]">
             No fiscal years match your criteria
           </p>
         </div>
@@ -161,12 +163,13 @@ export default function FinancialYearsList({
                   </div>
 
                   <div className="mb-4">
-                    <h3 className="text-base font-black text-black tracking-tight transition-colors line-clamp-1 group-hover:text-opacity-80">
+                    <h3 className="text-base font-bold text-black tracking-tight transition-colors line-clamp-1 group-hover:text-opacity-80">
                       {year.code}
                     </h3>
                     <div className="flex items-center gap-2 mt-2">
                       <span className="text-[9px] font-bold text-black/40">
-                        {new Date(year.start_date).toLocaleDateString()} - {new Date(year.end_date).toLocaleDateString()}
+                        {new Date(year.start_date).toLocaleDateString()} -{" "}
+                        {new Date(year.end_date).toLocaleDateString()}
                       </span>
                     </div>
                   </div>
@@ -190,16 +193,16 @@ export default function FinancialYearsList({
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/10 bg-black/5">
-                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Fiscal Code
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Period
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Status
                   </th>
-                  <th className="text-right py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-right py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Actions
                   </th>
                 </tr>
@@ -211,7 +214,10 @@ export default function FinancialYearsList({
                     className="transition-colors group hover:bg-black/5"
                   >
                     <td className="py-3 px-4">
-                      <Link href={`/${rolePrefix}/fiscal-years/${year.reference}`} className="flex items-center gap-3">
+                      <Link
+                        href={`/${rolePrefix}/fiscal-years/${year.reference}`}
+                        className="flex items-center gap-3"
+                      >
                         <div className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold group-hover:bg-white group-hover:shadow-sm">
                           <CalendarRange className="w-4 h-4" />
                         </div>
@@ -310,18 +316,21 @@ export default function FinancialYearsList({
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-8 h-8 rounded-lg text-[10px] font-black transition-all ${currentPage === page
+                      className={`w-8 h-8 rounded-lg text-[10px] font-bold transition-all ${
+                        currentPage === page
                           ? "text-white shadow-md"
                           : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
-                        }`}
-                      style={{
-                        backgroundColor:
-                          currentPage === page ? primaryColor : undefined,
-                        boxShadow:
-                          currentPage === page
-                            ? `0 4px 6px -1px ${primaryColor}33`
-                            : undefined,
-                      } as React.CSSProperties}
+                      }`}
+                      style={
+                        {
+                          backgroundColor:
+                            currentPage === page ? primaryColor : undefined,
+                          boxShadow:
+                            currentPage === page
+                              ? `0 4px 6px -1px ${primaryColor}33`
+                              : undefined,
+                        } as React.CSSProperties
+                      }
                     >
                       {page}
                     </button>

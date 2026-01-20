@@ -59,11 +59,11 @@ export default function COADetailPage() {
             <div className="w-8 h-8 rounded-lg bg-[#D0402B] flex items-center justify-center text-white shadow-lg shadow-[#D0402B]/20">
               <Hash className="w-4 h-4" />
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D0402B]">
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#D0402B]">
               Account Classification
             </p>
           </div>
-          <h1 className="text-4xl font-black text-black tracking-tighter">
+          <h1 className="text-xl font-bold text-black tracking-tighter">
             {coa?.name}
           </h1>
           <p className="text-black/40 font-bold mt-1 text-sm italic">
@@ -73,11 +73,11 @@ export default function COADetailPage() {
 
         <div className="flex items-center gap-2">
           {coa?.is_active ? (
-            <Badge className="bg-green-500/10 text-green-600 border-none font-black text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
+            <Badge className="bg-green-500/10 text-green-600 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
               Active Classification
             </Badge>
           ) : (
-            <Badge className="bg-black/5 text-black/40 border-none font-black text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
+            <Badge className="bg-black/5 text-black/40 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
               Deactivated
             </Badge>
           )}
@@ -93,10 +93,10 @@ export default function COADetailPage() {
                 <ArrowUpDown className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Normal Balance
                 </p>
-                <p className="text-base font-black text-black tracking-tight">
+                <p className="text-base font-bold text-black tracking-tight">
                   {coa?.normal_balance} Side
                 </p>
               </div>
@@ -111,7 +111,7 @@ export default function COADetailPage() {
                 <Database className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Internal Reference
                 </p>
                 <p className="text-sm font-bold text-black font-mono">
@@ -129,10 +129,10 @@ export default function COADetailPage() {
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-black uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Display Order
                 </p>
-                <p className="text-base font-black text-black">
+                <p className="text-base font-bold text-black">
                   Position #{coa?.order}
                 </p>
               </div>
@@ -148,7 +148,7 @@ export default function COADetailPage() {
               <BookIcon className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-2xl font-black text-black tracking-tight italic">
+              <h2 className="text-xl font-bold text-black tracking-tight italic">
                 Associated Ledger <span className="text-[#D0402B]">Books</span>
               </h2>
               <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">

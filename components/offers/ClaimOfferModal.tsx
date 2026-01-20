@@ -63,7 +63,7 @@ export function ClaimOfferModal({
             <CheckCircle2 className="w-12 h-12 text-corporate-primary" />
           </div>
           <div>
-            <h2 className="text-3xl font-black mb-4">Claim Received!</h2>
+            <h2 className="text-xl font-bold mb-4">Claim Received!</h2>
             <p className="font-bold opacity-60 leading-relaxed">
               Thank you,{" "}
               <span className="text-corporate-primary">
@@ -75,7 +75,7 @@ export function ClaimOfferModal({
           </div>
           <Button
             onClick={onClose}
-            className="w-full bg-corporate-primary hover:bg-orange-600 text-white rounded-2xl py-8 font-black uppercase tracking-widest text-[10px]"
+            className="w-full bg-corporate-primary hover:bg-orange-600 text-white rounded-2xl py-8 font-bold uppercase tracking-widest text-[10px]"
           >
             Close
           </Button>
@@ -92,7 +92,7 @@ export function ClaimOfferModal({
           <div className="bg-black p-12 text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-corporate-primary/20 rounded-full blur-[60px] translate-x-1/2 -translate-y-1/2" />
             <Sparkles className="w-12 h-12 text-corporate-primary mb-6 animate-pulse" />
-            <DialogTitle className="text-3xl font-black leading-tight mb-2 tracking-tighter">
+            <DialogTitle className="text-xl font-bold leading-tight mb-2 tracking-tighter">
               Claim Your Exclusive <br />
               <span className="text-corporate-primary italic">
                 Opportunity.
@@ -109,7 +109,7 @@ export function ClaimOfferModal({
               <div className="space-y-3">
                 <Label
                   htmlFor="userName"
-                  className="font-black uppercase tracking-widest text-[10px] opacity-40 ml-1"
+                  className="font-bold uppercase tracking-widest text-[10px] opacity-40 ml-1"
                 >
                   Your Full Name
                 </Label>
@@ -127,7 +127,7 @@ export function ClaimOfferModal({
               <div className="space-y-3">
                 <Label
                   htmlFor="phone"
-                  className="font-black uppercase tracking-widest text-[10px] opacity-40 ml-1"
+                  className="font-bold uppercase tracking-widest text-[10px] opacity-40 ml-1"
                 >
                   Phone Number
                 </Label>
@@ -148,7 +148,7 @@ export function ClaimOfferModal({
               <div className="space-y-3">
                 <Label
                   htmlFor="whatsapp"
-                  className="font-black uppercase tracking-widest text-[10px] opacity-40 ml-1"
+                  className="font-bold uppercase tracking-widest text-[10px] opacity-40 ml-1"
                 >
                   WhatsApp (Optional)
                 </Label>
@@ -165,7 +165,7 @@ export function ClaimOfferModal({
               <div className="space-y-3">
                 <Label
                   htmlFor="email"
-                  className="font-black uppercase tracking-widest text-[10px] opacity-40 ml-1"
+                  className="font-bold uppercase tracking-widest text-[10px] opacity-40 ml-1"
                 >
                   Email (Optional)
                 </Label>
@@ -186,7 +186,7 @@ export function ClaimOfferModal({
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-corporate-primary hover:bg-orange-600 text-white rounded-[24px] py-10 text-xl font-black shadow-2xl shadow-orange-500/20 transition-all active:scale-95 disabled:opacity-50"
+                className="w-full bg-corporate-primary hover:bg-orange-600 text-white rounded-[24px] py-10 text-xl font-bold shadow-2xl shadow-orange-500/20 transition-all active:scale-95 disabled:opacity-50"
               >
                 {loading ? (
                   <Loader2 className="w-6 h-6 animate-spin" />
@@ -195,7 +195,7 @@ export function ClaimOfferModal({
                 )}
               </Button>
             </div>
-            <p className="text-center text-[10px] font-black uppercase tracking-[0.2em] opacity-30 italic">
+            <p className="text-center text-[10px] font-bold uppercase tracking-[0.2em] opacity-30 italic">
               Our team will contact you within 24 hours.
             </p>
             {/* Honeypot field */}

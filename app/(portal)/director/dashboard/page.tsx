@@ -4,7 +4,13 @@ import { useFetchAccount } from "@/hooks/accounts/actions";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import DivisionsList from "@/components/divisions/DivisionsList";
 import CreateDivisionModal from "@/forms/divisions/CreateDivisionModal";
-import { Building2, Layers, Book, ScrollText, CalendarRange } from "lucide-react";
+import {
+  Building2,
+  Layers,
+  Book,
+  ScrollText,
+  CalendarRange,
+} from "lucide-react";
 import { useFetchCOAs } from "@/hooks/coa/actions";
 import { useFetchBooks } from "@/hooks/books/actions";
 import { useFetchFinancialYears } from "@/hooks/financialyears/actions";
@@ -71,11 +77,11 @@ export default function DirectorDashboard() {
             <div className="w-6 h-6 rounded-md bg-[#D0402B] flex items-center justify-center text-white shadow-md shadow-[#D0402B]/20">
               <Building2 className="w-3 h-3" />
             </div>
-            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[#D0402B]">
+            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#D0402B]">
               Administrative Portal
             </p>
           </div>
-          <h1 className="text-xl font-black text-black tracking-tighter italic">
+          <h1 className="text-xl font-bold text-black tracking-tighter italic">
             Director <span className="text-[#D0402B]">Dashboard</span>
           </h1>
           <p className="text-black/40 font-bold mt-0.5 text-xs max-w-md">
@@ -100,10 +106,10 @@ export default function DirectorDashboard() {
                   <stat.icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-black/40 font-black uppercase tracking-widest text-[9px] mb-1">
+                  <p className="text-black/40 font-bold uppercase tracking-widest text-[9px] mb-1">
                     {stat.label}
                   </p>
-                  <h3 className="text-2xl font-black text-black tracking-tighter">
+                  <h3 className="text-xl font-bold text-black tracking-tighter">
                     {stat.value}
                   </h3>
                   <p className="text-[10px] font-bold text-black/40 mt-1">
@@ -124,10 +130,10 @@ export default function DirectorDashboard() {
       {/* Divisions Section */}
       <div className="space-y-6 pt-6">
         <div className="flex items-center justify-between border-b border-black/5 pb-6">
-          <h2 className="text-2xl font-black text-black tracking-tight">
+          <h2 className="text-xl font-bold text-black tracking-tight">
             Corporate Divisions
           </h2>
-          <p className="text-[10px] font-black uppercase tracking-widest text-black/40">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-black/40">
             Real-time status
           </p>
         </div>

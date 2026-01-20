@@ -47,7 +47,7 @@ export default function FinanceJournalsPage() {
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-black tracking-tighter">
+          <h1 className="text-xl font-bold text-black tracking-tighter">
             Transaction Journals
           </h1>
           <p className="text-black/60 font-medium mt-1">

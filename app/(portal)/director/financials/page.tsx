@@ -13,11 +13,11 @@ export default function FinancialsPage() {
             <div className="w-8 h-8 rounded-lg bg-[#D0402B] flex items-center justify-center text-white shadow-lg shadow-[#D0402B]/20">
               <Landmark className="w-4 h-4" />
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D0402B]">
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#D0402B]">
               Fiscal Management
             </p>
           </div>
-          <h1 className="text-4xl font-black text-black tracking-tighter italic">
+          <h1 className="text-xl font-bold text-black tracking-tighter italic">
             Financial <span className="text-[#D0402B]">Operations</span>
           </h1>
           <p className="text-black/40 font-bold mt-1 text-sm max-w-md">
@@ -28,7 +28,7 @@ export default function FinancialsPage() {
 
         <div className="flex items-center gap-4">
           <div className="hidden md:flex flex-col items-end">
-            <p className="text-[10px] font-black uppercase tracking-widest text-[#D0402B]">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-[#D0402B]">
               Platform Sync
             </p>
             <p className="text-xs font-bold text-black opacity-40 italic">
@@ -49,7 +49,7 @@ export default function FinancialsPage() {
               <Receipt className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-2xl font-black text-black tracking-tight italic">
+              <h2 className="text-xl font-bold text-black tracking-tight italic">
                 Journal <span className="text-[#D0402B]">Ledgers</span>
               </h2>
               <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">

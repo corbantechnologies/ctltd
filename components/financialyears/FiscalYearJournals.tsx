@@ -77,7 +77,7 @@ export default function FiscalYearJournals({
   const totalPages = Math.ceil(filteredJournals.length / itemsPerPage);
   const paginatedJournals = filteredJournals.slice(
     (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    currentPage * itemsPerPage,
   );
 
   if (isLoadingTypes) return <LoadingSpinner />;
@@ -121,9 +121,7 @@ export default function FiscalYearJournals({
                 backgroundColor: view === "grid" ? primaryColor : "transparent",
                 color: view === "grid" ? "white" : "rgba(0,0,0,0.4)",
                 boxShadow:
-                  view === "grid"
-                    ? `0 4px 6px -1px ${primaryColor}33`
-                    : "none",
+                  view === "grid" ? `0 4px 6px -1px ${primaryColor}33` : "none",
               }}
             >
               <LayoutGrid className="w-3.5 h-3.5" />
@@ -209,7 +207,7 @@ export default function FiscalYearJournals({
               title="Clear Filters"
             >
               <X className="w-3.5 h-3.5" />
-              <span className="text-[10px] font-black uppercase tracking-widest">
+              <span className="text-[10px] font-bold uppercase tracking-widest">
                 Clear
               </span>
             </Button>
@@ -246,10 +244,11 @@ export default function FiscalYearJournals({
                       `}</style>
                     </div>
                     <Badge
-                      className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-none ${journal.is_posted
-                        ? "bg-green-50 text-green-600 shadow-sm shadow-green-100"
-                        : "bg-orange-50 text-orange-600 shadow-sm shadow-orange-100"
-                        }`}
+                      className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-none ${
+                        journal.is_posted
+                          ? "bg-green-50 text-green-600 shadow-sm shadow-green-100"
+                          : "bg-orange-50 text-orange-600 shadow-sm shadow-orange-100"
+                      }`}
                     >
                       {journal.is_posted ? "Posted" : "Pending"}
                     </Badge>
@@ -301,16 +300,16 @@ export default function FiscalYearJournals({
             <table className="w-full">
               <thead>
                 <tr className="bg-gray-50/50 border-b border-gray-100">
-                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-gray-400">
                     Posting Date
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-gray-400">
                     Journal Description
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-gray-400">
                     Type
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-gray-400">
                     Status
                   </th>
                 </tr>
@@ -384,15 +383,15 @@ export default function FiscalYearJournals({
         <div className="flex flex-col md:flex-row justify-between items-center bg-white p-4 rounded-2xl border border-gray-100 shadow-sm mt-6 gap-4">
           <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center md:text-left">
             Showing{" "}
-            <span className="text-black font-black">
+            <span className="text-black font-bold">
               {(currentPage - 1) * itemsPerPage + 1}
             </span>{" "}
             to{" "}
-            <span className="text-black font-black">
+            <span className="text-black font-bold">
               {Math.min(currentPage * itemsPerPage, filteredJournals.length)}
             </span>{" "}
             of{" "}
-            <span className="text-black font-black">
+            <span className="text-black font-bold">
               {filteredJournals.length}
             </span>{" "}
             journals
@@ -403,7 +402,7 @@ export default function FiscalYearJournals({
               size="sm"
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="rounded-lg border-gray-100 bg-white transition-all hover:bg-gray-50 hover:text-black disabled:opacity-30 h-8 px-3 font-black text-gray-500 text-[10px] uppercase tracking-wider"
+              className="rounded-lg border-gray-100 bg-white transition-all hover:bg-gray-50 hover:text-black disabled:opacity-30 h-8 px-3 font-bold text-gray-500 text-[10px] uppercase tracking-wider"
             >
               <ChevronLeft className="w-3.5 h-3.5 mr-1" /> Prev
             </Button>
@@ -414,10 +413,11 @@ export default function FiscalYearJournals({
                   variant={currentPage === i + 1 ? "default" : "outline"}
                   size="sm"
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`w-8 h-8 rounded-lg transition-all font-black text-xs ${currentPage === i + 1
+                  className={`w-8 h-8 rounded-lg transition-all font-bold text-xs ${
+                    currentPage === i + 1
                       ? "text-white shadow-md"
                       : "bg-white border-gray-100 hover:bg-gray-50 text-gray-400"
-                    }`}
+                  }`}
                   style={{
                     backgroundColor:
                       currentPage === i + 1 ? primaryColor : undefined,
@@ -436,7 +436,7 @@ export default function FiscalYearJournals({
               size="sm"
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="rounded-lg border-gray-100 bg-white transition-all hover:bg-gray-50 hover:text-black disabled:opacity-30 h-8 px-3 font-black text-gray-500 text-[10px] uppercase tracking-wider"
+              className="rounded-lg border-gray-100 bg-white transition-all hover:bg-gray-50 hover:text-black disabled:opacity-30 h-8 px-3 font-bold text-gray-500 text-[10px] uppercase tracking-wider"
             >
               Next <ChevronRight className="w-3.5 h-3.5 ml-1" />
             </Button>
@@ -449,7 +449,7 @@ export default function FiscalYearJournals({
           <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center text-gray-300 mx-auto mb-4">
             <History className="w-8 h-8" />
           </div>
-          <h3 className="text-xl font-black text-black tracking-tight mb-2 uppercase tracking-widest italic scale-95">
+          <h3 className="text-xl font-bold text-black tracking-tight mb-2 uppercase tracking-widest italic scale-95">
             No Journals Found
           </h3>
           <p className="text-gray-400 font-bold max-w-sm mx-auto text-xs">

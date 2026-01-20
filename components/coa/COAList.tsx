@@ -69,7 +69,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
         <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center text-black/20 mb-4 shadow-sm">
           <Database className="w-8 h-8" />
         </div>
-        <p className="text-sm font-black text-black/40 uppercase tracking-widest">
+        <p className="text-sm font-bold text-black/40 uppercase tracking-widest">
           No accounts registered in COA
         </p>
       </div>
@@ -106,10 +106,11 @@ export default function COAList({ rolePrefix }: COAListProps) {
         <div className="flex items-center gap-1.5 bg-black/5 p-1 rounded-xl self-end lg:self-auto">
           <button
             onClick={() => setView("grid")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === "grid"
-              ? "bg-white shadow-sm"
-              : "text-black/40 hover:text-black"
-              }`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
+              view === "grid"
+                ? "bg-white shadow-sm"
+                : "text-black/40 hover:text-black"
+            }`}
             style={
               {
                 color: view === "grid" ? primaryColor : undefined,
@@ -121,10 +122,11 @@ export default function COAList({ rolePrefix }: COAListProps) {
           </button>
           <button
             onClick={() => setView("table")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === "table"
-              ? "bg-white shadow-sm"
-              : "text-black/40 hover:text-black"
-              }`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
+              view === "table"
+                ? "bg-white shadow-sm"
+                : "text-black/40 hover:text-black"
+            }`}
             style={
               {
                 color: view === "table" ? primaryColor : undefined,
@@ -140,7 +142,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
       {/* Content Rendering */}
       {paginatedCOAs.length === 0 ? (
         <div className="py-20 text-center">
-          <p className="text-sm font-black text-black/20 uppercase tracking-[0.2em]">
+          <p className="text-sm font-bold text-black/20 uppercase tracking-[0.2em]">
             No accounts match your criteria
           </p>
         </div>
@@ -180,7 +182,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
 
                   <div className="mb-4">
                     <h3
-                      className="text-base font-black text-black tracking-tight transition-colors line-clamp-1"
+                      className="text-base font-bold text-black tracking-tight transition-colors line-clamp-1"
                       style={
                         {
                           "--hover-text": primaryColor,
@@ -223,19 +225,19 @@ export default function COAList({ rolePrefix }: COAListProps) {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/10 bg-black/5">
-                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Account Name
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Code
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Type / Balance
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Status
                   </th>
-                  <th className="text-right py-3 px-4 text-[9px] font-black uppercase tracking-widest text-black/40">
+                  <th className="text-right py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Actions
                   </th>
                 </tr>
@@ -244,7 +246,9 @@ export default function COAList({ rolePrefix }: COAListProps) {
                 {paginatedCOAs.map((coa) => (
                   <tr
                     key={coa.reference}
-                    onClick={() => router.push(`/${rolePrefix}/coa/${coa.reference}`)}
+                    onClick={() =>
+                      router.push(`/${rolePrefix}/coa/${coa.reference}`)
+                    }
                     className="transition-colors group cursor-pointer"
                     style={
                       {
@@ -313,7 +317,10 @@ export default function COAList({ rolePrefix }: COAListProps) {
                       )}
                     </td>
                     <td className="py-3 px-4 text-right">
-                      <Link href={`/${rolePrefix}/coa/${coa.reference}`} onClick={(e) => e.stopPropagation()}>
+                      <Link
+                        href={`/${rolePrefix}/coa/${coa.reference}`}
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <Button
                           variant="ghost"
                           className="h-8 w-8 p-0 rounded-lg hover:text-white transition-all duration-300"
@@ -367,10 +374,11 @@ export default function COAList({ rolePrefix }: COAListProps) {
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-8 h-8 rounded-lg text-[10px] font-black transition-all ${currentPage === page
-                        ? "text-white shadow-md"
-                        : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
-                        }`}
+                      className={`w-8 h-8 rounded-lg text-[10px] font-bold transition-all ${
+                        currentPage === page
+                          ? "text-white shadow-md"
+                          : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
+                      }`}
                       style={
                         {
                           backgroundColor:

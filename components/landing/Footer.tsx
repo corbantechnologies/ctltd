@@ -48,7 +48,7 @@ export default function Footer() {
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-black font-black mb-6 tracking-widest uppercase text-xs">
+          <h4 className="text-black font-bold mb-6 tracking-widest uppercase text-xs">
             Company
           </h4>
           <ul className="space-y-4">
@@ -57,19 +57,19 @@ export default function Footer() {
                 <li key={item}>
                   <Link
                     href={`/${item.toLowerCase().replace(" ", "-")}`}
-                    className="text-black hover:text-corporate-primary text-sm font-black transition-colors"
+                    className="text-black hover:text-corporate-primary text-sm font-bold transition-colors"
                   >
                     {item}
                   </Link>
                 </li>
-              )
+              ),
             )}
           </ul>
         </div>
 
         {/* Solutions */}
         <div>
-          <h4 className="text-black font-black mb-6 tracking-widest uppercase text-xs">
+          <h4 className="text-black font-bold mb-6 tracking-widest uppercase text-xs">
             Solutions
           </h4>
           <ul className="space-y-4">
@@ -82,7 +82,7 @@ export default function Footer() {
               <li key={item.name}>
                 <a
                   href={item.href}
-                  className="text-black hover:text-corporate-primary text-sm font-black transition-colors"
+                  className="text-black hover:text-corporate-primary text-sm font-bold transition-colors"
                 >
                   {item.name}
                 </a>
@@ -93,7 +93,7 @@ export default function Footer() {
 
         {/* Contact Info */}
         <div className="space-y-6">
-          <h4 className="text-black font-black mb-6 tracking-widest uppercase text-xs">
+          <h4 className="text-black font-bold mb-6 tracking-widest uppercase text-xs">
             Office
           </h4>
           <div className="space-y-4">
@@ -111,26 +111,26 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-4 text-black group">
               <Mail className="w-5 h-5 text-corporate-primary shrink-0 group-hover:scale-110 transition-transform" />
-              <p className="text-sm font-black">info@corbantechnologies.org</p>
+              <p className="text-sm font-bold">info@corbantechnologies.org</p>
             </div>
           </div>
         </div>
       </div>
 
       <div className="mx-auto px-6 mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-6 text-black">
-        <p className="text-xs font-black">
+        <p className="text-xs font-bold">
           © {currentYear} Corban Technologies LTD. All rights reserved.
         </p>
         <div className="flex items-center gap-8">
           <a
             href="/privacy"
-            className="hover:text-corporate-primary text-xs font-black transition-colors"
+            className="hover:text-corporate-primary text-xs font-bold transition-colors"
           >
             Privacy Policy
           </a>
           <a
             href="/terms"
-            className="hover:text-corporate-primary text-xs font-black transition-colors"
+            className="hover:text-corporate-primary text-xs font-bold transition-colors"
           >
             Terms of Service
           </a>
