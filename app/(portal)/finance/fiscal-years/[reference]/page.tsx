@@ -29,7 +29,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export default function FiscalYearDetail() {
   const { reference } = useParams();
-  const { isLoading, data: fiscalYear } = useFetchFinancialYear(
+  const { isLoading, data: fiscalYear, refetch: refetchFiscalYear } = useFetchFinancialYear(
     reference as string,
   );
   const { data: journalTypes, isLoading: isLoadingTypes } =
@@ -222,6 +222,7 @@ export default function FiscalYearDetail() {
       {openCreateJournal && (
         <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
           <CreateJournal
+            refetch={refetchFiscalYear}
             fiscalYear={fiscalYear?.code}
             initialJournalType={selectedJournalType}
             rolePrefix="finance"

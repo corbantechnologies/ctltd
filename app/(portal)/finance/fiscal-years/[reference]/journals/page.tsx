@@ -19,7 +19,7 @@ import FiscalYearJournals from "@/components/financialyears/FiscalYearJournals";
 
 export default function FinanceJournalsPage() {
   const { reference } = useParams();
-  const { data: fiscalYear } = useFetchFinancialYear(reference as string);
+  const { data: fiscalYear, refetch: refetchFiscalYear } = useFetchFinancialYear(reference as string);
   const [openCreateJournal, setOpenCreateJournal] = useState(false);
 
   return (
@@ -77,6 +77,7 @@ export default function FinanceJournalsPage() {
       {openCreateJournal && (
         <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
           <CreateJournal
+            refetch={refetchFiscalYear}
             fiscalYear={fiscalYear?.code}
             rolePrefix="finance"
             onSuccess={() => setOpenCreateJournal(false)}

@@ -244,11 +244,10 @@ export default function FiscalYearJournals({
                       `}</style>
                     </div>
                     <Badge
-                      className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-none ${
-                        journal.is_posted
-                          ? "bg-green-50 text-green-600 shadow-sm shadow-green-100"
-                          : "bg-orange-50 text-orange-600 shadow-sm shadow-orange-100"
-                      }`}
+                      className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-none ${journal.is_posted
+                        ? "bg-green-50 text-green-600 shadow-sm shadow-green-100"
+                        : "bg-orange-50 text-orange-600 shadow-sm shadow-orange-100"
+                        }`}
                     >
                       {journal.is_posted ? "Posted" : "Pending"}
                     </Badge>
@@ -410,11 +409,10 @@ export default function FiscalYearJournals({
                   variant={currentPage === i + 1 ? "default" : "outline"}
                   size="sm"
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`w-8 h-8 rounded-lg transition-all font-bold text-xs ${
-                    currentPage === i + 1
-                      ? "text-white shadow-md"
-                      : "bg-white border-gray-100 hover:bg-gray-50 text-gray-400"
-                  }`}
+                  className={`w-8 h-8 rounded-lg transition-all font-bold text-xs ${currentPage === i + 1
+                    ? "text-white shadow-md"
+                    : "bg-white border-gray-100 hover:bg-gray-50 text-gray-400"
+                    }`}
                   style={{
                     backgroundColor:
                       currentPage === i + 1 ? primaryColor : undefined,

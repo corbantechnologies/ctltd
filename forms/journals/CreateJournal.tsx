@@ -28,6 +28,7 @@ interface CreateJournalProps {
   onSuccess?: () => void;
   onClose?: () => void;
   className?: string;
+  refetch: () => void;
 }
 
 export default function CreateJournal({
@@ -37,6 +38,7 @@ export default function CreateJournal({
   onSuccess,
   onClose,
   className,
+  refetch,
 }: CreateJournalProps) {
   const header = useAxiosAuth();
   const router = useRouter();
@@ -62,7 +64,7 @@ export default function CreateJournal({
         await createJournal(values, header);
         toast.success("Journal batch created successfully");
         queryClient.invalidateQueries({ queryKey: ["journals"] });
-        router.refresh();
+        refetch();
         if (onSuccess) onSuccess();
       } catch (error: any) {
         console.error("Create error:", error);
