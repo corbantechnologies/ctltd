@@ -307,19 +307,6 @@ export default function JournalsDetailPage() {
         </CardContent>
       </Card>
 
-      {/* Manual Modal Implementation for Create Journal Entry */}
-      {openAddEntry && (
-        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
-          <CreateJournalEntry
-            rolePrefix="finance"
-            journalReference={journal.code}
-            onSuccess={() => setOpenAddEntry(false)}
-            onClose={() => setOpenAddEntry(false)}
-            className="min-h-screen border-none shadow-none rounded-none"
-          />
-        </div>
-      )}
-
       {/* Manual Modal for Update Journal */}
       {openUpdateJournal && (
         <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
