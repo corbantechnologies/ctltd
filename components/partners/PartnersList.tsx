@@ -240,11 +240,8 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                           <Users className="w-4 h-4" />
                         </div>
                         <div>
-                          <div className="font-bold text-black text-sm">
+                          <div className="text-black text-sm">
                             {partner.name}
-                          </div>
-                          <div className="text-[9px] uppercase font-bold text-black/30 tracking-wider">
-                            {partner.reference}
                           </div>
                         </div>
                       </div>
