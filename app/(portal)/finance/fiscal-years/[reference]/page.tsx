@@ -87,9 +87,6 @@ export default function FiscalYearDetail() {
                 {fiscalYear.code}
               </h1>
               <div className="flex items-center gap-2 mt-1">
-                <Badge className="bg-black text-white border-none font-bold text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-md">
-                  REF: {fiscalYear.reference}
-                </Badge>
                 {fiscalYear.is_active ? (
                   <div className="flex items-center gap-1.5 text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
