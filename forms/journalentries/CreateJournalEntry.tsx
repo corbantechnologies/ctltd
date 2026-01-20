@@ -58,9 +58,9 @@ export default function CreateJournalEntry({
       division: "",
       debit: 0,
       credit: 0,
-      currency: "KES",
+      currency: "",
       exchange_rate: 1,
-      payment_method: "CASH",
+      payment_method: "",
       is_intercompany: false,
       source_document: "",
       document_number: "",
@@ -320,6 +320,7 @@ export default function CreateJournalEntry({
                 onBlur={formik.handleBlur}
                 value={formik.values.currency}
               >
+                <option value="">Select Currency</option>
                 <option value="KES">KES</option>
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
