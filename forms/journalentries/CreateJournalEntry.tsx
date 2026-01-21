@@ -423,6 +423,7 @@ export default function CreateJournalEntry({
                 value={formik.values.source_document}
               >
                 <option value="">Select Source Document</option>
+                <option value="KRA_INVOICE">KRA INVOICE</option>
                 <option value="KRA_SALES_RECEIPT">KRA SALES RECEIPT</option>
                 <option value="INVOICE">INVOICE</option>
                 <option value="RECEIPT">RECEIPT</option>
