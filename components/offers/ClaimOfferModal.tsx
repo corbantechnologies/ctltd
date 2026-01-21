@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CheckCircle2, Loader2, Sparkles } from "lucide-react";
+import toast from "react-hot-toast";
 
 interface ClaimOfferModalProps {
   isOpen: boolean;
@@ -49,7 +50,7 @@ export function ClaimOfferModal({
         setSuccess(true);
       }
     } catch (error) {
-      console.error("Error submitting claim:", error);
+      toast.error("Failed to send notification");
     } finally {
       setLoading(false);
     }
