@@ -56,6 +56,12 @@ export default function Navbar() {
       show: true,
     },
     {
+      name: "Reports",
+      href: `/${rolePrefix}/reports`,
+      icon: FileText,
+      show: isDirector || isFinance,
+    },
+    {
       name: "Divisions",
       href: `/${rolePrefix}/divisions`,
       icon: Database,
