@@ -88,11 +88,11 @@ export default function ReportsDashboard() {
             <div className="tabs-container">
                 {/* I'll use a simple layout first, maybe tabs later if needed. But dashboard is nice. */}
                 {/* Split View: PnL and Revenue */}
-                <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-7 mb-6">
+                <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-8 mb-6">
                     <div className="col-span-4">
                         {pnlData && <PnLReport data={pnlData} />}
                     </div>
-                    <div className="col-span-3">
+                    <div className="col-span-4">
                         {revenueData && <RevenueReport data={revenueData} />}
                     </div>
                 </div>
