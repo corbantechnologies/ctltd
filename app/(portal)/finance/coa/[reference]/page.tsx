@@ -23,7 +23,7 @@ import { Badge } from "@/components/ui/badge";
 
 export default function FinanceCOADetailPage() {
   const { reference } = useParams();
-  const { isLoading, data: coa } = useFetchCOA(reference as string);
+  const { isLoading, data: coa, refetch: refetchCOA } = useFetchCOA(reference as string);
   const [open, setOpen] = useState(false);
   const [openCreateBook, setOpenCreateBook] = useState(false);
 
@@ -190,6 +190,7 @@ export default function FinanceCOADetailPage() {
             onSuccess={() => setOpenCreateBook(false)}
             onClose={() => setOpenCreateBook(false)}
             className="min-h-screen border-none shadow-none rounded-none"
+            refetch={refetchCOA}
           />
         </div>
       )}

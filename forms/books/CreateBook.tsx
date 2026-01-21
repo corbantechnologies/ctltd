@@ -28,6 +28,7 @@ interface CreateBookProps {
   onSuccess?: () => void;
   onClose?: () => void;
   className?: string;
+  refetch: () => void;
 }
 
 export default function CreateBook({
@@ -36,6 +37,7 @@ export default function CreateBook({
   onSuccess,
   onClose,
   className,
+  refetch,
 }: CreateBookProps) {
   const header = useAxiosAuth();
   const router = useRouter();
@@ -61,6 +63,7 @@ export default function CreateBook({
       try {
         await createBook(values, header);
         toast.success("Account Book created successfully");
+        refetch();
         // reload
         queryClient.invalidateQueries({ queryKey: ["books"] });
         queryClient.invalidateQueries({ queryKey: ["coas"] }); // Refresh COA list as books are nested
