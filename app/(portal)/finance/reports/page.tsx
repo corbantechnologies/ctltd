@@ -1,6 +1,6 @@
 "use client";
 
-import ReportsDashboard from "@/components/portal/reports/ReportsDashboard";
+import ReportsDashboard from "@/components/reports/ReportsDashboard";
 
 export default function Reports() {
     return <ReportsDashboard />;

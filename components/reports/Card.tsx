@@ -12,7 +12,6 @@ export function Card({ children, className, gradient, ...props }: CardProps) {
             className={cn(
                 "rounded-2xl p-6 border",
                 "bg-white/80 backdrop-blur-xl border-black/5 shadow-sm",
-                "dark:bg-black/90 dark:border-white/5",
                 gradient && "bg-gradient-to-br from-white via-white to-orange-50/30",
                 className
             )}
