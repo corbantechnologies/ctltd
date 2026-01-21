@@ -40,6 +40,7 @@ export default function FiscalYearJournals({
   const [view, setView] = useState<"grid" | "table">("table");
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState("all");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -65,14 +66,20 @@ export default function FiscalYearJournals({
       const matchesType =
         typeFilter === "all" || journal.journal_type === typeFilter;
 
+      // Status Filter
+      const matchesStatus =
+        statusFilter === "all" ||
+        (statusFilter === "posted" && journal.is_posted) ||
+        (statusFilter === "pending" && !journal.is_posted);
+
       // Date Range Filter
       const matchesDateRange =
         (!startDate || journalDate >= new Date(startDate)) &&
         (!endDate || journalDate <= new Date(endDate));
 
-      return matchesSearch && matchesType && matchesDateRange;
+      return matchesSearch && matchesType && matchesDateRange && matchesStatus;
     });
-  }, [journals, searchQuery, typeFilter, startDate, endDate]);
+  }, [journals, searchQuery, typeFilter, statusFilter, startDate, endDate]);
 
   const totalPages = Math.ceil(filteredJournals.length / itemsPerPage);
   const paginatedJournals = filteredJournals.slice(
@@ -85,6 +92,7 @@ export default function FiscalYearJournals({
   const clearFilters = () => {
     setSearchQuery("");
     setTypeFilter("all");
+    setStatusFilter("all");
     setStartDate("");
     setEndDate("");
     setCurrentPage(1);
@@ -147,71 +155,118 @@ export default function FiscalYearJournals({
         </div>
 
         {/* Validated Filter Bar */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 pt-4 border-t border-gray-100">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 pt-4 border-t border-gray-100">
           {/* Type Filter */}
-          <div className="relative group">
-            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 transition-colors" />
-            <select
-              value={typeFilter}
-              onChange={(e) => {
-                setTypeFilter(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full h-10 pl-9 pr-3 rounded-lg border border-gray-100 bg-white focus:ring-2 focus:ring-gray-100 outline-none transition-all font-bold text-[10px] uppercase tracking-widest appearance-none text-gray-600 cursor-pointer shadow-sm hover:bg-gray-50"
-            >
-              <option value="all">All Journal Types</option>
-              {journalTypes?.map((type) => (
-                <option key={type.reference} value={type.name}>
-                  {type.name}
-                </option>
-              ))}
-            </select>
+          <div className="flex flex-col gap-1">
+            <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400 ml-1">
+              Journal Type
+            </span>
+            <div className="relative group">
+              <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 transition-colors" />
+              <select
+                value={typeFilter}
+                onChange={(e) => {
+                  setTypeFilter(e.target.value);
+                  setCurrentPage(1);
+                }}
+                className="w-full h-10 pl-9 pr-3 rounded-lg border border-gray-100 bg-white focus:ring-2 focus:ring-gray-100 outline-none transition-all font-bold text-[10px] uppercase tracking-widest appearance-none text-gray-600 cursor-pointer shadow-sm hover:bg-gray-50"
+              >
+                <option value="all">All Types</option>
+                {journalTypes?.map((type) => (
+                  <option key={type.reference} value={type.name}>
+                    {type.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Status Filter */}
+          <div className="flex flex-col gap-1">
+            <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400 ml-1">
+              Stats
+            </span>
+            <div className="relative group">
+              <CheckCircle2 className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 transition-colors" />
+              <select
+                value={statusFilter}
+                onChange={(e) => {
+                  setStatusFilter(e.target.value);
+                  setCurrentPage(1);
+                }}
+                className="w-full h-10 pl-9 pr-3 rounded-lg border border-gray-100 bg-white focus:ring-2 focus:ring-gray-100 outline-none transition-all font-bold text-[10px] uppercase tracking-widest appearance-none text-gray-600 cursor-pointer shadow-sm hover:bg-gray-50"
+              >
+                <option value="all">All Statuses</option>
+                <option value="posted">Posted</option>
+                <option value="pending">Pending</option>
+              </select>
+            </div>
           </div>
 
           {/* Date Range Start */}
-          <div className="relative group">
-            <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 group-focus-within:text-black transition-colors" />
-            <Input
-              type="date"
-              value={startDate}
-              onChange={(e) => {
-                setStartDate(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="pl-9 h-10 bg-white border-gray-100 rounded-lg focus:ring-gray-100 transition-all font-bold text-[10px] uppercase tracking-widest shadow-sm"
-              title="Start Date"
-            />
+          <div className="flex flex-col gap-1">
+            <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400 ml-1">
+              From Date
+            </span>
+            <div className="relative group">
+              <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 group-focus-within:text-black transition-colors" />
+              <Input
+                type="date"
+                value={startDate}
+                onChange={(e) => {
+                  setStartDate(e.target.value);
+                  setCurrentPage(1);
+                }}
+                className="pl-9 h-10 bg-white border-gray-100 rounded-lg focus:ring-gray-100 transition-all text-[10px] tracking-widest shadow-sm"
+              />
+            </div>
           </div>
 
           {/* Date Range End */}
-          <div className="relative group">
-            <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 group-focus-within:text-black transition-colors" />
-            <Input
-              type="date"
-              value={endDate}
-              onChange={(e) => {
-                setEndDate(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="pl-9 h-10 bg-white border-gray-100 rounded-lg focus:ring-gray-100 transition-all font-bold text-[10px] uppercase tracking-widest shadow-sm"
-              title="End Date"
-            />
+          <div className="flex flex-col gap-1">
+            <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400 ml-1">
+              To Date
+            </span>
+            <div className="relative group">
+              <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 group-focus-within:text-black transition-colors" />
+              <Input
+                type="date"
+                value={endDate}
+                onChange={(e) => {
+                  setEndDate(e.target.value);
+                  setCurrentPage(1);
+                }}
+                className="pl-9 h-10 bg-white border-gray-100 rounded-lg focus:ring-gray-100 transition-all text-[10px] tracking-widest shadow-sm"
+              />
+            </div>
           </div>
 
           {/* Clear Filter Button */}
-          {(searchQuery || typeFilter !== "all" || startDate || endDate) && (
-            <Button
-              variant="outline"
-              onClick={clearFilters}
-              className="h-10 px-4 rounded-lg border-gray-100 bg-white hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-all text-gray-400 shadow-sm flex items-center justify-center gap-2"
-              title="Clear Filters"
-            >
-              <X className="w-3.5 h-3.5" />
-              <span className="text-[10px] font-bold uppercase tracking-widest">
-                Clear
-              </span>
-            </Button>
-          )}
+          <div className="flex flex-col gap-1 justify-end">
+            {/* Spacer label to align button with inputs */}
+            <span className="text-[9px] font-bold uppercase tracking-widest text-transparent ml-1 select-none">
+              &nbsp;
+            </span>
+            {searchQuery ||
+            typeFilter !== "all" ||
+            statusFilter !== "all" ||
+            startDate ||
+            endDate ? (
+              <Button
+                variant="outline"
+                onClick={clearFilters}
+                className="h-10 px-4 rounded-lg border-gray-100 bg-white hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-all text-gray-400 shadow-sm flex items-center justify-center gap-2 w-full"
+                title="Clear Filters"
+              >
+                <X className="w-3.5 h-3.5" />
+                <span className="text-[10px] font-bold uppercase tracking-widest">
+                  Clear
+                </span>
+              </Button>
+            ) : (
+              <div className="h-10" />
+            )}
+          </div>
         </div>
       </div>
 
@@ -244,10 +299,11 @@ export default function FiscalYearJournals({
                       `}</style>
                     </div>
                     <Badge
-                      className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-none ${journal.is_posted
-                        ? "bg-green-50 text-green-600 shadow-sm shadow-green-100"
-                        : "bg-orange-50 text-orange-600 shadow-sm shadow-orange-100"
-                        }`}
+                      className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-none ${
+                        journal.is_posted
+                          ? "bg-green-50 text-green-600 shadow-sm shadow-green-100"
+                          : "bg-orange-50 text-orange-600 shadow-sm shadow-orange-100"
+                      }`}
                     >
                       {journal.is_posted ? "Posted" : "Pending"}
                     </Badge>
@@ -409,10 +465,11 @@ export default function FiscalYearJournals({
                   variant={currentPage === i + 1 ? "default" : "outline"}
                   size="sm"
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`w-8 h-8 rounded-lg transition-all font-bold text-xs ${currentPage === i + 1
-                    ? "text-white shadow-md"
-                    : "bg-white border-gray-100 hover:bg-gray-50 text-gray-400"
-                    }`}
+                  className={`w-8 h-8 rounded-lg transition-all font-bold text-xs ${
+                    currentPage === i + 1
+                      ? "text-white shadow-md"
+                      : "bg-white border-gray-100 hover:bg-gray-50 text-gray-400"
+                  }`}
                   style={{
                     backgroundColor:
                       currentPage === i + 1 ? primaryColor : undefined,
