@@ -40,7 +40,7 @@ export default function BooksList({
   const [view, setView] = useState<"grid" | "table">("table");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = 10;
 
   const filteredBooks = useMemo(() => {
     if (!books) return [];
@@ -99,11 +99,10 @@ export default function BooksList({
         <div className="flex items-center gap-2 bg-black/5 p-1.5 rounded-xl self-end lg:self-auto">
           <button
             onClick={() => setView("grid")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
-              view === "grid"
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "grid"
                 ? "bg-white shadow-sm"
                 : "text-black/40 hover:text-black"
-            }`}
+              }`}
             style={
               {
                 color: view === "grid" ? primaryColor : undefined,
@@ -115,11 +114,10 @@ export default function BooksList({
           </button>
           <button
             onClick={() => setView("table")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
-              view === "table"
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "table"
                 ? "bg-white shadow-sm"
                 : "text-black/40 hover:text-black"
-            }`}
+              }`}
             style={
               {
                 color: view === "table" ? primaryColor : undefined,
@@ -378,11 +376,10 @@ export default function BooksList({
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-10 h-10 rounded-xl text-[10px] font-bold transition-all ${
-                        currentPage === page
+                      className={`w-10 h-10 rounded-xl text-[10px] font-bold transition-all ${currentPage === page
                           ? "text-white shadow-lg"
                           : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
-                      }`}
+                        }`}
                       style={
                         {
                           backgroundColor:
