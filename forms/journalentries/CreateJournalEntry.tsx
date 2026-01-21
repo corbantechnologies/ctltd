@@ -22,6 +22,7 @@ import { useFetchBooks } from "@/hooks/books/actions";
 import { useFetchPartners } from "@/hooks/partners/actions";
 import { useFetchDivisions } from "@/hooks/divisions/actions";
 import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 interface CreateJournalEntryProps {
   rolePrefix?: string;
@@ -43,6 +44,7 @@ export default function CreateJournalEntry({
   const header = useAxiosAuth();
   const router = useRouter();
   const queryClient = useQueryClient();
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
 
@@ -71,8 +73,21 @@ export default function CreateJournalEntry({
       project: "",
     },
     enableReinitialize: true,
-    // No validationSchema — using native HTML required
+    // No Yup validation — using HTML required + minimal client check
     onSubmit: async (values, { setSubmitting, resetForm }) => {
+      setSubmitError(null);
+
+      // Quick client-side validation for amounts
+      const isForeign = values.currency && values.currency !== "KES";
+      const mainDebit = isForeign ? Number(values.foreign_debit) || 0 : Number(values.debit) || 0;
+      const mainCredit = isForeign ? Number(values.foreign_credit) || 0 : Number(values.credit) || 0;
+
+      if (mainDebit === 0 && mainCredit === 0) {
+        setSubmitError("At least one amount (debit or credit) must be greater than zero.");
+        setSubmitting(false);
+        return;
+      }
+
       try {
         const formData = new FormData();
         formData.append("journal", values.journal);
@@ -96,7 +111,7 @@ export default function CreateJournalEntry({
         }
 
         await createJournalEntry(formData, header);
-        toast.success("Journal entry recorded");
+        toast.success("Journal entry recorded successfully");
         refetch();
         queryClient.invalidateQueries({ queryKey: ["journal_entries"] });
         queryClient.invalidateQueries({ queryKey: ["journals"] });
@@ -109,7 +124,13 @@ export default function CreateJournalEntry({
         if (onSuccess) onSuccess();
         router.refresh();
       } catch (error: any) {
-        toast.error(error?.response?.data?.message || "Failed to record entry");
+        const backendError =
+          error?.response?.data?.non_field_errors?.[0] ||
+          error?.response?.data?.detail ||
+          error?.response?.data?.message ||
+          "Failed to record entry. Please check required fields and amounts.";
+        setSubmitError(backendError);
+        toast.error(backendError);
       } finally {
         setSubmitting(false);
       }
@@ -118,10 +139,10 @@ export default function CreateJournalEntry({
 
   return (
     <Card
-      className={`w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
+      className={`w-full border-black shadow-2xl rounded-[32px] overflow-hidden bg-gray-50 backdrop-blur-xl ${className}`}
     >
       <CardHeader
-        className="p-8 border-b border-black/5"
+        className="p-8 border-b border-black"
         style={{ backgroundColor: `${primaryColor}0D` }}
       >
         <div className="flex items-start justify-between mb-4">
@@ -158,10 +179,16 @@ export default function CreateJournalEntry({
         </div>
       </CardHeader>
 
-      <CardContent className="p-8">
+      <CardContent className="p-4 bg-gray-100">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
+          {submitError && (
+            <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-xl text-sm">
+              {submitError}
+            </div>
+          )}
+
           {/* Contextual Mapping */}
-          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-orange-50/20 rounded-3xl border border-black/5">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-orange-50/20 rounded-3xl border border-black">
             <div className="space-y-2">
               <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
                 Journal Batch <span className="text-red-500 text-xs font-bold">*</span>
@@ -172,7 +199,7 @@ export default function CreateJournalEntry({
                 value={journalReference}
                 disabled
                 required
-                className="flex h-12 w-full rounded-xl border border-black/5 bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20"
+                className="h-12 rounded-xl border-black bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20"
               />
             </div>
 
@@ -184,7 +211,7 @@ export default function CreateJournalEntry({
                 name="book"
                 required
                 disabled={isLoadingBooks}
-                className="flex h-12 w-full rounded-xl border border-black/5 bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+                className="h-12 w-full rounded-xl border border-black bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
                 onChange={formik.handleChange}
                 value={formik.values.book}
               >
@@ -204,7 +231,7 @@ export default function CreateJournalEntry({
               <select
                 name="partner"
                 disabled={isLoadingPartners}
-                className="flex h-12 w-full rounded-xl border border-black/5 bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+                className="h-12 w-full rounded-xl border border-black bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
                 onChange={formik.handleChange}
                 value={formik.values.partner}
               >
@@ -225,7 +252,7 @@ export default function CreateJournalEntry({
                 name="division"
                 required
                 disabled={isLoadingDivisions}
-                className="flex h-12 w-full rounded-xl border border-black/5 bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+                className="h-12 w-full rounded-xl border border-black bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
                 onChange={formik.handleChange}
                 value={formik.values.division}
               >
@@ -244,15 +271,15 @@ export default function CreateJournalEntry({
               </Label>
               <Input
                 name="project"
-                placeholder="PROJ-001"
-                className="h-12 rounded-xl border-black/5 bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20"
+                placeholder="e.g. PROJ-001"
+                className="h-12 rounded-xl border-black bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20"
                 onChange={formik.handleChange}
                 value={formik.values.project}
               />
             </div>
           </div>
 
-          <hr className="border-black/5 my-6" />
+          <hr className="border-black my-6" />
 
           {/* Financials */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -263,7 +290,7 @@ export default function CreateJournalEntry({
               <select
                 name="currency"
                 required
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+                className="h-14 w-full rounded-2xl border border-black bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
                 onChange={formik.handleChange}
                 value={formik.values.currency}
               >
@@ -277,7 +304,7 @@ export default function CreateJournalEntry({
 
             <div className="space-y-2">
               <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
-                Ex. Rate <span className="text-red-500 text-xs font-bold">*</span>
+                Exchange Rate <span className="text-red-500 text-xs font-bold">*</span>
               </Label>
               <Input
                 name="exchange_rate"
@@ -286,7 +313,7 @@ export default function CreateJournalEntry({
                 min="0"
                 required
                 placeholder="1.0000"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
+                className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5"
                 onChange={formik.handleChange}
                 value={formik.values.exchange_rate}
               />
@@ -296,7 +323,7 @@ export default function CreateJournalEntry({
               <>
                 <div className="space-y-2">
                   <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
-                    Debit Amount
+                    Debit Amount (KES)
                   </Label>
                   <Input
                     name="debit"
@@ -304,7 +331,7 @@ export default function CreateJournalEntry({
                     step="0.01"
                     min="0"
                     placeholder="0.00"
-                    className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
+                    className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5"
                     onChange={formik.handleChange}
                     value={formik.values.debit}
                   />
@@ -312,7 +339,7 @@ export default function CreateJournalEntry({
 
                 <div className="space-y-2">
                   <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
-                    Credit Amount
+                    Credit Amount (KES)
                   </Label>
                   <Input
                     name="credit"
@@ -320,7 +347,7 @@ export default function CreateJournalEntry({
                     step="0.01"
                     min="0"
                     placeholder="0.00"
-                    className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
+                    className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5"
                     onChange={formik.handleChange}
                     value={formik.values.credit}
                   />
@@ -332,7 +359,7 @@ export default function CreateJournalEntry({
               <>
                 <div className="space-y-2">
                   <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
-                    Foreign Debit
+                    Foreign Debit ({formik.values.currency})
                   </Label>
                   <Input
                     name="foreign_debit"
@@ -340,7 +367,7 @@ export default function CreateJournalEntry({
                     step="0.01"
                     min="0"
                     placeholder="0.00"
-                    className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
+                    className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5"
                     onChange={formik.handleChange}
                     value={formik.values.foreign_debit}
                   />
@@ -348,7 +375,7 @@ export default function CreateJournalEntry({
 
                 <div className="space-y-2">
                   <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
-                    Foreign Credit
+                    Foreign Credit ({formik.values.currency})
                   </Label>
                   <Input
                     name="foreign_credit"
@@ -356,7 +383,7 @@ export default function CreateJournalEntry({
                     step="0.01"
                     min="0"
                     placeholder="0.00"
-                    className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
+                    className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5"
                     onChange={formik.handleChange}
                     value={formik.values.foreign_credit}
                   />
@@ -373,7 +400,7 @@ export default function CreateJournalEntry({
               </Label>
               <select
                 name="payment_method"
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+                className="h-14 w-full rounded-2xl border border-black bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
                 onChange={formik.handleChange}
                 value={formik.values.payment_method}
               >
@@ -387,11 +414,11 @@ export default function CreateJournalEntry({
 
             <div className="space-y-2">
               <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
-                Source Doc Type
+                Source Document Type
               </Label>
               <select
                 name="source_document"
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+                className="h-14 w-full rounded-2xl border border-black bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
                 onChange={formik.handleChange}
                 value={formik.values.source_document}
               >
@@ -406,12 +433,12 @@ export default function CreateJournalEntry({
 
             <div className="space-y-2">
               <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
-                Document #
+                Document Number
               </Label>
               <Input
                 name="document_number"
-                placeholder="REF-001"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
+                placeholder="e.g. REF-001"
+                className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5"
                 onChange={formik.handleChange}
                 value={formik.values.document_number}
               />
@@ -425,7 +452,7 @@ export default function CreateJournalEntry({
                 name="document_file"
                 type="file"
                 accept=".pdf,.jpg,.jpeg,.png"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5 py-3 text-xs"
+                className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5 py-3 text-xs"
                 onChange={(e) => {
                   formik.setFieldValue("document_file", e.currentTarget.files?.[0] || null);
                 }}
@@ -440,18 +467,18 @@ export default function CreateJournalEntry({
             <Textarea
               name="notes"
               placeholder="Add any additional details or memo..."
-              className="min-h-[100px] rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold p-5"
+              className="min-h-[100px] rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold p-5"
               onChange={formik.handleChange}
               value={formik.values.notes}
             />
           </div>
 
-          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-2xl border border-black/5">
+          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-2xl border border-black">
             <input
               id="is_intercompany"
               name="is_intercompany"
               type="checkbox"
-              className="w-5 h-5 rounded-lg border-black/5 text-corporate-primary focus:ring-corporate-primary/20"
+              className="w-5 h-5 rounded-lg border-black text-corporate-primary focus:ring-corporate-primary/20"
               checked={formik.values.is_intercompany}
               onChange={formik.handleChange}
             />

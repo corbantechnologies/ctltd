@@ -144,7 +144,7 @@ export default function ForgotPassword() {
                   asChild
                   className="w-full h-14 bg-black hover:bg-corporate-primary text-white rounded-2xl text-lg font-black shadow-xl"
                 >
-                  <Link href="/reset-password">Proceed to Reset</Link>
+                  <Link href="/auth/reset-password">Proceed to Reset</Link>
                 </Button>
               </div>
             )}
