@@ -5,7 +5,7 @@ import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
 
 export interface User {
-  username: string;
+  member_code: string;
   email: string;
   first_name: string;
   last_name: string;
@@ -34,11 +34,11 @@ export interface resetPassword {
 }
 
 export const getAccount = async (
-  username: string,
+  member_code: string,
   headers: { headers: { Authorization: string } }
 ): Promise<User> => {
   const response: AxiosResponse<User> = await apiActions.get(
-    `/api/v1/auth/${username}/`,
+    `/api/v1/auth/${member_code}/`,
     headers
   );
   return response.data;

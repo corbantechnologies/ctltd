@@ -47,6 +47,7 @@ export default function CreateJournalType({
       try {
         await createJournalType(values, header);
         toast.success("Journal type defined successfully");
+        window.location.reload();
         queryClient.invalidateQueries({ queryKey: ["journal_types"] });
         resetForm();
         router.refresh();

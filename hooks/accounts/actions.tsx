@@ -1,17 +1,18 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import useUserUsername from "../authentication/useUserUsername";
+
 import { getAccount } from "@/services/accounts";
 import useAxiosAuth from "../authentication/useAxiosAuth";
+import useUserMemberCode from "../authentication/useUserMemberCode";
 
 export function useFetchAccount() {
-  const username = useUserUsername();
+  const member_code = useUserMemberCode();
   const header = useAxiosAuth();
 
   return useQuery({
-    queryKey: ["account", username],
-    queryFn: () => getAccount(username!, header),
-    enabled: !!username,
+    queryKey: ["account", member_code],
+    queryFn: () => getAccount(member_code!, header),
+    enabled: !!member_code,
   });
 }

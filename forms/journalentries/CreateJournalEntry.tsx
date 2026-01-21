@@ -3,7 +3,6 @@
 
 import { createJournalEntry } from "@/services/journalentries";
 import { useFormik } from "formik";
-import { JournalEntrySchema } from "@/validation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -23,6 +22,7 @@ import { useFetchBooks } from "@/hooks/books/actions";
 import { useFetchPartners } from "@/hooks/partners/actions";
 import { useFetchDivisions } from "@/hooks/divisions/actions";
 import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 interface CreateJournalEntryProps {
   rolePrefix?: string;
@@ -44,13 +44,13 @@ export default function CreateJournalEntry({
   const header = useAxiosAuth();
   const router = useRouter();
   const queryClient = useQueryClient();
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
 
   const { data: books, isLoading: isLoadingBooks } = useFetchBooks();
   const { data: partners, isLoading: isLoadingPartners } = useFetchPartners();
-  const { data: divisions, isLoading: isLoadingDivisions } =
-    useFetchDivisions();
+  const { data: divisions, isLoading: isLoadingDivisions } = useFetchDivisions();
 
   const formik = useFormik({
     initialValues: {
@@ -58,10 +58,12 @@ export default function CreateJournalEntry({
       book: "",
       partner: "",
       division: "",
-      debit: 0,
-      credit: 0,
+      debit: "",
+      credit: "",
       currency: "",
-      exchange_rate: 1,
+      exchange_rate: "1",
+      foreign_debit: "",
+      foreign_credit: "",
       payment_method: "",
       is_intercompany: false,
       source_document: "",
@@ -71,18 +73,33 @@ export default function CreateJournalEntry({
       project: "",
     },
     enableReinitialize: true,
-    validationSchema: JournalEntrySchema,
+    // No Yup validation — using HTML required + minimal client check
     onSubmit: async (values, { setSubmitting, resetForm }) => {
+      setSubmitError(null);
+
+      // Quick client-side validation for amounts
+      const isForeign = values.currency && values.currency !== "KES";
+      const mainDebit = isForeign ? Number(values.foreign_debit) || 0 : Number(values.debit) || 0;
+      const mainCredit = isForeign ? Number(values.foreign_credit) || 0 : Number(values.credit) || 0;
+
+      if (mainDebit === 0 && mainCredit === 0) {
+        setSubmitError("At least one amount (debit or credit) must be greater than zero.");
+        setSubmitting(false);
+        return;
+      }
+
       try {
         const formData = new FormData();
         formData.append("journal", values.journal);
         formData.append("book", values.book);
-        formData.append("partner", values.partner);
+        formData.append("partner", values.partner || "");
         formData.append("division", values.division);
-        formData.append("debit", values.debit.toString());
-        formData.append("credit", values.credit.toString());
+        formData.append("debit", values.debit || "0");
+        formData.append("credit", values.credit || "0");
         formData.append("currency", values.currency);
-        formData.append("exchange_rate", values.exchange_rate.toString());
+        formData.append("exchange_rate", values.exchange_rate);
+        formData.append("foreign_debit", values.foreign_debit || "0");
+        formData.append("foreign_credit", values.foreign_credit || "0");
         formData.append("payment_method", values.payment_method);
         formData.append("is_intercompany", values.is_intercompany.toString());
         formData.append("source_document", values.source_document || "");
@@ -94,7 +111,7 @@ export default function CreateJournalEntry({
         }
 
         await createJournalEntry(formData, header);
-        toast.success("Journal entry recorded");
+        toast.success("Journal entry recorded successfully");
         refetch();
         queryClient.invalidateQueries({ queryKey: ["journal_entries"] });
         queryClient.invalidateQueries({ queryKey: ["journals"] });
@@ -107,7 +124,13 @@ export default function CreateJournalEntry({
         if (onSuccess) onSuccess();
         router.refresh();
       } catch (error: any) {
-        toast.error(error?.response?.data?.message || "Failed to record entry");
+        const backendError =
+          error?.response?.data?.non_field_errors?.[0] ||
+          error?.response?.data?.detail ||
+          error?.response?.data?.message ||
+          "Failed to record entry. Please check required fields and amounts.";
+        setSubmitError(backendError);
+        toast.error(backendError);
       } finally {
         setSubmitting(false);
       }
@@ -116,10 +139,10 @@ export default function CreateJournalEntry({
 
   return (
     <Card
-      className={`w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
+      className={`w-full border-black shadow-2xl rounded-[32px] overflow-hidden bg-gray-50 backdrop-blur-xl ${className}`}
     >
       <CardHeader
-        className="p-8 border-b border-black/5"
+        className="p-8 border-b border-black"
         style={{ backgroundColor: `${primaryColor}0D` }}
       >
         <div className="flex items-start justify-between mb-4">
@@ -155,38 +178,41 @@ export default function CreateJournalEntry({
           )}
         </div>
       </CardHeader>
-      <CardContent className="p-8">
+
+      <CardContent className="p-4 bg-gray-100">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
+          {submitError && (
+            <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-xl text-sm">
+              {submitError}
+            </div>
+          )}
+
           {/* Contextual Mapping */}
-          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-orange-50/20 rounded-3xl border border-black/5">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-orange-50/20 rounded-3xl border border-black">
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
-                Journal Batch <span className="text-red-500">*</span>
+              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
+                Journal Batch <span className="text-red-500 text-xs font-bold">*</span>
               </Label>
               <Input
                 type="text"
                 name="journal"
                 value={journalReference}
                 disabled
-                className="flex h-12 w-full rounded-xl border border-black/5 bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+                required
+                className="h-12 rounded-xl border-black bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20"
               />
-              {formik.touched.journal && formik.errors.journal && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                  {formik.errors.journal}
-                </p>
-              )}
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
-                Account Book <span className="text-red-500">*</span>
+              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
+                Account Book <span className="text-red-500 text-xs font-bold">*</span>
               </Label>
               <select
                 name="book"
+                required
                 disabled={isLoadingBooks}
-                className="flex h-12 w-full rounded-xl border border-black/5 bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+                className="h-12 w-full rounded-xl border border-black bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 value={formik.values.book}
               >
                 <option value="">Select Account...</option>
@@ -196,11 +222,6 @@ export default function CreateJournalEntry({
                   </option>
                 ))}
               </select>
-              {formik.touched.book && formik.errors.book && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                  {formik.errors.book}
-                </p>
-              )}
             </div>
 
             <div className="space-y-2">
@@ -210,9 +231,8 @@ export default function CreateJournalEntry({
               <select
                 name="partner"
                 disabled={isLoadingPartners}
-                className="flex h-12 w-full rounded-xl border border-black/5 bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+                className="h-12 w-full rounded-xl border border-black bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 value={formik.values.partner}
               >
                 <option value="">None / External</option>
@@ -225,15 +245,15 @@ export default function CreateJournalEntry({
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
-                Division
+              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
+                Division <span className="text-red-500 text-xs font-bold">*</span>
               </Label>
               <select
                 name="division"
+                required
                 disabled={isLoadingDivisions}
-                className="flex h-12 w-full rounded-xl border border-black/5 bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+                className="h-12 w-full rounded-xl border border-black bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 value={formik.values.division}
               >
                 <option value="">Select Division</option>
@@ -251,76 +271,27 @@ export default function CreateJournalEntry({
               </Label>
               <Input
                 name="project"
-                placeholder="PROJ-001"
-                className="h-12 rounded-xl border-black/5 bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20"
+                placeholder="e.g. PROJ-001"
+                className="h-12 rounded-xl border-black bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20"
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 value={formik.values.project}
               />
             </div>
           </div>
 
-          <hr className="border-black/5" />
+          <hr className="border-black my-6" />
 
           {/* Financials */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="space-y-2">
-              <Label
-                htmlFor="debit"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
-              >
-                Debit Amount
-              </Label>
-              <Input
-                id="debit"
-                name="debit"
-                type="number"
-                step="0.01"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.debit}
-              />
-              {formik.touched.debit && formik.errors.debit && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                  {formik.errors.debit}
-                </p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label
-                htmlFor="credit"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
-              >
-                Credit Amount
-              </Label>
-              <Input
-                id="credit"
-                name="credit"
-                type="number"
-                step="0.01"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.credit}
-              />
-              {formik.touched.credit && formik.errors.credit && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                  {formik.errors.credit}
-                </p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
-                Currency <span className="text-red-500">*</span>
+              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
+                Currency <span className="text-red-500 text-xs font-bold">*</span>
               </Label>
               <select
                 name="currency"
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+                required
+                className="h-14 w-full rounded-2xl border border-black bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 value={formik.values.currency}
               >
                 <option value="">Select Currency</option>
@@ -329,36 +300,96 @@ export default function CreateJournalEntry({
                 <option value="EUR">EUR</option>
                 <option value="GBP">GBP</option>
               </select>
-              {formik.touched.currency && formik.errors.currency && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                  {formik.errors.currency}
-                </p>
-              )}
             </div>
 
             <div className="space-y-2">
-              <Label
-                htmlFor="exchange_rate"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
-              >
-                Ex. Rate <span className="text-red-500">*</span>
+              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
+                Exchange Rate <span className="text-red-500 text-xs font-bold">*</span>
               </Label>
               <Input
-                id="exchange_rate"
                 name="exchange_rate"
                 type="number"
                 step="0.0001"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
+                min="0"
+                required
+                placeholder="1.0000"
+                className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5"
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 value={formik.values.exchange_rate}
               />
-              {formik.touched.exchange_rate && formik.errors.exchange_rate && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                  {formik.errors.exchange_rate}
-                </p>
-              )}
             </div>
+
+            {formik.values.currency === "KES" && (
+              <>
+                <div className="space-y-2">
+                  <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+                    Debit Amount (KES)
+                  </Label>
+                  <Input
+                    name="debit"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    placeholder="0.00"
+                    className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5"
+                    onChange={formik.handleChange}
+                    value={formik.values.debit}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+                    Credit Amount (KES)
+                  </Label>
+                  <Input
+                    name="credit"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    placeholder="0.00"
+                    className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5"
+                    onChange={formik.handleChange}
+                    value={formik.values.credit}
+                  />
+                </div>
+              </>
+            )}
+
+            {formik.values.currency !== "KES" && formik.values.currency !== "" && (
+              <>
+                <div className="space-y-2">
+                  <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+                    Foreign Debit ({formik.values.currency})
+                  </Label>
+                  <Input
+                    name="foreign_debit"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    placeholder="0.00"
+                    className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5"
+                    onChange={formik.handleChange}
+                    value={formik.values.foreign_debit}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+                    Foreign Credit ({formik.values.currency})
+                  </Label>
+                  <Input
+                    name="foreign_credit"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    placeholder="0.00"
+                    className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5"
+                    onChange={formik.handleChange}
+                    value={formik.values.foreign_credit}
+                  />
+                </div>
+              </>
+            )}
           </div>
 
           {/* Documentation */}
@@ -369,9 +400,8 @@ export default function CreateJournalEntry({
               </Label>
               <select
                 name="payment_method"
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+                className="h-14 w-full rounded-2xl border border-black bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 value={formik.values.payment_method}
               >
                 <option value="">Select Payment Method</option>
@@ -383,17 +413,13 @@ export default function CreateJournalEntry({
             </div>
 
             <div className="space-y-2">
-              <Label
-                htmlFor="source_document"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
-              >
-                Source Doc Type
+              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+                Source Document Type
               </Label>
               <select
                 name="source_document"
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+                className="h-14 w-full rounded-2xl border border-black bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 value={formik.values.source_document}
               >
                 <option value="">Select Source Document</option>
@@ -406,79 +432,61 @@ export default function CreateJournalEntry({
             </div>
 
             <div className="space-y-2">
-              <Label
-                htmlFor="document_number"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
-              >
-                Document #
+              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+                Document Number
               </Label>
               <Input
-                id="document_number"
                 name="document_number"
-                placeholder="REF-001"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
+                placeholder="e.g. REF-001"
+                className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5"
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 value={formik.values.document_number}
               />
             </div>
 
             <div className="space-y-2">
-              <Label
-                htmlFor="document_file"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
-              >
+              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                 Supporting File
               </Label>
               <input
-                id="document_file"
                 name="document_file"
                 type="file"
-                accept=".pdf, .doc, .docx"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5 py-3 text-xs"
-                onChange={(event) => {
-                  formik.setFieldValue(
-                    "document_file",
-                    event.currentTarget.files?.[0] || null,
-                  );
+                accept=".pdf,.jpg,.jpeg,.png"
+                className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5 py-3 text-xs"
+                onChange={(e) => {
+                  formik.setFieldValue("document_file", e.currentTarget.files?.[0] || null);
                 }}
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label
-              htmlFor="notes"
-              className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
-            >
+            <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
               Entry Notes
             </Label>
             <Textarea
-              id="notes"
               name="notes"
-              className="min-h-[100px] rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold p-5"
+              placeholder="Add any additional details or memo..."
+              className="min-h-[100px] rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold p-5"
               onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
               value={formik.values.notes}
             />
           </div>
 
-          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-2xl border border-black/5">
+          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-2xl border border-black">
             <input
               id="is_intercompany"
               name="is_intercompany"
               type="checkbox"
-              className="w-5 h-5 rounded-lg border-black/5 text-corporate-primary focus:ring-corporate-primary/20"
-              onChange={formik.handleChange}
+              className="w-5 h-5 rounded-lg border-black text-corporate-primary focus:ring-corporate-primary/20"
               checked={formik.values.is_intercompany}
+              onChange={formik.handleChange}
             />
-            <Label
-              htmlFor="is_intercompany"
-              className="text-sm font-black text-black"
-            >
+            <Label htmlFor="is_intercompany" className="text-sm font-black text-black cursor-pointer">
               Intercompany Transaction
             </Label>
           </div>
+
           <Button
             type="submit"
             disabled={formik.isSubmitting}
