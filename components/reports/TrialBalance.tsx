@@ -1,5 +1,6 @@
 import { formatCurrency } from "@/tools/format";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./Card";
+import { Separator } from "@/components/ui/separator";
 
 interface TrialBalanceData {
     trial_balance: {
@@ -52,7 +53,9 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
                         ))}
                     </div>
 
-                    <div className="grid grid-cols-12 gap-2 pt-4 mt-2 border-t border-border bg-corporate-secondary/20 -mx-2 px-2 rounded-b-lg font-bold text-sm">
+                    <Separator className="my-4" />
+
+                    <div className="grid grid-cols-12 gap-2 mt-2 -mx-2 px-2 rounded-lg bg-corporate-secondary/20 font-bold text-sm py-2">
                         <div className="col-span-6">TOTALS</div>
                         <div className="col-span-2 text-right font-mono">{formatCurrency(data.totals.total_debit, data.currency)}</div>
                         <div className="col-span-2 text-right font-mono">{formatCurrency(data.totals.total_credit, data.currency)}</div>
@@ -60,6 +63,6 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
                     </div>
                 </div>
             </CardContent>
-        </Card>
+        </Card >
     );
 }

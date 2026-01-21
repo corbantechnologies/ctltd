@@ -1,8 +1,7 @@
 import { formatCurrency } from "@/tools/format";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./Card";
-import { Separator } from "@/components/ui/separator"; // Assuming generic ui components exist, otherwise I'll mock
-// Actually I don't know if components/ui exists. I saw components in root. 
-// I'll stick to standard html/divs to be safe or check directories.
+import { Separator } from "@/components/ui/separator";
+
 
 interface PnLData {
     revenue: number;
@@ -34,10 +33,10 @@ export function PnLReport({ data }: { data: PnLData }) {
             <CardContent className="space-y-1">
                 <Row label="Revenue" value={data.revenue} />
                 <Row label="Cost of Sales" value={data.cost_of_sales} />
-                <div className="my-2 border-t border-dashed border-gray-200" />
+                <Separator className="my-2" />
                 <Row label="Gross Profit" value={data.gross_profit} bold />
                 <Row label="Operating Expenses" value={data.operating_expenses} />
-                <div className="my-2 border-t border-gray-200" />
+                <Separator className="my-2" />
                 <Row label="Net Profit" value={data.net_profit} bold net />
             </CardContent>
         </Card>
