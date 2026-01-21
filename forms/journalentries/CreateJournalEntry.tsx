@@ -62,6 +62,8 @@ export default function CreateJournalEntry({
       credit: 0,
       currency: "",
       exchange_rate: 1,
+      foreign_debit: 0,
+      foreign_credit: 0,
       payment_method: "",
       is_intercompany: false,
       source_document: "",
@@ -83,6 +85,8 @@ export default function CreateJournalEntry({
         formData.append("credit", values.credit.toString());
         formData.append("currency", values.currency);
         formData.append("exchange_rate", values.exchange_rate.toString());
+        formData.append("foreign_debit", values.foreign_debit.toString());
+        formData.append("foreign_credit", values.foreign_credit.toString());
         formData.append("payment_method", values.payment_method);
         formData.append("is_intercompany", values.is_intercompany.toString());
         formData.append("source_document", values.source_document || "");
@@ -265,54 +269,6 @@ export default function CreateJournalEntry({
           {/* Financials */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="space-y-2">
-              <Label
-                htmlFor="debit"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
-              >
-                Debit Amount
-              </Label>
-              <Input
-                id="debit"
-                name="debit"
-                type="number"
-                step="0.01"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.debit}
-              />
-              {formik.touched.debit && formik.errors.debit && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                  {formik.errors.debit}
-                </p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label
-                htmlFor="credit"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
-              >
-                Credit Amount
-              </Label>
-              <Input
-                id="credit"
-                name="credit"
-                type="number"
-                step="0.01"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.credit}
-              />
-              {formik.touched.credit && formik.errors.credit && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
-                  {formik.errors.credit}
-                </p>
-              )}
-            </div>
-
-            <div className="space-y-2">
               <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                 Currency <span className="text-red-500">*</span>
               </Label>
@@ -359,6 +315,112 @@ export default function CreateJournalEntry({
                 </p>
               )}
             </div>
+
+            {formik.values.currency === "KES" && (
+              <>
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="debit"
+                    className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                  >
+                    Debit Amount
+                  </Label>
+                  <Input
+                    id="debit"
+                    name="debit"
+                    type="number"
+                    step="0.01"
+                    className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.debit}
+                  />
+                  {formik.touched.debit && formik.errors.debit && (
+                    <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                      {formik.errors.debit}
+                    </p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="credit"
+                    className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                  >
+                    Credit Amount
+                  </Label>
+                  <Input
+                    id="credit"
+                    name="credit"
+                    type="number"
+                    step="0.01"
+                    className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.credit}
+                  />
+                  {formik.touched.credit && formik.errors.credit && (
+                    <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                      {formik.errors.credit}
+                    </p>
+                  )}
+                </div>
+              </>
+            )}
+
+            {formik.values.currency !== "KES" && formik.values.currency !== "" && (
+              <>
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="foreign_debit"
+                    className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                  >
+                    Foreign Debit
+                  </Label>
+                  <Input
+                    id="foreign_debit"
+                    name="foreign_debit"
+                    type="number"
+                    step="0.01"
+                    className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.foreign_debit}
+                  />
+                  {formik.touched.foreign_debit && formik.errors.foreign_debit && (
+                    <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                      {formik.errors.foreign_debit}
+                    </p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="foreign_credit"
+                    className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                  >
+                    Foreign Credit
+                  </Label>
+                  <Input
+                    id="foreign_credit"
+                    name="foreign_credit"
+                    type="number"
+                    step="0.01"
+                    className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white font-bold px-5"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.foreign_credit}
+                  />
+                  {formik.touched.foreign_credit && formik.errors.foreign_credit && (
+                    <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                      {formik.errors.foreign_credit}
+                    </p>
+                  )}
+                </div>
+              </>
+            )}
+
+
           </div>
 
           {/* Documentation */}

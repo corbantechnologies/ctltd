@@ -15,6 +15,8 @@ interface JournalEntry {
   credit: string;
   currency: string;
   exchange_rate: string;
+  foreign_debit: string;
+  foreign_credit: string;
   payment_method: string;
   is_intercompany: boolean;
   source_document: string;
@@ -38,6 +40,8 @@ interface createJournalEntry {
   credit: number;
   currency: string;
   exchange_rate: number;
+  foreign_debit: number;
+  foreign_credit: number;
   payment_method: string;
   is_intercompany: boolean;
   source_document: string;
