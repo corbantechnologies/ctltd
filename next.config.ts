@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
         hostname: "res.cloudinary.com",
       },
     ]
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
   }
 };
 
