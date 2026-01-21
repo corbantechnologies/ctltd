@@ -83,14 +83,14 @@ export default function FiscalYearDetail() {
               <CalendarRange className="w-5 h-5" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-black tracking-tighter italic leading-none">
+              <h1 className="text-xl text-black tracking-tighter italic leading-none">
                 {fiscalYear.code}
               </h1>
               <div className="flex items-center gap-2 mt-1">
                 {fiscalYear.is_active ? (
                   <div className="flex items-center gap-1.5 text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-[9px] font-bold uppercase tracking-widest">
+                    <span className="text-[9px] uppercase tracking-widest">
                       Active
                     </span>
                   </div>
@@ -111,7 +111,7 @@ export default function FiscalYearDetail() {
         {fiscalYear.is_active === true && (
           <Button
             onClick={() => handleCreateJournal()}
-            className="h-10 px-4 bg-[#045138] hover:bg-black text-white rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center gap-2"
+            className="h-10 px-4 bg-[#045138] hover:bg-black text-white rounded-xl text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center gap-2"
           >
             <Plus className="w-3.5 h-3.5" />
             New Journal Batch
@@ -155,10 +155,10 @@ export default function FiscalYearDetail() {
                 <stat.icon className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">
+                <p className="text-[9px] uppercase tracking-widest mb-0.5">
                   {stat.label}
                 </p>
-                <p className="text-base font-bold text-black tracking-tight">
+                <p className="text-base text-black tracking-tight">
                   {stat.value}
                 </p>
               </div>
@@ -188,7 +188,7 @@ export default function FiscalYearDetail() {
         {/* Journal Types List (Right - 1/4) */}
         <div className="lg:col-span-1 space-y-3 order-1 lg:order-2">
           <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-[10px] font-bold uppercase tracking-widest text-black/40">
+            <h3 className="text-[10px] font-bold uppercase tracking-widest">
               Quick Entry
             </h3>
             <div className="flex-1 h-px bg-gray-100" />
@@ -201,8 +201,8 @@ export default function FiscalYearDetail() {
                 onClick={() => handleCreateJournal(type.name)}
                 className="group cursor-pointer border-none shadow-sm hover:shadow-md transition-all duration-200 bg-white rounded-lg overflow-hidden"
               >
-                <CardContent className="p-3 flex items-center gap-3">
-                  <div className="w-7 h-7 rounded-md bg-[#045138]/5 group-hover:bg-[#045138] flex items-center justify-center text-[#045138] group-hover:text-white transition-colors duration-200 flex-shrink-0">
+                <CardContent className="flex items-center gap-3">
+                  <div className="rounded-md bg-[#045138]/5 group-hover:bg-[#045138] flex items-center justify-center text-[#045138] group-hover:text-white transition-colors duration-200 flex-shrink-0">
                     <BookOpen className="w-3.5 h-3.5" />
                   </div>
                   <div className="flex-1 min-w-0">
