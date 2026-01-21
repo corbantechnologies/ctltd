@@ -4,5 +4,5 @@ import nextAuthMiddleware from "next-auth/middleware";
 export const middleware = nextAuthMiddleware;
 
 export const config = {
-  matcher: ["/(portal)/:path*"],
+  matcher: ["/(portal)/:path*", "/(portal)/finance/:path*", "/(portal)/director/:path*"],
 };
