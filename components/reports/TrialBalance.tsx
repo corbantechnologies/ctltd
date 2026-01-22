@@ -33,8 +33,8 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
                 <div>
                     <div className="hidden md:grid grid-cols-12 gap-2 border-b border-border pb-2 mb-2 text-xs font-semibold text-corporate-muted uppercase tracking-wider">
                         <div className="col-span-6">Account Name</div>
-                        <div className="col-span-2 text-right">Debit</div>
-                        <div className="col-span-2 text-right">Credit</div>
+                        <div className="col-span-2 text-right text-green-500">Debit</div>
+                        <div className="col-span-2 text-right text-red-500">Credit</div>
                         <div className="col-span-2 text-right">Balance</div>
                     </div>
 
