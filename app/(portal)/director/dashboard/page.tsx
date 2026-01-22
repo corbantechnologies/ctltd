@@ -20,6 +20,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { GlobalSearch } from "@/components/navigation/GlobalSearch";
 import AccountDistributionChart from "@/components/analytics/AccountDistributionChart";
 import RecentActivityFeed from "@/components/analytics/RecentActivityFeed";
+import ReportsDashboard from "@/components/reports/ReportsDashboard";
 
 export default function DirectorDashboard() {
   const { isLoading, data: account } = useFetchAccount();
@@ -125,6 +126,11 @@ export default function DirectorDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <AccountDistributionChart data={coas || []} />
         <RecentActivityFeed entries={entries || []} />
+      </div>
+
+      {/* Financial Reports Section */}
+      <div className="space-y-6 pt-6 border-t border-black/5">
+        <ReportsDashboard />
       </div>
 
       {/* Divisions Section */}

@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { GlobalSearch } from "@/components/navigation/GlobalSearch";
+import ReportsDashboard from "@/components/reports/ReportsDashboard";
 
 import AccountDistributionChart from "@/components/analytics/AccountDistributionChart";
 import RecentActivityFeed from "@/components/analytics/RecentActivityFeed";
@@ -113,8 +114,14 @@ export default function FinanceDashboard() {
         </div>
       </div>
 
-      <Tabs defaultValue="overview" className="space-y-6">
+      <Tabs defaultValue="reports" className="space-y-6">
         <TabsList className="bg-white/50 backdrop-blur-md p-1 rounded-xl border border-black/5 h-auto">
+          <TabsTrigger
+            value="reports"
+            className="rounded-lg px-4 py-2 text-xs font-bold data-[state=active]:bg-[#045138] data-[state=active]:text-white transition-all"
+          >
+            Financial Reports
+          </TabsTrigger>
           <TabsTrigger
             value="overview"
             className="rounded-lg px-4 py-2 text-xs font-bold data-[state=active]:bg-[#045138] data-[state=active]:text-white transition-all"
@@ -127,6 +134,7 @@ export default function FinanceDashboard() {
           >
             Configuration
           </TabsTrigger>
+
         </TabsList>
 
         {/* Overview Tab (Analytics) */}
@@ -303,6 +311,9 @@ export default function FinanceDashboard() {
               </div>
             </div>
           </div>
+        </TabsContent>
+        <TabsContent value="reports" className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <ReportsDashboard />
         </TabsContent>
       </Tabs>
 
