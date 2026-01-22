@@ -200,6 +200,9 @@ export default function FinancialYearsList({
                     Period
                   </th>
                   <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                    Estimated Profit
+                  </th>
+                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
                     Status
                   </th>
                   <th className="text-right py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
@@ -248,6 +251,7 @@ export default function FinancialYearsList({
                         </Badge>
                       </div>
                     </td>
+                    <td className="py-3 px-4">{year.estimated_profit}</td>
                     <td className="py-3 px-4">
                       {year.is_active ? (
                         <div className="flex items-center gap-1.5 text-green-600">
