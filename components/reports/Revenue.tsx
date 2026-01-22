@@ -33,7 +33,7 @@ export function RevenueReport({ data }: { data: RevenueData }) {
                         const percent = data.group_total_revenue ? (item.revenue / data.group_total_revenue) : 0;
                         return (
                             <div key={idx} className="space-y-1">
-                                <div className="flex justify-between text-sm">
+                                <div className="flex justify-between text-sm gap-4">
                                     <span className="font-medium">{item.division}</span>
                                     <span className="font-mono">{formatCurrency(item.revenue, data.currency)}</span>
                                 </div>

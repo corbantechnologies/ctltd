@@ -56,31 +56,33 @@ export function BalanceSheetReport({ data }: { data: BalanceCheckData }) {
                     </div>
                 </div>
             </CardHeader>
-            <CardContent>
-                <Section title="Assets" section={data.assets} />
-                <Separator className="my-6" />
-                <Section title="Liabilities" section={data.liabilities} />
-                <Separator className="my-6" />
-                <Section title="Equity" section={data.equity} />
-                {data.other && (data.other.debit !== 0 || data.other.credit !== 0) && (
-                    <>
-                        <Separator className="my-6" />
-                        <Section title="Other" section={data.other} />
-                    </>
-                )}
+            <CardContent className="overflow-x-auto">
+                <div className="min-w-[500px]">
+                    <Section title="Assets" section={data.assets} />
+                    <Separator className="my-6" />
+                    <Section title="Liabilities" section={data.liabilities} />
+                    <Separator className="my-6" />
+                    <Section title="Equity" section={data.equity} />
+                    {data.other && (data.other.debit !== 0 || data.other.credit !== 0) && (
+                        <>
+                            <Separator className="my-6" />
+                            <Section title="Other" section={data.other} />
+                        </>
+                    )}
 
-                <Separator className="my-8" />
-                <div className="pt-2">
-                    <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm font-medium">Total Assets</span>
-                        <span className="font-mono font-bold">{formatCurrency(data.total_assets, data.currency)}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                        <span className="text-sm font-medium">Total Liab + Equity</span>
-                        <span className="font-mono font-bold">{formatCurrency(data.total_liabilities_and_equity, data.currency)}</span>
+                    <Separator className="my-8" />
+                    <div className="pt-2">
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-sm font-medium">Total Assets</span>
+                            <span className="font-mono font-bold">{formatCurrency(data.total_assets, data.currency)}</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <span className="text-sm font-medium">Total Liab + Equity</span>
+                            <span className="font-mono font-bold">{formatCurrency(data.total_liabilities_and_equity, data.currency)}</span>
+                        </div>
                     </div>
                 </div>
             </CardContent>
-        </Card>
+        </Card >
     );
 }
