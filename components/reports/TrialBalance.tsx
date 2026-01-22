@@ -29,10 +29,10 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
                 <CardTitle>Trial Balance</CardTitle>
                 <CardDescription>{data.division} • {data.financial_year}</CardDescription>
             </CardHeader>
-            <CardContent className="flex-1 -mx-6 px-6">
+            <CardContent className="flex-1 -mx-4 px-4">
                 <div>
                     <div className="hidden md:grid grid-cols-12 gap-2 border-b border-border pb-2 mb-2 text-xs font-semibold text-corporate-muted uppercase tracking-wider">
-                        <div className="col-span-2">Code</div>
+                        {/* <div className="col-span-2">Code</div> */}
                         <div className="col-span-4">Account Name</div>
                         <div className="col-span-2 text-right">Debit</div>
                         <div className="col-span-2 text-right">Credit</div>
@@ -42,8 +42,8 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
                     <div className="space-y-4 md:space-y-1">
                         {data.trial_balance.map((row) => (
                             <div key={row.code} className="grid grid-cols-12 gap-2 py-2 text-sm border-b border-border/40 hover:bg-corporate-secondary/50 transition-colors">
-                                <div className="col-span-3 md:col-span-2 font-mono text-xs text-corporate-muted flex items-center">{row.code}</div>
-                                <div className="col-span-9 md:col-span-4 font-medium truncate flex items-center" title={row.name}>{row.name}</div>
+                                {/* <div className="col-span-3 md:col-span-2 font-mono text-xs text-corporate-muted flex items-center">{row.code}</div> */}
+                                <div className="col-span-12 md:col-span-8 flex items-center" title={row.name}>{row.name}</div>
 
                                 <div className="col-span-4 md:col-span-2 text-right font-mono text-corporate-muted flex flex-col md:block">
                                     <span className="text-[10px] uppercase text-corporate-muted md:hidden">Debit</span>
