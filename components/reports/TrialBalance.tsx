@@ -43,18 +43,18 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
                         {data.trial_balance.map((row) => (
                             <div key={row.code} className="grid grid-cols-12 gap-2 py-2 text-sm border-b border-border/40 hover:bg-corporate-secondary/50 transition-colors">
                                 {/* <div className="col-span-3 md:col-span-2 font-mono text-xs text-corporate-muted flex items-center">{row.code}</div> */}
-                                <div className="col-span-12 md:col-span-8 flex items-center" title={row.name}>{row.name}</div>
+                                <div className="col-span-12 md:col-span-8 flex items-center" title={row.name}>{row.name} <span className="text-[8px] uppercase text-corporate-muted md:hidden">{row.code}</span></div>
 
                                 <div className="col-span-4 md:col-span-2 text-right font-mono text-corporate-muted flex flex-col md:block">
-                                    <span className="text-[10px] uppercase text-corporate-muted md:hidden">Debit</span>
+                                    <span className="text-[8px] uppercase text-corporate-muted md:hidden">Debit</span>
                                     {row.debit > 0 ? formatNumber(row.debit) : "-"}
                                 </div>
                                 <div className="col-span-4 md:col-span-2 text-right font-mono text-corporate-muted flex flex-col md:block">
-                                    <span className="text-[10px] uppercase text-corporate-muted md:hidden">Credit</span>
+                                    <span className="text-[8px] uppercase text-corporate-muted md:hidden">Credit</span>
                                     {row.credit > 0 ? formatNumber(row.credit) : "-"}
                                 </div>
                                 <div className={`col-span-4 md:col-span-2 text-right font-mono font-medium flex flex-col md:block ${row.balance < 0 ? "text-red-500" : ""}`}>
-                                    <span className="text-[10px] uppercase text-corporate-muted md:hidden">Balance</span>
+                                    <span className="text-[8px] uppercase text-corporate-muted md:hidden">Balance</span>
                                     {formatNumber(row.balance)}
                                 </div>
                             </div>
@@ -66,15 +66,15 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
                     <div className="grid grid-cols-12 gap-2 mt-2 -mx-2 px-2 rounded-lg bg-corporate-secondary/20 font-bold text-sm py-2">
                         <div className="col-span-12 md:col-span-6 mb-2 md:mb-0">TOTALS</div>
                         <div className="col-span-4 md:col-span-2 text-right font-mono flex flex-col md:block">
-                            <span className="text-[10px] uppercase text-corporate-muted md:hidden font-normal">Debit</span>
+                            <span className="text-[8px] uppercase text-corporate-muted md:hidden font-normal">Debit</span>
                             {formatNumber(data.totals.total_debit)}
                         </div>
                         <div className="col-span-4 md:col-span-2 text-right font-mono flex flex-col md:block">
-                            <span className="text-[10px] uppercase text-corporate-muted md:hidden font-normal">Credit</span>
+                            <span className="text-[8px] uppercase text-corporate-muted md:hidden font-normal">Credit</span>
                             {formatNumber(data.totals.total_credit)}
                         </div>
                         <div className="col-span-4 md:col-span-2 text-right font-mono flex flex-col md:block">
-                            <span className="text-[10px] uppercase text-corporate-muted md:hidden font-normal">Balance</span>
+                            <span className="text-[8px] uppercase text-corporate-muted md:hidden font-normal">Balance</span>
                             {formatNumber(data.totals.net_balance)}
                         </div>
                     </div>

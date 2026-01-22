@@ -57,9 +57,7 @@ export function BalanceSheetReport({ data }: { data: BalanceCheckData }) {
                     <div>
                         <CardTitle>Balance Sheet</CardTitle>
                         <CardDescription>{data.division} • {data.financial_year}</CardDescription>
-                    </div>
-                    <div className={`text-sm px-3 py-1 rounded-full ${data.balance_check !== 0 ? "bg-red-100 text-red-700" : "bg-green-100 text-green-700"}`}>
-                        Check: {formatCurrency(data.balance_check, data.currency)}
+                        <CardDescription className="text-xs text-corporate-muted">Check: {formatCurrency(data.balance_check, data.currency)}</CardDescription>
                     </div>
                 </div>
             </CardHeader>
