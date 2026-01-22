@@ -43,7 +43,7 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
                         {data.trial_balance.map((row) => (
                             <div key={row.code} className="grid grid-cols-12 gap-2 py-2 text-sm border-b border-border/40 hover:bg-corporate-secondary/50 transition-colors">
                                 {/* <div className="col-span-3 md:col-span-2 font-mono text-xs text-corporate-muted flex items-center">{row.code}</div> */}
-                                <div className="col-span-12 md:col-span-8 flex items-center" title={row.name}>{row.name} <span className="text-[8px] uppercase text-corporate-muted md:hidden">{row.code}</span></div>
+                                <div className="col-span-12 md:col-span-8 flex items-center" title={row.name}>{row.name} {row.code}</div>
 
                                 <div className="col-span-4 md:col-span-2 text-right font-mono text-corporate-muted flex flex-col md:block">
                                     <span className="text-[8px] uppercase text-corporate-muted md:hidden">Debit</span>
