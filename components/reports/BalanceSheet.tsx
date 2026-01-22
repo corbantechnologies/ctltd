@@ -1,4 +1,4 @@
-import { formatCurrency } from "@/tools/format";
+import { formatCurrency, formatNumber } from "@/tools/format";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./Card";
 import { Separator } from "@/components/ui/separator";
 
@@ -36,15 +36,15 @@ export function BalanceSheetReport({ data }: { data: BalanceCheckData }) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 font-mono text-sm p-4 md:p-2 rounded-lg bg-corporate-secondary/50">
                 <div className="flex justify-between md:block">
                     <span className="md:hidden text-corporate-muted font-sans">Debit:</span>
-                    {formatCurrency(section.debit, data.currency)}
+                    {formatNumber(section.debit)}
                 </div>
                 <div className="flex justify-between md:block">
                     <span className="md:hidden text-corporate-muted font-sans">Credit:</span>
-                    {formatCurrency(section.credit, data.currency)}
+                    {formatNumber(section.credit)}
                 </div>
                 <div className={`flex justify-between md:block md:text-right font-bold ${section.net < 0 ? "text-red-500" : ""}`}>
                     <span className="md:hidden text-corporate-muted font-sans">Net:</span>
-                    {formatCurrency(section.net, data.currency)}
+                    {formatNumber(section.net)}
                 </div>
             </div>
         </div>
@@ -80,11 +80,11 @@ export function BalanceSheetReport({ data }: { data: BalanceCheckData }) {
                 <div className="pt-2">
                     <div className="flex justify-between items-center mb-2">
                         <span className="text-sm font-medium">Total Assets</span>
-                        <span className="font-mono font-bold">{formatCurrency(data.total_assets, data.currency)}</span>
+                        <span className="font-mono font-bold">{formatNumber(data.total_assets)}</span>
                     </div>
                     <div className="flex justify-between items-center">
                         <span className="text-sm font-medium">Total Liab + Equity</span>
-                        <span className="font-mono font-bold">{formatCurrency(data.total_liabilities_and_equity, data.currency)}</span>
+                        <span className="font-mono font-bold">{formatNumber(data.total_liabilities_and_equity)}</span>
                     </div>
                 </div>
             </CardContent>

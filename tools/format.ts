@@ -12,3 +12,10 @@ export const formatPercent = (value: number) => {
     minimumFractionDigits: 1,
   }).format(value);
 };
+
+export const formatNumber = (amount: number) => {
+  return new Intl.NumberFormat("en-KE", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount);
+};

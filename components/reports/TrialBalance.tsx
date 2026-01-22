@@ -1,4 +1,4 @@
-import { formatCurrency } from "@/tools/format";
+import { formatCurrency, formatNumber } from "@/tools/format";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./Card";
 import { Separator } from "@/components/ui/separator";
 
@@ -47,15 +47,15 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
 
                                 <div className="col-span-4 md:col-span-2 text-right font-mono text-corporate-muted flex flex-col md:block">
                                     <span className="text-[10px] uppercase text-corporate-muted md:hidden">Debit</span>
-                                    {row.debit > 0 ? formatCurrency(row.debit, data.currency) : "-"}
+                                    {row.debit > 0 ? formatNumber(row.debit) : "-"}
                                 </div>
                                 <div className="col-span-4 md:col-span-2 text-right font-mono text-corporate-muted flex flex-col md:block">
                                     <span className="text-[10px] uppercase text-corporate-muted md:hidden">Credit</span>
-                                    {row.credit > 0 ? formatCurrency(row.credit, data.currency) : "-"}
+                                    {row.credit > 0 ? formatNumber(row.credit) : "-"}
                                 </div>
                                 <div className={`col-span-4 md:col-span-2 text-right font-mono font-medium flex flex-col md:block ${row.balance < 0 ? "text-red-500" : ""}`}>
                                     <span className="text-[10px] uppercase text-corporate-muted md:hidden">Balance</span>
-                                    {formatCurrency(row.balance, data.currency)}
+                                    {formatNumber(row.balance)}
                                 </div>
                             </div>
                         ))}
@@ -67,15 +67,15 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
                         <div className="col-span-12 md:col-span-6 mb-2 md:mb-0">TOTALS</div>
                         <div className="col-span-4 md:col-span-2 text-right font-mono flex flex-col md:block">
                             <span className="text-[10px] uppercase text-corporate-muted md:hidden font-normal">Debit</span>
-                            {formatCurrency(data.totals.total_debit, data.currency)}
+                            {formatNumber(data.totals.total_debit)}
                         </div>
                         <div className="col-span-4 md:col-span-2 text-right font-mono flex flex-col md:block">
                             <span className="text-[10px] uppercase text-corporate-muted md:hidden font-normal">Credit</span>
-                            {formatCurrency(data.totals.total_credit, data.currency)}
+                            {formatNumber(data.totals.total_credit)}
                         </div>
                         <div className="col-span-4 md:col-span-2 text-right font-mono flex flex-col md:block">
                             <span className="text-[10px] uppercase text-corporate-muted md:hidden font-normal">Balance</span>
-                            {formatCurrency(data.totals.net_balance, data.currency)}
+                            {formatNumber(data.totals.net_balance)}
                         </div>
                     </div>
                 </div>
