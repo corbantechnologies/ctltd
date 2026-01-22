@@ -29,9 +29,11 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export default function FiscalYearDetail() {
   const { reference } = useParams();
-  const { isLoading, data: fiscalYear, refetch: refetchFiscalYear } = useFetchFinancialYear(
-    reference as string,
-  );
+  const {
+    isLoading,
+    data: fiscalYear,
+    refetch: refetchFiscalYear,
+  } = useFetchFinancialYear(reference as string);
   const { data: journalTypes, isLoading: isLoadingTypes } =
     useFetchJournalTypes();
   const [openCreateJournal, setOpenCreateJournal] = useState(false);
@@ -73,7 +75,9 @@ export default function FiscalYearDetail() {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>{fiscalYear.code}</BreadcrumbPage>
+                <BreadcrumbPage>
+                  {fiscalYear.code} ({fiscalYear.estimated_profit})
+                </BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -86,6 +90,9 @@ export default function FiscalYearDetail() {
               <h1 className="text-xl text-black tracking-tighter italic leading-none">
                 {fiscalYear.code}
               </h1>
+              <p className="text-[9px] uppercase tracking-widest text-black/40">
+                {fiscalYear.estimated_profit}
+              </p>
               <div className="flex items-center gap-2 mt-1">
                 {fiscalYear.is_active ? (
                   <div className="flex items-center gap-1.5 text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100">
