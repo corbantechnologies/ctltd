@@ -24,7 +24,7 @@ interface SectionData {
 export function BalanceSheetReport({ data }: { data: BalanceCheckData }) {
     const Section = ({ title, section }: { title: string; section: SectionData }) => (
         <div className="mb-6">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-corporate-muted mb-3 flex items-center gap-2">
+            <h4 className="text-xs font-black uppercase tracking-wider text-corporate-foreground mb-3 flex items-center gap-2">
                 {title}
                 <div className="h-px flex-1 bg-border/50"></div>
             </h4>
@@ -55,7 +55,7 @@ export function BalanceSheetReport({ data }: { data: BalanceCheckData }) {
             <CardHeader>
                 <div className="flex justify-between items-start">
                     <div>
-                        <CardTitle>Balance Sheet</CardTitle>
+                        <CardTitle className="text-black">Balance Sheet</CardTitle>
                         <CardDescription>{data.division} • {data.financial_year}</CardDescription>
                         <CardDescription className="text-xs text-corporate-muted">Check: {formatCurrency(data.balance_check, data.currency)}</CardDescription>
                     </div>
