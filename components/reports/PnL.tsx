@@ -16,7 +16,7 @@ interface PnLData {
 
 export function PnLReport({ data }: { data: PnLData }) {
     const Row = ({ label, value, bold = false, net = false }: { label: string; value: number; bold?: boolean; net?: boolean }) => (
-        <div className={`flex justify-between items-center py-2 ${bold ? "font-bold" : ""} ${net ? "bg-corporate-primary/5 px-2 rounded-lg -mx-2" : ""}`}>
+        <div className={`flex justify-between items-center py-2 gap-4 ${bold ? "font-bold" : ""} ${net ? "bg-corporate-primary/5 px-2 rounded-lg -mx-2" : ""}`}>
             <span className="text-sm">{label}</span>
             <span className={`font-mono text-sm ${value < 0 ? "text-red-500" : ""} ${net ? "text-corporate-primary" : ""}`}>
                 {formatCurrency(value, data.currency)}
