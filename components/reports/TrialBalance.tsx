@@ -32,8 +32,7 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
             <CardContent className="flex-1 -mx-4 px-4">
                 <div>
                     <div className="hidden md:grid grid-cols-12 gap-2 border-b border-border pb-2 mb-2 text-xs font-semibold text-corporate-muted uppercase tracking-wider">
-                        {/* <div className="col-span-2">Code</div> */}
-                        <div className="col-span-4">Account Name</div>
+                        <div className="col-span-6">Account Name</div>
                         <div className="col-span-2 text-right">Debit</div>
                         <div className="col-span-2 text-right">Credit</div>
                         <div className="col-span-2 text-right">Balance</div>
@@ -42,20 +41,23 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
                     <div className="space-y-4 md:space-y-1">
                         {data.trial_balance.map((row) => (
                             <div key={row.code} className="grid grid-cols-12 gap-2 py-2 text-sm border-b border-border/40 hover:bg-corporate-secondary/50 transition-colors">
-                                {/* <div className="col-span-3 md:col-span-2 font-mono text-xs text-corporate-muted flex items-center">{row.code}</div> */}
-                                <div className="col-span-12 md:col-span-8 flex items-center" title={row.name}>{row.name} {row.code}</div>
+                                <div className="col-span-12 md:col-span-6 flex items-center font-medium" title={row.name}>
+                                    <span className="truncate mr-1">{row.name}</span>
+                                    <span className="text-xs text-corporate-muted whitespace-nowrap hidden md:inline-block">- {row.code}</span>
+                                    <span className="text-xs text-corporate-muted whitespace-nowrap md:hidden">({row.code})</span>
+                                </div>
 
-                                <div className="col-span-4 md:col-span-2 text-right font-mono text-corporate-muted flex flex-col md:block">
-                                    <span className="text-[8px] uppercase text-corporate-muted text-green-500 md:hidden">Debit</span>
-                                    {row.debit > 0 ? formatNumber(row.debit) : "-"}
+                                <div className="col-span-4 md:col-span-2 text-right font-mono text-corporate-muted flex flex-col md:block justify-end">
+                                    <span className="text-[10px] uppercase text-corporate-muted md:hidden mb-1">Debit</span>
+                                    <span className="text-xs md:text-sm">{row.debit > 0 ? formatNumber(row.debit) : "-"}</span>
                                 </div>
-                                <div className="col-span-4 md:col-span-2 text-right font-mono text-corporate-muted flex flex-col md:block">
-                                    <span className="text-[8px] uppercase text-corporate-muted text-red-500 md:hidden">Credit</span>
-                                    {row.credit > 0 ? formatNumber(row.credit) : "-"}
+                                <div className="col-span-4 md:col-span-2 text-right font-mono text-corporate-muted flex flex-col md:block justify-end">
+                                    <span className="text-[10px] uppercase text-corporate-muted md:hidden mb-1">Credit</span>
+                                    <span className="text-xs md:text-sm">{row.credit > 0 ? formatNumber(row.credit) : "-"}</span>
                                 </div>
-                                <div className={`col-span-4 md:col-span-2 text-right font-mono font-medium flex flex-col md:block ${row.balance < 0 ? "text-red-500" : ""}`}>
-                                    <span className="text-[8px] uppercase text-corporate-muted md:hidden">Balance</span>
-                                    {formatNumber(row.balance)}
+                                <div className={`col-span-4 md:col-span-2 text-right font-mono font-medium flex flex-col md:block justify-end ${row.balance < 0 ? "text-red-500" : ""}`}>
+                                    <span className="text-[10px] uppercase text-corporate-muted md:hidden mb-1">Balance</span>
+                                    <span className="text-xs md:text-sm">{formatNumber(row.balance)}</span>
                                 </div>
                             </div>
                         ))}
