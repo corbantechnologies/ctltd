@@ -46,11 +46,11 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
                                 <div className="col-span-12 md:col-span-8 flex items-center" title={row.name}>{row.name} {row.code}</div>
 
                                 <div className="col-span-4 md:col-span-2 text-right font-mono text-corporate-muted flex flex-col md:block">
-                                    <span className="text-[8px] uppercase text-corporate-muted md:hidden">Debit</span>
+                                    <span className="text-[8px] uppercase text-corporate-muted text-green-500 md:hidden">Debit</span>
                                     {row.debit > 0 ? formatNumber(row.debit) : "-"}
                                 </div>
                                 <div className="col-span-4 md:col-span-2 text-right font-mono text-corporate-muted flex flex-col md:block">
-                                    <span className="text-[8px] uppercase text-corporate-muted md:hidden">Credit</span>
+                                    <span className="text-[8px] uppercase text-corporate-muted text-red-500 md:hidden">Credit</span>
                                     {row.credit > 0 ? formatNumber(row.credit) : "-"}
                                 </div>
                                 <div className={`col-span-4 md:col-span-2 text-right font-mono font-medium flex flex-col md:block ${row.balance < 0 ? "text-red-500" : ""}`}>
