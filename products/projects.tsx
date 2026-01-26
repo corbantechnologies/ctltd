@@ -1,7 +1,7 @@
 const projects = [
   {
     slug: "sacco-platform",
-    title: "SACCO Platform",
+    title: "Wananchi Mali: The SACCO Platform",
     shortDescription:
       "Comprehensive financial management system for small and medium SACCOs in Kenya.",
     website: null,
@@ -9,7 +9,7 @@ const projects = [
     techStack: ["Next.js", "Django REST Framework", "PostgreSQL"],
     featured: true,
     highlights: [
-      "Currently onboarding Tamarind SACCO and Mwanda Mzedu SACCO",
+      "Currently onboarding Sprout SACCO and Mwanda Mzedu SACCO",
       "Secure member management and loan tracking",
       "Automated financial reporting",
     ],
