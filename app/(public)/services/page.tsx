@@ -87,7 +87,7 @@ export default function Services() {
           <Badge className="mb-4 bg-orange-100 text-corporate-primary border-orange-200 font-bold uppercase tracking-widest py-2 px-6 shadow-sm rounded">
             Expertise
           </Badge>
-          <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-corporate-foreground mb-8 leading-tight">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tighter text-corporate-foreground mb-8 leading-tight">
             Our <span className="text-corporate-primary">Services.</span>
           </h1>
           <p className="text-corporate-foreground text-lg md:text-xl max-w-2xl leading-relaxed font-bold opacity-70">
@@ -110,7 +110,7 @@ export default function Services() {
                   <div className="w-16 h-16 rounded bg-orange-100 flex items-center justify-center text-corporate-primary mb-8 group-hover:bg-corporate-primary group-hover:text-white transition-all shadow-sm">
                     <service.icon className="w-8 h-8" />
                   </div>
-                  <CardTitle className="text-2xl font-black text-corporate-foreground tracking-tight mb-4">
+                  <CardTitle className="text-2xl font-bold text-corporate-foreground tracking-tight mb-4">
                     {service.title}
                   </CardTitle>
                 </CardHeader>
@@ -123,7 +123,7 @@ export default function Services() {
                     {service.highlights.map((item) => (
                       <li key={item} className="flex items-center gap-3">
                         <CheckCircle2 className="w-4 h-4 text-corporate-primary" />
-                        <span className="text-sm font-black text-corporate-foreground opacity-80">
+                        <span className="text-sm font-bold text-corporate-foreground opacity-80">
                           {item}
                         </span>
                       </li>

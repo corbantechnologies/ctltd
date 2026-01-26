@@ -12,7 +12,9 @@ export default function PublicLayout({
   return (
     <>
       <Navbar />
-      {children}
+      <div className="container mx-auto px-4">
+        {children}
+      </div>
       <Footer />
       <WhatsAppButton />
     </>
