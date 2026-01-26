@@ -45,7 +45,7 @@ export default function OfferDetail({ params }: PageProps) {
         <Button
           asChild
           variant="ghost"
-          className="bg-white/50 backdrop-blur-md border border-black/5 hover:bg-white hover:text-corporate-primary rounded-none px-4 font-bold transition-all"
+          className="bg-white/50 backdrop-blur-md border border-black/5 hover:bg-white hover:text-corporate-primary rounded px-4 font-bold transition-all"
         >
           <Link href="/offers" className="flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" />
@@ -58,11 +58,11 @@ export default function OfferDetail({ params }: PageProps) {
       <section className="relative pt-48 pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-grid-white pointer-events-none opacity-40" />
         {/* Decorative elements */}
-        <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-orange-100/10 rounded-none blur-[100px] -z-10 animate-pulse-slow" />
+        <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-orange-100/10 rounded blur-[100px] -z-10 animate-pulse-slow" />
 
         <div className="mx-auto px-6 relative z-10">
           <div className="max-w-4xl">
-            <Badge className="mb-6 bg-orange-500 text-white border-none font-bold uppercase tracking-widest py-2 px-6 shadow-xl shadow-orange-500/20 rounded-none">
+            <Badge className="mb-6 bg-orange-500 text-white border-none font-bold uppercase tracking-widest py-2 px-6 shadow-xl shadow-orange-500/20 rounded">
               Limited Time Offer
             </Badge>
             <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-corporate-foreground mb-8 leading-tight">
@@ -73,13 +73,13 @@ export default function OfferDetail({ params }: PageProps) {
             </h1>
 
             <div className="flex flex-wrap gap-4 items-center">
-              <div className="flex items-center gap-3 px-6 py-4 bg-white border border-black/5 rounded-none shadow-sm">
+              <div className="flex items-center gap-3 px-6 py-4 bg-white border border-black/5 rounded shadow-sm">
                 <Calendar className="w-5 h-5 text-corporate-primary" />
                 <span className="font-bold text-corporate-foreground opacity-70 uppercase tracking-widest text-xs">
                   Expiry: {offer.validUntil}
                 </span>
               </div>
-              <div className="flex items-center gap-3 px-6 py-4 bg-corporate-primary text-white rounded-none shadow-xl shadow-orange-500/20">
+              <div className="flex items-center gap-3 px-6 py-4 bg-corporate-primary text-white rounded shadow-xl shadow-orange-500/20">
                 <Tag className="w-5 h-5" />
                 <span className="font-black uppercase tracking-widest text-xs">
                   Save{" "}
@@ -109,7 +109,7 @@ export default function OfferDetail({ params }: PageProps) {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="p-8 bg-corporate-accent rounded-none border border-corporate-primary/10 relative overflow-hidden group">
+              <div className="p-8 bg-corporate-accent rounded border border-corporate-primary/10 relative overflow-hidden group">
                 <Sparkles className="absolute top-4 right-4 w-12 h-12 text-corporate-primary opacity-5 group-hover:scale-125 transition-transform" />
                 <h3 className="text-xl font-black mb-6 uppercase tracking-widest text-corporate-primary">
                   What&apos;s Included
@@ -126,7 +126,7 @@ export default function OfferDetail({ params }: PageProps) {
                 </ul>
               </div>
 
-              <div className="p-8 bg-white border border-black/5 rounded-none shadow-sm">
+              <div className="p-8 bg-white border border-black/5 rounded shadow-sm">
                 <h3 className="text-xl font-black mb-6 uppercase tracking-widest text-corporate-foreground opacity-40">
                   Applicable To
                 </h3>
@@ -153,7 +153,7 @@ export default function OfferDetail({ params }: PageProps) {
                   {offer.optionalAddOns.map((addon) => (
                     <div
                       key={addon.name}
-                      className="p-8 bg-corporate-secondary border border-black/5 rounded-none hover:border-corporate-primary/30 transition-all flex flex-col md:flex-row md:items-center justify-between gap-6 group"
+                      className="p-8 bg-corporate-secondary border border-black/5 rounded hover:border-corporate-primary/30 transition-all flex flex-col md:flex-row md:items-center justify-between gap-6 group"
                     >
                       <div className="space-y-2">
                         <h4 className="text-xl font-black group-hover:text-corporate-primary transition-colors">
@@ -163,7 +163,7 @@ export default function OfferDetail({ params }: PageProps) {
                           {addon.description}
                         </p>
                       </div>
-                      <Badge className="bg-white border-black/10 text-corporate-foreground font-bold py-4 px-6 rounded-none w-fit whitespace-normal text-center">
+                      <Badge className="bg-white border-black/10 text-corporate-foreground font-bold py-4 px-6 rounded w-fit whitespace-normal text-center">
                         {addon.note}
                       </Badge>
                     </div>
@@ -172,7 +172,7 @@ export default function OfferDetail({ params }: PageProps) {
               </div>
             )}
 
-            <div className="p-10 bg-black/5 rounded-none border border-dashed border-black/10">
+            <div className="p-10 bg-black/5 rounded border border-dashed border-black/10">
               <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-4 opacity-40">
                 The Fine Print
               </h4>
@@ -185,7 +185,7 @@ export default function OfferDetail({ params }: PageProps) {
           {/* Sticky Sidebar CTA */}
           <div className="lg:col-span-5">
             <div className="sticky top-40">
-              <div className="bg-white border border-black/5 rounded-none p-10 shadow-2xl shadow-black/5 relative overflow-hidden">
+              <div className="bg-white border border-black/5 rounded p-10 shadow-2xl shadow-black/5 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-400 to-orange-600" />
 
                 <div className="mb-10 text-center">
@@ -200,13 +200,13 @@ export default function OfferDetail({ params }: PageProps) {
                       {offer.discountedPrice}
                     </span>
                   </div>
-                  <Badge className="mt-4 bg-orange-100 text-corporate-primary border-none font-bold px-4 py-2 uppercase tracking-widest text-[10px] rounded-none">
+                  <Badge className="mt-4 bg-orange-100 text-corporate-primary border-none font-bold px-4 py-2 uppercase tracking-widest text-[10px] rounded">
                     Limited Opportunity
                   </Badge>
                 </div>
 
                 <div className="space-y-4 mb-10">
-                  <div className="flex items-center gap-3 p-4 bg-corporate-secondary rounded-none">
+                  <div className="flex items-center gap-3 p-4 bg-corporate-secondary rounded">
                     <CheckCircle2 className="w-5 h-5 text-corporate-primary" />
                     <span className="font-black text-sm">
                       Priority Setup Included
@@ -223,7 +223,7 @@ export default function OfferDetail({ params }: PageProps) {
                 <div className="space-y-4">
                   <Button
                     onClick={() => setIsModalOpen(true)}
-                    className="w-full bg-corporate-primary hover:bg-orange-600 text-white rounded-none py-10 text-lg font-bold shadow-xl shadow-orange-500/30 transition-all hover:scale-[1.02] active:scale-95 group"
+                    className="w-full bg-corporate-primary hover:bg-orange-600 text-white rounded py-10 text-lg font-bold shadow-xl shadow-orange-500/30 transition-all hover:scale-[1.02] active:scale-95 group"
                   >
                     Claim This Offer
                     <ArrowRight className="w-6 h-6 ml-2 transition-transform group-hover:translate-x-1" />
@@ -234,7 +234,7 @@ export default function OfferDetail({ params }: PageProps) {
                 </div>
               </div>
 
-              <div className="mt-8 p-8 bg-black rounded-none text-white flex items-center justify-between gap-4">
+              <div className="mt-8 p-8 bg-black rounded text-white flex items-center justify-between gap-4">
                 <div>
                   <h4 className="font-black uppercase tracking-widest text-xs mb-1">
                     Need something custom?
@@ -247,7 +247,7 @@ export default function OfferDetail({ params }: PageProps) {
                   asChild
                   size="sm"
                   variant="outline"
-                  className="border-white/20 text-white hover:bg-white hover:text-black rounded-none font-bold"
+                  className="border-white/20 text-white hover:bg-white hover:text-black rounded font-bold"
                 >
                   <Link href="/contact">Inquire</Link>
                 </Button>

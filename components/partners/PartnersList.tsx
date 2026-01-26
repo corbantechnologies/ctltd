@@ -73,13 +73,13 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
   return (
     <div className="space-y-6">
       {/* Controls Bar */}
-      <div className="flex flex-col lg:flex-row gap-4 items-center justify-between bg-white/50 backdrop-blur-xl p-3 rounded-none border border-black/5 shadow-sm">
+      <div className="flex flex-col lg:flex-row gap-4 items-center justify-between bg-white/50 backdrop-blur-xl p-3 rounded border border-black/5 shadow-sm">
         {/* Search */}
         <div className="relative w-full md:w-96 group">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-black/40 group-focus-within:text-black transition-colors" />
           <Input
             placeholder="Search partners..."
-            className="pl-9 h-10 bg-white border-black/5 rounded-none focus:ring-0 focus:border-black/20 transition-all font-bold text-xs"
+            className="pl-9 h-10 bg-white border-black/5 rounded focus:ring-0 focus:border-black/20 transition-all font-bold text-xs"
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
@@ -99,7 +99,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
               setTypeFilter(e.target.value);
               setCurrentPage(1);
             }}
-            className="h-10 w-[180px] bg-white border border-black/5 rounded-none font-bold text-[10px] uppercase tracking-wide px-3 outline-none focus:ring-1 focus:ring-black/10 cursor-pointer"
+            className="h-10 w-[180px] bg-white border border-black/5 rounded font-bold text-[10px] uppercase tracking-wide px-3 outline-none focus:ring-1 focus:ring-black/10 cursor-pointer"
           >
             <option value="all">All Categories</option>
             {partnerTypes?.map((type) => (
@@ -110,13 +110,13 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
           </select>
 
           {/* View Toggle */}
-          <div className="flex gap-1.5 items-center bg-black/5 rounded-none p-1">
+          <div className="flex gap-1.5 items-center bg-black/5 rounded p-1">
             <Button
               onClick={() => setView("grid")}
               variant="ghost"
-              className={`h-8 w-8 rounded-none p-0 transition-all ${view === "grid"
-                  ? "text-white shadow-sm"
-                  : "text-black/40 hover:text-black"
+              className={`h-8 w-8 rounded p-0 transition-all ${view === "grid"
+                ? "text-white shadow-sm"
+                : "text-black/40 hover:text-black"
                 }`}
               style={{
                 backgroundColor: view === "grid" ? primaryColor : "transparent",
@@ -127,9 +127,9 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
             <Button
               onClick={() => setView("table")}
               variant="ghost"
-              className={`h-8 w-8 rounded-none p-0 transition-all ${view === "table"
-                  ? "text-white shadow-sm"
-                  : "text-black/40 hover:text-black"
+              className={`h-8 w-8 rounded p-0 transition-all ${view === "table"
+                ? "text-white shadow-sm"
+                : "text-black/40 hover:text-black"
                 }`}
               style={{
                 backgroundColor:
@@ -151,11 +151,11 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
               href={`/${rolePrefix}/partners/${partner.reference}`}
               className="group block"
             >
-              <Card className="h-full border-black/5 bg-white/60 backdrop-blur-xl rounded-none overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group-hover:bg-white/90">
+              <Card className="h-full border-black/5 bg-white/60 backdrop-blur-xl rounded overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group-hover:bg-white/90">
                 <CardContent className="p-5 space-y-4">
                   <div className="flex justify-between items-start">
                     <div
-                      className="w-10 h-10 rounded-none flex items-center justify-center text-white shadow-md transition-transform duration-300 group-hover:scale-105"
+                      className="w-10 h-10 rounded flex items-center justify-center text-white shadow-md transition-transform duration-300 group-hover:scale-105"
                       style={{
                         backgroundColor: primaryColor,
                         boxShadow: `0 4px 10px -2px ${primaryColor}4D`,
@@ -164,9 +164,9 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                       <Users className="w-5 h-5" />
                     </div>
                     <Badge
-                      className={`px-2 py-0.5 rounded-none text-[9px] font-bold uppercase tracking-widest border-none ${partner.is_active
-                          ? "bg-green-500/10 text-green-600"
-                          : "bg-red-500/10 text-red-600"
+                      className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-widest border-none ${partner.is_active
+                        ? "bg-green-500/10 text-green-600"
+                        : "bg-red-500/10 text-red-600"
                         }`}
                     >
                       {partner.is_active ? "Active" : "Inactive"}
@@ -200,7 +200,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
 
       {/* Table View */}
       {view === "table" && (
-        <div className="bg-white/50 backdrop-blur-xl border border-black/5 rounded-none overflow-hidden shadow-xl shadow-black/5">
+        <div className="bg-white/50 backdrop-blur-xl border border-black/5 rounded overflow-hidden shadow-xl shadow-black/5">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader className="bg-black/5">
@@ -231,7 +231,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                     <TableCell className="py-3 px-4">
                       <div className="flex items-center gap-3">
                         <div
-                          className="w-8 h-8 rounded-none flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105"
+                          className="w-8 h-8 rounded flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105"
                           style={{ backgroundColor: primaryColor }}
                         >
                           <Users className="w-4 h-4" />
@@ -275,7 +275,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
 
       {/* Pagination Controls */}
       {totalPages > 1 && (
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/50 backdrop-blur-xl p-4 rounded-none border border-black/5">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/50 backdrop-blur-xl p-4 rounded border border-black/5">
           <p className="text-[10px] font-bold uppercase tracking-widest text-black/30">
             Showing{" "}
             <span className="text-black">{paginatedPartners.length}</span> of{" "}
@@ -288,7 +288,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
               variant="outline"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              className="w-8 h-8 p-0 rounded-none border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              className="w-8 h-8 p-0 rounded border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
               style={{ "--hover-bg": primaryColor } as React.CSSProperties}
             >
               <ChevronLeft className="w-3.5 h-3.5" />
@@ -306,9 +306,9 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-8 h-8 rounded-none text-[10px] font-bold transition-all ${currentPage === page
-                          ? "text-white shadow-md"
-                          : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
+                      className={`w-8 h-8 rounded text-[10px] font-bold transition-all ${currentPage === page
+                        ? "text-white shadow-md"
+                        : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
                         }`}
                       style={
                         {
@@ -341,7 +341,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
               variant="outline"
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              className="w-8 h-8 p-0 rounded-none border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              className="w-8 h-8 p-0 rounded border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
               style={{ "--hover-bg": primaryColor } as React.CSSProperties}
             >
               <ChevronRight className="w-3.5 h-3.5" />
@@ -353,7 +353,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
       {/* Empty State */}
       {filteredPartners?.length === 0 && (
         <div className="text-center py-24">
-          <div className="w-16 h-16 bg-black/5 rounded-none flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-black/5 rounded flex items-center justify-center mx-auto mb-4">
             <Search className="w-8 h-8 text-black/20" />
           </div>
           <h3 className="text-xl font-bold text-black/30 tracking-tight">

@@ -74,7 +74,7 @@ export default function Navbar() {
                 {item.name}
               </Link>
             ))}
-            <button className="bg-corporate-primary hover:bg-orange-600 text-white font-bold rounded-none px-4 py-4 h-auto transition-all active:scale-95 shadow shadow-orange-500/30 uppercase tracking-tighter flex items-center gap-2">
+            <button className="bg-corporate-primary hover:bg-orange-600 text-white font-bold rounded px-4 py-4 h-auto transition-all active:scale-95 shadow shadow-orange-500/30 uppercase tracking-tighter flex items-center gap-2">
               Get in Touch <ChevronRight className="w-5 h-5 stroke-[3px]" />
             </button>
           </div>
@@ -82,7 +82,7 @@ export default function Navbar() {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden p-2 rounded-none hover:bg-orange-50 transition-colors"
+            className="lg:hidden p-2 rounded hover:bg-orange-50 transition-colors"
             aria-label="Open menu"
           >
             <Menu className="h-7 w-7 text-black" />
@@ -119,7 +119,7 @@ export default function Navbar() {
           />
           <button
             onClick={() => setMobileMenuOpen(false)}
-            className="p-2 rounded-none hover:bg-orange-50 transition-colors"
+            className="p-2 rounded hover:bg-orange-50 transition-colors"
             aria-label="Close menu"
           >
             <X className="h-6 w-6 text-black" />
@@ -142,7 +142,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setMobileMenuOpen(false)}
-            className="bg-corporate-primary hover:bg-orange-600 text-white w-full mt-6 font-bold py-4 rounded-none shadow-lg transition-all active:scale-95 uppercase tracking-tighter"
+            className="bg-corporate-primary hover:bg-orange-600 text-white w-full mt-6 font-bold py-4 rounded shadow-lg transition-all active:scale-95 uppercase tracking-tighter"
           >
             <Link
               href="/contact"

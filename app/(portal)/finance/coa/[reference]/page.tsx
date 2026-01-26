@@ -176,7 +176,7 @@ export default function FinanceCOADetailPage() {
             rolePrefix="finance"
             onSuccess={() => setOpen(false)}
             onClose={() => setOpen(false)}
-            className="min-h-screen border-none shadow-none rounded-none"
+            className="min-h-screen border-none shadow-none rounded"
           />
         </div>
       )}
@@ -189,7 +189,7 @@ export default function FinanceCOADetailPage() {
             initialCOA={coa.name}
             onSuccess={() => setOpenCreateBook(false)}
             onClose={() => setOpenCreateBook(false)}
-            className="min-h-screen border-none shadow-none rounded-none"
+            className="min-h-screen border-none shadow-none rounded"
             refetch={refetchCOA}
           />
         </div>
