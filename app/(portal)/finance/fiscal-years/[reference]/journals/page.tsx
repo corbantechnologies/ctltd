@@ -82,7 +82,7 @@ export default function FinanceJournalsPage() {
             rolePrefix="finance"
             onSuccess={() => setOpenCreateJournal(false)}
             onClose={() => setOpenCreateJournal(false)}
-            className="min-h-screen border-none shadow-none rounded-none"
+            className="min-h-screen border-none shadow-none rounded"
           />
         </div>
       )}

@@ -33,7 +33,7 @@ export default function ProductDetailPage() {
           </p>
           <Button
             asChild
-            className="bg-corporate-primary hover:bg-orange-600 rounded-2xl px-8 py-6 h-auto font-black shadow-lg shadow-orange-500/20"
+            className="bg-corporate-primary hover:bg-orange-600 rounded px-8 py-6 h-auto font-bold shadow-lg shadow-orange-500/20"
           >
             <Link href="/products">Back to Portfolio</Link>
           </Button>
@@ -59,16 +59,16 @@ export default function ProductDetailPage() {
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
             <div className="max-w-3xl">
               <div className="flex items-center gap-3 mb-4">
-                <Badge className="bg-orange-100 text-corporate-primary border-orange-200 font-black uppercase tracking-widest py-1.5 px-4 shadow-sm text-[10px]">
+                <Badge className="bg-orange-100 text-corporate-primary border-orange-200 font-bold uppercase tracking-widest py-1.5 px-4 shadow-sm text-[10px] rounded">
                   Case Study
                 </Badge>
                 {project.featured && (
-                  <Badge className="bg-black text-white font-black uppercase tracking-widest py-1.5 px-4 shadow-sm text-[10px]">
+                  <Badge className="bg-black text-white font-bold uppercase tracking-widest py-1.5 px-4 shadow-sm text-[10px] rounded">
                     Featured
                   </Badge>
                 )}
               </div>
-              <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-corporate-foreground mb-8 leading-[0.9]">
+              <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-corporate-foreground mb-8 leading-tight">
                 {project.title.split(" ").map((word, i, arr) => (
                   <span key={i}>
                     {word === arr[arr.length - 1] ? (
@@ -79,7 +79,7 @@ export default function ProductDetailPage() {
                   </span>
                 ))}
               </h1>
-              <p className="text-corporate-foreground text-xl md:text-2xl leading-relaxed font-black opacity-70">
+              <p className="text-corporate-foreground text-lg md:text-xl leading-relaxed font-bold opacity-70">
                 {project.shortDescription}
               </p>
             </div>
@@ -88,7 +88,7 @@ export default function ProductDetailPage() {
               <Button
                 asChild
                 size="lg"
-                className="bg-corporate-primary hover:bg-orange-600 text-white rounded-2xl px-10 py-8 text-lg font-black shadow-2xl shadow-orange-500/40 border-none transition-all hover:scale-105 group w-full lg:w-auto"
+                className="bg-corporate-primary hover:bg-orange-600 text-white rounded px-10 py-8 text-lg font-bold shadow-xl shadow-orange-500/40 border-none transition-all hover:scale-105 group w-full lg:w-auto"
               >
                 <Link
                   href={project.website}
@@ -110,9 +110,9 @@ export default function ProductDetailPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             {/* Main Content */}
             <div className="lg:col-span-8 space-y-16">
-              <div className="bg-white p-10 md:p-16 rounded-[48px] border border-black/5 shadow-sm">
+              <div className="bg-white p-10 md:p-16 rounded border border-black/5 shadow-sm">
                 <h3 className="text-2xl font-black text-corporate-foreground mb-8 flex items-center gap-4 tracking-tighter">
-                  <div className="w-10 h-10 rounded-2xl bg-orange-100 flex items-center justify-center text-corporate-primary">
+                  <div className="w-10 h-10 rounded bg-orange-100 flex items-center justify-center text-corporate-primary">
                     <ChevronRight className="w-5 h-5" />
                   </div>
                   Overview & Context
@@ -121,7 +121,7 @@ export default function ProductDetailPage() {
                   {project.fullDescription.map((para, i) => (
                     <p
                       key={i}
-                      className="text-lg md:text-xl text-corporate-foreground opacity-60 font-bold leading-relaxed italic border-l-4 border-orange-200 pl-6"
+                      className="text-lg md:text-lg text-corporate-foreground opacity-60 font-medium leading-relaxed italic border-l-4 border-orange-200 pl-6"
                     >
                       {para}
                     </p>
@@ -131,7 +131,7 @@ export default function ProductDetailPage() {
 
               {/* Highlights/Key Features */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-white p-10 rounded-[40px] border border-black/5 shadow-sm hover:shadow-xl transition-all">
+                <div className="bg-white p-10 rounded border border-black/5 shadow-sm hover:shadow-xl transition-all">
                   <h4 className="text-[10px] uppercase tracking-[0.3em] text-corporate-foreground opacity-30 font-black mb-8">
                     Key Achievements
                   </h4>
@@ -150,8 +150,8 @@ export default function ProductDetailPage() {
                 </div>
 
                 {project.goals && (
-                  <div className="bg-black p-10 rounded-[40px] shadow-2xl relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                  <div className="bg-black p-10 rounded shadow-2xl relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded blur-3xl -translate-y-1/2 translate-x-1/2" />
                     <h4 className="text-[10px] uppercase tracking-[0.3em] text-white/30 font-black mb-8 flex items-center gap-2">
                       <Target className="w-3 h-3 text-corporate-primary" />{" "}
                       Future Roadmap
@@ -166,7 +166,7 @@ export default function ProductDetailPage() {
 
             {/* Sidebar / Tech Stack */}
             <div className="lg:col-span-4 space-y-8">
-              <div className="bg-white p-10 rounded-[40px] border border-black/5 shadow-sm sticky top-32">
+              <div className="bg-white p-10 rounded border border-black/5 shadow-sm sticky top-32">
                 <h4 className="text-[10px] uppercase tracking-[0.3em] text-corporate-foreground opacity-30 font-black mb-8 flex items-center gap-2">
                   <Cpu className="w-3 h-3 text-corporate-primary" /> Technology
                   Stack
@@ -176,7 +176,7 @@ export default function ProductDetailPage() {
                     <Badge
                       key={tech}
                       variant="outline"
-                      className="text-[11px] uppercase font-black tracking-widest border-black/10 text-corporate-foreground py-2 px-6 bg-orange-50/50 rounded-xl hover:bg-orange-50 transition-colors"
+                      className="text-[11px] uppercase font-bold tracking-widest border-black/10 text-corporate-foreground py-2 px-6 bg-orange-50/50 rounded hover:bg-orange-50 transition-colors"
                     >
                       {tech}
                     </Badge>
@@ -194,7 +194,7 @@ export default function ProductDetailPage() {
                   <Button
                     asChild
                     variant="outline"
-                    className="w-full border-black/10 hover:border-corporate-primary text-corporate-foreground hover:text-corporate-primary rounded-2xl py-8 h-auto font-black uppercase tracking-widest text-xs transition-all shadow-md hover:bg-orange-50"
+                    className="w-full border-black/10 hover:border-corporate-primary text-corporate-foreground hover:text-corporate-primary rounded py-8 h-auto font-bold uppercase tracking-widest text-xs transition-all shadow-md hover:bg-orange-50"
                   >
                     <Link href="/contact">Start Your Project</Link>
                   </Button>

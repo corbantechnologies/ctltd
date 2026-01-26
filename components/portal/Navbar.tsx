@@ -134,7 +134,7 @@ export default function Navbar() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="rounded-xl text-black hover:bg-orange-50"
+                  className="rounded text-black hover:bg-orange-50"
                   onClick={() => setMenuOpen(true)}
                 >
                   <Menu className="w-6 h-6" />
@@ -176,7 +176,7 @@ export default function Navbar() {
             <Button
               variant="ghost"
               size="icon"
-              className="rounded-xl hover:bg-orange-50"
+              className="rounded hover:bg-orange-50"
               onClick={() => setMenuOpen(false)}
             >
               <X className="w-6 h-6" />
@@ -186,7 +186,7 @@ export default function Navbar() {
           {/* User Info inside Drawer */}
           <div className="p-6 bg-orange-50/30">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-orange-100 flex items-center justify-center text-corporate-primary font-bold text-lg">
+              <div className="w-12 h-12 rounded bg-orange-100 flex items-center justify-center text-corporate-primary font-bold text-lg">
                 {account?.first_name?.[0]}
                 {account?.last_name?.[0]}
               </div>
@@ -215,7 +215,7 @@ export default function Navbar() {
                     key={item.name}
                     href={item.href}
                     className={cn(
-                      "flex items-center justify-between p-4 rounded-2xl font-bold text-sm transition-all group",
+                      "flex items-center justify-between p-4 rounded font-bold text-sm transition-all group",
                       isActive
                         ? "bg-orange-50 text-corporate-primary"
                         : "text-black/60 hover:bg-orange-50/50 hover:text-black",
@@ -224,7 +224,7 @@ export default function Navbar() {
                     <div className="flex items-center gap-4">
                       <div
                         className={cn(
-                          "w-10 h-10 rounded-xl flex items-center justify-center transition-colors",
+                          "w-10 h-10 rounded flex items-center justify-center transition-colors",
                           isActive
                             ? "bg-white shadow-sm"
                             : "bg-black/5 shadow-none",
@@ -249,7 +249,7 @@ export default function Navbar() {
           <div className="p-6 border-t border-black/5">
             <Button
               variant="outline"
-              className="w-full h-14 bg-black hover:bg-red-600 text-white hover:text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all border-none"
+              className="w-full h-14 bg-black hover:bg-red-600 text-white hover:text-white rounded font-bold flex items-center justify-center gap-3 transition-all border-none"
               onClick={() => signOut({ callbackUrl: "/auth/login" })}
             >
               <LogOut className="w-5 h-5" />

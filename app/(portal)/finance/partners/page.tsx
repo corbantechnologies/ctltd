@@ -55,7 +55,7 @@ export default function FinancePartnersPage() {
             rolePrefix="finance"
             onSuccess={() => setOpenCreatePartner(false)}
             onClose={() => setOpenCreatePartner(false)}
-            className="min-h-screen border-none shadow-none rounded-none"
+            className="min-h-screen border-none shadow-none rounded"
           />
         </div>
       )}

@@ -75,11 +75,10 @@ export default function PartnerDetailPage() {
               <ArrowLeft className="w-4 h-4" />
             </Button>
             <Badge
-              className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${
-                partner.is_active
+              className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${partner.is_active
                   ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
                   : "bg-red-500/10 text-red-600 shadow-sm shadow-red-500/10"
-              }`}
+                }`}
             >
               {partner.is_active ? "Active Partner" : "Inactive Partner"}
             </Badge>
@@ -204,29 +203,29 @@ export default function PartnerDetailPage() {
                     <td className="p-4 text-right font-mono text-black/80">
                       {parseFloat(entry.debit) > 0
                         ? new Intl.NumberFormat("en-KE", {
-                            style: "decimal",
-                            minimumFractionDigits: 2,
-                          }).format(parseFloat(entry.debit))
+                          style: "decimal",
+                          minimumFractionDigits: 2,
+                        }).format(parseFloat(entry.debit))
                         : "—"}
                     </td>
                     <td className="p-4 text-right font-mono text-black/80">
                       {parseFloat(entry.credit) > 0
                         ? new Intl.NumberFormat("en-KE", {
-                            style: "decimal",
-                            minimumFractionDigits: 2,
-                          }).format(parseFloat(entry.credit))
+                          style: "decimal",
+                          minimumFractionDigits: 2,
+                        }).format(parseFloat(entry.credit))
                         : "—"}
                     </td>
                   </tr>
                 ))}
                 {(!partner.journal_entries ||
                   partner.journal_entries.length === 0) && (
-                  <tr>
-                    <td colSpan={4} className="py-12 text-center">
-                      No transactions recorded yet.
-                    </td>
-                  </tr>
-                )}
+                    <tr>
+                      <td colSpan={4} className="py-12 text-center">
+                        No transactions recorded yet.
+                      </td>
+                    </tr>
+                  )}
               </tbody>
             </table>
           </div>
@@ -241,7 +240,7 @@ export default function PartnerDetailPage() {
             rolePrefix="finance"
             onSuccess={() => setOpenUpdatePartner(false)}
             onClose={() => setOpenUpdatePartner(false)}
-            className="min-h-screen border-none shadow-none rounded-none"
+            className="min-h-screen border-none shadow-none rounded"
           />
         </div>
       )}

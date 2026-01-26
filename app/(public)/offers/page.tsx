@@ -14,13 +14,13 @@ export default function Offers() {
       <section className="relative pt-40 pb-24 overflow-hidden border-b border-black/5">
         <div className="absolute inset-0 bg-grid-white pointer-events-none opacity-40" />
         <div className="mx-auto px-6 relative z-10 text-center lg:text-left">
-          <Badge className="mb-4 bg-orange-100 text-corporate-primary border-orange-200 font-black uppercase tracking-widest py-2 px-6 shadow-sm">
+          <Badge className="mb-4 bg-orange-100 text-corporate-primary border-orange-200 font-bold uppercase tracking-widest py-2 px-6 shadow-sm rounded">
             Exclusive Deals
           </Badge>
-          <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-corporate-foreground mb-8 leading-[0.9]">
+          <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-corporate-foreground mb-8 leading-tight">
             Special <span className="text-corporate-primary">Offers.</span>
           </h1>
-          <p className="text-corporate-foreground text-xl md:text-2xl max-w-2xl leading-relaxed font-black opacity-70">
+          <p className="text-corporate-foreground text-lg md:text-xl max-w-2xl leading-relaxed font-bold opacity-70">
             Premium technology solutions at unbeatable prices. Limited-time
             opportunities to scale your business.
           </p>
@@ -35,16 +35,16 @@ export default function Offers() {
               {offers.map((offer) => (
                 <Card
                   key={offer.slug}
-                  className="bg-white border-black/5 hover:border-corporate-primary/30 transition-all group shadow-sm hover:shadow-2xl rounded-[32px] overflow-hidden flex flex-col"
+                  className="bg-white border-black/5 hover:border-corporate-primary/30 transition-all group shadow-sm hover:shadow-xl rounded overflow-hidden flex flex-col"
                 >
                   <CardHeader className="p-10 pb-0">
                     <div className="flex justify-between items-start mb-8">
-                      <div className="w-16 h-16 rounded-2xl bg-orange-100 flex items-center justify-center text-corporate-primary group-hover:bg-corporate-primary group-hover:text-white transition-all shadow-md">
+                      <div className="w-16 h-16 rounded bg-orange-100 flex items-center justify-center text-corporate-primary group-hover:bg-corporate-primary group-hover:text-white transition-all shadow-sm">
                         <Tag className="w-8 h-8" />
                       </div>
                       <Badge
                         variant="outline"
-                        className="border-corporate-primary/20 text-corporate-primary font-black px-4 py-1 rounded-full text-[10px] uppercase tracking-wider"
+                        className="border-corporate-primary/20 text-corporate-primary font-bold px-4 py-1 rounded text-[10px] uppercase tracking-wider"
                       >
                         Save{" "}
                         {parseInt(offer.originalPrice) -
@@ -61,7 +61,7 @@ export default function Offers() {
                       {offer.description}
                     </p>
 
-                    <div className="mb-8 p-6 bg-corporate-accent rounded-2xl border border-corporate-primary/10">
+                    <div className="mb-8 p-6 bg-corporate-accent rounded border border-corporate-primary/10">
                       <div className="flex items-baseline gap-2 mb-1">
                         <span className="text-3xl font-black text-corporate-primary">
                           {offer.discountedPrice}
@@ -90,7 +90,7 @@ export default function Offers() {
                     <Button
                       asChild
                       variant="outline"
-                      className="w-full border-black/10 hover:border-corporate-primary text-corporate-foreground hover:text-corporate-primary group/btn rounded-2xl py-6 h-auto transition-all font-black shadow-lg hover:bg-orange-50 uppercase tracking-widest text-[10px]"
+                      className="w-full border-black/10 hover:border-corporate-primary text-corporate-foreground hover:text-corporate-primary group/btn rounded py-6 h-auto transition-all font-bold shadow-md hover:bg-orange-50 uppercase tracking-widest text-[10px]"
                     >
                       <Link
                         href={`/offers/${offer.slug}`}
@@ -105,8 +105,8 @@ export default function Offers() {
               ))}
             </div>
           ) : (
-            <div className="max-w-4xl mx-auto py-24 text-center space-y-8 bg-white rounded-[48px] border border-black/5 shadow-sm">
-              <div className="w-24 h-24 bg-orange-100 rounded-3xl flex items-center justify-center text-corporate-primary mx-auto shadow-inner">
+            <div className="max-w-4xl mx-auto py-24 text-center space-y-8 bg-white rounded border border-black/5 shadow-sm">
+              <div className="w-24 h-24 bg-orange-100 rounded flex items-center justify-center text-corporate-primary mx-auto shadow-inner">
                 <Tag className="w-10 h-10 opacity-20" />
               </div>
               <div>
@@ -122,7 +122,7 @@ export default function Offers() {
               <Button
                 asChild
                 variant="outline"
-                className="border-corporate-primary/20 text-corporate-primary hover:bg-orange-50 rounded-2xl px-10 py-6 h-auto font-black uppercase tracking-widest text-xs"
+                className="border-corporate-primary/20 text-corporate-primary hover:bg-orange-50 rounded px-10 py-6 h-auto font-bold uppercase tracking-widest text-xs"
               >
                 <Link href="/contact">Notify Me of New Deals</Link>
               </Button>
@@ -133,10 +133,10 @@ export default function Offers() {
 
       {/* CTA Section */}
       <section className="py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto bg-black rounded-[48px] p-12 md:p-24 text-center relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+        <div className="max-w-7xl mx-auto bg-black rounded p-12 md:p-24 text-center relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/5 rounded blur-[100px] -translate-y-1/2 translate-x-1/2" />
           <div className="relative z-10 space-y-10">
-            <h2 className="text-4xl md:text-7xl font-black text-white leading-[0.9] tracking-tighter max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-5xl font-black text-white leading-tight tracking-tighter max-w-4xl mx-auto">
               Don&apos;t Miss{" "}
               <span className="text-corporate-primary">Future</span> Deals.
             </h2>
@@ -148,7 +148,7 @@ export default function Offers() {
               <Button
                 asChild
                 size="lg"
-                className="bg-corporate-primary hover:bg-orange-600 text-white rounded-2xl px-12 py-8 text-xl font-black shadow-2xl shadow-orange-500/20 w-full sm:w-auto"
+                className="bg-corporate-primary hover:bg-orange-600 text-white rounded px-12 py-8 text-lg font-bold shadow-xl shadow-orange-500/20 w-full sm:w-auto"
               >
                 <Link href="/contact">Inquire Now</Link>
               </Button>

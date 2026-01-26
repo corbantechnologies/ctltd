@@ -51,7 +51,7 @@ export default function FinanceCOAPage() {
             rolePrefix="finance"
             onSuccess={() => setOpen(false)}
             onClose={() => setOpen(false)}
-            className="min-h-screen border-none shadow-none rounded-none"
+            className="min-h-screen border-none shadow-none rounded"
           />
         </div>
       )}
