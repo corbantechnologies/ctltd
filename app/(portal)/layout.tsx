@@ -6,7 +6,7 @@ export default function PortalLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#EFE5D9] flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col">
       <Navbar />
       <main className="p-6 flex-1">{children}</main>
       <footer className="text-center text-black/40 text-xs mt-12 pb-6">
