@@ -99,11 +99,10 @@ export default function FinancialYearsList({
         <div className="flex items-center gap-1.5 bg-black/5 p-1 rounded-xl self-end lg:self-auto">
           <button
             onClick={() => setView("grid")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
-              view === "grid"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "grid"
                 ? "bg-white shadow-sm text-black"
                 : "text-black/40 hover:text-black"
-            }`}
+              }`}
             style={{ color: view === "grid" ? primaryColor : undefined }}
           >
             <LayoutGrid className="w-3.5 h-3.5" />
@@ -111,11 +110,10 @@ export default function FinancialYearsList({
           </button>
           <button
             onClick={() => setView("table")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
-              view === "table"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "table"
                 ? "bg-white shadow-sm text-black"
                 : "text-black/40 hover:text-black"
-            }`}
+              }`}
             style={{ color: view === "table" ? primaryColor : undefined }}
           >
             <List className="w-3.5 h-3.5" />
@@ -193,19 +191,19 @@ export default function FinancialYearsList({
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/10 bg-black/5">
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Fiscal Code
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Period
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Estimated Profit
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Status
                   </th>
-                  <th className="text-right py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Actions
                   </th>
                 </tr>
@@ -216,7 +214,7 @@ export default function FinancialYearsList({
                     key={year.reference}
                     className="transition-colors group hover:bg-black/5"
                   >
-                    <td className="py-3 px-4">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <Link
                         href={`/${rolePrefix}/fiscal-years/${year.reference}`}
                         className="flex items-center gap-3"
@@ -225,57 +223,57 @@ export default function FinancialYearsList({
                           <CalendarRange className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-black transition-colors">
+                          <p className="text-sm font-medium text-black transition-colors">
                             {year.code}
                           </p>
-                          <p className="text-[9px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
+                          <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
                             {year.reference}
                           </p>
                         </div>
                       </Link>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-1.5">
                         <Badge
                           variant="outline"
-                          className="bg-white text-black/60 border-black/10 font-bold text-[9px] py-0 px-2"
+                          className="bg-white text-black/60 border-black/10 font-bold text-[9px] py-0 px-2 shadow-none"
                         >
                           {new Date(year.start_date).toLocaleDateString()}
                         </Badge>
                         <span className="text-black/20">-</span>
                         <Badge
                           variant="outline"
-                          className="bg-white text-black/60 border-black/10 font-bold text-[9px] py-0 px-2"
+                          className="bg-white text-black/60 border-black/10 font-bold text-[9px] py-0 px-2 shadow-none"
                         >
                           {new Date(year.end_date).toLocaleDateString()}
                         </Badge>
                       </div>
                     </td>
-                    <td className="py-3 px-4">{year.estimated_profit}</td>
-                    <td className="py-3 px-4">
+                    <td className="py-2.5 px-4 border-b border-black/5 text-sm font-medium">{year.estimated_profit}</td>
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       {year.is_active ? (
                         <div className="flex items-center gap-1.5 text-green-600">
                           <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                          <span className="text-[9px] font-bold uppercase tracking-widest">
+                          <span className="text-[10px] font-bold uppercase tracking-wider">
                             Active
                           </span>
                         </div>
                       ) : (
                         <div className="flex items-center gap-1.5 text-black/30">
                           <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
-                          <span className="text-[9px] font-bold uppercase tracking-widest">
+                          <span className="text-[10px] font-bold uppercase tracking-wider">
                             Closed
                           </span>
                         </div>
                       )}
                     </td>
-                    <td className="py-3 px-4 text-right">
+                    <td className="py-2.5 px-4 text-right border-b border-black/5">
                       <Link
                         href={`/${rolePrefix}/fiscal-years/${year.reference}`}
                       >
                         <Button
                           variant="ghost"
-                          className="h-8 w-8 p-0 rounded-lg hover:bg-white hover:shadow-sm hover:text-black transition-all duration-300 text-black/30"
+                          className="h-7 w-7 p-0 rounded-md hover:bg-white hover:shadow-sm hover:text-black transition-all duration-300 text-black/30"
                         >
                           <ArrowRight className="w-3.5 h-3.5" />
                         </Button>
@@ -320,11 +318,10 @@ export default function FinancialYearsList({
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-8 h-8 rounded-lg text-[10px] font-bold transition-all ${
-                        currentPage === page
+                      className={`w-8 h-8 rounded-lg text-[10px] font-bold transition-all ${currentPage === page
                           ? "text-white shadow-md"
                           : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
-                      }`}
+                        }`}
                       style={
                         {
                           backgroundColor:

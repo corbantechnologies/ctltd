@@ -296,15 +296,15 @@ export default function JournalsList({
               endDate ||
               selectedMonth !== "all" ||
               selectedYear !== "all") && (
-              <Button
-                variant="outline"
-                onClick={clearFilters}
-                className="h-12 w-12 p-0 rounded-xl border-black/5 bg-white/80 hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-all text-black/40 shadow-sm"
-                title="Clear Filters"
-              >
-                <X className="w-4 h-4" />
-              </Button>
-            )}
+                <Button
+                  variant="outline"
+                  onClick={clearFilters}
+                  className="h-12 w-12 p-0 rounded-xl border-black/5 bg-white/80 hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-all text-black/40 shadow-sm"
+                  title="Clear Filters"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              )}
           </div>
         </div>
       </div>
@@ -346,11 +346,10 @@ export default function JournalsList({
                       `}</style>
                     </div>
                     <Badge
-                      className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${
-                        journal.is_posted
+                      className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${journal.is_posted
                           ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
                           : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
-                      }`}
+                        }`}
                     >
                       {journal.is_posted ? "Posted" : "Pending"}
                     </Badge>
@@ -397,19 +396,19 @@ export default function JournalsList({
             <table className="w-full">
               <thead>
                 <tr className="bg-black/5 border-b border-black/5">
-                  <th className="text-left py-5 px-8 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Posting Date
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Journal Description
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Type
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Status
                   </th>
-                  <th className="text-right py-5 px-8 text-[10px] font-bold uppercase tracking-widest text-black/40 text-center">
+                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-center">
                     Reference
                   </th>
                 </tr>
@@ -423,9 +422,9 @@ export default function JournalsList({
                       (window.location.href = `/${rolePrefix}/${linkPrefix}/${journal.reference}`)
                     }
                   >
-                    <td className="py-6 px-8">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex flex-col">
-                        <span className="text-base font-bold text-black">
+                        <span className="text-sm font-medium text-black">
                           {new Date(journal.date).toLocaleDateString()}
                         </span>
                         <span className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
@@ -433,48 +432,48 @@ export default function JournalsList({
                         </span>
                       </div>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/40 group-hover:bg-[#D0402B]/10 group-hover:text-[#D0402B] transition-all">
                           <FileText className="w-4 h-4" />
                         </div>
-                        <span className="text-base font-bold text-black group-hover:text-[#D0402B] transition-colors">
+                        <span className="text-sm font-medium text-black group-hover:text-[#D0402B] transition-colors">
                           {journal.description}
                         </span>
                       </div>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <Badge
                         variant="outline"
-                        className="bg-white/50 border-black/5 text-black/60 font-bold text-[9px] uppercase px-3 py-1 rounded-full"
+                        className="bg-white/50 border-black/5 text-black/60 font-bold text-[9px] uppercase px-2 py-0.5 rounded-sm shadow-none"
                       >
                         {journal.journal_type}
                       </Badge>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-2">
                         {journal.is_posted ? (
                           <div className="flex items-center gap-2 text-green-600">
-                            <CheckCircle2 className="w-4 h-4" />
-                            <span className="text-[10px] font-bold uppercase tracking-widest">
+                            <CheckCircle2 className="w-3.5 h-3.5" />
+                            <span className="text-[10px] font-bold uppercase tracking-wider">
                               POSTED
                             </span>
                           </div>
                         ) : (
                           <div className="flex items-center gap-2 text-orange-600">
-                            <Clock className="w-4 h-4" />
-                            <span className="text-[10px] font-bold uppercase tracking-widest">
+                            <Clock className="w-3.5 h-3.5" />
+                            <span className="text-[10px] font-bold uppercase tracking-wider">
                               PENDING
                             </span>
                           </div>
                         )}
                       </div>
                     </td>
-                    <td className="py-6 px-8 text-right">
-                      <div className="flex items-center justify-end gap-4 font-mono font-bold text-sm text-black/40 group-hover:text-black">
+                    <td className="py-2.5 px-4 text-right border-b border-black/5">
+                      <div className="flex items-center justify-end gap-4 font-mono font-bold text-xs text-black/40 group-hover:text-black">
                         {journal.reference}
-                        <div className="w-8 h-8 rounded-xl bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-lg hover:bg-[#D0402B]">
-                          <ArrowUpRight className="w-4 h-4" />
+                        <div className="w-7 h-7 rounded-md bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-lg hover:bg-[#D0402B]">
+                          <ArrowUpRight className="w-3.5 h-3.5" />
                         </div>
                       </div>
                     </td>
@@ -521,11 +520,10 @@ export default function JournalsList({
                   variant={currentPage === i + 1 ? "default" : "outline"}
                   size="sm"
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`w-10 h-10 rounded-xl transition-all font-bold ${
-                    currentPage === i + 1
+                  className={`w-10 h-10 rounded-xl transition-all font-bold ${currentPage === i + 1
                       ? "bg-[#D0402B] text-white shadow-lg shadow-[#D0402B]/20"
                       : "bg-white/80 border-black/5 hover:bg-black/5"
-                  }`}
+                    }`}
                   style={{
                     backgroundColor:
                       currentPage === i + 1 ? primaryColor : undefined,

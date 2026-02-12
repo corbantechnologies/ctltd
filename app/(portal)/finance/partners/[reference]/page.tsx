@@ -76,8 +76,8 @@ export default function PartnerDetailPage() {
             </Button>
             <Badge
               className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${partner.is_active
-                  ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
-                  : "bg-red-500/10 text-red-600 shadow-sm shadow-red-500/10"
+                ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
+                : "bg-red-500/10 text-red-600 shadow-sm shadow-red-500/10"
                 }`}
             >
               {partner.is_active ? "Active Partner" : "Inactive Partner"}
@@ -175,13 +175,13 @@ export default function PartnerDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="bg-black/5 border-b border-black/5 text-left">
-                  <th className="p-4 text-[10px] font-bold uppercase tracking-widest ">
+                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Book & Date
                   </th>
-                  <th className="p-4 text-[10px] font-bold uppercase tracking-widest  text-right">
+                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-right">
                     Debit
                   </th>
-                  <th className="p-4 text-[10px] font-bold uppercase tracking-widest  text-right">
+                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-right">
                     Credit
                   </th>
                 </tr>
@@ -192,15 +192,15 @@ export default function PartnerDetailPage() {
                     key={entry.reference}
                     className="hover:bg-white/50 transition-colors"
                   >
-                    <td className="p-4">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="font-bold text-black">{entry.book}</div>
-                      <div className="text-[10px] uppercase  tracking-wider">
+                      <div className="text-[10px] uppercase text-black/40 tracking-wider">
                         {entry.created_at
                           ? new Date(entry.created_at).toLocaleDateString()
                           : "—"}
                       </div>
                     </td>
-                    <td className="p-4 text-right font-mono text-black/80">
+                    <td className="py-2.5 px-4 border-b border-black/5 text-right font-mono text-black/80">
                       {parseFloat(entry.debit) > 0
                         ? new Intl.NumberFormat("en-KE", {
                           style: "decimal",
@@ -208,7 +208,7 @@ export default function PartnerDetailPage() {
                         }).format(parseFloat(entry.debit))
                         : "—"}
                     </td>
-                    <td className="p-4 text-right font-mono text-black/80">
+                    <td className="py-2.5 px-4 border-b border-black/5 text-right font-mono text-black/80">
                       {parseFloat(entry.credit) > 0
                         ? new Intl.NumberFormat("en-KE", {
                           style: "decimal",

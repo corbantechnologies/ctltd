@@ -218,22 +218,22 @@ export default function BookDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/5 bg-black/5">
-                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Post Date
                   </th>
-                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Reference
                   </th>
-                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Partner / Branch
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Debit
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Credit
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40 text-center">
+                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-center">
                     Actions
                   </th>
                 </tr>
@@ -245,47 +245,47 @@ export default function BookDetailPage() {
                       key={entry.reference}
                       className="hover:bg-orange-50/20 transition-colors group"
                     >
-                      <td className="py-5 px-8">
-                        <p className="text-base text-black">
+                      <td className="py-2.5 px-4 border-b border-black/5">
+                        <p className="text-sm font-medium text-black">
                           {new Date(entry.created_at).toLocaleDateString()}
                         </p>
-                        <p className="text-[9px] font-bold text-black/30 uppercase mt-0.5">
+                        <p className="text-[10px] font-bold text-black/30 uppercase mt-0.5">
                           {new Date(entry.created_at).toLocaleTimeString()}
                         </p>
                       </td>
-                      <td className="py-5 px-8">
+                      <td className="py-2.5 px-4 border-b border-black/5">
                         <div className="flex items-center gap-2">
-                          <Receipt className="w-3 h-3 text-[#D0402B]" />
-                          <p className="text-base text-black">
+                          <Receipt className="w-3.5 h-3.5 text-[#D0402B]" />
+                          <p className="text-sm font-medium text-black">
                             {entry.reference}
                           </p>
                         </div>
                       </td>
-                      <td className="py-5 px-8">
-                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-widest px-2.5 py-1">
+                      <td className="py-2.5 px-4 border-b border-black/5">
+                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none">
                           {entry.division || "Entity Core"}
                         </Badge>
                       </td>
-                      <td className="py-5 px-8 text-right">
-                        <p className="text-base text-green-600">
+                      <td className="py-2.5 px-4 border-b border-black/5 text-right">
+                        <p className="text-sm font-medium text-green-600">
                           {entry.currency}{" "}
                           {parseFloat(entry.debit).toLocaleString(undefined, {
                             minimumFractionDigits: 2,
                           })}
                         </p>
                       </td>
-                      <td className="py-5 px-8 text-right">
-                        <p className="text-base text-[#D0402B]">
+                      <td className="py-2.5 px-4 border-b border-black/5 text-right">
+                        <p className="text-sm font-medium text-[#D0402B]">
                           {entry.currency}{" "}
                           {parseFloat(entry.credit).toLocaleString(undefined, {
                             minimumFractionDigits: 2,
                           })}
                         </p>
                       </td>
-                      <td className="py-5 px-8">
+                      <td className="py-2.5 px-4 border-b border-black/5">
                         <div className="flex justify-center">
-                          <button className="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-[#D0402B]">
-                            <ArrowUpRight className="w-4 h-4" />
+                          <button className="w-7 h-7 rounded-md bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-[#D0402B]">
+                            <ArrowUpRight className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </td>

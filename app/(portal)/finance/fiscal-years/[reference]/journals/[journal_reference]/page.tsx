@@ -141,8 +141,8 @@ export default function JournalsDetailPage() {
             </Button>
             <Badge
               className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${journal.is_posted
-                  ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
-                  : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
+                ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
+                : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
                 }`}
             >
               {journal.is_posted ? (
@@ -201,8 +201,8 @@ export default function JournalsDetailPage() {
               onClick={handlePostJournal}
               disabled={isPosting || !isBalanced}
               className={`h-12 font-bold uppercase text-xs tracking-widest rounded-xl shadow-lg transition-all ${!isBalanced
-                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  : "bg-[#045138] hover:bg-black text-white"
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-[#045138] hover:bg-black text-white"
                 }`}
             >
               {isPosting ? (
@@ -260,8 +260,8 @@ export default function JournalsDetailPage() {
         </Card>
         <Card
           className={`border-black/5 backdrop-blur-xl rounded-[24px] shadow-sm transition-colors ${isBalanced
-              ? "bg-[#045138]/5 border-[#045138]/20"
-              : "bg-red-500/5 border-red-500/20"
+            ? "bg-[#045138]/5 border-[#045138]/20"
+            : "bg-red-500/5 border-red-500/20"
             }`}
         >
           <CardContent className="p-6">
@@ -305,16 +305,16 @@ export default function JournalsDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="bg-black/5 border-b border-black/5 text-left">
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Account Book
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Partner / Division
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">
+                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-right">
                     Debit
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">
+                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-right">
                     Credit
                   </th>
                 </tr>
@@ -325,10 +325,10 @@ export default function JournalsDetailPage() {
                     key={entry.reference}
                     className="hover:bg-white/50 transition-colors"
                   >
-                    <td className="py-4 px-6">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="font-bold text-black">{entry.book}</div>
                     </td>
-                    <td className="py-4 px-6">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="font-bold text-black">
                         {entry.partner || "—"}
                       </div>
@@ -336,7 +336,7 @@ export default function JournalsDetailPage() {
                         {entry.division}
                       </div>
                     </td>
-                    <td className="py-4 px-6 text-right font-mono text-black/80">
+                    <td className="py-2.5 px-4 border-b border-black/5 text-right font-mono text-black/80">
                       {parseFloat(entry.debit) > 0
                         ? new Intl.NumberFormat("en-KE", {
                           style: "decimal",
@@ -344,7 +344,7 @@ export default function JournalsDetailPage() {
                         }).format(parseFloat(entry.debit))
                         : "—"}
                     </td>
-                    <td className="py-4 px-6 text-right font-mono text-black/80">
+                    <td className="py-2.5 px-4 border-b border-black/5 text-right font-mono text-black/80">
                       {parseFloat(entry.credit) > 0
                         ? new Intl.NumberFormat("en-KE", {
                           style: "decimal",

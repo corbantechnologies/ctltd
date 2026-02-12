@@ -215,56 +215,56 @@ export default function JournalDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/5 bg-black/5">
-                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Ledger Book
                   </th>
-                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Division
                   </th>
-                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Partner
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Debit
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Credit
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40 text-center">
+                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-center">
                     Explore
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-black/5">
                 {journal?.journal_entries &&
-                journal.journal_entries.length > 0 ? (
+                  journal.journal_entries.length > 0 ? (
                   journal.journal_entries.map((entry) => (
                     <tr
                       key={entry.reference}
                       className="hover:bg-orange-50/20 transition-colors group"
                     >
-                      <td className="py-5 px-8">
+                      <td className="py-2.5 px-4 border-b border-black/5">
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/40">
                             <Receipt className="w-4 h-4" />
                           </div>
                           <div>
-                            <p className="text-base font-bold text-black group-hover:text-[#D0402B] transition-colors">
+                            <p className="text-sm font-medium text-black group-hover:text-[#D0402B] transition-colors">
                               {entry.book}
                             </p>
-                            <p className="text-[9px] font-bold text-black/30 uppercase tracking-widest">
+                            <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest">
                               General Ledger
                             </p>
                           </div>
                         </div>
                       </td>
-                      <td className="py-5 px-8">
-                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-widest px-2.5 py-1">
+                      <td className="py-2.5 px-4 border-b border-black/5">
+                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none">
                           {entry.division || "Entity Core"}
                         </Badge>
                       </td>
-                      <td className="py-5 px-8">
-                        <p className="text-sm font-bold text-black/60 truncate max-w-[120px]">
+                      <td className="py-2.5 px-4 border-b border-black/5">
+                        <p className="text-xs font-bold text-black/60 truncate max-w-[120px]">
                           {entry.partner || (
                             <span className="text-black/20 italic">
                               No Partner
@@ -272,29 +272,29 @@ export default function JournalDetailPage() {
                           )}
                         </p>
                       </td>
-                      <td className="py-5 px-8 text-right underline decoration-green-500/20 underline-offset-4 pointer-events-none">
-                        <p className="text-base font-bold text-green-600">
+                      <td className="py-2.5 px-4 border-b border-black/5 text-right underline decoration-green-500/20 underline-offset-4 pointer-events-none">
+                        <p className="text-sm font-medium text-green-600">
                           {entry.currency}{" "}
                           {parseFloat(entry.debit).toLocaleString(undefined, {
                             minimumFractionDigits: 2,
                           })}
                         </p>
                       </td>
-                      <td className="py-5 px-8 text-right underline decoration-[#D0402B]/20 underline-offset-4">
-                        <p className="text-base font-bold text-[#D0402B]">
+                      <td className="py-2.5 px-4 border-b border-black/5 text-right underline decoration-[#D0402B]/20 underline-offset-4">
+                        <p className="text-sm font-medium text-[#D0402B]">
                           {entry.currency}{" "}
                           {parseFloat(entry.credit).toLocaleString(undefined, {
                             minimumFractionDigits: 2,
                           })}
                         </p>
                       </td>
-                      <td className="py-5 px-8">
+                      <td className="py-2.5 px-4 border-b border-black/5">
                         <div className="flex justify-center">
                           <button
-                            className="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-[#D0402B] shadow-lg"
+                            className="w-7 h-7 rounded-md bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-[#D0402B] shadow-sm"
                             title="View Ledger Detail"
                           >
-                            <ExternalLink className="w-4 h-4" />
+                            <ExternalLink className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </td>
