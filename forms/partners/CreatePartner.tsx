@@ -79,7 +79,7 @@ export default function CreatePartner({
 
   return (
     <Card
-      className={`w-full border-black/5 shadow-2xl rounded-[32px] bg-white/80 backdrop-blur-xl ${className}`}
+      className={`w-full border-black/5 shadow-2xl rounded-xl bg-white/80 backdrop-blur-xl ${className}`}
     >
       <CardHeader
         className="p-8 border-b border-black/5"
@@ -88,7 +88,7 @@ export default function CreatePartner({
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-4">
             <div
-              className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
+              className="w-12 h-12 rounded-lg flex items-center justify-center text-white shadow-lg"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
@@ -97,10 +97,10 @@ export default function CreatePartner({
               <UserPlus className="w-6 h-6" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-black text-black tracking-tight">
+              <CardTitle className="text-2xl font-bold text-black tracking-tight">
                 Register New Partner
               </CardTitle>
-              <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+              <CardDescription className="text-black/50 font-medium text-sm mt-1">
                 Ecosystem Relationship Hub
               </CardDescription>
             </div>
@@ -125,7 +125,7 @@ export default function CreatePartner({
             <div className="space-y-2">
               <Label
                 htmlFor="name"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Partner Name
               </Label>
@@ -133,7 +133,7 @@ export default function CreatePartner({
                 id="name"
                 name="name"
                 placeholder="Full Entity Name"
-                className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
+                className="h-14 rounded-md border-black/5 bg-black/5 focus:bg-white transition-all font-medium px-5"
                 style={{
                   color: primaryColor,
                 }}
@@ -142,7 +142,7 @@ export default function CreatePartner({
                 value={formik.values.name}
               />
               {formik.touched.name && formik.errors.name && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                <p className="text-xs font-semibold text-red-500 ml-1">
                   {formik.errors.name}
                 </p>
               )}
@@ -151,7 +151,7 @@ export default function CreatePartner({
             <div className="space-y-2">
               <Label
                 htmlFor="email"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Email Address
               </Label>
@@ -160,7 +160,7 @@ export default function CreatePartner({
                 name="email"
                 type="email"
                 placeholder="contact@entity.com"
-                className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
+                className="h-14 rounded-md border-black/5 bg-black/5 focus:bg-white transition-all font-medium px-5"
                 style={{
                   color: primaryColor,
                 }}
@@ -169,7 +169,7 @@ export default function CreatePartner({
                 value={formik.values.email}
               />
               {formik.touched.email && formik.errors.email && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                <p className="text-xs font-semibold text-red-500 ml-1">
                   {formik.errors.email}
                 </p>
               )}
@@ -180,7 +180,7 @@ export default function CreatePartner({
             <div className="space-y-2">
               <Label
                 htmlFor="phone"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Phone Number
               </Label>
@@ -188,7 +188,7 @@ export default function CreatePartner({
                 id="phone"
                 name="phone"
                 placeholder="+254..."
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
+                className="h-14 rounded-md border-black/5 bg-orange-50/30 focus:bg-white transition-all font-medium px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
@@ -198,7 +198,7 @@ export default function CreatePartner({
             <div className="space-y-2">
               <Label
                 htmlFor="partner_type"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Partner Category
               </Label>
@@ -206,7 +206,7 @@ export default function CreatePartner({
                 id="partner_type"
                 name="partner_type"
                 disabled={isLoadingTypes}
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-black/5 px-5 py-2 text-sm font-bold transition-all appearance-none"
+                className="flex h-14 w-full rounded-md border border-black/5 bg-black/5 px-5 py-2 text-sm font-medium transition-all appearance-none"
                 style={{
                   color: primaryColor,
                 }}
@@ -222,7 +222,7 @@ export default function CreatePartner({
                 ))}
               </select>
               {formik.touched.partner_type && formik.errors.partner_type && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                <p className="text-xs font-semibold text-red-500 ml-1">
                   {formik.errors.partner_type}
                 </p>
               )}
@@ -231,7 +231,7 @@ export default function CreatePartner({
             <div className="space-y-2">
               <Label
                 htmlFor="division"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Assigned Division
               </Label>
@@ -239,7 +239,7 @@ export default function CreatePartner({
                 id="division"
                 name="division"
                 disabled={isLoadingDivisions}
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-black/5 px-5 py-2 text-sm font-bold transition-all appearance-none"
+                className="flex h-14 w-full rounded-md border border-black/5 bg-black/5 px-5 py-2 text-sm font-medium transition-all appearance-none"
                 style={{
                   color: primaryColor,
                 }}
@@ -264,7 +264,7 @@ export default function CreatePartner({
             <div className="space-y-2">
               <Label
                 htmlFor="tax_pin"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Tax PIN (KRA)
               </Label>
@@ -272,7 +272,7 @@ export default function CreatePartner({
                 id="tax_pin"
                 name="tax_pin"
                 placeholder="P0XXXXXXXX"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
+                className="h-14 rounded-md border-black/5 bg-orange-50/30 focus:bg-white transition-all font-medium px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.tax_pin}
@@ -282,14 +282,14 @@ export default function CreatePartner({
             <div className="space-y-2">
               <Label
                 htmlFor="currency"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Preferred Currency
               </Label>
               <select
                 id="currency"
                 name="currency"
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 py-2 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 transition-all appearance-none"
+                className="flex h-14 w-full rounded-md border border-black/5 bg-orange-50/30 px-5 py-2 text-sm font-medium focus:ring-2 focus:ring-corporate-primary/20 transition-all appearance-none"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.currency}
@@ -304,7 +304,7 @@ export default function CreatePartner({
             <div className="space-y-2">
               <Label
                 htmlFor="wht_rate"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 WHT Rate (%)
               </Label>
@@ -314,13 +314,13 @@ export default function CreatePartner({
                 type="number"
                 step="0.01"
                 placeholder="0.00"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
+                className="h-14 rounded-md border-black/5 bg-orange-50/30 focus:bg-white transition-all font-medium px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.wht_rate}
               />
               {formik.touched.wht_rate && formik.errors.wht_rate && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                <p className="text-xs font-semibold text-red-500 ml-1">
                   {formik.errors.wht_rate}
                 </p>
               )}
@@ -330,7 +330,7 @@ export default function CreatePartner({
           <div className="space-y-2">
             <Label
               htmlFor="payment_terms"
-              className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+              className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
             >
               Payment Terms / Notes
             </Label>
@@ -338,7 +338,7 @@ export default function CreatePartner({
               id="payment_terms"
               name="payment_terms"
               placeholder="e.g. Net 30, Pay on Delivery"
-              className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
+              className="h-14 rounded-md border-black/5 bg-orange-50/30 focus:bg-white transition-all font-medium px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.payment_terms}
@@ -346,14 +346,14 @@ export default function CreatePartner({
           </div>
 
           <div
-            className="flex items-center gap-3 p-4 rounded-2xl border border-black/5"
+            className="flex items-center gap-3 p-4 rounded-md border border-black/5"
             style={{ backgroundColor: `${primaryColor}0D` }}
           >
             <input
               id="is_active"
               name="is_active"
               type="checkbox"
-              className="w-5 h-5 rounded-lg border-black/5 focus:ring-0"
+              className="w-5 h-5 rounded border-black/5 focus:ring-0"
               style={{
                 accentColor: primaryColor,
                 color: primaryColor,
@@ -364,7 +364,7 @@ export default function CreatePartner({
             />
             <Label
               htmlFor="is_active"
-              className="text-sm font-black text-black"
+              className="text-sm font-bold text-black"
             >
               Set Partner as Active
             </Label>
@@ -374,7 +374,7 @@ export default function CreatePartner({
             <Button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
+              className="w-full h-16 text-white rounded-md font-bold text-lg transition-all shadow-xl active:scale-[0.98] group"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,

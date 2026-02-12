@@ -248,10 +248,10 @@ export default function FiscalYearJournals({
               &nbsp;
             </span>
             {searchQuery ||
-            typeFilter !== "all" ||
-            statusFilter !== "all" ||
-            startDate ||
-            endDate ? (
+              typeFilter !== "all" ||
+              statusFilter !== "all" ||
+              startDate ||
+              endDate ? (
               <Button
                 variant="outline"
                 onClick={clearFilters}
@@ -299,11 +299,10 @@ export default function FiscalYearJournals({
                       `}</style>
                     </div>
                     <Badge
-                      className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-none ${
-                        journal.is_posted
+                      className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-none ${journal.is_posted
                           ? "bg-green-50 text-green-600 shadow-sm shadow-green-100"
                           : "bg-orange-50 text-orange-600 shadow-sm shadow-orange-100"
-                      }`}
+                        }`}
                     >
                       {journal.is_posted ? "Posted" : "Pending"}
                     </Badge>
@@ -354,18 +353,21 @@ export default function FiscalYearJournals({
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-gray-50/50 border-b border-gray-100">
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest ">
+                <tr className="bg-gray-50 border-y border-gray-200">
+                  <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600">
                     Posting Date
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest ">
+                  <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600">
                     Journal Description
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest ">
+                  <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600">
                     Type
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest ">
+                  <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600">
                     Status
+                  </th>
+                  <th className="text-right py-3 px-4 text-xs font-semibold text-gray-600">
+                    Ref
                   </th>
                 </tr>
               </thead>
@@ -373,54 +375,48 @@ export default function FiscalYearJournals({
                 {paginatedJournals.map((journal) => (
                   <tr
                     key={journal.reference}
-                    className="hover:bg-gray-50/50 transition-all cursor-pointer group"
+                    className="hover:bg-gray-50 border-b border-gray-100 last:border-0 transition-colors cursor-pointer group"
                     onClick={() =>
                       (window.location.href = `/${rolePrefix}/fiscal-years/${fiscalYearReference}/journals/${journal.reference}`)
                     }
                   >
-                    <td className="p-6">
-                      <div className="flex flex-col">
-                        <span className="text-xs text-black">
-                          {new Date(journal.date).toLocaleDateString()}
-                        </span>
-                      </div>
+                    <td className="py-3 px-4">
+                      <span className="text-sm font-medium text-gray-700">
+                        {new Date(journal.date).toLocaleDateString()}
+                      </span>
                     </td>
-                    <td className="p-6">
+                    <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-7 h-7 rounded-md bg-gray-50 flex items-center justify-center text-gray-400 group-hover:text-black transition-all">
-                          <FileText className="w-3.5 h-3.5" />
-                        </div>
-                        <span className="text-xs text-black transition-colors">
+                        <span className="text-sm text-gray-900 font-medium">
                           {journal.description}
                         </span>
                       </div>
                     </td>
-                    <td className="p-6">
+                    <td className="py-3 px-4">
                       <Badge
-                        variant="outline"
-                        className="bg-white border-gray-200 text-gray-600 text-xs uppercase px-2 py-0.5 rounded-full"
+                        variant="secondary"
+                        className="bg-gray-100 text-gray-600 text-xs font-medium px-2 py-0.5 rounded-md border-transparent"
                       >
                         {journal.journal_type}
                       </Badge>
                     </td>
-                    <td className="p-6">
-                      <div className="flex items-center gap-2">
-                        {journal.is_posted ? (
-                          <div className="flex items-center gap-1.5 text-green-600">
-                            <CheckCircle2 className="w-3.5 h-3.5" />
-                            <span className="text-[9px] font-bold uppercase tracking-widest">
-                              POSTED
-                            </span>
-                          </div>
-                        ) : (
-                          <div className="flex items-center gap-1.5 text-orange-600">
-                            <Clock className="w-3.5 h-3.5" />
-                            <span className="text-[9px] font-bold uppercase tracking-widest">
-                              PENDING
-                            </span>
-                          </div>
-                        )}
-                      </div>
+                    <td className="py-3 px-4">
+                      {journal.is_posted ? (
+                        <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-50 text-green-700">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                          <span className="text-xs font-medium">Posted</span>
+                        </div>
+                      ) : (
+                        <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-yellow-50 text-yellow-700">
+                          <span className="w-1.5 h-1.5 rounded-full bg-yellow-500" />
+                          <span className="text-xs font-medium">Pending</span>
+                        </div>
+                      )}
+                    </td>
+                    <td className="py-3 px-4 text-right">
+                      <span className="text-xs text-gray-400 font-mono">
+                        {journal.reference}
+                      </span>
                     </td>
                   </tr>
                 ))}
@@ -465,11 +461,10 @@ export default function FiscalYearJournals({
                   variant={currentPage === i + 1 ? "default" : "outline"}
                   size="sm"
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`w-8 h-8 rounded-lg transition-all font-bold text-xs ${
-                    currentPage === i + 1
+                  className={`w-8 h-8 rounded-lg transition-all font-bold text-xs ${currentPage === i + 1
                       ? "text-white shadow-md"
                       : "bg-white border-gray-100 hover:bg-gray-50 text-gray-400"
-                  }`}
+                    }`}
                   style={{
                     backgroundColor:
                       currentPage === i + 1 ? primaryColor : undefined,
