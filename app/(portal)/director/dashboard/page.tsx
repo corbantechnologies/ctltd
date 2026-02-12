@@ -99,13 +99,13 @@ export default function DirectorDashboard() {
         <TabsList className="bg-white/50 border border-black/5 p-1 h-auto rounded-xl">
           <TabsTrigger
             value="overview"
-            className="data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg px-4 py-2 text-sm font-bold text-black/60 data-[state=active]:text-black"
+            className="data-[state=active]:bg-[#D0402B] data-[state=active]:shadow-md rounded-lg px-4 py-2 text-sm font-bold text-black/60 data-[state=active]:text-white transition-all"
           >
             Overview
           </TabsTrigger>
           <TabsTrigger
             value="financials"
-            className="data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg px-4 py-2 text-sm font-bold text-black/60 data-[state=active]:text-black"
+            className="data-[state=active]:bg-[#D0402B] data-[state=active]:shadow-md rounded-lg px-4 py-2 text-sm font-bold text-black/60 data-[state=active]:text-white transition-all"
           >
             Financial Reports
           </TabsTrigger>
