@@ -109,89 +109,46 @@ export default function JournalDetailPage() {
         </div>
       </div>
 
-      {/* Summary Statistics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <Calendar className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Fiscal Date
-                </p>
-                <p className="text-base font-bold text-black tracking-tight">
-                  {new Date(journal?.date || "").toLocaleDateString()}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <User className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Created By
-                </p>
-                <p className="text-base font-bold text-black tracking-tight uppercase truncate max-w-[120px]">
-                  {journal?.created_by || "System"}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
+              Total Debit
+            </p>
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-2xl bg-green-500/5 flex items-center justify-center text-green-600">
                 <ArrowUpRight className="w-5 h-5" />
               </div>
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Total Debit
-                </p>
-                <p className="text-base font-bold text-green-600 tracking-tight">
-                  KES{" "}
-                  {totalDebit.toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                  })}
-                </p>
-              </div>
+              <p className="text-xl font-bold text-green-600 tracking-tight">
+                KES{" "}
+                {totalDebit.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                })}
+              </p>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#D0402B]/5 flex items-center justify-center text-[#D0402B]">
-                <ArrowRight className="w-5 h-5 translate-y-0.5" />
-              </div>
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Total Credit
-                </p>
-                <p className="text-base font-bold text-[#D0402B] tracking-tight">
-                  KES{" "}
-                  {totalCredit.toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                  })}
-                </p>
-              </div>
+            <div>
+              <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                Total Credit
+              </p>
+              <p className="text-xl font-bold text-[#D0402B] tracking-tight">
+                KES{" "}
+                {totalCredit.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                })}
+              </p>
             </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Nested Entries Table */}
-      <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[32px] overflow-hidden shadow-xl shadow-black/5 pb-6">
+      <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl shadow-black/5 pb-6">
         <CardHeader className="p-8 border-b border-black/5 flex flex-row items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-xl bg-[#D0402B]/10 flex items-center justify-center text-[#D0402B]">
@@ -215,56 +172,56 @@ export default function JournalDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/5 bg-black/5">
-                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Ledger Book
                   </th>
-                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Division
                   </th>
-                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Partner
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Debit
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Credit
                   </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40 text-center">
+                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-center">
                     Explore
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-black/5">
                 {journal?.journal_entries &&
-                journal.journal_entries.length > 0 ? (
+                  journal.journal_entries.length > 0 ? (
                   journal.journal_entries.map((entry) => (
                     <tr
                       key={entry.reference}
                       className="hover:bg-orange-50/20 transition-colors group"
                     >
-                      <td className="py-5 px-8">
+                      <td className="py-2.5 px-4 border-b border-black/5">
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/40">
                             <Receipt className="w-4 h-4" />
                           </div>
                           <div>
-                            <p className="text-base font-bold text-black group-hover:text-[#D0402B] transition-colors">
+                            <p className="text-sm font-medium text-black group-hover:text-[#D0402B] transition-colors">
                               {entry.book}
                             </p>
-                            <p className="text-[9px] font-bold text-black/30 uppercase tracking-widest">
+                            <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest">
                               General Ledger
                             </p>
                           </div>
                         </div>
                       </td>
-                      <td className="py-5 px-8">
-                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-widest px-2.5 py-1">
+                      <td className="py-2.5 px-4 border-b border-black/5">
+                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none">
                           {entry.division || "Entity Core"}
                         </Badge>
                       </td>
-                      <td className="py-5 px-8">
-                        <p className="text-sm font-bold text-black/60 truncate max-w-[120px]">
+                      <td className="py-2.5 px-4 border-b border-black/5">
+                        <p className="text-xs font-bold text-black/60 truncate max-w-[120px]">
                           {entry.partner || (
                             <span className="text-black/20 italic">
                               No Partner
@@ -272,29 +229,29 @@ export default function JournalDetailPage() {
                           )}
                         </p>
                       </td>
-                      <td className="py-5 px-8 text-right underline decoration-green-500/20 underline-offset-4 pointer-events-none">
-                        <p className="text-base font-bold text-green-600">
+                      <td className="py-2.5 px-4 border-b border-black/5 text-right underline decoration-green-500/20 underline-offset-4 pointer-events-none">
+                        <p className="text-sm font-medium text-green-600">
                           {entry.currency}{" "}
                           {parseFloat(entry.debit).toLocaleString(undefined, {
                             minimumFractionDigits: 2,
                           })}
                         </p>
                       </td>
-                      <td className="py-5 px-8 text-right underline decoration-[#D0402B]/20 underline-offset-4">
-                        <p className="text-base font-bold text-[#D0402B]">
+                      <td className="py-2.5 px-4 border-b border-black/5 text-right underline decoration-[#D0402B]/20 underline-offset-4">
+                        <p className="text-sm font-medium text-[#D0402B]">
                           {entry.currency}{" "}
                           {parseFloat(entry.credit).toLocaleString(undefined, {
                             minimumFractionDigits: 2,
                           })}
                         </p>
                       </td>
-                      <td className="py-5 px-8">
+                      <td className="py-2.5 px-4 border-b border-black/5">
                         <div className="flex justify-center">
                           <button
-                            className="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-[#D0402B] shadow-lg"
+                            className="w-7 h-7 rounded-md bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-[#D0402B] shadow-sm"
                             title="View Ledger Detail"
                           >
-                            <ExternalLink className="w-4 h-4" />
+                            <ExternalLink className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </td>

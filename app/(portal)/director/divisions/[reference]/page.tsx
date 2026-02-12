@@ -11,6 +11,7 @@ import {
   Activity,
   ArrowUpRight,
   Receipt,
+  Users,
 } from "lucide-react";
 import {
   Card,
@@ -87,58 +88,58 @@ export default function DivisionDetail() {
         </div>
       </div>
 
-      {/* Meta Statistics */}
+      {/* Quick Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+        <Card className="bg-white/60 backdrop-blur-xl border-black/5 shadow-sm rounded-2xl">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <Hash className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+                <Calendar className="w-6 h-6" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Registry Code
+                <p className="text-[10px] font-bold uppercase tracking-widest text-black/30">
+                  Established
                 </p>
-                <p className="text-base tracking-tight uppercase">
-                  {division?.code}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <Calendar className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Established On
-                </p>
-                <p className="text-base tracking-tight">
+                <p className="text-lg font-bold text-black tracking-tight">
                   {division?.created_at
                     ? new Date(division.created_at).toLocaleDateString()
-                    : "N/A"}
+                    : "—"}
                 </p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+        <Card className="bg-white/60 backdrop-blur-xl border-black/5 shadow-sm rounded-2xl">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <Activity className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+                <Users className="w-6 h-6" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Internal Ref
+                <p className="text-[10px] font-bold uppercase tracking-widest text-black/30">
+                  Partners
                 </p>
-                <p className="text-base tracking-tight">
-                  {division?.reference}
+                <p className="text-lg font-bold text-black tracking-tight">
+                  {division?.partners?.length || 0} Registered
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-white/60 backdrop-blur-xl border-black/5 shadow-sm rounded-2xl">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+                <Building2 className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-black/30">
+                  Department Type
+                </p>
+                <p className="text-lg font-bold text-black tracking-tight uppercase">
+                  Operational Unit
                 </p>
               </div>
             </div>
@@ -146,123 +147,122 @@ export default function DivisionDetail() {
         </Card>
       </div>
 
-      {/* Transaction History */}
-      <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[32px] overflow-hidden shadow-xl shadow-black/5 pb-6">
-        <CardHeader className="p-8 border-b border-black/5">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-xl bg-[#D0402B]/10 flex items-center justify-center text-[#D0402B]">
-                <History className="w-5 h-5" />
-              </div>
-              <div>
-                <CardTitle className="text-xl font-bold text-black tracking-tight">
-                  Transaction History
-                </CardTitle>
-                <CardDescription className="text-black/30 font-bold uppercase text-[9px] tracking-widest mt-0.5">
-                  Financial Ledger Records
-                </CardDescription>
-              </div>
+      {/* Partners List Section */}
+      <Card className="bg-white/60 backdrop-blur-xl border-black/5 shadow-sm rounded-2xl overflow-hidden">
+        <div className="p-6 border-b border-black/5 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-[#045138]/10 flex items-center justify-center text-[#045138]">
+              <Users className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-black tracking-tight">
+                Associated Partners
+              </h3>
+              <p className="text-[10px] font-bold text-black/40 uppercase tracking-widest">
+                Team Members & Stakeholders
+              </p>
             </div>
           </div>
-        </CardHeader>
-        <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-black/5 bg-black/5">
-                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
-                    Date
-                  </th>
-                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
-                    Reference
-                  </th>
-                  <th className="text-left py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
-                    Batch
-                  </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
-                    Debit
-                  </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40">
-                    Credit
-                  </th>
-                  <th className="text-right py-4 px-8 text-[9px] font-bold uppercase tracking-widest text-black/40 text-center">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-black/5">
-                {division?.journal_entries &&
+          <Badge className="bg-black text-white hover:bg-black/90 border-none">
+            {division?.partners?.length || 0} Members
+          </Badge>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-black/5 bg-black/5">
+                <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  Date
+                </th>
+                <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  Reference
+                </th>
+                <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  Batch
+                </th>
+                <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  Debit
+                </th>
+                <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  Credit
+                </th>
+                <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-center">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-black/5">
+              {division?.journal_entries &&
                 division.journal_entries.length > 0 ? (
-                  division.journal_entries.map((entry) => (
-                    <tr
-                      key={entry.reference}
-                      className="hover:bg-orange-50/20 transition-colors group"
-                    >
-                      <td className="py-5 px-8">
-                        <p className="text-base text-black">
-                          {new Date(entry.created_at).toLocaleDateString()}
-                        </p>
-                        <p className="text-[9px] font-bold text-black/30 uppercase mt-0.5">
-                          {new Date(entry.created_at).toLocaleTimeString()}
-                        </p>
-                      </td>
-                      <td className="py-5 px-8">
-                        <div className="flex items-center gap-2">
-                          <Receipt className="w-3 h-3 text-[#D0402B]" />
-                          <p className="text-base text-black">
-                            {entry.reference}
-                          </p>
-                        </div>
-                      </td>
-                      <td className="py-5 px-8">
-                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-widest px-2.5 py-1">
-                          {entry.journal}
-                        </Badge>
-                      </td>
-                      <td className="py-5 px-8 text-right">
-                        <p className="text-base text-green-600">
-                          {entry.currency}{" "}
-                          {parseFloat(entry.debit).toLocaleString(undefined, {
-                            minimumFractionDigits: 2,
-                          })}
-                        </p>
-                      </td>
-                      <td className="py-5 px-8 text-right">
-                        <p className="text-base text-[#D0402B]">
-                          {entry.currency}{" "}
-                          {parseFloat(entry.credit).toLocaleString(undefined, {
-                            minimumFractionDigits: 2,
-                          })}
-                        </p>
-                      </td>
-                      <td className="py-5 px-8">
-                        <div className="flex justify-center">
-                          <button className="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-[#D0402B]">
-                            <ArrowUpRight className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={6} className="py-20 text-center">
-                      <div className="flex flex-col items-center justify-center">
-                        <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/20 mb-3">
-                          <History className="w-6 h-6" />
-                        </div>
-                        <p className="text-xs font-bold text-black/30 uppercase tracking-widest">
-                          No financial entries found
+                division.journal_entries.map((entry) => (
+                  <tr
+                    key={entry.reference}
+                    className="hover:bg-orange-50/20 transition-colors group"
+                  >
+                    <td className="py-2.5 px-4 border-b border-black/5">
+                      <p className="text-sm font-medium text-black">
+                        {new Date(entry.created_at).toLocaleDateString()}
+                      </p>
+                      <p className="text-[10px] text-black/40 mt-0.5">
+                        {new Date(entry.created_at).toLocaleTimeString()}
+                      </p>
+                    </td>
+                    <td className="py-2.5 px-4 border-b border-black/5">
+                      <div className="flex items-center gap-2">
+                        <Receipt className="w-3.5 h-3.5 text-[#D0402B]" />
+                        <p className="text-sm font-medium text-black">
+                          {entry.reference}
                         </p>
                       </div>
                     </td>
+                    <td className="py-2.5 px-4 border-b border-black/5">
+                      <Badge className="bg-black/5 text-black/70 hover:bg-black hover:text-white transition-all border-none font-bold text-[10px] uppercase tracking-wider px-2 py-0.5 shadow-none">
+                        {entry.journal}
+                      </Badge>
+                    </td>
+                    <td className="py-2.5 px-4 text-right border-b border-black/5">
+                      <p className="text-sm font-bold text-black/80">
+                        {entry.currency}{" "}
+                        {parseFloat(entry.debit).toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                        })}
+                      </p>
+                    </td>
+                    <td className="py-2.5 px-4 text-right border-b border-black/5">
+                      <p className="text-sm font-bold text-[#D0402B]">
+                        {entry.currency}{" "}
+                        {parseFloat(entry.credit).toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                        })}
+                      </p>
+                    </td>
+                    <td className="py-2.5 px-4 border-b border-black/5">
+                      <div className="flex justify-center">
+                        <button className="w-7 h-7 rounded-md bg-black/5 text-black flex items-center justify-center hover:bg-[#D0402B] hover:text-white transition-all">
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </td>
                   </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </CardContent>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={6} className="py-20 text-center">
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/20 mb-3">
+                        <History className="w-6 h-6" />
+                      </div>
+                      <p className="text-xs font-bold text-black/30 uppercase tracking-widest">
+                        No financial entries found
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </Card>
-    </div>
+    </div >
   );
 }

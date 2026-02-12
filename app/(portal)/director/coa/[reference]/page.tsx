@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   Hash,
   ArrowUpDown,
+  Wallet,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -104,36 +105,21 @@ export default function COADetailPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <Database className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-600">
+                <Wallet className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Internal Reference
+                  Current Balance
                 </p>
-                <p className="text-sm font-bold text-black font-mono">
-                  {coa?.reference}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Display Order
-                </p>
-                <p className="text-base font-bold text-black">
-                  Position #{coa?.order}
+                <p className="text-base font-bold text-green-600 tracking-tight">
+                  KES{" "}
+                  {parseFloat((coa as any).balance).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                  })}
                 </p>
               </div>
             </div>
@@ -164,6 +150,6 @@ export default function COADetailPage() {
           coaReference={reference}
         />
       </div>
-    </div>
+    </div >
   );
 }

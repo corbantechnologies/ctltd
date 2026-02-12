@@ -101,13 +101,14 @@ export default function FiscalYearJournals({
   return (
     <div className="space-y-4">
       {/* Controls Section */}
-      <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm space-y-4">
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
-          <div className="relative w-full lg:w-96 group">
+      <div className="bg-white p-3 rounded-xl border border-gray-200 shadow-sm space-y-3">
+        <div className="flex flex-col lg:flex-row gap-3">
+          {/* Search */}
+          <div className="relative flex-1 group">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 transition-colors" />
             <Input
-              placeholder="Search journals by description or reference..."
-              className="pl-9 h-10 bg-gray-50 border-gray-100 rounded-xl transition-all font-medium text-sm shadow-inner focus:ring-1 focus:bg-white"
+              placeholder="Search journals..."
+              className="pl-9 h-9 bg-gray-50 border-gray-200 rounded-lg transition-all font-medium text-xs shadow-sm focus:bg-white"
               style={{
                 ["--tw-ring-color" as any]: primaryColor,
               }}
@@ -119,57 +120,18 @@ export default function FiscalYearJournals({
             />
           </div>
 
-          <div className="flex items-center gap-1.5 bg-gray-50 p-1 rounded-xl border border-gray-100 shadow-sm">
-            <Button
-              variant={view === "grid" ? "default" : "ghost"}
-              size="icon"
-              onClick={() => setView("grid")}
-              className="w-8 h-8 rounded-lg transition-all"
-              style={{
-                backgroundColor: view === "grid" ? primaryColor : "transparent",
-                color: view === "grid" ? "white" : "rgba(0,0,0,0.4)",
-                boxShadow:
-                  view === "grid" ? `0 4px 6px -1px ${primaryColor}33` : "none",
-              }}
-            >
-              <LayoutGrid className="w-3.5 h-3.5" />
-            </Button>
-            <Button
-              variant={view === "table" ? "default" : "ghost"}
-              size="icon"
-              onClick={() => setView("table")}
-              className="w-8 h-8 rounded-lg transition-all"
-              style={{
-                backgroundColor:
-                  view === "table" ? primaryColor : "transparent",
-                color: view === "table" ? "white" : "rgba(0,0,0,0.4)",
-                boxShadow:
-                  view === "table"
-                    ? `0 4px 6px -1px ${primaryColor}33`
-                    : "none",
-              }}
-            >
-              <List className="w-3.5 h-3.5" />
-            </Button>
-          </div>
-        </div>
-
-        {/* Validated Filter Bar */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 pt-4 border-t border-gray-100">
-          {/* Type Filter */}
-          <div className="flex flex-col gap-1">
-            <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400 ml-1">
-              Journal Type
-            </span>
-            <div className="relative group">
-              <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 transition-colors" />
+          {/* Filters Row */}
+          <div className="flex flex-wrap lg:flex-nowrap gap-2 items-center">
+            {/* Type Filter */}
+            <div className="relative w-32 md:w-40">
+              <Filter className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-400" />
               <select
                 value={typeFilter}
                 onChange={(e) => {
                   setTypeFilter(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full h-10 pl-9 pr-3 rounded-lg border border-gray-100 bg-white focus:ring-2 focus:ring-gray-100 outline-none transition-all font-bold text-[10px] uppercase tracking-widest appearance-none text-gray-600 cursor-pointer shadow-sm hover:bg-gray-50"
+                className="w-full h-9 pl-8 pr-2 rounded-lg border border-gray-200 bg-white text-xs font-medium text-gray-700 outline-none focus:ring-2 focus:ring-gray-100 transition-all appearance-none cursor-pointer hover:bg-gray-50"
               >
                 <option value="all">All Types</option>
                 {journalTypes?.map((type) => (
@@ -179,93 +141,98 @@ export default function FiscalYearJournals({
                 ))}
               </select>
             </div>
-          </div>
 
-          {/* Status Filter */}
-          <div className="flex flex-col gap-1">
-            <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400 ml-1">
-              Stats
-            </span>
-            <div className="relative group">
-              <CheckCircle2 className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 transition-colors" />
+            {/* Status Filter */}
+            <div className="relative w-28 md:w-36">
+              <CheckCircle2 className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-400" />
               <select
                 value={statusFilter}
                 onChange={(e) => {
                   setStatusFilter(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full h-10 pl-9 pr-3 rounded-lg border border-gray-100 bg-white focus:ring-2 focus:ring-gray-100 outline-none transition-all font-bold text-[10px] uppercase tracking-widest appearance-none text-gray-600 cursor-pointer shadow-sm hover:bg-gray-50"
+                className="w-full h-9 pl-8 pr-2 rounded-lg border border-gray-200 bg-white text-xs font-medium text-gray-700 outline-none focus:ring-2 focus:ring-gray-100 transition-all appearance-none cursor-pointer hover:bg-gray-50"
               >
-                <option value="all">All Statuses</option>
+                <option value="all">Status</option>
                 <option value="posted">Posted</option>
                 <option value="pending">Pending</option>
               </select>
             </div>
-          </div>
 
-          {/* Date Range Start */}
-          <div className="flex flex-col gap-1">
-            <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400 ml-1">
-              From Date
-            </span>
-            <div className="relative group">
-              <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 group-focus-within:text-black transition-colors" />
-              <Input
-                type="date"
-                value={startDate}
-                onChange={(e) => {
-                  setStartDate(e.target.value);
-                  setCurrentPage(1);
-                }}
-                className="pl-9 h-10 bg-white border-gray-100 rounded-lg focus:ring-gray-100 transition-all text-[10px] tracking-widest shadow-sm"
-              />
+            {/* Date Range Group */}
+            <div className="flex items-center gap-1 bg-gray-50 p-1 rounded-lg border border-gray-200">
+              <div className="relative">
+                <Input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => {
+                    setStartDate(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  className="h-7 w-28 bg-white border-0 rounded text-[10px] px-2 shadow-sm focus:ring-0"
+                  placeholder="Start"
+                />
+              </div>
+              <span className="text-gray-300">-</span>
+              <div className="relative">
+                <Input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => {
+                    setEndDate(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  className="h-7 w-28 bg-white border-0 rounded text-[10px] px-2 shadow-sm focus:ring-0"
+                  placeholder="End"
+                />
+              </div>
             </div>
-          </div>
 
-          {/* Date Range End */}
-          <div className="flex flex-col gap-1">
-            <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400 ml-1">
-              To Date
-            </span>
-            <div className="relative group">
-              <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 group-focus-within:text-black transition-colors" />
-              <Input
-                type="date"
-                value={endDate}
-                onChange={(e) => {
-                  setEndDate(e.target.value);
-                  setCurrentPage(1);
-                }}
-                className="pl-9 h-10 bg-white border-gray-100 rounded-lg focus:ring-gray-100 transition-all text-[10px] tracking-widest shadow-sm"
-              />
-            </div>
-          </div>
-
-          {/* Clear Filter Button */}
-          <div className="flex flex-col gap-1 justify-end">
-            {/* Spacer label to align button with inputs */}
-            <span className="text-[9px] font-bold uppercase tracking-widest text-transparent ml-1 select-none">
-              &nbsp;
-            </span>
-            {searchQuery ||
-            typeFilter !== "all" ||
-            statusFilter !== "all" ||
-            startDate ||
-            endDate ? (
+            {/* View Toggles */}
+            <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-lg border border-gray-200 ml-auto lg:ml-0">
               <Button
-                variant="outline"
-                onClick={clearFilters}
-                className="h-10 px-4 rounded-lg border-gray-100 bg-white hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-all text-gray-400 shadow-sm flex items-center justify-center gap-2 w-full"
-                title="Clear Filters"
+                variant={view === "grid" ? "default" : "ghost"}
+                size="icon"
+                onClick={() => setView("grid")}
+                className="w-7 h-7 rounded-md transition-all shadow-sm"
+                style={{
+                  backgroundColor: view === "grid" ? primaryColor : "white",
+                  color: view === "grid" ? "white" : "gray",
+                }}
               >
-                <X className="w-3.5 h-3.5" />
-                <span className="text-[10px] font-bold uppercase tracking-widest">
-                  Clear
-                </span>
+                <LayoutGrid className="w-3.5 h-3.5" />
               </Button>
-            ) : (
-              <div className="h-10" />
-            )}
+              <Button
+                variant={view === "table" ? "default" : "ghost"}
+                size="icon"
+                onClick={() => setView("table")}
+                className="w-7 h-7 rounded-md transition-all shadow-sm"
+                style={{
+                  backgroundColor:
+                    view === "table" ? primaryColor : "white",
+                  color: view === "table" ? "white" : "gray",
+                }}
+              >
+                <List className="w-3.5 h-3.5" />
+              </Button>
+            </div>
+
+            {/* Clear Filters (Conditional) */}
+            {(searchQuery ||
+              typeFilter !== "all" ||
+              statusFilter !== "all" ||
+              startDate ||
+              endDate) && (
+                <Button
+                  variant="ghost"
+                  onClick={clearFilters}
+                  size="icon"
+                  className="h-9 w-9 rounded-lg hover:bg-red-50 hover:text-red-500 transition-colors"
+                  title="Clear Filters"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              )}
           </div>
         </div>
       </div>
@@ -299,11 +266,10 @@ export default function FiscalYearJournals({
                       `}</style>
                     </div>
                     <Badge
-                      className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-none ${
-                        journal.is_posted
-                          ? "bg-green-50 text-green-600 shadow-sm shadow-green-100"
-                          : "bg-orange-50 text-orange-600 shadow-sm shadow-orange-100"
-                      }`}
+                      className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-none ${journal.is_posted
+                        ? "bg-green-50 text-green-600 shadow-sm shadow-green-100"
+                        : "bg-orange-50 text-orange-600 shadow-sm shadow-orange-100"
+                        }`}
                     >
                       {journal.is_posted ? "Posted" : "Pending"}
                     </Badge>
@@ -354,18 +320,21 @@ export default function FiscalYearJournals({
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-gray-50/50 border-b border-gray-100">
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest ">
+                <tr className="bg-gray-50 border-y border-gray-200">
+                  <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600">
                     Posting Date
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest ">
+                  <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600">
                     Journal Description
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest ">
+                  <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600">
                     Type
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest ">
+                  <th className="text-left py-3 px-4 text-xs font-semibold text-gray-600">
                     Status
+                  </th>
+                  <th className="text-right py-3 px-4 text-xs font-semibold text-gray-600">
+                    Ref
                   </th>
                 </tr>
               </thead>
@@ -373,54 +342,48 @@ export default function FiscalYearJournals({
                 {paginatedJournals.map((journal) => (
                   <tr
                     key={journal.reference}
-                    className="hover:bg-gray-50/50 transition-all cursor-pointer group"
+                    className="hover:bg-gray-50 border-b border-gray-100 last:border-0 transition-colors cursor-pointer group"
                     onClick={() =>
                       (window.location.href = `/${rolePrefix}/fiscal-years/${fiscalYearReference}/journals/${journal.reference}`)
                     }
                   >
-                    <td className="p-6">
-                      <div className="flex flex-col">
-                        <span className="text-xs text-black">
-                          {new Date(journal.date).toLocaleDateString()}
-                        </span>
-                      </div>
+                    <td className="py-3 px-4">
+                      <span className="text-sm font-medium text-gray-700">
+                        {new Date(journal.date).toLocaleDateString()}
+                      </span>
                     </td>
-                    <td className="p-6">
+                    <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-7 h-7 rounded-md bg-gray-50 flex items-center justify-center text-gray-400 group-hover:text-black transition-all">
-                          <FileText className="w-3.5 h-3.5" />
-                        </div>
-                        <span className="text-xs text-black transition-colors">
+                        <span className="text-sm text-gray-900 font-medium">
                           {journal.description}
                         </span>
                       </div>
                     </td>
-                    <td className="p-6">
+                    <td className="py-3 px-4">
                       <Badge
-                        variant="outline"
-                        className="bg-white border-gray-200 text-gray-600 text-xs uppercase px-2 py-0.5 rounded-full"
+                        variant="secondary"
+                        className="bg-gray-100 text-gray-600 text-xs font-medium px-2 py-0.5 rounded-md border-transparent"
                       >
                         {journal.journal_type}
                       </Badge>
                     </td>
-                    <td className="p-6">
-                      <div className="flex items-center gap-2">
-                        {journal.is_posted ? (
-                          <div className="flex items-center gap-1.5 text-green-600">
-                            <CheckCircle2 className="w-3.5 h-3.5" />
-                            <span className="text-[9px] font-bold uppercase tracking-widest">
-                              POSTED
-                            </span>
-                          </div>
-                        ) : (
-                          <div className="flex items-center gap-1.5 text-orange-600">
-                            <Clock className="w-3.5 h-3.5" />
-                            <span className="text-[9px] font-bold uppercase tracking-widest">
-                              PENDING
-                            </span>
-                          </div>
-                        )}
-                      </div>
+                    <td className="py-3 px-4">
+                      {journal.is_posted ? (
+                        <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-50 text-green-700">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                          <span className="text-xs font-medium">Posted</span>
+                        </div>
+                      ) : (
+                        <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-yellow-50 text-yellow-700">
+                          <span className="w-1.5 h-1.5 rounded-full bg-yellow-500" />
+                          <span className="text-xs font-medium">Pending</span>
+                        </div>
+                      )}
+                    </td>
+                    <td className="py-3 px-4 text-right">
+                      <span className="text-xs text-gray-400 font-mono">
+                        {journal.reference}
+                      </span>
                     </td>
                   </tr>
                 ))}
@@ -465,11 +428,10 @@ export default function FiscalYearJournals({
                   variant={currentPage === i + 1 ? "default" : "outline"}
                   size="sm"
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`w-8 h-8 rounded-lg transition-all font-bold text-xs ${
-                    currentPage === i + 1
-                      ? "text-white shadow-md"
-                      : "bg-white border-gray-100 hover:bg-gray-50 text-gray-400"
-                  }`}
+                  className={`w-8 h-8 rounded-lg transition-all font-bold text-xs ${currentPage === i + 1
+                    ? "text-white shadow-md"
+                    : "bg-white border-gray-100 hover:bg-gray-50 text-gray-400"
+                    }`}
                   style={{
                     backgroundColor:
                       currentPage === i + 1 ? primaryColor : undefined,

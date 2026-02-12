@@ -39,7 +39,7 @@ export default function ForgotPassword() {
       } catch (error: any) {
         toast.error(
           error.response?.data?.message ||
-            "Failed to send reset code. Please try again."
+          "Failed to send reset code. Please try again."
         );
       } finally {
         setLoading(false);
@@ -56,23 +56,23 @@ export default function ForgotPassword() {
 
       <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8">
-          <Badge className="mb-4 bg-orange-100 text-corporate-primary border-orange-200 font-black uppercase tracking-widest py-1.5 px-4 shadow-sm">
+          <Badge className="mb-4 bg-orange-100 text-corporate-primary border-orange-200 font-medium uppercase tracking-widest py-1.5 px-4 shadow-sm">
             Corban Technologies LTD
           </Badge>
-          <h1 className="text-4xl font-black tracking-tighter text-black mb-2">
+          <h1 className="text-4xl font-bold tracking-tighter text-black mb-2">
             Recover <span className="text-corporate-primary">Access.</span>
           </h1>
-          <p className="text-black/60 font-bold">
+          <p className="text-black/60 font-medium">
             We&apos;ll help you get back into your account.
           </p>
         </div>
 
-        <Card className="border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-sm">
+        <Card className="border-black/5 shadow-2xl rounded-xl overflow-hidden bg-white/80 backdrop-blur-sm">
           <CardHeader className="pt-8 px-8">
-            <CardTitle className="text-2xl font-black text-black tracking-tight text-center">
+            <CardTitle className="text-2xl font-bold text-black tracking-tight text-center">
               {submitted ? "Check Your Email" : "Forgot Password"}
             </CardTitle>
-            <CardDescription className="text-center font-bold opacity-60">
+            <CardDescription className="text-center font-medium opacity-60">
               {submitted
                 ? "If an account exists for this email, you will receive a reset code shortly."
                 : "Enter your email address and we'll send you a recovery code."}
@@ -82,7 +82,7 @@ export default function ForgotPassword() {
             {!submitted ? (
               <form onSubmit={formik.handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-black uppercase tracking-widest text-black/40 ml-1">
+                  <label className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1">
                     Email Address
                   </label>
                   <div className="relative group">
@@ -97,15 +97,14 @@ export default function ForgotPassword() {
                       value={formik.values.email}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      className={`pl-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all ${
-                        formik.touched.email && formik.errors.email
+                      className={`pl-10 h-14 bg-orange-50/50 border-black/5 rounded-md font-medium focus:bg-white transition-all ${formik.touched.email && formik.errors.email
                           ? "border-red-500"
                           : ""
-                      }`}
+                        }`}
                     />
                   </div>
                   {formik.touched.email && formik.errors.email && (
-                    <p className="text-xs text-red-500 font-bold ml-1">
+                    <p className="text-xs text-red-500 font-medium ml-1">
                       {formik.errors.email}
                     </p>
                   )}
@@ -114,7 +113,7 @@ export default function ForgotPassword() {
                 <Button
                   disabled={loading}
                   type="submit"
-                  className="w-full h-14 bg-black hover:bg-corporate-primary text-white rounded-2xl text-lg font-black shadow-xl transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+                  className="w-full h-14 bg-black hover:bg-corporate-primary text-white rounded-md text-lg font-bold shadow-xl transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50"
                 >
                   {loading ? (
                     <div className="flex items-center gap-2">
@@ -135,14 +134,14 @@ export default function ForgotPassword() {
                   <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-corporate-primary shrink-0">
                     <Mail className="w-6 h-6" />
                   </div>
-                  <p className="text-sm font-bold text-black/70">
+                  <p className="text-sm font-medium text-black/70">
                     Instructions have been sent to{" "}
                     <strong>{formik.values.email}</strong>
                   </p>
                 </div>
                 <Button
                   asChild
-                  className="w-full h-14 bg-black hover:bg-corporate-primary text-white rounded-2xl text-lg font-black shadow-xl"
+                  className="w-full h-14 bg-black hover:bg-corporate-primary text-white rounded-md text-lg font-bold shadow-xl"
                 >
                   <Link href="/auth/reset-password">Proceed to Reset</Link>
                 </Button>
@@ -154,7 +153,7 @@ export default function ForgotPassword() {
                 <Button
                   asChild
                   variant="ghost"
-                  className="w-full text-black/40 hover:text-black font-black flex items-center justify-center gap-2"
+                  className="w-full text-black/40 hover:text-black font-bold flex items-center justify-center gap-2"
                 >
                   <Link href="/auth/login">
                     <ChevronLeft className="w-4 h-4" />
@@ -165,7 +164,7 @@ export default function ForgotPassword() {
             )}
           </CardContent>
           <CardFooter className="bg-orange-50/50 border-t border-black/5 py-6 flex flex-col items-center">
-            <p className="text-sm font-bold text-black/40">
+            <p className="text-sm font-medium text-black/40">
               Corban Technologies LTD Recovery Service
             </p>
           </CardFooter>

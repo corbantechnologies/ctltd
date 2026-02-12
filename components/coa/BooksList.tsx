@@ -100,8 +100,8 @@ export default function BooksList({
           <button
             onClick={() => setView("grid")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "grid"
-                ? "bg-white shadow-sm"
-                : "text-black/40 hover:text-black"
+              ? "bg-white shadow-sm"
+              : "text-black/40 hover:text-black"
               }`}
             style={
               {
@@ -115,8 +115,8 @@ export default function BooksList({
           <button
             onClick={() => setView("table")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "table"
-                ? "bg-white shadow-sm"
-                : "text-black/40 hover:text-black"
+              ? "bg-white shadow-sm"
+              : "text-black/40 hover:text-black"
               }`}
             style={
               {
@@ -229,19 +229,19 @@ export default function BooksList({
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/10 bg-black/5">
-                  <th className="text-left py-5 px-8 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Book Identity
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Account Type
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Compliance
                   </th>
-                  <th className="text-left py-5 px-8 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Status
                   </th>
-                  <th className="text-right py-5 px-8 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Audit
                   </th>
                 </tr>
@@ -255,9 +255,9 @@ export default function BooksList({
                       { "--hover-bg": `${primaryColor}0D` } as CSSWithVariables
                     }
                   >
-                    <td className="py-6 px-8">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/30 group-hover:bg-black group-hover:text-white transition-all">
+                        <div className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/30 group-hover:bg-black group-hover:text-white transition-all">
                           {book.is_bank ? (
                             <Landmark className="w-4 h-4" />
                           ) : (
@@ -266,7 +266,7 @@ export default function BooksList({
                         </div>
                         <div>
                           <p
-                            className="text-sm font-bold text-black transition-colors"
+                            className="text-sm font-medium text-black transition-colors"
                             style={
                               {
                                 "--group-hover-text": primaryColor,
@@ -281,20 +281,20 @@ export default function BooksList({
                         </div>
                       </div>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <p className="text-[11px] font-bold text-black/60 uppercase tracking-wider">
                         {book.account_type}
                       </p>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex gap-1.5">
                         {book.is_tax && (
-                          <Badge className="bg-orange-500/10 text-orange-600 border-none text-[8px] font-bold px-2 py-0.5 rounded-full">
+                          <Badge className="bg-orange-500/10 text-orange-600 border-none text-[8px] font-bold px-1.5 py-0.5 rounded-sm">
                             TAX
                           </Badge>
                         )}
                         {book.is_bank && (
-                          <Badge className="bg-blue-500/10 text-blue-600 border-none text-[8px] font-bold px-2 py-0.5 rounded-full">
+                          <Badge className="bg-blue-500/10 text-blue-600 border-none text-[8px] font-bold px-1.5 py-0.5 rounded-sm">
                             BANK
                           </Badge>
                         )}
@@ -305,35 +305,35 @@ export default function BooksList({
                         )}
                       </div>
                     </td>
-                    <td className="py-6 px-8">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       {book.is_active ? (
                         <div className="flex items-center gap-2 text-green-600">
                           <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                          <span className="text-[10px] font-bold uppercase tracking-widest">
+                          <span className="text-[10px] font-bold uppercase tracking-wider">
                             In Operation
                           </span>
                         </div>
                       ) : (
                         <div className="flex items-center gap-2 text-black/30">
                           <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
-                          <span className="text-[10px] font-bold uppercase tracking-widest">
+                          <span className="text-[10px] font-bold uppercase tracking-wider">
                             Retired
                           </span>
                         </div>
                       )}
                     </td>
-                    <td className="py-6 px-8 text-right">
+                    <td className="py-2.5 px-4 text-right border-b border-black/5">
                       <Link
                         href={`/${rolePrefix}/coa/${coaReference}/${book.reference}`}
                       >
                         <Button
                           variant="ghost"
-                          className="h-10 w-10 p-0 rounded-xl hover:text-white transition-all duration-300"
+                          className="h-7 w-7 p-0 rounded-md hover:text-white transition-all duration-300"
                           style={
                             { "--hover-bg": primaryColor } as CSSWithVariables
                           }
                         >
-                          <ArrowRight className="w-4 h-4" />
+                          <ArrowRight className="w-3.5 h-3.5" />
                         </Button>
                       </Link>
                     </td>
@@ -377,8 +377,8 @@ export default function BooksList({
                       key={page}
                       onClick={() => setCurrentPage(page)}
                       className={`w-10 h-10 rounded-xl text-[10px] font-bold transition-all ${currentPage === page
-                          ? "text-white shadow-lg"
-                          : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
+                        ? "text-white shadow-lg"
+                        : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
                         }`}
                       style={
                         {

@@ -106,11 +106,10 @@ export default function COAList({ rolePrefix }: COAListProps) {
         <div className="flex items-center gap-1.5 bg-black/5 p-1 rounded-xl self-end lg:self-auto">
           <button
             onClick={() => setView("grid")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
-              view === "grid"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "grid"
                 ? "bg-white shadow-sm"
                 : "text-black/40 hover:text-black"
-            }`}
+              }`}
             style={
               {
                 color: view === "grid" ? primaryColor : undefined,
@@ -122,11 +121,10 @@ export default function COAList({ rolePrefix }: COAListProps) {
           </button>
           <button
             onClick={() => setView("table")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
-              view === "table"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "table"
                 ? "bg-white shadow-sm"
                 : "text-black/40 hover:text-black"
-            }`}
+              }`}
             style={
               {
                 color: view === "table" ? primaryColor : undefined,
@@ -225,19 +223,19 @@ export default function COAList({ rolePrefix }: COAListProps) {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/10 bg-black/5">
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Account Name
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Code
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Type / Balance
                   </th>
-                  <th className="text-left py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Status
                   </th>
-                  <th className="text-right py-3 px-4 text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Actions
                   </th>
                 </tr>
@@ -256,7 +254,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
                       } as CSSWithVariables
                     } // 5% opacity
                   >
-                    <td className="py-3 px-4">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-3">
                         <div
                           className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold"
@@ -271,7 +269,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
                         </div>
                         <div>
                           <p
-                            className="text-sm font-bold text-black transition-colors"
+                            className="text-sm font-medium text-black transition-colors"
                             style={
                               {
                                 "--group-hover-text": primaryColor,
@@ -280,50 +278,50 @@ export default function COAList({ rolePrefix }: COAListProps) {
                           >
                             {coa.name}
                           </p>
-                          <p className="text-[9px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
+                          <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
                             {coa.reference}
                           </p>
                         </div>
                       </div>
                     </td>
-                    <td className="py-3 px-4">
-                      <Badge className="bg-black text-white border-none font-bold text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-full">
+                    <td className="py-2.5 px-4 border-b border-black/5">
+                      <Badge className="bg-black/5 text-black border-none font-bold text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none">
                         {coa.code}
                       </Badge>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-2">
                         <ArrowUpDown className="w-3 h-3 text-black/30" />
-                        <span className="text-[9px] font-bold uppercase tracking-widest text-black/60">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-black/60">
                           {coa.normal_balance}
                         </span>
                       </div>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       {coa.is_active ? (
                         <div className="flex items-center gap-1.5 text-green-600">
                           <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                          <span className="text-[9px] font-bold uppercase tracking-widest">
+                          <span className="text-[9px] font-bold uppercase tracking-wider">
                             Active
                           </span>
                         </div>
                       ) : (
                         <div className="flex items-center gap-1.5 text-black/30">
                           <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
-                          <span className="text-[9px] font-bold uppercase tracking-widest">
+                          <span className="text-[9px] font-bold uppercase tracking-wider">
                             Inactive
                           </span>
                         </div>
                       )}
                     </td>
-                    <td className="py-3 px-4 text-right">
+                    <td className="py-2.5 px-4 text-right border-b border-black/5">
                       <Link
                         href={`/${rolePrefix}/coa/${coa.reference}`}
                         onClick={(e) => e.stopPropagation()}
                       >
                         <Button
                           variant="ghost"
-                          className="h-8 w-8 p-0 rounded-lg hover:text-white transition-all duration-300"
+                          className="h-7 w-7 p-0 rounded-md hover:text-white transition-all duration-300"
                           style={
                             {
                               "--hover-bg": primaryColor,
@@ -374,11 +372,10 @@ export default function COAList({ rolePrefix }: COAListProps) {
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-8 h-8 rounded-lg text-[10px] font-bold transition-all ${
-                        currentPage === page
+                      className={`w-8 h-8 rounded-lg text-[10px] font-bold transition-all ${currentPage === page
                           ? "text-white shadow-md"
                           : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
-                      }`}
+                        }`}
                       style={
                         {
                           backgroundColor:

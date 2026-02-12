@@ -114,8 +114,8 @@ export default function JournalsDetailPage() {
             </Button>
             <Badge
               className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${journal.is_posted
-                  ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
-                  : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
+                ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
+                : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
                 }`}
             >
               {journal.is_posted ? (
@@ -153,7 +153,7 @@ export default function JournalsDetailPage() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[24px] shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <CardContent className="p-6">
             <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
               Total Debit
@@ -166,7 +166,7 @@ export default function JournalsDetailPage() {
             </p>
           </CardContent>
         </Card>
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[24px] shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <CardContent className="p-6">
             <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
               Total Credit
@@ -180,9 +180,9 @@ export default function JournalsDetailPage() {
           </CardContent>
         </Card>
         <Card
-          className={`border-black/5 backdrop-blur-xl rounded-[24px] shadow-sm transition-colors ${isBalanced
-              ? "bg-[#045138]/5 border-[#045138]/20"
-              : "bg-red-500/5 border-red-500/20"
+          className={`border-black/5 backdrop-blur-xl rounded-2xl shadow-sm transition-colors ${isBalanced
+            ? "bg-[#D0402B]/5 border-[#D0402B]/20"
+            : "bg-red-500/5 border-red-500/20"
             }`}
         >
           <CardContent className="p-6">
@@ -211,10 +211,10 @@ export default function JournalsDetailPage() {
       </div>
 
       {/* Entries List */}
-      <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[32px] overflow-hidden shadow-xl shadow-black/5 pb-24">
+      <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl shadow-black/5 pb-24">
         <div className="p-8 border-b border-black/5 flex justify-between items-center">
           <h3 className="text-xl font-bold text-black tracking-tight flex items-center gap-3">
-            <Receipt className="w-5 h-5 text-[#045138]" />
+            <Receipt className="w-5 h-5 text-[#D0402B]" />
             Transaction Entries
           </h3>
           <span className="bg-black/5 px-3 py-1 rounded-full text-xs font-bold text-black/60">
@@ -226,19 +226,19 @@ export default function JournalsDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="bg-black/5 border-b border-black/5 text-left">
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Account Book
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Partner / Division
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
                     Details
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">
+                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-right">
                     Debit
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">
+                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-right">
                     Credit
                   </th>
                 </tr>
@@ -249,13 +249,13 @@ export default function JournalsDetailPage() {
                     key={entry.reference}
                     className="hover:bg-white/50 transition-colors"
                   >
-                    <td className="py-4 px-6">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="font-bold text-black">{entry.book}</div>
                       <div className="text-[10px] uppercase text-black/40 tracking-wider">
                         {entry.code}
                       </div>
                     </td>
-                    <td className="py-4 px-6">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="font-bold text-black">
                         {entry.partner || "—"}
                       </div>
@@ -263,7 +263,7 @@ export default function JournalsDetailPage() {
                         {entry.division}
                       </div>
                     </td>
-                    <td className="py-4 px-6 max-w-xs truncate">
+                    <td className="py-2.5 px-4 max-w-xs truncate border-b border-black/5">
                       <div className="text-black/80 truncate">
                         {entry.notes || "No notes"}
                       </div>
@@ -273,7 +273,7 @@ export default function JournalsDetailPage() {
                         </div>
                       )}
                     </td>
-                    <td className="py-4 px-6 text-right font-mono text-black/80">
+                    <td className="py-2.5 px-4 border-b border-black/5 text-right font-mono text-black/80">
                       {parseFloat(entry.debit) > 0
                         ? new Intl.NumberFormat("en-KE", {
                           style: "decimal",
@@ -281,7 +281,7 @@ export default function JournalsDetailPage() {
                         }).format(parseFloat(entry.debit))
                         : "—"}
                     </td>
-                    <td className="py-4 px-6 text-right font-mono text-black/80">
+                    <td className="py-2.5 px-4 border-b border-black/5 text-right font-mono text-black/80">
                       {parseFloat(entry.credit) > 0
                         ? new Intl.NumberFormat("en-KE", {
                           style: "decimal",

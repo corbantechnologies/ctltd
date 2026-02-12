@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import JournalsList from "@/components/financials/JournalsList";
 import CreateJournal from "@/forms/journals/CreateJournal";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";

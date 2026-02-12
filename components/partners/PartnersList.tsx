@@ -205,16 +205,16 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
             <Table>
               <TableHeader className="bg-black/5">
                 <TableRow className="hover:bg-transparent border-black/5">
-                  <TableHead className="py-3 px-4 text-[9px] font-bold text-black/40 uppercase tracking-widest">
+                  <TableHead className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
                     Entity
                   </TableHead>
-                  <TableHead className="py-3 px-4 text-[9px] font-bold text-black/40 uppercase tracking-widest">
+                  <TableHead className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
                     Division
                   </TableHead>
-                  <TableHead className="py-3 px-4 text-[9px] font-bold text-black/40 uppercase tracking-widest">
+                  <TableHead className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
                     Category
                   </TableHead>
-                  <TableHead className="py-3 px-4 text-[9px] font-bold text-black/40 uppercase tracking-widest">
+                  <TableHead className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
                     Status
                   </TableHead>
                 </TableRow>
@@ -228,39 +228,39 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                       (window.location.href = `/${rolePrefix}/partners/${partner.reference}`)
                     }
                   >
-                    <TableCell className="py-3 px-4">
+                    <TableCell className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-3">
                         <div
-                          className="w-8 h-8 rounded flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105"
+                          className="w-8 h-8 rounded-lg flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105"
                           style={{ backgroundColor: primaryColor }}
                         >
                           <Users className="w-4 h-4" />
                         </div>
                         <div>
-                          <div className="text-black text-sm">
+                          <div className="text-black text-sm font-medium">
                             {partner.name}
                           </div>
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell className="py-3 px-4 text-xs font-bold text-black/70">
+                    <TableCell className="py-2.5 px-4 border-b border-black/5 text-sm font-medium text-black/70">
                       {partner.division}
                     </TableCell>
-                    <TableCell className="py-3 px-4">
+                    <TableCell className="py-2.5 px-4 border-b border-black/5">
                       <Badge
                         variant="secondary"
-                        className="bg-white border border-black/5 text-black/70 font-bold text-[9px]"
+                        className="bg-white border border-black/5 text-black/70 font-bold text-[10px] px-2 py-0.5 rounded-sm shadow-none"
                       >
                         {partner.partner_type}
                       </Badge>
                     </TableCell>
-                    <TableCell className="py-3 px-4">
+                    <TableCell className="py-2.5 px-4 border-b border-black/5">
                       {partner.is_active ? (
-                        <div className="flex items-center gap-1.5 text-[9px] font-bold text-green-600 uppercase tracking-wider">
+                        <div className="flex items-center gap-1.5 text-[10px] font-bold text-green-600 uppercase tracking-wider">
                           <CheckCircle2 className="w-3.5 h-3.5" /> Active
                         </div>
                       ) : (
-                        <div className="flex items-center gap-1.5 text-[9px] font-bold text-red-600 uppercase tracking-wider">
+                        <div className="flex items-center gap-1.5 text-[10px] font-bold text-red-600 uppercase tracking-wider">
                           <AlertCircle className="w-3.5 h-3.5" /> Inactive
                         </div>
                       )}

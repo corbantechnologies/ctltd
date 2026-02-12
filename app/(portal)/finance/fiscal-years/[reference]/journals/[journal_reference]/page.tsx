@@ -141,8 +141,8 @@ export default function JournalsDetailPage() {
             </Button>
             <Badge
               className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${journal.is_posted
-                  ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
-                  : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
+                ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
+                : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
                 }`}
             >
               {journal.is_posted ? (
@@ -178,49 +178,51 @@ export default function JournalsDetailPage() {
         </div>
 
         {/* Action Buttons */}
-        {!journal.is_posted && (
-          <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-            <Button
-              onClick={() => setOpenAddEntry(true)}
-              className="h-12 bg-[#D0402B] border border-black/5 text-white hover:bg-black/5 font-bold uppercase text-xs tracking-widest rounded-xl shadow-sm"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Add Entry
-            </Button>
-            <Button
-              // onClick={() => setOpenUpdateJournal(true)} // Implement Update Modal if needed
-              variant="outline"
-              className="h-12 border-black/5 bg-white hover:bg-black/5 font-bold uppercase text-xs tracking-widest rounded-xl"
-              onClick={() => setOpenUpdateJournal(true)}
-            >
-              <Edit2 className="w-4 h-4 mr-2" />
-              Edit Details
-            </Button>
+        <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+          <Button
+            variant="outline"
+            className="h-12 border-black/5 bg-white hover:bg-black/5 font-bold uppercase text-xs tracking-widest rounded-xl"
+            onClick={() => setOpenUpdateJournal(true)}
+          >
+            <Edit2 className="w-4 h-4 mr-2" />
+            Edit Details
+          </Button>
 
-            <Button
-              onClick={handlePostJournal}
-              disabled={isPosting || !isBalanced}
-              className={`h-12 font-bold uppercase text-xs tracking-widest rounded-xl shadow-lg transition-all ${!isBalanced
+          {!journal.is_posted && (
+            <>
+              <Button
+                onClick={() => setOpenAddEntry(true)}
+                className="h-12 bg-[#D0402B] border border-black/5 text-white hover:bg-black/5 font-bold uppercase text-xs tracking-widest rounded-xl shadow-sm"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Add Entry
+              </Button>
+
+              <Button
+                onClick={handlePostJournal}
+                disabled={isPosting || !isBalanced}
+                className={`h-12 font-bold uppercase text-xs tracking-widest rounded-xl shadow-lg transition-all ${!isBalanced
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                   : "bg-[#045138] hover:bg-black text-white"
-                }`}
-            >
-              {isPosting ? (
-                <LoadingSpinner />
-              ) : (
-                <div className="flex items-center">
-                  <Lock className="w-4 h-4 mr-2" />
-                  Finalize & Post
-                </div>
-              )}
-            </Button>
-          </div>
-        )}
+                  }`}
+              >
+                {isPosting ? (
+                  <LoadingSpinner />
+                ) : (
+                  <div className="flex items-center">
+                    <Lock className="w-4 h-4 mr-2" />
+                    Finalize & Post
+                  </div>
+                )}
+              </Button>
+            </>
+          )}
+        </div>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[24px] shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <CardContent className="p-6">
             <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
               Total Debit
@@ -239,7 +241,7 @@ export default function JournalsDetailPage() {
             </p>
           </CardContent>
         </Card>
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[24px] shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <CardContent className="p-6">
             <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
               Total Credit
@@ -259,9 +261,9 @@ export default function JournalsDetailPage() {
           </CardContent>
         </Card>
         <Card
-          className={`border-black/5 backdrop-blur-xl rounded-[24px] shadow-sm transition-colors ${isBalanced
-              ? "bg-[#045138]/5 border-[#045138]/20"
-              : "bg-red-500/5 border-red-500/20"
+          className={`border-black/5 backdrop-blur-xl rounded-2xl shadow-sm transition-colors ${isBalanced
+            ? "bg-[#045138]/5 border-[#045138]/20"
+            : "bg-red-500/5 border-red-500/20"
             }`}
         >
           <CardContent className="p-6">
@@ -290,53 +292,53 @@ export default function JournalsDetailPage() {
       </div>
 
       {/* Entries List */}
-      <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[32px] overflow-hidden shadow-xl shadow-black/5 pb-24">
-        <div className="p-8 border-b border-black/5 flex justify-between items-center">
-          <h3 className="text-xl font-bold text-black tracking-tight flex items-center gap-3">
-            <Receipt className="w-5 h-5 text-[#045138]" />
+      <Card className="border-gray-200 bg-white rounded-xl shadow-sm pb-12">
+        <div className="p-6 border-b border-gray-100 flex justify-between items-center">
+          <h3 className="text-lg font-bold text-gray-900 tracking-tight flex items-center gap-3">
+            <Receipt className="w-4 h-4 text-gray-500" />
             Transaction Entries
           </h3>
-          <span className="bg-black/5 px-3 py-1 rounded-full text-xs font-bold text-black/60">
-            {journal.journal_entries.length} Records
+          <span className="bg-gray-100 px-3 py-1 rounded-md text-xs font-semibold text-gray-600">
+            {journal.journal_entries.length} Entries
           </span>
         </div>
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-black/5 border-b border-black/5 text-left">
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                <tr className="bg-gray-50 border-y border-gray-200 text-left">
+                  <th className="py-3 px-4 text-xs font-semibold text-gray-600">
                     Account Book
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  <th className="py-3 px-4 text-xs font-semibold text-gray-600">
                     Partner / Division
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">
+                  <th className="py-3 px-4 text-xs font-semibold text-gray-600 text-right">
                     Debit
                   </th>
-                  <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">
+                  <th className="py-3 px-4 text-xs font-semibold text-gray-600 text-right">
                     Credit
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-black/5 font-medium text-sm">
+              <tbody className="divide-y divide-gray-100">
                 {journal.journal_entries.map((entry) => (
                   <tr
                     key={entry.reference}
-                    className="hover:bg-white/50 transition-colors"
+                    className="hover:bg-gray-50/50 transition-colors"
                   >
-                    <td className="py-4 px-6">
-                      <div className="font-bold text-black">{entry.book}</div>
+                    <td className="py-3 px-4">
+                      <div className="text-sm font-medium text-gray-900">{entry.book}</div>
                     </td>
-                    <td className="py-4 px-6">
-                      <div className="font-bold text-black">
+                    <td className="py-3 px-4">
+                      <div className="text-sm font-medium text-gray-900">
                         {entry.partner || "—"}
                       </div>
-                      <div className="text-[10px] text-black/40">
+                      <div className="text-xs text-gray-500 mt-0.5">
                         {entry.division}
                       </div>
                     </td>
-                    <td className="py-4 px-6 text-right font-mono text-black/80">
+                    <td className="py-3 px-4 text-right font-mono text-sm text-gray-700">
                       {parseFloat(entry.debit) > 0
                         ? new Intl.NumberFormat("en-KE", {
                           style: "decimal",
@@ -344,7 +346,7 @@ export default function JournalsDetailPage() {
                         }).format(parseFloat(entry.debit))
                         : "—"}
                     </td>
-                    <td className="py-4 px-6 text-right font-mono text-black/80">
+                    <td className="py-3 px-4 text-right font-mono text-sm text-gray-700">
                       {parseFloat(entry.credit) > 0
                         ? new Intl.NumberFormat("en-KE", {
                           style: "decimal",
@@ -356,7 +358,7 @@ export default function JournalsDetailPage() {
                 ))}
                 {journal.journal_entries.length === 0 && (
                   <tr>
-                    <td colSpan={5} className="py-12 text-center text-black/30">
+                    <td colSpan={4} className="py-12 text-center text-gray-400 text-sm">
                       No entries recorded yet.
                     </td>
                   </tr>
