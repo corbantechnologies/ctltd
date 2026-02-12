@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
 
 import { createJournalType } from "@/services/journaltypes";
 import { useFormik } from "formik";
@@ -16,7 +14,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { toast } from "react-hot-toast";
-import { Loader2, Settings2, Plus } from "lucide-react";
+import { Loader2, Settings2, Plus, X } from "lucide-react"; // Added X to import
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
@@ -29,7 +27,9 @@ interface CreateJournalTypeProps {
 export default function CreateJournalType({
   rolePrefix = "finance",
   onSuccess,
-}: CreateJournalTypeProps) {
+  className,
+  onClose,
+}: CreateJournalTypeProps & { className?: string; onClose?: () => void }) {
   const header = useAxiosAuth();
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -63,7 +63,7 @@ export default function CreateJournalType({
   });
 
   return (
-    <Card className="w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
+    <Card className={`w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}>
       <CardHeader
         className="p-8 border-b border-black/5"
         style={{ backgroundColor: `${primaryColor}0D` }}
@@ -86,6 +86,17 @@ export default function CreateJournalType({
               Ledger Configuration
             </CardDescription>
           </div>
+          {onClose && (
+            <Button
+              type="button"
+              onClick={onClose}
+              variant="ghost"
+              size="icon"
+              className="hover:bg-red-50 hover:text-red-500 rounded-full"
+            >
+              <X className="w-5 h-5" />
+            </Button>
+          )}
         </div>
       </CardHeader>
       <CardContent className="p-8">

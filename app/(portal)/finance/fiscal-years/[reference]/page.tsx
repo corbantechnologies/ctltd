@@ -28,10 +28,6 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import {
-  Dialog,
-  DialogContent,
-} from "@/components/ui/dialog";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -43,6 +39,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuPortal,
 } from "@/components/ui/dropdown-menu";
+import { CenteredModal } from "@/components/ui/centered-modal";
 import CreateJournal from "@/forms/journals/CreateJournal";
 import CreatePartner from "@/forms/partners/CreatePartner";
 import CreatePartnerType from "@/forms/partnertypes/CreatePartnerType";
@@ -241,24 +238,45 @@ export default function FiscalYearDetail() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Hidden Dialogs Controlled by State */}
-            <Dialog open={openPartnerType} onOpenChange={setOpenPartnerType}>
-              <DialogContent className="max-w-2xl bg-transparent border-none p-0 shadow-none">
-                <CreatePartnerType onSuccess={() => setOpenPartnerType(false)} rolePrefix="finance" />
-              </DialogContent>
-            </Dialog>
+            {/* Centered Modals for ALL Create Actions */}
+            <CenteredModal open={openPartnerType} onOpenChange={setOpenPartnerType}>
+              <CreatePartnerType
+                onSuccess={() => setOpenPartnerType(false)}
+                rolePrefix="finance"
+              />
+            </CenteredModal>
 
-            <Dialog open={openPartner} onOpenChange={setOpenPartner}>
-              <DialogContent className="max-w-3xl bg-transparent border-none p-0 shadow-none">
-                <CreatePartner onSuccess={() => setOpenPartner(false)} onClose={() => setOpenPartner(false)} rolePrefix="finance" />
-              </DialogContent>
-            </Dialog>
+            <CenteredModal
+              open={openPartner}
+              onOpenChange={setOpenPartner}
+              className="max-w-3xl"
+            >
+              <CreatePartner
+                onSuccess={() => setOpenPartner(false)}
+                rolePrefix="finance"
+              />
+            </CenteredModal>
 
-            <Dialog open={openJournalType} onOpenChange={setOpenJournalType}>
-              <DialogContent className="max-w-xl bg-transparent border-none p-0 shadow-none">
-                <CreateJournalType onSuccess={() => setOpenJournalType(false)} rolePrefix="finance" />
-              </DialogContent>
-            </Dialog>
+            <CenteredModal open={openJournalType} onOpenChange={setOpenJournalType}>
+              <CreateJournalType
+                onSuccess={() => setOpenJournalType(false)}
+                rolePrefix="finance"
+              />
+            </CenteredModal>
+
+            <CenteredModal
+              open={openCreateJournal}
+              onOpenChange={setOpenCreateJournal}
+              className="max-w-4xl"
+            >
+              <CreateJournal
+                refetch={refetchFiscalYear}
+                fiscalYear={fiscalYear?.code}
+                initialJournalType={selectedJournalType}
+                rolePrefix="finance"
+                onSuccess={() => setOpenCreateJournal(false)}
+              />
+            </CenteredModal>
 
           </div>
         )}
@@ -335,22 +353,6 @@ export default function FiscalYearDetail() {
           />
         </div>
       </div>
-
-      {/* Manual Modal Implementation for Create Journal */}
-      {/* Kept existing logic for Journal Batch creation as it has custom routing/logic */}
-      {openCreateJournal && (
-        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
-          <CreateJournal
-            refetch={refetchFiscalYear}
-            fiscalYear={fiscalYear?.code}
-            initialJournalType={selectedJournalType}
-            rolePrefix="finance"
-            onSuccess={() => setOpenCreateJournal(false)}
-            onClose={() => setOpenCreateJournal(false)}
-            className="min-h-screen border-none shadow-none rounded-none"
-          />
-        </div>
-      )}
     </div>
   );
 }
