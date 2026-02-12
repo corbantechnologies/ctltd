@@ -34,65 +34,83 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
     }, []);
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="p-0 overflow-hidden shadow-2xl rounded-2xl border border-black/5 bg-white/80 backdrop-blur-xl max-w-2xl">
-                <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-14 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
-                    <div className="flex items-center border-b border-black/5 px-4" cmdk-input-wrapper="">
-                        <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
-                        <Command.Input
-                            className="flex h-14 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
-                            placeholder="Type a command or search..."
-                        />
-                    </div>
-                    <Command.List className="max-h-[300px] overflow-y-auto overflow-x-hidden py-2 px-2 scrollbar-hide">
-                        <Command.Empty className="py-6 text-center text-sm">No results found.</Command.Empty>
+    return (
+        <>
+            <button
+                onClick={() => setOpen(true)}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border border-black/5 bg-white shadow-sm hover:shadow-md transition-all group text-left"
+            >
+                <Search className="w-4 h-4 text-black/40 group-hover:text-corporate-primary transition-colors" />
+                <span className="text-sm font-medium text-black/40 group-hover:text-black/60 flex-1">
+                    Search anything...
+                </span>
+                <div className="hidden md:flex items-center gap-1">
+                    <span className="text-[10px] font-bold bg-black/5 border border-black/5 rounded px-1.5 py-0.5 text-black/30">
+                        ⌘K
+                    </span>
+                </div>
+            </button>
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogContent className="p-0 overflow-hidden shadow-2xl rounded-2xl border border-black/5 bg-white/80 backdrop-blur-xl max-w-2xl">
+                    <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-14 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
+                        <div className="flex items-center border-b border-black/5 px-4" cmdk-input-wrapper="">
+                            <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+                            <Command.Input
+                                className="flex h-14 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+                                placeholder="Type a command or search..."
+                            />
+                        </div>
+                        <Command.List className="max-h-[300px] overflow-y-auto overflow-x-hidden py-2 px-2 scrollbar-hide">
+                            <Command.Empty className="py-6 text-center text-sm">No results found.</Command.Empty>
 
-                        <Command.Group heading="Navigation">
-                            <Command.Item
-                                className="relative flex cursor-default select-none items-center rounded-xl px-2 py-2 text-sm outline-none aria-selected:bg-[#045138] aria-selected:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors"
-                                onSelect={() => runCommand(() => router.push(`/${role}/dashboard`))}
-                            >
-                                <Calculator className="mr-2 h-4 w-4" />
-                                <span>Dashboard</span>
-                            </Command.Item>
-                            <Command.Item
-                                className="relative flex cursor-default select-none items-center rounded-xl px-2 py-2 text-sm outline-none aria-selected:bg-[#045138] aria-selected:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors"
-                                onSelect={() => runCommand(() => router.push(`/${role}/coa`))}
-                            >
-                                <Layers className="mr-2 h-4 w-4" />
-                                <span>Chart of Accounts</span>
-                            </Command.Item>
-                        </Command.Group>
-
-                        <Command.Group heading="Accounts">
-                            {coas?.slice(0, 10).map((coa) => (
+                            <Command.Group heading="Navigation">
                                 <Command.Item
-                                    key={coa.reference}
                                     className="relative flex cursor-default select-none items-center rounded-xl px-2 py-2 text-sm outline-none aria-selected:bg-[#045138] aria-selected:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors"
-                                    onSelect={() => runCommand(() => router.push(`/${role}/coa/${coa.reference}`))}
+                                    onSelect={() => runCommand(() => router.push(`/${role}/dashboard`))}
                                 >
-                                    <FileText className="mr-2 h-4 w-4" />
-                                    <span>{coa.name} ({coa.code})</span>
+                                    <Calculator className="mr-2 h-4 w-4" />
+                                    <span>Dashboard</span>
                                 </Command.Item>
-                            ))}
-                        </Command.Group>
-
-                        <Command.Group heading="Books">
-                            {books?.slice(0, 10).map((book) => (
                                 <Command.Item
-                                    key={book.reference}
                                     className="relative flex cursor-default select-none items-center rounded-xl px-2 py-2 text-sm outline-none aria-selected:bg-[#045138] aria-selected:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors"
-                                    onSelect={() => runCommand(() => router.push(`/${role}/books/${book.reference}`))} // Check path
+                                    onSelect={() => runCommand(() => router.push(`/${role}/coa`))}
                                 >
-                                    <Book className="mr-2 h-4 w-4" />
-                                    <span>{book.name}</span>
+                                    <Layers className="mr-2 h-4 w-4" />
+                                    <span>Chart of Accounts</span>
                                 </Command.Item>
-                            ))}
-                        </Command.Group>
+                            </Command.Group>
 
-                    </Command.List>
-                </Command>
-            </DialogContent>
-        </Dialog>
+                            <Command.Group heading="Accounts">
+                                {coas?.slice(0, 10).map((coa) => (
+                                    <Command.Item
+                                        key={coa.reference}
+                                        className="relative flex cursor-default select-none items-center rounded-xl px-2 py-2 text-sm outline-none aria-selected:bg-[#045138] aria-selected:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors"
+                                        onSelect={() => runCommand(() => router.push(`/${role}/coa/${coa.reference}`))}
+                                    >
+                                        <FileText className="mr-2 h-4 w-4" />
+                                        <span>{coa.name} ({coa.code})</span>
+                                    </Command.Item>
+                                ))}
+                            </Command.Group>
+
+                            <Command.Group heading="Books">
+                                {books?.slice(0, 10).map((book) => (
+                                    <Command.Item
+                                        key={book.reference}
+                                        className="relative flex cursor-default select-none items-center rounded-xl px-2 py-2 text-sm outline-none aria-selected:bg-[#045138] aria-selected:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors"
+                                        onSelect={() => runCommand(() => router.push(`/${role}/books/${book.reference}`))} // Check path
+                                    >
+                                        <Book className="mr-2 h-4 w-4" />
+                                        <span>{book.name}</span>
+                                    </Command.Item>
+                                ))}
+                            </Command.Group>
+
+                        </Command.List>
+                    </Command>
+                </DialogContent>
+            </Dialog>
+        </>
+    );
     );
 }
