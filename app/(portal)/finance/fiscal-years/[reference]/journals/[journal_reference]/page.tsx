@@ -178,44 +178,46 @@ export default function JournalsDetailPage() {
         </div>
 
         {/* Action Buttons */}
-        {!journal.is_posted && (
-          <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-            <Button
-              onClick={() => setOpenAddEntry(true)}
-              className="h-12 bg-[#D0402B] border border-black/5 text-white hover:bg-black/5 font-bold uppercase text-xs tracking-widest rounded-xl shadow-sm"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Add Entry
-            </Button>
-            <Button
-              // onClick={() => setOpenUpdateJournal(true)} // Implement Update Modal if needed
-              variant="outline"
-              className="h-12 border-black/5 bg-white hover:bg-black/5 font-bold uppercase text-xs tracking-widest rounded-xl"
-              onClick={() => setOpenUpdateJournal(true)}
-            >
-              <Edit2 className="w-4 h-4 mr-2" />
-              Edit Details
-            </Button>
+        <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+          <Button
+            variant="outline"
+            className="h-12 border-black/5 bg-white hover:bg-black/5 font-bold uppercase text-xs tracking-widest rounded-xl"
+            onClick={() => setOpenUpdateJournal(true)}
+          >
+            <Edit2 className="w-4 h-4 mr-2" />
+            Edit Details
+          </Button>
 
-            <Button
-              onClick={handlePostJournal}
-              disabled={isPosting || !isBalanced}
-              className={`h-12 font-bold uppercase text-xs tracking-widest rounded-xl shadow-lg transition-all ${!isBalanced
-                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                : "bg-[#045138] hover:bg-black text-white"
-                }`}
-            >
-              {isPosting ? (
-                <LoadingSpinner />
-              ) : (
-                <div className="flex items-center">
-                  <Lock className="w-4 h-4 mr-2" />
-                  Finalize & Post
-                </div>
-              )}
-            </Button>
-          </div>
-        )}
+          {!journal.is_posted && (
+            <>
+              <Button
+                onClick={() => setOpenAddEntry(true)}
+                className="h-12 bg-[#D0402B] border border-black/5 text-white hover:bg-black/5 font-bold uppercase text-xs tracking-widest rounded-xl shadow-sm"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Add Entry
+              </Button>
+
+              <Button
+                onClick={handlePostJournal}
+                disabled={isPosting || !isBalanced}
+                className={`h-12 font-bold uppercase text-xs tracking-widest rounded-xl shadow-lg transition-all ${!isBalanced
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-[#045138] hover:bg-black text-white"
+                  }`}
+              >
+                {isPosting ? (
+                  <LoadingSpinner />
+                ) : (
+                  <div className="flex items-center">
+                    <Lock className="w-4 h-4 mr-2" />
+                    Finalize & Post
+                  </div>
+                )}
+              </Button>
+            </>
+          )}
+        </div>
       </div>
 
       {/* Stats Cards */}
