@@ -34,7 +34,6 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
     }, []);
 
     return (
-    return (
         <>
             <button
                 onClick={() => setOpen(true)}
@@ -111,6 +110,5 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
                 </DialogContent>
             </Dialog>
         </>
-    );
     );
 }
