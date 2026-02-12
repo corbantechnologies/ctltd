@@ -11,6 +11,10 @@ import {
   ShieldCheck,
   Landmark,
   Activity,
+  Calendar,
+  Hash,
+  ArrowUpDown,
+  Wallet,
 } from "lucide-react";
 import {
   Card,
@@ -107,17 +111,35 @@ export default function FinanceBookDetailPage() {
 
       {/* Meta Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <ShieldCheck className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+                <Calendar className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Registry Code
+                  Created
                 </p>
                 <p className="text-base font-bold text-black tracking-tight">
+                  {book?.created_at && new Date(book.created_at).toLocaleDateString()}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+                <Hash className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                  Book Code
+                </p>
+                <p className="text-base font-bold text-black tracking-tight font-mono">
                   {book?.code}
                 </p>
               </div>
@@ -125,66 +147,39 @@ export default function FinanceBookDetailPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <Activity className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+                <ArrowUpDown className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Tax Compliance
+                  Normal Balance
                 </p>
-                <div className="flex items-center gap-2">
-                  {book?.is_tax ? (
-                    <Badge className="bg-orange-500/10 text-orange-600 border-none text-[10px] font-bold px-2 py-0.5 rounded-full">
-                      TAXABLE
-                    </Badge>
-                  ) : (
-                    <p className="text-xs font-bold text-black/20">
-                      Non-Taxable
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <Landmark className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Financial Channel
-                </p>
-                <p className="text-xs font-bold text-black">
-                  {book?.is_bank
-                    ? "Banking Institution"
-                    : book?.is_cash
-                      ? "Cash Account"
-                      : "General Ledger"}
+                <p className="text-base font-bold text-black tracking-tight uppercase">
+                  {(book as any).normal_balance}
                 </p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <Receipt className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-600">
+                <Wallet className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Internal Ref
+                  Current Balance
                 </p>
-                <p className="text-xs font-mono font-bold text-black truncate max-w-[120px]">
-                  {book?.reference}
+                <p className="text-base font-bold text-green-600 tracking-tight">
+                  KES{" "}
+                  {parseFloat((book as any).balance).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                  })}
                 </p>
               </div>
             </div>
@@ -192,8 +187,8 @@ export default function FinanceBookDetailPage() {
         </Card>
       </div>
 
-      {/* Transaction History */}
-      <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[32px] overflow-hidden shadow-xl shadow-black/5 pb-6">
+      {/* Transaction History (Journal Entries) */}
+      <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl shadow-black/5 pb-24">
         <CardHeader className="p-8 border-b border-black/5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">

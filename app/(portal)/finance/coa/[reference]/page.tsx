@@ -13,6 +13,8 @@ import {
   Activity,
   ArrowLeft,
   BookPlus,
+  Calendar,
+  Wallet,
 } from "lucide-react";
 import Link from "next/link";
 import CreateBook from "@/forms/books/CreateBook";
@@ -20,6 +22,7 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function FinanceCOADetailPage() {
   const { reference } = useParams();
@@ -104,51 +107,81 @@ export default function FinanceCOADetailPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {[
-          {
-            icon: Hash,
-            label: "Core Reference",
-            value: coa.reference,
-            color: "text-blue-600",
-            bg: "bg-blue-50",
-          },
-          {
-            icon: ArrowUpDown,
-            label: "Normal Balance",
-            value: coa.normal_balance,
-            color: "text-purple-600",
-            bg: "bg-purple-50",
-          },
-          {
-            icon: Activity,
-            label: "Associated Books",
-            value: `${coa.books?.length || 0} Records`,
-            color: "text-[#045138]",
-            bg: "bg-green-50",
-          },
-        ].map((stat, i) => (
-          <div
-            key={i}
-            className="bg-white/60 backdrop-blur-xl p-6 rounded-[32px] border border-black/5 shadow-sm group hover:-translate-y-1 transition-all duration-300"
-          >
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div
-                className={`w-12 h-12 rounded-2xl ${stat.bg} ${stat.color} flex items-center justify-center shrink-0`}
-              >
-                <stat.icon className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+                <Calendar className="w-5 h-5" />
               </div>
-              <div className="min-w-0 flex-1">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-black/30 mb-1 truncate">
-                  {stat.label}
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                  Created
                 </p>
-                <p className="text-lg font-bold text-black tracking-tight truncate">
-                  {stat.value}
+                <p className="text-base font-bold text-black tracking-tight">
+                  {new Date(coa.created_at).toLocaleDateString()}
                 </p>
               </div>
             </div>
-          </div>
-        ))}
+          </CardContent>
+        </Card>
+
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+                <Hash className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                  Account Code
+                </p>
+                <p className="text-base font-bold text-black tracking-tight font-mono">
+                  {coa.code}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+                <ArrowUpDown className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                  Normal Balance
+                </p>
+                <p className="text-base font-bold text-black tracking-tight uppercase">
+                  {(coa as any).normal_balance}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-600">
+                <Wallet className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                  Current Balance
+                </p>
+                <p className="text-base font-bold text-green-600 tracking-tight">
+                  KES{" "}
+                  {parseFloat((coa as any).balance).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                  })}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Associated Books Section */}

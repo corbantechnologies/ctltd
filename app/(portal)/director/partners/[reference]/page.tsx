@@ -12,6 +12,10 @@ import {
   Receipt,
   ShieldCheck,
   Building,
+  ArrowLeft,
+  Calendar,
+  Hash,
+  Building2,
 } from "lucide-react";
 import {
   Card,
@@ -95,72 +99,74 @@ export default function PartnerDetailPage() {
 
       {/* Meta Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <Mail className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+                <Calendar className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Official Email
+                  Relationship
                 </p>
-                <p className="text-sm font-bold text-black truncate max-w-[150px]">
-                  {partner?.email}
+                <p className="text-base font-bold text-black tracking-tight">
+                  {partner?.created_at
+                    ? new Date(partner.created_at).toLocaleDateString()
+                    : "—"}
                 </p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <Phone className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Contact Line
-                </p>
-                <p className="text-base tracking-tight font-bold text-black italic">
-                  {partner?.phone}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <ShieldCheck className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+                <Hash className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
                   Tax PIN
                 </p>
-                <p className="text-base tracking-tight font-bold text-black uppercase">
-                  {partner?.tax_pin}
+                <p className="text-base font-bold text-black tracking-tight">
+                  {partner?.tax_pin || "Not Set"}
                 </p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <Building className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+                <Building2 className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Division
+                  Type
                 </p>
-                <p className="text-base tracking-tight font-bold text-black">
-                  {partner?.division}
+                <p className="text-base font-bold text-black tracking-tight">
+                  {partner?.partner_type}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+                <Phone className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                  Contact
+                </p>
+                <p className="text-base font-bold text-black tracking-tight truncate max-w-[120px]">
+                  {partner?.phone || "No Phone"}
                 </p>
               </div>
             </div>
@@ -168,24 +174,20 @@ export default function PartnerDetailPage() {
         </Card>
       </div>
 
-      {/* Transaction History */}
-      <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[32px] overflow-hidden shadow-xl shadow-black/5 pb-6">
-        <CardHeader className="p-8 border-b border-black/5">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-xl bg-[#D0402B]/10 flex items-center justify-center text-[#D0402B]">
-                <History className="w-5 h-5" />
-              </div>
-              <div>
-                <CardTitle className="text-xl font-bold text-black tracking-tight">
-                  Financial Engagement
-                </CardTitle>
-                <CardDescription className="text-black/30 font-bold uppercase text-[9px] tracking-widest mt-0.5">
-                  Partner Specific Transaction History
-                </CardDescription>
-              </div>
+      {/* Transaction History (Journal Entries) */}
+      <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl shadow-black/5 pb-24">
+        <CardHeader className="p-8 border-b border-black/5 flex flex-row items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-[#D0402B]/10 flex items-center justify-center text-[#D0402B]">
+              <History className="w-5 h-5" />
             </div>
+            <h3 className="text-xl font-bold text-black tracking-tight">
+              Transaction Ledger
+            </h3>
           </div>
+          <Badge className="bg-black/5 text-black border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-lg">
+            {partner?.journal_entries?.length || 0} Records
+          </Badge>
         </CardHeader>
         <CardContent className="p-0">
           <div className="overflow-x-auto">

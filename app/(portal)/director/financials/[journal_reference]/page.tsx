@@ -109,89 +109,46 @@ export default function JournalDetailPage() {
         </div>
       </div>
 
-      {/* Summary Statistics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <Calendar className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Fiscal Date
-                </p>
-                <p className="text-base font-bold text-black tracking-tight">
-                  {new Date(journal?.date || "").toLocaleDateString()}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40">
-                <User className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Created By
-                </p>
-                <p className="text-base font-bold text-black tracking-tight uppercase truncate max-w-[120px]">
-                  {journal?.created_by || "System"}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
+              Total Debit
+            </p>
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-2xl bg-green-500/5 flex items-center justify-center text-green-600">
                 <ArrowUpRight className="w-5 h-5" />
               </div>
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Total Debit
-                </p>
-                <p className="text-base font-bold text-green-600 tracking-tight">
-                  KES{" "}
-                  {totalDebit.toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                  })}
-                </p>
-              </div>
+              <p className="text-xl font-bold text-green-600 tracking-tight">
+                KES{" "}
+                {totalDebit.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                })}
+              </p>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#D0402B]/5 flex items-center justify-center text-[#D0402B]">
-                <ArrowRight className="w-5 h-5 translate-y-0.5" />
-              </div>
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                  Total Credit
-                </p>
-                <p className="text-base font-bold text-[#D0402B] tracking-tight">
-                  KES{" "}
-                  {totalCredit.toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                  })}
-                </p>
-              </div>
+            <div>
+              <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                Total Credit
+              </p>
+              <p className="text-xl font-bold text-[#D0402B] tracking-tight">
+                KES{" "}
+                {totalCredit.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                })}
+              </p>
             </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Nested Entries Table */}
-      <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[32px] overflow-hidden shadow-xl shadow-black/5 pb-6">
+      <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl shadow-black/5 pb-6">
         <CardHeader className="p-8 border-b border-black/5 flex flex-row items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-xl bg-[#D0402B]/10 flex items-center justify-center text-[#D0402B]">

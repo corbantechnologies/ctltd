@@ -222,7 +222,7 @@ export default function JournalsDetailPage() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[24px] shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <CardContent className="p-6">
             <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
               Total Debit
@@ -241,7 +241,7 @@ export default function JournalsDetailPage() {
             </p>
           </CardContent>
         </Card>
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-[24px] shadow-sm">
+        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <CardContent className="p-6">
             <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
               Total Credit
@@ -261,7 +261,7 @@ export default function JournalsDetailPage() {
           </CardContent>
         </Card>
         <Card
-          className={`border-black/5 backdrop-blur-xl rounded-[24px] shadow-sm transition-colors ${isBalanced
+          className={`border-black/5 backdrop-blur-xl rounded-2xl shadow-sm transition-colors ${isBalanced
             ? "bg-[#045138]/5 border-[#045138]/20"
             : "bg-red-500/5 border-red-500/20"
             }`}
@@ -292,7 +292,7 @@ export default function JournalsDetailPage() {
       </div>
 
       {/* Entries List */}
-      <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-[32px] overflow-hidden shadow-xl shadow-black/5 pb-24">
+      <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl shadow-black/5 pb-24">
         <div className="p-8 border-b border-black/5 flex justify-between items-center">
           <h3 className="text-xl font-bold text-black tracking-tight flex items-center gap-3">
             <Receipt className="w-5 h-5 text-[#045138]" />
