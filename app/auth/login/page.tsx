@@ -98,7 +98,7 @@ export default function Login() {
           </p>
         </div>
 
-        <Card className="border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-sm">
+        <Card className="border-black/5 shadow-2xl rounded-xl overflow-hidden bg-white/80 backdrop-blur-sm">
           <CardHeader className="pt-8 px-8">
             <CardTitle className="text-2xl font-black text-black tracking-tight text-center">
               Login
@@ -125,11 +125,10 @@ export default function Login() {
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className={`pl-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all ${
-                      formik.touched.email && formik.errors.email
+                    className={`pl-10 h-14 bg-orange-50/50 border-black/5 rounded-md font-bold focus:bg-white transition-all ${formik.touched.email && formik.errors.email
                         ? "border-red-500"
                         : ""
-                    }`}
+                      }`}
                   />
                 </div>
                 {formik.touched.email && formik.errors.email && (
@@ -164,11 +163,10 @@ export default function Login() {
                     value={formik.values.password}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className={`pl-10 pr-10 h-14 bg-orange-50/50 border-black/5 rounded-2xl font-bold focus:bg-white transition-all ${
-                      formik.touched.password && formik.errors.password
+                    className={`pl-10 pr-10 h-14 bg-orange-50/50 border-black/5 rounded-md font-bold focus:bg-white transition-all ${formik.touched.password && formik.errors.password
                         ? "border-red-500"
                         : ""
-                    }`}
+                      }`}
                   />
                   <button
                     type="button"
@@ -192,7 +190,7 @@ export default function Login() {
               <Button
                 disabled={loading}
                 type="submit"
-                className="w-full h-14 bg-black hover:bg-corporate-primary text-white rounded-2xl text-lg font-black shadow-xl transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:hover:bg-black"
+                className="w-full h-14 bg-black hover:bg-corporate-primary text-white rounded-md text-lg font-black shadow-xl transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:hover:bg-black"
               >
                 {loading ? (
                   <div className="flex items-center gap-2">
