@@ -5,7 +5,7 @@ import { AxiosResponse } from "axios";
 import { PaginatedResponse } from "./general";
 import { JournalEntry } from "./journalentries";
 
-interface Partner {
+export interface Partner {
   code: string;
   name: string;
   phone: string;

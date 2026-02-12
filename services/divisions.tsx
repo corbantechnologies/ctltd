@@ -4,6 +4,7 @@ import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
 import { PaginatedResponse } from "./general";
 import { JournalEntry } from "./journalentries";
+import { Partner } from "./partners";
 
 interface Division {
   name: string;
@@ -13,6 +14,7 @@ interface Division {
   updated_at: string;
   reference: string;
   journal_entries: JournalEntry[]
+  partners: Partner[]
 }
 
 
