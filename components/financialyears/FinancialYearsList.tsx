@@ -29,7 +29,7 @@ export default function FinancialYearsList({
   const [view, setView] = useState<"grid" | "table">("table");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 20;
 
   const { isLoading, data: financialYears } = useFetchFinancialYears();
 
@@ -100,8 +100,8 @@ export default function FinancialYearsList({
           <button
             onClick={() => setView("grid")}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "grid"
-                ? "bg-white shadow-sm text-black"
-                : "text-black/40 hover:text-black"
+              ? "bg-white shadow-sm text-black"
+              : "text-black/40 hover:text-black"
               }`}
             style={{ color: view === "grid" ? primaryColor : undefined }}
           >
@@ -111,8 +111,8 @@ export default function FinancialYearsList({
           <button
             onClick={() => setView("table")}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "table"
-                ? "bg-white shadow-sm text-black"
-                : "text-black/40 hover:text-black"
+              ? "bg-white shadow-sm text-black"
+              : "text-black/40 hover:text-black"
               }`}
             style={{ color: view === "table" ? primaryColor : undefined }}
           >
@@ -319,8 +319,8 @@ export default function FinancialYearsList({
                       key={page}
                       onClick={() => setCurrentPage(page)}
                       className={`w-8 h-8 rounded-lg text-[10px] font-bold transition-all ${currentPage === page
-                          ? "text-white shadow-md"
-                          : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
+                        ? "text-white shadow-md"
+                        : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
                         }`}
                       style={
                         {

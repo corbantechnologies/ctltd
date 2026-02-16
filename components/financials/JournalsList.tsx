@@ -45,7 +45,7 @@ export default function JournalsList({
     new Date().getFullYear().toString(),
   );
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 20;
 
   const { data: journals, isLoading: isLoadingJournals } = useFetchJournals();
   const { data: journalTypes, isLoading: isLoadingTypes } =
@@ -347,8 +347,8 @@ export default function JournalsList({
                     </div>
                     <Badge
                       className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${journal.is_posted
-                          ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
-                          : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
+                        ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
+                        : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
                         }`}
                     >
                       {journal.is_posted ? "Posted" : "Pending"}
@@ -521,8 +521,8 @@ export default function JournalsList({
                   size="sm"
                   onClick={() => setCurrentPage(i + 1)}
                   className={`w-10 h-10 rounded-xl transition-all font-bold ${currentPage === i + 1
-                      ? "bg-[#D0402B] text-white shadow-lg shadow-[#D0402B]/20"
-                      : "bg-white/80 border-black/5 hover:bg-black/5"
+                    ? "bg-[#D0402B] text-white shadow-lg shadow-[#D0402B]/20"
+                    : "bg-white/80 border-black/5 hover:bg-black/5"
                     }`}
                   style={{
                     backgroundColor:
