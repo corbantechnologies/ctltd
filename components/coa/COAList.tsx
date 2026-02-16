@@ -36,7 +36,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
   const [view, setView] = useState<"grid" | "table">("table");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 20;
 
   const { isLoading, data: coas } = useFetchCOAs();
 
@@ -107,8 +107,8 @@ export default function COAList({ rolePrefix }: COAListProps) {
           <button
             onClick={() => setView("grid")}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "grid"
-                ? "bg-white shadow-sm"
-                : "text-black/40 hover:text-black"
+              ? "bg-white shadow-sm"
+              : "text-black/40 hover:text-black"
               }`}
             style={
               {
@@ -122,8 +122,8 @@ export default function COAList({ rolePrefix }: COAListProps) {
           <button
             onClick={() => setView("table")}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "table"
-                ? "bg-white shadow-sm"
-                : "text-black/40 hover:text-black"
+              ? "bg-white shadow-sm"
+              : "text-black/40 hover:text-black"
               }`}
             style={
               {
@@ -373,8 +373,8 @@ export default function COAList({ rolePrefix }: COAListProps) {
                       key={page}
                       onClick={() => setCurrentPage(page)}
                       className={`w-8 h-8 rounded-lg text-[10px] font-bold transition-all ${currentPage === page
-                          ? "text-white shadow-md"
-                          : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
+                        ? "text-white shadow-md"
+                        : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
                         }`}
                       style={
                         {

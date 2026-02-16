@@ -3,6 +3,9 @@
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import { useFetchJournal } from "@/hooks/journals/actions";
 import { useParams } from "next/navigation";
+import { useState } from "react";
+import JournalEntryDetailModal from "@/components/journals/JournalEntryDetailModal";
+import { JournalEntry } from "@/services/journalentries";
 import {
   FileText,
   History,
@@ -36,6 +39,14 @@ export default function JournalDetailPage() {
 
   const { isLoading: isLoadingJournal, data: journal } =
     useFetchJournal(journal_reference);
+
+  const [selectedEntry, setSelectedEntry] = useState<JournalEntry | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleViewDetails = (entry: JournalEntry) => {
+    setSelectedEntry(entry);
+    setIsModalOpen(true);
+  };
 
   if (isLoadingJournal) {
     return <LoadingSpinner />;
@@ -250,6 +261,7 @@ export default function JournalDetailPage() {
                           <button
                             className="w-7 h-7 rounded-md bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-[#D0402B] shadow-sm"
                             title="View Ledger Detail"
+                            onClick={() => handleViewDetails(entry)}
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
                           </button>
@@ -295,6 +307,12 @@ export default function JournalDetailPage() {
           </p>
         </div>
       )}
+
+      <JournalEntryDetailModal
+        entry={selectedEntry}
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }
