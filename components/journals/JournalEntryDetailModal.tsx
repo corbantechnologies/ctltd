@@ -1,12 +1,5 @@
 "use client";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -25,6 +18,7 @@ import {
   File,
 } from "lucide-react";
 import { JournalEntry } from "@/services/journalentries";
+import { useEffect } from "react";
 
 interface JournalEntryDetailModalProps {
   entry: JournalEntry | null;
@@ -37,10 +31,22 @@ export default function JournalEntryDetailModal({
   open,
   onClose,
 }: JournalEntryDetailModalProps) {
-  if (!entry) return null;
+  // Prevent background scrolling when modal is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [open]);
+
+  if (!entry || !open) return null;
 
   const DetailItem = ({ icon: Icon, label, value, className = "" }: any) => (
-    <div className={`flex flex-col gap-1 ${className}`}>
+    <div className={`flex flex-col gap-1.5 ${className}`}>
       <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 flex items-center gap-1.5">
         <Icon className="w-3 h-3" />
         {label}
@@ -60,70 +66,79 @@ export default function JournalEntryDetailModal({
   };
 
   return (
-    <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 gap-0 bg-white rounded-2xl shadow-2xl border border-gray-100">
-        <DialogHeader className="p-8 border-b border-gray-100 sticky top-0 bg-white/80 backdrop-blur-md z-10">
-          <div className="flex justify-between items-start">
-            <div className="space-y-2">
-              <div className="flex items-center gap-3">
-                <Badge
-                  variant="outline"
-                  className="bg-gray-50 text-gray-600 border-gray-200 px-3 py-1 text-xs"
-                >
-                  {entry.code}
-                </Badge>
-                <Badge
-                  variant="outline"
-                  className="bg-blue-50 text-blue-600 border-blue-200 px-3 py-1 text-xs"
-                >
-                  {entry.journal}
-                </Badge>
-              </div>
-              <DialogTitle className="text-2xl font-bold text-gray-900 tracking-tight">
-                Journal Entry Details
-              </DialogTitle>
-              <DialogDescription className="text-sm text-gray-500 flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
+        onClick={onClose}
+      ></div>
+
+      {/* Modal Content */}
+      <div className="relative w-full max-w-5xl max-h-[90vh] bg-white rounded-2xl shadow-2xl flex flex-col animate-in fade-in zoom-in-95 duration-200">
+        {/* Header */}
+        <div className="flex-none p-6 sm:p-8 border-b border-gray-100 bg-white rounded-t-2xl z-10 flex justify-between items-start">
+          <div className="space-y-2">
+            <div className="flex items-center gap-3">
+              <Badge
+                variant="outline"
+                className="bg-gray-50 text-gray-600 border-gray-200 px-3 py-1 text-xs font-medium"
+              >
+                {entry.code}
+              </Badge>
+              <Badge
+                variant="outline"
+                className="bg-blue-50 text-blue-600 border-blue-200 px-3 py-1 text-xs font-medium"
+              >
+                {entry.journal}
+              </Badge>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+              Journal Entry Details
+            </h2>
+            <div className="text-sm text-gray-500 flex items-center gap-2">
+              <Calendar className="w-4 h-4" />
+              <span>
                 Created on{" "}
                 {new Date(entry.created_at).toLocaleString(undefined, {
                   dateStyle: "full",
-                  timeStyle: "medium",
+                  timeStyle: "short",
                 })}
-              </DialogDescription>
+              </span>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onClose}
-              className="rounded-full hover:bg-gray-100 -mr-2 -mt-2 w-10 h-10"
-            >
-              <X className="w-5 h-5" />
-            </Button>
           </div>
-        </DialogHeader>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onClose}
+            className="rounded-full hover:bg-gray-100 -mr-2 -mt-2 w-10 h-10 text-gray-500 hover:text-gray-900"
+          >
+            <X className="w-6 h-6" />
+          </Button>
+        </div>
 
-        <div className="p-8 space-y-10">
+        {/* Scrollable Body */}
+        <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-10 custom-scrollbar">
           {/* Financials Section */}
           <section className="space-y-5">
             <h4 className="text-base font-bold text-gray-900 flex items-center gap-2.5">
-              <div className="p-1.5 bg-green-100 rounded-lg">
-                <DollarSign className="w-4 h-4 text-green-700" />
+              <div className="p-2 bg-green-100/50 rounded-lg">
+                <DollarSign className="w-5 h-5 text-green-700" />
               </div>
               Financials
             </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {/* Debit Card */}
               <div
-                className={`p-5 rounded-2xl border transition-all ${parseFloat(entry.debit) > 0 ? "bg-green-50 border-green-200 shadow-sm" : "bg-gray-50 border-gray-100 opacity-60"}`}
+                className={`p-6 rounded-2xl border transition-all ${parseFloat(entry.debit) > 0 ? "bg-green-50/50 border-green-200 shadow-sm" : "bg-gray-50 border-gray-100 opacity-60"}`}
               >
-                <div className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2 flex items-center gap-2">
+                <div className="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-3 flex items-center gap-2">
                   <div
                     className={`w-2 h-2 rounded-full ${parseFloat(entry.debit) > 0 ? "bg-green-500" : "bg-gray-300"}`}
                   />
                   Debit
                 </div>
                 <div
-                  className={`text-2xl font-bold tracking-tight ${parseFloat(entry.debit) > 0 ? "text-green-700" : "text-gray-400"}`}
+                  className={`text-3xl font-bold tracking-tight ${parseFloat(entry.debit) > 0 ? "text-green-700" : "text-gray-400"}`}
                 >
                   {formatCurrency(entry.debit, entry.currency)}
                 </div>
@@ -131,36 +146,36 @@ export default function JournalEntryDetailModal({
 
               {/* Credit Card */}
               <div
-                className={`p-5 rounded-2xl border transition-all ${parseFloat(entry.credit) > 0 ? "bg-orange-50 border-orange-200 shadow-sm" : "bg-gray-50 border-gray-100 opacity-60"}`}
+                className={`p-6 rounded-2xl border transition-all ${parseFloat(entry.credit) > 0 ? "bg-orange-50/50 border-orange-200 shadow-sm" : "bg-gray-50 border-gray-100 opacity-60"}`}
               >
-                <div className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2 flex items-center gap-2">
+                <div className="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-3 flex items-center gap-2">
                   <div
                     className={`w-2 h-2 rounded-full ${parseFloat(entry.credit) > 0 ? "bg-orange-500" : "bg-gray-300"}`}
                   />
                   Credit
                 </div>
                 <div
-                  className={`text-2xl font-bold tracking-tight ${parseFloat(entry.credit) > 0 ? "text-orange-700" : "text-gray-400"}`}
+                  className={`text-3xl font-bold tracking-tight ${parseFloat(entry.credit) > 0 ? "text-orange-700" : "text-gray-400"}`}
                 >
                   {formatCurrency(entry.credit, entry.currency)}
                 </div>
               </div>
 
               {/* Meta Data */}
-              <div className="sm:col-span-2 grid grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl border border-gray-100 bg-white">
+              <div className="md:col-span-2 grid grid-cols-2 gap-4">
+                <div className="p-5 rounded-xl border border-gray-200/60 bg-white shadow-sm flex flex-col justify-center">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 block mb-1">
                     Currency
                   </span>
-                  <span className="text-lg font-bold text-gray-900">
+                  <span className="text-xl font-bold text-gray-900">
                     {entry.currency}
                   </span>
                 </div>
-                <div className="p-4 rounded-xl border border-gray-100 bg-white">
+                <div className="p-5 rounded-xl border border-gray-200/60 bg-white shadow-sm flex flex-col justify-center">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 block mb-1">
                     Exchange Rate
                   </span>
-                  <span className="text-lg font-bold text-gray-900">
+                  <span className="text-xl font-bold text-gray-900">
                     {entry.exchange_rate}
                   </span>
                 </div>
@@ -168,11 +183,11 @@ export default function JournalEntryDetailModal({
             </div>
             {(parseFloat(entry.foreign_debit) > 0 ||
               parseFloat(entry.foreign_credit) > 0) && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 p-4 bg-blue-50/30 rounded-xl border border-blue-100">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-5 bg-blue-50/30 rounded-xl border border-blue-100/50">
                 <DetailItem
                   icon={Globe}
                   label="Foreign Debit"
-                  value={formatCurrency(entry.foreign_debit, "USD")} // Assuming simplified display, ideally currency code should be dynamic if available for foreign
+                  value={formatCurrency(entry.foreign_debit, "USD")}
                 />
                 <DetailItem
                   icon={Globe}
@@ -188,12 +203,12 @@ export default function JournalEntryDetailModal({
           {/* Entity & Classification */}
           <section className="space-y-5">
             <h4 className="text-base font-bold text-gray-900 flex items-center gap-2.5">
-              <div className="p-1.5 bg-blue-100 rounded-lg">
-                <Building2 className="w-4 h-4 text-blue-700" />
+              <div className="p-2 bg-blue-100/50 rounded-lg">
+                <Building2 className="w-5 h-5 text-blue-700" />
               </div>
               Entity & Classification
             </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-12 p-6 bg-gray-50/50 rounded-2xl border border-gray-100/50 hover:border-gray-100 transition-colors">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 p-8 bg-gray-50 rounded-2xl border border-gray-100">
               <DetailItem
                 icon={Book}
                 label="Account Book"
@@ -224,12 +239,12 @@ export default function JournalEntryDetailModal({
           {/* Documentation */}
           <section className="space-y-5">
             <h4 className="text-base font-bold text-gray-900 flex items-center gap-2.5">
-              <div className="p-1.5 bg-orange-100 rounded-lg">
-                <FileText className="w-4 h-4 text-orange-700" />
+              <div className="p-2 bg-orange-100/50 rounded-lg">
+                <FileText className="w-5 h-5 text-orange-700" />
               </div>
               Documentation
             </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12">
               <DetailItem
                 icon={CreditCard}
                 label="Payment Method"
@@ -241,7 +256,7 @@ export default function JournalEntryDetailModal({
                 value={`${entry.source_document} ${entry.document_number ? `#${entry.document_number}` : ""}`}
               />
               {entry.document_file && (
-                <div className="sm:col-span-2 pt-2">
+                <div className="md:col-span-2 pt-2">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 flex items-center gap-1.5 mb-3">
                     <File className="w-3 h-3" />
                     Attachment
@@ -250,7 +265,7 @@ export default function JournalEntryDetailModal({
                     href={entry.document_file}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2.5 text-sm font-medium text-blue-700 hover:text-blue-800 bg-blue-50 border border-blue-100 hover:bg-blue-100 hover:border-blue-200 px-5 py-3 rounded-xl transition-all group"
+                    className="inline-flex items-center gap-2.5 text-sm font-medium text-blue-700 hover:text-blue-800 bg-blue-50 border border-blue-100 hover:bg-blue-100 hover:border-blue-200 px-5 py-3 rounded-xl transition-all group w-full sm:w-auto justify-center"
                   >
                     <FileText className="w-4 h-4 group-hover:scale-110 transition-transform" />
                     View Attached Document
@@ -267,8 +282,8 @@ export default function JournalEntryDetailModal({
               {/* Notes */}
               <section className="space-y-3">
                 <h4 className="text-base font-bold text-gray-900 flex items-center gap-2.5">
-                  <div className="p-1.5 bg-gray-100 rounded-lg">
-                    <FileText className="w-4 h-4 text-gray-700" />
+                  <div className="p-2 bg-gray-100/50 rounded-lg">
+                    <FileText className="w-5 h-5 text-gray-700" />
                   </div>
                   Notes / Description
                 </h4>
@@ -280,16 +295,18 @@ export default function JournalEntryDetailModal({
           )}
         </div>
 
-        <div className="p-8 bg-gray-50/80 border-t border-gray-100 flex justify-end backdrop-blur-sm">
+        {/* Footer */}
+        <div className="flex-none p-6 sm:p-8 bg-gray-50 border-t border-gray-100 flex justify-end rounded-b-2xl">
           <Button
             onClick={onClose}
             variant="outline"
-            className="font-bold border-gray-200 hover:bg-white hover:text-black"
+            size="lg"
+            className="font-bold border-gray-200 hover:bg-white hover:text-black min-w-[120px]"
           >
-            Close Details
+            Close
           </Button>
         </div>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 }
