@@ -32,6 +32,8 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "react-hot-toast";
 import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
+import JournalEntryDetailModal from "@/components/journals/JournalEntryDetailModal";
+import { JournalEntry } from "@/services/journalentries";
 
 export default function JournalsDetailPage() {
   const { reference, journal_reference } = useParams();
@@ -45,6 +47,7 @@ export default function JournalsDetailPage() {
   } = useFetchJournal(journal_reference as string);
   const [openAddEntry, setOpenAddEntry] = useState(false);
   const [openUpdateJournal, setOpenUpdateJournal] = useState(false);
+  const [selectedEntry, setSelectedEntry] = useState<JournalEntry | null>(null);
   const [isPosting, setIsPosting] = useState(false);
 
   // Calculate totals
@@ -325,10 +328,11 @@ export default function JournalsDetailPage() {
                 {journal.journal_entries.map((entry) => (
                   <tr
                     key={entry.reference}
-                    className="hover:bg-gray-50/50 transition-colors"
+                    className="hover:bg-gray-50/50 transition-colors cursor-pointer group"
+                    onClick={() => setSelectedEntry(entry)}
                   >
                     <td className="py-3 px-4">
-                      <div className="text-sm font-medium text-gray-900">{entry.book}</div>
+                      <div className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">{entry.book}</div>
                     </td>
                     <td className="py-3 px-4">
                       <div className="text-sm font-medium text-gray-900">
@@ -393,6 +397,13 @@ export default function JournalsDetailPage() {
           />
         </div>
       )}
+
+      {/* Detail Modal */}
+      <JournalEntryDetailModal
+        entry={selectedEntry}
+        open={!!selectedEntry}
+        onClose={() => setSelectedEntry(null)}
+      />
     </div>
   );
 }

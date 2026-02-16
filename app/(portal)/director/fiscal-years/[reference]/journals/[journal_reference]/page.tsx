@@ -31,6 +31,8 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Card, CardContent } from "@/components/ui/card";
 import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
+import JournalEntryDetailModal from "@/components/journals/JournalEntryDetailModal";
+import { JournalEntry } from "@/services/journalentries";
 
 export default function JournalsDetailPage() {
   const { reference, journal_reference } = useParams();
@@ -41,6 +43,7 @@ export default function JournalsDetailPage() {
   );
   const [openAddEntry, setOpenAddEntry] = useState(false);
   const [openUpdateJournal, setOpenUpdateJournal] = useState(false);
+  const [selectedEntry, setSelectedEntry] = useState<JournalEntry | null>(null);
 
   // Calculate totals
   const totalDebit =
@@ -113,10 +116,11 @@ export default function JournalsDetailPage() {
               <ArrowLeft className="w-4 h-4" />
             </Button>
             <Badge
-              className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${journal.is_posted
-                ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
-                : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
-                }`}
+              className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${
+                journal.is_posted
+                  ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
+                  : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
+              }`}
             >
               {journal.is_posted ? (
                 <div className="flex items-center gap-2">
@@ -180,10 +184,11 @@ export default function JournalsDetailPage() {
           </CardContent>
         </Card>
         <Card
-          className={`border-black/5 backdrop-blur-xl rounded-2xl shadow-sm transition-colors ${isBalanced
-            ? "bg-[#D0402B]/5 border-[#D0402B]/20"
-            : "bg-red-500/5 border-red-500/20"
-            }`}
+          className={`border-black/5 backdrop-blur-xl rounded-2xl shadow-sm transition-colors ${
+            isBalanced
+              ? "bg-[#D0402B]/5 border-[#D0402B]/20"
+              : "bg-red-500/5 border-red-500/20"
+          }`}
         >
           <CardContent className="p-6">
             <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
@@ -191,8 +196,9 @@ export default function JournalsDetailPage() {
             </p>
             <div className="flex items-center gap-3">
               <p
-                className={`text-xl font-bold tracking-tight ${isBalanced ? "text-[#045138]" : "text-red-600"
-                  }`}
+                className={`text-xl font-bold tracking-tight ${
+                  isBalanced ? "text-[#045138]" : "text-red-600"
+                }`}
               >
                 {isBalanced ? "Balanced" : "Unbalanced"}
               </p>
@@ -247,10 +253,13 @@ export default function JournalsDetailPage() {
                 {journal.journal_entries.map((entry) => (
                   <tr
                     key={entry.reference}
-                    className="hover:bg-white/50 transition-colors"
+                    className="hover:bg-white/50 transition-colors cursor-pointer group"
+                    onClick={() => setSelectedEntry(entry)}
                   >
                     <td className="py-2.5 px-4 border-b border-black/5">
-                      <div className="font-bold text-black">{entry.book}</div>
+                      <div className="font-bold text-black group-hover:text-[#D0402B] transition-colors">
+                        {entry.book}
+                      </div>
                       <div className="text-[10px] uppercase text-black/40 tracking-wider">
                         {entry.code}
                       </div>
@@ -276,17 +285,17 @@ export default function JournalsDetailPage() {
                     <td className="py-2.5 px-4 border-b border-black/5 text-right font-mono text-black/80">
                       {parseFloat(entry.debit) > 0
                         ? new Intl.NumberFormat("en-KE", {
-                          style: "decimal",
-                          minimumFractionDigits: 2,
-                        }).format(parseFloat(entry.debit))
+                            style: "decimal",
+                            minimumFractionDigits: 2,
+                          }).format(parseFloat(entry.debit))
                         : "—"}
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5 text-right font-mono text-black/80">
                       {parseFloat(entry.credit) > 0
                         ? new Intl.NumberFormat("en-KE", {
-                          style: "decimal",
-                          minimumFractionDigits: 2,
-                        }).format(parseFloat(entry.credit))
+                            style: "decimal",
+                            minimumFractionDigits: 2,
+                          }).format(parseFloat(entry.credit))
                         : "—"}
                     </td>
                   </tr>
@@ -314,6 +323,13 @@ export default function JournalsDetailPage() {
           />
         </div>
       )}
+
+      {/* Detail Modal */}
+      <JournalEntryDetailModal
+        entry={selectedEntry}
+        open={!!selectedEntry}
+        onClose={() => setSelectedEntry(null)}
+      />
     </div>
   );
 }
