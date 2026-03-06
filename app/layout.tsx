@@ -7,6 +7,9 @@ import TanstackQueryProvider from "@/providers/TanstackQueryProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "react-hot-toast";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -25,13 +28,13 @@ export default function RootLayout({
           content="SACCO platforms, cloud, cybersecurity, IoT, AI, web & mobile development — full-stack technology partner based in Mombasa, Kenya."
         />
       </head>
-      <body className="min-h-screen selection:bg-corporate-primary selection:text-white antialiased">
+      <body className={`${inter.className} min-h-screen bg-slate-50 text-slate-900 selection:bg-corporate-primary selection:text-white antialiased`}>
         <Toaster position="top-center" />
         <NextAuthProvider>
           <TanstackQueryProvider>
-           
+
             <main className="relative">{children}</main>
-            
+
           </TanstackQueryProvider>
         </NextAuthProvider>
         <Analytics />

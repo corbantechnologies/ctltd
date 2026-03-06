@@ -6,7 +6,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-corporate-secondary border-t border-slate-200 pt-24 pb-12 overflow-hidden relative">
+    <footer className="bg-white border-t border-slate-200 pt-20 pb-10 overflow-hidden relative">
       {/* Decorative background element */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-corporate-primary to-transparent opacity-30"></div>
 
@@ -25,21 +25,21 @@ export default function Footer() {
               className="h-9 w-auto object-contain"
             />
           </Link>
-          <p className="text-black text-sm leading-relaxed max-w-xs font-bold">
+          <p className="text-slate-500 text-sm leading-relaxed max-w-xs">
             Designing and deploying world-class digital infrastructure that
             powers the future of finance and enterprise in East Africa.
           </p>
           <div className="flex items-center gap-4">
             <a
               href="https://x.com/corbantechltd"
-              className="p-2.5 rounded-full bg-white border border-slate-200 text-black hover:bg-corporate-primary hover:text-white hover:border-corporate-primary transition-all shadow-md"
+              className="p-2.5 rounded-full bg-slate-50 border border-slate-200 text-slate-600 hover:bg-corporate-primary hover:text-white transition-colors"
             >
               <Twitter className="w-4 h-4" />
             </a>
 
             <a
               href="https://github.com/corbantechnologies"
-              className="p-2.5 rounded-full bg-white border border-slate-200 text-black hover:bg-corporate-primary hover:text-white hover:border-corporate-primary transition-all shadow-md"
+              className="p-2.5 rounded-full bg-slate-50 border border-slate-200 text-slate-600 hover:bg-corporate-primary hover:text-white transition-colors"
             >
               <Github className="w-4 h-4" />
             </a>
@@ -48,16 +48,16 @@ export default function Footer() {
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-black font-bold mb-6 tracking-widest uppercase text-xs">
+          <h4 className="text-slate-900 font-semibold mb-5">
             Company
           </h4>
-          <ul className="space-y-4">
+          <ul className="space-y-3">
             {["Products", "Offers", "Services", "Contact", "About"].map(
               (item) => (
                 <li key={item}>
                   <Link
                     href={`/${item.toLowerCase().replace(" ", "-")}`}
-                    className="text-black hover:text-corporate-primary text-sm font-bold transition-colors"
+                    className="text-slate-500 hover:text-corporate-primary text-sm transition-colors"
                   >
                     {item}
                   </Link>
@@ -69,10 +69,10 @@ export default function Footer() {
 
         {/* Solutions */}
         <div>
-          <h4 className="text-black font-bold mb-6 tracking-widest uppercase text-xs">
+          <h4 className="text-slate-900 font-semibold mb-5">
             Solutions
           </h4>
-          <ul className="space-y-4">
+          <ul className="space-y-3">
             {[
               { name: "SACCO Platform", href: "/products/sacco-platform" },
               { name: "Web & Mobile Dev", href: "/services" },
@@ -82,7 +82,7 @@ export default function Footer() {
               <li key={item.name}>
                 <a
                   href={item.href}
-                  className="text-black hover:text-corporate-primary text-sm font-bold transition-colors"
+                  className="text-slate-500 hover:text-corporate-primary text-sm transition-colors"
                 >
                   {item.name}
                 </a>
@@ -92,50 +92,50 @@ export default function Footer() {
         </div>
 
         {/* Contact Info */}
-        <div className="space-y-6">
-          <h4 className="text-black font-bold mb-6 tracking-widest uppercase text-xs">
+        <div className="space-y-5">
+          <h4 className="text-slate-900 font-semibold mb-5">
             Office
           </h4>
           <div className="space-y-4">
-            <div className="flex items-start gap-4 text-black group">
+            <div className="flex items-start gap-4 text-slate-500 group">
               <MapPin className="w-5 h-5 text-corporate-primary shrink-0 group-hover:scale-110 transition-transform" />
               <div className="text-sm">
-                <p className="font-extrabold text-black">
+                <p className="font-medium text-slate-900">
                   Corban Innovation Hub
                 </p>
-                <p className="font-bold">Mombasa, Kenya</p>
-                <p className="text-xs font-bold opacity-60 uppercase">
+                <p>Mombasa, Kenya</p>
+                <p className="text-xs text-slate-400 mt-1">
                   P.O. Box 10541-80101
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-4 text-black group">
+            <div className="flex items-center gap-4 text-slate-500 group">
               <Mail className="w-5 h-5 text-corporate-primary shrink-0 group-hover:scale-110 transition-transform" />
-              <p className="text-sm font-bold">info@corbantechnologies.org</p>
+              <p className="text-sm">info@corbantechnologies.org</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="mx-auto px-6 mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-6 text-black">
-        <p className="text-xs font-bold">
+      <div className="mx-auto px-6 mt-16 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500">
+        <p className="text-sm">
           © {currentYear} Corban Technologies LTD. All rights reserved.
         </p>
         <div className="flex items-center gap-8">
           <a
             href="/privacy"
-            className="hover:text-corporate-primary text-xs font-bold transition-colors"
+            className="hover:text-corporate-primary text-sm transition-colors"
           >
             Privacy Policy
           </a>
           <a
             href="/terms"
-            className="hover:text-corporate-primary text-xs font-bold transition-colors"
+            className="hover:text-corporate-primary text-sm transition-colors"
           >
             Terms of Service
           </a>
         </div>
       </div>
-    </footer>
+    </footer >
   );
 }

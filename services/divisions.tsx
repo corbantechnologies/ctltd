@@ -17,6 +17,26 @@ interface Division {
   partners: Partner[]
 }
 
+export interface DivisionPublic {
+  name: string;
+  is_active: boolean;
+  reference: string;
+  description: string; // uses markdown format
+  website: string;
+  email: string;
+  phone: string;
+  address: string;
+  logo: string;
+  director: string;
+  director_details: {
+    member_code: string;
+    full_name: string;
+    email: string;
+  };
+  services: string; // uses markdown format
+  projects: string; // uses markdown format
+}
+
 
 interface createDivision {
   name: string; //errors expected if the name is not unique
@@ -92,6 +112,23 @@ export const reactivateDivision = async (
   const response: AxiosResponse<Division> = await apiActions.patch(
     `/api/v1/divisions/${reference}/reactivate/`,
     headers
+  );
+  return response.data;
+};
+
+// Public Endpoints
+
+export const getPublicDivisions = async (): Promise<DivisionPublic[]> => {
+  const response: AxiosResponse<PaginatedResponse<DivisionPublic>> =
+    await apiActions.get(`/api/v1/divisions/list/public/`);
+  return response.data.results || [];
+};
+
+export const getPublicDivision = async (
+  reference: string
+): Promise<DivisionPublic> => {
+  const response: AxiosResponse<DivisionPublic> = await apiActions.get(
+    `/api/v1/divisions/detail/public/${reference}/`
   );
   return response.data;
 };

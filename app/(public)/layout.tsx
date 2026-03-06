@@ -12,9 +12,9 @@ export default function PublicLayout({
   return (
     <>
       <Navbar />
-      <div className="container mx-auto px-4">
+      <main className="w-full min-h-screen">
         {children}
-      </div>
+      </main>
       <Footer />
       <WhatsAppButton />
     </>
