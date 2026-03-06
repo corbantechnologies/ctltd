@@ -53,6 +53,9 @@ export default function Navbar() {
                 {item.name}
               </Link>
             ))}
+          </div>
+
+          <div className="hidden lg:flex items-center">
             <Link
               href="/contact"
               className="bg-corporate-primary hover:bg-orange-600 text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm flex items-center gap-2"

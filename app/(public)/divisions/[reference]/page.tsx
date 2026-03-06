@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Building2, Globe, Mail, Phone, UserCheck, ArrowLeft, ExternalLink, Briefcase, Zap, Target } from "lucide-react";
+import * as Tabs from "@radix-ui/react-tabs";
 import Link from "next/link";
 
 export default function DivisionPage() {
@@ -106,58 +107,90 @@ export default function DivisionPage() {
                     {/* Left Column: Heavy Content (Markdown) */}
                     <div className="lg:col-span-8 space-y-24">
 
-                        {/* About Section */}
-                        {division.description && (
-                            <section className="scroll-mt-32">
-                                <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center border border-orange-100 shadow-sm shrink-0">
-                                        <Target className="w-6 h-6 text-corporate-primary" />
-                                    </div>
-                                    <h2 className="text-3xl font-bold text-slate-900 tracking-tight">
+                        <Tabs.Root defaultValue="overview" className="flex flex-col w-full">
+                            {/* Tab Navigation */}
+                            <Tabs.List className="flex flex-wrap gap-2 mb-10 border-b border-slate-200 pb-4">
+                                {division.description && (
+                                    <Tabs.Trigger
+                                        value="overview"
+                                        className="px-6 py-3 rounded-full text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-corporate-primary"
+                                    >
                                         Strategic Overview
-                                    </h2>
-                                </div>
-                                <div className="prose prose-lg prose-slate prose-orange max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:font-semibold prose-a:text-corporate-primary hover:prose-a:text-orange-600 prose-p:leading-relaxed prose-img:rounded-3xl prose-img:shadow-lg prose-strong:text-slate-900 border-l-4 border-slate-200 pl-8 ml-6">
-                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.description}</ReactMarkdown>
-                                </div>
-                            </section>
-                        )}
+                                    </Tabs.Trigger>
+                                )}
+                                {division.services && (
+                                    <Tabs.Trigger
+                                        value="services"
+                                        className="px-6 py-3 rounded-full text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-corporate-primary"
+                                    >
+                                        Core Services
+                                    </Tabs.Trigger>
+                                )}
+                                {division.projects && (
+                                    <Tabs.Trigger
+                                        value="projects"
+                                        className="px-6 py-3 rounded-full text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-corporate-primary"
+                                    >
+                                        Key Initiatives
+                                    </Tabs.Trigger>
+                                )}
+                            </Tabs.List>
 
-                        {/* Services Section */}
-                        {division.services && (
-                            <section className="scroll-mt-32">
-                                <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center border border-blue-100 shadow-sm shrink-0">
-                                        <Zap className="w-6 h-6 text-blue-600" />
-                                    </div>
-                                    <h2 className="text-3xl font-bold text-slate-900 tracking-tight">
-                                        Core Services & Solutions
-                                    </h2>
-                                </div>
-                                <div className="bg-slate-50 border border-slate-200 p-8 md:p-12 rounded-[2rem]">
-                                    <div className="prose prose-lg prose-slate prose-orange max-w-none prose-ul:space-y-4 prose-li:marker:text-corporate-primary prose-li:marker:font-bold prose-li:pl-2">
-                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.services}</ReactMarkdown>
-                                    </div>
-                                </div>
-                            </section>
-                        )}
+                            {/* Tab Panels */}
 
-                        {/* Projects Section */}
-                        {division.projects && (
-                            <section className="scroll-mt-32">
-                                <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center border border-emerald-100 shadow-sm shrink-0">
-                                        <Briefcase className="w-6 h-6 text-emerald-600" />
+                            {/* About Section */}
+                            {division.description && (
+                                <Tabs.Content value="overview" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
+                                    <div className="flex items-center gap-4 mb-8">
+                                        <div className="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center border border-orange-100 shadow-sm shrink-0">
+                                            <Target className="w-6 h-6 text-corporate-primary" />
+                                        </div>
+                                        <h2 className="text-3xl font-bold text-slate-900 tracking-tight">
+                                            Strategic Overview
+                                        </h2>
                                     </div>
-                                    <h2 className="text-3xl font-bold text-slate-900 tracking-tight">
-                                        Key Initiatives & Impact
-                                    </h2>
-                                </div>
-                                <div className="prose prose-lg prose-slate prose-emerald max-w-none prose-headings:font-bold prose-headings:text-slate-800 prose-blockquote:border-l-corporate-primary prose-blockquote:bg-slate-50 prose-blockquote:p-6 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-blockquote:text-slate-700">
-                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.projects}</ReactMarkdown>
-                                </div>
-                            </section>
-                        )}
+                                    <div className="prose prose-lg prose-slate prose-orange max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:font-semibold prose-a:text-corporate-primary hover:prose-a:text-orange-600 prose-p:leading-relaxed prose-img:rounded-3xl prose-img:shadow-lg prose-strong:text-slate-900 border-l-4 border-slate-200 pl-8 ml-6">
+                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.description}</ReactMarkdown>
+                                    </div>
+                                </Tabs.Content>
+                            )}
+
+                            {/* Services Section */}
+                            {division.services && (
+                                <Tabs.Content value="services" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
+                                    <div className="flex items-center gap-4 mb-8">
+                                        <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center border border-blue-100 shadow-sm shrink-0">
+                                            <Zap className="w-6 h-6 text-blue-600" />
+                                        </div>
+                                        <h2 className="text-3xl font-bold text-slate-900 tracking-tight">
+                                            Core Services & Solutions
+                                        </h2>
+                                    </div>
+                                    <div className="bg-slate-50 border border-slate-200 p-8 md:p-12 rounded-[2rem]">
+                                        <div className="prose prose-lg prose-slate prose-orange max-w-none prose-ul:space-y-4 prose-li:marker:text-corporate-primary prose-li:marker:font-bold prose-li:pl-2">
+                                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.services}</ReactMarkdown>
+                                        </div>
+                                    </div>
+                                </Tabs.Content>
+                            )}
+
+                            {/* Projects Section */}
+                            {division.projects && (
+                                <Tabs.Content value="projects" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
+                                    <div className="flex items-center gap-4 mb-8">
+                                        <div className="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center border border-emerald-100 shadow-sm shrink-0">
+                                            <Briefcase className="w-6 h-6 text-emerald-600" />
+                                        </div>
+                                        <h2 className="text-3xl font-bold text-slate-900 tracking-tight">
+                                            Key Initiatives & Impact
+                                        </h2>
+                                    </div>
+                                    <div className="prose prose-lg prose-slate prose-emerald max-w-none prose-headings:font-bold prose-headings:text-slate-800 prose-blockquote:border-l-corporate-primary prose-blockquote:bg-slate-50 prose-blockquote:p-6 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-blockquote:text-slate-700">
+                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.projects}</ReactMarkdown>
+                                    </div>
+                                </Tabs.Content>
+                            )}
+                        </Tabs.Root>
                     </div>
 
                     {/* Right Column: Sticky Sidebar */}

@@ -55,16 +55,16 @@ export default function Contact() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Contact Hero */}
-      <section className="relative pt-10 pb-24 overflow-hidden border-b border-slate-200 bg-white">
-        <div className="absolute inset-0 bg-grid-slate-100 pointer-events-none opacity-40" />
-        <div className="mx-auto px-6 relative z-10 text-center lg:text-left max-w-6xl">
-          <span className="mb-4 inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-corporate-primary border border-slate-200 shadow-sm">
+      <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 overflow-hidden border-b border-slate-200 bg-white">
+        <div className="absolute inset-0 bg-grid-slate-100 pointer-events-none opacity-40 mx-auto max-w-7xl" />
+        <div className="container mx-auto px-6 relative z-10 text-center lg:text-left max-w-6xl flex flex-col items-center lg:items-start">
+          <span className="mb-6 inline-flex items-center rounded-full bg-slate-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-corporate-primary border border-slate-200 shadow-sm">
             Contact Us
           </span>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-8 leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-8 leading-[1.1]">
             Let&apos;s <span className="text-corporate-primary">Connect.</span>
           </h1>
-          <p className="text-slate-500 text-lg md:text-xl max-w-2xl leading-relaxed">
+          <p className="text-slate-500 text-lg md:text-xl max-w-2xl leading-relaxed text-center lg:text-left">
             Have a project in mind or need technical consultation? Our experts
             are ready to help you scale.
           </p>
