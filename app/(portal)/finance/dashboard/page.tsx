@@ -320,7 +320,7 @@ export default function FinanceDashboard() {
         </Tabs.Content>
 
         <Tabs.Content value="reports" className="focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <div className="bg-white p-1 rounded-[3rem] border border-slate-200 shadow-2xl shadow-slate-100 overflow-hidden">
+          <div>
             <ReportsDashboard />
           </div>
         </Tabs.Content>
