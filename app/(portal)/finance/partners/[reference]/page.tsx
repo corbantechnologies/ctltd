@@ -5,8 +5,6 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import UpdatePartner from "@/forms/partners/UpdatePartner";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   ArrowLeft,
   Building2,
@@ -22,15 +20,6 @@ import {
   ShieldCheck,
   Wallet,
 } from "lucide-react";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function PartnerDetailPage() {
   const { reference } = useParams();
@@ -49,44 +38,40 @@ export default function PartnerDetailPage() {
   return (
     <div className="space-y-8 pb-12">
       {/* Breadcrumbs */}
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/finance/dashboard">Dashboard</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/finance/partners">
-              Partners Hub
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>{partner.name}</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <nav>
+        <ol className="flex items-center gap-2 text-sm text-black/60">
+          <li>
+            <a href="/finance/dashboard" className="hover:text-black hover:underline">Dashboard</a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <a href="/finance/partners" className="hover:text-black hover:underline">Partners Hub</a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <span className="font-bold text-black">{partner.name}</span>
+          </li>
+        </ol>
+      </nav>
 
       {/* Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start gap-6">
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <Button
-              variant="outline"
-              size="icon"
+            <button
               onClick={() => router.back()}
-              className="w-10 h-10 rounded-full border-black/5 bg-white shadow-sm hover:bg-black/5"
+              className="flex items-center justify-center w-10 h-10 rounded-full border border-black/5 bg-white shadow-sm hover:bg-black/5 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
-            </Button>
-            <Badge
+            </button>
+            <span
               className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${partner.is_active
                 ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
                 : "bg-red-500/10 text-red-600 shadow-sm shadow-red-500/10"
                 }`}
             >
               {partner.is_active ? "Active Partner" : "Inactive Partner"}
-            </Badge>
+            </span>
           </div>
           <div>
             <h1 className="text-xl font-bold text-black tracking-tighter mb-2">
@@ -105,19 +90,19 @@ export default function PartnerDetailPage() {
           </div>
         </div>
 
-        <Button
+        <button
           onClick={() => setOpenUpdatePartner(true)}
-          className="h-12 bg-white hover:bg-black/5 text-black border border-black/5 rounded-xl font-bold text-xs uppercase tracking-widest shadow-sm flex items-center gap-2 transition-all"
+          className="flex items-center justify-center gap-2 h-12 px-4 bg-white hover:bg-black/5 text-black border border-black/5 rounded-xl font-bold text-xs uppercase tracking-widest shadow-sm transition-colors"
         >
           <Edit2 className="w-4 h-4" />
           Edit Profile
-        </Button>
+        </button>
       </div>
 
       {/* Info Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <Calendar className="w-5 h-5" />
@@ -133,11 +118,11 @@ export default function PartnerDetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <Hash className="w-5 h-5" />
@@ -151,11 +136,11 @@ export default function PartnerDetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <Building2 className="w-5 h-5" />
@@ -169,11 +154,11 @@ export default function PartnerDetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <Phone className="w-5 h-5" />
@@ -187,13 +172,13 @@ export default function PartnerDetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       {/* Transaction History (Journal Entries) */}
-      <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl shadow-black/5 pb-24">
-        <CardHeader className="p-8 border-b border-black/5 flex flex-row items-center justify-between">
+      <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl shadow-black/5 pb-24">
+        <div className="p-8 border-b border-black/5 flex flex-row items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-600">
               <History className="w-5 h-5" />
@@ -205,16 +190,16 @@ export default function PartnerDetailPage() {
           <span className="bg-black/5 px-3 py-1 rounded-full text-xs font-bold text-black/60">
             {partner.journal_entries?.length || 0} Records
           </span>
-        </CardHeader>
-        <CardContent className="p-0">
+        </div>
+        <div className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="bg-black/5 border-b border-black/5 text-left">
                   <th className="py-2 px-4">
-                    <Badge className="bg-black/5 text-black border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-lg">
+                    <span className="bg-black/5 text-black border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-lg inline-block">
                       Book & Date
-                    </Badge>
+                    </span>
                   </th>
                   <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-right">
                     Debit
@@ -267,8 +252,8 @@ export default function PartnerDetailPage() {
               </tbody>
             </table>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Manual Modal Implementation for Update Partner */}
       {openUpdatePartner && (

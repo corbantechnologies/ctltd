@@ -3,7 +3,6 @@
 import COAList from "@/components/coa/COAList";
 import CreateCOA from "@/forms/coa/CreateCOA";
 import { Database, Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 export default function FinanceCOAPage() {
@@ -31,13 +30,13 @@ export default function FinanceCOAPage() {
           </p>
         </div>
 
-        <Button
+        <button
           onClick={() => setOpen(true)}
-          className="h-9 px-4 bg-black hover:bg-[#045138] text-white rounded-xl font-bold text-xs transition-all shadow-md active:scale-95 group"
+          className="flex items-center justify-center h-9 px-4 bg-black hover:bg-[#045138] text-white rounded-xl font-bold text-xs transition-all shadow-md active:scale-95 group"
         >
           <Plus className="w-3.5 h-3.5 mr-1.5 group-hover:rotate-90 transition-transform" />
           Register New Account
-        </Button>
+        </button>
       </div>
 
       <div className="pt-4 border-t border-black/5">

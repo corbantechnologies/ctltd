@@ -20,9 +20,7 @@ import Link from "next/link";
 import CreateBook from "@/forms/books/CreateBook";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+
 
 export default function FinanceCOADetailPage() {
   const { reference } = useParams();
@@ -64,9 +62,9 @@ export default function FinanceCOADetailPage() {
                 {coa.name}
               </h1>
               <div className="flex items-center gap-3 mt-2">
-                <Badge className="bg-black text-white border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-lg">
+                <span className="bg-black text-white border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-lg">
                   CODE: {coa.code}
-                </Badge>
+                </span>
                 {coa.is_active ? (
                   <div className="flex items-center gap-1.5 text-green-600 bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
@@ -88,28 +86,28 @@ export default function FinanceCOADetailPage() {
         </div>
 
         <div className="flex items-center gap-3">
-          <Button
+          <button
             onClick={() => setOpenCreateBook(true)}
-            className="h-14 px-6 bg-white border border-black/5 hover:bg-black/5 text-black rounded-2xl font-bold text-sm transition-all shadow-sm active:scale-95 group"
+            className="flex items-center justify-center h-14 px-6 bg-white border border-black/5 hover:bg-black/5 text-black rounded-2xl font-bold text-sm transition-all shadow-sm active:scale-95 group"
           >
             <BookPlus className="w-5 h-5 mr-2 group-hover:text-[#045138] transition-colors" />
             Add Ledger Book
-          </Button>
+          </button>
 
-          <Button
+          <button
             onClick={() => setOpen(true)}
-            className="h-14 px-8 bg-black hover:bg-[#045138] text-white rounded-2xl font-bold text-sm transition-all shadow-xl active:scale-95 group"
+            className="flex items-center justify-center h-14 px-8 bg-black hover:bg-[#045138] text-white rounded-2xl font-bold text-sm transition-all shadow-xl active:scale-95 group"
           >
             <Edit3 className="w-5 h-5 mr-2" />
             Update Account
-          </Button>
+          </button>
         </div>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <Calendar className="w-5 h-5" />
@@ -123,11 +121,11 @@ export default function FinanceCOADetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <Hash className="w-5 h-5" />
@@ -141,11 +139,11 @@ export default function FinanceCOADetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <ArrowUpDown className="w-5 h-5" />
@@ -159,11 +157,11 @@ export default function FinanceCOADetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-600">
                 <Wallet className="w-5 h-5" />
@@ -180,8 +178,8 @@ export default function FinanceCOADetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       {/* Associated Books Section */}

@@ -4,17 +4,11 @@
 import { createBook } from "@/services/books";
 import { useFormik } from "formik";
 import { BookSchema } from "@/validation";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+
+
+
+
+
 import { toast } from "react-hot-toast";
 import { Loader2, BookOpen, Plus, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
@@ -90,10 +84,10 @@ export default function CreateBook({
   });
 
   return (
-    <Card
+    <div
       className={`w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
     >
-      <CardHeader
+      <div
         className="p-8 border-b border-black/5"
         style={{ backgroundColor: `${primaryColor}0D` }}
       >
@@ -109,16 +103,16 @@ export default function CreateBook({
               <BookOpen className="w-6 h-6" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-black text-black tracking-tight">
+              <h2 className="text-2xl font-black text-black tracking-tight">
                 Create Account Book
-              </CardTitle>
-              <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+              </h2>
+              <p className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
                 General Ledger Infrastructure
-              </CardDescription>
+              </p>
             </div>
           </div>
           {onClose && (
-            <Button
+            <button
               type="button"
               onClick={onClose}
               variant="ghost"
@@ -126,21 +120,21 @@ export default function CreateBook({
               className="hover:bg-red-50 hover:text-red-500 rounded-full"
             >
               <X className="w-5 h-5" />
-            </Button>
+            </button>
           )}
         </div>
-      </CardHeader>
-      <CardContent className="p-8">
+      </div>
+      <div className="p-8">
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="code"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Book Code
-              </Label>
-              <Input
+              </label>
+              <input
                 id="code"
                 name="code"
                 type="text"
@@ -159,13 +153,13 @@ export default function CreateBook({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="name"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Book Name
-              </Label>
-              <Input
+              </label>
+              <input
                 id="name"
                 name="name"
                 type="text"
@@ -185,12 +179,12 @@ export default function CreateBook({
           </div>
 
           <div className="space-y-2">
-            <Label
+            <label
               htmlFor="account_type"
               className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
             >
               Account Type (COA)
-            </Label>
+            </label>
             <select
               id="account_type"
               name="account_type"
@@ -304,13 +298,13 @@ export default function CreateBook({
           </div>
 
           <div className="space-y-2">
-            <Label
+            <label
               htmlFor="description"
               className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
             >
               Description
-            </Label>
-            <Textarea
+            </label>
+            <textarea
               id="description"
               name="description"
               placeholder="Provide a brief description of this book..."
@@ -323,7 +317,7 @@ export default function CreateBook({
           </div>
 
           <div className="pt-4">
-            <Button
+            <button
               type="submit"
               disabled={formik.isSubmitting}
               className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
@@ -340,10 +334,10 @@ export default function CreateBook({
                   Initialize Account Book
                 </div>
               )}
-            </Button>
+            </button>
           </div>
         </form>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

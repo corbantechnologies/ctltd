@@ -1,7 +1,5 @@
 import { formatCurrency, formatNumber } from "@/tools/format";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./Card";
-import { Separator } from "@/components/ui/separator";
-
 interface BalanceCheckData {
     assets: SectionData;
     liabilities: SectionData;
@@ -63,18 +61,18 @@ export function BalanceSheetReport({ data }: { data: BalanceCheckData }) {
             </CardHeader>
             <CardContent>
                 <Section title="Assets" section={data.assets} />
-                <Separator className="my-6" />
+                <hr className="my-6 border-black/10" />
                 <Section title="Liabilities" section={data.liabilities} />
-                <Separator className="my-6" />
+                <hr className="my-6 border-black/10" />
                 <Section title="Equity" section={data.equity} />
                 {data.other && (data.other.debit !== 0 || data.other.credit !== 0) && (
                     <>
-                        <Separator className="my-6" />
+                        <hr className="my-6 border-black/10" />
                         <Section title="Other" section={data.other} />
                     </>
                 )}
 
-                <Separator className="my-8" />
+                <hr className="my-8 border-black/10" />
                 <div className="pt-2">
                     <div className="flex justify-between items-center mb-2">
                         <span className="text-sm font-medium">Total Assets</span>

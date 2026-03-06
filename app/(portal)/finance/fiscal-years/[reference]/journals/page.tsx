@@ -2,16 +2,7 @@
 
 import { useState } from "react";
 import CreateJournal from "@/forms/journals/CreateJournal";
-import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { useParams } from "next/navigation";
 import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
 import FiscalYearJournals from "@/components/financialyears/FiscalYearJournals";
@@ -24,29 +15,27 @@ export default function FinanceJournalsPage() {
   return (
     <div className="space-y-8 pb-12">
       {/* Breadcrumbs */}
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/finance/dashboard">Dashboard</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/finance/fiscal-years">
-              Fiscal Years
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href={`/finance/fiscal-years/${reference}`}>
+      <nav>
+        <ol className="flex items-center gap-2 text-sm text-black/60">
+          <li>
+            <a href="/finance/dashboard" className="hover:text-black hover:underline">Dashboard</a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <a href="/finance/fiscal-years" className="hover:text-black hover:underline">Fiscal Years</a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <a href={`/finance/fiscal-years/${reference}`} className="hover:text-black hover:underline">
               {fiscalYear?.code}
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Journals</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+            </a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <span className="font-bold text-black">Journals</span>
+          </li>
+        </ol>
+      </nav>
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
@@ -57,13 +46,13 @@ export default function FinanceJournalsPage() {
             Manage daily journal batches and financial entries
           </p>
         </div>
-        <Button
+        <button
           onClick={() => setOpenCreateJournal(true)}
-          className="h-12 px-6 bg-[#045138] hover:bg-black text-white rounded-2xl font-bold text-sm uppercase tracking-wider transition-all shadow-lg active:scale-95 flex items-center gap-2"
+          className="flex items-center justify-center h-12 px-6 bg-[#045138] hover:bg-black text-white rounded-2xl font-bold text-sm uppercase tracking-wider transition-all shadow-lg active:scale-95 gap-2"
         >
           <Plus className="w-4 h-4" />
           New Journal Batch
-        </Button>
+        </button>
       </div>
 
       <FiscalYearJournals

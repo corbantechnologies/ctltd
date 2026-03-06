@@ -19,10 +19,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useMemo } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import { Journal } from "@/services/journals";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 
@@ -106,9 +102,10 @@ export default function FiscalYearJournals({
           {/* Search */}
           <div className="relative flex-1 group">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 transition-colors" />
-            <Input
+            <input
+              type="text"
               placeholder="Search journals..."
-              className="pl-9 h-9 bg-gray-50 border-gray-200 rounded-lg transition-all font-medium text-xs shadow-sm focus:bg-white"
+              className="pl-9 h-9 w-full bg-gray-50 border border-gray-200 rounded-lg transition-all font-medium text-xs shadow-sm focus:outline-none focus:ring-1 focus:bg-white"
               style={{
                 ["--tw-ring-color" as any]: primaryColor,
               }}
@@ -162,27 +159,27 @@ export default function FiscalYearJournals({
             {/* Date Range Group */}
             <div className="flex items-center gap-1 bg-gray-50 p-1 rounded-lg border border-gray-200">
               <div className="relative">
-                <Input
+                <input
                   type="date"
                   value={startDate}
                   onChange={(e) => {
                     setStartDate(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="h-7 w-28 bg-white border-0 rounded text-[10px] px-2 shadow-sm focus:ring-0"
+                  className="h-7 w-28 bg-white border-0 rounded text-[10px] px-2 shadow-sm focus:outline-none focus:ring-1"
                   placeholder="Start"
                 />
               </div>
               <span className="text-gray-300">-</span>
               <div className="relative">
-                <Input
+                <input
                   type="date"
                   value={endDate}
                   onChange={(e) => {
                     setEndDate(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="h-7 w-28 bg-white border-0 rounded text-[10px] px-2 shadow-sm focus:ring-0"
+                  className="h-7 w-28 bg-white border-0 rounded text-[10px] px-2 shadow-sm focus:outline-none focus:ring-1"
                   placeholder="End"
                 />
               </div>
@@ -190,23 +187,19 @@ export default function FiscalYearJournals({
 
             {/* View Toggles */}
             <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-lg border border-gray-200 ml-auto lg:ml-0">
-              <Button
-                variant={view === "grid" ? "default" : "ghost"}
-                size="icon"
+              <button
                 onClick={() => setView("grid")}
-                className="w-7 h-7 rounded-md transition-all shadow-sm"
+                className="flex items-center justify-center w-7 h-7 rounded-md transition-all shadow-sm"
                 style={{
                   backgroundColor: view === "grid" ? primaryColor : "white",
                   color: view === "grid" ? "white" : "gray",
                 }}
               >
                 <LayoutGrid className="w-3.5 h-3.5" />
-              </Button>
-              <Button
-                variant={view === "table" ? "default" : "ghost"}
-                size="icon"
+              </button>
+              <button
                 onClick={() => setView("table")}
-                className="w-7 h-7 rounded-md transition-all shadow-sm"
+                className="flex items-center justify-center w-7 h-7 rounded-md transition-all shadow-sm"
                 style={{
                   backgroundColor:
                     view === "table" ? primaryColor : "white",
@@ -214,7 +207,7 @@ export default function FiscalYearJournals({
                 }}
               >
                 <List className="w-3.5 h-3.5" />
-              </Button>
+              </button>
             </div>
 
             {/* Clear Filters (Conditional) */}
@@ -223,15 +216,13 @@ export default function FiscalYearJournals({
               statusFilter !== "all" ||
               startDate ||
               endDate) && (
-                <Button
-                  variant="ghost"
+                <button
                   onClick={clearFilters}
-                  size="icon"
-                  className="h-9 w-9 rounded-lg hover:bg-red-50 hover:text-red-500 transition-colors"
+                  className="flex items-center justify-center h-9 w-9 bg-white border border-gray-200 rounded-lg hover:bg-red-50 hover:text-red-500 transition-colors"
                   title="Clear Filters"
                 >
                   <X className="w-4 h-4" />
-                </Button>
+                </button>
               )}
           </div>
         </div>
@@ -246,16 +237,11 @@ export default function FiscalYearJournals({
               href={`/${rolePrefix}/fiscal-years/${fiscalYearReference}/journals/${journal.reference}`}
               className="group block"
             >
-              <Card className="h-full border-gray-100 bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group-hover:bg-white">
-                <CardContent className="p-5">
+              <div className="h-full border border-gray-100 bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group-hover:bg-white">
+                <div className="p-5">
                   <div className="flex justify-between items-start mb-4">
                     <div
                       className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 shadow-sm bg-gray-50 text-gray-400 group-hover:text-white"
-                      style={
-                        {
-                          // We will use CSS variables or inline styles for hover bg
-                        }
-                      }
                     >
                       <FileText className="w-5 h-5" />
                       <style jsx>{`
@@ -265,14 +251,14 @@ export default function FiscalYearJournals({
                         }
                       `}</style>
                     </div>
-                    <Badge
-                      className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-none ${journal.is_posted
+                    <span
+                      className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-none inline-block ${journal.is_posted
                         ? "bg-green-50 text-green-600 shadow-sm shadow-green-100"
                         : "bg-orange-50 text-orange-600 shadow-sm shadow-orange-100"
                         }`}
                     >
                       {journal.is_posted ? "Posted" : "Pending"}
-                    </Badge>
+                    </span>
                   </div>
 
                   <div className="space-y-3">
@@ -309,8 +295,8 @@ export default function FiscalYearJournals({
                       </div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </Link>
           ))}
         </div>
@@ -360,12 +346,11 @@ export default function FiscalYearJournals({
                       </div>
                     </td>
                     <td className="py-3 px-4">
-                      <Badge
-                        variant="secondary"
-                        className="bg-gray-100 text-gray-600 text-xs font-medium px-2 py-0.5 rounded-md border-transparent"
+                      <span
+                        className="bg-gray-100 text-gray-600 text-xs font-medium px-2 py-0.5 rounded-md border-transparent inline-block"
                       >
                         {journal.journal_type}
-                      </Badge>
+                      </span>
                     </td>
                     <td className="py-3 px-4">
                       {journal.is_posted ? (
@@ -412,25 +397,21 @@ export default function FiscalYearJournals({
             journals
           </p>
           <div className="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 md:pb-0">
-            <Button
-              variant="outline"
-              size="sm"
+            <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="rounded-lg border-gray-100 bg-white transition-all hover:bg-gray-50 hover:text-black disabled:opacity-30 h-8 px-3 font-bold text-gray-500 text-[10px] uppercase tracking-wider"
+              className="flex items-center justify-center border border-gray-200 rounded-lg bg-white transition-all hover:bg-gray-50 hover:text-black disabled:opacity-30 h-8 px-3 font-bold text-gray-500 text-[10px] uppercase tracking-wider"
             >
               <ChevronLeft className="w-3.5 h-3.5 mr-1" /> Prev
-            </Button>
+            </button>
             <div className="flex gap-1">
               {[...Array(totalPages)].map((_, i) => (
-                <Button
+                <button
                   key={i + 1}
-                  variant={currentPage === i + 1 ? "default" : "outline"}
-                  size="sm"
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`w-8 h-8 rounded-lg transition-all font-bold text-xs ${currentPage === i + 1
-                    ? "text-white shadow-md"
-                    : "bg-white border-gray-100 hover:bg-gray-50 text-gray-400"
+                  className={`flex items-center justify-center w-8 h-8 rounded-lg transition-all font-bold text-xs border ${currentPage === i + 1
+                    ? "text-white border-transparent shadow-md"
+                    : "bg-white border-gray-200 hover:bg-gray-50 text-gray-400"
                     }`}
                   style={{
                     backgroundColor:
@@ -442,18 +423,16 @@ export default function FiscalYearJournals({
                   }}
                 >
                   {i + 1}
-                </Button>
+                </button>
               ))}
             </div>
-            <Button
-              variant="outline"
-              size="sm"
+            <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="rounded-lg border-gray-100 bg-white transition-all hover:bg-gray-50 hover:text-black disabled:opacity-30 h-8 px-3 font-bold text-gray-500 text-[10px] uppercase tracking-wider"
+              className="flex items-center justify-center border border-gray-200 rounded-lg bg-white transition-all hover:bg-gray-50 hover:text-black disabled:opacity-30 h-8 px-3 font-bold text-gray-500 text-[10px] uppercase tracking-wider"
             >
               Next <ChevronRight className="w-3.5 h-3.5 ml-1" />
-            </Button>
+            </button>
           </div>
         </div>
       )}

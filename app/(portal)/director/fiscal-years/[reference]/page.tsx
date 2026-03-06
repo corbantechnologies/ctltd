@@ -5,17 +5,7 @@ import FiscalYearJournals from "@/components/financialyears/FiscalYearJournals";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import { CalendarRange, Calendar, Activity } from "lucide-react";
 import { useParams } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 
 export default function FiscalYearDetail() {
   const { reference } = useParams();
@@ -36,25 +26,21 @@ export default function FiscalYearDetail() {
       {/* Breadcrumbs & Actions */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div className="space-y-4">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/director/dashboard">
-                  Dashboard
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/director/fiscal-years">
-                  Fiscal Years
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{fiscalYear.code}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          <nav>
+            <ol className="flex items-center gap-2 text-sm text-black/60">
+              <li>
+                <a href="/director/dashboard" className="hover:text-black hover:underline">Dashboard</a>
+              </li>
+              <li><span className="text-black/30">/</span></li>
+              <li>
+                <a href="/director/fiscal-years" className="hover:text-black hover:underline">Fiscal Years</a>
+              </li>
+              <li><span className="text-black/30">/</span></li>
+              <li>
+                <span className="font-bold text-black">{fiscalYear.code}</span>
+              </li>
+            </ol>
+          </nav>
 
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-2xl bg-[#045138] flex items-center justify-center text-white shadow-xl shadow-[#045138]/20">
@@ -65,9 +51,9 @@ export default function FiscalYearDetail() {
                 {fiscalYear.code}
               </h1>
               <div className="flex items-center gap-3 mt-2">
-                <Badge className="bg-black text-white border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-lg">
+                <span className="bg-black text-white border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-lg inline-block">
                   REF: {fiscalYear.reference}
-                </Badge>
+                </span>
                 {fiscalYear.is_active ? (
                   <div className="flex items-center gap-1.5 text-green-600 bg-green-50 px-3 py-1 rounded-full border border-green-100">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
@@ -91,8 +77,8 @@ export default function FiscalYearDetail() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <Calendar className="w-5 h-5" />
@@ -110,11 +96,11 @@ export default function FiscalYearDetail() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <Calendar className="w-5 h-5" />
@@ -132,11 +118,11 @@ export default function FiscalYearDetail() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div
                 className={`w-12 h-12 rounded-xl flex items-center justify-center ${fiscalYear.is_active
@@ -158,8 +144,8 @@ export default function FiscalYearDetail() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       {/* Associated Journals Section */}

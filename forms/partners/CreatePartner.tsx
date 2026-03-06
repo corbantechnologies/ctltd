@@ -4,16 +4,10 @@
 import { createPartner } from "@/services/partners";
 import { useFormik } from "formik";
 import { PartnerSchema } from "@/validation";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+
+
+
+
 import { toast } from "react-hot-toast";
 import { Loader2, UserPlus, ShieldCheck, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
@@ -78,10 +72,10 @@ export default function CreatePartner({
   });
 
   return (
-    <Card
+    <div
       className={`w-full border-black/5 shadow-2xl rounded-xl bg-white/80 backdrop-blur-xl ${className}`}
     >
-      <CardHeader
+      <div
         className="p-8 border-b border-black/5"
         style={{ backgroundColor: `${primaryColor}0D` }}
       >
@@ -97,16 +91,16 @@ export default function CreatePartner({
               <UserPlus className="w-6 h-6" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-bold text-black tracking-tight">
+              <h2 className="text-2xl font-bold text-black tracking-tight">
                 Register New Partner
-              </CardTitle>
-              <CardDescription className="text-black/50 font-medium text-sm mt-1">
+              </h2>
+              <p className="text-black/50 font-medium text-sm mt-1">
                 Ecosystem Relationship Hub
-              </CardDescription>
+              </p>
             </div>
           </div>
           {onClose && (
-            <Button
+            <button
               type="button"
               onClick={onClose}
               variant="ghost"
@@ -114,22 +108,22 @@ export default function CreatePartner({
               className="hover:bg-red-50 hover:text-red-500 rounded-full"
             >
               <X className="w-5 h-5" />
-            </Button>
+            </button>
           )}
         </div>
-      </CardHeader>
-      <CardContent className="p-8">
+      </div>
+      <div className="p-8">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
           {/* Basic Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="name"
                 className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Partner Name
-              </Label>
-              <Input
+              </label>
+              <input
                 id="name"
                 name="name"
                 placeholder="Full Entity Name"
@@ -149,13 +143,13 @@ export default function CreatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="email"
                 className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Email Address
-              </Label>
-              <Input
+              </label>
+              <input
                 id="email"
                 name="email"
                 type="email"
@@ -178,13 +172,13 @@ export default function CreatePartner({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="phone"
                 className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Phone Number
-              </Label>
-              <Input
+              </label>
+              <input
                 id="phone"
                 name="phone"
                 placeholder="+254..."
@@ -196,12 +190,12 @@ export default function CreatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="partner_type"
                 className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Partner Category
-              </Label>
+              </label>
               <select
                 id="partner_type"
                 name="partner_type"
@@ -229,12 +223,12 @@ export default function CreatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="division"
                 className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Assigned Division
-              </Label>
+              </label>
               <select
                 id="division"
                 name="division"
@@ -262,13 +256,13 @@ export default function CreatePartner({
           {/* Financial Settings */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="tax_pin"
                 className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Tax PIN (KRA)
-              </Label>
-              <Input
+              </label>
+              <input
                 id="tax_pin"
                 name="tax_pin"
                 placeholder="P0XXXXXXXX"
@@ -280,12 +274,12 @@ export default function CreatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="currency"
                 className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Preferred Currency
-              </Label>
+              </label>
               <select
                 id="currency"
                 name="currency"
@@ -302,13 +296,13 @@ export default function CreatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="wht_rate"
                 className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 WHT Rate (%)
-              </Label>
-              <Input
+              </label>
+              <input
                 id="wht_rate"
                 name="wht_rate"
                 type="number"
@@ -328,13 +322,13 @@ export default function CreatePartner({
           </div>
 
           <div className="space-y-2">
-            <Label
+            <label
               htmlFor="payment_terms"
               className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
             >
               Payment Terms / Notes
-            </Label>
-            <Input
+            </label>
+            <input
               id="payment_terms"
               name="payment_terms"
               placeholder="e.g. Net 30, Pay on Delivery"
@@ -362,16 +356,16 @@ export default function CreatePartner({
               onBlur={formik.handleBlur}
               checked={formik.values.is_active}
             />
-            <Label
+            <label
               htmlFor="is_active"
               className="text-sm font-bold text-black"
             >
               Set Partner as Active
-            </Label>
+            </label>
           </div>
 
           <div className="pt-4">
-            <Button
+            <button
               type="submit"
               disabled={formik.isSubmitting}
               className="w-full h-16 text-white rounded-md font-bold text-lg transition-all shadow-xl active:scale-[0.98] group"
@@ -388,10 +382,10 @@ export default function CreatePartner({
                   Finalize Registration
                 </div>
               )}
-            </Button>
+            </button>
           </div>
         </form>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

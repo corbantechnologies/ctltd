@@ -1,8 +1,5 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import {
   X,
   Calendar,
@@ -79,18 +76,16 @@ export default function JournalEntryDetailModal({
         <div className="flex-none p-5 sm:p-8 border-b border-gray-100 bg-white rounded-t-2xl z-10 flex justify-between items-start">
           <div className="space-y-1.5 sm:space-y-2 pr-4">
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-              <Badge
-                variant="outline"
-                className="bg-gray-50 text-gray-600 border-gray-200 px-2.5 py-0.5 text-[10px] sm:text-xs font-medium"
+              <span
+                className="bg-gray-50 text-gray-600 border border-gray-200 px-2.5 py-0.5 text-[10px] sm:text-xs font-medium rounded-full inline-block"
               >
                 {entry.code}
-              </Badge>
-              <Badge
-                variant="outline"
-                className="bg-blue-50 text-blue-600 border-blue-200 px-2.5 py-0.5 text-[10px] sm:text-xs font-medium"
+              </span>
+              <span
+                className="bg-blue-50 text-blue-600 border border-blue-200 px-2.5 py-0.5 text-[10px] sm:text-xs font-medium rounded-full inline-block"
               >
                 {entry.journal}
-              </Badge>
+              </span>
             </div>
             <h2 className="text-xl sm:text-3xl font-bold text-gray-900 tracking-tight leading-tight">
               Journal Entry Details
@@ -106,14 +101,12 @@ export default function JournalEntryDetailModal({
               </span>
             </div>
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
+          <button
             onClick={onClose}
-            className="rounded-full hover:bg-gray-100 -mr-2 -mt-2 w-8 h-8 sm:w-10 sm:h-10 text-gray-500 hover:text-gray-900 flex-shrink-0"
+            className="rounded-full hover:bg-gray-100 -mr-2 -mt-2 w-8 h-8 sm:w-10 sm:h-10 text-gray-500 hover:text-gray-900 flex-shrink-0 flex items-center justify-center transition-colors"
           >
             <X className="w-5 h-5 sm:w-6 sm:h-6" />
-          </Button>
+          </button>
         </div>
 
         {/* Scrollable Body */}
@@ -198,7 +191,7 @@ export default function JournalEntryDetailModal({
             )}
           </section>
 
-          <Separator className="bg-gray-100" />
+          <hr className="bg-gray-100 border-0 h-px" />
 
           {/* Entity & Classification */}
           <section className="space-y-4 sm:space-y-5">
@@ -297,14 +290,12 @@ export default function JournalEntryDetailModal({
 
         {/* Footer */}
         <div className="flex-none p-5 sm:p-8 bg-gray-50 border-t border-gray-100 flex justify-end rounded-b-2xl">
-          <Button
+          <button
             onClick={onClose}
-            variant="outline"
-            size="lg"
-            className="font-bold border-gray-200 hover:bg-white hover:text-black min-w-[100px] sm:min-w-[120px] h-10 sm:h-11 text-sm sm:text-base"
+            className="font-bold border border-gray-200 hover:bg-white hover:text-black min-w-[100px] sm:min-w-[120px] h-10 sm:h-11 text-sm sm:text-base rounded-md flex items-center justify-center transition-colors"
           >
             Close
-          </Button>
+          </button>
         </div>
       </div>
     </div>

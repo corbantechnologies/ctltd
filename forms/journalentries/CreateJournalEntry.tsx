@@ -3,17 +3,11 @@
 
 import { createJournalEntry } from "@/services/journalentries";
 import { useFormik } from "formik";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+
+
+
+
+
 import { toast } from "react-hot-toast";
 import { Loader2, Receipt, Plus, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
@@ -138,10 +132,10 @@ export default function CreateJournalEntry({
   });
 
   return (
-    <Card
+    <div
       className={`w-full border-black shadow-2xl rounded-[32px] overflow-hidden bg-gray-50 backdrop-blur-xl ${className}`}
     >
-      <CardHeader
+      <div
         className="p-8 border-b border-black"
         style={{ backgroundColor: `${primaryColor}0D` }}
       >
@@ -157,16 +151,16 @@ export default function CreateJournalEntry({
               <Receipt className="w-6 h-6" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-black text-black tracking-tight">
+              <h2 className="text-2xl font-black text-black tracking-tight">
                 New Transaction Entry
-              </CardTitle>
-              <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+              </h2>
+              <p className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
                 Single Entry Point
-              </CardDescription>
+              </p>
             </div>
           </div>
           {onClose && (
-            <Button
+            <button
               type="button"
               onClick={onClose}
               variant="ghost"
@@ -174,12 +168,12 @@ export default function CreateJournalEntry({
               className="hover:bg-red-50 hover:text-red-500 rounded-full"
             >
               <X className="w-5 h-5" />
-            </Button>
+            </button>
           )}
         </div>
-      </CardHeader>
+      </div>
 
-      <CardContent className="p-4 bg-gray-100">
+      <div className="p-4 bg-gray-100">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
           {submitError && (
             <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-xl text-sm">
@@ -190,10 +184,10 @@ export default function CreateJournalEntry({
           {/* Contextual Mapping */}
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-orange-50/20 rounded-3xl border border-black">
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
                 Journal Batch <span className="text-red-500 text-xs font-bold">*</span>
-              </Label>
-              <Input
+              </label>
+              <input
                 type="text"
                 name="journal"
                 value={journalReference}
@@ -204,9 +198,9 @@ export default function CreateJournalEntry({
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
                 Account Book <span className="text-red-500 text-xs font-bold">*</span>
-              </Label>
+              </label>
               <select
                 name="book"
                 required
@@ -225,9 +219,9 @@ export default function CreateJournalEntry({
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                 Partner
-              </Label>
+              </label>
               <select
                 name="partner"
                 disabled={isLoadingPartners}
@@ -245,9 +239,9 @@ export default function CreateJournalEntry({
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
                 Division <span className="text-red-500 text-xs font-bold">*</span>
-              </Label>
+              </label>
               <select
                 name="division"
                 required
@@ -266,10 +260,10 @@ export default function CreateJournalEntry({
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                 Project
-              </Label>
-              <Input
+              </label>
+              <input
                 name="project"
                 placeholder="e.g. PROJ-001"
                 className="h-12 rounded-xl border-black bg-white px-4 text-xs font-bold focus:ring-2 focus:ring-corporate-primary/20"
@@ -284,9 +278,9 @@ export default function CreateJournalEntry({
           {/* Financials */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
                 Currency <span className="text-red-500 text-xs font-bold">*</span>
-              </Label>
+              </label>
               <select
                 name="currency"
                 required
@@ -303,10 +297,10 @@ export default function CreateJournalEntry({
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
                 Exchange Rate <span className="text-red-500 text-xs font-bold">*</span>
-              </Label>
-              <Input
+              </label>
+              <input
                 name="exchange_rate"
                 type="number"
                 step="0.0001"
@@ -322,10 +316,10 @@ export default function CreateJournalEntry({
             {formik.values.currency === "KES" && (
               <>
                 <div className="space-y-2">
-                  <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                     Debit Amount (KES)
-                  </Label>
-                  <Input
+                  </label>
+                  <input
                     name="debit"
                     type="number"
                     step="0.01"
@@ -338,10 +332,10 @@ export default function CreateJournalEntry({
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                     Credit Amount (KES)
-                  </Label>
-                  <Input
+                  </label>
+                  <input
                     name="credit"
                     type="number"
                     step="0.01"
@@ -358,10 +352,10 @@ export default function CreateJournalEntry({
             {formik.values.currency !== "KES" && formik.values.currency !== "" && (
               <>
                 <div className="space-y-2">
-                  <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                     Foreign Debit ({formik.values.currency})
-                  </Label>
-                  <Input
+                  </label>
+                  <input
                     name="foreign_debit"
                     type="number"
                     step="0.01"
@@ -374,10 +368,10 @@ export default function CreateJournalEntry({
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                     Foreign Credit ({formik.values.currency})
-                  </Label>
-                  <Input
+                  </label>
+                  <input
                     name="foreign_credit"
                     type="number"
                     step="0.01"
@@ -395,9 +389,9 @@ export default function CreateJournalEntry({
           {/* Documentation */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                 Payment Method
-              </Label>
+              </label>
               <select
                 name="payment_method"
                 className="h-14 w-full rounded-2xl border border-black bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
@@ -413,9 +407,9 @@ export default function CreateJournalEntry({
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                 Source Document Type
-              </Label>
+              </label>
               <select
                 name="source_document"
                 className="h-14 w-full rounded-2xl border border-black bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
@@ -433,10 +427,10 @@ export default function CreateJournalEntry({
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                 Document Number
-              </Label>
-              <Input
+              </label>
+              <input
                 name="document_number"
                 placeholder="e.g. REF-001"
                 className="h-14 rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold px-5"
@@ -446,9 +440,9 @@ export default function CreateJournalEntry({
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
                 Supporting File
-              </Label>
+              </label>
               <input
                 name="document_file"
                 type="file"
@@ -462,10 +456,10 @@ export default function CreateJournalEntry({
           </div>
 
           <div className="space-y-2">
-            <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+            <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
               Entry Notes
-            </Label>
-            <Textarea
+            </label>
+            <textarea
               name="notes"
               placeholder="Add any additional details or memo..."
               className="min-h-[100px] rounded-2xl border-black bg-orange-50/30 focus:bg-white font-bold p-5"
@@ -483,12 +477,12 @@ export default function CreateJournalEntry({
               checked={formik.values.is_intercompany}
               onChange={formik.handleChange}
             />
-            <Label htmlFor="is_intercompany" className="text-sm font-black text-black cursor-pointer">
+            <label htmlFor="is_intercompany" className="text-sm font-black text-black cursor-pointer">
               Intercompany Transaction
-            </Label>
+            </label>
           </div>
 
-          <Button
+          <button
             type="submit"
             disabled={formik.isSubmitting}
             className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
@@ -505,9 +499,9 @@ export default function CreateJournalEntry({
                 Record Transaction Entry
               </div>
             )}
-          </Button>
+          </button>
         </form>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

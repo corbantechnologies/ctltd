@@ -3,17 +3,11 @@
 
 import { createJournal } from "@/services/journals";
 import { useFormik } from "formik";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+
+
+
+
+
 import { toast } from "react-hot-toast";
 import { Loader2, Book, Plus, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
@@ -77,10 +71,10 @@ export default function CreateJournal({
   });
 
   return (
-    <Card
+    <div
       className={`mx-auto w-full border-black/5 shadow-2xl rounded-xl overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
     >
-      <CardHeader className="p-8 border-b border-black/5 bg-gradient-to-r from-white to-gray-50/50">
+      <div className="p-8 border-b border-black/5 bg-gradient-to-r from-white to-gray-50/50">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-4">
             <div
@@ -93,16 +87,16 @@ export default function CreateJournal({
               <Book className="w-6 h-6" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-bold text-black tracking-tight">
+              <h2 className="text-2xl font-bold text-black tracking-tight">
                 New Journal Batch
-              </CardTitle>
-              <CardDescription className="text-black/50 font-medium text-sm mt-1">
+              </h2>
+              <p className="text-black/50 font-medium text-sm mt-1">
                 Transaction Container
-              </CardDescription>
+              </p>
             </div>
           </div>
           {onClose && (
-            <Button
+            <button
               type="button"
               onClick={onClose}
               variant="ghost"
@@ -110,23 +104,23 @@ export default function CreateJournal({
               className="hover:bg-red-50 hover:text-red-500 rounded-full text-black/40"
             >
               <X className="w-5 h-5" />
-            </Button>
+            </button>
           )}
         </div>
-      </CardHeader>
+      </div>
 
-      <CardContent className="p-8">
+      <div className="p-8">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="financial_year"
                 className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
               >
                 Financial Year{" "}
                 <span className="text-red-500 text-xs font-bold">*</span>
-              </Label>
-              <Input
+              </label>
+              <input
                 id="financial_year"
                 name="financial_year"
                 type="text"
@@ -139,14 +133,14 @@ export default function CreateJournal({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="date"
                 className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
               >
                 Transaction Date{" "}
                 <span className="text-red-500 text-xs font-bold">*</span>
-              </Label>
-              <Input
+              </label>
+              <input
                 id="date"
                 name="date"
                 type="date"
@@ -158,13 +152,13 @@ export default function CreateJournal({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="journal_type"
                 className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
               >
                 Journal Category{" "}
                 <span className="text-red-500 text-xs font-bold">*</span>
-              </Label>
+              </label>
               <select
                 id="journal_type"
                 name="journal_type"
@@ -185,14 +179,14 @@ export default function CreateJournal({
           </div>
 
           <div className="space-y-2">
-            <Label
+            <label
               htmlFor="description"
               className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
             >
               Batch Narrative{" "}
               <span className="text-red-500 text-xs font-bold">*</span>
-            </Label>
-            <Textarea
+            </label>
+            <textarea
               id="description"
               name="description"
               required
@@ -204,12 +198,12 @@ export default function CreateJournal({
           </div>
 
           <div className="space-y-2">
-            <Label
+            <label
               htmlFor="currency"
               className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
             >
               Currency <span className="text-red-500 text-xs font-bold">*</span>
-            </Label>
+            </label>
             <select
               name="currency"
               required
@@ -226,7 +220,7 @@ export default function CreateJournal({
           </div>
 
           <div className="pt-6">
-            <Button
+            <button
               type="submit"
               disabled={formik.isSubmitting}
               className="w-full h-16 text-white rounded-md font-bold text-lg transition-all shadow-xl active:scale-[0.98] group"
@@ -243,10 +237,10 @@ export default function CreateJournal({
                   Initialize Journal Batch
                 </div>
               )}
-            </Button>
+            </button>
           </div>
         </form>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

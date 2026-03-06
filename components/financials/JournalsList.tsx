@@ -20,10 +20,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useMemo } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import LoadingSpinner from "../portal/LoadingSpinner";
 
 interface JournalsListProps {
@@ -135,9 +131,10 @@ export default function JournalsList({
                 color: undefined, // Let CSS handle focus-within if possible, or simple inline
               }}
             />
-            <Input
+            <input
+              type="text"
               placeholder="Search journals by description or reference..."
-              className="pl-11 h-12 bg-white/80 border-black/5 rounded-2xl transition-all font-medium text-sm shadow-inner focus:ring-2"
+              className="pl-11 h-12 w-full bg-white/80 border border-black/5 rounded-2xl transition-all font-medium text-sm shadow-inner focus:outline-none focus:ring-2"
               style={{
                 ["--tw-ring-color" as any]: `${primaryColor}33`,
                 borderColor: "rgba(0,0,0,0.05)", // default
@@ -151,11 +148,9 @@ export default function JournalsList({
           </div>
 
           <div className="flex items-center gap-2 bg-white/80 p-1.5 rounded-2xl border border-black/5 shadow-sm">
-            <Button
-              variant={view === "grid" ? "default" : "ghost"}
-              size="icon"
+            <button
               onClick={() => setView("grid")}
-              className="w-10 h-10 rounded-xl transition-all"
+              className="flex items-center justify-center w-10 h-10 rounded-xl transition-all"
               style={{
                 backgroundColor: view === "grid" ? primaryColor : "transparent",
                 color: view === "grid" ? "white" : "rgba(0,0,0,0.4)",
@@ -166,12 +161,10 @@ export default function JournalsList({
               }}
             >
               <LayoutGrid className="w-4 h-4" />
-            </Button>
-            <Button
-              variant={view === "table" ? "default" : "ghost"}
-              size="icon"
+            </button>
+            <button
               onClick={() => setView("table")}
-              className="w-10 h-10 rounded-xl transition-all"
+              className="flex items-center justify-center w-10 h-10 rounded-xl transition-all"
               style={{
                 backgroundColor:
                   view === "table" ? primaryColor : "transparent",
@@ -183,7 +176,7 @@ export default function JournalsList({
               }}
             >
               <List className="w-4 h-4" />
-            </Button>
+            </button>
           </div>
         </div>
 
@@ -212,14 +205,14 @@ export default function JournalsList({
           {/* Date Range Start */}
           <div className="relative group">
             <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 group-focus-within:text-[#D0402B] transition-colors" />
-            <Input
+            <input
               type="date"
               value={startDate}
               onChange={(e) => {
                 setStartDate(e.target.value);
                 setCurrentPage(1);
               }}
-              className="pl-11 h-12 bg-white/80 border-black/5 rounded-xl focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-bold text-[10px] uppercase tracking-widest shadow-sm"
+              className="w-full pl-11 h-12 bg-white/80 border border-black/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-bold text-[10px] uppercase tracking-widest shadow-sm"
               title="Start Date"
             />
           </div>
@@ -227,14 +220,14 @@ export default function JournalsList({
           {/* Date Range End */}
           <div className="relative group">
             <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 group-focus-within:text-[#D0402B] transition-colors" />
-            <Input
+            <input
               type="date"
               value={endDate}
               onChange={(e) => {
                 setEndDate(e.target.value);
                 setCurrentPage(1);
               }}
-              className="pl-11 h-12 bg-white/80 border-black/5 rounded-xl focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-bold text-[10px] uppercase tracking-widest shadow-sm"
+              className="w-full pl-11 h-12 bg-white/80 border border-black/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-bold text-[10px] uppercase tracking-widest shadow-sm"
               title="End Date"
             />
           </div>
@@ -296,14 +289,13 @@ export default function JournalsList({
               endDate ||
               selectedMonth !== "all" ||
               selectedYear !== "all") && (
-                <Button
-                  variant="outline"
+                <button
                   onClick={clearFilters}
-                  className="h-12 w-12 p-0 rounded-xl border-black/5 bg-white/80 hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-all text-black/40 shadow-sm"
+                  className="flex items-center justify-center h-12 w-12 border border-black/5 rounded-xl bg-white/80 hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-all text-black/40 shadow-sm"
                   title="Clear Filters"
                 >
                   <X className="w-4 h-4" />
-                </Button>
+                </button>
               )}
           </div>
         </div>
@@ -318,8 +310,8 @@ export default function JournalsList({
               href={`/${rolePrefix}/fiscal-years/${linkPrefix}/${journal.reference}`}
               className="group block"
             >
-              <Card className="h-full border-black/5 bg-white/60 backdrop-blur-xl rounded-[32px] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group-hover:bg-white/90">
-                <CardContent className="p-8">
+              <div className="h-full border border-black/5 bg-white/60 backdrop-blur-xl rounded-[32px] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group-hover:bg-white/90">
+                <div className="p-8">
                   <div className="flex justify-between items-start mb-6">
                     <div
                       className="w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-sm group-hover:text-white"
@@ -345,14 +337,14 @@ export default function JournalsList({
                         }
                       `}</style>
                     </div>
-                    <Badge
-                      className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${journal.is_posted
+                    <span
+                      className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest inline-block ${journal.is_posted
                         ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
                         : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
                         }`}
                     >
                       {journal.is_posted ? "Posted" : "Pending"}
-                    </Badge>
+                    </span>
                   </div>
 
                   <div className="space-y-4">
@@ -384,8 +376,8 @@ export default function JournalsList({
                       </div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </Link>
           ))}
         </div>
@@ -443,12 +435,9 @@ export default function JournalsList({
                       </div>
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
-                      <Badge
-                        variant="outline"
-                        className="bg-white/50 border-black/5 text-black/60 font-bold text-[9px] uppercase px-2 py-0.5 rounded-sm shadow-none"
-                      >
+                      <span className="bg-white/50 border border-black/5 text-black/60 font-bold text-[9px] uppercase px-2 py-0.5 rounded-sm inline-block">
                         {journal.journal_type}
-                      </Badge>
+                      </span>
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-2">
@@ -504,24 +493,20 @@ export default function JournalsList({
             journals
           </p>
           <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
+            <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="rounded-xl border-black/5 bg-white/80 transition-all hover:bg-[#D0402B] hover:text-white disabled:opacity-30 h-10 px-4 font-bold"
+              className="flex items-center justify-center border border-black/5 rounded-xl bg-white/80 transition-all hover:bg-[#D0402B] hover:text-white disabled:opacity-30 h-10 px-4 font-bold"
             >
               <ChevronLeft className="w-4 h-4 mr-1" /> Prev
-            </Button>
+            </button>
             <div className="flex gap-1">
               {[...Array(totalPages)].map((_, i) => (
-                <Button
+                <button
                   key={i + 1}
-                  variant={currentPage === i + 1 ? "default" : "outline"}
-                  size="sm"
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`w-10 h-10 rounded-xl transition-all font-bold ${currentPage === i + 1
-                    ? "bg-[#D0402B] text-white shadow-lg shadow-[#D0402B]/20"
+                  className={`flex items-center justify-center w-10 h-10 border rounded-xl transition-all font-bold ${currentPage === i + 1
+                    ? "bg-[#D0402B] border-transparent text-white shadow-lg shadow-[#D0402B]/20"
                     : "bg-white/80 border-black/5 hover:bg-black/5"
                     }`}
                   style={{
@@ -535,18 +520,16 @@ export default function JournalsList({
                   }}
                 >
                   {i + 1}
-                </Button>
+                </button>
               ))}
             </div>
-            <Button
-              variant="outline"
-              size="sm"
+            <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="rounded-xl border-black/5 bg-white/80 transition-all hover:bg-[#D0402B] hover:text-white disabled:opacity-30 h-10 px-4 font-bold"
+              className="flex items-center justify-center border border-black/5 rounded-xl bg-white/80 transition-all hover:bg-[#D0402B] hover:text-white disabled:opacity-30 h-10 px-4 font-bold"
             >
               Next <ChevronRight className="w-4 h-4 ml-1" />
-            </Button>
+            </button>
           </div>
         </div>
       )}

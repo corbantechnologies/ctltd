@@ -4,16 +4,10 @@
 import { updatePartner } from "@/services/partners";
 import { useFormik } from "formik";
 import { PartnerSchema } from "@/validation";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+
+
+
+
 import { toast } from "react-hot-toast";
 import { Loader2, Edit3, Save, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
@@ -102,10 +96,10 @@ export default function UpdatePartner({
   });
 
   return (
-    <Card
+    <div
       className={`w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
     >
-      <CardHeader
+      <div
         className="p-8 border-b border-black/5"
         style={{ backgroundColor: `${primaryColor}0D` }}
       >
@@ -121,16 +115,16 @@ export default function UpdatePartner({
               <Edit3 className="w-6 h-6" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-black text-black tracking-tight">
+              <h2 className="text-2xl font-black text-black tracking-tight">
                 Update Partner
-              </CardTitle>
-              <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+              </h2>
+              <p className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
                 Refine Relationship
-              </CardDescription>
+              </p>
             </div>
           </div>
           {onClose && (
-            <Button
+            <button
               type="button"
               onClick={onClose}
               variant="ghost"
@@ -138,22 +132,22 @@ export default function UpdatePartner({
               className="hover:bg-red-50 hover:text-red-500 rounded-full"
             >
               <X className="w-5 h-5" />
-            </Button>
+            </button>
           )}
         </div>
-      </CardHeader>
-      <CardContent className="p-8">
+      </div>
+      <div className="p-8">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
           {/* Basic Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="name"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Partner Name
-              </Label>
-              <Input
+              </label>
+              <input
                 id="name"
                 name="name"
                 className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
@@ -169,13 +163,13 @@ export default function UpdatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="email"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Email Address
-              </Label>
-              <Input
+              </label>
+              <input
                 id="email"
                 name="email"
                 type="email"
@@ -194,13 +188,13 @@ export default function UpdatePartner({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="phone"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Phone Number
-              </Label>
-              <Input
+              </label>
+              <input
                 id="phone"
                 name="phone"
                 className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
@@ -211,12 +205,12 @@ export default function UpdatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="partner_type"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Partner Category
-              </Label>
+              </label>
               <select
                 id="partner_type"
                 name="partner_type"
@@ -235,12 +229,12 @@ export default function UpdatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="division"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Assigned Division
-              </Label>
+              </label>
               <select
                 id="division"
                 name="division"
@@ -265,13 +259,13 @@ export default function UpdatePartner({
           {/* Financial Settings */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="tax_pin"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Tax PIN (KRA)
-              </Label>
-              <Input
+              </label>
+              <input
                 id="tax_pin"
                 name="tax_pin"
                 className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
@@ -282,12 +276,12 @@ export default function UpdatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="currency"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Preferred Currency
-              </Label>
+              </label>
               <select
                 id="currency"
                 name="currency"
@@ -304,13 +298,13 @@ export default function UpdatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="wht_rate"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 WHT Rate (%)
-              </Label>
-              <Input
+              </label>
+              <input
                 id="wht_rate"
                 name="wht_rate"
                 type="number"
@@ -324,13 +318,13 @@ export default function UpdatePartner({
           </div>
 
           <div className="space-y-2">
-            <Label
+            <label
               htmlFor="payment_terms"
               className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
             >
               Payment Terms / Notes
-            </Label>
-            <Input
+            </label>
+            <input
               id="payment_terms"
               name="payment_terms"
               className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
@@ -357,16 +351,16 @@ export default function UpdatePartner({
               onBlur={formik.handleBlur}
               checked={formik.values.is_active}
             />
-            <Label
+            <label
               htmlFor="is_active"
               className="text-sm font-black text-black"
             >
               Keep Partner Active
-            </Label>
+            </label>
           </div>
 
           <div className="pt-4">
-            <Button
+            <button
               type="submit"
               disabled={formik.isSubmitting}
               className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
@@ -383,10 +377,10 @@ export default function UpdatePartner({
                   Save Changes
                 </div>
               )}
-            </Button>
+            </button>
           </div>
         </form>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
