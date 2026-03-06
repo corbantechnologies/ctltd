@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useFetchCOAs } from "@/hooks/coa/actions";
 import { useFetchBooks } from "@/hooks/books/actions";
-import * as Dialog from "@radix-ui/react-dialog";
 import { cn } from "@/lib/utils";
 
 export function GlobalSearch({ role = "finance" }: { role?: "finance" | "director" }) {
@@ -74,10 +73,13 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
                 </div>
             </button>
 
-            <Dialog.Root open={open} onOpenChange={setOpen}>
-                <Dialog.Portal>
-                    <Dialog.Overlay className="fixed inset-0 bg-slate-950/40 backdrop-blur-md z-[100] animate-in fade-in duration-300" />
-                    <Dialog.Content className="fixed top-[15%] left-1/2 -translate-x-1/2 w-full max-w-2xl bg-white/90 backdrop-blur-2xl rounded-[2rem] shadow-2xl border border-slate-200 p-0 overflow-hidden z-[101] animate-in zoom-in-95 fade-in duration-300">
+            {open && (
+                <>
+                    <div 
+                        className="fixed inset-0 bg-slate-950/40 backdrop-blur-md z-[100] animate-in fade-in duration-300" 
+                        onClick={() => setOpen(false)}
+                    />
+                    <div className="fixed top-[15%] left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-2xl bg-white/90 backdrop-blur-2xl rounded-[2rem] shadow-2xl border border-slate-200 p-0 overflow-hidden z-[101] animate-in zoom-in-95 fade-in duration-300">
                         <Command className="w-full">
                             <div className="flex items-center border-b border-slate-100 px-6" cmdk-input-wrapper="">
                                 <Search className="mr-3 h-5 w-5 shrink-0 text-slate-400" />
@@ -153,9 +155,9 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
 
                             </Command.List>
                         </Command>
-                    </Dialog.Content>
-                </Dialog.Portal>
-            </Dialog.Root>
+                    </div>
+                </>
+            )}
         </>
     );
 }
