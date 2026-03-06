@@ -115,9 +115,8 @@ export default function CreateBook({
             <button
               type="button"
               onClick={onClose}
-              variant="ghost"
-              size="icon"
-              className="hover:bg-red-50 hover:text-red-500 rounded-full"
+             
+              className="hover:bg-red-50 hover:text-red-500 rounded-full p-2"
             >
               <X className="w-5 h-5" />
             </button>
@@ -139,7 +138,7 @@ export default function CreateBook({
                 name="code"
                 type="text"
                 placeholder="e.g. BK-100"
-                className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.code}
@@ -164,7 +163,7 @@ export default function CreateBook({
                 name="name"
                 type="text"
                 placeholder="e.g. Main Cash Book"
-                className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
@@ -189,7 +188,7 @@ export default function CreateBook({
               id="account_type"
               name="account_type"
               disabled={isLoadingCOAs || !!initialCOA}
-              className="flex h-14 w-full rounded-2xl border border-black/5 bg-black/5 px-5 py-2 text-sm font-bold ring-offset-white focus:outline-none focus:ring-2 transition-all appearance-none cursor-pointer disabled:opacity-50"
+              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold ring-offset-white transition-all appearance-none cursor-pointer disabled:opacity-50"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.account_type}
@@ -308,7 +307,7 @@ export default function CreateBook({
               id="description"
               name="description"
               placeholder="Provide a brief description of this book..."
-              className="min-h-[120px] rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold p-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[120px] rounded-2xl focus:bg-slate-50 transition-all font-bold p-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.description}
@@ -320,7 +319,7 @@ export default function CreateBook({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
+              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,

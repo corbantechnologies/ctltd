@@ -103,9 +103,8 @@ export default function CreatePartner({
             <button
               type="button"
               onClick={onClose}
-              variant="ghost"
-              size="icon"
-              className="hover:bg-red-50 hover:text-red-500 rounded-full"
+             
+              className="hover:bg-red-50 hover:text-red-500 rounded-full p-2"
             >
               <X className="w-5 h-5" />
             </button>
@@ -127,7 +126,7 @@ export default function CreatePartner({
                 id="name"
                 name="name"
                 placeholder="Full Entity Name"
-                className="h-14 rounded-md border-black/5 bg-black/5 focus:bg-white transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-medium px-5"
                 style={{
                   color: primaryColor,
                 }}
@@ -154,7 +153,7 @@ export default function CreatePartner({
                 name="email"
                 type="email"
                 placeholder="contact@entity.com"
-                className="h-14 rounded-md border-black/5 bg-black/5 focus:bg-white transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-medium px-5"
                 style={{
                   color: primaryColor,
                 }}
@@ -182,7 +181,7 @@ export default function CreatePartner({
                 id="phone"
                 name="phone"
                 placeholder="+254..."
-                className="h-14 rounded-md border-black/5 bg-orange-50/30 focus:bg-white transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-medium px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
@@ -200,7 +199,7 @@ export default function CreatePartner({
                 id="partner_type"
                 name="partner_type"
                 disabled={isLoadingTypes}
-                className="flex h-14 w-full rounded-md border border-black/5 bg-black/5 px-5 py-2 text-sm font-medium transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-medium transition-all appearance-none"
                 style={{
                   color: primaryColor,
                 }}
@@ -233,7 +232,7 @@ export default function CreatePartner({
                 id="division"
                 name="division"
                 disabled={isLoadingDivisions}
-                className="flex h-14 w-full rounded-md border border-black/5 bg-black/5 px-5 py-2 text-sm font-medium transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-medium transition-all appearance-none"
                 style={{
                   color: primaryColor,
                 }}
@@ -266,7 +265,7 @@ export default function CreatePartner({
                 id="tax_pin"
                 name="tax_pin"
                 placeholder="P0XXXXXXXX"
-                className="h-14 rounded-md border-black/5 bg-orange-50/30 focus:bg-white transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-medium px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.tax_pin}
@@ -283,7 +282,7 @@ export default function CreatePartner({
               <select
                 id="currency"
                 name="currency"
-                className="flex h-14 w-full rounded-md border border-black/5 bg-orange-50/30 px-5 py-2 text-sm font-medium focus:ring-2 focus:ring-corporate-primary/20 transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-medium focus:ring-corporate-primary/20 transition-all appearance-none"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.currency}
@@ -308,7 +307,7 @@ export default function CreatePartner({
                 type="number"
                 step="0.01"
                 placeholder="0.00"
-                className="h-14 rounded-md border-black/5 bg-orange-50/30 focus:bg-white transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-medium px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.wht_rate}
@@ -332,7 +331,7 @@ export default function CreatePartner({
               id="payment_terms"
               name="payment_terms"
               placeholder="e.g. Net 30, Pay on Delivery"
-              className="h-14 rounded-md border-black/5 bg-orange-50/30 focus:bg-white transition-all font-medium px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-medium px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.payment_terms}
@@ -368,7 +367,7 @@ export default function CreatePartner({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-md font-bold text-lg transition-all shadow-xl active:scale-[0.98] group"
+              className="w-full h-16 text-white rounded-[1.25rem] font-bold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,

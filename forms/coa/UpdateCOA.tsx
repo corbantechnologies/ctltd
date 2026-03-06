@@ -93,9 +93,8 @@ export default function UpdateCOA({
               <button
                 type="button"
                 onClick={onClose}
-                variant="ghost"
-                size="icon"
-                className="hover:bg-red-50 hover:text-red-500 rounded-full text-black/40"
+               
+                className="hover:bg-red-50 hover:text-red-500 rounded-full text-black/40 p-2"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -124,7 +123,7 @@ export default function UpdateCOA({
               name="name"
               type="text"
               placeholder="e.g. Cash in Bank"
-              className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
@@ -141,7 +140,7 @@ export default function UpdateCOA({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
+              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,

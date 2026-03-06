@@ -99,9 +99,8 @@ export default function CreateJournal({
             <button
               type="button"
               onClick={onClose}
-              variant="ghost"
-              size="icon"
-              className="hover:bg-red-50 hover:text-red-500 rounded-full text-black/40"
+             
+              className="hover:bg-red-50 hover:text-red-500 rounded-full text-black/40 p-2"
             >
               <X className="w-5 h-5" />
             </button>
@@ -126,7 +125,7 @@ export default function CreateJournal({
                 type="text"
                 required
                 placeholder="e.g., FY2025/2026"
-                className="h-14 rounded-md border-black/5 bg-black/5 focus:bg-white transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-medium px-5"
                 onChange={formik.handleChange}
                 value={formik.values.financial_year}
               />
@@ -145,7 +144,7 @@ export default function CreateJournal({
                 name="date"
                 type="date"
                 required
-                className="h-14 rounded-md border-black/5 bg-black/5 focus:bg-white transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-medium px-5"
                 onChange={formik.handleChange}
                 value={formik.values.date}
               />
@@ -164,7 +163,7 @@ export default function CreateJournal({
                 name="journal_type"
                 required
                 disabled={isLoadingTypes}
-                className="flex h-14 w-full rounded-md border border-black/5 bg-black/5 px-5 py-2 text-sm font-medium focus:ring-2 focus:ring-[#045138]/30 appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-medium focus:ring-[#045138]/30 appearance-none"
                 onChange={formik.handleChange}
                 value={formik.values.journal_type}
               >
@@ -191,7 +190,7 @@ export default function CreateJournal({
               name="description"
               required
               placeholder="Provide a clear description of this journal batch (e.g., 'January 2026 sales and expenses')"
-              className="min-h-[120px] rounded-md border-black/5 bg-black/5 focus:bg-white transition-all font-medium p-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[120px] rounded-2xl focus:bg-slate-50 transition-all font-medium p-5"
               onChange={formik.handleChange}
               value={formik.values.description}
             />
@@ -207,7 +206,7 @@ export default function CreateJournal({
             <select
               name="currency"
               required
-              className="flex h-14 w-full rounded-md border border-black/5 bg-black/5 px-5 text-sm font-medium focus:ring-2 focus:ring-[#045138]/30 appearance-none"
+              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm font-medium focus:ring-[#045138]/30 appearance-none"
               onChange={formik.handleChange}
               value={formik.values.currency}
             >
@@ -223,7 +222,7 @@ export default function CreateJournal({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-md font-bold text-lg transition-all shadow-xl active:scale-[0.98] group"
+              className="w-full h-16 text-white rounded-[1.25rem] font-bold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,

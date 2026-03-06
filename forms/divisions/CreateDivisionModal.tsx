@@ -91,7 +91,7 @@ export default function CreateDivisionModal() {
                   name="name"
                   type="text"
                   placeholder="e.g. Strategic Operations, Digital Assets"
-                  className="w-full h-14 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-corporate-primary/30 focus:ring-0 transition-all font-bold px-6 text-sm text-slate-900 placeholder:text-slate-300"
+                  className="w-full h-14 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-corporate-primary/30 focus:ring-0 transition-all font-bold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.name}
@@ -124,7 +124,7 @@ export default function CreateDivisionModal() {
                 <button
                   type="submit"
                   disabled={formik.isSubmitting}
-                  className="w-full h-16 bg-slate-900 hover:bg-corporate-primary text-white rounded-[1.25rem] font-bold text-base transition-all shadow-xl hover:shadow-corporate-primary/20 active:scale-[0.98] group relative overflow-hidden"
+                  className="w-full h-16 bg-slate-900 hover:bg-corporate-primary text-white rounded-[1.25rem] font-bold text-base transition-all shadow-xl hover:shadow-corporate-primary/20 active:scale-[0.98] group relative overflow-hidden flex items-center justify-center"
                 >
                   {formik.isSubmitting ? (
                     <Loader2 className="w-6 h-6 animate-spin mx-auto" />

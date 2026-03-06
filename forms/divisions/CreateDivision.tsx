@@ -74,7 +74,7 @@ export default function CreateDivision() {
                 name="name"
                 type="text"
                 placeholder="e.g. Sales, Marketing, HR"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white focus:ring-corporate-primary/20 transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 focus:ring-corporate-primary/20 transition-all font-bold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
@@ -109,7 +109,7 @@ export default function CreateDivision() {
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 bg-black hover:bg-corporate-primary text-white rounded-[20px] font-black text-lg transition-all shadow-xl hover:shadow-orange-500/20 active:scale-[0.98] group"
+              className="w-full h-16 bg-black hover:bg-corporate-primary text-white rounded-[20px] font-black text-lg transition-all shadow-xl hover:shadow-orange-500/20 active:scale-[0.98] group flex items-center justify-center"
             >
               {formik.isSubmitting ? (
                 <Loader2 className="w-6 h-6 animate-spin" />

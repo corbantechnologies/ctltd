@@ -103,7 +103,7 @@ export default function CreateJournalType({
                 type="text"
                 required
                 placeholder="e.g. Accrual, Fixed Asset, Disbursement"
-                className="w-full h-14 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-emerald-600/30 focus:ring-0 transition-all font-bold px-6 text-sm text-slate-900 placeholder:text-slate-300"
+                className="w-full h-14 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-emerald-600/30 focus:ring-0 transition-all font-bold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
@@ -127,7 +127,7 @@ export default function CreateJournalType({
                 name="description"
                 required
                 placeholder="Provide a comprehensive operational definition for this journal type..."
-                className="w-full min-h-[140px] rounded-2xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-emerald-600/30 focus:ring-0 transition-all font-bold p-6 text-sm text-slate-900 placeholder:text-slate-300 resize-none"
+                className="w-full min-h-[140px] rounded-2xl border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-emerald-600/30 focus:ring-0 transition-all font-bold p-6 text-sm text-slate-900 placeholder:text-slate-300 resize-none focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.description}
