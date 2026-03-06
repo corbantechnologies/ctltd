@@ -1,40 +1,35 @@
+"use client";
 
 import { createJournalType } from "@/services/journaltypes";
 import { useFormik } from "formik";
 import { JournalTypeSchema } from "@/validation";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
 import { toast } from "react-hot-toast";
-import { Loader2, Settings2, Plus, X } from "lucide-react"; // Added X to import
+import { Loader2, Settings2, Plus, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
+import { cn } from "@/lib/utils";
 
 interface CreateJournalTypeProps {
   rolePrefix?: string;
   onSuccess?: () => void;
+  onClose?: () => void;
+  className?: string;
 }
 
 export default function CreateJournalType({
   rolePrefix = "finance",
   onSuccess,
-  className,
   onClose,
-}: CreateJournalTypeProps & { className?: string; onClose?: () => void }) {
+  className,
+}: CreateJournalTypeProps) {
   const header = useAxiosAuth();
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
+  const primaryColorClass = rolePrefix === "director" ? "bg-corporate-primary" : "bg-emerald-600";
+  const primaryTextClass = rolePrefix === "director" ? "text-corporate-primary" : "text-emerald-600";
+  const primaryShadowClass = rolePrefix === "director" ? "shadow-corporate-primary/20" : "shadow-emerald-600/20";
 
   const formik = useFormik({
     initialValues: {
@@ -46,15 +41,14 @@ export default function CreateJournalType({
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
         await createJournalType(values, header);
-        toast.success("Journal type defined successfully");
-        window.location.reload();
+        toast.success("Transaction type defined successfully");
         queryClient.invalidateQueries({ queryKey: ["journal_types"] });
         resetForm();
         router.refresh();
         if (onSuccess) onSuccess();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to define journal type",
+          error?.response?.data?.message || "Failed to define transaction type",
         );
       } finally {
         setSubmitting(false);
@@ -63,86 +57,77 @@ export default function CreateJournalType({
   });
 
   return (
-    <Card
-      className={`w-full border-black/5 shadow-2xl rounded-xl overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
-    >
-      <CardHeader className="p-8 border-b border-black/5 bg-gradient-to-r from-white to-gray-50/50">
-        <div className="flex items-start justify-between mb-4">
+    <div className={cn("w-full bg-white rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden", className)}>
+      <div className="bg-slate-900 p-8 text-white relative">
+        <div className={cn("absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-20", rolePrefix === "director" ? "bg-corporate-primary" : "bg-emerald-600")} />
+
+        <div className="flex items-center justify-between relative z-10">
           <div className="flex items-center gap-4">
-            <div
-              className="w-12 h-12 rounded-lg flex items-center justify-center text-white shadow-lg"
-              style={{
-                backgroundColor: primaryColor,
-                boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
-              }}
-            >
+            <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center text-white border border-white/10 backdrop-blur-md shadow-lg", primaryColorClass)}>
               <Settings2 className="w-6 h-6" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-bold text-black tracking-tight">
-                New Journal Type
-              </CardTitle>
-              <CardDescription className="text-black/50 font-medium text-sm mt-1">
-                Ledger Configuration
-              </CardDescription>
+              <h2 className="text-xl font-bold tracking-tight italic">
+                Define <span className={primaryTextClass}>Journal Type</span>
+              </h2>
+              <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest mt-1">
+                Ledger Classification Logic
+              </p>
             </div>
           </div>
           {onClose && (
-            <Button
+            <button
               type="button"
               onClick={onClose}
-              variant="ghost"
-              size="icon"
-              className="hover:bg-red-50 hover:text-red-500 rounded-full"
+              className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-white/40 hover:text-white transition-all border border-white/5"
             >
               <X className="w-5 h-5" />
-            </Button>
+            </button>
           )}
         </div>
-      </CardHeader>
-      <CardContent className="p-8">
+      </div>
+
+      <div className="p-8">
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           <div className="space-y-6">
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="name"
-                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
+                className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1 block"
               >
-                Type Name{" "}
-                <span className="text-red-500 text-xs font-bold">*</span>
-              </Label>
-              <Input
+                Nomenclature <span className="text-red-500">*</span>
+              </label>
+              <input
                 id="name"
                 name="name"
                 type="text"
                 required
-                placeholder="e.g., Accrual, Payment"
-                className="h-14 rounded-md border-black/5 bg-black/5 focus:bg-white transition-all font-medium px-5"
+                placeholder="e.g. Accrual, Fixed Asset, Disbursement"
+                className="w-full h-14 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-emerald-600/30 focus:ring-0 transition-all font-bold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
               />
               {formik.touched.name && formik.errors.name && (
-                <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest ml-1">
+                <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest ml-1 mt-1">
                   {formik.errors.name}
                 </p>
               )}
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="description"
-                className="text-sm font-bold uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
+                className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1 block"
               >
-                Description{" "}
-                <span className="text-red-500 text-xs font-bold">*</span>
-              </Label>
-              <Textarea
+                Functional Definition <span className="text-red-500">*</span>
+              </label>
+              <textarea
                 id="description"
                 name="description"
                 required
-                placeholder="Describe this journal type..."
-                className="min-h-[120px] rounded-md border-black/5 bg-black/5 focus:bg-white transition-all font-medium p-5"
+                placeholder="Provide a comprehensive operational definition for this journal type..."
+                className="w-full min-h-[140px] rounded-2xl border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-emerald-600/30 focus:ring-0 transition-all font-bold p-6 text-sm text-slate-900 placeholder:text-slate-300 resize-none focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.description}
@@ -150,46 +135,49 @@ export default function CreateJournalType({
             </div>
           </div>
 
-          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-md border border-black/5">
-            <input
-              id="is_active"
-              name="is_active"
-              type="checkbox"
-              className="w-5 h-5 rounded-lg border-black/5 text-corporate-primary focus:ring-corporate-primary/20"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              checked={formik.values.is_active}
-            />
-            <Label
-              htmlFor="is_active"
-              className="text-sm font-bold text-black"
-            >
-              Enable for Operations
-            </Label>
+          <div
+            className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-slate-200 transition-colors group cursor-pointer"
+            onClick={() => formik.setFieldValue("is_active", !formik.values.is_active)}
+          >
+            <div className={cn(
+              "w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all",
+              formik.values.is_active ? cn(primaryColorClass, "border-transparent shadow-lg", primaryShadowClass) : "bg-white border-slate-200"
+            )}>
+              {formik.values.is_active && <Plus className="w-4 h-4 text-white rotate-45" />}
+            </div>
+            <div>
+              <span className="text-sm font-bold text-slate-900 block cursor-pointer">
+                Enable for Operations
+              </span>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
+                Authorized for live transactional ledger use
+              </p>
+            </div>
           </div>
 
-          <div className="pt-6">
-            <Button
+          <div className="pt-4">
+            <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-md font-bold text-lg transition-all shadow-xl active:scale-[0.98] group"
-              style={{
-                backgroundColor: primaryColor,
-                boxShadow: `0 10px 20px -5px ${primaryColor}4D`,
-              }}
+              className={cn(
+                "w-full h-16 text-white rounded-[1.25rem] font-bold text-base transition-all shadow-xl active:scale-[0.98] group relative overflow-hidden",
+                primaryColorClass,
+                primaryShadowClass,
+                "hover:brightness-110"
+              )}
             >
               {formik.isSubmitting ? (
-                <Loader2 className="w-6 h-6 animate-spin" />
+                <Loader2 className="w-6 h-6 animate-spin mx-auto" />
               ) : (
-                <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center gap-3">
                   <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
-                  Define Journal Type
+                  Define Transaction Type
                 </div>
               )}
-            </Button>
+            </button>
           </div>
         </form>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

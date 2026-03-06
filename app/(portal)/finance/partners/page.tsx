@@ -3,16 +3,7 @@
 import { useState } from "react";
 import PartnersList from "@/components/partners/PartnersList";
 import CreatePartner from "@/forms/partners/CreatePartner";
-import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 
 export default function FinancePartnersPage() {
   const [openCreatePartner, setOpenCreatePartner] = useState(false);
@@ -20,17 +11,17 @@ export default function FinancePartnersPage() {
   return (
     <div className="space-y-6 pb-6">
       {/* Breadcrumbs */}
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/finance/dashboard">Dashboard</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Partners Hub</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <nav>
+        <ol className="flex items-center gap-2 text-sm text-black/60">
+          <li>
+            <a href="/finance/dashboard" className="hover:text-black hover:underline">Dashboard</a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <span className="font-bold text-black">Partners Hub</span>
+          </li>
+        </ol>
+      </nav>
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-xl font-bold text-black tracking-tighter">
@@ -40,13 +31,13 @@ export default function FinancePartnersPage() {
             Manage vendors, clients, and internal entities
           </p>
         </div>
-        <Button
+        <button
           onClick={() => setOpenCreatePartner(true)}
-          className="h-9 px-4 bg-[#045138] hover:bg-black text-white rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center gap-1.5"
+          className="flex items-center justify-center gap-1.5 h-9 px-4 bg-[#045138] hover:bg-black text-white rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95"
         >
           <Plus className="w-3.5 h-3.5" />
           Register Partner
-        </Button>
+        </button>
       </div>
       <PartnersList rolePrefix="finance" />
       {openCreatePartner && (

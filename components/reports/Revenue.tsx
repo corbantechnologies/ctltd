@@ -1,7 +1,5 @@
 import { formatCurrency, formatPercent } from "@/tools/format";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./Card";
-import { Separator } from "@/components/ui/separator";
-
 interface RevenueData {
     group_total_revenue: number;
     breakdown: {
@@ -26,7 +24,7 @@ export function RevenueReport({ data }: { data: RevenueData }) {
                     <span className="text-3xl font-bold font-mono">{formatCurrency(data.group_total_revenue, data.currency)}</span>
                 </div>
 
-                <Separator className="mb-6" />
+                <hr className="mb-6 border-black/10" />
 
                 <div className="space-y-4">
                     {data.breakdown.map((item, idx) => {

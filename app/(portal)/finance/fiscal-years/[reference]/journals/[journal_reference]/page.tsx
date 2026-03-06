@@ -8,8 +8,6 @@ import CreateJournalEntry from "@/forms/journalentries/CreateJournalEntry";
 import UpdateJournal from "@/forms/journals/UpdateJournal";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   ArrowLeft,
   Calendar,
@@ -21,15 +19,6 @@ import {
   Edit2,
   Lock,
 } from "lucide-react";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "react-hot-toast";
 import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
 import JournalEntryDetailModal from "@/components/journals/JournalEntryDetailModal";
@@ -98,51 +87,45 @@ export default function JournalsDetailPage() {
   return (
     <div className="space-y-8 pb-12">
       {/* Breadcrumbs */}
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/finance/dashboard">Dashboard</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/finance/fiscal-years">
-              Fiscal Years
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href={`/finance/fiscal-years/${reference}`}>
+      <nav>
+        <ol className="flex flex-wrap items-center gap-2 text-sm text-black/60">
+          <li>
+            <a href="/finance/dashboard" className="hover:text-black hover:underline">Dashboard</a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <a href="/finance/fiscal-years" className="hover:text-black hover:underline">Fiscal Years</a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <a href={`/finance/fiscal-years/${reference}`} className="hover:text-black hover:underline">
               {fiscalYear?.code}
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink
-              href={`/finance/fiscal-years/${reference}/journals`}
-            >
+            </a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <a href={`/finance/fiscal-years/${reference}/journals`} className="hover:text-black hover:underline">
               Journals
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>{journal.description}</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+            </a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <span className="font-bold text-black">{journal.description}</span>
+          </li>
+        </ol>
+      </nav>
 
       {/* Header Section */}
       <div className="flex flex-col lg:flex-row justify-between items-start gap-6">
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <Button
-              variant="outline"
-              size="icon"
+            <button
               onClick={() => router.back()}
-              className="w-10 h-10 rounded-full border-black/5 bg-white shadow-sm hover:bg-black/5"
+              className="flex items-center justify-center w-10 h-10 rounded-full border border-black/5 bg-white shadow-sm hover:bg-black/5 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
-            </Button>
-            <Badge
+            </button>
+            <span
               className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${journal.is_posted
                 ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
                 : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
@@ -157,7 +140,7 @@ export default function JournalsDetailPage() {
                   <Clock className="w-3 h-3" /> PENDING
                 </div>
               )}
-            </Badge>
+            </span>
           </div>
           <div>
             <h1 className="text-xl font-bold text-black tracking-tighter mb-2">
@@ -182,29 +165,28 @@ export default function JournalsDetailPage() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-          <Button
-            variant="outline"
-            className="h-12 border-black/5 bg-white hover:bg-black/5 font-bold uppercase text-xs tracking-widest rounded-xl"
+          <button
+            className="flex items-center justify-center px-4 h-12 border border-black/5 bg-white hover:bg-black/5 font-bold uppercase text-xs tracking-widest rounded-xl transition-colors"
             onClick={() => setOpenUpdateJournal(true)}
           >
             <Edit2 className="w-4 h-4 mr-2" />
             Edit Details
-          </Button>
+          </button>
 
           {!journal.is_posted && (
             <>
-              <Button
+              <button
                 onClick={() => setOpenAddEntry(true)}
-                className="h-12 bg-[#D0402B] border border-black/5 text-white hover:bg-black/5 font-bold uppercase text-xs tracking-widest rounded-xl shadow-sm"
+                className="flex items-center justify-center px-4 h-12 bg-[#D0402B] border border-black/5 text-white hover:bg-[#D0402B]/90 font-bold uppercase text-xs tracking-widest rounded-xl shadow-sm transition-colors"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Entry
-              </Button>
+              </button>
 
-              <Button
+              <button
                 onClick={handlePostJournal}
                 disabled={isPosting || !isBalanced}
-                className={`h-12 font-bold uppercase text-xs tracking-widest rounded-xl shadow-lg transition-all ${!isBalanced
+                className={`flex items-center justify-center px-4 h-12 font-bold uppercase text-xs tracking-widest rounded-xl shadow-lg transition-all ${!isBalanced
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                   : "bg-[#045138] hover:bg-black text-white"
                   }`}
@@ -217,7 +199,7 @@ export default function JournalsDetailPage() {
                     Finalize & Post
                   </div>
                 )}
-              </Button>
+              </button>
             </>
           )}
         </div>
@@ -225,8 +207,8 @@ export default function JournalsDetailPage() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
+          <div className="p-6">
             <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
               Total Debit
             </p>
@@ -242,10 +224,10 @@ export default function JournalsDetailPage() {
                 currency: journal.currency,
               }).format(totalDebit)}
             </p>
-          </CardContent>
-        </Card>
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
-          <CardContent className="p-6">
+          </div>
+        </div>
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
+          <div className="p-6">
             <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
               Total Credit
             </p>
@@ -261,15 +243,15 @@ export default function JournalsDetailPage() {
                 currency: journal.currency,
               }).format(totalCredit)}
             </p>
-          </CardContent>
-        </Card>
-        <Card
-          className={`border-black/5 backdrop-blur-xl rounded-2xl shadow-sm transition-colors ${isBalanced
+          </div>
+        </div>
+        <div
+          className={`border border-black/5 backdrop-blur-xl rounded-2xl shadow-sm transition-colors ${isBalanced
             ? "bg-[#045138]/5 border-[#045138]/20"
             : "bg-red-500/5 border-red-500/20"
             }`}
         >
-          <CardContent className="p-6">
+          <div className="p-6">
             <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
               Balance Status
             </p>
@@ -281,21 +263,21 @@ export default function JournalsDetailPage() {
                 {isBalanced ? "Balanced" : "Unbalanced"}
               </p>
               {!isBalanced && (
-                <Badge className="bg-red-500 text-white border-none w-fit">
+                <span className="px-3 py-1 bg-red-500 text-white font-bold text-xs rounded-full w-fit">
                   Diff:{" "}
                   {new Intl.NumberFormat("en-KE", {
                     style: "currency",
                     currency: journal.currency,
                   }).format(Math.abs(totalDebit - totalCredit))}
-                </Badge>
+                </span>
               )}
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       {/* Entries List */}
-      <Card className="border-gray-200 bg-white rounded-xl shadow-sm pb-12">
+      <div className="border border-gray-200 bg-white rounded-xl shadow-sm pb-12">
         <div className="p-6 border-b border-gray-100 flex justify-between items-center">
           <h3 className="text-lg font-bold text-gray-900 tracking-tight flex items-center gap-3">
             <Receipt className="w-4 h-4 text-gray-500" />
@@ -305,7 +287,7 @@ export default function JournalsDetailPage() {
             {journal.journal_entries.length} Entries
           </span>
         </div>
-        <CardContent className="p-0">
+        <div className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -370,8 +352,8 @@ export default function JournalsDetailPage() {
               </tbody>
             </table>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Manual Modal Implementation for Create Journal Entry */}
       {openAddEntry && (

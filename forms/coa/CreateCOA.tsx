@@ -4,16 +4,10 @@
 import { createCOA } from "@/services/coa";
 import { useFormik } from "formik";
 import { COASchema } from "@/validation";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+
+
+
+
 import { toast } from "react-hot-toast";
 import { Loader2, FileText, Plus, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
@@ -66,10 +60,10 @@ export default function CreateCOA({
   });
 
   return (
-    <Card
+    <div
       className={`w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
     >
-      <CardHeader
+      <div
         className="p-8 border-b border-black/5"
         style={{ backgroundColor: `${primaryColor}0D` }}
       >
@@ -85,43 +79,42 @@ export default function CreateCOA({
               <FileText className="w-6 h-6" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-black text-black tracking-tight">
+              <h2 className="text-2xl font-black text-black tracking-tight">
                 Add Chart of Account
-              </CardTitle>
-              <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+              </h2>
+              <p className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
                 Financial Classification
-              </CardDescription>
+              </p>
             </div>
           </div>
           {onClose && (
-            <Button
+            <button
               type="button"
               onClick={onClose}
-              variant="ghost"
-              size="icon"
-              className="hover:bg-red-50 hover:text-red-500 rounded-full"
+             
+              className="hover:bg-red-50 hover:text-red-500 rounded-full p-2"
             >
               <X className="w-5 h-5" />
-            </Button>
+            </button>
           )}
         </div>
-      </CardHeader>
-      <CardContent className="p-8">
+      </div>
+      <div className="p-8">
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="code"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Account Code
-              </Label>
-              <Input
+              </label>
+              <input
                 id="code"
                 name="code"
                 type="text"
                 placeholder="e.g. 1000"
-                className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.code}
@@ -135,18 +128,18 @@ export default function CreateCOA({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="order"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Display Order
-              </Label>
-              <Input
+              </label>
+              <input
                 id="order"
                 name="order"
                 type="number"
                 placeholder="e.g. 10"
-                className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.order}
@@ -161,18 +154,18 @@ export default function CreateCOA({
           </div>
 
           <div className="space-y-2">
-            <Label
+            <label
               htmlFor="name"
               className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
             >
               Account Name
-            </Label>
-            <Input
+            </label>
+            <input
               id="name"
               name="name"
               type="text"
               placeholder="e.g. Liabilitiess"
-              className="h-14 rounded-2xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
@@ -186,16 +179,16 @@ export default function CreateCOA({
           </div>
 
           <div className="space-y-2">
-            <Label
+            <label
               htmlFor="normal_balance"
               className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
             >
               Normal Balance
-            </Label>
+            </label>
             <select
               id="normal_balance"
               name="normal_balance"
-              className="flex h-14 w-full rounded-2xl border border-black/5 bg-black/5 px-5 py-2 text-sm font-bold ring-offset-white focus:outline-none focus:ring-2 transition-all appearance-none cursor-pointer"
+              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold ring-offset-white transition-all appearance-none cursor-pointer"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.normal_balance}
@@ -222,19 +215,19 @@ export default function CreateCOA({
               checked={formik.values.is_active}
               style={{ accentColor: primaryColor }}
             />
-            <Label
+            <label
               htmlFor="is_active"
               className="text-sm font-black text-black cursor-pointer"
             >
               Set as Active Account
-            </Label>
+            </label>
           </div>
 
           <div className="pt-4">
-            <Button
+            <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
+              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,
@@ -248,10 +241,10 @@ export default function CreateCOA({
                   Register Account
                 </div>
               )}
-            </Button>
+            </button>
           </div>
         </form>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

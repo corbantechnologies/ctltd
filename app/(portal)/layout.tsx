@@ -6,11 +6,19 @@ export default function PortalLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#F5F5F5] flex flex-col">
+    <div className="min-h-screen bg-slate-50 flex flex-col font-sans antialiased text-slate-900">
       <Navbar />
-      <main className="p-6 flex-1">{children}</main>
-      <footer className="text-center text-black/40 text-xs mt-12 pb-6">
-        <p>Copyright © {new Date().getFullYear()} Corban Technologies LTD. All rights reserved.</p>
+      <main className="mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+        <div className="animate-in fade-in slide-in-from-bottom-2 duration-500">
+          {children}
+        </div>
+      </main>
+      <footer className="border-t border-slate-200 py-8 bg-white/50 backdrop-blur-sm">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-slate-400 text-xs font-semibold uppercase tracking-widest">
+            &copy; {new Date().getFullYear()} Corban Technologies LTD. Engineered for Excellence.
+          </p>
+        </div>
       </footer>
     </div>
   );

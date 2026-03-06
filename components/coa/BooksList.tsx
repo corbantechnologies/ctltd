@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   Book as BookIcon,
   ArrowRight,
@@ -18,8 +16,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useMemo } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Book } from "@/services/books";
 
 type CSSWithVariables = React.CSSProperties & {
@@ -84,14 +80,15 @@ export default function BooksList({
               className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20"
               style={{ color: searchQuery ? primaryColor : undefined }}
             />
-            <Input
+            <input
+              type="text"
               placeholder="Search books..."
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              className="pl-11 h-12 rounded-xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold text-xs"
+              className="pl-11 h-12 w-full rounded-xl border border-black/5 bg-black/5 focus:bg-white transition-all font-bold text-xs focus:outline-none focus:ring-1"
             />
           </div>
         </div>
@@ -145,8 +142,8 @@ export default function BooksList({
               href={`/${rolePrefix}/coa/${coaReference}/${book.reference}`}
               className="group"
             >
-              <Card className="border-black/5 shadow-sm hover:shadow-2xl transition-all duration-500 rounded-[28px] overflow-hidden bg-white/80 backdrop-blur-xl group-hover:-translate-y-1 h-full flex flex-col">
-                <CardContent className="p-6 flex-1 flex flex-col">
+              <div className="border border-black/5 shadow-sm hover:shadow-2xl transition-all duration-500 rounded-[28px] overflow-hidden bg-white/80 backdrop-blur-xl group-hover:-translate-y-1 h-full flex flex-col">
+                <div className="p-6 flex-1 flex flex-col">
                   <div className="flex justify-between items-start mb-6">
                     <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center text-black/40 group-hover:bg-black group-hover:text-white transition-all duration-500 shadow-inner">
                       {book.is_bank ? (
@@ -158,13 +155,13 @@ export default function BooksList({
                       )}
                     </div>
                     {book.is_active ? (
-                      <Badge className="bg-green-500/10 text-green-600 border-none font-bold text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full">
+                      <span className="bg-green-500/10 text-green-600 border-none font-bold text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full inline-block">
                         Active
-                      </Badge>
+                      </span>
                     ) : (
-                      <Badge className="bg-black/5 text-black/40 border-none font-bold text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full">
+                      <span className="bg-black/5 text-black/40 border-none font-bold text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full inline-block">
                         Inactive
-                      </Badge>
+                      </span>
                     )}
                   </div>
 
@@ -197,15 +194,15 @@ export default function BooksList({
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
                         {book.is_tax && (
-                          <Badge className="bg-orange-500/10 text-orange-600 border-none text-[8px] font-bold px-1.5 py-0.5 rounded-sm">
+                          <span className="bg-orange-500/10 text-orange-600 border-none text-[8px] font-bold px-1.5 py-0.5 rounded-sm flex items-center">
                             <Percent className="w-2 h-2 mr-1" />
                             TAX
-                          </Badge>
+                          </span>
                         )}
                         {book.is_bank && (
-                          <Badge className="bg-blue-500/10 text-blue-600 border-none text-[8px] font-bold px-1.5 py-0.5 rounded-sm">
+                          <span className="bg-blue-500/10 text-blue-600 border-none text-[8px] font-bold px-1.5 py-0.5 rounded-sm inline-block">
                             BANK
-                          </Badge>
+                          </span>
                         )}
                       </div>
                       <ArrowRight
@@ -218,8 +215,8 @@ export default function BooksList({
                       />
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </Link>
           ))}
         </div>
@@ -289,14 +286,14 @@ export default function BooksList({
                     <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex gap-1.5">
                         {book.is_tax && (
-                          <Badge className="bg-orange-500/10 text-orange-600 border-none text-[8px] font-bold px-1.5 py-0.5 rounded-sm">
+                          <span className="bg-orange-500/10 text-orange-600 border-none text-[8px] font-bold px-1.5 py-0.5 rounded-sm inline-block">
                             TAX
-                          </Badge>
+                          </span>
                         )}
                         {book.is_bank && (
-                          <Badge className="bg-blue-500/10 text-blue-600 border-none text-[8px] font-bold px-1.5 py-0.5 rounded-sm">
+                          <span className="bg-blue-500/10 text-blue-600 border-none text-[8px] font-bold px-1.5 py-0.5 rounded-sm inline-block">
                             BANK
-                          </Badge>
+                          </span>
                         )}
                         {!book.is_tax && !book.is_bank && (
                           <span className="text-[10px] text-black/20 font-bold">
@@ -326,15 +323,14 @@ export default function BooksList({
                       <Link
                         href={`/${rolePrefix}/coa/${coaReference}/${book.reference}`}
                       >
-                        <Button
-                          variant="ghost"
-                          className="h-7 w-7 p-0 rounded-md hover:text-white transition-all duration-300"
+                        <button
+                          className="flex items-center justify-center h-7 w-7 p-0 rounded-md hover:text-white transition-all duration-300"
                           style={
                             { "--hover-bg": primaryColor } as CSSWithVariables
                           }
                         >
                           <ArrowRight className="w-3.5 h-3.5" />
-                        </Button>
+                        </button>
                       </Link>
                     </td>
                   </tr>
@@ -354,15 +350,14 @@ export default function BooksList({
           </p>
 
           <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
+            <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              className="w-10 h-10 p-0 rounded-xl border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              className="flex items-center justify-center w-10 h-10 p-0 border border-black/5 rounded-xl bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
               style={{ ["--hover-bg" as any]: primaryColor }}
             >
               <ChevronLeft className="w-4 h-4" />
-            </Button>
+            </button>
 
             <div className="flex items-center gap-1 px-4">
               {[...Array(totalPages)].map((_, i) => {
@@ -407,15 +402,14 @@ export default function BooksList({
               })}
             </div>
 
-            <Button
-              variant="outline"
+            <button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              className="w-10 h-10 p-0 rounded-xl border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              className="flex items-center justify-center w-10 h-10 p-0 border border-black/5 rounded-xl bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
               style={{ ["--hover-bg" as any]: primaryColor }}
             >
               <ChevronRight className="w-4 h-4" />
-            </Button>
+            </button>
           </div>
         </div>
       )}

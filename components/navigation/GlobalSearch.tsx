@@ -2,12 +2,12 @@
 
 import * as React from "react";
 import { Command } from "cmdk";
-import { Search, Calculator, Layers, Book, FileText } from "lucide-react";
+import { Search, Calculator, Layers, Book, FileText, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useFetchCOAs } from "@/hooks/coa/actions";
 import { useFetchBooks } from "@/hooks/books/actions";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 
 export function GlobalSearch({ role = "finance" }: { role?: "finance" | "director" }) {
     const [open, setOpen] = useState(false);
@@ -37,78 +37,127 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
         <>
             <button
                 onClick={() => setOpen(true)}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border border-black/5 bg-white shadow-sm hover:shadow-md transition-all group text-left"
+                className={cn(
+                    "w-full flex items-center gap-5 px-8 py-5 rounded-[2rem] border border-slate-200 bg-white shadow-2xl shadow-slate-100 transition-all group text-left relative overflow-hidden",
+                    role === "director" ? "hover:border-corporate-primary/40" : "hover:border-emerald-600/40"
+                )}
             >
-                <Search className="w-4 h-4 text-black/40 group-hover:text-corporate-primary transition-colors" />
-                <span className="text-sm font-medium text-black/40 group-hover:text-black/60 flex-1">
-                    Search anything...
-                </span>
-                <div className="hidden md:flex items-center gap-1">
-                    <span className="text-[10px] font-bold bg-black/5 border border-black/5 rounded px-1.5 py-0.5 text-black/30">
-                        ⌘K
+                <div className={cn(
+                    "absolute top-0 right-0 w-32 h-32 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-10 transition-opacity",
+                    role === "director" ? "bg-corporate-primary" : "bg-emerald-600"
+                )} />
+
+                <div className={cn(
+                    "w-12 h-12 rounded-2xl flex items-center justify-center transition-all shadow-inner",
+                    role === "director" ? "bg-slate-50 group-hover:bg-corporate-primary group-hover:text-white" : "bg-slate-50 group-hover:bg-emerald-600 group-hover:text-white",
+                    "text-slate-400"
+                )}>
+                    <Search className="w-6 h-6" />
+                </div>
+                <div className="flex-1">
+                    <span className="text-lg font-bold text-slate-400 group-hover:text-slate-900 transition-colors block italic">
+                        Access Corporate Intel...
                     </span>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-300 mt-0.5">
+                        Global Search Engine
+                    </p>
+                </div>
+                <div className="hidden md:flex items-center gap-2">
+                    <kbd className="px-3 py-1.5 rounded-xl bg-slate-900 text-white text-[9px] font-black shadow-2xl tracking-tighter shadow-slate-900/20">
+                        CMD
+                    </kbd>
+                    <span className="text-slate-300 font-bold">+</span>
+                    <kbd className="px-3 py-1.5 rounded-xl bg-slate-900 text-white text-[9px] font-black shadow-2xl tracking-tighter shadow-slate-900/20">
+                        K
+                    </kbd>
                 </div>
             </button>
-            <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent className="p-0 overflow-hidden shadow-2xl rounded-2xl border border-black/5 bg-white/80 backdrop-blur-xl max-w-2xl">
-                    <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-14 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
-                        <div className="flex items-center border-b border-black/5 px-4" cmdk-input-wrapper="">
-                            <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
-                            <Command.Input
-                                className="flex h-14 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
-                                placeholder="Type a command or search..."
-                            />
-                        </div>
-                        <Command.List className="max-h-[300px] overflow-y-auto overflow-x-hidden py-2 px-2 scrollbar-hide">
-                            <Command.Empty className="py-6 text-center text-sm">No results found.</Command.Empty>
 
-                            <Command.Group heading="Navigation">
-                                <Command.Item
-                                    className="relative flex cursor-default select-none items-center rounded-xl px-2 py-2 text-sm outline-none aria-selected:bg-[#045138] aria-selected:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors"
-                                    onSelect={() => runCommand(() => router.push(`/${role}/dashboard`))}
+            {open && (
+                <>
+                    <div 
+                        className="fixed inset-0 bg-slate-950/40 backdrop-blur-md z-[100] animate-in fade-in duration-300" 
+                        onClick={() => setOpen(false)}
+                    />
+                    <div className="fixed top-[15%] left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-2xl bg-white/90 backdrop-blur-2xl rounded-[2rem] shadow-2xl border border-slate-200 p-0 overflow-hidden z-[101] animate-in zoom-in-95 fade-in duration-300">
+                        <Command className="w-full">
+                            <div className="flex items-center border-b border-slate-100 px-6" cmdk-input-wrapper="">
+                                <Search className="mr-3 h-5 w-5 shrink-0 text-slate-400" />
+                                <Command.Input
+                                    className="flex h-20 w-full rounded-md bg-transparent py-3 text-lg font-medium text-slate-900 outline-none placeholder:text-slate-400 disabled:cursor-not-allowed disabled:opacity-50"
+                                    placeholder="Looking for something specific?"
+                                />
+                                <button
+                                    onClick={() => setOpen(false)}
+                                    className="p-2 rounded-xl hover:bg-slate-100 text-slate-400 transition-colors"
                                 >
-                                    <Calculator className="mr-2 h-4 w-4" />
-                                    <span>Dashboard</span>
-                                </Command.Item>
-                                <Command.Item
-                                    className="relative flex cursor-default select-none items-center rounded-xl px-2 py-2 text-sm outline-none aria-selected:bg-[#045138] aria-selected:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors"
-                                    onSelect={() => runCommand(() => router.push(`/${role}/coa`))}
-                                >
-                                    <Layers className="mr-2 h-4 w-4" />
-                                    <span>Chart of Accounts</span>
-                                </Command.Item>
-                            </Command.Group>
+                                    <X className="w-5 h-5" />
+                                </button>
+                            </div>
+                            <Command.List className="max-h-[450px] overflow-y-auto overflow-x-hidden p-4 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
+                                <Command.Empty className="py-12 text-center text-slate-500 font-medium">
+                                    No results found for your query.
+                                </Command.Empty>
 
-                            <Command.Group heading="Accounts">
-                                {coas?.slice(0, 10).map((coa) => (
+                                <Command.Group heading={<span className="px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Navigation</span>}>
                                     <Command.Item
-                                        key={coa.reference}
-                                        className="relative flex cursor-default select-none items-center rounded-xl px-2 py-2 text-sm outline-none aria-selected:bg-[#045138] aria-selected:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors"
-                                        onSelect={() => runCommand(() => router.push(`/${role}/coa/${coa.reference}`))}
+                                        className="flex cursor-pointer select-none items-center rounded-2xl px-4 py-4 text-slate-600 outline-none hover:bg-slate-100 hover:text-slate-900 aria-selected:bg-slate-100 aria-selected:text-slate-900 transition-all mb-1 group"
+                                        onSelect={() => runCommand(() => router.push(`/${role}/dashboard`))}
                                     >
-                                        <FileText className="mr-2 h-4 w-4" />
-                                        <span>{coa.name} ({coa.code})</span>
+                                        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
+                                            <Calculator className="h-5 w-5" />
+                                        </div>
+                                        <span className="font-bold">Command Dashboard</span>
                                     </Command.Item>
-                                ))}
-                            </Command.Group>
-
-                            <Command.Group heading="Books">
-                                {books?.slice(0, 10).map((book) => (
                                     <Command.Item
-                                        key={book.reference}
-                                        className="relative flex cursor-default select-none items-center rounded-xl px-2 py-2 text-sm outline-none aria-selected:bg-[#045138] aria-selected:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors"
-                                        onSelect={() => runCommand(() => router.push(`/${role}/books/${book.reference}`))} // Check path
+                                        className="flex cursor-pointer select-none items-center rounded-2xl px-4 py-4 text-slate-600 outline-none hover:bg-slate-100 hover:text-slate-900 aria-selected:bg-slate-100 aria-selected:text-slate-900 transition-all mb-1 group"
+                                        onSelect={() => runCommand(() => router.push(`/${role}/coa`))}
                                     >
-                                        <Book className="mr-2 h-4 w-4" />
-                                        <span>{book.name}</span>
+                                        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
+                                            <Layers className="h-5 w-5" />
+                                        </div>
+                                        <span className="font-bold">Chart of Accounts</span>
                                     </Command.Item>
-                                ))}
-                            </Command.Group>
+                                </Command.Group>
 
-                        </Command.List>
-                    </Command>
-                </DialogContent>
-            </Dialog>
+                                <Command.Group heading={<span className="px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 block mt-4 mb-2">Ledger Accounts</span>}>
+                                    {coas?.slice(0, 8).map((coa) => (
+                                        <Command.Item
+                                            key={coa.reference}
+                                            className="flex cursor-pointer select-none items-center rounded-2xl px-4 py-4 text-slate-600 outline-none hover:bg-slate-100 hover:text-slate-900 aria-selected:bg-slate-100 aria-selected:text-slate-900 transition-all mb-1 group"
+                                            onSelect={() => runCommand(() => router.push(`/${role}/coa/${coa.reference}`))}
+                                        >
+                                            <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
+                                                <FileText className="h-5 w-5" />
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <span className="font-bold">{coa.name}</span>
+                                                <span className="text-xs text-slate-400 font-bold tracking-wider">{coa.code}</span>
+                                            </div>
+                                        </Command.Item>
+                                    ))}
+                                </Command.Group>
+
+                                <Command.Group heading={<span className="px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 block mt-4 mb-2">Institutional Books</span>}>
+                                    {books?.slice(0, 8).map((book) => (
+                                        <Command.Item
+                                            key={book.reference}
+                                            className="flex cursor-pointer select-none items-center rounded-2xl px-4 py-4 text-slate-600 outline-none hover:bg-slate-100 hover:text-slate-900 aria-selected:bg-slate-100 aria-selected:text-slate-900 transition-all mb-1 group"
+                                            onSelect={() => runCommand(() => router.push(`/${role}/books/${book.reference}`))}
+                                        >
+                                            <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
+                                                <Book className="h-5 w-5" />
+                                            </div>
+                                            <span className="font-bold">{book.name}</span>
+                                        </Command.Item>
+                                    ))}
+                                </Command.Group>
+
+                            </Command.List>
+                        </Command>
+                    </div>
+                </>
+            )}
         </>
     );
 }

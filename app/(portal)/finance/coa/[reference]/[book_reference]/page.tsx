@@ -16,21 +16,7 @@ import {
   ArrowUpDown,
   Wallet,
 } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+
 
 export default function FinanceBookDetailPage() {
   const { reference, book_reference } = useParams<{
@@ -46,31 +32,29 @@ export default function FinanceBookDetailPage() {
 
   return (
     <div className="space-y-8 pb-12">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/finance">Dashboard</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/finance/coa">COA</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href={`/finance/coa/${reference}`}>
+      <nav>
+        <ol className="flex items-center gap-2 text-sm text-black/60">
+          <li>
+            <a href="/finance" className="hover:text-black hover:underline">Dashboard</a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <a href="/finance/coa" className="hover:text-black hover:underline">COA</a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <a href={`/finance/coa/${reference}`} className="hover:text-black hover:underline">
               {book?.account_type}
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink
-              href={`/finance/coa/${reference}/${book?.reference}`}
-            >
+            </a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <a href={`/finance/coa/${reference}/${book?.reference}`} className="font-bold text-black">
               {book?.name}
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+            </a>
+          </li>
+        </ol>
+      </nav>
 
       {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -98,21 +82,21 @@ export default function FinanceBookDetailPage() {
 
         <div className="flex items-center gap-2">
           {book?.is_active ? (
-            <Badge className="bg-green-500/10 text-green-600 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
+            <span className="bg-green-500/10 text-green-600 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
               Active Ledger
-            </Badge>
+            </span>
           ) : (
-            <Badge className="bg-black/5 text-black/40 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
+            <span className="bg-black/5 text-black/40 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
               Retired
-            </Badge>
+            </span>
           )}
         </div>
       </div>
 
       {/* Meta Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <Calendar className="w-5 h-5" />
@@ -126,11 +110,11 @@ export default function FinanceBookDetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <Hash className="w-5 h-5" />
@@ -144,11 +128,11 @@ export default function FinanceBookDetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <ArrowUpDown className="w-5 h-5" />
@@ -162,11 +146,11 @@ export default function FinanceBookDetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-600">
                 <Wallet className="w-5 h-5" />
@@ -183,30 +167,30 @@ export default function FinanceBookDetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       {/* Transaction History (Journal Entries) */}
-      <Card className="border-black/5 bg-white/50 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl shadow-black/5 pb-24">
-        <CardHeader className="p-8 border-b border-black/5">
+      <div className="border border-black/5 bg-white/50 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl shadow-black/5 pb-24">
+        <div className="p-8 border-b border-black/5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-xl bg-[#045138]/10 flex items-center justify-center text-[#045138]">
                 <History className="w-5 h-5" />
               </div>
               <div>
-                <CardTitle className="text-xl font-bold text-black tracking-tight">
+                <h3 className="text-xl font-bold text-black tracking-tight">
                   Ledger History
-                </CardTitle>
-                <CardDescription className="text-black/30 font-bold uppercase text-[9px] tracking-widest mt-0.5">
+                </h3>
+                <p className="text-black/30 font-bold uppercase text-[9px] tracking-widest mt-0.5">
                   Chronological Transaction Records
-                </CardDescription>
+                </p>
               </div>
             </div>
           </div>
-        </CardHeader>
-        <CardContent className="p-0">
+        </div>
+        <div className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -255,9 +239,9 @@ export default function FinanceBookDetailPage() {
                         </div>
                       </td>
                       <td className="py-2.5 px-4 border-b border-black/5">
-                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none">
+                        <span className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none">
                           {entry.division || "Entity Core"}
-                        </Badge>
+                        </span>
                       </td>
                       <td className="py-2.5 px-4 border-b border-black/5 text-right">
                         <p className="text-sm font-medium text-green-600">
@@ -301,8 +285,8 @@ export default function FinanceBookDetailPage() {
               </tbody>
             </table>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

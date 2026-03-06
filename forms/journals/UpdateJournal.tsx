@@ -3,17 +3,11 @@
 
 import { updateJournal } from "@/services/journals";
 import { useFormik } from "formik";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+
+
+
+
+
 import { toast } from "react-hot-toast";
 import { Loader2, Edit3, Save, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
@@ -82,39 +76,38 @@ export default function UpdateJournal({
   });
 
   return (
-    <Card
+    <div
       className={`mx-auto border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
     >
-      <CardHeader className="bg-orange-50/50 p-8 border-b border-black/5">
+      <div className="bg-orange-50/50 p-8 border-b border-black/5">
         <div className="flex items-center gap-4 mb-4">
           <div className="w-12 h-12 rounded-2xl bg-black flex items-center justify-center text-white shadow-lg">
             <Edit3 className="w-6 h-6" />
           </div>
           <div>
-            <CardTitle className="text-2xl font-black text-black tracking-tight">
+            <h2 className="text-2xl font-black text-black tracking-tight">
               Update Journal Batch
-            </CardTitle>
-            <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+            </h2>
+            <p className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
               Refine Transaction Batch
-            </CardDescription>
+            </p>
           </div>
           {onClose && (
             <div className="ml-auto">
-              <Button
+              <button
                 type="button"
                 onClick={onClose}
-                variant="ghost"
-                size="icon"
-                className="hover:bg-red-50 hover:text-red-500 rounded-full text-black/40"
+               
+                className="hover:bg-red-50 hover:text-red-500 rounded-full text-black/40 p-2"
               >
                 <X className="w-5 h-5" />
-              </Button>
+              </button>
             </div>
           )}
         </div>
-      </CardHeader>
+      </div>
 
-      <CardContent className="p-8">
+      <div className="p-8">
         {/* Static info */}
         <div className="grid grid-cols-2 gap-4 mb-6">
           <div className="p-4 bg-black/5 rounded-2xl border border-black/5">
@@ -134,17 +127,17 @@ export default function UpdateJournal({
         {/* Editable fields */}
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label
+            <label
               htmlFor="date"
               className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
             >
               Transaction Date
-            </Label>
-            <Input
+            </label>
+            <input
               id="date"
               name="date"
               type="date"
-              className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.date}
@@ -152,16 +145,16 @@ export default function UpdateJournal({
           </div>
 
           <div className="space-y-2">
-            <Label
+            <label
               htmlFor="description"
               className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
             >
               Description
-            </Label>
-            <Textarea
+            </label>
+            <textarea
               id="description"
               name="description"
-              className="min-h-[120px] rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold p-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[120px] rounded-2xl focus:bg-slate-50 transition-all font-bold p-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.description}
@@ -169,12 +162,12 @@ export default function UpdateJournal({
           </div>
 
           <div className="space-y-2">
-            <Label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
+            <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1">
               Currency
-            </Label>
+            </label>
             <select
               name="currency"
-              className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 appearance-none"
+              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm font-bold focus:ring-corporate-primary/20 appearance-none"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.currency}
@@ -187,10 +180,10 @@ export default function UpdateJournal({
           </div>
 
           <div className="pt-4">
-            <Button
+            <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
+              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
             >
               {formik.isSubmitting ? (
                 <Loader2 className="w-6 h-6 animate-spin" />
@@ -200,10 +193,10 @@ export default function UpdateJournal({
                   Save Changes
                 </div>
               )}
-            </Button>
+            </button>
           </div>
         </form>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

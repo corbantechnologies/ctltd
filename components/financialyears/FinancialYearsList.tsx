@@ -2,8 +2,6 @@
 
 import { useFetchFinancialYears } from "@/hooks/financialyears/actions";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   CalendarRange,
   ArrowRight,
@@ -16,8 +14,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useMemo } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 interface FinancialYearsListProps {
   rolePrefix: string;
@@ -79,14 +75,15 @@ export default function FinancialYearsList({
               className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-black/20"
               style={{ color: searchQuery ? primaryColor : undefined }}
             />
-            <Input
+            <input
+              type="text"
               placeholder="Search by code or reference..."
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              className="pl-9 h-10 rounded-xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold text-xs focus:ring-1"
+              className="pl-9 h-10 w-full rounded-xl border border-black/5 bg-black/5 focus:bg-white transition-all font-bold text-xs focus:outline-none focus:ring-1"
               style={
                 {
                   "--tw-ring-color": primaryColor,
@@ -137,8 +134,8 @@ export default function FinancialYearsList({
               href={`/${rolePrefix}/fiscal-years/${year.reference}`}
               className="group"
             >
-              <Card className="border-black/5 shadow-sm hover:shadow-2xl transition-all duration-300 rounded-2xl overflow-hidden bg-white/80 backdrop-blur-xl group-hover:-translate-y-1">
-                <CardContent className="p-5">
+              <div className="border border-black/5 shadow-sm hover:shadow-2xl transition-all duration-300 rounded-2xl overflow-hidden bg-white/80 backdrop-blur-xl group-hover:-translate-y-1">
+                <div className="p-5">
                   <div className="flex justify-between items-start mb-4">
                     <div
                       className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 shadow-inner"
@@ -150,13 +147,13 @@ export default function FinancialYearsList({
                       <CalendarRange className="w-5 h-5" />
                     </div>
                     {year.is_active ? (
-                      <Badge className="bg-green-500/10 text-green-600 border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full">
+                      <span className="bg-green-500/10 text-green-600 border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full inline-block">
                         Active
-                      </Badge>
+                      </span>
                     ) : (
-                      <Badge className="bg-black/5 text-black/40 border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full">
+                      <span className="bg-black/5 text-black/40 border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full inline-block">
                         Closed
-                      </Badge>
+                      </span>
                     )}
                   </div>
 
@@ -180,8 +177,8 @@ export default function FinancialYearsList({
                     </div>
                     <ArrowRight className="w-3.5 h-3.5 text-black/20 group-hover:text-[#D0402B] group-hover:translate-x-1 transition-all" />
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </Link>
           ))}
         </div>
@@ -234,19 +231,13 @@ export default function FinancialYearsList({
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-1.5">
-                        <Badge
-                          variant="outline"
-                          className="bg-white text-black/60 border-black/10 font-bold text-[9px] py-0 px-2 shadow-none"
-                        >
+                        <span className="bg-white text-black/60 border border-black/10 font-bold text-[9px] py-0 px-2 rounded-full inline-block">
                           {new Date(year.start_date).toLocaleDateString()}
-                        </Badge>
+                        </span>
                         <span className="text-black/20">-</span>
-                        <Badge
-                          variant="outline"
-                          className="bg-white text-black/60 border-black/10 font-bold text-[9px] py-0 px-2 shadow-none"
-                        >
+                        <span className="bg-white text-black/60 border border-black/10 font-bold text-[9px] py-0 px-2 rounded-full inline-block">
                           {new Date(year.end_date).toLocaleDateString()}
-                        </Badge>
+                        </span>
                       </div>
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5 text-sm font-medium">{year.estimated_profit}</td>
@@ -271,12 +262,11 @@ export default function FinancialYearsList({
                       <Link
                         href={`/${rolePrefix}/fiscal-years/${year.reference}`}
                       >
-                        <Button
-                          variant="ghost"
-                          className="h-7 w-7 p-0 rounded-md hover:bg-white hover:shadow-sm hover:text-black transition-all duration-300 text-black/30"
+                        <button
+                          className="h-7 w-7 p-0 rounded-md hover:bg-white flex items-center justify-center hover:shadow-sm hover:text-black transition-all duration-300 text-black/30"
                         >
                           <ArrowRight className="w-3.5 h-3.5" />
-                        </Button>
+                        </button>
                       </Link>
                     </td>
                   </tr>
@@ -296,15 +286,14 @@ export default function FinancialYearsList({
           </p>
 
           <div className="flex items-center gap-1.5">
-            <Button
-              variant="outline"
+            <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              className="w-8 h-8 p-0 rounded-lg border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              className="flex items-center justify-center w-8 h-8 p-0 border border-black/5 rounded-lg bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
               style={{ "--hover-bg": primaryColor } as React.CSSProperties}
             >
               <ChevronLeft className="w-3.5 h-3.5" />
-            </Button>
+            </button>
 
             <div className="flex items-center gap-1 px-2">
               {[...Array(totalPages)].map((_, i) => {
@@ -349,15 +338,14 @@ export default function FinancialYearsList({
               })}
             </div>
 
-            <Button
-              variant="outline"
+            <button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              className="w-8 h-8 p-0 rounded-lg border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              className="flex items-center justify-center w-8 h-8 p-0 border border-black/5 rounded-lg bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
               style={{ "--hover-bg": primaryColor } as React.CSSProperties}
             >
               <ChevronRight className="w-3.5 h-3.5" />
-            </Button>
+            </button>
           </div>
         </div>
       )}

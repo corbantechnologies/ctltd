@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ScrollText } from "lucide-react";
+import { ScrollText, Clock, ArrowRight } from "lucide-react";
 
 interface RecentActivityFeedProps {
   entries: any[];
@@ -11,7 +10,6 @@ interface RecentActivityFeedProps {
 export default function RecentActivityFeed({
   entries,
 }: RecentActivityFeedProps) {
-  // Sort by created_at desc and take top 5
   if (!entries) return null;
 
   const recentEntries = [...entries]
@@ -22,62 +20,78 @@ export default function RecentActivityFeed({
     .slice(0, 5);
 
   return (
-    <Card className="col-span-1 shadow-xl shadow-black/5 border-none rounded-[32px] bg-white/60 backdrop-blur-xl">
-      <CardHeader>
-        <CardTitle className="text-xl font-bold text-black flex items-center gap-2">
-          <ScrollText className="w-5 h-5 text-[#045138]" />
-          Recent Activity
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          {recentEntries.length === 0 ? (
-            <p className="text-center text-gray-500 py-4">
-              No recent activity.
+    <div className="col-span-1 shadow-2xl shadow-slate-200/50 border border-slate-200 rounded-[2.5rem] bg-white p-8 relative overflow-hidden flex flex-col group hover:shadow-corporate-primary/5 transition-all duration-500">
+      <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-corporate-primary/5 transition-colors" />
+
+      <div className="flex items-center justify-between mb-8 relative z-10">
+        <div>
+          <h3 className="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+            <ScrollText className="w-5 h-5 text-corporate-primary" />
+            Audit Trail
+          </h3>
+          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
+            Latest Transactions
+          </p>
+        </div>
+        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 border border-slate-100 group-hover:border-slate-200 transition-colors">
+          <Clock className="w-5 h-5" />
+        </div>
+      </div>
+
+      <div className="space-y-4 relative z-10 flex-1">
+        {recentEntries.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-12 text-slate-400">
+            <ScrollText className="w-12 h-12 mb-4 opacity-10" />
+            <p className="text-sm font-semibold italic">
+              No recent activity recorded.
             </p>
-          ) : (
-            recentEntries.map((entry) => (
-              <div
-                key={entry.reference}
-                className="flex items-center justify-between p-3 rounded-xl hover:bg-black/5 transition-colors group"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#045138]/10 flex items-center justify-center text-[#045138] font-bold text-xs uppercase">
-                    JE
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-sm text-black group-hover:text-[#045138] transition-colors">
-                      {entry.notes || "Journal Entry"}
-                    </h4>
-                    <p className="text-[10px] uppercase font-bold text-black/40">
-                      {entry.created_at
-                        ? new Date(entry.created_at).toLocaleDateString(
-                            "en-US",
-                            {
-                              year: "numeric",
-                              month: "short",
-                              day: "numeric",
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            },
-                          )
-                        : "N/A"}
-                    </p>
-                  </div>
+          </div>
+        ) : (
+          recentEntries.map((entry) => (
+            <div
+              key={entry.reference}
+              className="group/item flex items-center justify-between p-4 rounded-2xl hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 font-extrabold text-xs group-hover/item:bg-white group-hover/item:shadow-sm border border-transparent group-hover/item:border-slate-200 transition-all">
+                  TRX
                 </div>
-                <div className="text-right">
-                  <span className="font-bold text-sm block">
-                    {Number(entry.debit).toLocaleString()}
-                  </span>
-                  <span className="text-[10px] font-bold text-black/30 bg-black/5 px-2 py-0.5 rounded-full">
-                    {entry.code}
-                  </span>
+                <div>
+                  <h4 className="font-bold text-sm text-slate-900 line-clamp-1">
+                    {entry.notes || "Journal Entry"}
+                  </h4>
+                  <p className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mt-0.5">
+                    {entry.created_at
+                      ? new Date(entry.created_at).toLocaleDateString(
+                        "en-US",
+                        {
+                          month: "short",
+                          day: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        },
+                      )
+                      : "N/A"}
+                  </p>
                 </div>
               </div>
-            ))
-          )}
-        </div>
-      </CardContent>
-    </Card>
+              <div className="text-right">
+                <span className="font-extrabold text-sm text-slate-900 block tracking-tight">
+                  {Number(entry.debit).toLocaleString()}
+                </span>
+                <span className="text-[9px] font-black text-corporate-primary bg-corporate-primary/5 px-2 py-0.5 rounded-full border border-corporate-primary/10">
+                  {entry.code}
+                </span>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      <button className="mt-8 py-4 px-6 rounded-2xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-all flex items-center justify-center gap-2 group/btn">
+        View Full Ledger
+        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+      </button>
+    </div>
   );
 }

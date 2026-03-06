@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+
 import { useParams } from "next/navigation";
 import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
 import FiscalYearJournals from "@/components/financialyears/FiscalYearJournals";
@@ -18,32 +11,25 @@ export default function FinanceJournalsPage() {
 
   return (
     <div className="space-y-8 pb-12">
-      {/* Breadcrumbs */}
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/director/dashboard">
-              Dashboard
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/director/fiscal-years">
-              Fiscal Years
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href={`/director/fiscal-years/${reference}`}>
-              {fiscalYear?.code}
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Journals</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <nav>
+        <ol className="flex items-center gap-2 text-sm text-black/60">
+          <li>
+            <a href="/director/dashboard" className="hover:text-black hover:underline">Dashboard</a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <a href="/director/fiscal-years" className="hover:text-black hover:underline">Fiscal Years</a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <a href={`/director/fiscal-years/${reference}`} className="hover:text-black hover:underline">{fiscalYear?.code}</a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <span className="font-bold text-black">Journals</span>
+          </li>
+        </ol>
+      </nav>
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>

@@ -4,16 +4,10 @@
 import { updatePartner } from "@/services/partners";
 import { useFormik } from "formik";
 import { PartnerSchema } from "@/validation";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+
+
+
+
 import { toast } from "react-hot-toast";
 import { Loader2, Edit3, Save, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
@@ -102,10 +96,10 @@ export default function UpdatePartner({
   });
 
   return (
-    <Card
+    <div
       className={`w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
     >
-      <CardHeader
+      <div
         className="p-8 border-b border-black/5"
         style={{ backgroundColor: `${primaryColor}0D` }}
       >
@@ -121,42 +115,41 @@ export default function UpdatePartner({
               <Edit3 className="w-6 h-6" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-black text-black tracking-tight">
+              <h2 className="text-2xl font-black text-black tracking-tight">
                 Update Partner
-              </CardTitle>
-              <CardDescription className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+              </h2>
+              <p className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
                 Refine Relationship
-              </CardDescription>
+              </p>
             </div>
           </div>
           {onClose && (
-            <Button
+            <button
               type="button"
               onClick={onClose}
-              variant="ghost"
-              size="icon"
-              className="hover:bg-red-50 hover:text-red-500 rounded-full"
+             
+              className="hover:bg-red-50 hover:text-red-500 rounded-full p-2"
             >
               <X className="w-5 h-5" />
-            </Button>
+            </button>
           )}
         </div>
-      </CardHeader>
-      <CardContent className="p-8">
+      </div>
+      <div className="p-8">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
           {/* Basic Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="name"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Partner Name
-              </Label>
-              <Input
+              </label>
+              <input
                 id="name"
                 name="name"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
@@ -169,17 +162,17 @@ export default function UpdatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="email"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Email Address
-              </Label>
-              <Input
+              </label>
+              <input
                 id="email"
                 name="email"
                 type="email"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
@@ -194,16 +187,16 @@ export default function UpdatePartner({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="phone"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Phone Number
-              </Label>
-              <Input
+              </label>
+              <input
                 id="phone"
                 name="phone"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
@@ -211,17 +204,17 @@ export default function UpdatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="partner_type"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Partner Category
-              </Label>
+              </label>
               <select
                 id="partner_type"
                 name="partner_type"
                 disabled={isLoadingTypes}
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 py-2 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold focus:ring-corporate-primary/20 transition-all appearance-none"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.partner_type}
@@ -235,17 +228,17 @@ export default function UpdatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="division"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Assigned Division
-              </Label>
+              </label>
               <select
                 id="division"
                 name="division"
                 disabled={isLoadingDivisions}
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 py-2 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold focus:ring-corporate-primary/20 transition-all appearance-none"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.division}
@@ -265,16 +258,16 @@ export default function UpdatePartner({
           {/* Financial Settings */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="tax_pin"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Tax PIN (KRA)
-              </Label>
-              <Input
+              </label>
+              <input
                 id="tax_pin"
                 name="tax_pin"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.tax_pin}
@@ -282,16 +275,16 @@ export default function UpdatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="currency"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 Preferred Currency
-              </Label>
+              </label>
               <select
                 id="currency"
                 name="currency"
-                className="flex h-14 w-full rounded-2xl border border-black/5 bg-orange-50/30 px-5 py-2 text-sm font-bold focus:ring-2 focus:ring-corporate-primary/20 transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold focus:ring-corporate-primary/20 transition-all appearance-none"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.currency}
@@ -304,18 +297,18 @@ export default function UpdatePartner({
             </div>
 
             <div className="space-y-2">
-              <Label
+              <label
                 htmlFor="wht_rate"
                 className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
               >
                 WHT Rate (%)
-              </Label>
-              <Input
+              </label>
+              <input
                 id="wht_rate"
                 name="wht_rate"
                 type="number"
                 step="0.01"
-                className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.wht_rate}
@@ -324,16 +317,16 @@ export default function UpdatePartner({
           </div>
 
           <div className="space-y-2">
-            <Label
+            <label
               htmlFor="payment_terms"
               className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
             >
               Payment Terms / Notes
-            </Label>
-            <Input
+            </label>
+            <input
               id="payment_terms"
               name="payment_terms"
-              className="h-14 rounded-2xl border-black/5 bg-orange-50/30 focus:bg-white transition-all font-bold px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.payment_terms}
@@ -357,19 +350,19 @@ export default function UpdatePartner({
               onBlur={formik.handleBlur}
               checked={formik.values.is_active}
             />
-            <Label
+            <label
               htmlFor="is_active"
               className="text-sm font-black text-black"
             >
               Keep Partner Active
-            </Label>
+            </label>
           </div>
 
           <div className="pt-4">
-            <Button
+            <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group"
+              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,
@@ -383,10 +376,10 @@ export default function UpdatePartner({
                   Save Changes
                 </div>
               )}
-            </Button>
+            </button>
           </div>
         </form>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

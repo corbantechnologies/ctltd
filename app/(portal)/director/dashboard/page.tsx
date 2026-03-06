@@ -10,26 +10,30 @@ import {
   Book,
   ScrollText,
   CalendarRange,
+  ArrowUpRight,
+  TrendingUp,
 } from "lucide-react";
 import { useFetchCOAs } from "@/hooks/coa/actions";
 import { useFetchBooks } from "@/hooks/books/actions";
 import { useFetchFinancialYears } from "@/hooks/financialyears/actions";
 import { useFetchJournalEntries } from "@/hooks/journalentries/actions";
 import { useFetchDivisions } from "@/hooks/divisions/actions";
-import { Card, CardContent } from "@/components/ui/card";
 import { GlobalSearch } from "@/components/navigation/GlobalSearch";
 import AccountDistributionChart from "@/components/analytics/AccountDistributionChart";
 import RecentActivityFeed from "@/components/analytics/RecentActivityFeed";
 import ReportsDashboard from "@/components/reports/ReportsDashboard";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import * as Tabs from "@radix-ui/react-tabs";
+import { cn } from "@/lib/utils";
 
 export default function DirectorDashboard() {
-  const { isLoading, data: account } = useFetchAccount();
-  const { data: coas } = useFetchCOAs();
-  const { data: books } = useFetchBooks();
-  const { data: years } = useFetchFinancialYears();
-  const { data: entries } = useFetchJournalEntries();
-  const { data: divisions } = useFetchDivisions();
+  const { data: account, isLoading: accountLoading } = useFetchAccount();
+  const { data: coas, isLoading: coaLoading } = useFetchCOAs();
+  const { data: books, isLoading: booksLoading } = useFetchBooks();
+  const { data: years, isLoading: yearsLoading } = useFetchFinancialYears();
+  const { data: entries, isLoading: entriesLoading } = useFetchJournalEntries();
+  const { data: divisions, isLoading: divisionsLoading } = useFetchDivisions();
+
+  const isLoading = accountLoading || coaLoading || booksLoading || yearsLoading || entriesLoading || divisionsLoading;
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -41,133 +45,150 @@ export default function DirectorDashboard() {
       value: divisions?.length || 0,
       icon: Building2,
       description: "Operational Units",
+      color: "text-corporate-primary",
+      bg: "bg-corporate-primary/10",
     },
     {
       label: "Active Fiscal Year",
       value: years?.find((y: any) => y.is_active)?.code || "N/A",
       icon: CalendarRange,
       description: `${years?.length || 0} Years Configured`,
+      color: "text-emerald-600",
+      bg: "bg-emerald-50",
     },
     {
       label: "Chart of Accounts",
       value: coas?.length || 0,
       icon: Layers,
       description: "Active Ledgers",
+      color: "text-blue-600",
+      bg: "bg-blue-50",
     },
     {
       label: "Ledger Books",
       value: books?.length || 0,
       icon: Book,
       description: "Sub-accounts",
+      color: "text-amber-600",
+      bg: "bg-amber-50",
     },
     {
       label: "Journal Entries",
       value: entries?.length || 0,
       icon: ScrollText,
       description: "Total Transactions",
+      color: "text-slate-900",
+      bg: "bg-slate-100",
     },
   ];
 
   return (
-    <div className="space-y-6 pb-6">
-      {/* Ctrl + K */}
+    <div className="space-y-10 pb-20">
+      {/* Ctrl + K Search */}
       <GlobalSearch role="director" />
+
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <div className="w-6 h-6 rounded-md bg-[#D0402B] flex items-center justify-center text-white shadow-md shadow-[#D0402B]/20">
-              <Building2 className="w-3 h-3" />
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-8 h-8 rounded-xl bg-corporate-primary flex items-center justify-center text-white shadow-lg shadow-corporate-primary/20">
+              <Building2 className="w-4 h-4" />
             </div>
-            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#D0402B]">
-              Administrative Portal
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-corporate-primary">
+              Executive Command Center
             </p>
           </div>
-          <h1 className="text-xl font-bold text-black tracking-tighter italic">
-            Director <span className="text-[#D0402B]">Dashboard</span>
+          <h1 className="text-4xl font-bold text-slate-900 tracking-tight italic">
+            Director <span className="text-corporate-primary">Overview</span>
           </h1>
-          <p className="text-black/40 font-bold mt-0.5 text-xs max-w-md">
-            Welcome, {account?.first_name} {account?.last_name}. Oversee
-            corporate infrastructure and division management.
+          <p className="text-slate-400 font-bold mt-2 text-sm max-w-lg">
+            Welcome back, <span className="text-slate-900">{account?.first_name}</span>.
+            Corporate infrastructure and strategic audit trail monitoring active.
           </p>
         </div>
         <CreateDivisionModal />
       </div>
 
-      {/* Stats Grid */}
-      <Tabs defaultValue="overview" className="space-y-6">
-        <TabsList className="bg-white/50 border border-black/5 p-1 h-auto rounded-xl">
-          <TabsTrigger
+      <Tabs.Root defaultValue="overview" className="space-y-10">
+        <Tabs.List className="inline-flex p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner">
+          <Tabs.Trigger
             value="overview"
-            className="data-[state=active]:bg-[#D0402B] data-[state=active]:shadow-md rounded-lg px-4 py-2 text-sm font-bold text-black/60 data-[state=active]:text-white transition-all"
+            className="px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
-            Overview
-          </TabsTrigger>
-          <TabsTrigger
+            System Health
+          </Tabs.Trigger>
+          <Tabs.Trigger
             value="financials"
-            className="data-[state=active]:bg-[#D0402B] data-[state=active]:shadow-md rounded-lg px-4 py-2 text-sm font-bold text-black/60 data-[state=active]:text-white transition-all"
+            className="px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
-            Financial Reports
-          </TabsTrigger>
-        </TabsList>
+            Fiscal Reports
+          </Tabs.Trigger>
+        </Tabs.List>
 
-        <TabsContent value="overview" className="space-y-6 focus-visible:outline-none">
+        <Tabs.Content value="overview" className="space-y-10 focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700">
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             {stats.map((stat, i) => (
-              <Card
+              <div
                 key={i}
-                className="border-none shadow-xl shadow-black/5 bg-white/80 backdrop-blur-xl rounded-2xl overflow-hidden"
+                className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-2xl shadow-slate-100 relative overflow-hidden group hover:-translate-y-1 transition-all duration-500"
               >
-                <CardContent className="p-5 relative">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-[#D0402B]/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
-                  <div className="relative z-10 flex flex-col gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#D0402B]/10 flex items-center justify-center text-[#D0402B]">
-                      <stat.icon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="text-black/40 font-bold uppercase tracking-widest text-[9px] mb-1">
-                        {stat.label}
-                      </p>
-                      <h3 className="text-xl font-bold text-black tracking-tighter">
-                        {stat.value}
-                      </h3>
-                      <p className="text-[10px] font-bold text-black/40 mt-1">
-                        {stat.description}
-                      </p>
-                    </div>
+                <div className={cn("absolute top-0 right-0 w-24 h-24 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-30 group-hover:opacity-60 transition-opacity", stat.bg)} />
+                <div className="relative z-10 flex flex-col gap-4">
+                  <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center shadow-inner", stat.bg, stat.color)}>
+                    <stat.icon className="w-6 h-6" />
                   </div>
-                </CardContent>
-              </Card>
+                  <div>
+                    <p className="text-slate-400 font-bold uppercase tracking-widest text-[9px] mb-1">
+                      {stat.label}
+                    </p>
+                    <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
+                      {stat.value}
+                    </h3>
+                    <p className="text-[10px] font-bold text-slate-400 mt-1 uppercase tracking-tighter">
+                      {stat.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <AccountDistributionChart data={coas || []} />
+            <div className="lg:col-span-2">
+              <AccountDistributionChart data={coas || []} />
+            </div>
             <RecentActivityFeed entries={entries || []} />
           </div>
 
           {/* Divisions Section */}
-          <div className="space-y-6 pt-6 border-t border-black/5">
-            <div className="flex items-center justify-between border-b border-black/5 pb-6">
-              <h2 className="text-xl font-bold text-black tracking-tight">
-                Corporate Divisions
-              </h2>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-black/40">
-                Real-time status
-              </p>
+          <div className="space-y-8 pt-10 border-t border-slate-100">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+                  Unit Infrastructure
+                </h2>
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">
+                  Real-time Operational Capacity
+                </p>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-600 rounded-full border border-emerald-100 shadow-sm animate-pulse">
+                <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span className="text-[10px] font-black uppercase tracking-widest">System Online</span>
+              </div>
             </div>
-            <DivisionsList rolePrefix="director" />
+            <div className="bg-slate-50/50 p-1 rounded-[3rem] border border-slate-100">
+              <DivisionsList rolePrefix="director" />
+            </div>
           </div>
-        </TabsContent>
+        </Tabs.Content>
 
-        <TabsContent value="financials" className="focus-visible:outline-none">
-          {/* Financial Reports Section */}
-          <div className="space-y-6">
+        <Tabs.Content value="financials" className="focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div>
             <ReportsDashboard />
           </div>
-        </TabsContent>
-      </Tabs>
+        </Tabs.Content>
+      </Tabs.Root>
     </div>
   );
 }

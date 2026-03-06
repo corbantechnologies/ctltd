@@ -7,16 +7,7 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Close menu when resizing to desktop or clicking a link
   useEffect(() => {
@@ -26,9 +17,7 @@ export default function Navbar() {
   }, []);
 
   const navItems = [
-    { name: "Services", href: "/services" },
-    { name: "Products", href: "/products" },
-    { name: "Offers", href: "/offers" },
+    { name: "Divisions", href: "/divisions" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];
@@ -36,12 +25,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={cn(
-          "fixed top-0 w-full z-50 transition-all duration-300 border-b",
-          scrolled
-            ? "bg-white/95 backdrop-blur-xl border-black/5 py-3 shadow-md"
-            : "bg-transparent border-transparent py-5",
-        )}
+        className="sticky top-0 w-full z-50 transition-all duration-300 border-b bg-white border-slate-200 py-4 shadow-sm"
       >
         <div className="mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
@@ -64,19 +48,20 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={cn(
-                  "text-sm transition-colors duration-200 font-extrabold tracking-widest uppercase",
-                  scrolled
-                    ? "text-black hover:text-corporate-primary"
-                    : "text-black hover:text-corporate-primary",
-                )}
+                className="text-sm font-medium text-slate-600 hover:text-corporate-primary transition-colors"
               >
                 {item.name}
               </Link>
             ))}
-            <button className="bg-corporate-primary hover:bg-orange-600 text-white font-bold rounded px-4 py-4 h-auto transition-all active:scale-95 shadow shadow-orange-500/30 uppercase tracking-tighter flex items-center gap-2">
-              Get in Touch <ChevronRight className="w-5 h-5 stroke-[3px]" />
-            </button>
+          </div>
+
+          <div className="hidden lg:flex items-center">
+            <Link
+              href="/contact"
+              className="bg-corporate-primary hover:bg-orange-600 text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm flex items-center gap-2"
+            >
+              Get in Touch <ChevronRight className="w-4 h-4" />
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -133,24 +118,20 @@ export default function Navbar() {
               key={item.name}
               href={item.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="group flex items-center justify-between text-xl font-bold text-black hover:text-corporate-primary transition-colors"
+              className="group flex items-center justify-between text-lg font-medium text-slate-900 hover:text-corporate-primary transition-colors"
             >
               {item.name}
-              <ChevronRight className="w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity text-corporate-primary" />
+              <ChevronRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-corporate-primary" />
             </Link>
           ))}
 
-          <button
+          <Link
             onClick={() => setMobileMenuOpen(false)}
-            className="bg-corporate-primary hover:bg-orange-600 text-white w-full mt-6 font-bold py-4 rounded shadow-lg transition-all active:scale-95 uppercase tracking-tighter"
+            href="/contact"
+            className="bg-corporate-primary hover:bg-orange-600 text-white w-full mt-4 font-medium py-3.5 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2"
           >
-            <Link
-              href="/contact"
-              className="block w-full h-full flex items-center justify-center gap-2"
-            >
-              Get in Touch <ChevronRight className="w-5 h-5 stroke-[3px]" />
-            </Link>
-          </button>
+            Get in Touch <ChevronRight className="w-5 h-5" />
+          </Link>
         </div>
       </div>
     </>

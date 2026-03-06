@@ -1,7 +1,5 @@
 import { formatCurrency } from "@/tools/format";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./Card";
-import { Separator } from "@/components/ui/separator";
-
 
 interface PnLData {
     revenue: number;
@@ -33,10 +31,10 @@ export function PnLReport({ data }: { data: PnLData }) {
             <CardContent className="space-y-1">
                 <Row label="Revenue" value={data.revenue} />
                 <Row label="Cost of Sales" value={data.cost_of_sales} />
-                <Separator className="my-2" />
+                <hr className="my-2 border-black/10" />
                 <Row label="Gross Profit" value={data.gross_profit} bold />
                 <Row label="Operating Expenses" value={data.operating_expenses} />
-                <Separator className="my-2" />
+                <hr className="my-2 border-black/10" />
                 <Row label="Net Profit" value={data.net_profit} bold net />
             </CardContent>
         </Card>

@@ -17,29 +17,8 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { useParams } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  DropdownMenuSub,
-  DropdownMenuSubTrigger,
-  DropdownMenuSubContent,
-  DropdownMenuPortal,
-} from "@/components/ui/dropdown-menu";
-import { CenteredModal } from "@/components/ui/centered-modal";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+
 import CreateJournal from "@/forms/journals/CreateJournal";
 import CreatePartner from "@/forms/partners/CreatePartner";
 import CreatePartnerType from "@/forms/partnertypes/CreatePartnerType";
@@ -84,27 +63,21 @@ export default function FiscalYearDetail() {
       {/* Breadcrumbs & Actions */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div className="space-y-1">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/finance/dashboard">
-                  Dashboard
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/finance/fiscal-years">
-                  Years
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>
-                  {fiscalYear.code}
-                </BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          <nav>
+            <ol className="flex items-center gap-2 text-sm text-black/60">
+              <li>
+                <a href="/finance/dashboard" className="hover:text-black hover:underline">Dashboard</a>
+              </li>
+              <li><span className="text-black/30">/</span></li>
+              <li>
+                <a href="/finance/fiscal-years" className="hover:text-black hover:underline">Years</a>
+              </li>
+              <li><span className="text-black/30">/</span></li>
+              <li>
+                <span className="font-bold text-black">{fiscalYear.code}</span>
+              </li>
+            </ol>
+          </nav>
 
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-[#045138] flex items-center justify-center text-white shadow-md shadow-[#045138]/20">
@@ -141,142 +114,157 @@ export default function FiscalYearDetail() {
         {/* Quick Actions Dropdown */}
         {fiscalYear.is_active && (
           <div className="flex items-center gap-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  className="h-9 px-4 bg-[#045138] hover:bg-black text-white rounded-xl text-[10px] uppercase font-bold tracking-wider transition-all shadow-md active:scale-95 flex items-center gap-2"
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger asChild>
+                <button
+                  className="flex items-center justify-center h-9 px-4 bg-[#045138] hover:bg-black text-white rounded-xl text-[10px] uppercase font-bold tracking-wider transition-all shadow-md active:scale-95 gap-2"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   Add New
                   <ChevronDown className="w-3 h-3 opacity-50 ml-1" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-64 rounded-xl p-2 bg-white">
-                <DropdownMenuLabel className="text-xs uppercase tracking-widest text-black/40 font-bold px-2 py-1.5">
-                  Transactions
-                </DropdownMenuLabel>
+                </button>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Portal>
+                <DropdownMenu.Content align="end" className="z-50 w-64 rounded-xl p-2 bg-white shadow-xl border border-black/5 animate-in fade-in zoom-in-95">
+                  <div className="text-xs uppercase tracking-widest text-black/40 font-bold px-2 py-1.5">
+                    Transactions
+                  </div>
 
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger className="rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer">
-                    <div className="w-7 h-7 rounded-md bg-[#045138]/10 text-[#045138] flex items-center justify-center mr-3">
-                      <Plus className="w-4 h-4" />
-                    </div>
-                    <div className="flex flex-col text-left">
-                      <span className="font-bold text-xs">Journal Batch</span>
-                      <span className="text-[9px] text-black/50">Record new entry</span>
-                    </div>
-                  </DropdownMenuSubTrigger>
-                  <DropdownMenuPortal>
-                    <DropdownMenuSubContent className="w-56 p-2 bg-white rounded-xl shadow-xl ml-2">
-                      <DropdownMenuLabel className="text-[10px] uppercase tracking-widest text-black/40 font-bold px-2 py-1.5">
-                        Select Journal Type
-                      </DropdownMenuLabel>
-                      <div className="max-h-64 overflow-y-auto">
-                        <DropdownMenuItem
-                          onClick={() => handleCreateJournal()}
-                          className="rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
-                        >
-                          <span className="font-bold text-xs text-black/60">General (No Type)</span>
-                        </DropdownMenuItem>
-                        {journalTypes?.map((type) => (
-                          <DropdownMenuItem
-                            key={type.reference}
-                            onClick={() => handleCreateJournal(type.name)}
-                            className="rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer flex items-center justify-between"
-                          >
-                            <span className="font-bold text-xs">{type.name}</span>
-                          </DropdownMenuItem>
-                        ))}
+                  <DropdownMenu.Sub>
+                    <DropdownMenu.SubTrigger className="flex items-center outline-none rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer">
+                      <div className="w-7 h-7 rounded-md bg-[#045138]/10 text-[#045138] flex items-center justify-center mr-3">
+                        <Plus className="w-4 h-4" />
                       </div>
-                    </DropdownMenuSubContent>
-                  </DropdownMenuPortal>
-                </DropdownMenuSub>
+                      <div className="flex flex-col text-left flex-1">
+                        <span className="font-bold text-xs">Journal Batch</span>
+                        <span className="text-[9px] text-black/50">Record new entry</span>
+                      </div>
+                      <ChevronDown className="w-3 h-3 opacity-50 ml-1 -rotate-90" />
+                    </DropdownMenu.SubTrigger>
+                    <DropdownMenu.Portal>
+                      <DropdownMenu.SubContent className="z-50 w-56 p-2 bg-white border border-black/5 rounded-xl shadow-xl ml-2 animate-in fade-in slide-in-from-left-2">
+                        <div className="text-[10px] uppercase tracking-widest text-black/40 font-bold px-2 py-1.5">
+                          Select Journal Type
+                        </div>
+                        <div className="max-h-64 overflow-y-auto">
+                          <DropdownMenu.Item
+                            onClick={() => handleCreateJournal()}
+                            className="outline-none rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
+                          >
+                            <span className="font-bold text-xs text-black/60">General (No Type)</span>
+                          </DropdownMenu.Item>
+                          {journalTypes?.map((type) => (
+                            <DropdownMenu.Item
+                              key={type.reference}
+                              onClick={() => handleCreateJournal(type.name)}
+                              className="outline-none rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer flex items-center justify-between"
+                            >
+                              <span className="font-bold text-xs">{type.name}</span>
+                            </DropdownMenu.Item>
+                          ))}
+                        </div>
+                      </DropdownMenu.SubContent>
+                    </DropdownMenu.Portal>
+                  </DropdownMenu.Sub>
 
-                <DropdownMenuSeparator className="my-1 bg-black/5" />
+                  <DropdownMenu.Separator className="my-1 bg-black/5 h-px" />
 
-                <DropdownMenuLabel className="text-xs uppercase tracking-widest text-black/40 font-bold px-2 py-1.5">
-                  Entities & Configuration
-                </DropdownMenuLabel>
-                <DropdownMenuItem
-                  onClick={() => setOpenPartner(true)}
-                  className="rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
-                >
-                  <div className="w-7 h-7 rounded-md bg-orange-50 text-orange-600 flex items-center justify-center mr-3">
-                    <UserPlus className="w-4 h-4" />
+                  <div className="text-xs uppercase tracking-widest text-black/40 font-bold px-2 py-1.5">
+                    Entities & Configuration
                   </div>
-                  <div className="flex flex-col">
-                    <span className="font-bold text-xs">New Partner</span>
-                    <span className="text-[9px] text-black/50">Register supplier/customer</span>
-                  </div>
-                </DropdownMenuItem>
+                  <DropdownMenu.Item
+                    onClick={() => setOpenPartner(true)}
+                    className="flex items-center outline-none rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
+                  >
+                    <div className="w-7 h-7 rounded-md bg-orange-50 text-orange-600 flex items-center justify-center mr-3">
+                      <UserPlus className="w-4 h-4" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-bold text-xs">New Partner</span>
+                      <span className="text-[9px] text-black/50">Register supplier/customer</span>
+                    </div>
+                  </DropdownMenu.Item>
 
-                <DropdownMenuItem
-                  onClick={() => setOpenPartnerType(true)}
-                  className="rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
-                >
-                  <div className="w-7 h-7 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center mr-3">
-                    <Settings2 className="w-4 h-4" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-bold text-xs">Partner Type</span>
-                    <span className="text-[9px] text-black/50">Define partner category</span>
-                  </div>
-                </DropdownMenuItem>
+                  <DropdownMenu.Item
+                    onClick={() => setOpenPartnerType(true)}
+                    className="flex items-center outline-none rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
+                  >
+                    <div className="w-7 h-7 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center mr-3">
+                      <Settings2 className="w-4 h-4" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-bold text-xs">Partner Type</span>
+                      <span className="text-[9px] text-black/50">Define partner category</span>
+                    </div>
+                  </DropdownMenu.Item>
 
-                <DropdownMenuItem
-                  onClick={() => setOpenJournalType(true)}
-                  className="rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
-                >
-                  <div className="w-7 h-7 rounded-md bg-purple-50 text-purple-600 flex items-center justify-center mr-3">
-                    <BookPlus className="w-4 h-4" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-bold text-xs">Journal Type</span>
-                    <span className="text-[9px] text-black/50">Configure ledger types</span>
-                  </div>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  <DropdownMenu.Item
+                    onClick={() => setOpenJournalType(true)}
+                    className="flex items-center outline-none rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
+                  >
+                    <div className="w-7 h-7 rounded-md bg-purple-50 text-purple-600 flex items-center justify-center mr-3">
+                      <BookPlus className="w-4 h-4" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-bold text-xs">Journal Type</span>
+                      <span className="text-[9px] text-black/50">Configure ledger types</span>
+                    </div>
+                  </DropdownMenu.Item>
+                </DropdownMenu.Content>
+              </DropdownMenu.Portal>
+            </DropdownMenu.Root>
 
             {/* Centered Modals for ALL Create Actions */}
-            <CenteredModal open={openPartnerType} onOpenChange={setOpenPartnerType}>
-              <CreatePartnerType
-                onSuccess={() => setOpenPartnerType(false)}
-                rolePrefix="finance"
-              />
-            </CenteredModal>
+            {openPartnerType && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+                <div className="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 animate-in zoom-in-95">
+                  <CreatePartnerType
+                    onSuccess={() => setOpenPartnerType(false)}
+                    rolePrefix="finance"
+                  />
+                  <button onClick={() => setOpenPartnerType(false)} className="mt-4 text-sm underline text-center w-full block">Cancel</button>
+                </div>
+              </div>
+            )}
 
-            <CenteredModal
-              open={openPartner}
-              onOpenChange={setOpenPartner}
-              className="max-w-3xl"
-            >
-              <CreatePartner
-                onSuccess={() => setOpenPartner(false)}
-                rolePrefix="finance"
-              />
-            </CenteredModal>
+            {openPartner && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+                <div className="bg-white rounded-xl shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 animate-in zoom-in-95">
+                  <CreatePartner
+                    onSuccess={() => setOpenPartner(false)}
+                    rolePrefix="finance"
+                  />
+                  <button onClick={() => setOpenPartner(false)} className="mt-4 text-sm underline text-center w-full block">Cancel</button>
+                </div>
+              </div>
+            )}
 
-            <CenteredModal open={openJournalType} onOpenChange={setOpenJournalType}>
-              <CreateJournalType
-                onSuccess={() => setOpenJournalType(false)}
-                rolePrefix="finance"
-              />
-            </CenteredModal>
+            {openJournalType && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+                <div className="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 animate-in zoom-in-95">
+                  <CreateJournalType
+                    onSuccess={() => setOpenJournalType(false)}
+                    rolePrefix="finance"
+                  />
+                  <button onClick={() => setOpenJournalType(false)} className="mt-4 text-sm underline text-center w-full block">Cancel</button>
+                </div>
+              </div>
+            )}
 
-            <CenteredModal
-              open={openCreateJournal}
-              onOpenChange={setOpenCreateJournal}
-              className="max-w-4xl"
-            >
-              <CreateJournal
-                refetch={refetchFiscalYear}
-                fiscalYear={fiscalYear?.code}
-                initialJournalType={selectedJournalType}
-                rolePrefix="finance"
-                onSuccess={() => setOpenCreateJournal(false)}
-              />
-            </CenteredModal>
+            {openCreateJournal && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+                <div className="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 animate-in zoom-in-95">
+                  <CreateJournal
+                    refetch={refetchFiscalYear}
+                    fiscalYear={fiscalYear?.code}
+                    initialJournalType={selectedJournalType}
+                    rolePrefix="finance"
+                    onSuccess={() => setOpenCreateJournal(false)}
+                  />
+                  <button onClick={() => setOpenCreateJournal(false)} className="mt-4 text-sm underline text-center w-full block">Cancel</button>
+                </div>
+              </div>
+            )}
 
           </div>
         )}

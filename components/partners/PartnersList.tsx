@@ -4,18 +4,6 @@ import { useFetchPartners } from "@/hooks/partners/actions";
 import { useFetchPartnerTypes } from "@/hooks/partnertypes/actions";
 import { useState } from "react";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   Grid,
   List,
@@ -77,9 +65,10 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
         {/* Search */}
         <div className="relative w-full md:w-96 group">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-black/40 group-focus-within:text-black transition-colors" />
-          <Input
+          <input
+            type="text"
             placeholder="Search partners..."
-            className="pl-9 h-10 bg-white border-black/5 rounded focus:ring-0 focus:border-black/20 transition-all font-bold text-xs"
+            className="pl-9 h-10 w-full bg-white border border-black/5 rounded focus:outline-none focus:ring-0 focus:border-black/20 transition-all font-bold text-xs"
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
@@ -111,10 +100,9 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
 
           {/* View Toggle */}
           <div className="flex gap-1.5 items-center bg-black/5 rounded p-1">
-            <Button
+            <button
               onClick={() => setView("grid")}
-              variant="ghost"
-              className={`h-8 w-8 rounded p-0 transition-all ${view === "grid"
+              className={`flex items-center justify-center h-8 w-8 rounded p-0 transition-all ${view === "grid"
                 ? "text-white shadow-sm"
                 : "text-black/40 hover:text-black"
                 }`}
@@ -123,11 +111,10 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
               }}
             >
               <Grid className="w-3.5 h-3.5" />
-            </Button>
-            <Button
+            </button>
+            <button
               onClick={() => setView("table")}
-              variant="ghost"
-              className={`h-8 w-8 rounded p-0 transition-all ${view === "table"
+              className={`flex items-center justify-center h-8 w-8 rounded p-0 transition-all ${view === "table"
                 ? "text-white shadow-sm"
                 : "text-black/40 hover:text-black"
                 }`}
@@ -137,7 +124,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
               }}
             >
               <List className="w-3.5 h-3.5" />
-            </Button>
+            </button>
           </div>
         </div>
       </div>
@@ -151,8 +138,8 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
               href={`/${rolePrefix}/partners/${partner.reference}`}
               className="group block"
             >
-              <Card className="h-full border-black/5 bg-white/60 backdrop-blur-xl rounded overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group-hover:bg-white/90">
-                <CardContent className="p-5 space-y-4">
+              <div className="h-full border border-black/5 bg-white/60 backdrop-blur-xl rounded overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group-hover:bg-white/90">
+                <div className="p-5 space-y-4">
                   <div className="flex justify-between items-start">
                     <div
                       className="w-10 h-10 rounded flex items-center justify-center text-white shadow-md transition-transform duration-300 group-hover:scale-105"
@@ -163,14 +150,14 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                     >
                       <Users className="w-5 h-5" />
                     </div>
-                    <Badge
-                      className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-widest border-none ${partner.is_active
+                    <span
+                      className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-widest inline-block ${partner.is_active
                         ? "bg-green-500/10 text-green-600"
                         : "bg-red-500/10 text-red-600"
                         }`}
                     >
                       {partner.is_active ? "Active" : "Inactive"}
-                    </Badge>
+                    </span>
                   </div>
 
                   <div>
@@ -191,44 +178,43 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                       </span>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </Link>
           ))}
         </div>
       )}
-
       {/* Table View */}
       {view === "table" && (
         <div className="bg-white/50 backdrop-blur-xl border border-black/5 rounded overflow-hidden shadow-xl shadow-black/5">
           <div className="overflow-x-auto">
-            <Table>
-              <TableHeader className="bg-black/5">
-                <TableRow className="hover:bg-transparent border-black/5">
-                  <TableHead className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
+            <table className="w-full text-left">
+              <thead className="bg-black/5">
+                <tr className="border-b border-black/5">
+                  <th className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
                     Entity
-                  </TableHead>
-                  <TableHead className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
+                  </th>
+                  <th className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
                     Division
-                  </TableHead>
-                  <TableHead className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
+                  </th>
+                  <th className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
                     Category
-                  </TableHead>
-                  <TableHead className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
+                  </th>
+                  <th className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
                     Status
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
                 {paginatedPartners.map((partner) => (
-                  <TableRow
+                  <tr
                     key={partner.reference}
-                    className="hover:bg-white/50 border-black/5 transition-colors cursor-pointer group"
+                    className="hover:bg-white/50 border-b border-black/5 transition-colors cursor-pointer group"
                     onClick={() =>
                       (window.location.href = `/${rolePrefix}/partners/${partner.reference}`)
                     }
                   >
-                    <TableCell className="py-2.5 px-4 border-b border-black/5">
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-3">
                         <div
                           className="w-8 h-8 rounded-lg flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105"
@@ -242,19 +228,16 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                           </div>
                         </div>
                       </div>
-                    </TableCell>
-                    <TableCell className="py-2.5 px-4 border-b border-black/5 text-sm font-medium text-black/70">
+                    </td>
+                    <td className="py-2.5 px-4 border-b border-black/5 text-sm font-medium text-black/70">
                       {partner.division}
-                    </TableCell>
-                    <TableCell className="py-2.5 px-4 border-b border-black/5">
-                      <Badge
-                        variant="secondary"
-                        className="bg-white border border-black/5 text-black/70 font-bold text-[10px] px-2 py-0.5 rounded-sm shadow-none"
-                      >
+                    </td>
+                    <td className="py-2.5 px-4 border-b border-black/5">
+                      <span className="bg-white border border-black/5 text-black/70 font-bold text-[10px] px-2 py-0.5 rounded-sm shadow-none inline-block">
                         {partner.partner_type}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="py-2.5 px-4 border-b border-black/5">
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-4 border-b border-black/5">
                       {partner.is_active ? (
                         <div className="flex items-center gap-1.5 text-[10px] font-bold text-green-600 uppercase tracking-wider">
                           <CheckCircle2 className="w-3.5 h-3.5" /> Active
@@ -264,11 +247,11 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                           <AlertCircle className="w-3.5 h-3.5" /> Inactive
                         </div>
                       )}
-                    </TableCell>
-                  </TableRow>
+                    </td>
+                  </tr>
                 ))}
-              </TableBody>
-            </Table>
+              </tbody>
+            </table>
           </div>
         </div>
       )}
@@ -284,15 +267,14 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
           </p>
 
           <div className="flex items-center gap-1.5">
-            <Button
-              variant="outline"
+            <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              className="w-8 h-8 p-0 rounded border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              className="flex items-center justify-center w-8 h-8 p-0 rounded border border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
               style={{ "--hover-bg": primaryColor } as React.CSSProperties}
             >
               <ChevronLeft className="w-3.5 h-3.5" />
-            </Button>
+            </button>
 
             <div className="flex items-center gap-1 px-2">
               {[...Array(totalPages)].map((_, i) => {
@@ -337,15 +319,14 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
               })}
             </div>
 
-            <Button
-              variant="outline"
+            <button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              className="w-8 h-8 p-0 rounded border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
+              className="flex items-center justify-center w-8 h-8 p-0 rounded border border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
               style={{ "--hover-bg": primaryColor } as React.CSSProperties}
             >
               <ChevronRight className="w-3.5 h-3.5" />
-            </Button>
+            </button>
           </div>
         </div>
       )}

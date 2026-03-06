@@ -17,21 +17,7 @@ import {
   Hash,
   Building2,
 } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+
 
 export default function PartnerDetailPage() {
   const { reference } = useParams<{ reference: string }>();
@@ -45,25 +31,21 @@ export default function PartnerDetailPage() {
 
   return (
     <div className="space-y-8 pb-12">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/director/dashboard">
-              Dashboard
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/director/partners">Partners</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href={`/director/partners/${partner?.reference}`}>
-              {partner?.name}
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <nav>
+        <ol className="flex items-center gap-2 text-sm text-black/60">
+          <li>
+            <a href="/director/dashboard" className="hover:text-black hover:underline">Dashboard</a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <a href="/director/partners" className="hover:text-black hover:underline">Partners</a>
+          </li>
+          <li><span className="text-black/30">/</span></li>
+          <li>
+            <span className="font-bold text-black">{partner?.name}</span>
+          </li>
+        </ol>
+      </nav>
 
       {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -86,21 +68,21 @@ export default function PartnerDetailPage() {
 
         <div className="flex items-center gap-2">
           {partner?.is_active ? (
-            <Badge className="bg-green-500/10 text-green-600 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
+            <span className="bg-green-500/10 text-green-600 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
               Active Partnership
-            </Badge>
+            </span>
           ) : (
-            <Badge className="bg-black/5 text-black/40 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
+            <span className="bg-black/5 text-black/40 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
               Suspended
-            </Badge>
+            </span>
           )}
         </div>
       </div>
 
       {/* Meta Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <Calendar className="w-5 h-5" />
@@ -116,11 +98,11 @@ export default function PartnerDetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <Hash className="w-5 h-5" />
@@ -134,11 +116,11 @@ export default function PartnerDetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <Building2 className="w-5 h-5" />
@@ -152,11 +134,11 @@ export default function PartnerDetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
-          <CardContent className="p-6">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+          <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
                 <Phone className="w-5 h-5" />
@@ -170,13 +152,13 @@ export default function PartnerDetailPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       {/* Transaction History (Journal Entries) */}
-      <Card className="border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl shadow-black/5 pb-24">
-        <CardHeader className="p-8 border-b border-black/5 flex flex-row items-center justify-between">
+      <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl shadow-black/5 pb-24">
+        <div className="p-8 border-b border-black/5 flex flex-row items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-xl bg-[#D0402B]/10 flex items-center justify-center text-[#D0402B]">
               <History className="w-5 h-5" />
@@ -185,11 +167,11 @@ export default function PartnerDetailPage() {
               Transaction Ledger
             </h3>
           </div>
-          <Badge className="bg-black/5 text-black border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-lg">
+          <span className="bg-black/5 text-black border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-lg inline-block">
             {partner?.journal_entries?.length || 0} Records
-          </Badge>
-        </CardHeader>
-        <CardContent className="p-0">
+          </span>
+        </div>
+        <div className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -239,9 +221,9 @@ export default function PartnerDetailPage() {
                         </div>
                       </td>
                       <td className="py-2.5 px-4 border-b border-black/5">
-                        <Badge className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none">
+                        <span className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none inline-block">
                           {entry.journal}
-                        </Badge>
+                        </span>
                       </td>
                       <td className="py-2.5 px-4 border-b border-black/5 text-right">
                         <p className="text-sm font-medium text-green-600">
@@ -285,8 +267,8 @@ export default function PartnerDetailPage() {
               </tbody>
             </table>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
