@@ -2,32 +2,32 @@
 
 import DivisionsList from "@/components/divisions/DivisionsList";
 import CreateDivisionModal from "@/forms/divisions/CreateDivisionModal";
-import { Database } from "lucide-react";
+import { Database, TrendingUp } from "lucide-react";
 
 export default function DivisionsPage() {
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <div className="space-y-10 pb-20">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <div className="w-6 h-6 rounded-md bg-[#D0402B] flex items-center justify-center text-white shadow-md shadow-[#D0402B]/20">
-              <Database className="w-3 h-3" />
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-8 h-8 rounded-xl bg-corporate-primary flex items-center justify-center text-white shadow-lg shadow-corporate-primary/20">
+              <Database className="w-4 h-4" />
             </div>
-            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#D0402B]">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-corporate-primary">
               Management Layer
             </p>
           </div>
-          <h1 className="text-xl font-bold text-black tracking-tighter italic">
-            Corporate <span className="text-[#D0402B]">Divisions</span>
+          <h1 className="text-4xl font-bold text-slate-900 tracking-tight italic">
+            Corporate <span className="text-corporate-primary">Divisions</span>
           </h1>
-          <p className="text-black/40 font-bold mt-0.5 text-xs max-w-md">
-            Organize business units and define operational boundaries.
+          <p className="text-slate-400 font-bold mt-2 text-sm max-w-lg">
+            Organize business units, define operational boundaries, and manage institutional protocols.
           </p>
         </div>
         <CreateDivisionModal />
       </div>
 
-      <div className="pt-4 border-t border-black/5">
+      <div className="pt-8 border-t border-slate-100">
         <DivisionsList rolePrefix="director" />
       </div>
     </div>

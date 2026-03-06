@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -10,15 +9,11 @@ import { useFetchBooks } from "@/hooks/books/actions";
 import { useFetchFinancialYears } from "@/hooks/financialyears/actions";
 import { useFetchJournalEntries } from "@/hooks/journalentries/actions";
 import CreateJournalType from "@/forms/journaltypes/CreateJournalType";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import * as Tabs from "@radix-ui/react-tabs";
 import CreatePartnerType from "@/forms/partnertypes/CreatePartnerType";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { GlobalSearch } from "@/components/navigation/GlobalSearch";
 import ReportsDashboard from "@/components/reports/ReportsDashboard";
-
 import AccountDistributionChart from "@/components/analytics/AccountDistributionChart";
 import RecentActivityFeed from "@/components/analytics/RecentActivityFeed";
 import {
@@ -33,22 +28,15 @@ import {
   CalendarRange,
   Book,
   ScrollText,
-  Sparkles,
   TrendingUp,
-  Wallet,
-  PieChart,
-  Activity,
   ArrowUpRight,
-  ArrowDownRight,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function FinanceDashboard() {
-  const { data: divisions, isLoading: isLoadingDivisions } =
-    useFetchDivisions();
-  const { data: journalTypes, isLoading: isLoadingJournalTypes } =
-    useFetchJournalTypes();
-  const { data: partnerTypes, isLoading: isLoadingPartnerTypes } =
-    useFetchPartnerTypes();
+  const { data: divisions, isLoading: isLoadingDivisions } = useFetchDivisions();
+  const { data: journalTypes, isLoading: isLoadingJournalTypes } = useFetchJournalTypes();
+  const { data: partnerTypes, isLoading: isLoadingPartnerTypes } = useFetchPartnerTypes();
   const { data: coas } = useFetchCOAs();
   const { data: books } = useFetchBooks();
   const { data: years } = useFetchFinancialYears();
@@ -60,304 +48,304 @@ export default function FinanceDashboard() {
   if (isLoadingDivisions || isLoadingJournalTypes || isLoadingPartnerTypes)
     return <LoadingSpinner />;
 
-  // Analytics Data
   const stats = [
     {
       label: "Total Divisions",
       value: divisions?.length || 0,
       icon: Building2,
       description: "Operational Units",
+      color: "text-emerald-600",
+      bg: "bg-emerald-50",
     },
     {
       label: "Active Fiscal Year",
       value: years?.find((y: any) => y.is_active)?.code || "N/A",
       icon: CalendarRange,
       description: `${years?.length || 0} Years Configured`,
+      color: "text-blue-600",
+      bg: "bg-blue-50",
     },
     {
       label: "Chart of Accounts",
       value: coas?.length || 0,
       icon: Layers,
       description: "Active Ledgers",
+      color: "text-indigo-600",
+      bg: "bg-indigo-50",
     },
     {
       label: "Ledger Books",
       value: books?.length || 0,
       icon: Book,
       description: "Sub-accounts",
+      color: "text-amber-600",
+      bg: "bg-amber-50",
     },
     {
       label: "Journal Entries",
       value: entries?.length || 0,
       icon: ScrollText,
       description: "Total Transactions",
+      color: "text-slate-900",
+      bg: "bg-slate-100",
     },
     {
       label: "Journal Types",
       value: journalTypes?.length || 0,
       icon: BookOpen,
-      description: "Transaction Categories",
+      description: "Categories",
+      color: "text-rose-600",
+      bg: "bg-rose-50",
     },
     {
       label: "Partner Types",
       value: partnerTypes?.length || 0,
       icon: Users,
-      description: "Entity Classifications",
+      description: "Entities",
+      color: "text-cyan-600",
+      bg: "bg-cyan-50",
     },
   ];
 
   return (
-    <div className="space-y-6 pb-6">
+    <div className="space-y-10 pb-20">
       <GlobalSearch role="finance" />
+
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
-          <h1 className="text-xl font-bold text-black tracking-tighter">
-            Finance Portal
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-8 h-8 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-600/20">
+              <TrendingUp className="w-4 h-4" />
+            </div>
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-600">
+              Financial Oversight
+            </p>
+          </div>
+          <h1 className="text-4xl font-bold text-slate-900 tracking-tight italic">
+            Finance <span className="text-emerald-600">Portal</span>
           </h1>
-          <p className="text-black/60 font-medium italic text-xs mt-0.5">
-            Overview and system configuration
+          <p className="text-slate-400 font-bold mt-2 text-sm max-w-lg">
+            Fiscal policy audit, system configuration, and strategic resource allocation engine.
           </p>
         </div>
       </div>
 
-      <Tabs defaultValue="reports" className="space-y-6">
-        <TabsList className="bg-white/50 backdrop-blur-md p-1 rounded-xl border border-black/5 h-auto">
-          <TabsTrigger
+      <Tabs.Root defaultValue="reports" className="space-y-10">
+        <Tabs.List className="inline-flex p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner">
+          <Tabs.Trigger
             value="reports"
-            className="rounded-lg px-4 py-2 text-xs font-bold data-[state=active]:bg-[#045138] data-[state=active]:text-white transition-all"
+            className="px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
-            Financial Reports
-          </TabsTrigger>
-          <TabsTrigger
+            Fiscal Reports
+          </Tabs.Trigger>
+          <Tabs.Trigger
             value="overview"
-            className="rounded-lg px-4 py-2 text-xs font-bold data-[state=active]:bg-[#045138] data-[state=active]:text-white transition-all"
+            className="px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
-            Overview
-          </TabsTrigger>
-          <TabsTrigger
+            System Health
+          </Tabs.Trigger>
+          <Tabs.Trigger
             value="configuration"
-            className="rounded-lg px-4 py-2 text-xs font-bold data-[state=active]:bg-[#045138] data-[state=active]:text-white transition-all"
+            className="px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
-            Configuration
-          </TabsTrigger>
+            Architecture
+          </Tabs.Trigger>
+        </Tabs.List>
 
-        </TabsList>
-
-        {/* Overview Tab (Analytics) */}
-        <TabsContent value="overview" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {stats.map((stat, i) => (
-              <Card
+        <Tabs.Content value="overview" className="space-y-10 focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {stats.slice(0, 4).map((stat, i) => (
+              <div
                 key={i}
-                className="border-none shadow-xl shadow-black/5 bg-white/80 backdrop-blur-xl rounded overflow-hidden"
+                className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-2xl shadow-slate-100 relative overflow-hidden group hover:-translate-y-1 transition-all duration-500"
               >
-                <CardContent className="p-4 relative">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-[#045138]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                  <div className="relative z-10 flex flex-col gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#045138]/10 flex items-center justify-center text-[#045138]">
-                      <stat.icon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="text-black font-medium uppercase tracking-widest text-[9px] mb-1">
-                        {stat.label}
-                      </p>
-                      <h3 className="text-xl font-semibold text-black tracking-tighter">
-                        {stat.value}
-                      </h3>
-                      <p className="font-normal italic text-xs mt-1">
-                        {stat.description}
-                      </p>
-                    </div>
+                <div className={cn("absolute top-0 right-0 w-24 h-24 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-30 group-hover:opacity-60 transition-opacity", stat.bg)} />
+                <div className="relative z-10 flex flex-col gap-4">
+                  <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center shadow-inner", stat.bg, stat.color)}>
+                    <stat.icon className="w-6 h-6" />
                   </div>
-                </CardContent>
-              </Card>
+                  <div>
+                    <p className="text-slate-400 font-bold uppercase tracking-widest text-[9px] mb-1">
+                      {stat.label}
+                    </p>
+                    <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
+                      {stat.value}
+                    </h3>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <AccountDistributionChart data={coas || []} />
-            <RecentActivityFeed entries={entries || []} />
-            <Card className="col-span-1 border-none shadow-xl shadow-black/5 bg-[#045138] rounded-[32px] text-white p-8 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
-              <div className="relative z-10 space-y-4">
-                <h3 className="text-xl font-bold">Quick Actions</h3>
-                <div className="flex flex-wrap gap-4">
-                  <Button
-                    onClick={() => setOpenCreateJournalType(true)}
-                    className="bg-white text-[#045138] hover:bg-white/90 font-bold rounded-xl h-12 px-6"
-                  >
-                    <Plus className="w-4 h-4 mr-2" /> Add Journal Type
-                  </Button>
-                  <Button
-                    onClick={() => setOpenCreatePartnerType(true)}
-                    variant="outline"
-                    className="border-white/20 text-white hover:bg-white/10 font-bold rounded-xl h-12 px-6"
-                  >
-                    <Plus className="w-4 h-4 mr-2" /> Add Partner Type
-                  </Button>
+            <div className="lg:col-span-2">
+              <AccountDistributionChart data={coas || []} />
+            </div>
+            <div className="space-y-8">
+              <RecentActivityFeed entries={entries || []} />
+              <div className="bg-slate-900 p-8 rounded-[2.5rem] border border-slate-800 shadow-2xl relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-600/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-emerald-600/30 transition-colors" />
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold text-white tracking-tight mb-6">Tactical Actions</h3>
+                  <div className="space-y-4">
+                    <button
+                      onClick={() => setOpenCreateJournalType(true)}
+                      className="w-full h-14 bg-white/10 hover:bg-white/20 text-white rounded-2xl border border-white/10 font-bold text-sm transition-all flex items-center justify-center gap-3 group/btn"
+                    >
+                      <Plus className="w-4 h-4 group-hover/btn:rotate-90 transition-transform text-emerald-400" />
+                      Add Journal Type
+                    </button>
+                    <button
+                      onClick={() => setOpenCreatePartnerType(true)}
+                      className="w-full h-14 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl shadow-lg shadow-emerald-600/20 font-bold text-sm transition-all flex items-center justify-center gap-3"
+                    >
+                      <Plus className="w-4 h-4" />
+                      Add Partner Category
+                    </button>
+                  </div>
                 </div>
               </div>
-            </Card>
+            </div>
           </div>
-        </TabsContent>
+        </Tabs.Content>
 
-        {/* Configuration Tab */}
-        <TabsContent
-          value="configuration"
-          className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500"
-        >
-          {/* Stats Grid */}
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <Tabs.Content value="configuration" className="space-y-10 focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {/* Divisions Section */}
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="font-bold text-black flex items-center gap-2">
-                  <Building2 className="w-5 h-5 text-[#045138]" />
-                  Divisions
-                </h2>
-                <Badge variant="secondary" className="bg-black/5 text-black">
-                  {divisions?.length || 0}
-                </Badge>
+            <div className="space-y-6">
+              <div className="flex items-center justify-between px-2">
+                <div>
+                  <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                    <Building2 className="w-5 h-5 text-emerald-600" />
+                    Operational Units
+                  </h2>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Active Sub-ledgers</p>
+                </div>
+                <div className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[10px] font-black border border-slate-200 uppercase">
+                  {divisions?.length || 0} Total
+                </div>
               </div>
               <div className="space-y-3">
                 {divisions?.map((division) => (
-                  <Card
+                  <div
                     key={division.reference}
-                    className="group border-black/5 hover:border-[#045138]/20 bg-white/60 backdrop-blur-xl transition-all shadow-sm hover:shadow-md rounded-2xl"
+                    className="group bg-white p-5 rounded-2xl border border-slate-200 hover:border-emerald-600/20 hover:shadow-xl hover:shadow-slate-100 transition-all flex items-center gap-4"
                   >
-                    <CardContent className="p-4 flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-[#045138]/5 flex items-center justify-center text-[#045138] group-hover:bg-[#045138] group-hover:text-white transition-colors">
-                        <Layers className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-black text-sm">
-                          {division.name}
-                        </h3>
-                      </div>
-                    </CardContent>
-                  </Card>
+                    <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-inner">
+                      <Layers className="w-4 h-4" />
+                    </div>
+                    <h3 className="font-bold text-slate-900 text-sm">
+                      {division.name}
+                    </h3>
+                  </div>
                 ))}
               </div>
             </div>
 
             {/* Journal Types Section */}
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="font-bold text-black flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-[#045138]" />
-                  Journal Types
-                </h2>
-                <Button
-                  size="sm"
+            <div className="space-y-6">
+              <div className="flex items-center justify-between px-2">
+                <div>
+                  <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                    <BookOpen className="w-5 h-5 text-emerald-600" />
+                    Journal Logic
+                  </h2>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Transaction Schemas</p>
+                </div>
+                <button
                   onClick={() => setOpenCreateJournalType(true)}
-                  className="h-8 bg-[#045138]/10 hover:bg-[#045138] text-[#045138] hover:text-white border-none rounded-lg text-xs font-semibold uppercase tracking-wider"
+                  className="p-2 bg-emerald-50 text-emerald-600 rounded-xl hover:bg-emerald-600 hover:text-white transition-all border border-emerald-100 hover:shadow-lg hover:shadow-emerald-600/20"
                 >
-                  <Plus className="w-3 h-3 mr-1" /> New
-                </Button>
+                  <Plus className="w-4 h-4" />
+                </button>
               </div>
               <div className="space-y-3">
                 {journalTypes?.map((type) => (
-                  <Card
+                  <div
                     key={type.reference}
-                    className="group border-black/5 hover:border-[#045138]/20 bg-white/60 backdrop-blur-xl transition-all shadow-sm hover:shadow-md rounded-2xl"
+                    className="group bg-white p-5 rounded-2xl border border-slate-200 hover:border-emerald-600/20 hover:shadow-xl hover:shadow-slate-100 transition-all flex flex-col gap-2"
                   >
-                    <CardContent className="p-4 flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-[#045138]/5 flex items-center justify-center text-[#045138] group-hover:bg-[#045138] group-hover:text-white transition-colors">
-                        <Settings2 className="w-5 h-5" />
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-inner">
+                        <Settings2 className="w-4 h-4" />
                       </div>
-                      <div>
-                        <h3 className="font-semibold text-black text-sm">
-                          {type.name}
-                        </h3>
-                        <p className="text-xs font-medium line-clamp-1">
-                          {type.description}
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      <h3 className="font-bold text-slate-900 text-sm">{type.name}</h3>
+                    </div>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-tight line-clamp-2 px-1">
+                      {type.description}
+                    </p>
+                  </div>
                 ))}
               </div>
             </div>
 
             {/* Partner Types Section */}
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="font-bold text-black flex items-center gap-2">
-                  <Users className="w-5 h-5 text-[#045138]" />
-                  Partner Types
-                </h2>
-                <Button
-                  size="sm"
+            <div className="space-y-6">
+              <div className="flex items-center justify-between px-2">
+                <div>
+                  <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                    <Users className="w-5 h-5 text-emerald-600" />
+                    Ecosystem
+                  </h2>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Partner Entities</p>
+                </div>
+                <button
                   onClick={() => setOpenCreatePartnerType(true)}
-                  className="h-8 bg-[#045138]/10 hover:bg-[#045138] text-[#045138] hover:text-white border-none rounded-lg text-xs font-semibold uppercase tracking-wider"
+                  className="p-2 bg-emerald-50 text-emerald-600 rounded-xl hover:bg-emerald-600 hover:text-white transition-all border border-emerald-100 hover:shadow-lg hover:shadow-emerald-600/20"
                 >
-                  <Plus className="w-3 h-3 mr-1" /> New
-                </Button>
+                  <Plus className="w-4 h-4" />
+                </button>
               </div>
               <div className="space-y-3">
                 {partnerTypes?.map((type) => (
-                  <Card
+                  <div
                     key={type.reference}
-                    className="group border-black/5 hover:border-[#045138]/20 bg-white/60 backdrop-blur-xl transition-all shadow-sm hover:shadow-md rounded-2xl"
+                    className="group bg-white p-5 rounded-2xl border border-slate-200 hover:border-emerald-600/20 hover:shadow-xl hover:shadow-slate-100 transition-all flex flex-col gap-2"
                   >
-                    <CardContent className="p-4 flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-[#045138]/5 flex items-center justify-center text-[#045138] group-hover:bg-[#045138] group-hover:text-white transition-colors">
-                        <Briefcase className="w-5 h-5" />
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-inner">
+                        <Briefcase className="w-4 h-4" />
                       </div>
-                      <div>
-                        <h3 className="font-semibold text-black text-sm">
-                          {type.name}
-                        </h3>
-                        <p className="text-xs font-medium line-clamp-1">
-                          {type.description}
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      <h3 className="font-bold text-slate-900 text-sm">{type.name}</h3>
+                    </div>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-tight line-clamp-2 px-1">
+                      {type.description}
+                    </p>
+                  </div>
                 ))}
               </div>
             </div>
           </div>
-        </TabsContent>
-        <TabsContent value="reports" className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <ReportsDashboard />
-        </TabsContent>
-      </Tabs>
+        </Tabs.Content>
+
+        <Tabs.Content value="reports" className="focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="bg-white p-1 rounded-[3rem] border border-slate-200 shadow-2xl shadow-slate-100 overflow-hidden">
+            <ReportsDashboard />
+          </div>
+        </Tabs.Content>
+      </Tabs.Root>
 
       {/* Manual Modals */}
       {openCreateJournalType && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-2xl animate-in zoom-in-95 duration-200">
-            <Button
-              onClick={() => setOpenCreateJournalType(false)}
-              className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-white text-black shadow-lg hover:bg-red-50 hover:text-red-600 z-10"
-              size="icon"
-            >
-              <X className="w-5 h-5" />
-            </Button>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xl animate-in fade-in duration-300">
+          <div className="w-full max-w-2xl animate-in zoom-in-95 duration-300">
             <CreateJournalType
               rolePrefix="finance"
               onSuccess={() => setOpenCreateJournalType(false)}
+              onClose={() => setOpenCreateJournalType(false)}
             />
           </div>
         </div>
       )}
 
       {openCreatePartnerType && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-2xl animate-in zoom-in-95 duration-200">
-            <Button
-              onClick={() => setOpenCreatePartnerType(false)}
-              className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-white text-black shadow-lg hover:bg-red-50 hover:text-red-600 z-10"
-              size="icon"
-            >
-              <X className="w-5 h-5" />
-            </Button>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xl animate-in fade-in duration-300">
+          <div className="w-full max-w-2xl animate-in zoom-in-95 duration-300">
             <CreatePartnerType
               rolePrefix="finance"
               onSuccess={() => setOpenCreatePartnerType(false)}
+              onClose={() => setOpenCreatePartnerType(false)}
             />
           </div>
         </div>

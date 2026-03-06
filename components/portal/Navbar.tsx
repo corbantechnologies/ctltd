@@ -8,7 +8,6 @@ import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import { useFetchAccount } from "@/hooks/accounts/actions";
 import { useFetchFinancialYears } from "@/hooks/financialyears/actions";
-import { Button } from "@/components/ui/button";
 import {
   LogOut,
   LayoutDashboard,
@@ -17,6 +16,8 @@ import {
   Menu,
   X,
   ChevronRight,
+  User,
+  Settings,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -42,7 +43,6 @@ export default function Navbar() {
     setMenuOpen(false);
   }, [pathname]);
 
-  // Fetch financial years to find active one for direct linking
   const { data: years } = useFetchFinancialYears();
   const activeYear = years?.find(
     (y: { is_active: boolean; reference: string }) => y.is_active,
@@ -75,7 +75,6 @@ export default function Navbar() {
     },
     {
       name: "Fiscal Year",
-      // If there is an active year, link directly to it. Otherwise, link to the list.
       href: activeYear
         ? `/${rolePrefix}/fiscal-years/${activeYear.reference}`
         : `/${rolePrefix}/fiscal-years`,
@@ -98,8 +97,8 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 w-full z-40 bg-white border-b border-black/5 py-3 pr-2 shadow-sm">
-        <div className="mx-auto px-6 flex justify-between items-center">
+      <nav className="sticky top-0 w-full z-40 bg-slate-900 border-b border-slate-800 py-3 pr-2 shadow-2xl">
+        <div className="mx-auto px-6 lg:px-12 flex justify-between items-center">
           {/* Logo */}
           <Link
             href="/"
@@ -110,37 +109,36 @@ export default function Navbar() {
               alt="Corban Technologies Logo"
               width={140}
               height={38}
-              className="h-7 w-auto object-contain"
+              className="h-8 w-auto object-contain brightness-0 invert"
             />
           </Link>
 
           {/* Controls & Nav */}
-          <div className="flex items-center gap-2">
-            {/* Account Info - Visible on larger screens */}
-            <div className="flex items-center gap-3">
-              <div className="hidden sm:flex flex-col items-end mr-1">
-                <span className="text-sm font-bold text-black leading-none">
-                  {isLoading
-                    ? "..."
-                    : `${account?.first_name} ${account?.last_name}`}
-                </span>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-corporate-primary">
-                  {isDirector ? "Director" : isFinance ? "Finance" : "Portal"}
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                {/* Global Menu Toggle */}
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded text-black hover:bg-orange-50"
-                  onClick={() => setMenuOpen(true)}
-                >
-                  <Menu className="w-6 h-6" />
-                </Button>
-              </div>
+          <div className="flex items-center gap-6">
+            <div className="hidden sm:flex flex-col items-end">
+              <span className="text-sm font-bold text-white leading-none tracking-tight">
+                {isLoading
+                  ? "Loading..."
+                  : `${account?.first_name} ${account?.last_name}`}
+              </span>
+              <span className={cn(
+                "text-[10px] uppercase font-black tracking-[0.2em] mt-1.5 px-3 py-1 rounded-full border shadow-sm",
+                isDirector
+                  ? "text-corporate-primary bg-corporate-primary/5 border-corporate-primary/20 shadow-corporate-primary/5"
+                  : isFinance
+                    ? "text-emerald-500 bg-emerald-500/5 border-emerald-500/20 shadow-emerald-500/5"
+                    : "text-slate-400 bg-slate-800 border-slate-700"
+              )}>
+                {isDirector ? "Executive Director" : isFinance ? "Finance Controller" : "Portal User"}
+              </span>
             </div>
+
+            <button
+              onClick={() => setMenuOpen(true)}
+              className="p-3 rounded-2xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all border border-slate-800 hover:border-slate-700 shadow-2xl group"
+            >
+              <Menu className="w-6 h-6 group-hover:scale-110 transition-transform" />
+            </button>
           </div>
         </div>
       </nav>
@@ -148,7 +146,7 @@ export default function Navbar() {
       {/* Menu Backdrop */}
       <div
         className={cn(
-          "fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] transition-opacity",
+          "fixed inset-0 bg-slate-950/60 backdrop-blur-md z-[60] transition-opacity duration-300",
           menuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none",
@@ -159,53 +157,67 @@ export default function Navbar() {
       {/* Side Menu Drawer */}
       <aside
         className={cn(
-          "fixed right-0 top-0 h-full w-[300px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-in-out",
+          "fixed right-0 top-0 h-full w-[340px] bg-slate-900 z-[70] shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] transform transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1) border-l border-slate-800",
           menuOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
         <div className="flex flex-col h-full">
           {/* Drawer Header */}
-          <div className="p-6 border-b border-black/5 flex items-center justify-between">
+          <div className="p-8 border-b border-slate-800 flex items-center justify-between bg-slate-900/50 backdrop-blur-xl">
             <Image
               src="/logo.png"
               alt="Logo"
               width={120}
               height={32}
-              className="h-6 w-auto object-contain"
+              className="h-6 w-auto object-contain brightness-0 invert"
             />
-            <Button
-              variant="ghost"
-              size="icon"
-              className="rounded hover:bg-orange-50"
+            <button
               onClick={() => setMenuOpen(false)}
+              className="p-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition-colors border border-transparent hover:border-slate-700"
             >
               <X className="w-6 h-6" />
-            </Button>
+            </button>
           </div>
 
-          {/* User Info inside Drawer */}
-          <div className="p-6 bg-orange-50/30">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded bg-orange-100 flex items-center justify-center text-corporate-primary font-bold text-lg">
+          {/* User Info Section */}
+          <div className="p-8 bg-gradient-to-b from-slate-900 to-slate-950/50 border-b border-slate-800">
+            <div className="flex items-center gap-5">
+              <div className={cn(
+                "w-16 h-16 rounded-[1.25rem] flex items-center justify-center text-white font-black text-2xl border shadow-2xl transition-transform hover:scale-105",
+                isDirector
+                  ? "bg-corporate-primary border-corporate-primary/20 shadow-corporate-primary/10"
+                  : isFinance
+                    ? "bg-emerald-600 border-emerald-600/20 shadow-emerald-600/10"
+                    : "bg-slate-800 border-slate-700"
+              )}>
                 {account?.first_name?.[0]}
                 {account?.last_name?.[0]}
               </div>
               <div>
-                <p className="font-bold text-black leading-tight">
+                <p className="font-black text-white text-xl tracking-tight italic">
                   {account?.first_name} {account?.last_name}
                 </p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-corporate-primary mt-1">
-                  {isDirector ? "Director" : isFinance ? "Finance" : "Portal"}
-                </p>
+                <div className={cn(
+                  "inline-flex items-center px-3 py-1 rounded-full border mt-2",
+                  isDirector
+                    ? "bg-corporate-primary/10 border-corporate-primary/20"
+                    : isFinance
+                      ? "bg-emerald-500/10 border-emerald-500/20"
+                      : "bg-slate-800 border-slate-700"
+                )}>
+                  <span className={cn(
+                    "text-[9px] font-black uppercase tracking-[0.2em]",
+                    isDirector ? "text-corporate-primary" : isFinance ? "text-emerald-500" : "text-slate-400"
+                  )}>
+                    {isDirector ? "Authorized Executive" : isFinance ? "Fiscal Controller" : "Access Level: Basic"}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Drawer Links */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-2">
-            <div className="px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-black/30">
-              Navigation
-            </div>
+          {/* Navigation Links */}
+          <div className="flex-1 overflow-y-auto p-6 space-y-2 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
             {navItems
               .filter((item) => item.show)
               .map((item) => {
@@ -215,19 +227,21 @@ export default function Navbar() {
                     key={item.name}
                     href={item.href}
                     className={cn(
-                      "flex items-center justify-between p-4 rounded font-bold text-sm transition-all group",
+                      "flex items-center justify-between p-4 rounded-2xl font-black text-[11px] uppercase tracking-widest transition-all group border border-transparent",
                       isActive
-                        ? "bg-orange-50 text-corporate-primary"
-                        : "text-black/60 hover:bg-orange-50/50 hover:text-black",
+                        ? "bg-slate-800/80 text-white border-slate-700 shadow-xl"
+                        : "text-slate-500 hover:bg-slate-800/40 hover:text-white hover:border-slate-800/50",
                     )}
                   >
                     <div className="flex items-center gap-4">
                       <div
                         className={cn(
-                          "w-10 h-10 rounded flex items-center justify-center transition-colors",
+                          "w-11 h-11 rounded-xl flex items-center justify-center transition-all group-hover:scale-110 shadow-lg",
                           isActive
-                            ? "bg-white shadow-sm"
-                            : "bg-black/5 shadow-none",
+                            ? isDirector
+                              ? "bg-corporate-primary text-white shadow-corporate-primary/20"
+                              : "bg-emerald-600 text-white shadow-emerald-600/20"
+                            : "bg-slate-800/80 text-slate-600 group-hover:text-white shadow-black/5",
                         )}
                       >
                         <item.icon className="w-5 h-5" />
@@ -236,8 +250,8 @@ export default function Navbar() {
                     </div>
                     <ChevronRight
                       className={cn(
-                        "w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity",
-                        isActive && "opacity-100",
+                        "w-5 h-5 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1",
+                        isActive && (isDirector ? "text-corporate-primary opacity-100" : "text-emerald-500 opacity-100"),
                       )}
                     />
                   </Link>
@@ -245,16 +259,15 @@ export default function Navbar() {
               })}
           </div>
 
-          {/* Drawer Footer */}
-          <div className="p-6 border-t border-black/5">
-            <Button
-              variant="outline"
-              className="w-full h-14 bg-black hover:bg-red-600 text-white hover:text-white rounded font-bold flex items-center justify-center gap-3 transition-all border-none"
+          {/* Footer Action */}
+          <div className="p-8 border-t border-slate-800 bg-slate-900/50 backdrop-blur-xl">
+            <button
               onClick={() => signOut({ callbackUrl: "/auth/login" })}
+              className="w-full h-14 bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all border border-red-500/20 shadow-lg shadow-red-500/5 group"
             >
-              <LogOut className="w-5 h-5" />
-              Sign Out
-            </Button>
+              <LogOut className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
+              Sign Out Securely
+            </button>
           </div>
         </div>
       </aside>

@@ -2,8 +2,6 @@
 
 import { useFetchDivisions } from "@/hooks/divisions/actions";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   Database,
   ArrowRight,
@@ -14,15 +12,12 @@ import {
   ChevronLeft,
   ChevronRight,
   MoreHorizontal,
+  Activity,
+  ShieldAlert,
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useMemo } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-
-type CSSWithVariables = React.CSSProperties & {
-  [key: string]: string | number;
-};
+import { cn } from "@/lib/utils";
 
 interface DivisionsListProps {
   rolePrefix: string;
@@ -32,7 +27,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
   const [view, setView] = useState<"grid" | "table">("table");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
+  const itemsPerPage = 10;
 
   const { isLoading, data: divisions } = useFetchDivisions();
 
@@ -52,7 +47,9 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
     return filteredDivisions.slice(start, start + itemsPerPage);
   }, [filteredDivisions, currentPage]);
 
-  const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
+  const primaryColorClass = rolePrefix === "director" ? "text-corporate-primary" : "text-emerald-600";
+  const primaryBgClass = rolePrefix === "director" ? "bg-corporate-primary" : "bg-emerald-600";
+  const primaryBorderClass = rolePrefix === "director" ? "border-corporate-primary/20" : "border-emerald-600/20";
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -60,323 +57,229 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
 
   if (!divisions || divisions.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center p-12 bg-black/5 rounded-[32px] border-2 border-dashed border-black/10">
-        <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center text-black/20 mb-4 shadow-sm">
-          <Database className="w-8 h-8" />
+      <div className="flex flex-col items-center justify-center p-16 bg-slate-50 rounded-[3rem] border-2 border-dashed border-slate-200">
+        <div className="w-20 h-20 rounded-3xl bg-white flex items-center justify-center text-slate-200 mb-6 shadow-xl border border-slate-100">
+          <Database className="w-10 h-10" />
         </div>
-        <p className="text-sm font-bold text-black/40 uppercase tracking-widest">
-          No divisions established yet
+        <h4 className="text-xl font-bold text-slate-900 tracking-tight">System Base Empty</h4>
+        <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mt-2">
+          Establish infrastructure units to begin
         </p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      {/* Controls Bar */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-white/50 backdrop-blur-xl p-3 rounded-2xl border border-black/5 shadow-sm">
-        <div className="flex flex-col md:flex-row items-center gap-3 w-full lg:w-auto">
-          {/* Search */}
-          <div className="relative w-full md:w-80">
-            <Search
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-black/20"
-              style={
-                {
-                  color: searchQuery ? primaryColor : undefined,
-                } as CSSWithVariables
-              }
-            />
-            <Input
-              placeholder="Search by name or reference..."
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="pl-9 h-10 rounded-xl border-black/5 bg-black/5 focus:bg-white transition-all font-bold text-xs"
-            />
+    <div className="space-y-8">
+      {/* Search & View Toggle */}
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+        <div className="relative w-full lg:max-w-md group">
+          <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none transition-colors">
+            <Search className={cn("w-5 h-5 text-slate-300 group-focus-within:text-slate-900 transition-colors", searchQuery && primaryColorClass)} />
           </div>
+          <input
+            type="text"
+            placeholder="Search by name or reference..."
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="w-full h-16 pl-14 pr-6 rounded-[1.5rem] border border-slate-200 bg-white/80 backdrop-blur-md focus:bg-white focus:border-slate-900 focus:ring-0 transition-all font-bold text-sm text-slate-900 shadow-sm"
+          />
         </div>
 
-        <div className="flex items-center gap-1.5 bg-black/5 p-1 rounded-xl self-end lg:self-auto">
+        <div className="flex items-center gap-2 p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner overflow-hidden">
           <button
             onClick={() => setView("grid")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "grid"
-              ? "bg-white shadow-sm"
-              : "text-black/40 hover:text-black"
-              }`}
-            style={
-              {
-                color: view === "grid" ? primaryColor : undefined,
-              } as CSSWithVariables
-            }
+            className={cn(
+              "flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all",
+              view === "grid"
+                ? "bg-white text-slate-900 shadow-md border border-slate-100"
+                : "text-slate-400 hover:text-slate-600"
+            )}
           >
-            <LayoutGrid className="w-3.5 h-3.5" />
+            <LayoutGrid className="w-4 h-4" />
             Grid
           </button>
           <button
             onClick={() => setView("table")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "table"
-              ? "bg-white shadow-sm"
-              : "text-black/40 hover:text-black"
-              }`}
-            style={
-              {
-                color: view === "table" ? primaryColor : undefined,
-              } as CSSWithVariables
-            }
+            className={cn(
+              "flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all",
+              view === "table"
+                ? "bg-white text-slate-900 shadow-md border border-slate-100"
+                : "text-slate-400 hover:text-slate-600"
+            )}
           >
-            <List className="w-3.5 h-3.5" />
+            <List className="w-4 h-4" />
             Table
           </button>
         </div>
       </div>
 
-      {/* Content Rendering */}
-      {paginatedDivisions.length === 0 ? (
-        <div className="py-20 text-center">
-          <p className="text-sm font-bold text-black/20 uppercase tracking-[0.2em]">
-            No divisions match your criteria
-          </p>
-        </div>
-      ) : view === "grid" ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {paginatedDivisions.map((division) => (
-            <Link
-              key={division.reference}
-              href={`/${rolePrefix}/divisions/${division.reference}`}
-              className="group"
-            >
-              <Card className="border-black/5 shadow-sm hover:shadow-2xl transition-all duration-300 rounded-2xl overflow-hidden bg-white/80 backdrop-blur-xl group-hover:-translate-y-1">
-                <CardContent className="p-5">
-                  <div className="flex justify-between items-start mb-4">
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center group-hover:text-white transition-all duration-300 shadow-inner"
-                      style={
-                        {
-                          backgroundColor: `${primaryColor}1A`, // 10% opacity
-                          color: primaryColor,
-                          "--hover-bg": primaryColor,
-                        } as CSSWithVariables
-                      }
-                    >
-                      <Layers className="w-5 h-5" />
+      {/* Main Content */}
+      <div className="animate-in fade-in duration-700">
+        {paginatedDivisions.length === 0 ? (
+          <div className="py-24 text-center">
+            <ShieldAlert className="w-16 h-16 text-slate-200 mx-auto mb-4" />
+            <p className="text-base font-bold text-slate-400 uppercase tracking-[0.2em]">
+              No results found
+            </p>
+          </div>
+        ) : view === "grid" ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {paginatedDivisions.map((division) => (
+              <Link
+                key={division.reference}
+                href={`/${rolePrefix}/divisions/${division.reference}`}
+                className="group block"
+              >
+                <div className="bg-white border border-slate-200 shadow-2xl shadow-slate-100 rounded-[2.5rem] p-8 hover:-translate-y-2 transition-all duration-500 relative overflow-hidden group-hover:shadow-corporate-primary/10">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-corporate-primary/5 transition-colors" />
+
+                  <div className="flex justify-between items-start mb-8 relative z-10">
+                    <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 border border-slate-100 shadow-inner bg-slate-50 group-hover:bg-slate-900 group-hover:text-white group-hover:scale-110 group-hover:shadow-lg",)}>
+                      <Layers className="w-6 h-6" />
                     </div>
-                    {division.is_active ? (
-                      <Badge className="bg-green-500/10 text-green-600 border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full">
-                        Active
-                      </Badge>
-                    ) : (
-                      <Badge className="bg-black/5 text-black/40 border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full">
-                        Inactive
-                      </Badge>
-                    )}
+                    <div className={cn("px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-sm border",
+                      division.is_active ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-slate-50 text-slate-400 border-slate-100")}>
+                      <div className={cn("w-2 h-2 rounded-full", division.is_active ? "bg-emerald-500 animate-pulse" : "bg-slate-300")} />
+                      {division.is_active ? "Active" : "Legacy"}
+                    </div>
                   </div>
 
-                  <div className="mb-4">
-                    <h3
-                      className="text-base font-bold text-black tracking-tight transition-colors line-clamp-1"
-                      style={
-                        {
-                          "--hover-text": primaryColor,
-                        } as CSSWithVariables
-                      }
-                    >
+                  <div className="relative z-10 mb-8">
+                    <h3 className="text-xl font-bold text-slate-900 tracking-tight group-hover:text-corporate-primary transition-colors">
                       {division.name}
                     </h3>
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-black/30 mt-1">
-                      REF: {division.reference}
-                    </p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">REF:</span>
+                      <span className="text-[10px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-lg border border-slate-200">{division.reference}</span>
+                    </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-3 border-t border-black/5">
-                    <span
-                      className="text-[9px] font-bold uppercase tracking-widest"
-                      style={{ color: primaryColor }}
-                    >
-                      View Infrastructure
+                  <div className="pt-6 border-t border-slate-100 flex items-center justify-between relative z-10 group/btn">
+                    <span className={cn("text-[10px] font-bold uppercase tracking-widest", primaryColorClass)}>
+                      Manage Unit
                     </span>
-                    <ArrowRight className="w-3.5 h-3.5 text-black/20 group-hover:translate-x-1 transition-all" />
+                    <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-slate-900 group-hover:text-white group-hover:rotate-45 transition-all">
+                      <ArrowRight className="w-5 h-5" />
+                    </div>
                   </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
-      ) : (
-        <div className="bg-white/50 backdrop-blur-xl border border-black/5 rounded-2xl overflow-hidden shadow-xl shadow-black/5">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-black/10 bg-black/5">
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
-                    Division Name
-                  </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
-                    Reference
-                  </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
-                    Status
-                  </th>
-                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-black/5">
-                {paginatedDivisions.map((division) => (
-                  <tr
-                    key={division.reference}
-                    className="transition-colors group"
-                    style={
-                      { "--hover-bg": `${primaryColor}0D` } as CSSWithVariables
-                    }
-                  >
-                    <td className="py-2.5 px-4 border-b border-black/5">
-                      <div className="flex items-center gap-3">
-                        <div
-                          className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold"
-                          style={
-                            {
-                              "--group-hover-bg": `${primaryColor}33`,
-                              "--group-hover-text": primaryColor,
-                            } as CSSWithVariables
-                          }
-                        >
-                          <Layers className="w-4 h-4" />
-                        </div>
-                        <p
-                          className="text-sm font-medium text-black transition-colors"
-                          style={
-                            {
-                              "--group-hover-text": primaryColor,
-                            } as CSSWithVariables
-                          }
-                        >
-                          {division.name}
-                        </p>
-                      </div>
-                    </td>
-                    <td className="py-2.5 px-4 border-b border-black/5">
-                      <Badge className="bg-black/5 text-black border-none font-bold text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none">
-                        {division.reference}
-                      </Badge>
-                    </td>
-                    <td className="py-2.5 px-4 border-b border-black/5">
-                      {division.is_active ? (
-                        <div className="flex items-center gap-1.5 text-green-600">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                          <span className="text-[10px] font-bold uppercase tracking-wider">
-                            Active
-                          </span>
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-1.5 text-black/30">
-                          <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
-                          <span className="text-[10px] font-bold uppercase tracking-wider">
-                            Inactive
-                          </span>
-                        </div>
-                      )}
-                    </td>
-                    <td className="py-2.5 px-4 text-right border-b border-black/5">
-                      <Link
-                        href={`/${rolePrefix}/divisions/${division.reference}`}
-                      >
-                        <Button
-                          variant="ghost"
-                          className="h-7 w-7 p-0 rounded-md hover:text-white transition-all duration-300"
-                          style={
-                            {
-                              "--hover-bg": primaryColor,
-                            } as CSSWithVariables
-                          }
-                        >
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </Button>
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                </div>
+              </Link>
+            ))}
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="bg-white border border-slate-200 rounded-[2.5rem] shadow-2xl shadow-slate-100 overflow-hidden relative">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-slate-100 bg-slate-50/50">
+                    <th className="text-left py-6 px-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                      Organizational Unit
+                    </th>
+                    <th className="text-left py-6 px-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                      Nomenclature
+                    </th>
+                    <th className="text-left py-6 px-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                      Operational State
+                    </th>
+                    <th className="text-right py-6 px-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                      Access
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {paginatedDivisions.map((division) => (
+                    <tr
+                      key={division.reference}
+                      className="group/row hover:bg-slate-50/50 transition-colors"
+                    >
+                      <td className="py-6 px-8">
+                        <div className="flex items-center gap-4">
+                          <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 group-hover/row:bg-slate-900 group-hover/row:text-white transition-all shadow-inner border border-transparent group-hover/row:border-slate-800">
+                            <Database className="w-5 h-5" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-bold text-slate-900 text-sm">{division.name}</span>
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Division Unit</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-6 px-8">
+                        <span className="text-xs font-bold text-slate-600 bg-slate-100 px-3 py-1 rounded-xl border border-slate-200 shadow-sm">
+                          {division.reference}
+                        </span>
+                      </td>
+                      <td className="py-6 px-8">
+                        <div className={cn("inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border",
+                          division.is_active ? "bg-emerald-50 text-emerald-600 border-emerald-100 shadow-sm shadow-emerald-500/5" : "bg-slate-50 text-slate-400 border-slate-100")}>
+                          <div className={cn("w-1.5 h-1.5 rounded-full", division.is_active ? "bg-emerald-500 animate-pulse" : "bg-slate-300")} />
+                          {division.is_active ? "Operational" : "Deactivated"}
+                        </div>
+                      </td>
+                      <td className="py-6 px-8 text-right">
+                        <Link
+                          href={`/${rolePrefix}/divisions/${division.reference}`}
+                          className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 hover:bg-slate-900 hover:text-white transition-all border border-transparent hover:border-slate-800 hover:shadow-xl hover:rotate-12 group/btn"
+                        >
+                          <ArrowRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-1" />
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+      </div>
 
-      {/* Pagination Controls */}
+      {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/50 backdrop-blur-xl p-4 rounded-2xl border border-black/5">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-black/30">
-            Showing{" "}
-            <span className="text-black">{paginatedDivisions.length}</span> of{" "}
-            <span className="text-black">{filteredDivisions.length}</span>{" "}
-            divisions
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 py-8 border-t border-slate-100">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2rem] text-slate-400">
+            Trace Level: <span className="text-slate-900">{paginatedDivisions.length}</span> / <span className="text-slate-900">{filteredDivisions.length}</span>
           </p>
 
-          <div className="flex items-center gap-1.5">
-            <Button
-              variant="outline"
+          <div className="flex items-center gap-2">
+            <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              className="w-8 h-8 p-0 rounded-lg border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
-              style={{ "--hover-bg": primaryColor } as CSSWithVariables}
+              className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-slate-200 text-slate-400 hover:bg-slate-900 hover:text-white hover:border-slate-900 disabled:opacity-20 transition-all shadow-sm"
             >
-              <ChevronLeft className="w-3.5 h-3.5" />
-            </Button>
+              <ChevronLeft className="w-5 h-5" />
+            </button>
 
-            <div className="flex items-center gap-1 px-2">
+            <div className="flex items-center bg-slate-100 p-1 rounded-2xl border border-slate-200">
               {[...Array(totalPages)].map((_, i) => {
                 const page = i + 1;
-                if (
-                  page === 1 ||
-                  page === totalPages ||
-                  (page >= currentPage - 1 && page <= currentPage + 1)
-                ) {
-                  return (
-                    <button
-                      key={page}
-                      onClick={() => setCurrentPage(page)}
-                      className={`w-8 h-8 rounded-lg text-[10px] font-bold transition-all ${currentPage === page
-                        ? "text-white shadow-md"
-                        : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
-                        }`}
-                      style={
-                        {
-                          backgroundColor:
-                            currentPage === page ? primaryColor : undefined,
-                          boxShadow:
-                            currentPage === page
-                              ? `0 4px 6px -1px ${primaryColor}33`
-                              : undefined,
-                        } as CSSWithVariables
-                      }
-                    >
-                      {page}
-                    </button>
-                  );
-                }
-                if (page === currentPage - 2 || page === currentPage + 2) {
-                  return (
-                    <MoreHorizontal
-                      key={page}
-                      className="w-3 h-3 text-black/20"
-                    />
-                  );
-                }
-                return null;
+                const isSelected = currentPage === page;
+                return (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={cn(
+                      "w-10 h-10 rounded-xl text-[10px] font-black transition-all",
+                      isSelected
+                        ? "bg-slate-900 text-white shadow-lg"
+                        : "text-slate-400 hover:text-slate-900"
+                    )}
+                  >
+                    {String(page).padStart(2, '0')}
+                  </button>
+                );
               })}
             </div>
 
-            <Button
-              variant="outline"
+            <button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              className="w-8 h-8 p-0 rounded-lg border-black/5 bg-white shadow-sm transition-all disabled:opacity-30 hover:text-white"
-              style={{ "--hover-bg": primaryColor } as CSSWithVariables}
+              className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-slate-200 text-slate-400 hover:bg-slate-900 hover:text-white hover:border-slate-900 disabled:opacity-20 transition-all shadow-sm"
             >
-              <ChevronRight className="w-3.5 h-3.5" />
-            </Button>
+              <ChevronRight className="w-5 h-5" />
+            </button>
           </div>
         </div>
       )}
