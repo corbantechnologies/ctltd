@@ -227,7 +227,7 @@ export default function JournalEntryDetailModal({
             </div>
           </section>
 
-          <Separator className="bg-gray-100" />
+          <hr className="bg-gray-100 border-0 h-px" />
 
           {/* Documentation */}
           <section className="space-y-4 sm:space-y-5">
@@ -270,7 +270,7 @@ export default function JournalEntryDetailModal({
 
           {entry.notes && (
             <>
-              <Separator className="bg-gray-100" />
+              <hr className="bg-gray-100 border-0 h-px" />
 
               {/* Notes */}
               <section className="space-y-3">
