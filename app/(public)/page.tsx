@@ -41,7 +41,7 @@ export default function Home() {
               Launch Your Project <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <Link
-              href="#divisions"
+              href="/divisions"
               className="w-full sm:w-auto inline-flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-white px-8 py-3.5 rounded-lg font-medium transition-colors ring-1 ring-slate-700"
             >
               Explore Divisions
@@ -119,7 +119,7 @@ export default function Home() {
                 Get Started Now
               </Link>
               <Link
-                href="#divisions"
+                href="/divisions"
                 className="w-full sm:w-auto inline-flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-white px-8 py-3.5 rounded-lg font-medium transition-colors ring-1 ring-slate-700"
               >
                 View Divisions

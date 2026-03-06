@@ -52,11 +52,11 @@ export default function Footer() {
             Company
           </h4>
           <ul className="space-y-3">
-            {["Products", "Offers", "Services", "Contact", "About"].map(
+            {["Divisions", "About", "Contact"].map(
               (item) => (
                 <li key={item}>
                   <Link
-                    href={`/${item.toLowerCase().replace(" ", "-")}`}
+                    href={item === "Divisions" ? "/divisions" : `/${item.toLowerCase()}`}
                     className="text-slate-500 hover:text-corporate-primary text-sm transition-colors"
                   >
                     {item}
@@ -74,10 +74,10 @@ export default function Footer() {
           </h4>
           <ul className="space-y-3">
             {[
-              { name: "SACCO Platform", href: "/products/sacco-platform" },
-              { name: "Web & Mobile Dev", href: "/services" },
-              { name: "Cloud Infrastructure", href: "/services" },
-              { name: "Cybersecurity", href: "/services" },
+              { name: "Financial Systems", href: "/divisions" },
+              { name: "Cloud Infrastructure", href: "/divisions" },
+              { name: "Cybersecurity", href: "/divisions" },
+              { name: "Enterprise Software", href: "/divisions" },
             ].map((item) => (
               <li key={item.name}>
                 <a
