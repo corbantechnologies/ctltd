@@ -197,20 +197,29 @@ export default function Navbar() {
                 <p className="font-black text-white text-xl tracking-tight italic">
                   {account?.first_name} {account?.last_name}
                 </p>
-                <div className={cn(
-                  "inline-flex items-center px-3 py-1 rounded-full border mt-2",
-                  isDirector
-                    ? "bg-corporate-primary/10 border-corporate-primary/20"
-                    : isFinance
-                      ? "bg-emerald-500/10 border-emerald-500/20"
-                      : "bg-slate-800 border-slate-700"
-                )}>
-                  <span className={cn(
-                    "text-[9px] font-black uppercase tracking-[0.2em]",
-                    isDirector ? "text-corporate-primary" : isFinance ? "text-emerald-500" : "text-slate-400"
+                <div className="flex flex-wrap gap-2 mt-2">
+                  <div className={cn(
+                    "inline-flex items-center px-3 py-1 rounded-full border",
+                    isDirector
+                      ? "bg-corporate-primary/10 border-corporate-primary/20"
+                      : isFinance
+                        ? "bg-emerald-500/10 border-emerald-500/20"
+                        : "bg-slate-800 border-slate-700"
                   )}>
-                    {isDirector ? "Authorized Executive" : isFinance ? "Fiscal Controller" : "Access Level: Basic"}
-                  </span>
+                    <span className={cn(
+                      "text-[9px] font-black uppercase tracking-[0.2em]",
+                      isDirector ? "text-corporate-primary" : isFinance ? "text-emerald-500" : "text-slate-400"
+                    )}>
+                      {isDirector ? "Executive Director" : isFinance ? "Finance Controller" : "Portal User"}
+                    </span>
+                  </div>
+                  {activeYear && (
+                    <div className="inline-flex items-center px-3 py-1 rounded-full border bg-slate-800 border-slate-700 shadow-inner">
+                      <span className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
+                        FY: {activeYear.code}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

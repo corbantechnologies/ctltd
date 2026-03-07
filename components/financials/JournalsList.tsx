@@ -500,7 +500,7 @@ export default function JournalsList({
             >
               <ChevronLeft className="w-4 h-4 mr-1" /> Prev
             </button>
-            <div className="flex gap-1">
+            <div className="flex gap-1 overflow-x-auto max-w-[120px] sm:max-w-none scrollbar-none pb-1">
               {[...Array(totalPages)].map((_, i) => (
                 <button
                   key={i + 1}

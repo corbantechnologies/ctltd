@@ -68,31 +68,31 @@ export default function DivisionPage() {
                 <div className="container mx-auto px-6 relative z-10 max-w-7xl">
                     <button
                         onClick={() => router.push('/divisions')}
-                        className="inline-flex items-center text-slate-400 hover:text-white transition-colors mb-12 text-sm font-medium tracking-wide group"
+                        className="inline-flex items-center text-slate-400 hover:text-white transition-colors mb-8 sm:mb-12 text-sm font-medium tracking-wide group"
                     >
                         <ArrowLeft className="w-5 h-5 mr-3 group-hover:-translate-x-1 transition-transform" />
                         Explore All Divisions
                     </button>
 
-                    <div className="flex flex-col md:flex-row gap-10 items-start md:items-center">
+                    <div className="flex flex-col md:flex-row gap-8 sm:gap-10 items-start md:items-center">
                         {/* Division Logo Bubble */}
-                        <div className="w-28 h-28 md:w-36 md:h-36 shrink-0 bg-white rounded-[2rem] p-4 flex items-center justify-center shadow-2xl shadow-black/50 border-4 border-slate-800/50 relative overflow-hidden group">
+                        <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 shrink-0 bg-white rounded-[1.5rem] sm:rounded-[2rem] p-4 flex items-center justify-center shadow-2xl shadow-black/50 border-4 border-slate-800/50 relative overflow-hidden group">
                             <div className="absolute inset-0 bg-gradient-to-tr from-slate-100 to-white z-0" />
                             {division.logo ? (
                                 <img src={division.logo} alt={division.name} className="w-full h-full object-contain relative z-10 group-hover:scale-105 transition-transform duration-500" />
                             ) : (
-                                <Building2 className="w-14 h-14 text-slate-400 relative z-10 group-hover:scale-110 transition-transform duration-500" />
+                                <Building2 className="w-10 h-10 sm:w-14 sm:h-14 text-slate-400 relative z-10 group-hover:scale-110 transition-transform duration-500" />
                             )}
                         </div>
 
                         <div className="flex-1">
-                            <div className="inline-flex items-center rounded-full bg-slate-800/80 backdrop-blur-md px-4 py-1.5 text-xs font-bold text-corporate-primary border border-slate-700/50 mb-6 uppercase tracking-widest shadow-inner">
+                            <div className="inline-flex items-center rounded-full bg-slate-800/80 backdrop-blur-md px-4 py-1.5 text-[10px] font-black text-corporate-primary border border-slate-700/50 mb-4 sm:mb-6 uppercase tracking-[0.2em] shadow-inner">
                                 Enterprise Division
                             </div>
-                            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-4 leading-[1.1]">
+                            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-4 leading-[1.1]">
                                 {division.name}
                             </h1>
-                            <p className="text-lg md:text-xl text-slate-400 font-medium max-w-2xl leading-relaxed">
+                            <p className="text-base sm:text-lg md:text-xl text-slate-400 font-medium max-w-2xl leading-relaxed">
                                 {division.description?.substring(0, 150).replace(/[#*`_]/g, '')}...
                             </p>
                         </div>
@@ -109,87 +109,80 @@ export default function DivisionPage() {
 
                         <Tabs.Root defaultValue="overview" className="flex flex-col w-full">
                             {/* Tab Navigation */}
-                            <Tabs.List className="flex flex-wrap gap-2 mb-10 border-b border-slate-200 pb-4">
-                                {division.description && (
-                                    <Tabs.Trigger
-                                        value="overview"
-                                        className="px-6 py-3 rounded-full text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-corporate-primary"
-                                    >
-                                        Strategic Overview
-                                    </Tabs.Trigger>
-                                )}
-                                {division.services && (
-                                    <Tabs.Trigger
-                                        value="services"
-                                        className="px-6 py-3 rounded-full text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-corporate-primary"
-                                    >
-                                        Core Services
-                                    </Tabs.Trigger>
-                                )}
-                                {division.projects && (
-                                    <Tabs.Trigger
-                                        value="projects"
-                                        className="px-6 py-3 rounded-full text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-corporate-primary"
-                                    >
-                                        Key Initiatives
-                                    </Tabs.Trigger>
-                                )}
-                            </Tabs.List>
+                            <div className="overflow-x-auto scrollbar-none -mx-6 px-6 sm:mx-0 sm:px-0">
+                                <Tabs.List className="flex flex-nowrap sm:flex-wrap gap-2 mb-10 border-b border-slate-200 pb-4 min-w-max sm:min-w-0">
+                                    {division.description && (
+                                        <Tabs.Trigger
+                                            value="overview"
+                                            className="px-6 py-3 rounded-full text-[11px] sm:text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none whitespace-nowrap"
+                                        >
+                                            Strategic Overview
+                                        </Tabs.Trigger>
+                                    )}
+                                    {division.services && (
+                                        <Tabs.Trigger
+                                            value="services"
+                                            className="px-6 py-3 rounded-full text-[11px] sm:text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none whitespace-nowrap"
+                                        >
+                                            Core Services
+                                        </Tabs.Trigger>
+                                    )}
+                                    {division.projects && (
+                                        <Tabs.Trigger
+                                            value="projects"
+                                            className="px-6 py-3 rounded-full text-[11px] sm:text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none whitespace-nowrap"
+                                        >
+                                            Key Initiatives
+                                        </Tabs.Trigger>
+                                    )}
+                                </Tabs.List>
+                            </div>
 
                             {/* Tab Panels */}
 
-                            {/* About Section */}
-                            {division.description && (
                                 <Tabs.Content value="overview" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
                                     <div className="flex items-center gap-4 mb-8">
-                                        <div className="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center border border-orange-100 shadow-sm shrink-0">
-                                            <Target className="w-6 h-6 text-corporate-primary" />
+                                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-orange-50 flex items-center justify-center border border-orange-100 shadow-sm shrink-0">
+                                            <Target className="w-5 h-5 sm:w-6 sm:h-6 text-corporate-primary" />
                                         </div>
-                                        <h2 className="text-3xl font-bold text-slate-900 tracking-tight">
+                                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight italic uppercase italic">
                                             Strategic Overview
                                         </h2>
                                     </div>
-                                    <div className="prose prose-lg prose-slate prose-orange max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:font-semibold prose-a:text-corporate-primary hover:prose-a:text-orange-600 prose-p:leading-relaxed prose-img:rounded-3xl prose-img:shadow-lg prose-strong:text-slate-900 border-l-4 border-slate-200 pl-8 ml-6">
+                                    <div className="prose prose-base sm:prose-lg prose-slate prose-orange max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:font-semibold prose-a:text-corporate-primary hover:prose-a:text-orange-600 prose-p:leading-relaxed prose-img:rounded-3xl prose-img:shadow-lg prose-strong:text-slate-900 border-l-2 sm:border-l-4 border-slate-200 pl-4 sm:pl-8 ml-2 sm:ml-6">
                                         <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.description}</ReactMarkdown>
                                     </div>
                                 </Tabs.Content>
-                            )}
 
-                            {/* Services Section */}
-                            {division.services && (
                                 <Tabs.Content value="services" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
                                     <div className="flex items-center gap-4 mb-8">
-                                        <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center border border-blue-100 shadow-sm shrink-0">
-                                            <Zap className="w-6 h-6 text-blue-600" />
+                                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-blue-50 flex items-center justify-center border border-blue-100 shadow-sm shrink-0">
+                                            <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                                         </div>
-                                        <h2 className="text-3xl font-bold text-slate-900 tracking-tight">
-                                            Core Services & Solutions
+                                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight italic uppercase italic">
+                                            Core Services
                                         </h2>
                                     </div>
-                                    <div className="bg-slate-50 border border-slate-200 p-8 md:p-12 rounded-[2rem]">
-                                        <div className="prose prose-lg prose-slate prose-orange max-w-none prose-ul:space-y-4 prose-li:marker:text-corporate-primary prose-li:marker:font-bold prose-li:pl-2">
+                                    <div className="bg-slate-50 border border-slate-200 p-6 sm:p-12 rounded-[1.5rem] sm:rounded-[2rem]">
+                                        <div className="prose prose-base sm:prose-lg prose-slate prose-orange max-w-none prose-ul:space-y-4 prose-li:marker:text-corporate-primary prose-li:marker:font-bold prose-li:pl-2">
                                             <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.services}</ReactMarkdown>
                                         </div>
                                     </div>
                                 </Tabs.Content>
-                            )}
 
-                            {/* Projects Section */}
-                            {division.projects && (
                                 <Tabs.Content value="projects" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
                                     <div className="flex items-center gap-4 mb-8">
-                                        <div className="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center border border-emerald-100 shadow-sm shrink-0">
-                                            <Briefcase className="w-6 h-6 text-emerald-600" />
+                                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-emerald-50 flex items-center justify-center border border-emerald-100 shadow-sm shrink-0">
+                                            <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600" />
                                         </div>
-                                        <h2 className="text-3xl font-bold text-slate-900 tracking-tight">
-                                            Key Initiatives & Impact
+                                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight italic uppercase italic">
+                                            Key Initiatives
                                         </h2>
                                     </div>
-                                    <div className="prose prose-lg prose-slate prose-emerald max-w-none prose-headings:font-bold prose-headings:text-slate-800 prose-blockquote:border-l-corporate-primary prose-blockquote:bg-slate-50 prose-blockquote:p-6 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-blockquote:text-slate-700">
+                                    <div className="prose prose-base sm:prose-lg prose-slate prose-emerald max-w-none prose-headings:font-bold prose-headings:text-slate-800 prose-blockquote:border-l-corporate-primary prose-blockquote:bg-slate-50 prose-blockquote:p-4 sm:p-6 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-blockquote:text-slate-700 border-l-2 sm:border-l-4 border-emerald-200 pl-4 sm:pl-8 ml-2 sm:ml-6">
                                         <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.projects}</ReactMarkdown>
                                     </div>
                                 </Tabs.Content>
-                            )}
                         </Tabs.Root>
                     </div>
 

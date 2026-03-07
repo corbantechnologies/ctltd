@@ -124,7 +124,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="p-8 bg-slate-900 rounded-2xl shadow-lg relative overflow-hidden group">
+              <div className="p-6 sm:p-8 bg-slate-900 rounded-2xl shadow-lg relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-corporate-primary/20 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
                 <div className="relative z-10 flex items-center gap-6">
                   <div className="w-12 h-12 rounded-xl bg-corporate-primary/20 border border-corporate-primary/30 flex items-center justify-center text-corporate-primary">
@@ -144,7 +144,7 @@ export default function Contact() {
 
             {/* Form */}
             <div className="lg:col-span-7">
-              <div className="bg-white p-8 md:p-10 rounded-2xl border border-slate-200 shadow-sm">
+              <div className="bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm">
                 {success && (
                   <div className="mb-8 bg-green-50 border border-green-200 text-green-700 rounded-lg p-4 flex items-center gap-3">
                     <Send className="w-5 h-5" />

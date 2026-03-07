@@ -396,15 +396,15 @@ export default function FiscalYearJournals({
             </span>{" "}
             journals
           </p>
-          <div className="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 md:pb-0">
+          <div className="flex items-center gap-1.5 overflow-x-auto max-w-[150px] sm:max-w-none scrollbar-none pb-1 md:pb-0">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="flex items-center justify-center border border-gray-200 rounded-lg bg-white transition-all hover:bg-gray-50 hover:text-black disabled:opacity-30 h-8 px-3 font-bold text-gray-500 text-[10px] uppercase tracking-wider"
+              className="flex items-center justify-center border border-gray-200 rounded-lg bg-white transition-all hover:bg-gray-50 hover:text-black disabled:opacity-30 h-8 px-3 font-bold text-gray-500 text-[10px] uppercase tracking-wider shrink-0"
             >
               <ChevronLeft className="w-3.5 h-3.5 mr-1" /> Prev
             </button>
-            <div className="flex gap-1">
+            <div className="flex gap-1 shrink-0">
               {[...Array(totalPages)].map((_, i) => (
                 <button
                   key={i + 1}
