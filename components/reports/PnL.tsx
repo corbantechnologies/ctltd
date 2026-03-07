@@ -28,7 +28,7 @@ export function PnLReport({ data }: { data: PnLData }) {
                 <CardTitle>Profit & Loss</CardTitle>
                 <CardDescription>{data.division} • {data.financial_year}</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-1">
+            <CardContent className="space-y-1 p-5 sm:p-6">
                 <Row label="Revenue" value={data.revenue} />
                 <Row label="Cost of Sales" value={data.cost_of_sales} />
                 <hr className="my-2 border-black/10" />

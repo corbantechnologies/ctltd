@@ -18,12 +18,15 @@ import {
   MoreHorizontal,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useMemo } from "react";
 
 interface PartnersListProps {
   rolePrefix: string;
 }
 
 export default function PartnersList({ rolePrefix }: PartnersListProps) {
+  const router = useRouter();
   const [view, setView] = useState<"grid" | "table">("table");
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
@@ -187,8 +190,8 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
       {/* Table View */}
       {view === "table" && (
         <div className="bg-white/50 backdrop-blur-xl border border-black/5 rounded overflow-hidden shadow-xl shadow-black/5">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left">
+          <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-slate-200">
+            <table className="w-full text-left min-w-[700px]">
               <thead className="bg-black/5">
                 <tr className="border-b border-black/5">
                   <th className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
@@ -210,9 +213,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                   <tr
                     key={partner.reference}
                     className="hover:bg-white/50 border-b border-black/5 transition-colors cursor-pointer group"
-                    onClick={() =>
-                      (window.location.href = `/${rolePrefix}/partners/${partner.reference}`)
-                    }
+                    onClick={() => router.push(`/${rolePrefix}/partners/${partner.reference}`)}
                   >
                     <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-3">

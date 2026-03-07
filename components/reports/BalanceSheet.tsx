@@ -26,12 +26,12 @@ export function BalanceSheetReport({ data }: { data: BalanceCheckData }) {
                 {title}
                 <div className="h-px flex-1 bg-border/50"></div>
             </h4>
-            <div className="hidden md:grid grid-cols-3 gap-4 text-sm mb-2 px-1">
-                <div className="text-corporate-muted">Debit</div>
-                <div className="text-corporate-muted">Credit</div>
-                <div className="text-right font-medium text-corporate-foreground">Net</div>
+            <div className="hidden md:grid grid-cols-3 gap-4 text-[10px] font-bold uppercase tracking-widest text-corporate-muted/60 mb-2 px-1">
+                <div>Debit</div>
+                <div>Credit</div>
+                <div className="text-right">Net</div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 font-mono text-sm p-4 md:p-2 rounded-lg bg-corporate-secondary/50">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 font-mono text-sm p-5 sm:p-6 md:p-3 rounded-2xl bg-corporate-secondary/40 border border-corporate-secondary/20">
                 <div className="flex justify-between md:block">
                     <span className="md:hidden text-corporate-muted font-sans">Debit:</span>
                     {formatNumber(section.debit)}
@@ -53,9 +53,11 @@ export function BalanceSheetReport({ data }: { data: BalanceCheckData }) {
             <CardHeader>
                 <div className="flex justify-between items-start">
                     <div>
-                        <CardTitle className="text-black">Balance Sheet</CardTitle>
-                        <CardDescription>{data.division} • {data.financial_year}</CardDescription>
-                        <CardDescription className="text-xs text-corporate-muted">Check: {formatCurrency(data.balance_check, data.currency)}</CardDescription>
+                        <CardTitle className="text-black text-2xl font-black italic tracking-tight">Balance Sheet</CardTitle>
+                        <CardDescription className="font-bold text-xs uppercase tracking-[0.2em] mt-1">{data.division} • {data.financial_year}</CardDescription>
+                        <CardDescription className="text-[10px] font-black uppercase tracking-widest text-corporate-primary mt-2 bg-corporate-primary/5 px-3 py-1 rounded-full inline-block border border-corporate-primary/10">
+                            Check: {formatCurrency(data.balance_check, data.currency)}
+                        </CardDescription>
                     </div>
                 </div>
             </CardHeader>

@@ -57,7 +57,7 @@ export default function About() {
             </ul>
           </div>
           <div className="relative group w-full max-w-md mx-auto lg:max-w-none">
-            <div className="relative bg-white border border-slate-200 p-8 sm:p-10 rounded-3xl shadow-xl shadow-slate-200/50">
+            <div className="relative bg-white border border-slate-200 p-6 sm:p-10 rounded-3xl shadow-xl shadow-slate-200/50">
               <div className="grid grid-cols-2 gap-8 sm:gap-10">
                 {stats.map((stat) => (
                   <div key={stat.label} className="space-y-4 flex flex-col items-center text-center">

@@ -27,7 +27,7 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
                 <CardTitle>Trial Balance</CardTitle>
                 <CardDescription>{data.division} • {data.financial_year}</CardDescription>
             </CardHeader>
-            <CardContent className="flex-1 -mx-4 px-4">
+            <CardContent className="flex-1 -mx-4 px-4 sm:mx-0 sm:px-6">
                 <div>
                     <div className="hidden md:grid grid-cols-12 gap-2 border-b border-border pb-2 mb-2 text-xs font-semibold text-corporate-muted uppercase tracking-wider">
                         <div className="col-span-6">Account Name</div>
@@ -39,10 +39,10 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
                     <div className="space-y-4 md:space-y-1">
                         {data.trial_balance.map((row) => (
                             <div key={row.code} className="grid grid-cols-12 gap-2 py-2 text-sm border-b border-border/40 hover:bg-corporate-secondary/50 transition-colors">
-                                <div className="col-span-12 md:col-span-6 flex items-center font-medium" title={row.name}>
-                                    <span className="truncate mr-1">{row.name}</span>
-                                    <span className="text-xs text-corporate-muted whitespace-nowrap hidden md:inline-block">- {row.code}</span>
-                                    <span className="text-xs text-corporate-muted whitespace-nowrap md:hidden">({row.code})</span>
+                                <div className="col-span-12 md:col-span-6 flex items-center font-bold tracking-tight text-black" title={row.name}>
+                                    <span className="truncate mr-1 max-w-[200px] sm:max-w-none">{row.name}</span>
+                                    <span className="text-[10px] text-corporate-muted uppercase tracking-widest hidden md:inline-block">- {row.code}</span>
+                                    <span className="text-[10px] text-corporate-muted uppercase tracking-widest md:hidden ml-1 opacity-50">({row.code})</span>
                                 </div>
 
                                 <div className="col-span-4 md:col-span-2 text-right font-mono text-corporate-muted flex flex-col md:block justify-end">
@@ -63,18 +63,18 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
 
                     <hr className="my-4 border-black/10" />
 
-                    <div className="grid grid-cols-12 gap-2 mt-2 -mx-2 px-2 rounded-lg bg-corporate-secondary/20 font-bold text-sm py-2">
-                        <div className="col-span-12 md:col-span-6 mb-2 md:mb-0">TOTALS</div>
+                    <div className="grid grid-cols-12 gap-2 mt-2 -mx-2 px-6 rounded-2xl bg-corporate-primary/5 font-black text-[11px] uppercase tracking-widest py-4 border border-corporate-primary/10 shadow-inner">
+                        <div className="col-span-12 md:col-span-6 mb-2 md:mb-0 flex items-center text-corporate-primary italic">TOTAL DISCLOSURE</div>
                         <div className="col-span-4 md:col-span-2 text-right font-mono flex flex-col md:block">
-                            <span className="text-[8px] uppercase text-corporate-muted md:hidden font-normal">Debit</span>
+                            <span className="text-[8px] text-corporate-muted md:hidden font-bold mb-1">Debit</span>
                             {formatNumber(data.totals.total_debit)}
                         </div>
                         <div className="col-span-4 md:col-span-2 text-right font-mono flex flex-col md:block">
-                            <span className="text-[8px] uppercase text-corporate-muted md:hidden font-normal">Credit</span>
+                            <span className="text-[8px] text-corporate-muted md:hidden font-bold mb-1">Credit</span>
                             {formatNumber(data.totals.total_credit)}
                         </div>
-                        <div className="col-span-4 md:col-span-2 text-right font-mono flex flex-col md:block">
-                            <span className="text-[8px] uppercase text-corporate-muted md:hidden font-normal">Balance</span>
+                        <div className="col-span-4 md:col-span-2 text-right font-mono flex flex-col md:block text-corporate-primary">
+                            <span className="text-[8px] text-corporate-muted md:hidden font-bold mb-1">Balance</span>
                             {formatNumber(data.totals.net_balance)}
                         </div>
                     </div>

@@ -38,10 +38,10 @@ export default function ReportsDashboard() {
     }
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 p-4 sm:p-0">
             <div>
-                <h2 className="text-3xl font-bold tracking-tight text-corporate-foreground">Financial Reports</h2>
-                <p className="text-corporate-muted">Overview of your financial performance and position.</p>
+                <h2 className="text-3xl font-black tracking-tight text-corporate-foreground italic uppercase">Financial Reports</h2>
+                <p className="text-slate-400 font-bold text-xs uppercase tracking-widest mt-1">Overview of your financial performance and position.</p>
             </div>
 
             {/* Key Metrics */}

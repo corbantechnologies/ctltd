@@ -133,10 +133,10 @@ export default function CreateJournalEntry({
 
   return (
     <div
-      className={`w-full border-black shadow-2xl rounded-[32px] overflow-hidden bg-gray-50 backdrop-blur-xl ${className}`}
+      className={`w-full border-black shadow-2xl rounded-[32px] overflow-hidden bg-gray-50 backdrop-blur-xl p-4 sm:p-0 ${className}`}
     >
       <div
-        className="p-8 border-b border-black"
+        className="p-6 sm:p-8 border-b border-black"
         style={{ backgroundColor: `${primaryColor}0D` }}
       >
         <div className="flex items-start justify-between mb-4">
@@ -181,7 +181,7 @@ export default function CreateJournalEntry({
           )}
 
           {/* Contextual Mapping */}
-          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-orange-50/20 rounded-3xl border border-black">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 bg-orange-50/20 rounded-3xl border border-black">
             <div className="space-y-2">
               <label className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
                 Journal Batch <span className="text-red-500 text-xs font-bold">*</span>
