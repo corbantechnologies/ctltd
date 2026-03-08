@@ -23,6 +23,7 @@ export default function CreateDivision() {
     initialValues: {
       name: "",
       is_active: true,
+      is_public: true,
     },
     validationSchema: DivisionSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
@@ -102,6 +103,24 @@ export default function CreateDivision() {
               className="text-sm font-black text-black"
             >
               Set as Active Division
+            </label>
+          </div>
+
+          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-2xl border border-black/5">
+            <input
+              id="is_public"
+              name="is_public"
+              type="checkbox"
+              className="w-5 h-5 rounded-lg border-black/5 text-corporate-primary focus:ring-corporate-primary/20"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              checked={formik.values.is_public}
+            />
+            <label
+              htmlFor="is_public"
+              className="text-sm font-black text-black"
+            >
+              Set as Public Division
             </label>
           </div>
 

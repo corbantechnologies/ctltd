@@ -21,6 +21,7 @@ export default function CreateDivisionModal() {
     initialValues: {
       name: "",
       is_active: true,
+      is_public: true,
     },
     validationSchema: DivisionSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
@@ -116,6 +117,23 @@ export default function CreateDivisionModal() {
                   </label>
                   <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
                     Enable immediate unit operations
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-slate-200 transition-colors group cursor-pointer" onClick={() => formik.setFieldValue('is_public', !formik.values.is_public)}>
+                <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${formik.values.is_public ? 'bg-corporate-primary border-corporate-primary shadow-lg shadow-orange-500/20' : 'bg-white border-slate-200'}`}>
+                  {formik.values.is_public && <Plus className="w-4 h-4 text-white rotate-45" />}
+                </div>
+                <div>
+                  <label
+                    htmlFor="is_public"
+                    className="text-sm font-bold text-slate-900 cursor-pointer block"
+                  >
+                    Public Status
+                  </label>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
+                    Enable public visibility
                   </p>
                 </div>
               </div>

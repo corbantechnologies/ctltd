@@ -18,6 +18,7 @@ interface UpdateDivisionProps {
   division: {
     name: string;
     is_active: boolean;
+    is_public: boolean;
     reference: string;
   };
 }
@@ -31,6 +32,7 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
     initialValues: {
       name: division.name,
       is_active: division.is_active,
+      is_public: division.is_public,
     },
     enableReinitialize: true,
     validationSchema: DivisionSchema,
@@ -107,6 +109,24 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
               className="text-sm font-black text-black"
             >
               Keep Division Active
+            </label>
+          </div>
+
+          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-2xl border border-black/5 transition-colors">
+            <input
+              id="is_public"
+              name="is_public"
+              type="checkbox"
+              className="w-5 h-5 rounded-lg border-black/5 text-corporate-primary focus:ring-corporate-primary/20"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              checked={formik.values.is_public}
+            />
+            <label
+              htmlFor="is_public"
+              className="text-sm font-black text-black"
+            >
+              Set as Public Division
             </label>
           </div>
 

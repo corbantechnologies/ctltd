@@ -20,6 +20,7 @@ interface Division {
 export interface DivisionPublic {
   name: string;
   is_active: boolean;
+  is_public: boolean;
   reference: string;
   description: string; // uses markdown format
   website: string;
@@ -41,11 +42,13 @@ export interface DivisionPublic {
 interface createDivision {
   name: string; //errors expected if the name is not unique
   is_active: boolean; // backend already defaults to true
+  is_public: boolean;
 }
 
 interface updateDivision {
   name: string;
   is_active: boolean;
+  is_public: boolean;
 }
 
 // All actions here are performed by users with the director role
