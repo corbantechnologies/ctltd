@@ -4,7 +4,7 @@ import { useFetchPublicDivision } from "@/hooks/divisions/actions";
 import { useParams, useRouter } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Building2, Globe, Mail, Phone, UserCheck, ArrowLeft, ExternalLink, Briefcase, Zap, Target } from "lucide-react";
+import { Building2, Globe, UserCheck, ArrowLeft, ExternalLink, Briefcase, Zap, Target } from "lucide-react";
 import * as Tabs from "@radix-ui/react-tabs";
 import Link from "next/link";
 
@@ -190,53 +190,27 @@ export default function DivisionPage() {
                     <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-32 h-fit">
 
                         {/* Executive Contact Card */}
-                        <div className="bg-white border text-center border-slate-200 rounded-[2rem] p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden group">
-                            <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-corporate-primary via-orange-400 to-yellow-400" />
+                        {division.website && (
+                            <div className="bg-white border text-center border-slate-200 rounded-[2rem] p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden group">
+                                <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-corporate-primary via-orange-400 to-yellow-400" />
 
-                            <h3 className="text-xl font-extrabold text-slate-900 mb-8 pt-2">Division Connect</h3>
+                                <h3 className="text-xl font-extrabold text-slate-900 mb-8 pt-2">Division Connect</h3>
 
-                            <ul className="space-y-6 text-left">
-                                {division.email && (
-                                    <li className="flex items-start gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
-                                        <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
-                                            <Mail className="w-5 h-5 text-slate-600" />
-                                        </div>
-                                        <div>
-                                            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Email</p>
-                                            <a href={`mailto:${division.email}`} className="text-slate-900 font-semibold hover:text-corporate-primary transition-colors word-break break-all">
-                                                {division.email}
-                                            </a>
-                                        </div>
-                                    </li>
-                                )}
-                                {division.phone && (
-                                    <li className="flex items-start gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
-                                        <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
-                                            <Phone className="w-5 h-5 text-slate-600" />
-                                        </div>
-                                        <div>
-                                            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Direct Line</p>
-                                            <a href={`tel:${division.phone}`} className="text-slate-900 font-semibold hover:text-corporate-primary transition-colors">
-                                                {division.phone}
-                                            </a>
-                                        </div>
-                                    </li>
-                                )}
-                                {division.website && (
+                                <ul className="space-y-6 text-left">
                                     <li className="flex items-start gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
                                         <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
                                             <Globe className="w-5 h-5 text-slate-600" />
                                         </div>
                                         <div>
-                                            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Web Portal</p>
+                                            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Learn More</p>
                                             <a href={division.website} target="_blank" rel="noreferrer" className="text-slate-900 font-semibold hover:text-corporate-primary transition-colors inline-flex items-center">
-                                                Visit Platform <ExternalLink className="ml-1.5 w-4 h-4" />
+                                                Visit Website <ExternalLink className="ml-1.5 w-4 h-4" />
                                             </a>
                                         </div>
                                     </li>
-                                )}
-                            </ul>
-                        </div>
+                                </ul>
+                            </div>
+                        )}
 
                         {/* Leadership Spot */}
                         {division.director_details && (
