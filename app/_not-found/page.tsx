@@ -11,11 +11,13 @@ export default function NotFound() {
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-orange-100/30 rounded-full blur-[120px] animate-pulse-slow" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-orange-50/40 rounded-full blur-[100px] animate-pulse-slow delay-1000" />
 
-      <div className="relative z-10 w-full max-w-2xl text-center">
-        <div className="mb-8 flex justify-center">
-          <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-corporate-primary border border-slate-200 shadow-sm mb-6">
-            Error 404
-          </span>
+      <div className="relative z-10 w-full max-w-2xl flex flex-col items-center text-center">
+        <div className="mb-8 flex flex-col items-center">
+          <div className="w-full flex justify-center mb-6">
+            <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-corporate-primary border border-slate-200 shadow-sm">
+              Error 404
+            </span>
+          </div>
 
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-slate-900 mb-6">
             Lost in <span className="text-corporate-primary">The Cloud?</span>
@@ -26,7 +28,7 @@ export default function NotFound() {
             existed in the first place.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
             <Link
               href="/"
               className="flex items-center justify-center gap-2 bg-corporate-primary hover:bg-orange-600 text-white rounded-lg px-8 py-3.5 text-base font-medium transition-colors shadow-sm group w-full sm:w-auto"

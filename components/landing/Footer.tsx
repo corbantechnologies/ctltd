@@ -121,20 +121,6 @@ export default function Footer() {
         <p className="text-sm">
           © {currentYear} Corban Technologies LTD. All rights reserved.
         </p>
-        <div className="flex items-center gap-8">
-          <a
-            href="/privacy"
-            className="hover:text-corporate-primary text-sm transition-colors"
-          >
-            Privacy Policy
-          </a>
-          <a
-            href="/terms"
-            className="hover:text-corporate-primary text-sm transition-colors"
-          >
-            Terms of Service
-          </a>
-        </div>
       </div>
     </footer >
   );
