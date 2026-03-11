@@ -124,7 +124,7 @@ export default function FinanceDashboard() {
       </div>
 
       <Tabs.Root defaultValue="reports" className="space-y-6">
-        <Tabs.List className="grid w-full grid-cols-3">
+        <Tabs.List className="grid w-auto grid-cols-3">
           <Tabs.Trigger
             value="reports"
             className="p-1 rounded text-[10px] md:text-xs uppercase transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-sm data-[state=active]:border data-[state=active]:border-slate-200 text-slate-500 hover:text-slate-700"
