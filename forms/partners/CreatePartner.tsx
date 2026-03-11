@@ -73,16 +73,16 @@ export default function CreatePartner({
 
   return (
     <div
-      className={`w-full border-black/5 shadow-2xl rounded-xl bg-white/80 backdrop-blur-xl ${className}`}
+      className={`w-full border-black/5 shadow-2xl rounded bg-white/80 backdrop-blur-xl ${className}`}
     >
       <div
-        className="p-8 border-b border-black/5"
+        className="p-4 border-b border-black/5"
         style={{ backgroundColor: `${primaryColor}0D` }}
       >
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-4">
             <div
-              className="w-12 h-12 rounded-lg flex items-center justify-center text-white shadow-lg"
+              className="w-12 h-12 rounded flex items-center justify-center text-white shadow-lg"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
