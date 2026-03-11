@@ -35,7 +35,7 @@ export default function FinanceBookDetailPage() {
       <nav>
         <ol className="flex items-center gap-2 text-sm text-black/60">
           <li>
-            <a href="/finance" className="hover:text-black hover:underline">Dashboard</a>
+            <a href="/finance/dashboard" className="hover:text-black hover:underline">Dashboard</a>
           </li>
           <li><span className="text-black/30">/</span></li>
           <li>

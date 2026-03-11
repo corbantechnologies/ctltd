@@ -33,7 +33,7 @@ export default function AccountDistributionChart({
     .filter((item) => item.value > 0);
 
   return (
-    <div className="col-span-1 shadow-2xl shadow-slate-200/50 border border-slate-200 rounded-[2.5rem] bg-white p-8 relative overflow-hidden group hover:shadow-corporate-primary/5 transition-all duration-500">
+    <div className="col-span-1 shadow shadow-slate-200/50 border border-slate-200 rounded bg-white p-8 relative overflow-hidden group hover:shadow-corporate-primary/5 transition-all duration-500">
       <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-corporate-primary/5 transition-colors" />
 
       <div className="mb-8">
