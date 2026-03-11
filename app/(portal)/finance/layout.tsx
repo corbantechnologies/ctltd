@@ -22,14 +22,14 @@ export default function FinanceLayout({
                     onClick={() => setOpenCreateJournalType(true)}
                     className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-full shadow-lg border border-black/5 hover:bg-black hover:text-white transition-all shadow-black/10 group"
                 >
-                    <span className="text-xs font-bold uppercase tracking-widest hidden group-hover:block transition-all">New Journal Type</span>
+                    <span className="text-xs font-semibold uppercase tracking-widest hidden group-hover:block transition-all">New Journal Type</span>
                     <Settings2 className="w-5 h-5 flex-shrink-0" />
                 </button>
                 <button
                     onClick={() => setOpenCreatePartnerType(true)}
                     className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-full shadow-lg border border-black/5 hover:bg-black hover:text-white transition-all shadow-black/10 group"
                 >
-                    <span className="text-xs font-bold uppercase tracking-widest hidden group-hover:block transition-all">New Partner Type</span>
+                    <span className="text-xs font-semibold uppercase tracking-widest hidden group-hover:block transition-all">New Partner Type</span>
                     <Users className="w-5 h-5 flex-shrink-0" />
                 </button>
             </div>

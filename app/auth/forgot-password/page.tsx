@@ -59,11 +59,11 @@ export default function ForgotPassword() {
             </Link>
           </div>
 
-          <div className="inline-flex items-center rounded-full bg-slate-800/80 backdrop-blur-md px-4 py-1.5 text-xs font-bold text-corporate-primary border border-slate-700/50 mb-6 uppercase tracking-widest shadow-inner">
+          <div className="inline-flex items-center rounded-full bg-slate-800/80 backdrop-blur-md px-4 py-1.5 text-xs font-semibold text-corporate-primary border border-slate-700/50 mb-6 uppercase tracking-widest shadow-inner">
             Security Restoration
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white tracking-tight mb-4 leading-tight">
             Recover <span className="text-corporate-primary">Access</span>.
           </h1>
           <p className="text-lg md:text-xl text-slate-400 font-medium max-w-xl mx-auto leading-relaxed">
@@ -87,7 +87,7 @@ export default function ForgotPassword() {
             {!submitted ? (
               <form onSubmit={formik.handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-900 ml-1">
+                  <label className="text-sm font-semibold text-slate-900 ml-1">
                     Registered Email
                   </label>
                   <div className="relative group/input">
@@ -109,7 +109,7 @@ export default function ForgotPassword() {
                     />
                   </div>
                   {formik.touched.email && formik.errors.email && (
-                    <p className="text-xs font-bold text-red-500 ml-1">
+                    <p className="text-xs font-semibold text-red-500 ml-1">
                       {formik.errors.email}
                     </p>
                   )}
@@ -118,7 +118,7 @@ export default function ForgotPassword() {
                 <button
                   disabled={loading}
                   type="submit"
-                  className="w-full h-14 bg-corporate-primary hover:bg-orange-600 text-white rounded-xl font-bold transition-all shadow-lg shadow-orange-900/10 flex items-center justify-center gap-3 active:scale-[0.98] disabled:opacity-50 group/btn"
+                  className="w-full h-14 bg-corporate-primary hover:bg-orange-600 text-white rounded-xl font-semibold transition-all shadow-lg shadow-orange-900/10 flex items-center justify-center gap-3 active:scale-[0.98] disabled:opacity-50 group/btn"
                 >
                   {loading ? (
                     <>
@@ -136,7 +136,7 @@ export default function ForgotPassword() {
                 <div className="mt-6 text-center">
                   <Link
                     href="/auth/login"
-                    className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-900 text-sm font-bold transition-colors"
+                    className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-900 text-sm font-semibold transition-colors"
                   >
                     <ChevronLeft className="w-4 h-4" />
                     Back to Sign In
@@ -150,21 +150,21 @@ export default function ForgotPassword() {
                 </div>
 
                 <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-slate-900">Protocol Dispatched</h3>
+                  <h3 className="text-2xl font-semibold text-slate-900">Protocol Dispatched</h3>
                   <p className="text-slate-500 font-medium leading-relaxed">
-                    A recovery link has been sent to <span className="text-corporate-primary font-bold">{formik.values.email}</span>. Please authorize the request via your inbox.
+                    A recovery link has been sent to <span className="text-corporate-primary font-semibold">{formik.values.email}</span>. Please authorize the request via your inbox.
                   </p>
                 </div>
 
                 <Link
                   href="/auth/reset-password"
-                  className="w-full h-14 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold transition-all shadow-lg shadow-slate-900/10 flex items-center justify-center gap-3 active:scale-[0.98] group"
+                  className="w-full h-14 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-semibold transition-all shadow-lg shadow-slate-900/10 flex items-center justify-center gap-3 active:scale-[0.98] group"
                 >
                   <span>Enter Recovery Code</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
 
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest pt-4">
+                <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest pt-4">
                   Code Expires in 15 Minutes
                 </p>
               </div>

@@ -91,11 +91,11 @@ export default function Login() {
             </Link>
           </div>
 
-          <div className="inline-flex items-center rounded-full bg-slate-800/80 backdrop-blur-md px-4 py-1.5 text-xs font-bold text-corporate-primary border border-slate-700/50 mb-6 uppercase tracking-widest shadow-inner">
+          <div className="inline-flex items-center rounded-full bg-slate-800/80 backdrop-blur-md px-4 py-1.5 text-xs text-corporate-primary border border-slate-700/50 mb-6 uppercase tracking-widest shadow-inner">
             Authorized Personnel Only
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white tracking-tight mb-4 leading-tight">
             Portal <span className="text-corporate-primary">Access</span>.
           </h1>
           <p className="text-lg md:text-xl text-slate-400 font-medium max-w-xl mx-auto leading-relaxed">
@@ -118,7 +118,7 @@ export default function Login() {
 
             <form onSubmit={formik.handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-900 ml-1">
+                <label className="text-sm font-semibold text-slate-900 ml-1">
                   Email Address
                 </label>
                 <div className="relative group/input">
@@ -140,7 +140,7 @@ export default function Login() {
                   />
                 </div>
                 {formik.touched.email && formik.errors.email && (
-                  <p className="text-xs font-bold text-red-500 ml-1">
+                  <p className="text-xs font-semibold text-red-500 ml-1">
                     {formik.errors.email}
                   </p>
                 )}
@@ -148,12 +148,12 @@ export default function Login() {
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between ml-1">
-                  <label className="text-sm font-bold text-slate-900">
+                  <label className="text-sm font-semibold text-slate-900">
                     Password
                   </label>
                   <Link
                     href="/auth/forgot-password"
-                    className="text-xs font-bold text-corporate-primary hover:text-orange-600 transition-colors"
+                    className="text-xs font-semibold text-corporate-primary hover:text-orange-600 transition-colors"
                   >
                     Forgot Password?
                   </Link>
@@ -184,7 +184,7 @@ export default function Login() {
                   </button>
                 </div>
                 {formik.touched.password && formik.errors.password && (
-                  <p className="text-xs font-bold text-red-500 ml-1">
+                  <p className="text-xs font-semibold text-red-500 ml-1">
                     {formik.errors.password}
                   </p>
                 )}
@@ -193,7 +193,7 @@ export default function Login() {
               <button
                 disabled={loading}
                 type="submit"
-                className="w-full h-14 bg-corporate-primary hover:bg-orange-600 text-white rounded-xl font-bold transition-all shadow-lg shadow-orange-900/10 flex items-center justify-center gap-3 active:scale-[0.98] disabled:opacity-50 group/btn"
+                className="w-full h-14 bg-corporate-primary hover:bg-orange-600 text-white rounded-xl font-semibold transition-all shadow-lg shadow-orange-900/10 flex items-center justify-center gap-3 active:scale-[0.98] disabled:opacity-50 group/btn"
               >
                 {loading ? (
                   <>
@@ -209,7 +209,7 @@ export default function Login() {
               </button>
             </form>
 
-            <div className="mt-8 text-center text-sm font-bold text-slate-400">
+            <div className="mt-8 text-center text-sm font-semibold text-slate-400">
               Need Help?{" "}
               <Link
                 href="/contact"
@@ -223,7 +223,7 @@ export default function Login() {
           <div className="mt-12 text-center">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-900 text-sm font-bold transition-colors group/back"
+              className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-900 text-sm font-semibold transition-colors group/back"
             >
               <div className="h-px w-6 bg-slate-300 group-hover/back:w-10 group-hover/back:bg-slate-900 transition-all" />
               Return to Website

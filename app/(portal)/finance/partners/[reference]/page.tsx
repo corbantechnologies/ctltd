@@ -30,7 +30,7 @@ export default function PartnerDetailPage() {
   if (isLoading) return <LoadingSpinner />;
   if (!partner)
     return (
-      <div className="p-12 text-center font-bold text-black/20">
+      <div className="p-12 text-center font-semibold text-black/20">
         Partner not found.
       </div>
     );
@@ -49,7 +49,7 @@ export default function PartnerDetailPage() {
           </li>
           <li><span className="text-black/30">/</span></li>
           <li>
-            <span className="font-bold text-black">{partner.name}</span>
+            <span className="font-semibold text-black">{partner.name}</span>
           </li>
         </ol>
       </nav>
@@ -65,7 +65,7 @@ export default function PartnerDetailPage() {
               <ArrowLeft className="w-4 h-4" />
             </button>
             <span
-              className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${partner.is_active
+              className={`px-4 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-widest border-none ${partner.is_active
                 ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
                 : "bg-red-500/10 text-red-600 shadow-sm shadow-red-500/10"
                 }`}
@@ -74,10 +74,10 @@ export default function PartnerDetailPage() {
             </span>
           </div>
           <div>
-            <h1 className="text-xl font-bold text-black tracking-tighter mb-2">
+            <h1 className="text-xl font-semibold text-black tracking-tighter mb-2">
               {partner.name}
             </h1>
-            <div className="flex flex-wrap gap-4 text-sm font-bold ">
+            <div className="flex flex-wrap gap-4 text-sm font-semibold ">
               <span className="flex items-center gap-2 bg-white/50 px-3 py-1 rounded-lg border border-black/5">
                 <Building2 className="w-4 h-4" /> {partner.partner_type}
               </span>
@@ -92,7 +92,7 @@ export default function PartnerDetailPage() {
 
         <button
           onClick={() => setOpenUpdatePartner(true)}
-          className="flex items-center justify-center gap-2 h-12 px-4 bg-white hover:bg-black/5 text-black border border-black/5 rounded-xl font-bold text-xs uppercase tracking-widest shadow-sm transition-colors"
+          className="flex items-center justify-center gap-2 h-12 px-4 bg-white hover:bg-black/5 text-black border border-black/5 rounded-xl font-semibold text-xs uppercase tracking-widest shadow-sm transition-colors"
         >
           <Edit2 className="w-4 h-4" />
           Edit Profile
@@ -108,10 +108,10 @@ export default function PartnerDetailPage() {
                 <Calendar className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                   Relationship
                 </p>
-                <p className="text-base font-bold text-black tracking-tight">
+                <p className="text-base font-semibold text-black tracking-tight">
                   {partner?.created_at
                     ? new Date(partner.created_at).toLocaleDateString()
                     : "—"}
@@ -128,10 +128,10 @@ export default function PartnerDetailPage() {
                 <Hash className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                   Tax PIN
                 </p>
-                <p className="text-base font-bold text-black tracking-tight">
+                <p className="text-base font-semibold text-black tracking-tight">
                   {partner?.tax_pin || "Not Set"}
                 </p>
               </div>
@@ -146,10 +146,10 @@ export default function PartnerDetailPage() {
                 <Building2 className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                   Type
                 </p>
-                <p className="text-base font-bold text-black tracking-tight">
+                <p className="text-base font-semibold text-black tracking-tight">
                   {partner?.partner_type}
                 </p>
               </div>
@@ -164,10 +164,10 @@ export default function PartnerDetailPage() {
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                   Contact
                 </p>
-                <p className="text-base font-bold text-black tracking-tight truncate max-w-[120px]">
+                <p className="text-base font-semibold text-black tracking-tight truncate max-w-[120px]">
                   {partner?.phone || "No Phone"}
                 </p>
               </div>
@@ -183,11 +183,11 @@ export default function PartnerDetailPage() {
             <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-600">
               <History className="w-5 h-5" />
             </div>
-            <h3 className="text-xl font-bold text-black tracking-tight">
+            <h3 className="text-xl font-semibold text-black tracking-tight">
               Transaction Ledger
             </h3>
           </div>
-          <span className="bg-black/5 px-3 py-1 rounded-full text-xs font-bold text-black/60">
+          <span className="bg-black/5 px-3 py-1 rounded-full text-xs font-semibold text-black/60">
             {partner.journal_entries?.length || 0} Records
           </span>
         </div>
@@ -197,14 +197,14 @@ export default function PartnerDetailPage() {
               <thead>
                 <tr className="bg-black/5 border-b border-black/5 text-left">
                   <th className="py-2 px-4">
-                    <span className="bg-black/5 text-black border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-lg inline-block">
+                    <span className="bg-black/5 text-black border-none font-semibold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-lg inline-block">
                       Book & Date
                     </span>
                   </th>
-                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-right">
+                  <th className="py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60 text-right">
                     Debit
                   </th>
-                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-right">
+                  <th className="py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60 text-right">
                     Credit
                   </th>
                 </tr>
@@ -216,7 +216,7 @@ export default function PartnerDetailPage() {
                     className="hover:bg-white/50 transition-colors"
                   >
                     <td className="py-2.5 px-4 border-b border-black/5">
-                      <div className="font-bold text-black">{entry.book}</div>
+                      <div className="font-semibold text-black">{entry.book}</div>
                       <div className="text-[10px] uppercase text-black/40 tracking-wider">
                         {entry.created_at
                           ? new Date(entry.created_at).toLocaleDateString()

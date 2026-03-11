@@ -67,10 +67,10 @@ export default function CreateJournalType({
               <Settings2 className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-xl font-bold tracking-tight italic">
+              <h2 className="text-xl font-semibold tracking-tight italic">
                 Define <span className={primaryTextClass}>Journal Type</span>
               </h2>
-              <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest mt-1">
+              <p className="text-slate-400 font-semibold uppercase text-[10px] tracking-widest mt-1">
                 Ledger Classification Logic
               </p>
             </div>
@@ -93,7 +93,7 @@ export default function CreateJournalType({
             <div className="space-y-2">
               <label
                 htmlFor="name"
-                className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1 block"
+                className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block"
               >
                 Nomenclature <span className="text-red-500">*</span>
               </label>
@@ -103,13 +103,13 @@ export default function CreateJournalType({
                 type="text"
                 required
                 placeholder="e.g. Accrual, Fixed Asset, Disbursement"
-                className="w-full h-14 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-emerald-600/30 focus:ring-0 transition-all font-bold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
+                className="w-full h-14 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-emerald-600/30 focus:ring-0 transition-all font-semibold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
               />
               {formik.touched.name && formik.errors.name && (
-                <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest ml-1 mt-1">
+                <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1 mt-1">
                   {formik.errors.name}
                 </p>
               )}
@@ -118,7 +118,7 @@ export default function CreateJournalType({
             <div className="space-y-2">
               <label
                 htmlFor="description"
-                className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1 block"
+                className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block"
               >
                 Functional Definition <span className="text-red-500">*</span>
               </label>
@@ -127,7 +127,7 @@ export default function CreateJournalType({
                 name="description"
                 required
                 placeholder="Provide a comprehensive operational definition for this journal type..."
-                className="w-full min-h-[140px] rounded-2xl border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-emerald-600/30 focus:ring-0 transition-all font-bold p-6 text-sm text-slate-900 placeholder:text-slate-300 resize-none focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
+                className="w-full min-h-[140px] rounded-2xl border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-emerald-600/30 focus:ring-0 transition-all font-semibold p-6 text-sm text-slate-900 placeholder:text-slate-300 resize-none focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.description}
@@ -146,10 +146,10 @@ export default function CreateJournalType({
               {formik.values.is_active && <Plus className="w-4 h-4 text-white rotate-45" />}
             </div>
             <div>
-              <span className="text-sm font-bold text-slate-900 block cursor-pointer">
+              <span className="text-sm font-semibold text-slate-900 block cursor-pointer">
                 Enable for Operations
               </span>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
+              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mt-0.5">
                 Authorized for live transactional ledger use
               </p>
             </div>
@@ -160,7 +160,7 @@ export default function CreateJournalType({
               type="submit"
               disabled={formik.isSubmitting}
               className={cn(
-                "w-full h-16 text-white rounded-[1.25rem] font-bold text-base transition-all shadow-xl active:scale-[0.98] group relative overflow-hidden",
+                "w-full h-16 text-white rounded-[1.25rem] font-semibold text-base transition-all shadow-xl active:scale-[0.98] group relative overflow-hidden",
                 primaryColorClass,
                 primaryShadowClass,
                 "hover:brightness-110"

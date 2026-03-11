@@ -79,7 +79,7 @@ export default function JournalsDetailPage() {
   if (isLoading) return <LoadingSpinner />;
   if (!journal)
     return (
-      <div className="p-12 text-center font-bold text-black/20">
+      <div className="p-12 text-center font-semibold text-black/20">
         Journal not found.
       </div>
     );
@@ -110,7 +110,7 @@ export default function JournalsDetailPage() {
           </li>
           <li><span className="text-black/30">/</span></li>
           <li>
-            <span className="font-bold text-black">{journal.description}</span>
+            <span className="font-semibold text-black">{journal.description}</span>
           </li>
         </ol>
       </nav>
@@ -126,7 +126,7 @@ export default function JournalsDetailPage() {
               <ArrowLeft className="w-4 h-4" />
             </button>
             <span
-              className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${journal.is_posted
+              className={`px-4 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-widest border-none ${journal.is_posted
                 ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
                 : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
                 }`}
@@ -143,10 +143,10 @@ export default function JournalsDetailPage() {
             </span>
           </div>
           <div>
-            <h1 className="text-xl font-bold text-black tracking-tighter mb-2">
+            <h1 className="text-xl font-semibold text-black tracking-tighter mb-2">
               {journal.description || "Untitled Journal Batch"}
             </h1>
-            <div className="flex flex-wrap gap-4 text-sm font-bold text-black/40">
+            <div className="flex flex-wrap gap-4 text-sm font-semibold text-black/40">
               <span className="flex items-center gap-2 bg-white/50 px-3 py-1 rounded-lg border border-black/5">
                 <Calendar className="w-4 h-4" />
                 {new Date(journal.date).toLocaleDateString(undefined, {
@@ -166,7 +166,7 @@ export default function JournalsDetailPage() {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
           <button
-            className="flex items-center justify-center px-4 h-12 border border-black/5 bg-white hover:bg-black/5 font-bold uppercase text-xs tracking-widest rounded-xl transition-colors"
+            className="flex items-center justify-center px-4 h-12 border border-black/5 bg-white hover:bg-black/5 font-semibold uppercase text-xs tracking-widest rounded-xl transition-colors"
             onClick={() => setOpenUpdateJournal(true)}
           >
             <Edit2 className="w-4 h-4 mr-2" />
@@ -177,7 +177,7 @@ export default function JournalsDetailPage() {
             <>
               <button
                 onClick={() => setOpenAddEntry(true)}
-                className="flex items-center justify-center px-4 h-12 bg-[#D0402B] border border-black/5 text-white hover:bg-[#D0402B]/90 font-bold uppercase text-xs tracking-widest rounded-xl shadow-sm transition-colors"
+                className="flex items-center justify-center px-4 h-12 bg-[#D0402B] border border-black/5 text-white hover:bg-[#D0402B]/90 font-semibold uppercase text-xs tracking-widest rounded-xl shadow-sm transition-colors"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Entry
@@ -186,7 +186,7 @@ export default function JournalsDetailPage() {
               <button
                 onClick={handlePostJournal}
                 disabled={isPosting || !isBalanced}
-                className={`flex items-center justify-center px-4 h-12 font-bold uppercase text-xs tracking-widest rounded-xl shadow-lg transition-all ${!isBalanced
+                className={`flex items-center justify-center px-4 h-12 font-semibold uppercase text-xs tracking-widest rounded-xl shadow-lg transition-all ${!isBalanced
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                   : "bg-[#045138] hover:bg-black text-white"
                   }`}
@@ -209,11 +209,11 @@ export default function JournalsDetailPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <div className="p-6">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-2">
               Total Debit
             </p>
             <p
-              className="text-xl font-bold text-black tracking-tight truncate"
+              className="text-xl font-semibold text-black tracking-tight truncate"
               title={new Intl.NumberFormat("en-KE", {
                 style: "currency",
                 currency: journal.currency,
@@ -228,11 +228,11 @@ export default function JournalsDetailPage() {
         </div>
         <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <div className="p-6">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-2">
               Total Credit
             </p>
             <p
-              className="text-xl font-bold text-black tracking-tight truncate"
+              className="text-xl font-semibold text-black tracking-tight truncate"
               title={new Intl.NumberFormat("en-KE", {
                 style: "currency",
                 currency: journal.currency,
@@ -252,18 +252,18 @@ export default function JournalsDetailPage() {
             }`}
         >
           <div className="p-6">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-2">
               Balance Status
             </p>
             <div className="flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-3">
               <p
-                className={`text-xl font-bold tracking-tight ${isBalanced ? "text-[#045138]" : "text-red-600"
+                className={`text-xl font-semibold tracking-tight ${isBalanced ? "text-[#045138]" : "text-red-600"
                   }`}
               >
                 {isBalanced ? "Balanced" : "Unbalanced"}
               </p>
               {!isBalanced && (
-                <span className="px-3 py-1 bg-red-500 text-white font-bold text-xs rounded-full w-fit">
+                <span className="px-3 py-1 bg-red-500 text-white font-semibold text-xs rounded-full w-fit">
                   Diff:{" "}
                   {new Intl.NumberFormat("en-KE", {
                     style: "currency",
@@ -279,7 +279,7 @@ export default function JournalsDetailPage() {
       {/* Entries List */}
       <div className="border border-gray-200 bg-white rounded-xl shadow-sm pb-12">
         <div className="p-6 border-b border-gray-100 flex justify-between items-center">
-          <h3 className="text-lg font-bold text-gray-900 tracking-tight flex items-center gap-3">
+          <h3 className="text-lg font-semibold text-gray-900 tracking-tight flex items-center gap-3">
             <Receipt className="w-4 h-4 text-gray-500" />
             Transaction Entries
           </h3>

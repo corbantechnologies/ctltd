@@ -87,7 +87,7 @@ export default function CreateJournal({
               <Book className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-black tracking-tight">
+              <h2 className="text-2xl font-semibold text-black tracking-tight">
                 New Journal Batch
               </h2>
               <p className="text-black/50 font-medium text-sm mt-1">
@@ -99,7 +99,7 @@ export default function CreateJournal({
             <button
               type="button"
               onClick={onClose}
-             
+
               className="hover:bg-red-50 hover:text-red-500 rounded-full text-black/40 p-2"
             >
               <X className="w-5 h-5" />
@@ -117,7 +117,7 @@ export default function CreateJournal({
                 className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
               >
                 Financial Year{" "}
-                <span className="text-red-500 text-xs font-bold">*</span>
+                <span className="text-red-500 text-xs font-semibold">*</span>
               </label>
               <input
                 id="financial_year"
@@ -137,7 +137,7 @@ export default function CreateJournal({
                 className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
               >
                 Transaction Date{" "}
-                <span className="text-red-500 text-xs font-bold">*</span>
+                <span className="text-red-500 text-xs font-semibold">*</span>
               </label>
               <input
                 id="date"
@@ -156,7 +156,7 @@ export default function CreateJournal({
                 className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
               >
                 Journal Category{" "}
-                <span className="text-red-500 text-xs font-bold">*</span>
+                <span className="text-red-500 text-xs font-semibold">*</span>
               </label>
               <select
                 id="journal_type"
@@ -183,7 +183,7 @@ export default function CreateJournal({
               className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
             >
               Batch Narrative{" "}
-              <span className="text-red-500 text-xs font-bold">*</span>
+              <span className="text-red-500 text-xs font-semibold">*</span>
             </label>
             <textarea
               id="description"
@@ -201,7 +201,7 @@ export default function CreateJournal({
               htmlFor="currency"
               className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1"
             >
-              Currency <span className="text-red-500 text-xs font-bold">*</span>
+              Currency <span className="text-red-500 text-xs font-semibold">*</span>
             </label>
             <select
               name="currency"
@@ -222,7 +222,7 @@ export default function CreateJournal({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[1.25rem] font-bold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 text-white rounded-[1.25rem] font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,

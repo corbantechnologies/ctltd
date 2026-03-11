@@ -14,7 +14,7 @@ interface PnLData {
 
 export function PnLReport({ data }: { data: PnLData }) {
     const Row = ({ label, value, bold = false, net = false }: { label: string; value: number; bold?: boolean; net?: boolean }) => (
-        <div className={`flex justify-between items-center py-2 gap-4 ${bold ? "font-bold" : ""} ${net ? "bg-corporate-primary/5 px-2 rounded-lg -mx-2" : ""}`}>
+        <div className={`flex justify-between items-center py-0.5 gap-4 ${bold ? "" : ""} ${net ? "bg-corporate-primary/5 px-2 rounded -mx-2" : ""}`}>
             <span className="text-sm">{label}</span>
             <span className={`font-mono text-sm ${value < 0 ? "text-red-500" : ""} ${net ? "text-corporate-primary" : ""}`}>
                 {formatCurrency(value, data.currency)}
@@ -23,12 +23,12 @@ export function PnLReport({ data }: { data: PnLData }) {
     );
 
     return (
-        <Card className="h-full">
+        <Card className="h-full rounded">
             <CardHeader>
                 <CardTitle>Profit & Loss</CardTitle>
                 <CardDescription>{data.division} • {data.financial_year}</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-1 p-5 sm:p-6">
+            <CardContent className="space-y-1 p-1 sm:p-1">
                 <Row label="Revenue" value={data.revenue} />
                 <Row label="Cost of Sales" value={data.cost_of_sales} />
                 <hr className="my-2 border-black/10" />

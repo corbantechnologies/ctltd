@@ -36,7 +36,7 @@ export default function COADetailPage() {
           </li>
           <li><span className="text-black/30">/</span></li>
           <li>
-            <span className="font-bold text-black">{coa?.name}</span>
+            <span className="font-semibold text-black">{coa?.name}</span>
           </li>
         </ol>
       </nav>
@@ -48,25 +48,25 @@ export default function COADetailPage() {
             <div className="w-8 h-8 rounded-lg bg-[#D0402B] flex items-center justify-center text-white shadow-lg shadow-[#D0402B]/20">
               <Hash className="w-4 h-4" />
             </div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#D0402B]">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#D0402B]">
               Account Classification
             </p>
           </div>
-          <h1 className="text-xl font-bold text-black tracking-tighter">
+          <h1 className="text-xl font-semibold text-black tracking-tighter">
             {coa?.name}
           </h1>
-          <p className="text-black/40 font-bold mt-1 text-sm italic">
+          <p className="text-black/40 font-semibold mt-1 text-sm italic">
             Registry Code: <span className="text-black">{coa?.code}</span>
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           {coa?.is_active ? (
-            <span className="bg-green-500/10 text-green-600 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl inline-block">
+            <span className="bg-green-500/10 text-green-600 border-none font-semibold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl inline-block">
               Active Classification
             </span>
           ) : (
-            <span className="bg-black/5 text-black/40 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl inline-block">
+            <span className="bg-black/5 text-black/40 border-none font-semibold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl inline-block">
               Deactivated
             </span>
           )}
@@ -82,10 +82,10 @@ export default function COADetailPage() {
                 <ArrowUpDown className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                   Normal Balance
                 </p>
-                <p className="text-base font-bold text-black tracking-tight">
+                <p className="text-base font-semibold text-black tracking-tight">
                   {coa?.normal_balance} Side
                 </p>
               </div>
@@ -100,10 +100,10 @@ export default function COADetailPage() {
                 <Wallet className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                   Current Balance
                 </p>
-                <p className="text-base font-bold text-green-600 tracking-tight">
+                <p className="text-base font-semibold text-green-600 tracking-tight">
                   KES{" "}
                   {parseFloat((coa as any).balance).toLocaleString(undefined, {
                     minimumFractionDigits: 2,
@@ -122,10 +122,10 @@ export default function COADetailPage() {
               <BookIcon className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-black tracking-tight italic">
+              <h2 className="text-xl font-semibold text-black tracking-tight italic">
                 Associated Ledger <span className="text-[#D0402B]">Books</span>
               </h2>
-              <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
+              <p className="text-[10px] font-semibold text-black/30 uppercase tracking-widest mt-0.5">
                 Segmented accounts under {coa?.name}
               </p>
             </div>

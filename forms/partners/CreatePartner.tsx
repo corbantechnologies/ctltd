@@ -91,7 +91,7 @@ export default function CreatePartner({
               <UserPlus className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-black tracking-tight">
+              <h2 className="text-2xl font-semibold text-black tracking-tight">
                 Register New Partner
               </h2>
               <p className="text-black/50 font-medium text-sm mt-1">
@@ -103,7 +103,7 @@ export default function CreatePartner({
             <button
               type="button"
               onClick={onClose}
-             
+
               className="hover:bg-red-50 hover:text-red-500 rounded-full p-2"
             >
               <X className="w-5 h-5" />
@@ -357,7 +357,7 @@ export default function CreatePartner({
             />
             <label
               htmlFor="is_active"
-              className="text-sm font-bold text-black"
+              className="text-sm font-semibold text-black"
             >
               Set Partner as Active
             </label>
@@ -367,7 +367,7 @@ export default function CreatePartner({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[1.25rem] font-bold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 text-white rounded-[1.25rem] font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,

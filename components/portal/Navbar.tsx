@@ -116,13 +116,13 @@ export default function Navbar() {
           {/* Controls & Nav */}
           <div className="flex items-center gap-6">
             <div className="hidden sm:flex flex-col items-end">
-              <span className="text-sm font-bold text-white leading-none tracking-tight">
+              <span className="text-sm font-semibold text-white leading-none tracking-tight">
                 {isLoading
                   ? "Loading..."
                   : `${account?.first_name} ${account?.last_name}`}
               </span>
               <span className={cn(
-                "text-[10px] uppercase font-black tracking-[0.2em] mt-1.5 px-3 py-1 rounded-full border shadow-sm",
+                "text-[10px] uppercase font-semibold tracking-[0.2em] mt-1.5 px-3 py-1 rounded-full border shadow-sm",
                 isDirector
                   ? "text-corporate-primary bg-corporate-primary/5 border-corporate-primary/20 shadow-corporate-primary/5"
                   : isFinance
@@ -183,7 +183,7 @@ export default function Navbar() {
           <div className="p-8 bg-gradient-to-b from-slate-900 to-slate-950/50 border-b border-slate-800">
             <div className="flex items-center gap-5">
               <div className={cn(
-                "w-16 h-16 rounded-[1.25rem] flex items-center justify-center text-white font-black text-2xl border shadow-2xl transition-transform hover:scale-105",
+                "w-16 h-16 rounded-[1.25rem] flex items-center justify-center text-white font-semibold text-2xl border shadow-2xl transition-transform hover:scale-105",
                 isDirector
                   ? "bg-corporate-primary border-corporate-primary/20 shadow-corporate-primary/10"
                   : isFinance
@@ -194,7 +194,7 @@ export default function Navbar() {
                 {account?.last_name?.[0]}
               </div>
               <div>
-                <p className="font-black text-white text-xl tracking-tight italic">
+                <p className="font-semibold text-white text-xl tracking-tight italic">
                   {account?.first_name} {account?.last_name}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-2">
@@ -207,7 +207,7 @@ export default function Navbar() {
                         : "bg-slate-800 border-slate-700"
                   )}>
                     <span className={cn(
-                      "text-[9px] font-black uppercase tracking-[0.2em]",
+                      "text-[9px] font-semibold uppercase tracking-[0.2em]",
                       isDirector ? "text-corporate-primary" : isFinance ? "text-emerald-500" : "text-slate-400"
                     )}>
                       {isDirector ? "Executive Director" : isFinance ? "Finance Controller" : "Portal User"}
@@ -215,7 +215,7 @@ export default function Navbar() {
                   </div>
                   {activeYear && (
                     <div className="inline-flex items-center px-3 py-1 rounded-full border bg-slate-800 border-slate-700 shadow-inner">
-                      <span className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
+                      <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-slate-400">
                         FY: {activeYear.code}
                       </span>
                     </div>
@@ -236,7 +236,7 @@ export default function Navbar() {
                     key={item.name}
                     href={item.href}
                     className={cn(
-                      "flex items-center justify-between p-4 rounded-2xl font-black text-[11px] uppercase tracking-widest transition-all group border border-transparent",
+                      "flex items-center justify-between p-4 rounded-2xl font-semibold text-[11px] uppercase tracking-widest transition-all group border border-transparent",
                       isActive
                         ? "bg-slate-800/80 text-white border-slate-700 shadow-xl"
                         : "text-slate-500 hover:bg-slate-800/40 hover:text-white hover:border-slate-800/50",
@@ -272,7 +272,7 @@ export default function Navbar() {
           <div className="p-8 border-t border-slate-800 bg-slate-900/50 backdrop-blur-xl">
             <button
               onClick={() => signOut({ callbackUrl: "/auth/login" })}
-              className="w-full h-14 bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all border border-red-500/20 shadow-lg shadow-red-500/5 group"
+              className="w-full h-14 bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white rounded-2xl font-semibold flex items-center justify-center gap-3 transition-all border border-red-500/20 shadow-lg shadow-red-500/5 group"
             >
               <LogOut className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
               Sign Out Securely

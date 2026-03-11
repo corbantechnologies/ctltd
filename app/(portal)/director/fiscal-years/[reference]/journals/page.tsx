@@ -26,14 +26,14 @@ export default function FinanceJournalsPage() {
           </li>
           <li><span className="text-black/30">/</span></li>
           <li>
-            <span className="font-bold text-black">Journals</span>
+            <span className="font-semibold text-black">Journals</span>
           </li>
         </ol>
       </nav>
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-black tracking-tighter">
+          <h1 className="text-xl font-semibold text-black tracking-tighter">
             Transaction Journals
           </h1>
           <p className="text-black/60 font-medium mt-1">

@@ -103,10 +103,10 @@ export default function CreateBook({
               <BookOpen className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-2xl font-black text-black tracking-tight">
+              <h2 className="text-2xl font-semibold text-black tracking-tight">
                 Create Account Book
               </h2>
-              <p className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+              <p className="text-black/50 font-semibold uppercase text-[10px] tracking-widest mt-1">
                 General Ledger Infrastructure
               </p>
             </div>
@@ -115,7 +115,7 @@ export default function CreateBook({
             <button
               type="button"
               onClick={onClose}
-             
+
               className="hover:bg-red-50 hover:text-red-500 rounded-full p-2"
             >
               <X className="w-5 h-5" />
@@ -129,7 +129,7 @@ export default function CreateBook({
             <div className="space-y-2">
               <label
                 htmlFor="code"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Book Code
               </label>
@@ -138,14 +138,14 @@ export default function CreateBook({
                 name="code"
                 type="text"
                 placeholder="e.g. BK-100"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.code}
                 style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
               />
               {formik.touched.code && formik.errors.code && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
                   {formik.errors.code}
                 </p>
               )}
@@ -154,7 +154,7 @@ export default function CreateBook({
             <div className="space-y-2">
               <label
                 htmlFor="name"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Book Name
               </label>
@@ -163,14 +163,14 @@ export default function CreateBook({
                 name="name"
                 type="text"
                 placeholder="e.g. Main Cash Book"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
                 style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
               />
               {formik.touched.name && formik.errors.name && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
                   {formik.errors.name}
                 </p>
               )}
@@ -180,7 +180,7 @@ export default function CreateBook({
           <div className="space-y-2">
             <label
               htmlFor="account_type"
-              className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+              className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
             >
               Account Type (COA)
             </label>
@@ -188,7 +188,7 @@ export default function CreateBook({
               id="account_type"
               name="account_type"
               disabled={isLoadingCOAs || !!initialCOA}
-              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold ring-offset-white transition-all appearance-none cursor-pointer disabled:opacity-50"
+              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold ring-offset-white transition-all appearance-none cursor-pointer disabled:opacity-50"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.account_type}
@@ -202,7 +202,7 @@ export default function CreateBook({
               ))}
             </select>
             {formik.touched.account_type && formik.errors.account_type && (
-              <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+              <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
                 {formik.errors.account_type}
               </p>
             )}
@@ -227,7 +227,7 @@ export default function CreateBook({
                 className="w-5 h-5 rounded-lg transition-colors cursor-pointer"
                 style={{ accentColor: primaryColor }}
               />
-              <span className="text-[10px] font-black uppercase text-black/60 group-hover:text-black">
+              <span className="text-[10px] font-semibold uppercase text-black/60 group-hover:text-black">
                 Active
               </span>
             </div>
@@ -248,7 +248,7 @@ export default function CreateBook({
                 className="w-5 h-5 rounded-lg transition-colors cursor-pointer"
                 style={{ accentColor: primaryColor }}
               />
-              <span className="text-[10px] font-black uppercase text-black/60 group-hover:text-black">
+              <span className="text-[10px] font-semibold uppercase text-black/60 group-hover:text-black">
                 Bank
               </span>
             </div>
@@ -269,7 +269,7 @@ export default function CreateBook({
                 className="w-5 h-5 rounded-lg transition-colors cursor-pointer"
                 style={{ accentColor: primaryColor }}
               />
-              <span className="text-[10px] font-black uppercase text-black/60 group-hover:text-black">
+              <span className="text-[10px] font-semibold uppercase text-black/60 group-hover:text-black">
                 Tax
               </span>
             </div>
@@ -290,7 +290,7 @@ export default function CreateBook({
                 className="w-5 h-5 rounded-lg transition-colors cursor-pointer"
                 style={{ accentColor: primaryColor }}
               />
-              <span className="text-[10px] font-black uppercase text-black/60 group-hover:text-black">
+              <span className="text-[10px] font-semibold uppercase text-black/60 group-hover:text-black">
                 Cash
               </span>
             </div>
@@ -299,7 +299,7 @@ export default function CreateBook({
           <div className="space-y-2">
             <label
               htmlFor="description"
-              className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+              className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
             >
               Description
             </label>
@@ -307,7 +307,7 @@ export default function CreateBook({
               id="description"
               name="description"
               placeholder="Provide a brief description of this book..."
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[120px] rounded-2xl focus:bg-slate-50 transition-all font-bold p-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[120px] rounded-2xl focus:bg-slate-50 transition-all font-semibold p-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.description}
@@ -319,7 +319,7 @@ export default function CreateBook({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 text-white rounded-[20px] font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,

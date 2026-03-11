@@ -11,7 +11,7 @@ import LoadingSpinner from "@/components/portal/LoadingSpinner";
 
 
 function ErrorMessage({ message }: { message: string }) {
-    return <div className="p-4 rounded-lg bg-red-50 text-red-600 text-sm border border-red-100">{message}</div>;
+    return <div className="p-4 rounded bg-red-50 text-red-600 text-sm border border-red-100">{message}</div>;
 }
 
 export default function ReportsDashboard() {
@@ -40,8 +40,8 @@ export default function ReportsDashboard() {
     return (
         <div className="space-y-6 p-4 sm:p-0">
             <div>
-                <h2 className="text-3xl font-black tracking-tight text-corporate-foreground italic uppercase">Financial Reports</h2>
-                <p className="text-slate-400 font-bold text-xs uppercase tracking-widest mt-1">Overview of your financial performance and position.</p>
+                <h2 className="font-semibold tracking-tight text-corporate-foreground">Financial Reports</h2>
+                <p className="text-slate-400 text-sm mt-1">Overview of your financial performance and position.</p>
             </div>
 
             {/* Key Metrics */}

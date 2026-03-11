@@ -86,10 +86,10 @@ export default function DivisionPage() {
                         </div>
 
                         <div className="flex-1">
-                            <div className="inline-flex items-center rounded-full bg-slate-800/80 backdrop-blur-md px-4 py-1.5 text-[10px] font-black text-corporate-primary border border-slate-700/50 mb-4 sm:mb-6 uppercase tracking-[0.2em] shadow-inner">
+                            <div className="inline-flex items-center rounded-full bg-slate-800/80 backdrop-blur-md px-4 py-1.5 text-[10px] font-semibold text-corporate-primary border border-slate-700/50 mb-4 sm:mb-6 uppercase tracking-[0.2em] shadow-inner">
                                 Enterprise Division
                             </div>
-                            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-4 leading-[1.1]">
+                            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold text-white tracking-tight mb-4 leading-[1.1]">
                                 {division.name}
                             </h1>
                             <p className="text-base sm:text-lg md:text-xl text-slate-400 font-medium max-w-2xl leading-relaxed">
@@ -140,49 +140,49 @@ export default function DivisionPage() {
 
                             {/* Tab Panels */}
 
-                                <Tabs.Content value="overview" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
-                                    <div className="flex items-center gap-4 mb-8">
-                                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-orange-50 flex items-center justify-center border border-orange-100 shadow-sm shrink-0">
-                                            <Target className="w-5 h-5 sm:w-6 sm:h-6 text-corporate-primary" />
-                                        </div>
-                                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight italic uppercase italic">
-                                            Strategic Overview
-                                        </h2>
+                            <Tabs.Content value="overview" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-orange-50 flex items-center justify-center border border-orange-100 shadow-sm shrink-0">
+                                        <Target className="w-5 h-5 sm:w-6 sm:h-6 text-corporate-primary" />
                                     </div>
-                                    <div className="prose prose-base sm:prose-lg prose-slate prose-orange max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:font-semibold prose-a:text-corporate-primary hover:prose-a:text-orange-600 prose-p:leading-relaxed prose-img:rounded-3xl prose-img:shadow-lg prose-strong:text-slate-900 border-l-2 sm:border-l-4 border-slate-200 pl-4 sm:pl-8 ml-2 sm:ml-6">
-                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.description}</ReactMarkdown>
-                                    </div>
-                                </Tabs.Content>
+                                    <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight italic uppercase italic">
+                                        Strategic Overview
+                                    </h2>
+                                </div>
+                                <div className="prose prose-base sm:prose-lg prose-slate prose-orange max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:font-semibold prose-a:text-corporate-primary hover:prose-a:text-orange-600 prose-p:leading-relaxed prose-img:rounded-3xl prose-img:shadow-lg prose-strong:text-slate-900 border-l-2 sm:border-l-4 border-slate-200 pl-4 sm:pl-8 ml-2 sm:ml-6">
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.description}</ReactMarkdown>
+                                </div>
+                            </Tabs.Content>
 
-                                <Tabs.Content value="services" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
-                                    <div className="flex items-center gap-4 mb-8">
-                                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-blue-50 flex items-center justify-center border border-blue-100 shadow-sm shrink-0">
-                                            <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
-                                        </div>
-                                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight italic uppercase italic">
-                                            Core Services
-                                        </h2>
+                            <Tabs.Content value="services" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-blue-50 flex items-center justify-center border border-blue-100 shadow-sm shrink-0">
+                                        <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                                     </div>
-                                    <div className="bg-slate-50 border border-slate-200 p-6 sm:p-12 rounded-[1.5rem] sm:rounded-[2rem]">
-                                        <div className="prose prose-base sm:prose-lg prose-slate prose-orange max-w-none prose-ul:space-y-4 prose-li:marker:text-corporate-primary prose-li:marker:font-bold prose-li:pl-2">
-                                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.services}</ReactMarkdown>
-                                        </div>
+                                    <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight italic uppercase italic">
+                                        Core Services
+                                    </h2>
+                                </div>
+                                <div className="bg-slate-50 border border-slate-200 p-6 sm:p-12 rounded-[1.5rem] sm:rounded-[2rem]">
+                                    <div className="prose prose-base sm:prose-lg prose-slate prose-orange max-w-none prose-ul:space-y-4 prose-li:marker:text-corporate-primary prose-li:marker:font-bold prose-li:pl-2">
+                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.services}</ReactMarkdown>
                                     </div>
-                                </Tabs.Content>
+                                </div>
+                            </Tabs.Content>
 
-                                <Tabs.Content value="projects" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
-                                    <div className="flex items-center gap-4 mb-8">
-                                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-emerald-50 flex items-center justify-center border border-emerald-100 shadow-sm shrink-0">
-                                            <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600" />
-                                        </div>
-                                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight italic uppercase italic">
-                                            Key Initiatives
-                                        </h2>
+                            <Tabs.Content value="projects" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-emerald-50 flex items-center justify-center border border-emerald-100 shadow-sm shrink-0">
+                                        <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600" />
                                     </div>
-                                    <div className="prose prose-base sm:prose-lg prose-slate prose-emerald max-w-none prose-headings:font-bold prose-headings:text-slate-800 prose-blockquote:border-l-corporate-primary prose-blockquote:bg-slate-50 prose-blockquote:p-4 sm:p-6 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-blockquote:text-slate-700 border-l-2 sm:border-l-4 border-emerald-200 pl-4 sm:pl-8 ml-2 sm:ml-6">
-                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.projects}</ReactMarkdown>
-                                    </div>
-                                </Tabs.Content>
+                                    <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight italic uppercase italic">
+                                        Key Initiatives
+                                    </h2>
+                                </div>
+                                <div className="prose prose-base sm:prose-lg prose-slate prose-emerald max-w-none prose-headings:font-bold prose-headings:text-slate-800 prose-blockquote:border-l-corporate-primary prose-blockquote:bg-slate-50 prose-blockquote:p-4 sm:p-6 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-blockquote:text-slate-700 border-l-2 sm:border-l-4 border-emerald-200 pl-4 sm:pl-8 ml-2 sm:ml-6">
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.projects}</ReactMarkdown>
+                                </div>
+                            </Tabs.Content>
                         </Tabs.Root>
                     </div>
 
@@ -194,7 +194,7 @@ export default function DivisionPage() {
                             <div className="bg-white border text-center border-slate-200 rounded-[2rem] p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden group">
                                 <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-corporate-primary via-orange-400 to-yellow-400" />
 
-                                <h3 className="text-xl font-extrabold text-slate-900 mb-8 pt-2">Division Connect</h3>
+                                <h3 className="text-xl font-semibold text-slate-900 mb-8 pt-2">Division Connect</h3>
 
                                 <ul className="space-y-6 text-left">
                                     <li className="flex items-start gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">

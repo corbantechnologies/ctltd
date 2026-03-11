@@ -48,7 +48,7 @@ export default function FiscalYearDetail() {
   if (isLoading || isLoadingTypes) return <LoadingSpinner />;
   if (!fiscalYear)
     return (
-      <div className="p-12 text-center font-bold text-gray-300">
+      <div className="p-12 text-center font-semibold text-gray-300">
         Fiscal Year not found.
       </div>
     );
@@ -74,7 +74,7 @@ export default function FiscalYearDetail() {
               </li>
               <li><span className="text-black/30">/</span></li>
               <li>
-                <span className="font-bold text-black">{fiscalYear.code}</span>
+                <span className="font-semibold text-black">{fiscalYear.code}</span>
               </li>
             </ol>
           </nav>
@@ -84,24 +84,24 @@ export default function FiscalYearDetail() {
               <CalendarRange className="w-4 h-4" />
             </div>
             <div>
-              <h1 className="text-lg font-bold text-black tracking-tight leading-none">
+              <h1 className="text-lg font-semibold text-black tracking-tight leading-none">
                 {fiscalYear.code}
               </h1>
               <div className="flex items-center gap-2 mt-1">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-black/40">
+                <span className="text-[10px] font-semibold uppercase tracking-widest text-black/40">
                   {fiscalYear.estimated_profit}
                 </span>
                 {fiscalYear.is_active ? (
                   <div className="flex items-center gap-1.5 text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-[9px] font-bold uppercase tracking-widest">
+                    <span className="text-[9px] font-semibold uppercase tracking-widest">
                       Active
                     </span>
                   </div>
                 ) : (
                   <div className="flex items-center gap-1.5 text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full border border-gray-100">
                     <div className="w-1.5 h-1.5 rounded-full bg-gray-300" />
-                    <span className="text-[9px] font-bold uppercase tracking-widest">
+                    <span className="text-[9px] font-semibold uppercase tracking-widest">
                       Closed
                     </span>
                   </div>
@@ -117,7 +117,7 @@ export default function FiscalYearDetail() {
             <DropdownMenu.Root>
               <DropdownMenu.Trigger asChild>
                 <button
-                  className="flex items-center justify-center h-9 px-4 bg-[#045138] hover:bg-black text-white rounded-xl text-[10px] uppercase font-bold tracking-wider transition-all shadow-md active:scale-95 gap-2"
+                  className="flex items-center justify-center h-9 px-4 bg-[#045138] hover:bg-black text-white rounded-xl text-[10px] uppercase font-semibold tracking-wider transition-all shadow-md active:scale-95 gap-2"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   Add New
@@ -126,7 +126,7 @@ export default function FiscalYearDetail() {
               </DropdownMenu.Trigger>
               <DropdownMenu.Portal>
                 <DropdownMenu.Content align="end" className="z-50 w-64 rounded-xl p-2 bg-white shadow-xl border border-black/5 animate-in fade-in zoom-in-95">
-                  <div className="text-xs uppercase tracking-widest text-black/40 font-bold px-2 py-1.5">
+                  <div className="text-xs uppercase tracking-widest text-black/40 font-semibold px-2 py-1.5">
                     Transactions
                   </div>
 
@@ -136,14 +136,14 @@ export default function FiscalYearDetail() {
                         <Plus className="w-4 h-4" />
                       </div>
                       <div className="flex flex-col text-left flex-1">
-                        <span className="font-bold text-xs">Journal Batch</span>
+                        <span className="font-semibold text-xs">Journal Batch</span>
                         <span className="text-[9px] text-black/50">Record new entry</span>
                       </div>
                       <ChevronDown className="w-3 h-3 opacity-50 ml-1 -rotate-90" />
                     </DropdownMenu.SubTrigger>
                     <DropdownMenu.Portal>
                       <DropdownMenu.SubContent className="z-50 w-56 p-2 bg-white border border-black/5 rounded-xl shadow-xl ml-2 animate-in fade-in slide-in-from-left-2">
-                        <div className="text-[10px] uppercase tracking-widest text-black/40 font-bold px-2 py-1.5">
+                        <div className="text-[10px] uppercase tracking-widest text-black/40 font-semibold px-2 py-1.5">
                           Select Journal Type
                         </div>
                         <div className="max-h-64 overflow-y-auto">
@@ -151,7 +151,7 @@ export default function FiscalYearDetail() {
                             onClick={() => handleCreateJournal()}
                             className="outline-none rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
                           >
-                            <span className="font-bold text-xs text-black/60">General (No Type)</span>
+                            <span className="font-semibold text-xs text-black/60">General (No Type)</span>
                           </DropdownMenu.Item>
                           {journalTypes?.map((type) => (
                             <DropdownMenu.Item
@@ -159,7 +159,7 @@ export default function FiscalYearDetail() {
                               onClick={() => handleCreateJournal(type.name)}
                               className="outline-none rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer flex items-center justify-between"
                             >
-                              <span className="font-bold text-xs">{type.name}</span>
+                              <span className="font-semibold text-xs">{type.name}</span>
                             </DropdownMenu.Item>
                           ))}
                         </div>
@@ -169,7 +169,7 @@ export default function FiscalYearDetail() {
 
                   <DropdownMenu.Separator className="my-1 bg-black/5 h-px" />
 
-                  <div className="text-xs uppercase tracking-widest text-black/40 font-bold px-2 py-1.5">
+                  <div className="text-xs uppercase tracking-widest text-black/40 font-semibold px-2 py-1.5">
                     Entities & Configuration
                   </div>
                   <DropdownMenu.Item
@@ -180,7 +180,7 @@ export default function FiscalYearDetail() {
                       <UserPlus className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="font-bold text-xs">New Partner</span>
+                      <span className="font-semibold text-xs">New Partner</span>
                       <span className="text-[9px] text-black/50">Register supplier/customer</span>
                     </div>
                   </DropdownMenu.Item>
@@ -193,7 +193,7 @@ export default function FiscalYearDetail() {
                       <Settings2 className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="font-bold text-xs">Partner Type</span>
+                      <span className="font-semibold text-xs">Partner Type</span>
                       <span className="text-[9px] text-black/50">Define partner category</span>
                     </div>
                   </DropdownMenu.Item>
@@ -206,7 +206,7 @@ export default function FiscalYearDetail() {
                       <BookPlus className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="font-bold text-xs">Journal Type</span>
+                      <span className="font-semibold text-xs">Journal Type</span>
                       <span className="text-[9px] text-black/50">Configure ledger types</span>
                     </div>
                   </DropdownMenu.Item>
@@ -315,7 +315,7 @@ export default function FiscalYearDetail() {
               <p className="text-[9px] uppercase tracking-widest text-black/40">
                 {stat.label}
               </p>
-              <p className="text-sm font-bold text-black tracking-tight">
+              <p className="text-sm font-semibold text-black tracking-tight">
                 {stat.value}
               </p>
             </div>
@@ -328,7 +328,7 @@ export default function FiscalYearDetail() {
         {/* Associated Journals Section (Left - 4/5) */}
         <div className="lg:col-span-12 space-y-4 order-2 lg:order-1 w-full">
           <div className="flex items-center gap-3">
-            <h2 className="text-base font-bold text-black tracking-tight">
+            <h2 className="text-base font-semibold text-black tracking-tight">
               Period Journals
             </h2>
             <div className="flex-1 h-px bg-gray-100" />

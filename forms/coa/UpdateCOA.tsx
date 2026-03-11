@@ -81,10 +81,10 @@ export default function UpdateCOA({
             <Edit3 className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-black tracking-tight">
+            <h2 className="text-2xl font-semibold text-black tracking-tight">
               Update Account
             </h2>
-            <p className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+            <p className="text-black/50 font-semibold uppercase text-[10px] tracking-widest mt-1">
               Refine Classification
             </p>
           </div>
@@ -93,7 +93,7 @@ export default function UpdateCOA({
               <button
                 type="button"
                 onClick={onClose}
-               
+
                 className="hover:bg-red-50 hover:text-red-500 rounded-full text-black/40 p-2"
               >
                 <X className="w-5 h-5" />
@@ -104,17 +104,17 @@ export default function UpdateCOA({
       </div>
       <div className="p-8">
         <div className="mb-6 p-4 bg-black/5 rounded-2xl border border-black/5">
-          <p className="text-[10px] font-black uppercase tracking-widest text-black/40 mb-1">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-1">
             Account Code (Read-only)
           </p>
-          <p className="font-bold text-black">{coa.code}</p>
+          <p className="font-semibold text-black">{coa.code}</p>
         </div>
 
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <label
               htmlFor="name"
-              className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+              className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
             >
               Account Name
             </label>
@@ -123,14 +123,14 @@ export default function UpdateCOA({
               name="name"
               type="text"
               placeholder="e.g. Cash in Bank"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
               style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
             />
             {formik.touched.name && formik.errors.name && (
-              <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+              <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
                 {formik.errors.name}
               </p>
             )}
@@ -140,7 +140,7 @@ export default function UpdateCOA({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 text-white rounded-[20px] font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,

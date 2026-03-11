@@ -38,36 +38,36 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
             <button
                 onClick={() => setOpen(true)}
                 className={cn(
-                    "w-full flex items-center gap-5 px-8 py-5 rounded-[2rem] border border-slate-200 bg-white shadow-2xl shadow-slate-100 transition-all group text-left relative overflow-hidden",
+                    "w-full flex items-center gap-3 md:gap-5 px-2 md:px-4 py-2 md:py-2 rounded border border-slate-200 bg-white shadow-slate-100 transition-all group text-left relative overflow-hidden",
                     role === "director" ? "hover:border-corporate-primary/40" : "hover:border-emerald-600/40"
                 )}
             >
                 <div className={cn(
-                    "absolute top-0 right-0 w-32 h-32 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-10 transition-opacity",
+                    "absolute top-0 right-0 w-32 h-32 rounded -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-10 transition-opacity",
                     role === "director" ? "bg-corporate-primary" : "bg-emerald-600"
                 )} />
 
                 <div className={cn(
-                    "w-12 h-12 rounded-2xl flex items-center justify-center transition-all shadow-inner",
+                    "w-8 h-8 rounded flex items-center justify-center transition-all shadow-inner",
                     role === "director" ? "bg-slate-50 group-hover:bg-corporate-primary group-hover:text-white" : "bg-slate-50 group-hover:bg-emerald-600 group-hover:text-white",
                     "text-slate-400"
                 )}>
-                    <Search className="w-6 h-6" />
+                    <Search className="w-5 h-5" />
                 </div>
-                <div className="flex-1">
-                    <span className="text-lg font-bold text-slate-400 group-hover:text-slate-900 transition-colors block italic">
+                <div className="flex-1 min-w-0">
+                    <span className="text-sm md:text-lg font-semibold group-hover:text-slate-900 transition-colors block italic truncate">
                         Access Corporate Intel...
                     </span>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-300 mt-0.5">
+                    <p className="text-[10px] font-semibold text-slate-300 mt-0.5 truncate">
                         Global Search Engine
                     </p>
                 </div>
                 <div className="hidden md:flex items-center gap-2">
-                    <kbd className="px-3 py-1.5 rounded-xl bg-slate-900 text-white text-[9px] font-black shadow-2xl tracking-tighter shadow-slate-900/20">
+                    <kbd className="px-3 py-1.5 rounded-xl bg-slate-900 text-white text-[9px] font-semibold shadow-2xl tracking-tighter shadow-slate-900/20">
                         CMD
                     </kbd>
-                    <span className="text-slate-300 font-bold">+</span>
-                    <kbd className="px-3 py-1.5 rounded-xl bg-slate-900 text-white text-[9px] font-black shadow-2xl tracking-tighter shadow-slate-900/20">
+                    <span className="text-slate-300 font-semibold">+</span>
+                    <kbd className="px-3 py-1.5 rounded-xl bg-slate-900 text-white text-[9px] font-semibold shadow-2xl tracking-tighter shadow-slate-900/20">
                         K
                     </kbd>
                 </div>
@@ -75,8 +75,8 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
 
             {open && (
                 <>
-                    <div 
-                        className="fixed inset-0 bg-slate-950/40 backdrop-blur-md z-[100] animate-in fade-in duration-300" 
+                    <div
+                        className="fixed inset-0 bg-slate-950/40 backdrop-blur-md z-[100] animate-in fade-in duration-300"
                         onClick={() => setOpen(false)}
                     />
                     <div className="fixed top-[5%] sm:top-[15%] left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] max-w-2xl bg-white/90 backdrop-blur-2xl rounded-[2rem] shadow-2xl border border-slate-200 p-0 overflow-hidden z-[101] animate-in zoom-in-95 fade-in duration-300 max-h-[90vh] flex flex-col">
@@ -99,7 +99,7 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
                                     No results found for your query.
                                 </Command.Empty>
 
-                                <Command.Group heading={<span className="px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Navigation</span>}>
+                                <Command.Group heading={<span className="px-4 py-2 text-[10px] font-semibold uppercase tracking-widest text-slate-400 block mb-2">Navigation</span>}>
                                     <Command.Item
                                         className="flex cursor-pointer select-none items-center rounded-2xl px-4 py-4 text-slate-600 outline-none hover:bg-slate-100 hover:text-slate-900 aria-selected:bg-slate-100 aria-selected:text-slate-900 transition-all mb-1 group"
                                         onSelect={() => runCommand(() => router.push(`/${role}/dashboard`))}
@@ -107,7 +107,7 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
                                         <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
                                             <Calculator className="h-5 w-5" />
                                         </div>
-                                        <span className="font-bold">Command Dashboard</span>
+                                        <span className="font-semibold">Command Dashboard</span>
                                     </Command.Item>
                                     <Command.Item
                                         className="flex cursor-pointer select-none items-center rounded-2xl px-4 py-4 text-slate-600 outline-none hover:bg-slate-100 hover:text-slate-900 aria-selected:bg-slate-100 aria-selected:text-slate-900 transition-all mb-1 group"
@@ -116,11 +116,11 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
                                         <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
                                             <Layers className="h-5 w-5" />
                                         </div>
-                                        <span className="font-bold">Chart of Accounts</span>
+                                        <span className="font-semibold">Chart of Accounts</span>
                                     </Command.Item>
                                 </Command.Group>
 
-                                <Command.Group heading={<span className="px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 block mt-4 mb-2">Ledger Accounts</span>}>
+                                <Command.Group heading={<span className="px-4 py-2 text-[10px] font-semibold uppercase tracking-widest text-slate-400 block mt-4 mb-2">Ledger Accounts</span>}>
                                     {coas?.slice(0, 8).map((coa) => (
                                         <Command.Item
                                             key={coa.reference}
@@ -131,14 +131,14 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
                                                 <FileText className="h-5 w-5" />
                                             </div>
                                             <div className="flex flex-col">
-                                                <span className="font-bold">{coa.name}</span>
-                                                <span className="text-xs text-slate-400 font-bold tracking-wider">{coa.code}</span>
+                                                <span className="font-semibold">{coa.name}</span>
+                                                <span className="text-xs text-slate-400 font-semibold tracking-wider">{coa.code}</span>
                                             </div>
                                         </Command.Item>
                                     ))}
                                 </Command.Group>
 
-                                <Command.Group heading={<span className="px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 block mt-4 mb-2">Institutional Books</span>}>
+                                <Command.Group heading={<span className="px-4 py-2 text-[10px] font-semibold uppercase tracking-widest text-slate-400 block mt-4 mb-2">Institutional Books</span>}>
                                     {books?.slice(0, 8).map((book) => (
                                         <Command.Item
                                             key={book.reference}
@@ -148,7 +148,7 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
                                             <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
                                                 <Book className="h-5 w-5" />
                                             </div>
-                                            <span className="font-bold">{book.name}</span>
+                                            <span className="font-semibold">{book.name}</span>
                                         </Command.Item>
                                     ))}
                                 </Command.Group>

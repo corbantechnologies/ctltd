@@ -65,7 +65,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
         <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center text-black/20 mb-4 shadow-sm">
           <Database className="w-8 h-8" />
         </div>
-        <p className="text-sm font-bold text-black/40 uppercase tracking-widest">
+        <p className="text-sm font-semibold text-black/40 uppercase tracking-widest">
           No accounts registered in COA
         </p>
       </div>
@@ -95,7 +95,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              className="pl-9 h-10 w-full rounded-xl border border-black/5 bg-black/5 focus:bg-white transition-all font-bold text-xs focus:outline-none focus:ring-1"
+              className="pl-9 h-10 w-full rounded-xl border border-black/5 bg-black/5 focus:bg-white transition-all font-semibold text-xs focus:outline-none focus:ring-1"
             />
           </div>
         </div>
@@ -103,7 +103,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
         <div className="flex items-center gap-1.5 bg-black/5 p-1 rounded-xl self-end lg:self-auto">
           <button
             onClick={() => setView("grid")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "grid"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-semibold uppercase tracking-widest transition-all ${view === "grid"
               ? "bg-white shadow-sm"
               : "text-black/40 hover:text-black"
               }`}
@@ -118,7 +118,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
           </button>
           <button
             onClick={() => setView("table")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "table"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-semibold uppercase tracking-widest transition-all ${view === "table"
               ? "bg-white shadow-sm"
               : "text-black/40 hover:text-black"
               }`}
@@ -137,7 +137,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
       {/* Content Rendering */}
       {paginatedCOAs.length === 0 ? (
         <div className="py-20 text-center">
-          <p className="text-sm font-bold text-black/20 uppercase tracking-[0.2em]">
+          <p className="text-sm font-semibold text-black/20 uppercase tracking-[0.2em]">
             No accounts match your criteria
           </p>
         </div>
@@ -165,11 +165,11 @@ export default function COAList({ rolePrefix }: COAListProps) {
                       <Hash className="w-5 h-5" />
                     </div>
                     {coa.is_active ? (
-                      <span className="bg-green-500/10 text-green-600 border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full inline-block">
+                      <span className="bg-green-500/10 text-green-600 border-none font-semibold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full inline-block">
                         Active
                       </span>
                     ) : (
-                      <span className="bg-black/5 text-black/40 border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full inline-block">
+                      <span className="bg-black/5 text-black/40 border-none font-semibold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full inline-block">
                         Inactive
                       </span>
                     )}
@@ -177,7 +177,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
 
                   <div className="mb-4">
                     <h3
-                      className="text-base font-bold text-black tracking-tight transition-colors line-clamp-1"
+                      className="text-base font-semibold text-black tracking-tight transition-colors line-clamp-1"
                       style={
                         {
                           "--hover-text": primaryColor,
@@ -188,13 +188,13 @@ export default function COAList({ rolePrefix }: COAListProps) {
                     </h3>
                     <div className="flex items-center gap-2 mt-1">
                       <p
-                        className="text-[9px] font-bold uppercase tracking-widest"
+                        className="text-[9px] font-semibold uppercase tracking-widest"
                         style={{ color: primaryColor } as CSSWithVariables}
                       >
                         CODE: {coa.code}
                       </p>
                       <span className="w-1 h-1 rounded-full bg-black/10" />
-                      <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                      <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                         REF: {coa.reference}
                       </p>
                     </div>
@@ -203,7 +203,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
                   <div className="flex items-center justify-between pt-3 border-t border-black/5">
                     <div className="flex items-center gap-1.5">
                       <Activity className="w-3 h-3 text-black/20" />
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-black/40">
+                      <span className="text-[9px] font-semibold uppercase tracking-widest text-black/40">
                         {coa.normal_balance} Balance
                       </span>
                     </div>
@@ -220,19 +220,19 @@ export default function COAList({ rolePrefix }: COAListProps) {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/10 bg-black/5">
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Account Name
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Code
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Type / Balance
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Status
                   </th>
-                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-right py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Actions
                   </th>
                 </tr>
@@ -254,7 +254,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
                     <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-3">
                         <div
-                          className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/30 transition-all font-bold"
+                          className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/30 transition-all font-semibold"
                           style={
                             {
                               "--group-hover-bg": `${primaryColor}33`, // 20% opacity
@@ -275,21 +275,21 @@ export default function COAList({ rolePrefix }: COAListProps) {
                           >
                             {coa.name}
                           </p>
-                          <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
+                          <p className="text-[10px] font-semibold text-black/30 uppercase tracking-widest mt-0.5">
                             {coa.reference}
                           </p>
                         </div>
                       </div>
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
-                      <span className="bg-black/5 text-black border border-black/5 font-bold text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none inline-block">
+                      <span className="bg-black/5 text-black border border-black/5 font-semibold text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none inline-block">
                         {coa.code}
                       </span>
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-2">
                         <ArrowUpDown className="w-3 h-3 text-black/30" />
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-black/60">
+                        <span className="text-[10px] font-semibold uppercase tracking-widest text-black/60">
                           {coa.normal_balance}
                         </span>
                       </div>
@@ -298,14 +298,14 @@ export default function COAList({ rolePrefix }: COAListProps) {
                       {coa.is_active ? (
                         <div className="flex items-center gap-1.5 text-green-600">
                           <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                          <span className="text-[9px] font-bold uppercase tracking-wider">
+                          <span className="text-[9px] font-semibold uppercase tracking-wider">
                             Active
                           </span>
                         </div>
                       ) : (
                         <div className="flex items-center gap-1.5 text-black/30">
                           <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
-                          <span className="text-[9px] font-bold uppercase tracking-wider">
+                          <span className="text-[9px] font-semibold uppercase tracking-wider">
                             Inactive
                           </span>
                         </div>
@@ -339,7 +339,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
       {/* Pagination Controls */}
       {totalPages > 1 && (
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/50 backdrop-blur-xl p-4 rounded-2xl border border-black/5">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-black/30">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-black/30">
             Showing <span className="text-black">{paginatedCOAs.length}</span>{" "}
             of <span className="text-black">{filteredCOAs.length}</span>{" "}
             accounts
@@ -367,7 +367,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-8 h-8 rounded-lg text-[10px] font-bold transition-all ${currentPage === page
+                      className={`w-8 h-8 rounded-lg text-[10px] font-semibold transition-all ${currentPage === page
                         ? "text-white shadow-md"
                         : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
                         }`}

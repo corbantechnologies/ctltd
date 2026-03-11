@@ -25,11 +25,11 @@ export default function RecentActivityFeed({
 
       <div className="flex items-center justify-between mb-8 relative z-10">
         <div>
-          <h3 className="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+          <h3 className="text-xl font-semibold text-slate-900 tracking-tight flex items-center gap-2">
             <ScrollText className="w-5 h-5 text-corporate-primary" />
             Audit Trail
           </h3>
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
+          <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-1">
             Latest Transactions
           </p>
         </div>
@@ -53,14 +53,14 @@ export default function RecentActivityFeed({
               className="group/item flex items-center justify-between p-4 rounded-2xl hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 font-extrabold text-xs group-hover/item:bg-white group-hover/item:shadow-sm border border-transparent group-hover/item:border-slate-200 transition-all">
+                <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 font-semibold text-xs group-hover/item:bg-white group-hover/item:shadow-sm border border-transparent group-hover/item:border-slate-200 transition-all">
                   TRX
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm text-slate-900 line-clamp-1">
+                  <h4 className="font-semibold text-sm text-slate-900 line-clamp-1">
                     {entry.notes || "Journal Entry"}
                   </h4>
-                  <p className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mt-0.5">
+                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mt-0.5">
                     {entry.created_at
                       ? new Date(entry.created_at).toLocaleDateString(
                         "en-US",
@@ -76,10 +76,10 @@ export default function RecentActivityFeed({
                 </div>
               </div>
               <div className="text-right">
-                <span className="font-extrabold text-sm text-slate-900 block tracking-tight">
+                <span className="font-semibold text-sm text-slate-900 block tracking-tight">
                   {Number(entry.debit).toLocaleString()}
                 </span>
-                <span className="text-[9px] font-black text-corporate-primary bg-corporate-primary/5 px-2 py-0.5 rounded-full border border-corporate-primary/10">
+                <span className="text-[9px] font-semibold text-corporate-primary bg-corporate-primary/5 px-2 py-0.5 rounded-full border border-corporate-primary/10">
                   {entry.code}
                 </span>
               </div>
@@ -88,7 +88,7 @@ export default function RecentActivityFeed({
         )}
       </div>
 
-      <button className="mt-8 py-4 px-6 rounded-2xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-all flex items-center justify-center gap-2 group/btn">
+      <button className="mt-8 py-4 px-6 rounded-2xl bg-slate-900 text-white font-semibold text-sm hover:bg-slate-800 transition-all flex items-center justify-center gap-2 group/btn">
         View Full Ledger
         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
       </button>
