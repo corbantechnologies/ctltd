@@ -22,7 +22,7 @@ interface TrialBalanceData {
 
 export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
     return (
-        <Card className="h-full overflow-hidden flex flex-col">
+        <Card className="h-full overflow-hidden flex flex-col rounded">
             <CardHeader>
                 <CardTitle>Trial Balance</CardTitle>
                 <CardDescription>{data.division} • {data.financial_year}</CardDescription>

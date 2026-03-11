@@ -17,7 +17,7 @@ export function MetricCard({ title, value, currency = "KES", trend, description,
     const isPositive = value >= 0;
 
     return (
-        <Card className={cn("relative overflow-hidden", className)}>
+        <Card className={cn("relative overflow-hidden rounded", className)}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium opacity-80">{title}</CardTitle>
                 {Icon ? (

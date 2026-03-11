@@ -49,7 +49,7 @@ export function BalanceSheetReport({ data }: { data: BalanceCheckData }) {
     );
 
     return (
-        <Card className="h-full">
+        <Card className="h-full rounded">
             <CardHeader>
                 <div className="flex justify-between items-start">
                     <div>

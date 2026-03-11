@@ -11,7 +11,7 @@ import LoadingSpinner from "@/components/portal/LoadingSpinner";
 
 
 function ErrorMessage({ message }: { message: string }) {
-    return <div className="p-4 rounded-lg bg-red-50 text-red-600 text-sm border border-red-100">{message}</div>;
+    return <div className="p-4 rounded bg-red-50 text-red-600 text-sm border border-red-100">{message}</div>;
 }
 
 export default function ReportsDashboard() {

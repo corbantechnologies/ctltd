@@ -23,7 +23,7 @@ export function PnLReport({ data }: { data: PnLData }) {
     );
 
     return (
-        <Card className="h-full">
+        <Card className="h-full rounded">
             <CardHeader>
                 <CardTitle>Profit & Loss</CardTitle>
                 <CardDescription>{data.division} • {data.financial_year}</CardDescription>

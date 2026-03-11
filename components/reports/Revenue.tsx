@@ -13,7 +13,7 @@ interface RevenueData {
 
 export function RevenueReport({ data }: { data: RevenueData }) {
     return (
-        <Card className="h-full">
+        <Card className="h-full rounded">
             <CardHeader>
                 <CardTitle>Revenue Breakdown</CardTitle>
                 <CardDescription>{data.financial_year}</CardDescription>
