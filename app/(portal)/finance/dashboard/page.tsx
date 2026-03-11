@@ -114,14 +114,6 @@ export default function FinanceDashboard() {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-8 h-8 rounded bg-emerald-600 flex items-center justify-center text-white shadow-emerald-600/20">
-              <TrendingUp className="w-4 h-4" />
-            </div>
-            <p className="text-[10px] uppercase tracking-[0.3em] text-emerald-600">
-              Financial Oversight
-            </p>
-          </div>
           <h1 className="text-xl md:text-xl text-slate-900 tracking-tight">
             Finance <span className="text-emerald-600">Portal</span>
           </h1>
@@ -131,8 +123,8 @@ export default function FinanceDashboard() {
         </div>
       </div>
 
-      <Tabs.Root defaultValue="reports" className="space-y-10">
-        <Tabs.List className="flex w-full overflow-x-auto md:inline-flex md:w-auto p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner scrollbar-hide">
+      <Tabs.Root defaultValue="reports" className="space-y-6">
+        <Tabs.List className="flex w-full overflow-x-auto md:inline-flex md:w-auto p-1.5 bg-slate-100 border border-slate-200 scrollbar-hide">
           <Tabs.Trigger
             value="reports"
             className="shrink-0 whitespace-nowrap px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
