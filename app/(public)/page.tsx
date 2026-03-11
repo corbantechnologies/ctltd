@@ -19,7 +19,7 @@ export default function Home() {
 
         <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
           <div className="mb-8">
-            <div className="inline-flex items-center rounded-full bg-slate-800 px-3 py-1 text-xs font-semibold text-corporate-primary border border-slate-700">
+            <div className="inline-flex items-center rounded bg-slate-800 px-3 py-1 text-xs font-semibold text-corporate-primary border border-slate-700">
               MOMBASA'S LEADING TECH PARTNER
             </div>
           </div>
@@ -36,13 +36,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               href="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white px-8 py-3.5 rounded-lg font-medium transition-colors shadow-lg shadow-orange-900/20"
+              className="w-full sm:w-auto inline-flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white px-8 py-3.5 rounded font-medium transition-colors shadow-lg shadow-orange-900/20"
             >
               Launch Your Project <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <Link
               href="/divisions"
-              className="w-full sm:w-auto inline-flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-white px-8 py-3.5 rounded-lg font-medium transition-colors ring-1 ring-slate-700"
+              className="w-full sm:w-auto inline-flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-white px-8 py-3.5 rounded font-medium transition-colors ring-1 ring-slate-700"
             >
               Explore Divisions
             </Link>
@@ -66,7 +66,7 @@ export default function Home() {
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="h-64 bg-white rounded-2xl border border-slate-200 animate-pulse" />
+                <div key={i} className="h-64 bg-white rounded border border-slate-200 animate-pulse" />
               ))}
             </div>
           ) : (
@@ -75,9 +75,9 @@ export default function Home() {
                 <Link
                   key={division.reference}
                   href={`/divisions/${division.reference}`}
-                  className="group bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-all hover:border-orange-200 flex flex-col h-full"
+                  className="group bg-white p-8 rounded shadow-sm border border-slate-200 hover:shadow-md transition-all hover:border-orange-200 flex flex-col h-full"
                 >
-                  <div className="bg-slate-50 w-14 h-14 rounded-xl flex items-center justify-center mb-6 border border-slate-100 group-hover:scale-110 transition-all overflow-hidden p-2">
+                  <div className="bg-slate-50 w-14 h-14 rounded flex items-center justify-center mb-6 border border-slate-100 group-hover:scale-110 transition-all overflow-hidden p-2">
                     {division.logo ? (
                       <img src={division.logo} alt={division.name} className="w-full h-full object-contain" />
                     ) : (
@@ -102,8 +102,8 @@ export default function Home() {
       {/* Removed Flagship Product Showcase & Grid in favor of Dynamic Divisions */}
 
       <section className="py-20 px-6 bg-white">
-        <div className="max-w-6xl mx-auto bg-slate-900 rounded-3xl p-12 md:p-16 text-center relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-corporate-primary/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
+        <div className="max-w-6xl mx-auto bg-slate-900 rounded p-12 md:p-16 text-center relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-corporate-primary/10 rounded blur-[80px] -translate-y-1/2 translate-x-1/2" />
           <div className="relative z-10 space-y-8">
             <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight max-w-3xl mx-auto">
               Ready to <span className="text-corporate-primary">Future-Proof</span> Your Business?
@@ -114,13 +114,13 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link
                 href="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white px-8 py-3.5 rounded-lg font-medium transition-colors shadow-lg shadow-orange-900/20"
+                className="w-full sm:w-auto inline-flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white px-8 py-3.5 rounded font-medium transition-colors shadow-lg shadow-orange-900/20"
               >
                 Get Started Now
               </Link>
               <Link
                 href="/divisions"
-                className="w-full sm:w-auto inline-flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-white px-8 py-3.5 rounded-lg font-medium transition-colors ring-1 ring-slate-700"
+                className="w-full sm:w-auto inline-flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-white px-8 py-3.5 rounded font-medium transition-colors ring-1 ring-slate-700"
               >
                 View Divisions
               </Link>

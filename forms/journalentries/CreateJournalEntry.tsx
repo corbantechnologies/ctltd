@@ -142,7 +142,7 @@ export default function CreateJournalEntry({
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-4">
             <div
-              className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
+              className="w-12 h-12 rounded flex items-center justify-center text-white shadow-lg"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
@@ -164,7 +164,7 @@ export default function CreateJournalEntry({
               type="button"
               onClick={onClose}
 
-              className="hover:bg-red-50 hover:text-red-500 rounded-full p-2"
+              className="hover:bg-red-50 hover:text-red-500 rounded p-2"
             >
               <X className="w-5 h-5" />
             </button>
@@ -175,13 +175,13 @@ export default function CreateJournalEntry({
       <div className="p-4 bg-gray-100">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
           {submitError && (
-            <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-xl text-sm">
+            <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded text-sm">
               {submitError}
             </div>
           )}
 
           {/* Contextual Mapping */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 bg-orange-50/20 rounded-3xl border border-black">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 bg-orange-50/20 rounded border border-black">
             <div className="space-y-2">
               <label className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1 flex items-center gap-1">
                 Journal Batch <span className="text-red-500 text-xs font-semibold">*</span>
@@ -192,7 +192,7 @@ export default function CreateJournalEntry({
                 value={journalReference}
                 disabled
                 required
-                className="w-full h-14 rounded-2xl border-slate-200 bg-slate-50 px-4 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
+                className="w-full h-14 rounded border-slate-200 bg-slate-50 px-4 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
               />
             </div>
 
@@ -204,7 +204,7 @@ export default function CreateJournalEntry({
                 name="book"
                 required
                 disabled={isLoadingBooks}
-                className="h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 appearance-none focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
+                className="h-14 w-full rounded border border-slate-200 bg-slate-50 px-4 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 appearance-none focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 value={formik.values.book}
               >
@@ -224,7 +224,7 @@ export default function CreateJournalEntry({
               <select
                 name="partner"
                 disabled={isLoadingPartners}
-                className="h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 appearance-none focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
+                className="h-14 w-full rounded border border-slate-200 bg-slate-50 px-4 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 appearance-none focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 value={formik.values.partner}
               >
@@ -245,7 +245,7 @@ export default function CreateJournalEntry({
                 name="division"
                 required
                 disabled={isLoadingDivisions}
-                className="h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 appearance-none focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
+                className="h-14 w-full rounded border border-slate-200 bg-slate-50 px-4 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 appearance-none focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 value={formik.values.division}
               >
@@ -265,7 +265,7 @@ export default function CreateJournalEntry({
               <input
                 name="project"
                 placeholder="e.g. PROJ-001"
-                className="w-full h-14 rounded-2xl border-slate-200 bg-slate-50 px-4 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
+                className="w-full h-14 rounded border-slate-200 bg-slate-50 px-4 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 value={formik.values.project}
               />
@@ -283,7 +283,7 @@ export default function CreateJournalEntry({
               <select
                 name="currency"
                 required
-                className="h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 appearance-none focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
+                className="h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 appearance-none focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 value={formik.values.currency}
               >
@@ -306,7 +306,7 @@ export default function CreateJournalEntry({
                 min="0"
                 required
                 placeholder="1.0000"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 font-semibold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 font-semibold px-5"
                 onChange={formik.handleChange}
                 value={formik.values.exchange_rate}
               />
@@ -324,7 +324,7 @@ export default function CreateJournalEntry({
                     step="0.01"
                     min="0"
                     placeholder="0.00"
-                    className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 font-semibold px-5"
+                    className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 font-semibold px-5"
                     onChange={formik.handleChange}
                     value={formik.values.debit}
                   />
@@ -340,7 +340,7 @@ export default function CreateJournalEntry({
                     step="0.01"
                     min="0"
                     placeholder="0.00"
-                    className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 font-semibold px-5"
+                    className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 font-semibold px-5"
                     onChange={formik.handleChange}
                     value={formik.values.credit}
                   />
@@ -360,7 +360,7 @@ export default function CreateJournalEntry({
                     step="0.01"
                     min="0"
                     placeholder="0.00"
-                    className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 font-semibold px-5"
+                    className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 font-semibold px-5"
                     onChange={formik.handleChange}
                     value={formik.values.foreign_debit}
                   />
@@ -376,7 +376,7 @@ export default function CreateJournalEntry({
                     step="0.01"
                     min="0"
                     placeholder="0.00"
-                    className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 font-semibold px-5"
+                    className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 font-semibold px-5"
                     onChange={formik.handleChange}
                     value={formik.values.foreign_credit}
                   />
@@ -393,7 +393,7 @@ export default function CreateJournalEntry({
               </label>
               <select
                 name="payment_method"
-                className="h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 appearance-none focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
+                className="h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 appearance-none focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 value={formik.values.payment_method}
               >
@@ -411,7 +411,7 @@ export default function CreateJournalEntry({
               </label>
               <select
                 name="source_document"
-                className="h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 appearance-none focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
+                className="h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 text-sm font-semibold focus:ring-2 focus:ring-corporate-primary/20 appearance-none focus:outline-none focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 value={formik.values.source_document}
               >
@@ -432,7 +432,7 @@ export default function CreateJournalEntry({
               <input
                 name="document_number"
                 placeholder="e.g. REF-001"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 font-semibold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 font-semibold px-5"
                 onChange={formik.handleChange}
                 value={formik.values.document_number}
               />
@@ -446,7 +446,7 @@ export default function CreateJournalEntry({
                 name="document_file"
                 type="file"
                 accept=".pdf,.jpg,.jpeg,.png"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 font-semibold px-5 py-3 text-sm"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 font-semibold px-5 py-3 text-sm"
                 onChange={(e) => {
                   formik.setFieldValue("document_file", e.currentTarget.files?.[0] || null);
                 }}
@@ -461,18 +461,18 @@ export default function CreateJournalEntry({
             <textarea
               name="notes"
               placeholder="Add any additional details or memo..."
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[100px] rounded-2xl focus:bg-slate-50 font-semibold p-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[100px] rounded focus:bg-slate-50 font-semibold p-5"
               onChange={formik.handleChange}
               value={formik.values.notes}
             />
           </div>
 
-          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-2xl border border-black">
+          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded border border-black">
             <input
               id="is_intercompany"
               name="is_intercompany"
               type="checkbox"
-              className="w-5 h-5 rounded-lg border-black text-corporate-primary focus:ring-corporate-primary/20"
+              className="w-5 h-5 rounded border-black text-corporate-primary focus:ring-corporate-primary/20"
               checked={formik.values.is_intercompany}
               onChange={formik.handleChange}
             />

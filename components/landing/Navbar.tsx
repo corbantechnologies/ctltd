@@ -58,7 +58,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center">
             <Link
               href="/contact"
-              className="bg-corporate-primary hover:bg-orange-600 text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm flex items-center gap-2"
+              className="bg-corporate-primary hover:bg-orange-600 text-white px-5 py-2.5 rounded font-medium transition-colors shadow-sm flex items-center gap-2"
             >
               Get in Touch <ChevronRight className="w-4 h-4" />
             </Link>
@@ -128,7 +128,7 @@ export default function Navbar() {
           <Link
             onClick={() => setMobileMenuOpen(false)}
             href="/contact"
-            className="bg-corporate-primary hover:bg-orange-600 text-white w-full mt-4 font-medium py-3.5 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2"
+            className="bg-corporate-primary hover:bg-orange-600 text-white w-full mt-4 font-medium py-3.5 rounded shadow-sm transition-colors flex items-center justify-center gap-2"
           >
             Get in Touch <ChevronRight className="w-5 h-5" />
           </Link>

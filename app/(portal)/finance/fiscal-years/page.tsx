@@ -10,7 +10,7 @@ export default function FiscalYearsPage() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <div className="w-6 h-6 rounded-md bg-[#045138] flex items-center justify-center text-white shadow-md shadow-[#045138]/20">
+            <div className="w-6 h-6 rounded bg-[#045138] flex items-center justify-center text-white shadow-md shadow-[#045138]/20">
               <CalendarRange className="w-3 h-3" />
             </div>
             <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[#045138]">

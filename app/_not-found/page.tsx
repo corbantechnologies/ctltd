@@ -8,13 +8,13 @@ export default function NotFound() {
     <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-white px-4">
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 bg-grid-white opacity-40" />
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-orange-100/30 rounded-full blur-[120px] animate-pulse-slow" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-orange-50/40 rounded-full blur-[100px] animate-pulse-slow delay-1000" />
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-orange-100/30 rounded blur-[120px] animate-pulse-slow" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-orange-50/40 rounded blur-[100px] animate-pulse-slow delay-1000" />
 
       <div className="relative z-10 w-full max-w-2xl flex flex-col items-center text-center">
         <div className="mb-8 flex flex-col items-center">
           <div className="w-full flex justify-center mb-6">
-            <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-corporate-primary border border-slate-200 shadow-sm">
+            <span className="inline-flex items-center rounded bg-slate-100 px-3 py-1 text-xs font-semibold text-corporate-primary border border-slate-200 shadow-sm">
               Error 404
             </span>
           </div>
@@ -31,7 +31,7 @@ export default function NotFound() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
             <Link
               href="/"
-              className="flex items-center justify-center gap-2 bg-corporate-primary hover:bg-orange-600 text-white rounded-lg px-8 py-3.5 text-base font-medium transition-colors shadow-sm group w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 bg-corporate-primary hover:bg-orange-600 text-white rounded px-8 py-3.5 text-base font-medium transition-colors shadow-sm group w-full sm:w-auto"
             >
               <Home className="w-5 h-5" />
               Return Home
@@ -40,7 +40,7 @@ export default function NotFound() {
 
             <Link
               href="/contact"
-              className="flex items-center justify-center gap-2 border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 rounded-lg px-8 py-3.5 text-base font-medium transition-colors w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 rounded px-8 py-3.5 text-base font-medium transition-colors w-full sm:w-auto"
             >
               <Mail className="w-5 h-5" />
               Contact Support

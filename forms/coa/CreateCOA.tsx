@@ -70,7 +70,7 @@ export default function CreateCOA({
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-4">
             <div
-              className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
+              className="w-12 h-12 rounded flex items-center justify-center text-white shadow-lg"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
@@ -92,7 +92,7 @@ export default function CreateCOA({
               type="button"
               onClick={onClose}
 
-              className="hover:bg-red-50 hover:text-red-500 rounded-full p-2"
+              className="hover:bg-red-50 hover:text-red-500 rounded p-2"
             >
               <X className="w-5 h-5" />
             </button>
@@ -114,7 +114,7 @@ export default function CreateCOA({
                 name="code"
                 type="text"
                 placeholder="e.g. 1000"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.code}
@@ -139,7 +139,7 @@ export default function CreateCOA({
                 name="order"
                 type="number"
                 placeholder="e.g. 10"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.order}
@@ -165,7 +165,7 @@ export default function CreateCOA({
               name="name"
               type="text"
               placeholder="e.g. Liabilitiess"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
@@ -188,7 +188,7 @@ export default function CreateCOA({
             <select
               id="normal_balance"
               name="normal_balance"
-              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold ring-offset-white transition-all appearance-none cursor-pointer"
+              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold ring-offset-white transition-all appearance-none cursor-pointer"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.normal_balance}
@@ -204,12 +204,12 @@ export default function CreateCOA({
             )}
           </div>
 
-          <div className="flex items-center gap-3 p-4 bg-black/5 rounded-2xl border border-black/5">
+          <div className="flex items-center gap-3 p-4 bg-black/5 rounded border border-black/5">
             <input
               id="is_active"
               name="is_active"
               type="checkbox"
-              className="w-5 h-5 rounded-lg border-black/5 transition-colors cursor-pointer"
+              className="w-5 h-5 rounded border-black/5 transition-colors cursor-pointer"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               checked={formik.values.is_active}

@@ -21,7 +21,7 @@ export default function RecentActivityFeed({
 
   return (
     <div className="col-span-1 shadow-xl shadow-slate-200/50 border border-slate-200 rounded bg-white p-4 relative overflow-hidden flex flex-col group hover:shadow-corporate-primary/5 transition-all duration-500">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-corporate-primary/5 transition-colors" />
+      <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-corporate-primary/5 transition-colors" />
 
       <div className="flex items-center justify-between mb-8 relative z-10">
         <div>
@@ -33,7 +33,7 @@ export default function RecentActivityFeed({
             Latest Transactions
           </p>
         </div>
-        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 border border-slate-100 group-hover:border-slate-200 transition-colors">
+        <div className="w-10 h-10 rounded bg-slate-50 flex items-center justify-center text-slate-400 border border-slate-100 group-hover:border-slate-200 transition-colors">
           <Clock className="w-5 h-5" />
         </div>
       </div>
@@ -50,7 +50,7 @@ export default function RecentActivityFeed({
           recentEntries.map((entry) => (
             <div
               key={entry.reference}
-              className="group/item flex items-center justify-between p-4 rounded-2xl hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all"
+              className="group/item flex items-center justify-between p-4 rounded hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all"
             >
               <div className="flex items-center gap-4">
                 <div>

@@ -91,7 +91,7 @@ export default function DirectorDashboard() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-8 h-8 rounded-xl bg-corporate-primary flex items-center justify-center text-white shadow-lg shadow-corporate-primary/20">
+            <div className="w-8 h-8 rounded bg-corporate-primary flex items-center justify-center text-white shadow-lg shadow-corporate-primary/20">
               <Building2 className="w-4 h-4" />
             </div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-corporate-primary">
@@ -110,16 +110,16 @@ export default function DirectorDashboard() {
       </div>
 
       <Tabs.Root defaultValue="overview" className="space-y-10">
-        <Tabs.List className="flex w-full overflow-x-auto md:inline-flex md:w-auto p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner scrollbar-hide">
+        <Tabs.List className="flex w-full overflow-x-auto md:inline-flex md:w-auto p-1.5 bg-slate-100 rounded border border-slate-200 shadow-inner scrollbar-hide">
           <Tabs.Trigger
             value="overview"
-            className="shrink-0 whitespace-nowrap px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="shrink-0 whitespace-nowrap px-8 py-3 rounded text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
             System Health
           </Tabs.Trigger>
           <Tabs.Trigger
             value="financials"
-            className="shrink-0 whitespace-nowrap px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="shrink-0 whitespace-nowrap px-8 py-3 rounded text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
             Fiscal Reports
           </Tabs.Trigger>
@@ -133,9 +133,9 @@ export default function DirectorDashboard() {
                 key={i}
                 className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-2xl shadow-slate-100 relative overflow-hidden group hover:-translate-y-1 transition-all duration-500"
               >
-                <div className={cn("absolute top-0 right-0 w-24 h-24 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-30 group-hover:opacity-60 transition-opacity", stat.bg)} />
+                <div className={cn("absolute top-0 right-0 w-24 h-24 rounded blur-3xl -translate-y-1/2 translate-x-1/2 opacity-30 group-hover:opacity-60 transition-opacity", stat.bg)} />
                 <div className="relative z-10 flex flex-col gap-4">
-                  <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center shadow-inner", stat.bg, stat.color)}>
+                  <div className={cn("w-12 h-12 rounded flex items-center justify-center shadow-inner", stat.bg, stat.color)}>
                     <stat.icon className="w-6 h-6" />
                   </div>
                   <div>
@@ -172,8 +172,8 @@ export default function DirectorDashboard() {
                   Real-time Operational Capacity
                 </p>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-600 rounded-full border border-emerald-100 shadow-sm animate-pulse">
-                <div className="w-2 h-2 rounded-full bg-emerald-500" />
+              <div className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-600 rounded border border-emerald-100 shadow-sm animate-pulse">
+                <div className="w-2 h-2 rounded bg-emerald-500" />
                 <span className="text-[10px] font-semibold uppercase tracking-widest">System Online</span>
               </div>
             </div>

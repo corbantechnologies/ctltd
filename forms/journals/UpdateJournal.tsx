@@ -81,7 +81,7 @@ export default function UpdateJournal({
     >
       <div className="bg-orange-50/50 p-8 border-b border-black/5">
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-12 h-12 rounded-2xl bg-black flex items-center justify-center text-white shadow-lg">
+          <div className="w-12 h-12 rounded bg-black flex items-center justify-center text-white shadow-lg">
             <Edit3 className="w-6 h-6" />
           </div>
           <div>
@@ -98,7 +98,7 @@ export default function UpdateJournal({
                 type="button"
                 onClick={onClose}
 
-                className="hover:bg-red-50 hover:text-red-500 rounded-full text-black/40 p-2"
+                className="hover:bg-red-50 hover:text-red-500 rounded text-black/40 p-2"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -110,13 +110,13 @@ export default function UpdateJournal({
       <div className="p-8">
         {/* Static info */}
         <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="p-4 bg-black/5 rounded-2xl border border-black/5">
+          <div className="p-4 bg-black/5 rounded border border-black/5">
             <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-1">
               Batch Reference
             </p>
             <p className="font-semibold text-black">{journal.reference}</p>
           </div>
-          <div className="p-4 bg-black/5 rounded-2xl border border-black/5">
+          <div className="p-4 bg-black/5 rounded border border-black/5">
             <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-1">
               Category
             </p>
@@ -137,7 +137,7 @@ export default function UpdateJournal({
               id="date"
               name="date"
               type="date"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.date}
@@ -154,7 +154,7 @@ export default function UpdateJournal({
             <textarea
               id="description"
               name="description"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[120px] rounded-2xl focus:bg-slate-50 transition-all font-semibold p-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[120px] rounded focus:bg-slate-50 transition-all font-semibold p-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.description}
@@ -167,7 +167,7 @@ export default function UpdateJournal({
             </label>
             <select
               name="currency"
-              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm font-semibold focus:ring-corporate-primary/20 appearance-none"
+              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 text-sm font-semibold focus:ring-corporate-primary/20 appearance-none"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.currency}

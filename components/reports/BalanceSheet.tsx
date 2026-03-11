@@ -31,7 +31,7 @@ export function BalanceSheetReport({ data }: { data: BalanceCheckData }) {
                 <div>Credit</div>
                 <div className="text-right">Net</div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-2 font-mono text-sm p-5 sm:p-6 md:p-3 rounded-2xl bg-corporate-secondary/40 border border-corporate-secondary/20">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-2 font-mono text-sm p-5 sm:p-6 md:p-3 rounded bg-corporate-secondary/40 border border-corporate-secondary/20">
                 <div className="flex justify-between md:block">
                     <span className="md:hidden text-corporate-muted font-sans">Debit:</span>
                     {formatNumber(section.debit)}

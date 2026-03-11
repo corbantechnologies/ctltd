@@ -48,7 +48,7 @@ export default function FinanceJournalsPage() {
         </div>
         <button
           onClick={() => setOpenCreateJournal(true)}
-          className="flex items-center justify-center h-12 px-6 bg-[#045138] hover:bg-black text-white rounded-2xl font-semibold text-sm uppercase tracking-wider transition-all shadow-lg active:scale-95 gap-2"
+          className="flex items-center justify-center h-12 px-6 bg-[#045138] hover:bg-black text-white rounded font-semibold text-sm uppercase tracking-wider transition-all shadow-lg active:scale-95 gap-2"
         >
           <Plus className="w-4 h-4" />
           New Journal Batch

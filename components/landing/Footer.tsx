@@ -32,14 +32,14 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <a
               href="https://x.com/corbantechltd"
-              className="p-2.5 rounded-full bg-slate-50 border border-slate-200 text-slate-600 hover:bg-corporate-primary hover:text-white transition-colors"
+              className="p-2.5 rounded bg-slate-50 border border-slate-200 text-slate-600 hover:bg-corporate-primary hover:text-white transition-colors"
             >
               <Twitter className="w-4 h-4" />
             </a>
 
             <a
               href="https://github.com/corbantechnologies"
-              className="p-2.5 rounded-full bg-slate-50 border border-slate-200 text-slate-600 hover:bg-corporate-primary hover:text-white transition-colors"
+              className="p-2.5 rounded bg-slate-50 border border-slate-200 text-slate-600 hover:bg-corporate-primary hover:text-white transition-colors"
             >
               <Github className="w-4 h-4" />
             </a>

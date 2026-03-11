@@ -121,12 +121,12 @@ export default function JournalsDetailPage() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => router.back()}
-              className="flex items-center justify-center w-10 h-10 rounded-full border border-black/5 bg-white shadow-sm hover:bg-black/5 transition-colors"
+              className="flex items-center justify-center w-10 h-10 rounded border border-black/5 bg-white shadow-sm hover:bg-black/5 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
             <span
-              className={`px-4 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-widest border-none ${journal.is_posted
+              className={`px-4 py-1.5 rounded text-[10px] font-semibold uppercase tracking-widest border-none ${journal.is_posted
                 ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
                 : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
                 }`}
@@ -147,7 +147,7 @@ export default function JournalsDetailPage() {
               {journal.description || "Untitled Journal Batch"}
             </h1>
             <div className="flex flex-wrap gap-4 text-sm font-semibold text-black/40">
-              <span className="flex items-center gap-2 bg-white/50 px-3 py-1 rounded-lg border border-black/5">
+              <span className="flex items-center gap-2 bg-white/50 px-3 py-1 rounded border border-black/5">
                 <Calendar className="w-4 h-4" />
                 {new Date(journal.date).toLocaleDateString(undefined, {
                   weekday: "long",
@@ -156,7 +156,7 @@ export default function JournalsDetailPage() {
                   day: "numeric",
                 })}
               </span>
-              <span className="bg-[#045138]/10 text-[#045138] px-3 py-1 rounded-lg">
+              <span className="bg-[#045138]/10 text-[#045138] px-3 py-1 rounded">
                 {journal.journal_type}
               </span>
             </div>
@@ -166,7 +166,7 @@ export default function JournalsDetailPage() {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
           <button
-            className="flex items-center justify-center px-4 h-12 border border-black/5 bg-white hover:bg-black/5 font-semibold uppercase text-xs tracking-widest rounded-xl transition-colors"
+            className="flex items-center justify-center px-4 h-12 border border-black/5 bg-white hover:bg-black/5 font-semibold uppercase text-xs tracking-widest rounded transition-colors"
             onClick={() => setOpenUpdateJournal(true)}
           >
             <Edit2 className="w-4 h-4 mr-2" />
@@ -177,7 +177,7 @@ export default function JournalsDetailPage() {
             <>
               <button
                 onClick={() => setOpenAddEntry(true)}
-                className="flex items-center justify-center px-4 h-12 bg-[#D0402B] border border-black/5 text-white hover:bg-[#D0402B]/90 font-semibold uppercase text-xs tracking-widest rounded-xl shadow-sm transition-colors"
+                className="flex items-center justify-center px-4 h-12 bg-[#D0402B] border border-black/5 text-white hover:bg-[#D0402B]/90 font-semibold uppercase text-xs tracking-widest rounded shadow-sm transition-colors"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Entry
@@ -186,7 +186,7 @@ export default function JournalsDetailPage() {
               <button
                 onClick={handlePostJournal}
                 disabled={isPosting || !isBalanced}
-                className={`flex items-center justify-center px-4 h-12 font-semibold uppercase text-xs tracking-widest rounded-xl shadow-lg transition-all ${!isBalanced
+                className={`flex items-center justify-center px-4 h-12 font-semibold uppercase text-xs tracking-widest rounded shadow-lg transition-all ${!isBalanced
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                   : "bg-[#045138] hover:bg-black text-white"
                   }`}
@@ -207,7 +207,7 @@ export default function JournalsDetailPage() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded shadow-sm">
           <div className="p-6">
             <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-2">
               Total Debit
@@ -226,7 +226,7 @@ export default function JournalsDetailPage() {
             </p>
           </div>
         </div>
-        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded shadow-sm">
           <div className="p-6">
             <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-2">
               Total Credit
@@ -246,7 +246,7 @@ export default function JournalsDetailPage() {
           </div>
         </div>
         <div
-          className={`border border-black/5 backdrop-blur-xl rounded-2xl shadow-sm transition-colors ${isBalanced
+          className={`border border-black/5 backdrop-blur-xl rounded shadow-sm transition-colors ${isBalanced
             ? "bg-[#045138]/5 border-[#045138]/20"
             : "bg-red-500/5 border-red-500/20"
             }`}
@@ -263,7 +263,7 @@ export default function JournalsDetailPage() {
                 {isBalanced ? "Balanced" : "Unbalanced"}
               </p>
               {!isBalanced && (
-                <span className="px-3 py-1 bg-red-500 text-white font-semibold text-xs rounded-full w-fit">
+                <span className="px-3 py-1 bg-red-500 text-white font-semibold text-xs rounded w-fit">
                   Diff:{" "}
                   {new Intl.NumberFormat("en-KE", {
                     style: "currency",
@@ -277,13 +277,13 @@ export default function JournalsDetailPage() {
       </div>
 
       {/* Entries List */}
-      <div className="border border-gray-200 bg-white rounded-xl shadow-sm pb-12">
+      <div className="border border-gray-200 bg-white rounded shadow-sm pb-12">
         <div className="p-6 border-b border-gray-100 flex justify-between items-center">
           <h3 className="text-lg font-semibold text-gray-900 tracking-tight flex items-center gap-3">
             <Receipt className="w-4 h-4 text-gray-500" />
             Transaction Entries
           </h3>
-          <span className="bg-gray-100 px-3 py-1 rounded-md text-xs font-semibold text-gray-600">
+          <span className="bg-gray-100 px-3 py-1 rounded text-xs font-semibold text-gray-600">
             {journal.journal_entries.length} Entries
           </span>
         </div>

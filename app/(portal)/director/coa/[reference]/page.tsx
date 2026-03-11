@@ -45,7 +45,7 @@ export default function COADetailPage() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-[#D0402B] flex items-center justify-center text-white shadow-lg shadow-[#D0402B]/20">
+            <div className="w-8 h-8 rounded bg-[#D0402B] flex items-center justify-center text-white shadow-lg shadow-[#D0402B]/20">
               <Hash className="w-4 h-4" />
             </div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#D0402B]">
@@ -62,11 +62,11 @@ export default function COADetailPage() {
 
         <div className="flex items-center gap-2">
           {coa?.is_active ? (
-            <span className="bg-green-500/10 text-green-600 border-none font-semibold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl inline-block">
+            <span className="bg-green-500/10 text-green-600 border-none font-semibold text-[10px] uppercase tracking-wider px-4 py-2 rounded inline-block">
               Active Classification
             </span>
           ) : (
-            <span className="bg-black/5 text-black/40 border-none font-semibold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl inline-block">
+            <span className="bg-black/5 text-black/40 border-none font-semibold text-[10px] uppercase tracking-wider px-4 py-2 rounded inline-block">
               Deactivated
             </span>
           )}
@@ -78,7 +78,7 @@ export default function COADetailPage() {
         <div className="border border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
           <div className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#D0402B]/5 flex items-center justify-center text-[#D0402B]">
+              <div className="w-12 h-12 rounded bg-[#D0402B]/5 flex items-center justify-center text-[#D0402B]">
                 <ArrowUpDown className="w-5 h-5" />
               </div>
               <div>
@@ -93,10 +93,10 @@ export default function COADetailPage() {
           </div>
         </div>
 
-        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded overflow-hidden shadow-sm">
           <div className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-600">
+              <div className="w-12 h-12 rounded bg-green-500/10 flex items-center justify-center text-green-600">
                 <Wallet className="w-5 h-5" />
               </div>
               <div>
@@ -118,7 +118,7 @@ export default function COADetailPage() {
       <div className="pt-12 border-t border-black/5">
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+            <div className="w-10 h-10 rounded bg-black/5 flex items-center justify-center text-black/40">
               <BookIcon className="w-5 h-5" />
             </div>
             <div>

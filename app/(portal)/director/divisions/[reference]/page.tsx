@@ -71,7 +71,7 @@ export default function DivisionDetail() {
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8">
         <div className="flex-1">
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 rounded-xl bg-corporate-primary flex items-center justify-center text-white shadow-xl shadow-corporate-primary/20">
+            <div className="w-10 h-10 rounded bg-corporate-primary flex items-center justify-center text-white shadow-xl shadow-corporate-primary/20">
               <Building2 className="w-5 h-5" />
             </div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-corporate-primary">
@@ -87,15 +87,15 @@ export default function DivisionDetail() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3 bg-white p-2 rounded-2xl border border-slate-100 shadow-xl shadow-slate-100/50">
+        <div className="flex items-center gap-3 bg-white p-2 rounded border border-slate-100 shadow-xl shadow-slate-100/50">
           {division?.is_active ? (
-            <div className="flex items-center gap-2 px-5 py-3 bg-emerald-50 text-emerald-600 rounded-xl border border-emerald-100">
-              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <div className="flex items-center gap-2 px-5 py-3 bg-emerald-50 text-emerald-600 rounded border border-emerald-100">
+              <div className="w-2 h-2 rounded bg-emerald-500 animate-pulse" />
               <span className="text-[10px] font-semibold uppercase tracking-widest">Active Operational Status</span>
             </div>
           ) : (
-            <div className="flex items-center gap-2 px-5 py-3 bg-slate-100 text-slate-400 rounded-xl border border-slate-200">
-              <div className="w-2 h-2 rounded-full bg-slate-300" />
+            <div className="flex items-center gap-2 px-5 py-3 bg-slate-100 text-slate-400 rounded border border-slate-200">
+              <div className="w-2 h-2 rounded bg-slate-300" />
               <span className="text-[10px] font-semibold uppercase tracking-widest">Unit Offline</span>
             </div>
           )}
@@ -103,16 +103,16 @@ export default function DivisionDetail() {
       </div>
 
       <Tabs.Root defaultValue="overview" className="space-y-10">
-        <Tabs.List className="inline-flex p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner">
+        <Tabs.List className="inline-flex p-1.5 bg-slate-100 rounded border border-slate-200 shadow-inner">
           <Tabs.Trigger
             value="overview"
-            className="px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="px-8 py-3 rounded text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
             Unit Summary
           </Tabs.Trigger>
           <Tabs.Trigger
             value="financials"
-            className="px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="px-8 py-3 rounded text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
             Financial Audit
           </Tabs.Trigger>
@@ -126,9 +126,9 @@ export default function DivisionDetail() {
                 key={i}
                 className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-2xl shadow-slate-100 relative overflow-hidden group hover:-translate-y-1 transition-all duration-500"
               >
-                <div className={cn("absolute top-0 right-0 w-24 h-24 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-30 group-hover:opacity-60 transition-opacity", stat.bg)} />
+                <div className={cn("absolute top-0 right-0 w-24 h-24 rounded blur-3xl -translate-y-1/2 translate-x-1/2 opacity-30 group-hover:opacity-60 transition-opacity", stat.bg)} />
                 <div className="relative z-10 flex flex-col gap-4">
-                  <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center shadow-inner", stat.bg, stat.color)}>
+                  <div className={cn("w-12 h-12 rounded flex items-center justify-center shadow-inner", stat.bg, stat.color)}>
                     <stat.icon className="w-6 h-6" />
                   </div>
                   <div>
@@ -156,7 +156,7 @@ export default function DivisionDetail() {
                     Stakeholders & Personnel mapped to this unit
                   </p>
                 </div>
-                <div className="px-5 py-2 bg-slate-900 text-white rounded-2xl text-[10px] font-semibold border border-slate-800 uppercase shadow-xl shadow-slate-900/20">
+                <div className="px-5 py-2 bg-slate-900 text-white rounded text-[10px] font-semibold border border-slate-800 uppercase shadow-xl shadow-slate-900/20">
                   {division?.partners?.length || 0} Registered
                 </div>
               </div>
@@ -168,7 +168,7 @@ export default function DivisionDetail() {
                       key={partner.reference}
                       className="group bg-white p-6 rounded-[2.5rem] border border-slate-200 hover:border-corporate-primary/20 hover:shadow-2xl hover:shadow-slate-100 transition-all flex items-center gap-5"
                     >
-                      <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-corporate-primary group-hover:text-white transition-all shadow-inner border border-slate-100">
+                      <div className="w-14 h-14 rounded bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-corporate-primary group-hover:text-white transition-all shadow-inner border border-slate-100">
                         <Users className="w-6 h-6" />
                       </div>
                       <div>
@@ -183,7 +183,7 @@ export default function DivisionDetail() {
                   ))
                 ) : (
                   <div className="col-span-2 py-20 bg-slate-50/50 rounded-[3rem] border border-dashed border-slate-200 flex flex-col items-center justify-center text-center">
-                    <div className="w-16 h-16 rounded-3xl bg-slate-100 flex items-center justify-center text-slate-300 mb-4">
+                    <div className="w-16 h-16 rounded bg-slate-100 flex items-center justify-center text-slate-300 mb-4">
                       <Users className="w-8 h-8" />
                     </div>
                     <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest">No active partnerships detected</p>
@@ -195,7 +195,7 @@ export default function DivisionDetail() {
             {/* Side Info */}
             <div className="space-y-8">
               <div className="bg-slate-900 p-10 rounded-[3rem] text-white border border-slate-800 shadow-2xl relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-corporate-primary/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute top-0 right-0 w-64 h-64 bg-corporate-primary/10 rounded blur-[100px] -translate-y-1/2 translate-x-1/2" />
                 <div className="relative z-10 space-y-6">
                   <div className="flex items-center gap-3">
                     <Activity className="w-5 h-5 text-corporate-primary" />
@@ -232,7 +232,7 @@ export default function DivisionDetail() {
                   Immutable Mission Ledger Logs
                 </p>
               </div>
-              <div className="px-5 py-2.5 bg-white text-slate-900 rounded-2xl text-[10px] font-semibold border border-slate-200 uppercase shadow-sm">
+              <div className="px-5 py-2.5 bg-white text-slate-900 rounded text-[10px] font-semibold border border-slate-200 uppercase shadow-sm">
                 {division?.journal_entries?.length || 0} Transactions Found
               </div>
             </div>
@@ -263,7 +263,7 @@ export default function DivisionDetail() {
                         </td>
                         <td className="py-8 px-10">
                           <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center text-corporate-primary">
+                            <div className="w-8 h-8 rounded bg-orange-50 flex items-center justify-center text-corporate-primary">
                               <Receipt className="w-4 h-4" />
                             </div>
                             <p className="text-sm font-semibold text-slate-900 tracking-tight">
@@ -272,7 +272,7 @@ export default function DivisionDetail() {
                           </div>
                         </td>
                         <td className="py-8 px-10">
-                          <span className="px-3 py-1 bg-slate-900 text-[9px] font-semibold text-white rounded-lg uppercase tracking-widest">
+                          <span className="px-3 py-1 bg-slate-900 text-[9px] font-semibold text-white rounded uppercase tracking-widest">
                             {entry.journal}
                           </span>
                         </td>
@@ -288,7 +288,7 @@ export default function DivisionDetail() {
                         </td>
                         <td className="py-8 px-10">
                           <div className="flex justify-center">
-                            <button className="w-10 h-10 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center hover:bg-corporate-primary hover:text-white transition-all shadow-sm hover:shadow-lg hover:shadow-corporate-primary/20">
+                            <button className="w-10 h-10 rounded bg-slate-100 text-slate-400 flex items-center justify-center hover:bg-corporate-primary hover:text-white transition-all shadow-sm hover:shadow-lg hover:shadow-corporate-primary/20">
                               <ArrowUpRight className="w-4 h-4" />
                             </button>
                           </div>

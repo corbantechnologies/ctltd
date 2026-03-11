@@ -58,7 +58,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
   if (!divisions || divisions.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center p-16 bg-slate-50 rounded-[3rem] border-2 border-dashed border-slate-200">
-        <div className="w-20 h-20 rounded-3xl bg-white flex items-center justify-center text-slate-200 mb-6 shadow-xl border border-slate-100">
+        <div className="w-20 h-20 rounded bg-white flex items-center justify-center text-slate-200 mb-6 shadow-xl border border-slate-100">
           <Database className="w-10 h-10" />
         </div>
         <h4 className="text-xl font-semibold text-slate-900 tracking-tight">System Base Empty</h4>
@@ -89,11 +89,11 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
           />
         </div>
 
-        <div className="flex items-center gap-2 p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner overflow-hidden">
+        <div className="flex items-center gap-2 p-1.5 bg-slate-100 rounded border border-slate-200 shadow-inner overflow-hidden">
           <button
             onClick={() => setView("grid")}
             className={cn(
-              "flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all",
+              "flex items-center gap-2 px-6 py-3 rounded text-[10px] font-semibold uppercase tracking-widest transition-all",
               view === "grid"
                 ? "bg-white text-slate-900 shadow-md border border-slate-100"
                 : "text-slate-400 hover:text-slate-600"
@@ -105,7 +105,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
           <button
             onClick={() => setView("table")}
             className={cn(
-              "flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all",
+              "flex items-center gap-2 px-6 py-3 rounded text-[10px] font-semibold uppercase tracking-widest transition-all",
               view === "table"
                 ? "bg-white text-slate-900 shadow-md border border-slate-100"
                 : "text-slate-400 hover:text-slate-600"
@@ -135,15 +135,15 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                 className="group block"
               >
                 <div className="bg-white border border-slate-200 shadow-2xl shadow-slate-100 rounded-[2.5rem] p-8 hover:-translate-y-2 transition-all duration-500 relative overflow-hidden group-hover:shadow-corporate-primary/10">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-corporate-primary/5 transition-colors" />
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-corporate-primary/5 transition-colors" />
 
                   <div className="flex justify-between items-start mb-8 relative z-10">
-                    <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 border border-slate-100 shadow-inner bg-slate-50 group-hover:bg-slate-900 group-hover:text-white group-hover:scale-110 group-hover:shadow-lg",)}>
+                    <div className={cn("w-14 h-14 rounded flex items-center justify-center transition-all duration-500 border border-slate-100 shadow-inner bg-slate-50 group-hover:bg-slate-900 group-hover:text-white group-hover:scale-110 group-hover:shadow-lg",)}>
                       <Layers className="w-6 h-6" />
                     </div>
-                    <div className={cn("px-4 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-widest flex items-center gap-2 shadow-sm border",
+                    <div className={cn("px-4 py-1.5 rounded text-[10px] font-semibold uppercase tracking-widest flex items-center gap-2 shadow-sm border",
                       division.is_active ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-slate-50 text-slate-400 border-slate-100")}>
-                      <div className={cn("w-2 h-2 rounded-full", division.is_active ? "bg-emerald-500 animate-pulse" : "bg-slate-300")} />
+                      <div className={cn("w-2 h-2 rounded", division.is_active ? "bg-emerald-500 animate-pulse" : "bg-slate-300")} />
                       {division.is_active ? "Active" : "Legacy"}
                     </div>
                   </div>
@@ -154,7 +154,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                     </h3>
                     <div className="flex items-center gap-2 mt-2">
                       <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-[0.2em]">REF:</span>
-                      <span className="text-[10px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-lg border border-slate-200">{division.reference}</span>
+                      <span className="text-[10px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">{division.reference}</span>
                     </div>
                   </div>
 
@@ -162,7 +162,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                     <span className={cn("text-[10px] font-semibold uppercase tracking-widest", primaryColorClass)}>
                       Manage Unit
                     </span>
-                    <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-slate-900 group-hover:text-white group-hover:rotate-45 transition-all">
+                    <div className="w-10 h-10 rounded bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-slate-900 group-hover:text-white group-hover:rotate-45 transition-all">
                       <ArrowRight className="w-5 h-5" />
                     </div>
                   </div>
@@ -198,7 +198,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                     >
                       <td className="py-6 px-8">
                         <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 group-hover/row:bg-slate-900 group-hover/row:text-white transition-all shadow-inner border border-transparent group-hover/row:border-slate-800">
+                          <div className="w-12 h-12 rounded bg-slate-100 flex items-center justify-center text-slate-400 group-hover/row:bg-slate-900 group-hover/row:text-white transition-all shadow-inner border border-transparent group-hover/row:border-slate-800">
                             <Database className="w-5 h-5" />
                           </div>
                           <div className="flex flex-col">
@@ -208,21 +208,21 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                         </div>
                       </td>
                       <td className="py-6 px-8">
-                        <span className="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1 rounded-xl border border-slate-200 shadow-sm">
+                        <span className="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1 rounded border border-slate-200 shadow-sm">
                           {division.reference}
                         </span>
                       </td>
                       <td className="py-6 px-8">
-                        <div className={cn("inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-widest border",
+                        <div className={cn("inline-flex items-center gap-2 px-3 py-1 rounded text-[10px] font-semibold uppercase tracking-widest border",
                           division.is_active ? "bg-emerald-50 text-emerald-600 border-emerald-100 shadow-sm shadow-emerald-500/5" : "bg-slate-50 text-slate-400 border-slate-100")}>
-                          <div className={cn("w-1.5 h-1.5 rounded-full", division.is_active ? "bg-emerald-500 animate-pulse" : "bg-slate-300")} />
+                          <div className={cn("w-1.5 h-1.5 rounded", division.is_active ? "bg-emerald-500 animate-pulse" : "bg-slate-300")} />
                           {division.is_active ? "Operational" : "Deactivated"}
                         </div>
                       </td>
                       <td className="py-6 px-8 text-right">
                         <Link
                           href={`/${rolePrefix}/divisions/${division.reference}`}
-                          className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 hover:bg-slate-900 hover:text-white transition-all border border-transparent hover:border-slate-800 hover:shadow-xl hover:rotate-12 group/btn"
+                          className="inline-flex items-center justify-center w-12 h-12 rounded bg-slate-100 text-slate-400 hover:bg-slate-900 hover:text-white transition-all border border-transparent hover:border-slate-800 hover:shadow-xl hover:rotate-12 group/btn"
                         >
                           <ArrowRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-1" />
                         </Link>
@@ -247,12 +247,12 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
             <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-slate-200 text-slate-400 hover:bg-slate-900 hover:text-white hover:border-slate-900 disabled:opacity-20 transition-all shadow-sm"
+              className="w-12 h-12 flex items-center justify-center rounded bg-white border border-slate-200 text-slate-400 hover:bg-slate-900 hover:text-white hover:border-slate-900 disabled:opacity-20 transition-all shadow-sm"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
 
-            <div className="flex items-center bg-slate-100 p-1 rounded-2xl border border-slate-200">
+            <div className="flex items-center bg-slate-100 p-1 rounded border border-slate-200">
               {[...Array(totalPages)].map((_, i) => {
                 const page = i + 1;
                 const isSelected = currentPage === page;
@@ -261,7 +261,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                     key={page}
                     onClick={() => setCurrentPage(page)}
                     className={cn(
-                      "w-10 h-10 rounded-xl text-[10px] font-semibold transition-all",
+                      "w-10 h-10 rounded text-[10px] font-semibold transition-all",
                       isSelected
                         ? "bg-slate-900 text-white shadow-lg"
                         : "text-slate-400 hover:text-slate-900"
@@ -276,7 +276,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
             <button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-slate-200 text-slate-400 hover:bg-slate-900 hover:text-white hover:border-slate-900 disabled:opacity-20 transition-all shadow-sm"
+              className="w-12 h-12 flex items-center justify-center rounded bg-white border border-slate-200 text-slate-400 hover:bg-slate-900 hover:text-white hover:border-slate-900 disabled:opacity-20 transition-all shadow-sm"
             >
               <ChevronRight className="w-5 h-5" />
             </button>

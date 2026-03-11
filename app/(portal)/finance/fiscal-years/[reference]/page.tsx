@@ -80,7 +80,7 @@ export default function FiscalYearDetail() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#045138] flex items-center justify-center text-white shadow-md shadow-[#045138]/20">
+            <div className="w-8 h-8 rounded bg-[#045138] flex items-center justify-center text-white shadow-md shadow-[#045138]/20">
               <CalendarRange className="w-4 h-4" />
             </div>
             <div>
@@ -92,15 +92,15 @@ export default function FiscalYearDetail() {
                   {fiscalYear.estimated_profit}
                 </span>
                 {fiscalYear.is_active ? (
-                  <div className="flex items-center gap-1.5 text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                  <div className="flex items-center gap-1.5 text-green-600 bg-green-50 px-2 py-0.5 rounded border border-green-100">
+                    <div className="w-1.5 h-1.5 rounded bg-green-500 animate-pulse" />
                     <span className="text-[9px] font-semibold uppercase tracking-widest">
                       Active
                     </span>
                   </div>
                 ) : (
-                  <div className="flex items-center gap-1.5 text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full border border-gray-100">
-                    <div className="w-1.5 h-1.5 rounded-full bg-gray-300" />
+                  <div className="flex items-center gap-1.5 text-gray-400 bg-gray-50 px-2 py-0.5 rounded border border-gray-100">
+                    <div className="w-1.5 h-1.5 rounded bg-gray-300" />
                     <span className="text-[9px] font-semibold uppercase tracking-widest">
                       Closed
                     </span>
@@ -117,7 +117,7 @@ export default function FiscalYearDetail() {
             <DropdownMenu.Root>
               <DropdownMenu.Trigger asChild>
                 <button
-                  className="flex items-center justify-center h-9 px-4 bg-[#045138] hover:bg-black text-white rounded-xl text-[10px] uppercase font-semibold tracking-wider transition-all shadow-md active:scale-95 gap-2"
+                  className="flex items-center justify-center h-9 px-4 bg-[#045138] hover:bg-black text-white rounded text-[10px] uppercase font-semibold tracking-wider transition-all shadow-md active:scale-95 gap-2"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   Add New
@@ -125,14 +125,14 @@ export default function FiscalYearDetail() {
                 </button>
               </DropdownMenu.Trigger>
               <DropdownMenu.Portal>
-                <DropdownMenu.Content align="end" className="z-50 w-64 rounded-xl p-2 bg-white shadow-xl border border-black/5 animate-in fade-in zoom-in-95">
+                <DropdownMenu.Content align="end" className="z-50 w-64 rounded p-2 bg-white shadow-xl border border-black/5 animate-in fade-in zoom-in-95">
                   <div className="text-xs uppercase tracking-widest text-black/40 font-semibold px-2 py-1.5">
                     Transactions
                   </div>
 
                   <DropdownMenu.Sub>
-                    <DropdownMenu.SubTrigger className="flex items-center outline-none rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer">
-                      <div className="w-7 h-7 rounded-md bg-[#045138]/10 text-[#045138] flex items-center justify-center mr-3">
+                    <DropdownMenu.SubTrigger className="flex items-center outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer">
+                      <div className="w-7 h-7 rounded bg-[#045138]/10 text-[#045138] flex items-center justify-center mr-3">
                         <Plus className="w-4 h-4" />
                       </div>
                       <div className="flex flex-col text-left flex-1">
@@ -142,14 +142,14 @@ export default function FiscalYearDetail() {
                       <ChevronDown className="w-3 h-3 opacity-50 ml-1 -rotate-90" />
                     </DropdownMenu.SubTrigger>
                     <DropdownMenu.Portal>
-                      <DropdownMenu.SubContent className="z-50 w-56 p-2 bg-white border border-black/5 rounded-xl shadow-xl ml-2 animate-in fade-in slide-in-from-left-2">
+                      <DropdownMenu.SubContent className="z-50 w-56 p-2 bg-white border border-black/5 rounded shadow-xl ml-2 animate-in fade-in slide-in-from-left-2">
                         <div className="text-[10px] uppercase tracking-widest text-black/40 font-semibold px-2 py-1.5">
                           Select Journal Type
                         </div>
                         <div className="max-h-64 overflow-y-auto">
                           <DropdownMenu.Item
                             onClick={() => handleCreateJournal()}
-                            className="outline-none rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
+                            className="outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
                           >
                             <span className="font-semibold text-xs text-black/60">General (No Type)</span>
                           </DropdownMenu.Item>
@@ -157,7 +157,7 @@ export default function FiscalYearDetail() {
                             <DropdownMenu.Item
                               key={type.reference}
                               onClick={() => handleCreateJournal(type.name)}
-                              className="outline-none rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer flex items-center justify-between"
+                              className="outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer flex items-center justify-between"
                             >
                               <span className="font-semibold text-xs">{type.name}</span>
                             </DropdownMenu.Item>
@@ -174,9 +174,9 @@ export default function FiscalYearDetail() {
                   </div>
                   <DropdownMenu.Item
                     onClick={() => setOpenPartner(true)}
-                    className="flex items-center outline-none rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
+                    className="flex items-center outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
                   >
-                    <div className="w-7 h-7 rounded-md bg-orange-50 text-orange-600 flex items-center justify-center mr-3">
+                    <div className="w-7 h-7 rounded bg-orange-50 text-orange-600 flex items-center justify-center mr-3">
                       <UserPlus className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
@@ -187,9 +187,9 @@ export default function FiscalYearDetail() {
 
                   <DropdownMenu.Item
                     onClick={() => setOpenPartnerType(true)}
-                    className="flex items-center outline-none rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
+                    className="flex items-center outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
                   >
-                    <div className="w-7 h-7 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center mr-3">
+                    <div className="w-7 h-7 rounded bg-blue-50 text-blue-600 flex items-center justify-center mr-3">
                       <Settings2 className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
@@ -200,9 +200,9 @@ export default function FiscalYearDetail() {
 
                   <DropdownMenu.Item
                     onClick={() => setOpenJournalType(true)}
-                    className="flex items-center outline-none rounded-lg p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
+                    className="flex items-center outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
                   >
-                    <div className="w-7 h-7 rounded-md bg-purple-50 text-purple-600 flex items-center justify-center mr-3">
+                    <div className="w-7 h-7 rounded bg-purple-50 text-purple-600 flex items-center justify-center mr-3">
                       <BookPlus className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col">
@@ -217,7 +217,7 @@ export default function FiscalYearDetail() {
             {/* Centered Modals for ALL Create Actions */}
             {openPartnerType && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-                <div className="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 animate-in zoom-in-95">
+                <div className="bg-white rounded shadow-xl w-full max-w-lg p-6 animate-in zoom-in-95">
                   <CreatePartnerType
                     onSuccess={() => setOpenPartnerType(false)}
                     rolePrefix="finance"
@@ -229,7 +229,7 @@ export default function FiscalYearDetail() {
 
             {openPartner && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-                <div className="bg-white rounded-xl shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 animate-in zoom-in-95">
+                <div className="bg-white rounded shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 animate-in zoom-in-95">
                   <CreatePartner
                     onSuccess={() => setOpenPartner(false)}
                     rolePrefix="finance"
@@ -241,7 +241,7 @@ export default function FiscalYearDetail() {
 
             {openJournalType && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-                <div className="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 animate-in zoom-in-95">
+                <div className="bg-white rounded shadow-xl w-full max-w-lg p-6 animate-in zoom-in-95">
                   <CreateJournalType
                     onSuccess={() => setOpenJournalType(false)}
                     rolePrefix="finance"
@@ -253,7 +253,7 @@ export default function FiscalYearDetail() {
 
             {openCreateJournal && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-                <div className="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 animate-in zoom-in-95">
+                <div className="bg-white rounded shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 animate-in zoom-in-95">
                   <CreateJournal
                     refetch={refetchFiscalYear}
                     fiscalYear={fiscalYear?.code}
@@ -304,10 +304,10 @@ export default function FiscalYearDetail() {
         ].map((stat, i) => (
           <div
             key={i}
-            className="bg-white px-4 py-3 rounded-xl border border-gray-100 shadow-sm flex items-center gap-3"
+            className="bg-white px-4 py-3 rounded border border-gray-100 shadow-sm flex items-center gap-3"
           >
             <div
-              className={`w-8 h-8 rounded-lg ${stat.bg} ${stat.color} flex items-center justify-center`}
+              className={`w-8 h-8 rounded ${stat.bg} ${stat.color} flex items-center justify-center`}
             >
               <stat.icon className="w-4 h-4" />
             </div>

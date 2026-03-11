@@ -71,18 +71,18 @@ export default function JournalEntryDetailModal({
       ></div>
 
       {/* Modal Content */}
-      <div className="relative w-full max-w-5xl max-h-[90vh] bg-white rounded-2xl shadow-2xl flex flex-col animate-in fade-in zoom-in-95 duration-200">
+      <div className="relative w-full max-w-5xl max-h-[90vh] bg-white rounded shadow-2xl flex flex-col animate-in fade-in zoom-in-95 duration-200">
         {/* Header */}
         <div className="flex-none p-5 sm:p-8 border-b border-gray-100 bg-white rounded-t-2xl z-10 flex justify-between items-start">
           <div className="space-y-1.5 sm:space-y-2 pr-4">
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <span
-                className="bg-gray-50 text-gray-600 border border-gray-200 px-2.5 py-0.5 text-[10px] sm:text-xs font-medium rounded-full inline-block"
+                className="bg-gray-50 text-gray-600 border border-gray-200 px-2.5 py-0.5 text-[10px] sm:text-xs font-medium rounded inline-block"
               >
                 {entry.code}
               </span>
               <span
-                className="bg-blue-50 text-blue-600 border border-blue-200 px-2.5 py-0.5 text-[10px] sm:text-xs font-medium rounded-full inline-block"
+                className="bg-blue-50 text-blue-600 border border-blue-200 px-2.5 py-0.5 text-[10px] sm:text-xs font-medium rounded inline-block"
               >
                 {entry.journal}
               </span>
@@ -103,7 +103,7 @@ export default function JournalEntryDetailModal({
           </div>
           <button
             onClick={onClose}
-            className="rounded-full hover:bg-gray-100 -mr-2 -mt-2 w-8 h-8 sm:w-10 sm:h-10 text-gray-500 hover:text-gray-900 flex-shrink-0 flex items-center justify-center transition-colors"
+            className="rounded hover:bg-gray-100 -mr-2 -mt-2 w-8 h-8 sm:w-10 sm:h-10 text-gray-500 hover:text-gray-900 flex-shrink-0 flex items-center justify-center transition-colors"
           >
             <X className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
@@ -114,7 +114,7 @@ export default function JournalEntryDetailModal({
           {/* Financials Section */}
           <section className="space-y-4 sm:space-y-5">
             <h4 className="text-sm sm:text-base font-semibold text-gray-900 flex items-center gap-2.5">
-              <div className="p-1.5 sm:p-2 bg-green-100/50 rounded-lg">
+              <div className="p-1.5 sm:p-2 bg-green-100/50 rounded">
                 <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 text-green-700" />
               </div>
               Financials
@@ -122,11 +122,11 @@ export default function JournalEntryDetailModal({
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6">
               {/* Debit Card */}
               <div
-                className={`p-5 sm:p-6 rounded-2xl border transition-all ${parseFloat(entry.debit) > 0 ? "bg-green-50/50 border-green-200 shadow-sm" : "bg-gray-50 border-gray-100 opacity-60"}`}
+                className={`p-5 sm:p-6 rounded border transition-all ${parseFloat(entry.debit) > 0 ? "bg-green-50/50 border-green-200 shadow-sm" : "bg-gray-50 border-gray-100 opacity-60"}`}
               >
                 <div className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest text-gray-500 mb-2 sm:mb-3 flex items-center gap-2">
                   <div
-                    className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${parseFloat(entry.debit) > 0 ? "bg-green-500" : "bg-gray-300"}`}
+                    className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded ${parseFloat(entry.debit) > 0 ? "bg-green-500" : "bg-gray-300"}`}
                   />
                   Debit
                 </div>
@@ -139,11 +139,11 @@ export default function JournalEntryDetailModal({
 
               {/* Credit Card */}
               <div
-                className={`p-5 sm:p-6 rounded-2xl border transition-all ${parseFloat(entry.credit) > 0 ? "bg-orange-50/50 border-orange-200 shadow-sm" : "bg-gray-50 border-gray-100 opacity-60"}`}
+                className={`p-5 sm:p-6 rounded border transition-all ${parseFloat(entry.credit) > 0 ? "bg-orange-50/50 border-orange-200 shadow-sm" : "bg-gray-50 border-gray-100 opacity-60"}`}
               >
                 <div className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest text-gray-500 mb-2 sm:mb-3 flex items-center gap-2">
                   <div
-                    className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${parseFloat(entry.credit) > 0 ? "bg-orange-500" : "bg-gray-300"}`}
+                    className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded ${parseFloat(entry.credit) > 0 ? "bg-orange-500" : "bg-gray-300"}`}
                   />
                   Credit
                 </div>
@@ -156,7 +156,7 @@ export default function JournalEntryDetailModal({
 
               {/* Meta Data */}
               <div className="md:col-span-2 grid grid-cols-2 gap-3 sm:gap-4">
-                <div className="p-4 sm:p-5 rounded-xl border border-gray-200/60 bg-white shadow-sm flex flex-col justify-center">
+                <div className="p-4 sm:p-5 rounded border border-gray-200/60 bg-white shadow-sm flex flex-col justify-center">
                   <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 block mb-1">
                     Currency
                   </span>
@@ -164,7 +164,7 @@ export default function JournalEntryDetailModal({
                     {entry.currency}
                   </span>
                 </div>
-                <div className="p-4 sm:p-5 rounded-xl border border-gray-200/60 bg-white shadow-sm flex flex-col justify-center">
+                <div className="p-4 sm:p-5 rounded border border-gray-200/60 bg-white shadow-sm flex flex-col justify-center">
                   <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 block mb-1">
                     Exchange Rate
                   </span>
@@ -176,7 +176,7 @@ export default function JournalEntryDetailModal({
             </div>
             {(parseFloat(entry.foreign_debit) > 0 ||
               parseFloat(entry.foreign_credit) > 0) && (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 p-4 sm:p-5 bg-blue-50/30 rounded-xl border border-blue-100/50">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 p-4 sm:p-5 bg-blue-50/30 rounded border border-blue-100/50">
                   <DetailItem
                     icon={Globe}
                     label="Foreign Debit"
@@ -196,12 +196,12 @@ export default function JournalEntryDetailModal({
           {/* Entity & Classification */}
           <section className="space-y-4 sm:space-y-5">
             <h4 className="text-sm sm:text-base font-semibold text-gray-900 flex items-center gap-2.5">
-              <div className="p-1.5 sm:p-2 bg-blue-100/50 rounded-lg">
+              <div className="p-1.5 sm:p-2 bg-blue-100/50 rounded">
                 <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-blue-700" />
               </div>
               Entity & Classification
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 sm:gap-y-8 gap-x-12 p-5 sm:p-8 bg-gray-50 rounded-2xl border border-gray-100">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 sm:gap-y-8 gap-x-12 p-5 sm:p-8 bg-gray-50 rounded border border-gray-100">
               <DetailItem
                 icon={Book}
                 label="Account Book"
@@ -232,7 +232,7 @@ export default function JournalEntryDetailModal({
           {/* Documentation */}
           <section className="space-y-4 sm:space-y-5">
             <h4 className="text-sm sm:text-base font-semibold text-gray-900 flex items-center gap-2.5">
-              <div className="p-1.5 sm:p-2 bg-orange-100/50 rounded-lg">
+              <div className="p-1.5 sm:p-2 bg-orange-100/50 rounded">
                 <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-orange-700" />
               </div>
               Documentation
@@ -258,7 +258,7 @@ export default function JournalEntryDetailModal({
                     href={entry.document_file}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2.5 text-xs sm:text-sm font-medium text-blue-700 hover:text-blue-800 bg-blue-50 border border-blue-100 hover:bg-blue-100 hover:border-blue-200 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl transition-all group w-full sm:w-auto justify-center"
+                    className="inline-flex items-center gap-2.5 text-xs sm:text-sm font-medium text-blue-700 hover:text-blue-800 bg-blue-50 border border-blue-100 hover:bg-blue-100 hover:border-blue-200 px-4 sm:px-5 py-2.5 sm:py-3 rounded transition-all group w-full sm:w-auto justify-center"
                   >
                     <FileText className="w-4 h-4 group-hover:scale-110 transition-transform" />
                     View Attached Document
@@ -275,12 +275,12 @@ export default function JournalEntryDetailModal({
               {/* Notes */}
               <section className="space-y-3">
                 <h4 className="text-sm sm:text-base font-semibold text-gray-900 flex items-center gap-2.5">
-                  <div className="p-1.5 sm:p-2 bg-gray-100/50 rounded-lg">
+                  <div className="p-1.5 sm:p-2 bg-gray-100/50 rounded">
                     <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
                   </div>
                   Notes / Description
                 </h4>
-                <div className="p-5 sm:p-6 bg-gray-50 rounded-2xl text-sm text-gray-700 leading-relaxed border border-gray-100 italic">
+                <div className="p-5 sm:p-6 bg-gray-50 rounded text-sm text-gray-700 leading-relaxed border border-gray-100 italic">
                   "{entry.notes}"
                 </div>
               </section>
@@ -292,7 +292,7 @@ export default function JournalEntryDetailModal({
         <div className="flex-none p-5 sm:p-8 bg-gray-50 border-t border-gray-100 flex justify-end rounded-b-2xl">
           <button
             onClick={onClose}
-            className="font-semibold border border-gray-200 hover:bg-white hover:text-black min-w-[100px] sm:min-w-[120px] h-10 sm:h-11 text-sm sm:text-base rounded-md flex items-center justify-center transition-colors"
+            className="font-semibold border border-gray-200 hover:bg-white hover:text-black min-w-[100px] sm:min-w-[120px] h-10 sm:h-11 text-sm sm:text-base rounded flex items-center justify-center transition-colors"
           >
             Close
           </button>

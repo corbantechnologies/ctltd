@@ -106,7 +106,7 @@ export default function UpdatePartner({
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-4">
             <div
-              className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
+              className="w-12 h-12 rounded flex items-center justify-center text-white shadow-lg"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
@@ -128,7 +128,7 @@ export default function UpdatePartner({
               type="button"
               onClick={onClose}
 
-              className="hover:bg-red-50 hover:text-red-500 rounded-full p-2"
+              className="hover:bg-red-50 hover:text-red-500 rounded p-2"
             >
               <X className="w-5 h-5" />
             </button>
@@ -149,7 +149,7 @@ export default function UpdatePartner({
               <input
                 id="name"
                 name="name"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
@@ -172,7 +172,7 @@ export default function UpdatePartner({
                 id="email"
                 name="email"
                 type="email"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
@@ -196,7 +196,7 @@ export default function UpdatePartner({
               <input
                 id="phone"
                 name="phone"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
@@ -214,7 +214,7 @@ export default function UpdatePartner({
                 id="partner_type"
                 name="partner_type"
                 disabled={isLoadingTypes}
-                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold focus:ring-corporate-primary/20 transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold focus:ring-corporate-primary/20 transition-all appearance-none"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.partner_type}
@@ -238,7 +238,7 @@ export default function UpdatePartner({
                 id="division"
                 name="division"
                 disabled={isLoadingDivisions}
-                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold focus:ring-corporate-primary/20 transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold focus:ring-corporate-primary/20 transition-all appearance-none"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.division}
@@ -267,7 +267,7 @@ export default function UpdatePartner({
               <input
                 id="tax_pin"
                 name="tax_pin"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.tax_pin}
@@ -284,7 +284,7 @@ export default function UpdatePartner({
               <select
                 id="currency"
                 name="currency"
-                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold focus:ring-corporate-primary/20 transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold focus:ring-corporate-primary/20 transition-all appearance-none"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.currency}
@@ -308,7 +308,7 @@ export default function UpdatePartner({
                 name="wht_rate"
                 type="number"
                 step="0.01"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.wht_rate}
@@ -326,7 +326,7 @@ export default function UpdatePartner({
             <input
               id="payment_terms"
               name="payment_terms"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.payment_terms}
@@ -334,14 +334,14 @@ export default function UpdatePartner({
           </div>
 
           <div
-            className="flex items-center gap-3 p-4 rounded-2xl border border-black/5 transition-colors"
+            className="flex items-center gap-3 p-4 rounded border border-black/5 transition-colors"
             style={{ backgroundColor: `${primaryColor}0D` }}
           >
             <input
               id="is_active"
               name="is_active"
               type="checkbox"
-              className="w-5 h-5 rounded-lg border-black/5 focus:ring-0"
+              className="w-5 h-5 rounded border-black/5 focus:ring-0"
               style={{
                 accentColor: primaryColor,
                 color: primaryColor,

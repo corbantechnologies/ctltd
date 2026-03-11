@@ -53,7 +53,7 @@ export function ClaimOfferModal({
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
         <div className="relative w-full sm:max-w-md rounded-[40px] border-none p-12 text-center space-y-8 animate-in zoom-in-95 duration-300 bg-white" onClick={(e) => e.stopPropagation()}>
-          <div className="w-24 h-24 bg-corporate-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-24 h-24 bg-corporate-primary/10 rounded flex items-center justify-center mx-auto mb-4">
             <CheckCircle2 className="w-12 h-12 text-corporate-primary" />
           </div>
           <div>
@@ -69,7 +69,7 @@ export function ClaimOfferModal({
           </div>
           <button
             onClick={onClose}
-            className="w-full bg-corporate-primary hover:bg-orange-600 text-white rounded-2xl py-8 font-semibold uppercase tracking-widest text-[10px]"
+            className="w-full bg-corporate-primary hover:bg-orange-600 text-white rounded py-8 font-semibold uppercase tracking-widest text-[10px]"
           >
             Close
           </button>
@@ -84,7 +84,7 @@ export function ClaimOfferModal({
         <div className="relative">
           {/* Header Backdrop */}
           <div className="bg-black p-12 text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-corporate-primary/20 rounded-full blur-[60px] translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-corporate-primary/20 rounded blur-[60px] translate-x-1/2 -translate-y-1/2" />
             <Sparkles className="w-12 h-12 text-corporate-primary mb-6 animate-pulse" />
             <h2 className="text-xl font-semibold leading-tight mb-2 tracking-tighter">
               Claim Your Exclusive <br />
@@ -111,7 +111,7 @@ export function ClaimOfferModal({
                   id="userName"
                   required
                   placeholder="e.g. John Doe"
-                  className="w-full rounded-2xl border-black/5 bg-corporate-secondary py-6 px-6 font-semibold focus:ring-corporate-primary/30 focus:outline-none focus:ring-1"
+                  className="w-full rounded border-black/5 bg-corporate-secondary py-6 px-6 font-semibold focus:ring-corporate-primary/30 focus:outline-none focus:ring-1"
                   value={formData.userName}
                   onChange={(e) =>
                     setFormData({ ...formData, userName: e.target.value })
@@ -129,7 +129,7 @@ export function ClaimOfferModal({
                   id="phone"
                   required
                   placeholder="+254..."
-                  className="w-full rounded-2xl border-black/5 bg-corporate-secondary py-6 px-6 font-semibold focus:ring-corporate-primary/30 focus:outline-none focus:ring-1"
+                  className="w-full rounded border-black/5 bg-corporate-secondary py-6 px-6 font-semibold focus:ring-corporate-primary/30 focus:outline-none focus:ring-1"
                   value={formData.phone}
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
@@ -149,7 +149,7 @@ export function ClaimOfferModal({
                 <input
                   id="whatsapp"
                   placeholder="If different from phone"
-                  className="w-full rounded-2xl border-black/5 bg-corporate-secondary py-6 px-6 font-semibold focus:outline-none focus:ring-1"
+                  className="w-full rounded border-black/5 bg-corporate-secondary py-6 px-6 font-semibold focus:outline-none focus:ring-1"
                   value={formData.whatsapp}
                   onChange={(e) =>
                     setFormData({ ...formData, whatsapp: e.target.value })
@@ -167,7 +167,7 @@ export function ClaimOfferModal({
                   id="email"
                   type="email"
                   placeholder="For email confirmation"
-                  className="w-full rounded-2xl border-black/5 bg-corporate-secondary py-6 px-6 font-semibold focus:outline-none focus:ring-1"
+                  className="w-full rounded border-black/5 bg-corporate-secondary py-6 px-6 font-semibold focus:outline-none focus:ring-1"
                   value={formData.email}
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
