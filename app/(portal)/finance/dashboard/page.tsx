@@ -124,22 +124,22 @@ export default function FinanceDashboard() {
       </div>
 
       <Tabs.Root defaultValue="reports" className="space-y-6">
-        <Tabs.List className="flex w-full overflow-x-auto md:inline-flex md:w-auto p-1.5 bg-slate-100 border border-slate-200 scrollbar-hide">
+        <Tabs.List className="grid w-full grid-cols-3">
           <Tabs.Trigger
             value="reports"
-            className="shrink-0 whitespace-nowrap px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="p-1 rounded text-[10px] md:text-xs uppercase transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-sm data-[state=active]:border data-[state=active]:border-slate-200 text-slate-500 hover:text-slate-700"
           >
-            Fiscal Reports
+            Reports
           </Tabs.Trigger>
           <Tabs.Trigger
             value="overview"
-            className="shrink-0 whitespace-nowrap px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="p-1 rounded text-[10px] md:text-xs uppercase transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-sm data-[state=active]:border data-[state=active]:border-slate-200 text-slate-500 hover:text-slate-700"
           >
-            System Health
+            Health
           </Tabs.Trigger>
           <Tabs.Trigger
             value="configuration"
-            className="shrink-0 whitespace-nowrap px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="p-1 rounded text-[10px] md:text-xs uppercase transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-sm data-[state=active]:border data-[state=active]:border-slate-200 text-slate-500 hover:text-slate-700"
           >
             Architecture
           </Tabs.Trigger>
