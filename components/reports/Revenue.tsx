@@ -21,7 +21,7 @@ export function RevenueReport({ data }: { data: RevenueData }) {
             <CardContent className="p-5 sm:p-6">
                 <div className="mb-6 flex flex-col">
                     <span className="text-sm font-medium text-corporate-muted">Total Group Revenue</span>
-                    <span className="text-3xl font-bold font-mono">{formatCurrency(data.group_total_revenue, data.currency)}</span>
+                    <span className="text-3xl font-semibold font-mono">{formatCurrency(data.group_total_revenue, data.currency)}</span>
                 </div>
 
                 <hr className="mb-6 border-black/10" />

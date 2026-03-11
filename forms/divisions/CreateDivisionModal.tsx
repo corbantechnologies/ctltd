@@ -45,7 +45,7 @@ export default function CreateDivisionModal() {
 
   return (
     <>
-      <button onClick={() => setOpen(true)} className="h-14 px-8 bg-slate-900 hover:bg-corporate-primary text-white rounded-2xl font-bold text-sm tracking-tight transition-all shadow-xl hover:shadow-corporate-primary/20 active:scale-[0.98] flex items-center gap-3 group">
+      <button onClick={() => setOpen(true)} className="h-14 px-8 bg-slate-900 hover:bg-corporate-primary text-white rounded-2xl font-semibold text-sm tracking-tight transition-all shadow-xl hover:shadow-corporate-primary/20 active:scale-[0.98] flex items-center gap-3 group">
         <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
           <Plus className="w-4 h-4" />
         </div>
@@ -64,10 +64,10 @@ export default function CreateDivisionModal() {
                   <Database className="w-6 h-6" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold tracking-tight italic">
+                  <h2 className="text-xl font-semibold tracking-tight italic">
                     Establish <span className="text-corporate-primary">Division</span>
                   </h2>
-                  <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest mt-1">
+                  <p className="text-slate-400 font-semibold uppercase text-[10px] tracking-widest mt-1">
                     Corporate Infrastructure Unit
                   </p>
                 </div>
@@ -78,87 +78,87 @@ export default function CreateDivisionModal() {
               </button>
             </div>
 
-          <div className="p-8">
-            <form onSubmit={formik.handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <label
-                  htmlFor="name"
-                  className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1 block"
-                >
-                  Division Nomenclature
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="e.g. Strategic Operations, Digital Assets"
-                  className="w-full h-14 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-corporate-primary/30 focus:ring-0 transition-all font-bold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.name}
-                />
-                {formik.touched.name && formik.errors.name && (
-                  <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest ml-1 mt-1">
-                    {formik.errors.name}
-                  </p>
-                )}
-              </div>
-
-              <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-slate-200 transition-colors group cursor-pointer" onClick={() => formik.setFieldValue('is_active', !formik.values.is_active)}>
-                <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${formik.values.is_active ? 'bg-corporate-primary border-corporate-primary shadow-lg shadow-orange-500/20' : 'bg-white border-slate-200'}`}>
-                  {formik.values.is_active && <Plus className="w-4 h-4 text-white rotate-45" />}
-                </div>
-                <div>
+            <div className="p-8">
+              <form onSubmit={formik.handleSubmit} className="space-y-6">
+                <div className="space-y-2">
                   <label
-                    htmlFor="is_active"
-                    className="text-sm font-bold text-slate-900 cursor-pointer block"
+                    htmlFor="name"
+                    className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block"
                   >
-                    Active Status
+                    Division Nomenclature
                   </label>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
-                    Enable immediate unit operations
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-slate-200 transition-colors group cursor-pointer" onClick={() => formik.setFieldValue('is_public', !formik.values.is_public)}>
-                <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${formik.values.is_public ? 'bg-corporate-primary border-corporate-primary shadow-lg shadow-orange-500/20' : 'bg-white border-slate-200'}`}>
-                  {formik.values.is_public && <Plus className="w-4 h-4 text-white rotate-45" />}
-                </div>
-                <div>
-                  <label
-                    htmlFor="is_public"
-                    className="text-sm font-bold text-slate-900 cursor-pointer block"
-                  >
-                    Public Status
-                  </label>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
-                    Enable public visibility
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-4">
-                <button
-                  type="submit"
-                  disabled={formik.isSubmitting}
-                  className="w-full h-16 bg-slate-900 hover:bg-corporate-primary text-white rounded-[1.25rem] font-bold text-base transition-all shadow-xl hover:shadow-corporate-primary/20 active:scale-[0.98] group relative overflow-hidden flex items-center justify-center"
-                >
-                  {formik.isSubmitting ? (
-                    <Loader2 className="w-6 h-6 animate-spin mx-auto" />
-                  ) : (
-                    <div className="flex items-center justify-center gap-3">
-                      <Shield className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                      Establish Unit
-                    </div>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="e.g. Strategic Operations, Digital Assets"
+                    className="w-full h-14 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-corporate-primary/30 focus:ring-0 transition-all font-semibold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.name}
+                  />
+                  {formik.touched.name && formik.errors.name && (
+                    <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1 mt-1">
+                      {formik.errors.name}
+                    </p>
                   )}
-                </button>
-              </div>
-            </form>
+                </div>
+
+                <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-slate-200 transition-colors group cursor-pointer" onClick={() => formik.setFieldValue('is_active', !formik.values.is_active)}>
+                  <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${formik.values.is_active ? 'bg-corporate-primary border-corporate-primary shadow-lg shadow-orange-500/20' : 'bg-white border-slate-200'}`}>
+                    {formik.values.is_active && <Plus className="w-4 h-4 text-white rotate-45" />}
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="is_active"
+                      className="text-sm font-semibold text-slate-900 cursor-pointer block"
+                    >
+                      Active Status
+                    </label>
+                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mt-0.5">
+                      Enable immediate unit operations
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-slate-200 transition-colors group cursor-pointer" onClick={() => formik.setFieldValue('is_public', !formik.values.is_public)}>
+                  <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${formik.values.is_public ? 'bg-corporate-primary border-corporate-primary shadow-lg shadow-orange-500/20' : 'bg-white border-slate-200'}`}>
+                    {formik.values.is_public && <Plus className="w-4 h-4 text-white rotate-45" />}
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="is_public"
+                      className="text-sm font-semibold text-slate-900 cursor-pointer block"
+                    >
+                      Public Status
+                    </label>
+                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mt-0.5">
+                      Enable public visibility
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <button
+                    type="submit"
+                    disabled={formik.isSubmitting}
+                    className="w-full h-16 bg-slate-900 hover:bg-corporate-primary text-white rounded-[1.25rem] font-semibold text-base transition-all shadow-xl hover:shadow-corporate-primary/20 active:scale-[0.98] group relative overflow-hidden flex items-center justify-center"
+                  >
+                    {formik.isSubmitting ? (
+                      <Loader2 className="w-6 h-6 animate-spin mx-auto" />
+                    ) : (
+                      <div className="flex items-center justify-center gap-3">
+                        <Shield className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                        Establish Unit
+                      </div>
+                    )}
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    )}
-  </>
-);
+      )}
+    </>
+  );
 }

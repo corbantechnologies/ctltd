@@ -61,8 +61,8 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
         <div className="w-20 h-20 rounded-3xl bg-white flex items-center justify-center text-slate-200 mb-6 shadow-xl border border-slate-100">
           <Database className="w-10 h-10" />
         </div>
-        <h4 className="text-xl font-bold text-slate-900 tracking-tight">System Base Empty</h4>
-        <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mt-2">
+        <h4 className="text-xl font-semibold text-slate-900 tracking-tight">System Base Empty</h4>
+        <p className="text-sm font-semibold text-slate-400 uppercase tracking-widest mt-2">
           Establish infrastructure units to begin
         </p>
       </div>
@@ -85,7 +85,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
               setSearchQuery(e.target.value);
               setCurrentPage(1);
             }}
-            className="w-full h-16 pl-14 pr-6 rounded-[1.5rem] border border-slate-200 bg-white/80 backdrop-blur-md focus:bg-white focus:border-slate-900 focus:ring-0 transition-all font-bold text-sm text-slate-900 shadow-sm"
+            className="w-full h-16 pl-14 pr-6 rounded-[1.5rem] border border-slate-200 bg-white/80 backdrop-blur-md focus:bg-white focus:border-slate-900 focus:ring-0 transition-all font-semibold text-sm text-slate-900 shadow-sm"
           />
         </div>
 
@@ -93,7 +93,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
           <button
             onClick={() => setView("grid")}
             className={cn(
-              "flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all",
+              "flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all",
               view === "grid"
                 ? "bg-white text-slate-900 shadow-md border border-slate-100"
                 : "text-slate-400 hover:text-slate-600"
@@ -105,7 +105,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
           <button
             onClick={() => setView("table")}
             className={cn(
-              "flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all",
+              "flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all",
               view === "table"
                 ? "bg-white text-slate-900 shadow-md border border-slate-100"
                 : "text-slate-400 hover:text-slate-600"
@@ -122,7 +122,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
         {paginatedDivisions.length === 0 ? (
           <div className="py-24 text-center">
             <ShieldAlert className="w-16 h-16 text-slate-200 mx-auto mb-4" />
-            <p className="text-base font-bold text-slate-400 uppercase tracking-[0.2em]">
+            <p className="text-base font-semibold text-slate-400 uppercase tracking-[0.2em]">
               No results found
             </p>
           </div>
@@ -141,7 +141,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                     <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 border border-slate-100 shadow-inner bg-slate-50 group-hover:bg-slate-900 group-hover:text-white group-hover:scale-110 group-hover:shadow-lg",)}>
                       <Layers className="w-6 h-6" />
                     </div>
-                    <div className={cn("px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-sm border",
+                    <div className={cn("px-4 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-widest flex items-center gap-2 shadow-sm border",
                       division.is_active ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-slate-50 text-slate-400 border-slate-100")}>
                       <div className={cn("w-2 h-2 rounded-full", division.is_active ? "bg-emerald-500 animate-pulse" : "bg-slate-300")} />
                       {division.is_active ? "Active" : "Legacy"}
@@ -149,17 +149,17 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                   </div>
 
                   <div className="relative z-10 mb-8">
-                    <h3 className="text-xl font-bold text-slate-900 tracking-tight group-hover:text-corporate-primary transition-colors">
+                    <h3 className="text-xl font-semibold text-slate-900 tracking-tight group-hover:text-corporate-primary transition-colors">
                       {division.name}
                     </h3>
                     <div className="flex items-center gap-2 mt-2">
-                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">REF:</span>
-                      <span className="text-[10px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-lg border border-slate-200">{division.reference}</span>
+                      <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-[0.2em]">REF:</span>
+                      <span className="text-[10px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-lg border border-slate-200">{division.reference}</span>
                     </div>
                   </div>
 
                   <div className="pt-6 border-t border-slate-100 flex items-center justify-between relative z-10 group/btn">
-                    <span className={cn("text-[10px] font-bold uppercase tracking-widest", primaryColorClass)}>
+                    <span className={cn("text-[10px] font-semibold uppercase tracking-widest", primaryColorClass)}>
                       Manage Unit
                     </span>
                     <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-slate-900 group-hover:text-white group-hover:rotate-45 transition-all">
@@ -176,16 +176,16 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-slate-100 bg-slate-50/50">
-                    <th className="text-left py-6 px-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                    <th className="text-left py-6 px-8 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
                       Organizational Unit
                     </th>
-                    <th className="text-left py-6 px-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                    <th className="text-left py-6 px-8 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
                       Nomenclature
                     </th>
-                    <th className="text-left py-6 px-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                    <th className="text-left py-6 px-8 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
                       Operational State
                     </th>
-                    <th className="text-right py-6 px-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                    <th className="text-right py-6 px-8 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
                       Access
                     </th>
                   </tr>
@@ -202,18 +202,18 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                             <Database className="w-5 h-5" />
                           </div>
                           <div className="flex flex-col">
-                            <span className="font-bold text-slate-900 text-sm">{division.name}</span>
-                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Division Unit</span>
+                            <span className="font-semibold text-slate-900 text-sm">{division.name}</span>
+                            <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Division Unit</span>
                           </div>
                         </div>
                       </td>
                       <td className="py-6 px-8">
-                        <span className="text-xs font-bold text-slate-600 bg-slate-100 px-3 py-1 rounded-xl border border-slate-200 shadow-sm">
+                        <span className="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1 rounded-xl border border-slate-200 shadow-sm">
                           {division.reference}
                         </span>
                       </td>
                       <td className="py-6 px-8">
-                        <div className={cn("inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border",
+                        <div className={cn("inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-widest border",
                           division.is_active ? "bg-emerald-50 text-emerald-600 border-emerald-100 shadow-sm shadow-emerald-500/5" : "bg-slate-50 text-slate-400 border-slate-100")}>
                           <div className={cn("w-1.5 h-1.5 rounded-full", division.is_active ? "bg-emerald-500 animate-pulse" : "bg-slate-300")} />
                           {division.is_active ? "Operational" : "Deactivated"}
@@ -239,7 +239,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 py-8 border-t border-slate-100">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2rem] text-slate-400">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2rem] text-slate-400">
             Trace Level: <span className="text-slate-900">{paginatedDivisions.length}</span> / <span className="text-slate-900">{filteredDivisions.length}</span>
           </p>
 
@@ -261,7 +261,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                     key={page}
                     onClick={() => setCurrentPage(page)}
                     className={cn(
-                      "w-10 h-10 rounded-xl text-[10px] font-black transition-all",
+                      "w-10 h-10 rounded-xl text-[10px] font-semibold transition-all",
                       isSelected
                         ? "bg-slate-900 text-white shadow-lg"
                         : "text-slate-400 hover:text-slate-900"

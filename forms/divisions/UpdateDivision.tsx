@@ -59,10 +59,10 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
             <Edit3 className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-black tracking-tight">
+            <h2 className="text-2xl font-semibold text-black tracking-tight">
               Update Division
             </h2>
-            <p className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+            <p className="text-black/50 font-semibold uppercase text-[10px] tracking-widest mt-1">
               Refine Infrastructure
             </p>
           </div>
@@ -73,7 +73,7 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
           <div className="space-y-2">
             <label
               htmlFor="name"
-              className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+              className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
             >
               Division Name
             </label>
@@ -82,13 +82,13 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
               name="name"
               type="text"
               placeholder="e.g. Sales, Marketing, HR"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 focus:ring-corporate-primary/20 transition-all font-bold px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 focus:ring-corporate-primary/20 transition-all font-semibold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
             />
             {formik.touched.name && formik.errors.name && (
-              <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+              <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
                 {formik.errors.name}
               </p>
             )}
@@ -106,7 +106,7 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
             />
             <label
               htmlFor="is_active"
-              className="text-sm font-black text-black"
+              className="text-sm font-semibold text-black"
             >
               Keep Division Active
             </label>
@@ -124,7 +124,7 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
             />
             <label
               htmlFor="is_public"
-              className="text-sm font-black text-black"
+              className="text-sm font-semibold text-black"
             >
               Set as Public Division
             </label>
@@ -134,7 +134,7 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded-[20px] font-black text-lg transition-all shadow-xl hover:shadow-black/10 active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded-[20px] font-semibold text-lg transition-all shadow-xl hover:shadow-black/10 active:scale-[0.98] group flex items-center justify-center"
             >
               {formik.isSubmitting ? (
                 <Loader2 className="w-6 h-6 animate-spin" />

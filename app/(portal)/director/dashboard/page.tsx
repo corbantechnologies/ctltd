@@ -94,14 +94,14 @@ export default function DirectorDashboard() {
             <div className="w-8 h-8 rounded-xl bg-corporate-primary flex items-center justify-center text-white shadow-lg shadow-corporate-primary/20">
               <Building2 className="w-4 h-4" />
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-corporate-primary">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-corporate-primary">
               Executive Command Center
             </p>
           </div>
-          <h1 className="text-4xl font-bold text-slate-900 tracking-tight italic">
+          <h1 className="text-3xl md:text-4xl font-semibold text-slate-900 tracking-tight italic">
             Director <span className="text-corporate-primary">Overview</span>
           </h1>
-          <p className="text-slate-400 font-bold mt-2 text-sm max-w-lg">
+          <p className="text-slate-400 font-semibold mt-2 text-sm max-w-lg">
             Welcome back, <span className="text-slate-900">{account?.first_name}</span>.
             Corporate infrastructure and strategic audit trail monitoring active.
           </p>
@@ -110,16 +110,16 @@ export default function DirectorDashboard() {
       </div>
 
       <Tabs.Root defaultValue="overview" className="space-y-10">
-        <Tabs.List className="inline-flex p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner">
+        <Tabs.List className="flex w-full overflow-x-auto md:inline-flex md:w-auto p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner scrollbar-hide">
           <Tabs.Trigger
             value="overview"
-            className="px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="shrink-0 whitespace-nowrap px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
             System Health
           </Tabs.Trigger>
           <Tabs.Trigger
             value="financials"
-            className="px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="shrink-0 whitespace-nowrap px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
             Fiscal Reports
           </Tabs.Trigger>
@@ -139,13 +139,13 @@ export default function DirectorDashboard() {
                     <stat.icon className="w-6 h-6" />
                   </div>
                   <div>
-                    <p className="text-slate-400 font-bold uppercase tracking-widest text-[9px] mb-1">
+                    <p className="text-slate-400 font-semibold uppercase tracking-widest text-[9px] mb-1">
                       {stat.label}
                     </p>
-                    <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
+                    <h3 className="text-2xl font-semibold text-slate-900 tracking-tight">
                       {stat.value}
                     </h3>
-                    <p className="text-[10px] font-bold text-slate-400 mt-1 uppercase tracking-tighter">
+                    <p className="text-[10px] font-semibold text-slate-400 mt-1 uppercase tracking-tighter">
                       {stat.description}
                     </p>
                   </div>
@@ -165,16 +165,16 @@ export default function DirectorDashboard() {
           <div className="space-y-8 pt-10 border-t border-slate-100">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+                <h2 className="text-2xl font-semibold text-slate-900 tracking-tight">
                   Unit Infrastructure
                 </h2>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mt-1">
                   Real-time Operational Capacity
                 </p>
               </div>
               <div className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-600 rounded-full border border-emerald-100 shadow-sm animate-pulse">
                 <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                <span className="text-[10px] font-black uppercase tracking-widest">System Online</span>
+                <span className="text-[10px] font-semibold uppercase tracking-widest">System Online</span>
               </div>
             </div>
             <div className="bg-slate-50/50 p-1 rounded-[3rem] border border-slate-100">

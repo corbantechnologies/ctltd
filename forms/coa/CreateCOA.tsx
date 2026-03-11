@@ -79,10 +79,10 @@ export default function CreateCOA({
               <FileText className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-2xl font-black text-black tracking-tight">
+              <h2 className="text-2xl font-semibold text-black tracking-tight">
                 Add Chart of Account
               </h2>
-              <p className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+              <p className="text-black/50 font-semibold uppercase text-[10px] tracking-widest mt-1">
                 Financial Classification
               </p>
             </div>
@@ -91,7 +91,7 @@ export default function CreateCOA({
             <button
               type="button"
               onClick={onClose}
-             
+
               className="hover:bg-red-50 hover:text-red-500 rounded-full p-2"
             >
               <X className="w-5 h-5" />
@@ -105,7 +105,7 @@ export default function CreateCOA({
             <div className="space-y-2">
               <label
                 htmlFor="code"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Account Code
               </label>
@@ -114,14 +114,14 @@ export default function CreateCOA({
                 name="code"
                 type="text"
                 placeholder="e.g. 1000"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.code}
                 style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
               />
               {formik.touched.code && formik.errors.code && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
                   {formik.errors.code}
                 </p>
               )}
@@ -130,7 +130,7 @@ export default function CreateCOA({
             <div className="space-y-2">
               <label
                 htmlFor="order"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Display Order
               </label>
@@ -139,14 +139,14 @@ export default function CreateCOA({
                 name="order"
                 type="number"
                 placeholder="e.g. 10"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.order}
                 style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
               />
               {formik.touched.order && formik.errors.order && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
                   {formik.errors.order}
                 </p>
               )}
@@ -156,7 +156,7 @@ export default function CreateCOA({
           <div className="space-y-2">
             <label
               htmlFor="name"
-              className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+              className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
             >
               Account Name
             </label>
@@ -165,14 +165,14 @@ export default function CreateCOA({
               name="name"
               type="text"
               placeholder="e.g. Liabilitiess"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
               style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
             />
             {formik.touched.name && formik.errors.name && (
-              <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+              <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
                 {formik.errors.name}
               </p>
             )}
@@ -181,14 +181,14 @@ export default function CreateCOA({
           <div className="space-y-2">
             <label
               htmlFor="normal_balance"
-              className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+              className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
             >
               Normal Balance
             </label>
             <select
               id="normal_balance"
               name="normal_balance"
-              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold ring-offset-white transition-all appearance-none cursor-pointer"
+              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold ring-offset-white transition-all appearance-none cursor-pointer"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.normal_balance}
@@ -198,7 +198,7 @@ export default function CreateCOA({
               <option value="CREDIT">CREDIT</option>
             </select>
             {formik.touched.normal_balance && formik.errors.normal_balance && (
-              <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+              <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
                 {formik.errors.normal_balance}
               </p>
             )}
@@ -217,7 +217,7 @@ export default function CreateCOA({
             />
             <label
               htmlFor="is_active"
-              className="text-sm font-black text-black cursor-pointer"
+              className="text-sm font-semibold text-black cursor-pointer"
             >
               Set as Active Account
             </label>
@@ -227,7 +227,7 @@ export default function CreateCOA({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 text-white rounded-[20px] font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,

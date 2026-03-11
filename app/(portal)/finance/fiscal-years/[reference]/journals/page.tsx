@@ -32,14 +32,14 @@ export default function FinanceJournalsPage() {
           </li>
           <li><span className="text-black/30">/</span></li>
           <li>
-            <span className="font-bold text-black">Journals</span>
+            <span className="font-semibold text-black">Journals</span>
           </li>
         </ol>
       </nav>
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-black tracking-tighter">
+          <h1 className="text-xl font-semibold text-black tracking-tighter">
             Transaction Journals
           </h1>
           <p className="text-black/60 font-medium mt-1">
@@ -48,7 +48,7 @@ export default function FinanceJournalsPage() {
         </div>
         <button
           onClick={() => setOpenCreateJournal(true)}
-          className="flex items-center justify-center h-12 px-6 bg-[#045138] hover:bg-black text-white rounded-2xl font-bold text-sm uppercase tracking-wider transition-all shadow-lg active:scale-95 gap-2"
+          className="flex items-center justify-center h-12 px-6 bg-[#045138] hover:bg-black text-white rounded-2xl font-semibold text-sm uppercase tracking-wider transition-all shadow-lg active:scale-95 gap-2"
         >
           <Plus className="w-4 h-4" />
           New Journal Batch

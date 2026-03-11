@@ -191,7 +191,7 @@ export default function JournalsList({
                 setTypeFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full h-12 pl-11 pr-4 rounded-xl border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-bold text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white"
+              className="w-full h-12 pl-11 pr-4 rounded-xl border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-semibold text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white"
             >
               <option value="all">All Journal Types</option>
               {journalTypes?.map((type) => (
@@ -212,7 +212,7 @@ export default function JournalsList({
                 setStartDate(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full pl-11 h-12 bg-white/80 border border-black/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-bold text-[10px] uppercase tracking-widest shadow-sm"
+              className="w-full pl-11 h-12 bg-white/80 border border-black/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-semibold text-[10px] uppercase tracking-widest shadow-sm"
               title="Start Date"
             />
           </div>
@@ -227,7 +227,7 @@ export default function JournalsList({
                 setEndDate(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full pl-11 h-12 bg-white/80 border border-black/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-bold text-[10px] uppercase tracking-widest shadow-sm"
+              className="w-full pl-11 h-12 bg-white/80 border border-black/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-semibold text-[10px] uppercase tracking-widest shadow-sm"
               title="End Date"
             />
           </div>
@@ -240,7 +240,7 @@ export default function JournalsList({
                 setSelectedMonth(e.target.value);
                 setCurrentPage(1);
               }}
-              className="flex-1 h-12 px-4 rounded-xl border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-bold text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white"
+              className="flex-1 h-12 px-4 rounded-xl border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-semibold text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white"
             >
               <option value="all">Every Month</option>
               {[
@@ -269,7 +269,7 @@ export default function JournalsList({
                 setSelectedYear(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-24 h-12 px-2 rounded-xl border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-bold text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white text-center"
+              className="w-24 h-12 px-2 rounded-xl border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-semibold text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white text-center"
               title="Filter by Year"
             >
               <option value="all">Year</option>
@@ -338,7 +338,7 @@ export default function JournalsList({
                       `}</style>
                     </div>
                     <span
-                      className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest inline-block ${journal.is_posted
+                      className={`px-4 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-widest inline-block ${journal.is_posted
                         ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
                         : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
                         }`}
@@ -349,10 +349,10 @@ export default function JournalsList({
 
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-xl font-bold text-black tracking-tight leading-tight group-hover:text-[#D0402B] transition-colors mb-2 italic">
+                      <h3 className="text-xl font-semibold text-black tracking-tight leading-tight group-hover:text-[#D0402B] transition-colors mb-2 italic">
                         {journal.description || "No Description Provided"}
                       </h3>
-                      <div className="flex items-center gap-2 text-black/30 font-bold uppercase text-[10px] tracking-[0.2em]">
+                      <div className="flex items-center gap-2 text-black/30 font-semibold uppercase text-[10px] tracking-[0.2em]">
                         <Calendar className="w-3 h-3" />
                         {new Date(journal.date).toLocaleDateString(undefined, {
                           year: "numeric",
@@ -364,10 +364,10 @@ export default function JournalsList({
 
                     <div className="pt-4 border-t border-black/5 flex items-center justify-between">
                       <div className="flex flex-col">
-                        <span className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                        <span className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                           Registry Ref
                         </span>
-                        <span className="text-sm font-mono font-bold text-black">
+                        <span className="text-sm font-mono font-semibold text-black">
                           {journal.reference}
                         </span>
                       </div>
@@ -388,19 +388,19 @@ export default function JournalsList({
             <table className="w-full">
               <thead>
                 <tr className="bg-black/5 border-b border-black/5">
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Posting Date
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Journal Description
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Type
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Status
                   </th>
-                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-center">
+                  <th className="text-right py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60 text-center">
                     Reference
                   </th>
                 </tr>
@@ -419,7 +419,7 @@ export default function JournalsList({
                         <span className="text-sm font-medium text-black">
                           {new Date(journal.date).toLocaleDateString()}
                         </span>
-                        <span className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
+                        <span className="text-[10px] font-semibold text-black/30 uppercase tracking-widest mt-0.5">
                           Automated Entry
                         </span>
                       </div>
@@ -435,7 +435,7 @@ export default function JournalsList({
                       </div>
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
-                      <span className="bg-white/50 border border-black/5 text-black/60 font-bold text-[9px] uppercase px-2 py-0.5 rounded-sm inline-block">
+                      <span className="bg-white/50 border border-black/5 text-black/60 font-semibold text-[9px] uppercase px-2 py-0.5 rounded-sm inline-block">
                         {journal.journal_type}
                       </span>
                     </td>
@@ -444,14 +444,14 @@ export default function JournalsList({
                         {journal.is_posted ? (
                           <div className="flex items-center gap-2 text-green-600">
                             <CheckCircle2 className="w-3.5 h-3.5" />
-                            <span className="text-[10px] font-bold uppercase tracking-wider">
+                            <span className="text-[10px] font-semibold uppercase tracking-wider">
                               POSTED
                             </span>
                           </div>
                         ) : (
                           <div className="flex items-center gap-2 text-orange-600">
                             <Clock className="w-3.5 h-3.5" />
-                            <span className="text-[10px] font-bold uppercase tracking-wider">
+                            <span className="text-[10px] font-semibold uppercase tracking-wider">
                               PENDING
                             </span>
                           </div>
@@ -459,7 +459,7 @@ export default function JournalsList({
                       </div>
                     </td>
                     <td className="py-2.5 px-4 text-right border-b border-black/5">
-                      <div className="flex items-center justify-end gap-4 font-mono font-bold text-xs text-black/40 group-hover:text-black">
+                      <div className="flex items-center justify-end gap-4 font-mono font-semibold text-xs text-black/40 group-hover:text-black">
                         {journal.reference}
                         <div className="w-7 h-7 rounded-md bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-lg hover:bg-[#D0402B]">
                           <ArrowUpRight className="w-3.5 h-3.5" />
@@ -477,17 +477,17 @@ export default function JournalsList({
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-between items-center bg-white/40 p-6 rounded-[24px] border border-white/60 backdrop-blur-md shadow-sm mt-8">
-          <p className="text-xs font-bold text-black/40 uppercase tracking-widest">
+          <p className="text-xs font-semibold text-black/40 uppercase tracking-widest">
             Showing{" "}
-            <span className="text-black font-bold">
+            <span className="text-black font-semibold">
               {(currentPage - 1) * itemsPerPage + 1}
             </span>{" "}
             to{" "}
-            <span className="text-black font-bold">
+            <span className="text-black font-semibold">
               {Math.min(currentPage * itemsPerPage, filteredJournals.length)}
             </span>{" "}
             of{" "}
-            <span className="text-black font-bold">
+            <span className="text-black font-semibold">
               {filteredJournals.length}
             </span>{" "}
             journals
@@ -496,7 +496,7 @@ export default function JournalsList({
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="flex items-center justify-center border border-black/5 rounded-xl bg-white/80 transition-all hover:bg-[#D0402B] hover:text-white disabled:opacity-30 h-10 px-4 font-bold"
+              className="flex items-center justify-center border border-black/5 rounded-xl bg-white/80 transition-all hover:bg-[#D0402B] hover:text-white disabled:opacity-30 h-10 px-4 font-semibold"
             >
               <ChevronLeft className="w-4 h-4 mr-1" /> Prev
             </button>
@@ -505,7 +505,7 @@ export default function JournalsList({
                 <button
                   key={i + 1}
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`flex items-center justify-center w-10 h-10 border rounded-xl transition-all font-bold ${currentPage === i + 1
+                  className={`flex items-center justify-center w-10 h-10 border rounded-xl transition-all font-semibold ${currentPage === i + 1
                     ? "bg-[#D0402B] border-transparent text-white shadow-lg shadow-[#D0402B]/20"
                     : "bg-white/80 border-black/5 hover:bg-black/5"
                     }`}
@@ -526,7 +526,7 @@ export default function JournalsList({
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="flex items-center justify-center border border-black/5 rounded-xl bg-white/80 transition-all hover:bg-[#D0402B] hover:text-white disabled:opacity-30 h-10 px-4 font-bold"
+              className="flex items-center justify-center border border-black/5 rounded-xl bg-white/80 transition-all hover:bg-[#D0402B] hover:text-white disabled:opacity-30 h-10 px-4 font-semibold"
             >
               Next <ChevronRight className="w-4 h-4 ml-1" />
             </button>
@@ -539,10 +539,10 @@ export default function JournalsList({
           <div className="w-20 h-20 rounded-3xl bg-black/5 flex items-center justify-center text-black/10 mx-auto mb-6">
             <History className="w-10 h-10" />
           </div>
-          <h3 className="text-xl font-bold text-black tracking-tight mb-2 uppercase tracking-widest italic scale-95">
+          <h3 className="text-xl font-semibold text-black tracking-tight mb-2 uppercase tracking-widest italic scale-95">
             No Journals Detected
           </h3>
-          <p className="text-black/30 font-bold max-w-sm mx-auto text-sm">
+          <p className="text-black/30 font-semibold max-w-sm mx-auto text-sm">
             Adjust your search parameters or synchronize your data to view
             financial records.
           </p>

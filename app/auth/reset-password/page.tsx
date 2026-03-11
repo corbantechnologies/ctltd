@@ -80,11 +80,11 @@ export default function ResetPassword() {
             </Link>
           </div>
 
-          <div className="inline-flex items-center rounded-full bg-slate-800/80 backdrop-blur-md px-4 py-1.5 text-xs font-bold text-corporate-primary border border-slate-700/50 mb-6 uppercase tracking-widest shadow-inner">
+          <div className="inline-flex items-center rounded-full bg-slate-800/80 backdrop-blur-md px-4 py-1.5 text-xs font-semibold text-corporate-primary border border-slate-700/50 mb-6 uppercase tracking-widest shadow-inner">
             Credential Workspace
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white tracking-tight mb-4 leading-tight">
             Reset <span className="text-corporate-primary">Vault</span>.
           </h1>
           <p className="text-lg md:text-xl text-slate-400 font-medium max-w-xl mx-auto leading-relaxed">
@@ -109,7 +109,7 @@ export default function ResetPassword() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Email Input */}
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-900 ml-1">
+                  <label className="text-sm font-semibold text-slate-900 ml-1">
                     Email Identity
                   </label>
                   <div className="relative group/input">
@@ -131,7 +131,7 @@ export default function ResetPassword() {
                     />
                   </div>
                   {formik.touched.email && formik.errors.email && (
-                    <p className="text-xs font-bold text-red-500 ml-1">
+                    <p className="text-xs font-semibold text-red-500 ml-1">
                       {formik.errors.email}
                     </p>
                   )}
@@ -139,7 +139,7 @@ export default function ResetPassword() {
 
                 {/* Code Input */}
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-900 ml-1">
+                  <label className="text-sm font-semibold text-slate-900 ml-1">
                     Recovery Code
                   </label>
                   <div className="relative group/input">
@@ -161,7 +161,7 @@ export default function ResetPassword() {
                     />
                   </div>
                   {formik.touched.code && formik.errors.code && (
-                    <p className="text-xs font-bold text-red-500 ml-1">
+                    <p className="text-xs font-semibold text-red-500 ml-1">
                       {formik.errors.code}
                     </p>
                   )}
@@ -171,7 +171,7 @@ export default function ResetPassword() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* New Password */}
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-900 ml-1">
+                  <label className="text-sm font-semibold text-slate-900 ml-1">
                     New Password
                   </label>
                   <div className="relative group/input">
@@ -196,7 +196,7 @@ export default function ResetPassword() {
 
                 {/* Confirm Password */}
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-900 ml-1">
+                  <label className="text-sm font-semibold text-slate-900 ml-1">
                     Confirm Sync
                   </label>
                   <div className="relative group/input">
@@ -223,7 +223,7 @@ export default function ResetPassword() {
               {(formik.touched.password && formik.errors.password) || (formik.touched.confirmPassword && formik.errors.confirmPassword) ? (
                 <div className="p-4 bg-red-50 rounded-2xl border border-red-100 flex items-start gap-3">
                   <ShieldAlert className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
-                  <p className="text-xs font-bold text-red-500 leading-relaxed">
+                  <p className="text-xs font-semibold text-red-500 leading-relaxed">
                     {formik.errors.password || formik.errors.confirmPassword}
                   </p>
                 </div>
@@ -232,7 +232,7 @@ export default function ResetPassword() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="w-full flex items-center justify-center gap-2 text-xs font-bold text-slate-400 hover:text-slate-900 transition-colors"
+                className="w-full flex items-center justify-center gap-2 text-xs font-semibold text-slate-400 hover:text-slate-900 transition-colors"
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 {showPassword ? "Hide Credentials" : "Show Credentials"}
@@ -241,7 +241,7 @@ export default function ResetPassword() {
               <button
                 disabled={loading}
                 type="submit"
-                className="w-full h-14 bg-corporate-primary hover:bg-orange-600 text-white rounded-xl font-bold transition-all shadow-lg shadow-orange-900/10 flex items-center justify-center gap-3 active:scale-[0.98] disabled:opacity-50 group/btn"
+                className="w-full h-14 bg-corporate-primary hover:bg-orange-600 text-white rounded-xl font-semibold transition-all shadow-lg shadow-orange-900/10 flex items-center justify-center gap-3 active:scale-[0.98] disabled:opacity-50 group/btn"
               >
                 {loading ? (
                   <>
@@ -260,7 +260,7 @@ export default function ResetPassword() {
             <div className="mt-8 text-center">
               <Link
                 href="/auth/login"
-                className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-900 text-sm font-bold transition-colors"
+                className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-900 text-sm font-semibold transition-colors"
               >
                 <ChevronRight className="w-4 h-4 rotate-180" />
                 Back to Authentication

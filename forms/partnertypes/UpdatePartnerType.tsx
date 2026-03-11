@@ -69,10 +69,10 @@ export default function UpdatePartnerType({
             <Edit3 className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-black tracking-tight">
+            <h2 className="text-2xl font-semibold text-black tracking-tight">
               Update Category
             </h2>
-            <p className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+            <p className="text-black/50 font-semibold uppercase text-[10px] tracking-widest mt-1">
               Refine Ecosystem
             </p>
           </div>
@@ -80,17 +80,17 @@ export default function UpdatePartnerType({
       </div>
       <div className="p-8">
         <div className="mb-6 p-4 bg-black/5 rounded-2xl border border-black/5">
-          <p className="text-[10px] font-black uppercase tracking-widest text-black/40 mb-1">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-1">
             Category Name (Read-only)
           </p>
-          <p className="font-bold text-black">{partnerType.name}</p>
+          <p className="font-semibold text-black">{partnerType.name}</p>
         </div>
 
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <label
               htmlFor="description"
-              className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+              className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
             >
               Description
             </label>
@@ -98,7 +98,7 @@ export default function UpdatePartnerType({
               id="description"
               name="description"
               placeholder="Refine the purpose of this partner type..."
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[120px] rounded-2xl focus:bg-slate-50 transition-all font-bold p-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[120px] rounded-2xl focus:bg-slate-50 transition-all font-semibold p-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.description}
@@ -117,7 +117,7 @@ export default function UpdatePartnerType({
             />
             <label
               htmlFor="is_active"
-              className="text-sm font-black text-black"
+              className="text-sm font-semibold text-black"
             >
               Keep Category Active
             </label>
@@ -127,7 +127,7 @@ export default function UpdatePartnerType({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded-[20px] font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
             >
               {formik.isSubmitting ? (
                 <Loader2 className="w-6 h-6 animate-spin" />

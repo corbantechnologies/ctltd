@@ -115,10 +115,10 @@ export default function UpdatePartner({
               <Edit3 className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-2xl font-black text-black tracking-tight">
+              <h2 className="text-2xl font-semibold text-black tracking-tight">
                 Update Partner
               </h2>
-              <p className="text-black/50 font-bold uppercase text-[10px] tracking-widest mt-1">
+              <p className="text-black/50 font-semibold uppercase text-[10px] tracking-widest mt-1">
                 Refine Relationship
               </p>
             </div>
@@ -127,7 +127,7 @@ export default function UpdatePartner({
             <button
               type="button"
               onClick={onClose}
-             
+
               className="hover:bg-red-50 hover:text-red-500 rounded-full p-2"
             >
               <X className="w-5 h-5" />
@@ -142,20 +142,20 @@ export default function UpdatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="name"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Partner Name
               </label>
               <input
                 id="name"
                 name="name"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
               />
               {formik.touched.name && formik.errors.name && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
                   {formik.errors.name}
                 </p>
               )}
@@ -164,7 +164,7 @@ export default function UpdatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="email"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Email Address
               </label>
@@ -172,13 +172,13 @@ export default function UpdatePartner({
                 id="email"
                 name="email"
                 type="email"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
               />
               {formik.touched.email && formik.errors.email && (
-                <p className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">
+                <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
                   {formik.errors.email}
                 </p>
               )}
@@ -189,14 +189,14 @@ export default function UpdatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="phone"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Phone Number
               </label>
               <input
                 id="phone"
                 name="phone"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
@@ -206,7 +206,7 @@ export default function UpdatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="partner_type"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Partner Category
               </label>
@@ -214,7 +214,7 @@ export default function UpdatePartner({
                 id="partner_type"
                 name="partner_type"
                 disabled={isLoadingTypes}
-                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold focus:ring-corporate-primary/20 transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold focus:ring-corporate-primary/20 transition-all appearance-none"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.partner_type}
@@ -230,7 +230,7 @@ export default function UpdatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="division"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Assigned Division
               </label>
@@ -238,7 +238,7 @@ export default function UpdatePartner({
                 id="division"
                 name="division"
                 disabled={isLoadingDivisions}
-                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold focus:ring-corporate-primary/20 transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold focus:ring-corporate-primary/20 transition-all appearance-none"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.division}
@@ -260,14 +260,14 @@ export default function UpdatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="tax_pin"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Tax PIN (KRA)
               </label>
               <input
                 id="tax_pin"
                 name="tax_pin"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.tax_pin}
@@ -277,14 +277,14 @@ export default function UpdatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="currency"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 Preferred Currency
               </label>
               <select
                 id="currency"
                 name="currency"
-                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold focus:ring-corporate-primary/20 transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold focus:ring-corporate-primary/20 transition-all appearance-none"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.currency}
@@ -299,7 +299,7 @@ export default function UpdatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="wht_rate"
-                className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
               >
                 WHT Rate (%)
               </label>
@@ -308,7 +308,7 @@ export default function UpdatePartner({
                 name="wht_rate"
                 type="number"
                 step="0.01"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.wht_rate}
@@ -319,14 +319,14 @@ export default function UpdatePartner({
           <div className="space-y-2">
             <label
               htmlFor="payment_terms"
-              className="text-[10px] font-black uppercase tracking-widest text-black/40 ml-1"
+              className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
             >
               Payment Terms / Notes
             </label>
             <input
               id="payment_terms"
               name="payment_terms"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-bold px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.payment_terms}
@@ -352,7 +352,7 @@ export default function UpdatePartner({
             />
             <label
               htmlFor="is_active"
-              className="text-sm font-black text-black"
+              className="text-sm font-semibold text-black"
             >
               Keep Partner Active
             </label>
@@ -362,7 +362,7 @@ export default function UpdatePartner({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[20px] font-black text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 text-white rounded-[20px] font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,

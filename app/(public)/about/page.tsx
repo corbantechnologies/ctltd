@@ -17,7 +17,7 @@ export default function About() {
           <span className="mb-6 inline-flex items-center rounded-full bg-slate-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-corporate-primary border border-slate-200 shadow-sm">
             Our Mission
           </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-8 leading-[1.1]">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-slate-900 mb-8 leading-[1.1]">
             Engineering the{" "}
             <span className="text-corporate-primary">Future.</span>
           </h1>
@@ -31,7 +31,7 @@ export default function About() {
       <section className="py-20 lg:py-32 bg-slate-50 flex-grow">
         <div className="container max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <div className="space-y-8 text-center lg:text-left">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 leading-[1.1]">
               Local Insight,{" "}
               <span className="text-corporate-primary block sm:inline mt-2 sm:mt-0">Global Standards.</span>
             </h2>
@@ -65,7 +65,7 @@ export default function About() {
                       <stat.icon className="w-7 h-7" />
                     </div>
                     <div>
-                      <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-1">
+                      <div className="text-3xl sm:text-4xl font-semibold text-slate-900 mb-1">
                         {stat.value}
                       </div>
                       <div className="text-xs uppercase tracking-widest font-bold text-slate-400">

@@ -37,10 +37,10 @@ export default function AccountDistributionChart({
       <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-corporate-primary/5 transition-colors" />
 
       <div className="mb-8">
-        <h3 className="text-xl font-bold text-slate-900 tracking-tight">
+        <h3 className="text-xl font-semibold text-slate-900 tracking-tight">
           Portfolio Distribution
         </h3>
-        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
+        <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-1">
           Ledger Book Allocation
         </p>
       </div>
@@ -73,7 +73,7 @@ export default function AccountDistributionChart({
             <Legend
               verticalAlign="bottom"
               height={36}
-              formatter={(value) => <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">{value}</span>}
+              formatter={(value) => <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">{value}</span>}
             />
           </PieChart>
         </ResponsiveContainer>

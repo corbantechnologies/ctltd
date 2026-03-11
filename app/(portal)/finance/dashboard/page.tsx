@@ -115,39 +115,39 @@ export default function FinanceDashboard() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-8 h-8 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-600/20">
+            <div className="w-8 h-8 rounded bg-emerald-600 flex items-center justify-center text-white shadow-emerald-600/20">
               <TrendingUp className="w-4 h-4" />
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-600">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-emerald-600">
               Financial Oversight
             </p>
           </div>
-          <h1 className="text-4xl font-bold text-slate-900 tracking-tight italic">
+          <h1 className="text-xl md:text-xl text-slate-900 tracking-tight">
             Finance <span className="text-emerald-600">Portal</span>
           </h1>
-          <p className="text-slate-400 font-bold mt-2 text-sm max-w-lg">
+          <p className="text-slate-400 mt-2 text-sm max-w-lg">
             Fiscal policy audit, system configuration, and strategic resource allocation engine.
           </p>
         </div>
       </div>
 
       <Tabs.Root defaultValue="reports" className="space-y-10">
-        <Tabs.List className="inline-flex p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner">
+        <Tabs.List className="flex w-full overflow-x-auto md:inline-flex md:w-auto p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner scrollbar-hide">
           <Tabs.Trigger
             value="reports"
-            className="px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="shrink-0 whitespace-nowrap px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
             Fiscal Reports
           </Tabs.Trigger>
           <Tabs.Trigger
             value="overview"
-            className="px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="shrink-0 whitespace-nowrap px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
             System Health
           </Tabs.Trigger>
           <Tabs.Trigger
             value="configuration"
-            className="px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="shrink-0 whitespace-nowrap px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
             Architecture
           </Tabs.Trigger>
@@ -166,10 +166,10 @@ export default function FinanceDashboard() {
                     <stat.icon className="w-6 h-6" />
                   </div>
                   <div>
-                    <p className="text-slate-400 font-bold uppercase tracking-widest text-[9px] mb-1">
+                    <p className="text-slate-400 font-semibold uppercase tracking-widest text-[9px] mb-1">
                       {stat.label}
                     </p>
-                    <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
+                    <h3 className="text-2xl font-semibold text-slate-900 tracking-tight">
                       {stat.value}
                     </h3>
                   </div>
@@ -187,18 +187,18 @@ export default function FinanceDashboard() {
               <div className="bg-slate-900 p-8 rounded-[2.5rem] border border-slate-800 shadow-2xl relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-600/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-emerald-600/30 transition-colors" />
                 <div className="relative z-10">
-                  <h3 className="text-xl font-bold text-white tracking-tight mb-6">Tactical Actions</h3>
+                  <h3 className="text-xl font-semibold text-white tracking-tight mb-6">Tactical Actions</h3>
                   <div className="space-y-4">
                     <button
                       onClick={() => setOpenCreateJournalType(true)}
-                      className="w-full h-14 bg-white/10 hover:bg-white/20 text-white rounded-2xl border border-white/10 font-bold text-sm transition-all flex items-center justify-center gap-3 group/btn"
+                      className="w-full h-14 bg-white/10 hover:bg-white/20 text-white rounded-2xl border border-white/10 font-semibold text-sm transition-all flex items-center justify-center gap-3 group/btn"
                     >
                       <Plus className="w-4 h-4 group-hover/btn:rotate-90 transition-transform text-emerald-400" />
                       Add Journal Type
                     </button>
                     <button
                       onClick={() => setOpenCreatePartnerType(true)}
-                      className="w-full h-14 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl shadow-lg shadow-emerald-600/20 font-bold text-sm transition-all flex items-center justify-center gap-3"
+                      className="w-full h-14 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl shadow-lg shadow-emerald-600/20 font-semibold text-sm transition-all flex items-center justify-center gap-3"
                     >
                       <Plus className="w-4 h-4" />
                       Add Partner Category
@@ -216,13 +216,13 @@ export default function FinanceDashboard() {
             <div className="space-y-6">
               <div className="flex items-center justify-between px-2">
                 <div>
-                  <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                  <h2 className="text-lg font-semibold text-slate-900 tracking-tight flex items-center gap-2">
                     <Building2 className="w-5 h-5 text-emerald-600" />
                     Operational Units
                   </h2>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Active Sub-ledgers</p>
+                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Active Sub-ledgers</p>
                 </div>
-                <div className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[10px] font-black border border-slate-200 uppercase">
+                <div className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[10px] font-semibold border border-slate-200 uppercase">
                   {divisions?.length || 0} Total
                 </div>
               </div>
@@ -235,7 +235,7 @@ export default function FinanceDashboard() {
                     <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-inner">
                       <Layers className="w-4 h-4" />
                     </div>
-                    <h3 className="font-bold text-slate-900 text-sm">
+                    <h3 className="font-semibold text-slate-900 text-sm">
                       {division.name}
                     </h3>
                   </div>
@@ -247,11 +247,11 @@ export default function FinanceDashboard() {
             <div className="space-y-6">
               <div className="flex items-center justify-between px-2">
                 <div>
-                  <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                  <h2 className="text-lg font-semibold text-slate-900 tracking-tight flex items-center gap-2">
                     <BookOpen className="w-5 h-5 text-emerald-600" />
                     Journal Logic
                   </h2>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Transaction Schemas</p>
+                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Transaction Schemas</p>
                 </div>
                 <button
                   onClick={() => setOpenCreateJournalType(true)}
@@ -270,9 +270,9 @@ export default function FinanceDashboard() {
                       <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-inner">
                         <Settings2 className="w-4 h-4" />
                       </div>
-                      <h3 className="font-bold text-slate-900 text-sm">{type.name}</h3>
+                      <h3 className="font-semibold text-slate-900 text-sm">{type.name}</h3>
                     </div>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-tight line-clamp-2 px-1">
+                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-tight line-clamp-2 px-1">
                       {type.description}
                     </p>
                   </div>
@@ -284,11 +284,11 @@ export default function FinanceDashboard() {
             <div className="space-y-6">
               <div className="flex items-center justify-between px-2">
                 <div>
-                  <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                  <h2 className="text-lg font-semibold text-slate-900 tracking-tight flex items-center gap-2">
                     <Users className="w-5 h-5 text-emerald-600" />
                     Ecosystem
                   </h2>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Partner Entities</p>
+                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Partner Entities</p>
                 </div>
                 <button
                   onClick={() => setOpenCreatePartnerType(true)}
@@ -307,9 +307,9 @@ export default function FinanceDashboard() {
                       <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-inner">
                         <Briefcase className="w-4 h-4" />
                       </div>
-                      <h3 className="font-bold text-slate-900 text-sm">{type.name}</h3>
+                      <h3 className="font-semibold text-slate-900 text-sm">{type.name}</h3>
                     </div>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-tight line-clamp-2 px-1">
+                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-tight line-clamp-2 px-1">
                       {type.description}
                     </p>
                   </div>

@@ -63,7 +63,7 @@ export default function JournalDetailPage() {
           </li>
           <li><span className="text-black/30">/</span></li>
           <li>
-            <span className="font-bold text-black">Journal: {journal?.reference}</span>
+            <span className="font-semibold text-black">Journal: {journal?.reference}</span>
           </li>
         </ol>
       </nav>
@@ -75,25 +75,25 @@ export default function JournalDetailPage() {
             <div className="w-8 h-8 rounded-lg bg-[#D0402B] flex items-center justify-center text-white shadow-lg shadow-[#D0402B]/20">
               <FileText className="w-4 h-4" />
             </div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#D0402B]">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#D0402B]">
               Journal Detail Analysis
             </p>
           </div>
-          <h1 className="text-xl font-bold text-black tracking-tighter italic">
+          <h1 className="text-xl font-semibold text-black tracking-tighter italic">
             {journal?.description || "Financial Record"}
           </h1>
-          <p className="text-black/40 font-bold mt-1 text-sm italic">
+          <p className="text-black/40 font-semibold mt-1 text-sm italic">
             Registry Code: <span className="text-black">{journal?.code}</span>
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           {journal?.is_posted ? (
-            <span className="inline-flex items-center justify-center bg-green-500/10 text-green-600 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
+            <span className="inline-flex items-center justify-center bg-green-500/10 text-green-600 border-none font-semibold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
               <CheckCircle2 className="w-3 h-3 mr-2" /> Posted to Ledger
             </span>
           ) : (
-            <span className="inline-flex items-center justify-center bg-orange-500/10 text-orange-600 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl text-center">
+            <span className="inline-flex items-center justify-center bg-orange-500/10 text-orange-600 border-none font-semibold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl text-center">
               <Clock className="w-3 h-3 mr-2" /> Pending Finalization
             </span>
           )}
@@ -104,14 +104,14 @@ export default function JournalDetailPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <div className="p-6">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-2">
               Total Debit
             </p>
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-2xl bg-green-500/5 flex items-center justify-center text-green-600">
                 <ArrowUpRight className="w-5 h-5" />
               </div>
-              <p className="text-xl font-bold text-green-600 tracking-tight">
+              <p className="text-xl font-semibold text-green-600 tracking-tight">
                 KES{" "}
                 {totalDebit.toLocaleString(undefined, {
                   minimumFractionDigits: 2,
@@ -124,10 +124,10 @@ export default function JournalDetailPage() {
         <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <div className="p-6">
             <div>
-              <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+              <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                 Total Credit
               </p>
-              <p className="text-xl font-bold text-[#D0402B] tracking-tight">
+              <p className="text-xl font-semibold text-[#D0402B] tracking-tight">
                 KES{" "}
                 {totalCredit.toLocaleString(undefined, {
                   minimumFractionDigits: 2,
@@ -146,15 +146,15 @@ export default function JournalDetailPage() {
               <History className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-black tracking-tight italic">
+              <h3 className="text-xl font-semibold text-black tracking-tight italic">
                 Journal <span className="text-[#D0402B]">Entries</span>
               </h3>
-              <p className="text-black/30 font-bold uppercase text-[9px] tracking-widest mt-0.5">
+              <p className="text-black/30 font-semibold uppercase text-[9px] tracking-widest mt-0.5">
                 Detailed ledger breakdown for {journal?.reference}
               </p>
             </div>
           </div>
-          <span className="bg-black/5 text-black border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-xl inline-block">
+          <span className="bg-black/5 text-black border-none font-semibold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-xl inline-block">
             {journal?.journal_entries?.length || 0} Line Items
           </span>
         </div>
@@ -163,22 +163,22 @@ export default function JournalDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/5 bg-black/5">
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Ledger Book
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Division
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Partner
                   </th>
-                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-right py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Debit
                   </th>
-                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-right py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Credit
                   </th>
-                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-center">
+                  <th className="text-right py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60 text-center">
                     Explore
                   </th>
                 </tr>
@@ -200,19 +200,19 @@ export default function JournalDetailPage() {
                             <p className="text-sm font-medium text-black group-hover:text-[#D0402B] transition-colors">
                               {entry.book}
                             </p>
-                            <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest">
+                            <p className="text-[10px] font-semibold text-black/30 uppercase tracking-widest">
                               General Ledger
                             </p>
                           </div>
                         </div>
                       </td>
                       <td className="py-2.5 px-4 border-b border-black/5">
-                        <span className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none inline-block">
+                        <span className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-semibold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none inline-block">
                           {entry.division || "Entity Core"}
                         </span>
                       </td>
                       <td className="py-2.5 px-4 border-b border-black/5">
-                        <p className="text-xs font-bold text-black/60 truncate max-w-[120px]">
+                        <p className="text-xs font-semibold text-black/60 truncate max-w-[120px]">
                           {entry.partner || (
                             <span className="text-black/20 italic">
                               No Partner
@@ -254,7 +254,7 @@ export default function JournalDetailPage() {
                     <td colSpan={6} className="py-20 text-center">
                       <div className="flex flex-col items-center justify-center text-black/10">
                         <History className="w-12 h-12 mb-4" />
-                        <p className="text-xs font-bold uppercase tracking-[0.2em]">
+                        <p className="text-xs font-semibold uppercase tracking-[0.2em]">
                           No transactional movements found
                         </p>
                       </div>
@@ -274,12 +274,12 @@ export default function JournalDetailPage() {
             <div className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/40">
               <FileText className="w-4 h-4" />
             </div>
-            <h4 className="text-sm font-bold uppercase tracking-widest text-black/60 italic">
+            <h4 className="text-sm font-semibold uppercase tracking-widest text-black/60 italic">
               Administrative Records &{" "}
               <span className="text-[#D0402B]">Annotations</span>
             </h4>
           </div>
-          <p className="text-sm font-bold text-black/40 leading-relaxed max-w-2xl bg-white/40 p-6 rounded-2xl italic shadow-inner">
+          <p className="text-sm font-semibold text-black/40 leading-relaxed max-w-2xl bg-white/40 p-6 rounded-2xl italic shadow-inner">
             &quot;{journal.description}&quot; &mdash; System generated entry for
             internal ledger synchronization. All values are calculated based on
             the underlying transaction data and verified against the

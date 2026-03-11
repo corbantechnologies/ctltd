@@ -18,22 +18,22 @@ export default function FinancePartnersPage() {
           </li>
           <li><span className="text-black/30">/</span></li>
           <li>
-            <span className="font-bold text-black">Partners Hub</span>
+            <span className="font-semibold text-black">Partners Hub</span>
           </li>
         </ol>
       </nav>
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-black tracking-tighter">
+          <h1 className="text-xl font-semibold text-black tracking-tighter">
             Operational Partners
           </h1>
-          <p className="text-black/60 font-bold text-xs mt-0.5">
+          <p className="text-black/60 font-semibold text-xs mt-0.5">
             Manage vendors, clients, and internal entities
           </p>
         </div>
         <button
           onClick={() => setOpenCreatePartner(true)}
-          className="flex items-center justify-center gap-1.5 h-9 px-4 bg-[#045138] hover:bg-black text-white rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95"
+          className="flex items-center justify-center gap-1.5 h-9 px-4 bg-[#045138] hover:bg-black text-white rounded-xl font-semibold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95"
         >
           <Plus className="w-3.5 h-3.5" />
           Register Partner

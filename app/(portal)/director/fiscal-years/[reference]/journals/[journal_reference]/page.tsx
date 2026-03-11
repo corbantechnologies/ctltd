@@ -52,7 +52,7 @@ export default function JournalsDetailPage() {
   if (isLoading) return <LoadingSpinner />;
   if (!journal)
     return (
-      <div className="p-12 text-center font-bold text-black/20">
+      <div className="p-12 text-center font-semibold text-black/20">
         Journal not found.
       </div>
     );
@@ -79,7 +79,7 @@ export default function JournalsDetailPage() {
           </li>
           <li><span className="text-black/30">/</span></li>
           <li>
-            <span className="font-bold text-black">{journal.description}</span>
+            <span className="font-semibold text-black">{journal.description}</span>
           </li>
         </ol>
       </nav>
@@ -95,11 +95,10 @@ export default function JournalsDetailPage() {
               <ArrowLeft className="w-4 h-4" />
             </button>
             <span
-              className={`inline-flex items-center justify-center px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border-none ${
-                journal.is_posted
+              className={`inline-flex items-center justify-center px-4 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-widest border-none ${journal.is_posted
                   ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
                   : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
-              }`}
+                }`}
             >
               {journal.is_posted ? (
                 <span className="flex items-center gap-2">
@@ -113,10 +112,10 @@ export default function JournalsDetailPage() {
             </span>
           </div>
           <div>
-            <h1 className="text-xl font-bold text-black tracking-tighter mb-2">
+            <h1 className="text-xl font-semibold text-black tracking-tighter mb-2">
               {journal.description || "Untitled Journal Batch"}
             </h1>
-            <div className="flex flex-wrap gap-4 text-sm font-bold text-black/40">
+            <div className="flex flex-wrap gap-4 text-sm font-semibold text-black/40">
               <span className="flex items-center gap-2 bg-white/50 px-3 py-1 rounded-lg border border-black/5">
                 <Calendar className="w-4 h-4" />
                 {new Date(journal.date).toLocaleDateString(undefined, {
@@ -138,10 +137,10 @@ export default function JournalsDetailPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <div className="p-6">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-2">
               Total Debit
             </p>
-            <p className="text-xl font-bold text-black tracking-tight">
+            <p className="text-xl font-semibold text-black tracking-tight">
               {new Intl.NumberFormat("en-KE", {
                 style: "currency",
                 currency: journal.currency,
@@ -151,10 +150,10 @@ export default function JournalsDetailPage() {
         </div>
         <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
           <div className="p-6">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-2">
               Total Credit
             </p>
-            <p className="text-xl font-bold text-black tracking-tight">
+            <p className="text-xl font-semibold text-black tracking-tight">
               {new Intl.NumberFormat("en-KE", {
                 style: "currency",
                 currency: journal.currency,
@@ -163,21 +162,19 @@ export default function JournalsDetailPage() {
           </div>
         </div>
         <div
-          className={`border-black/5 backdrop-blur-xl rounded-2xl shadow-sm transition-colors border ${
-            isBalanced
+          className={`border-black/5 backdrop-blur-xl rounded-2xl shadow-sm transition-colors border ${isBalanced
               ? "bg-[#D0402B]/5 border-[#D0402B]/20"
               : "bg-red-500/5 border-red-500/20"
-          }`}
+            }`}
         >
           <div className="p-6">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-2">
               Balance Status
             </p>
             <div className="flex items-center gap-3">
               <p
-                className={`text-xl font-bold tracking-tight ${
-                  isBalanced ? "text-[#045138]" : "text-red-600"
-                }`}
+                className={`text-xl font-semibold tracking-tight ${isBalanced ? "text-[#045138]" : "text-red-600"
+                  }`}
               >
                 {isBalanced ? "Balanced" : "Unbalanced"}
               </p>
@@ -198,11 +195,11 @@ export default function JournalsDetailPage() {
       {/* Entries List */}
       <div className="border border-black/5 bg-white/50 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl shadow-black/5 pb-24">
         <div className="p-8 border-b border-black/5 flex justify-between items-center">
-          <h3 className="text-xl font-bold text-black tracking-tight flex items-center gap-3">
+          <h3 className="text-xl font-semibold text-black tracking-tight flex items-center gap-3">
             <Receipt className="w-5 h-5 text-[#D0402B]" />
             Transaction Entries
           </h3>
-          <span className="bg-black/5 px-3 py-1 rounded-full text-xs font-bold text-black/60">
+          <span className="bg-black/5 px-3 py-1 rounded-full text-xs font-semibold text-black/60">
             {journal.journal_entries.length} Records
           </span>
         </div>
@@ -211,19 +208,19 @@ export default function JournalsDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="bg-black/5 border-b border-black/5 text-left">
-                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Account Book
                   </th>
-                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Partner / Division
                   </th>
-                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Details
                   </th>
-                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-right">
+                  <th className="py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60 text-right">
                     Debit
                   </th>
-                  <th className="py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-right">
+                  <th className="py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60 text-right">
                     Credit
                   </th>
                 </tr>
@@ -236,7 +233,7 @@ export default function JournalsDetailPage() {
                     onClick={() => setSelectedEntry(entry)}
                   >
                     <td className="py-2.5 px-4 border-b border-black/5">
-                      <div className="font-bold text-black group-hover:text-[#D0402B] transition-colors">
+                      <div className="font-semibold text-black group-hover:text-[#D0402B] transition-colors">
                         {entry.book}
                       </div>
                       <div className="text-[10px] uppercase text-black/40 tracking-wider">
@@ -244,7 +241,7 @@ export default function JournalsDetailPage() {
                       </div>
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
-                      <div className="font-bold text-black">
+                      <div className="font-semibold text-black">
                         {entry.partner || "—"}
                       </div>
                       <div className="text-[10px] text-black/40">
@@ -256,7 +253,7 @@ export default function JournalsDetailPage() {
                         {entry.notes || "No notes"}
                       </div>
                       {(entry.source_document || entry.document_number) && (
-                        <div className="text-[10px] font-bold text-[#045138] uppercase tracking-wider mt-0.5">
+                        <div className="text-[10px] font-semibold text-[#045138] uppercase tracking-wider mt-0.5">
                           {entry.source_document} #{entry.document_number}
                         </div>
                       )}
@@ -264,17 +261,17 @@ export default function JournalsDetailPage() {
                     <td className="py-2.5 px-4 border-b border-black/5 text-right font-mono text-black/80">
                       {parseFloat(entry.debit) > 0
                         ? new Intl.NumberFormat("en-KE", {
-                            style: "decimal",
-                            minimumFractionDigits: 2,
-                          }).format(parseFloat(entry.debit))
+                          style: "decimal",
+                          minimumFractionDigits: 2,
+                        }).format(parseFloat(entry.debit))
                         : "—"}
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5 text-right font-mono text-black/80">
                       {parseFloat(entry.credit) > 0
                         ? new Intl.NumberFormat("en-KE", {
-                            style: "decimal",
-                            minimumFractionDigits: 2,
-                          }).format(parseFloat(entry.credit))
+                          style: "decimal",
+                          minimumFractionDigits: 2,
+                        }).format(parseFloat(entry.credit))
                         : "—"}
                     </td>
                   </tr>

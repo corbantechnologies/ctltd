@@ -47,7 +47,7 @@ export default function BookDetailPage() {
           </li>
           <li><span className="text-black/30">/</span></li>
           <li>
-            <span className="font-bold text-black">{book?.name}</span>
+            <span className="font-semibold text-black">{book?.name}</span>
           </li>
         </ol>
       </nav>
@@ -63,14 +63,14 @@ export default function BookDetailPage() {
                 <BookIcon className="w-4 h-4" />
               )}
             </div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#D0402B]">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#D0402B]">
               Ledger Account Deep-Dive
             </p>
           </div>
-          <h1 className="text-xl font-bold text-black tracking-tighter">
+          <h1 className="text-xl font-semibold text-black tracking-tighter">
             {book?.name}
           </h1>
-          <p className="text-black/40 font-bold mt-1 text-sm italic">
+          <p className="text-black/40 font-semibold mt-1 text-sm italic">
             Classification:{" "}
             <span className="text-black uppercase">{book?.account_type}</span>
           </p>
@@ -78,11 +78,11 @@ export default function BookDetailPage() {
 
         <div className="flex items-center gap-2">
           {book?.is_active ? (
-            <span className="bg-green-500/10 text-green-600 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
+            <span className="bg-green-500/10 text-green-600 border-none font-semibold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
               Active Ledger
             </span>
           ) : (
-            <span className="bg-black/5 text-black/40 border-none font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
+            <span className="bg-black/5 text-black/40 border-none font-semibold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl">
               Retired
             </span>
           )}
@@ -98,10 +98,10 @@ export default function BookDetailPage() {
                 <Calendar className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                   Created
                 </p>
-                <p className="text-base font-bold text-black tracking-tight">
+                <p className="text-base font-semibold text-black tracking-tight">
                   {book?.created_at && new Date(book.created_at).toLocaleDateString()}
                 </p>
               </div>
@@ -116,10 +116,10 @@ export default function BookDetailPage() {
                 <Hash className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                   Book Code
                 </p>
-                <p className="text-base font-bold text-black tracking-tight font-mono">
+                <p className="text-base font-semibold text-black tracking-tight font-mono">
                   {book?.code}
                 </p>
               </div>
@@ -134,10 +134,10 @@ export default function BookDetailPage() {
                 <ArrowUpDown className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                   Normal Balance
                 </p>
-                <p className="text-base font-bold text-black tracking-tight uppercase">
+                <p className="text-base font-semibold text-black tracking-tight uppercase">
                   {(book as any).normal_balance}
                 </p>
               </div>
@@ -152,10 +152,10 @@ export default function BookDetailPage() {
                 <Wallet className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                   Current Balance
                 </p>
-                <p className="text-base font-bold text-green-600 tracking-tight">
+                <p className="text-base font-semibold text-green-600 tracking-tight">
                   KES{" "}
                   {parseFloat((book as any).balance).toLocaleString(undefined, {
                     minimumFractionDigits: 2,
@@ -177,10 +177,10 @@ export default function BookDetailPage() {
                 <History className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-black tracking-tight">
+                <h3 className="text-xl font-semibold text-black tracking-tight">
                   Ledger History
                 </h3>
-                <p className="text-black/30 font-bold uppercase text-[9px] tracking-widest mt-0.5">
+                <p className="text-black/30 font-semibold uppercase text-[9px] tracking-widest mt-0.5">
                   Chronological Transaction Records
                 </p>
               </div>
@@ -192,22 +192,22 @@ export default function BookDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/5 bg-black/5">
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Post Date
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Reference
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Partner / Branch
                   </th>
-                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-right py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Debit
                   </th>
-                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-right py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Credit
                   </th>
-                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60 text-center">
+                  <th className="text-right py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60 text-center">
                     Actions
                   </th>
                 </tr>
@@ -223,7 +223,7 @@ export default function BookDetailPage() {
                         <p className="text-sm font-medium text-black">
                           {new Date(entry.created_at).toLocaleDateString()}
                         </p>
-                        <p className="text-[10px] font-bold text-black/30 uppercase mt-0.5">
+                        <p className="text-[10px] font-semibold text-black/30 uppercase mt-0.5">
                           {new Date(entry.created_at).toLocaleTimeString()}
                         </p>
                       </td>
@@ -236,7 +236,7 @@ export default function BookDetailPage() {
                         </div>
                       </td>
                       <td className="py-2.5 px-4 border-b border-black/5">
-                        <span className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none inline-block">
+                        <span className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-semibold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none inline-block">
                           {entry.division || "Entity Core"}
                         </span>
                       </td>
@@ -272,7 +272,7 @@ export default function BookDetailPage() {
                         <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/20 mb-3">
                           <History className="w-6 h-6" />
                         </div>
-                        <p className="text-xs font-bold text-black/30 uppercase tracking-widest">
+                        <p className="text-xs font-semibold text-black/30 uppercase tracking-widest">
                           No financial history detected
                         </p>
                       </div>

@@ -71,7 +71,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
           <input
             type="text"
             placeholder="Search partners..."
-            className="pl-9 h-10 w-full bg-white border border-black/5 rounded focus:outline-none focus:ring-0 focus:border-black/20 transition-all font-bold text-xs"
+            className="pl-9 h-10 w-full bg-white border border-black/5 rounded focus:outline-none focus:ring-0 focus:border-black/20 transition-all font-semibold text-xs"
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
@@ -91,7 +91,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
               setTypeFilter(e.target.value);
               setCurrentPage(1);
             }}
-            className="h-10 w-[180px] bg-white border border-black/5 rounded font-bold text-[10px] uppercase tracking-wide px-3 outline-none focus:ring-1 focus:ring-black/10 cursor-pointer"
+            className="h-10 w-[180px] bg-white border border-black/5 rounded font-semibold text-[10px] uppercase tracking-wide px-3 outline-none focus:ring-1 focus:ring-black/10 cursor-pointer"
           >
             <option value="all">All Categories</option>
             {partnerTypes?.map((type) => (
@@ -154,7 +154,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                       <Users className="w-5 h-5" />
                     </div>
                     <span
-                      className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-widest inline-block ${partner.is_active
+                      className={`px-2 py-0.5 rounded text-[9px] font-semibold uppercase tracking-widest inline-block ${partner.is_active
                         ? "bg-green-500/10 text-green-600"
                         : "bg-red-500/10 text-red-600"
                         }`}
@@ -164,10 +164,10 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                   </div>
 
                   <div>
-                    <h3 className="text-base font-bold text-black tracking-tight mb-1 line-clamp-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-black group-hover:to-black/60 transition-all">
+                    <h3 className="text-base font-semibold text-black tracking-tight mb-1 line-clamp-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-black group-hover:to-black/60 transition-all">
                       {partner.name}
                     </h3>
-                    <div className="flex items-center gap-2 text-[9px] font-bold text-black/40 uppercase tracking-wider">
+                    <div className="flex items-center gap-2 text-[9px] font-semibold text-black/40 uppercase tracking-wider">
                       <Briefcase className="w-3 h-3" />
                       {partner.partner_type}
                     </div>
@@ -176,7 +176,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                   <div className="space-y-3 pt-3 border-t border-black/5">
                     <div className="flex items-center gap-2 text-xs text-black/60">
                       <Building2 className="w-3.5 h-3.5 opacity-50" />
-                      <span className="truncate text-xs font-bold">
+                      <span className="truncate text-xs font-semibold">
                         {partner.division || "Global"}
                       </span>
                     </div>
@@ -194,16 +194,16 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
             <table className="w-full text-left min-w-[700px]">
               <thead className="bg-black/5">
                 <tr className="border-b border-black/5">
-                  <th className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
+                  <th className="py-2 px-4 text-[10px] font-semibold text-black/60 uppercase tracking-wider">
                     Entity
                   </th>
-                  <th className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
+                  <th className="py-2 px-4 text-[10px] font-semibold text-black/60 uppercase tracking-wider">
                     Division
                   </th>
-                  <th className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
+                  <th className="py-2 px-4 text-[10px] font-semibold text-black/60 uppercase tracking-wider">
                     Category
                   </th>
-                  <th className="py-2 px-4 text-[10px] font-bold text-black/60 uppercase tracking-wider">
+                  <th className="py-2 px-4 text-[10px] font-semibold text-black/60 uppercase tracking-wider">
                     Status
                   </th>
                 </tr>
@@ -234,17 +234,17 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                       {partner.division}
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
-                      <span className="bg-white border border-black/5 text-black/70 font-bold text-[10px] px-2 py-0.5 rounded-sm shadow-none inline-block">
+                      <span className="bg-white border border-black/5 text-black/70 font-semibold text-[10px] px-2 py-0.5 rounded-sm shadow-none inline-block">
                         {partner.partner_type}
                       </span>
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
                       {partner.is_active ? (
-                        <div className="flex items-center gap-1.5 text-[10px] font-bold text-green-600 uppercase tracking-wider">
+                        <div className="flex items-center gap-1.5 text-[10px] font-semibold text-green-600 uppercase tracking-wider">
                           <CheckCircle2 className="w-3.5 h-3.5" /> Active
                         </div>
                       ) : (
-                        <div className="flex items-center gap-1.5 text-[10px] font-bold text-red-600 uppercase tracking-wider">
+                        <div className="flex items-center gap-1.5 text-[10px] font-semibold text-red-600 uppercase tracking-wider">
                           <AlertCircle className="w-3.5 h-3.5" /> Inactive
                         </div>
                       )}
@@ -260,7 +260,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
       {/* Pagination Controls */}
       {totalPages > 1 && (
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/50 backdrop-blur-xl p-4 rounded border border-black/5">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-black/30">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-black/30">
             Showing{" "}
             <span className="text-black">{paginatedPartners.length}</span> of{" "}
             <span className="text-black">{filteredPartners.length}</span>{" "}
@@ -289,7 +289,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-8 h-8 rounded text-[10px] font-bold transition-all ${currentPage === page
+                      className={`w-8 h-8 rounded text-[10px] font-semibold transition-all ${currentPage === page
                         ? "text-white shadow-md"
                         : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
                         }`}
@@ -338,7 +338,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
           <div className="w-16 h-16 bg-black/5 rounded flex items-center justify-center mx-auto mb-4">
             <Search className="w-8 h-8 text-black/20" />
           </div>
-          <h3 className="text-xl font-bold text-black/30 tracking-tight">
+          <h3 className="text-xl font-semibold text-black/30 tracking-tight">
             No partners found
           </h3>
           <p className="text-black/20 font-medium mt-1">

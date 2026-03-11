@@ -57,8 +57,8 @@ export function ClaimOfferModal({
             <CheckCircle2 className="w-12 h-12 text-corporate-primary" />
           </div>
           <div>
-            <h2 className="text-xl font-bold mb-4">Claim Received!</h2>
-            <p className="font-bold opacity-60 leading-relaxed">
+            <h2 className="text-xl font-semibold mb-4">Claim Received!</h2>
+            <p className="font-semibold opacity-60 leading-relaxed">
               Thank you,{" "}
               <span className="text-corporate-primary">
                 {formData.userName}
@@ -69,7 +69,7 @@ export function ClaimOfferModal({
           </div>
           <button
             onClick={onClose}
-            className="w-full bg-corporate-primary hover:bg-orange-600 text-white rounded-2xl py-8 font-bold uppercase tracking-widest text-[10px]"
+            className="w-full bg-corporate-primary hover:bg-orange-600 text-white rounded-2xl py-8 font-semibold uppercase tracking-widest text-[10px]"
           >
             Close
           </button>
@@ -86,13 +86,13 @@ export function ClaimOfferModal({
           <div className="bg-black p-12 text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-corporate-primary/20 rounded-full blur-[60px] translate-x-1/2 -translate-y-1/2" />
             <Sparkles className="w-12 h-12 text-corporate-primary mb-6 animate-pulse" />
-            <h2 className="text-xl font-bold leading-tight mb-2 tracking-tighter">
+            <h2 className="text-xl font-semibold leading-tight mb-2 tracking-tighter">
               Claim Your Exclusive <br />
               <span className="text-corporate-primary italic">
                 Opportunity.
               </span>
             </h2>
-            <p className="text-white/40 font-bold uppercase tracking-widest text-[10px]">
+            <p className="text-white/40 font-semibold uppercase tracking-widest text-[10px]">
               {offerTitle}
             </p>
           </div>
@@ -103,7 +103,7 @@ export function ClaimOfferModal({
               <div className="space-y-3 flex flex-col items-start">
                 <label
                   htmlFor="userName"
-                  className="font-bold uppercase tracking-widest text-[10px] opacity-40 ml-1"
+                  className="font-semibold uppercase tracking-widest text-[10px] opacity-40 ml-1"
                 >
                   Your Full Name
                 </label>
@@ -111,7 +111,7 @@ export function ClaimOfferModal({
                   id="userName"
                   required
                   placeholder="e.g. John Doe"
-                  className="w-full rounded-2xl border-black/5 bg-corporate-secondary py-6 px-6 font-bold focus:ring-corporate-primary/30 focus:outline-none focus:ring-1"
+                  className="w-full rounded-2xl border-black/5 bg-corporate-secondary py-6 px-6 font-semibold focus:ring-corporate-primary/30 focus:outline-none focus:ring-1"
                   value={formData.userName}
                   onChange={(e) =>
                     setFormData({ ...formData, userName: e.target.value })
@@ -121,7 +121,7 @@ export function ClaimOfferModal({
               <div className="space-y-3 flex flex-col items-start">
                 <label
                   htmlFor="phone"
-                  className="font-bold uppercase tracking-widest text-[10px] opacity-40 ml-1"
+                  className="font-semibold uppercase tracking-widest text-[10px] opacity-40 ml-1"
                 >
                   Phone Number
                 </label>
@@ -129,7 +129,7 @@ export function ClaimOfferModal({
                   id="phone"
                   required
                   placeholder="+254..."
-                  className="w-full rounded-2xl border-black/5 bg-corporate-secondary py-6 px-6 font-bold focus:ring-corporate-primary/30 focus:outline-none focus:ring-1"
+                  className="w-full rounded-2xl border-black/5 bg-corporate-secondary py-6 px-6 font-semibold focus:ring-corporate-primary/30 focus:outline-none focus:ring-1"
                   value={formData.phone}
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
@@ -142,14 +142,14 @@ export function ClaimOfferModal({
               <div className="space-y-3 flex flex-col items-start">
                 <label
                   htmlFor="whatsapp"
-                  className="font-bold uppercase tracking-widest text-[10px] opacity-40 ml-1"
+                  className="font-semibold uppercase tracking-widest text-[10px] opacity-40 ml-1"
                 >
                   WhatsApp (Optional)
                 </label>
                 <input
                   id="whatsapp"
                   placeholder="If different from phone"
-                  className="w-full rounded-2xl border-black/5 bg-corporate-secondary py-6 px-6 font-bold focus:outline-none focus:ring-1"
+                  className="w-full rounded-2xl border-black/5 bg-corporate-secondary py-6 px-6 font-semibold focus:outline-none focus:ring-1"
                   value={formData.whatsapp}
                   onChange={(e) =>
                     setFormData({ ...formData, whatsapp: e.target.value })
@@ -159,7 +159,7 @@ export function ClaimOfferModal({
               <div className="space-y-3 flex flex-col items-start">
                 <label
                   htmlFor="email"
-                  className="font-bold uppercase tracking-widest text-[10px] opacity-40 ml-1"
+                  className="font-semibold uppercase tracking-widest text-[10px] opacity-40 ml-1"
                 >
                   Email (Optional)
                 </label>
@@ -167,7 +167,7 @@ export function ClaimOfferModal({
                   id="email"
                   type="email"
                   placeholder="For email confirmation"
-                  className="w-full rounded-2xl border-black/5 bg-corporate-secondary py-6 px-6 font-bold focus:outline-none focus:ring-1"
+                  className="w-full rounded-2xl border-black/5 bg-corporate-secondary py-6 px-6 font-semibold focus:outline-none focus:ring-1"
                   value={formData.email}
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
@@ -180,7 +180,7 @@ export function ClaimOfferModal({
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white rounded-[24px] py-6 text-xl font-bold shadow-2xl shadow-orange-500/20 transition-all active:scale-95 disabled:opacity-50"
+                className="w-full flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white rounded-[24px] py-6 text-xl font-semibold shadow-2xl shadow-orange-500/20 transition-all active:scale-95 disabled:opacity-50"
               >
                 {loading ? (
                   <Loader2 className="w-6 h-6 animate-spin" />
@@ -189,7 +189,7 @@ export function ClaimOfferModal({
                 )}
               </button>
             </div>
-            <p className="text-center text-[10px] font-bold uppercase tracking-[0.2em] opacity-30 italic">
+            <p className="text-center text-[10px] font-semibold uppercase tracking-[0.2em] opacity-30 italic">
               Our team will contact you within 24 hours.
             </p>
             {/* Honeypot field */}

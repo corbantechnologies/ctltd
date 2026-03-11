@@ -63,7 +63,7 @@ export default function BooksList({
         <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center text-black/20 mb-4 shadow-sm">
           <BookIcon className="w-8 h-8" />
         </div>
-        <p className="text-sm font-bold text-black/40 uppercase tracking-widest">
+        <p className="text-sm font-semibold text-black/40 uppercase tracking-widest">
           No ledger books found
         </p>
       </div>
@@ -88,7 +88,7 @@ export default function BooksList({
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              className="pl-11 h-12 w-full rounded-xl border border-black/5 bg-black/5 focus:bg-white transition-all font-bold text-xs focus:outline-none focus:ring-1"
+              className="pl-11 h-12 w-full rounded-xl border border-black/5 bg-black/5 focus:bg-white transition-all font-semibold text-xs focus:outline-none focus:ring-1"
             />
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function BooksList({
         <div className="flex items-center gap-2 bg-black/5 p-1.5 rounded-xl self-end lg:self-auto">
           <button
             onClick={() => setView("grid")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "grid"
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-semibold uppercase tracking-widest transition-all ${view === "grid"
               ? "bg-white shadow-sm"
               : "text-black/40 hover:text-black"
               }`}
@@ -111,7 +111,7 @@ export default function BooksList({
           </button>
           <button
             onClick={() => setView("table")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${view === "table"
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-semibold uppercase tracking-widest transition-all ${view === "table"
               ? "bg-white shadow-sm"
               : "text-black/40 hover:text-black"
               }`}
@@ -130,7 +130,7 @@ export default function BooksList({
       {/* Content Rendering */}
       {paginatedBooks.length === 0 ? (
         <div className="py-20 text-center">
-          <p className="text-sm font-bold text-black/20 uppercase tracking-[0.2em]">
+          <p className="text-sm font-semibold text-black/20 uppercase tracking-[0.2em]">
             No books match your criteria
           </p>
         </div>
@@ -155,11 +155,11 @@ export default function BooksList({
                       )}
                     </div>
                     {book.is_active ? (
-                      <span className="bg-green-500/10 text-green-600 border-none font-bold text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full inline-block">
+                      <span className="bg-green-500/10 text-green-600 border-none font-semibold text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full inline-block">
                         Active
                       </span>
                     ) : (
-                      <span className="bg-black/5 text-black/40 border-none font-bold text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full inline-block">
+                      <span className="bg-black/5 text-black/40 border-none font-semibold text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full inline-block">
                         Inactive
                       </span>
                     )}
@@ -167,7 +167,7 @@ export default function BooksList({
 
                   <div className="mb-6 flex-1">
                     <h3
-                      className="text-lg font-bold text-black tracking-tight transition-colors line-clamp-2"
+                      className="text-lg font-semibold text-black tracking-tight transition-colors line-clamp-2"
                       style={
                         { "--hover-text": primaryColor } as CSSWithVariables
                       }
@@ -175,7 +175,7 @@ export default function BooksList({
                       {book.name}
                     </h3>
                     <p
-                      className="text-[10px] font-bold uppercase tracking-widest mt-1"
+                      className="text-[10px] font-semibold uppercase tracking-widest mt-1"
                       style={{ color: primaryColor } as CSSWithVariables}
                     >
                       {book.code}
@@ -184,23 +184,23 @@ export default function BooksList({
 
                   <div className="pt-4 border-t border-black/5 space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                      <span className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                         Classification
                       </span>
-                      <span className="text-[10px] font-bold text-black/60">
+                      <span className="text-[10px] font-semibold text-black/60">
                         {book.account_type}
                       </span>
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
                         {book.is_tax && (
-                          <span className="bg-orange-500/10 text-orange-600 border-none text-[8px] font-bold px-1.5 py-0.5 rounded-sm flex items-center">
+                          <span className="bg-orange-500/10 text-orange-600 border-none text-[8px] font-semibold px-1.5 py-0.5 rounded-sm flex items-center">
                             <Percent className="w-2 h-2 mr-1" />
                             TAX
                           </span>
                         )}
                         {book.is_bank && (
-                          <span className="bg-blue-500/10 text-blue-600 border-none text-[8px] font-bold px-1.5 py-0.5 rounded-sm inline-block">
+                          <span className="bg-blue-500/10 text-blue-600 border-none text-[8px] font-semibold px-1.5 py-0.5 rounded-sm inline-block">
                             BANK
                           </span>
                         )}
@@ -226,19 +226,19 @@ export default function BooksList({
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/10 bg-black/5">
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Book Identity
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Account Type
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Compliance
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Status
                   </th>
-                  <th className="text-right py-2 px-4 text-[10px] font-bold uppercase tracking-wider text-black/60">
+                  <th className="text-right py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
                     Audit
                   </th>
                 </tr>
@@ -272,31 +272,31 @@ export default function BooksList({
                           >
                             {book.name}
                           </p>
-                          <p className="text-[10px] font-bold text-black/30 uppercase tracking-widest mt-0.5">
+                          <p className="text-[10px] font-semibold text-black/30 uppercase tracking-widest mt-0.5">
                             {book.code}
                           </p>
                         </div>
                       </div>
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
-                      <p className="text-[11px] font-bold text-black/60 uppercase tracking-wider">
+                      <p className="text-[11px] font-semibold text-black/60 uppercase tracking-wider">
                         {book.account_type}
                       </p>
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex gap-1.5">
                         {book.is_tax && (
-                          <span className="bg-orange-500/10 text-orange-600 border-none text-[8px] font-bold px-1.5 py-0.5 rounded-sm inline-block">
+                          <span className="bg-orange-500/10 text-orange-600 border-none text-[8px] font-semibold px-1.5 py-0.5 rounded-sm inline-block">
                             TAX
                           </span>
                         )}
                         {book.is_bank && (
-                          <span className="bg-blue-500/10 text-blue-600 border-none text-[8px] font-bold px-1.5 py-0.5 rounded-sm inline-block">
+                          <span className="bg-blue-500/10 text-blue-600 border-none text-[8px] font-semibold px-1.5 py-0.5 rounded-sm inline-block">
                             BANK
                           </span>
                         )}
                         {!book.is_tax && !book.is_bank && (
-                          <span className="text-[10px] text-black/20 font-bold">
+                          <span className="text-[10px] text-black/20 font-semibold">
                             —
                           </span>
                         )}
@@ -306,14 +306,14 @@ export default function BooksList({
                       {book.is_active ? (
                         <div className="flex items-center gap-2 text-green-600">
                           <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                          <span className="text-[10px] font-bold uppercase tracking-wider">
+                          <span className="text-[10px] font-semibold uppercase tracking-wider">
                             In Operation
                           </span>
                         </div>
                       ) : (
                         <div className="flex items-center gap-2 text-black/30">
                           <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
-                          <span className="text-[10px] font-bold uppercase tracking-wider">
+                          <span className="text-[10px] font-semibold uppercase tracking-wider">
                             Retired
                           </span>
                         </div>
@@ -344,7 +344,7 @@ export default function BooksList({
       {/* Pagination Controls */}
       {totalPages > 1 && (
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/50 backdrop-blur-xl p-6 rounded-[24px] border border-black/5">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-black/30">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-black/30">
             Showing <span className="text-black">{paginatedBooks.length}</span>{" "}
             of <span className="text-black">{filteredBooks.length}</span> books
           </p>
@@ -371,7 +371,7 @@ export default function BooksList({
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-10 h-10 rounded-xl text-[10px] font-bold transition-all ${currentPage === page
+                      className={`w-10 h-10 rounded-xl text-[10px] font-semibold transition-all ${currentPage === page
                         ? "text-white shadow-lg"
                         : "bg-white border border-black/5 text-black/40 hover:text-black shadow-sm"
                         }`}

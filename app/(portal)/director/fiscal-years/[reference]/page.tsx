@@ -16,7 +16,7 @@ export default function FiscalYearDetail() {
   if (isLoading) return <LoadingSpinner />;
   if (!fiscalYear)
     return (
-      <div className="p-12 text-center font-bold text-gray-300">
+      <div className="p-12 text-center font-semibold text-gray-300">
         Fiscal Year not found.
       </div>
     );
@@ -37,7 +37,7 @@ export default function FiscalYearDetail() {
               </li>
               <li><span className="text-black/30">/</span></li>
               <li>
-                <span className="font-bold text-black">{fiscalYear.code}</span>
+                <span className="font-semibold text-black">{fiscalYear.code}</span>
               </li>
             </ol>
           </nav>
@@ -47,24 +47,24 @@ export default function FiscalYearDetail() {
               <CalendarRange className="w-7 h-7" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-black tracking-tighter italic leading-none">
+              <h1 className="text-xl font-semibold text-black tracking-tighter italic leading-none">
                 {fiscalYear.code}
               </h1>
               <div className="flex items-center gap-3 mt-2">
-                <span className="bg-black text-white border-none font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-lg inline-block">
+                <span className="bg-black text-white border-none font-semibold text-[10px] uppercase tracking-widest px-3 py-1 rounded-lg inline-block">
                   REF: {fiscalYear.reference}
                 </span>
                 {fiscalYear.is_active ? (
                   <div className="flex items-center gap-1.5 text-green-600 bg-green-50 px-3 py-1 rounded-full border border-green-100">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest">
+                    <span className="text-[10px] font-semibold uppercase tracking-widest">
                       Active
                     </span>
                   </div>
                 ) : (
                   <div className="flex items-center gap-1.5 text-gray-400 bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
                     <div className="w-1.5 h-1.5 rounded-full bg-gray-300" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest">
+                    <span className="text-[10px] font-semibold uppercase tracking-widest">
                       Closed
                     </span>
                   </div>
@@ -84,10 +84,10 @@ export default function FiscalYearDetail() {
                 <Calendar className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                   Fiscal Start
                 </p>
-                <p className="text-base font-bold text-black tracking-tight">
+                <p className="text-base font-semibold text-black tracking-tight">
                   {new Date(fiscalYear.start_date).toLocaleDateString(undefined, {
                     year: "numeric",
                     month: "long",
@@ -106,10 +106,10 @@ export default function FiscalYearDetail() {
                 <Calendar className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                   Fiscal End
                 </p>
-                <p className="text-base font-bold text-black tracking-tight">
+                <p className="text-base font-semibold text-black tracking-tight">
                   {new Date(fiscalYear.end_date).toLocaleDateString(undefined, {
                     year: "numeric",
                     month: "long",
@@ -133,11 +133,11 @@ export default function FiscalYearDetail() {
                 <Activity className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-black/30">
                   Status
                 </p>
                 <p
-                  className={`text-base font-bold tracking-tight ${fiscalYear.is_active ? "text-green-600" : "text-black/60"
+                  className={`text-base font-semibold tracking-tight ${fiscalYear.is_active ? "text-green-600" : "text-black/60"
                     }`}
                 >
                   {fiscalYear.is_active ? "Active Period" : "Closed Period"}
@@ -152,7 +152,7 @@ export default function FiscalYearDetail() {
       <div className="space-y-6">
         <div className="flex items-center gap-4">
           <div className="flex-1 h-px bg-gray-100" />
-          <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-black">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.3em] text-black">
             Period Journal Entries
           </h2>
           <div className="flex-1 h-px bg-gray-100" />

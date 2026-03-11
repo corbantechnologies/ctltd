@@ -44,7 +44,7 @@ export default function JournalEntryDetailModal({
 
   const DetailItem = ({ icon: Icon, label, value, className = "" }: any) => (
     <div className={`flex flex-col gap-1.5 ${className}`}>
-      <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 flex items-center gap-1.5">
+      <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 flex items-center gap-1.5">
         <Icon className="w-3 h-3" />
         {label}
       </span>
@@ -87,7 +87,7 @@ export default function JournalEntryDetailModal({
                 {entry.journal}
               </span>
             </div>
-            <h2 className="text-xl sm:text-3xl font-bold text-gray-900 tracking-tight leading-tight">
+            <h2 className="text-xl sm:text-3xl font-semibold text-gray-900 tracking-tight leading-tight">
               Journal Entry Details
             </h2>
             <div className="text-xs sm:text-sm text-gray-500 flex items-center gap-1.5 sm:gap-2">
@@ -113,7 +113,7 @@ export default function JournalEntryDetailModal({
         <div className="flex-1 overflow-y-auto p-5 sm:p-8 space-y-8 sm:space-y-10 custom-scrollbar">
           {/* Financials Section */}
           <section className="space-y-4 sm:space-y-5">
-            <h4 className="text-sm sm:text-base font-bold text-gray-900 flex items-center gap-2.5">
+            <h4 className="text-sm sm:text-base font-semibold text-gray-900 flex items-center gap-2.5">
               <div className="p-1.5 sm:p-2 bg-green-100/50 rounded-lg">
                 <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 text-green-700" />
               </div>
@@ -124,14 +124,14 @@ export default function JournalEntryDetailModal({
               <div
                 className={`p-5 sm:p-6 rounded-2xl border transition-all ${parseFloat(entry.debit) > 0 ? "bg-green-50/50 border-green-200 shadow-sm" : "bg-gray-50 border-gray-100 opacity-60"}`}
               >
-                <div className="text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-2 sm:mb-3 flex items-center gap-2">
+                <div className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest text-gray-500 mb-2 sm:mb-3 flex items-center gap-2">
                   <div
                     className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${parseFloat(entry.debit) > 0 ? "bg-green-500" : "bg-gray-300"}`}
                   />
                   Debit
                 </div>
                 <div
-                  className={`text-2xl sm:text-3xl font-bold tracking-tight ${parseFloat(entry.debit) > 0 ? "text-green-700" : "text-gray-400"}`}
+                  className={`text-2xl sm:text-3xl font-semibold tracking-tight ${parseFloat(entry.debit) > 0 ? "text-green-700" : "text-gray-400"}`}
                 >
                   {formatCurrency(entry.debit, entry.currency)}
                 </div>
@@ -141,14 +141,14 @@ export default function JournalEntryDetailModal({
               <div
                 className={`p-5 sm:p-6 rounded-2xl border transition-all ${parseFloat(entry.credit) > 0 ? "bg-orange-50/50 border-orange-200 shadow-sm" : "bg-gray-50 border-gray-100 opacity-60"}`}
               >
-                <div className="text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-2 sm:mb-3 flex items-center gap-2">
+                <div className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest text-gray-500 mb-2 sm:mb-3 flex items-center gap-2">
                   <div
                     className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${parseFloat(entry.credit) > 0 ? "bg-orange-500" : "bg-gray-300"}`}
                   />
                   Credit
                 </div>
                 <div
-                  className={`text-2xl sm:text-3xl font-bold tracking-tight ${parseFloat(entry.credit) > 0 ? "text-orange-700" : "text-gray-400"}`}
+                  className={`text-2xl sm:text-3xl font-semibold tracking-tight ${parseFloat(entry.credit) > 0 ? "text-orange-700" : "text-gray-400"}`}
                 >
                   {formatCurrency(entry.credit, entry.currency)}
                 </div>
@@ -157,18 +157,18 @@ export default function JournalEntryDetailModal({
               {/* Meta Data */}
               <div className="md:col-span-2 grid grid-cols-2 gap-3 sm:gap-4">
                 <div className="p-4 sm:p-5 rounded-xl border border-gray-200/60 bg-white shadow-sm flex flex-col justify-center">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 block mb-1">
+                  <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 block mb-1">
                     Currency
                   </span>
-                  <span className="text-lg sm:text-xl font-bold text-gray-900">
+                  <span className="text-lg sm:text-xl font-semibold text-gray-900">
                     {entry.currency}
                   </span>
                 </div>
                 <div className="p-4 sm:p-5 rounded-xl border border-gray-200/60 bg-white shadow-sm flex flex-col justify-center">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 block mb-1">
+                  <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 block mb-1">
                     Exchange Rate
                   </span>
-                  <span className="text-lg sm:text-xl font-bold text-gray-900">
+                  <span className="text-lg sm:text-xl font-semibold text-gray-900">
                     {entry.exchange_rate}
                   </span>
                 </div>
@@ -176,26 +176,26 @@ export default function JournalEntryDetailModal({
             </div>
             {(parseFloat(entry.foreign_debit) > 0 ||
               parseFloat(entry.foreign_credit) > 0) && (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 p-4 sm:p-5 bg-blue-50/30 rounded-xl border border-blue-100/50">
-                <DetailItem
-                  icon={Globe}
-                  label="Foreign Debit"
-                  value={formatCurrency(entry.foreign_debit, "USD")}
-                />
-                <DetailItem
-                  icon={Globe}
-                  label="Foreign Credit"
-                  value={formatCurrency(entry.foreign_credit, "USD")}
-                />
-              </div>
-            )}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 p-4 sm:p-5 bg-blue-50/30 rounded-xl border border-blue-100/50">
+                  <DetailItem
+                    icon={Globe}
+                    label="Foreign Debit"
+                    value={formatCurrency(entry.foreign_debit, "USD")}
+                  />
+                  <DetailItem
+                    icon={Globe}
+                    label="Foreign Credit"
+                    value={formatCurrency(entry.foreign_credit, "USD")}
+                  />
+                </div>
+              )}
           </section>
 
           <hr className="bg-gray-100 border-0 h-px" />
 
           {/* Entity & Classification */}
           <section className="space-y-4 sm:space-y-5">
-            <h4 className="text-sm sm:text-base font-bold text-gray-900 flex items-center gap-2.5">
+            <h4 className="text-sm sm:text-base font-semibold text-gray-900 flex items-center gap-2.5">
               <div className="p-1.5 sm:p-2 bg-blue-100/50 rounded-lg">
                 <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-blue-700" />
               </div>
@@ -231,7 +231,7 @@ export default function JournalEntryDetailModal({
 
           {/* Documentation */}
           <section className="space-y-4 sm:space-y-5">
-            <h4 className="text-sm sm:text-base font-bold text-gray-900 flex items-center gap-2.5">
+            <h4 className="text-sm sm:text-base font-semibold text-gray-900 flex items-center gap-2.5">
               <div className="p-1.5 sm:p-2 bg-orange-100/50 rounded-lg">
                 <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-orange-700" />
               </div>
@@ -250,7 +250,7 @@ export default function JournalEntryDetailModal({
               />
               {entry.document_file && (
                 <div className="md:col-span-2 pt-2">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 flex items-center gap-1.5 mb-3">
+                  <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 flex items-center gap-1.5 mb-3">
                     <File className="w-3 h-3" />
                     Attachment
                   </span>
@@ -274,7 +274,7 @@ export default function JournalEntryDetailModal({
 
               {/* Notes */}
               <section className="space-y-3">
-                <h4 className="text-sm sm:text-base font-bold text-gray-900 flex items-center gap-2.5">
+                <h4 className="text-sm sm:text-base font-semibold text-gray-900 flex items-center gap-2.5">
                   <div className="p-1.5 sm:p-2 bg-gray-100/50 rounded-lg">
                     <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
                   </div>
@@ -292,7 +292,7 @@ export default function JournalEntryDetailModal({
         <div className="flex-none p-5 sm:p-8 bg-gray-50 border-t border-gray-100 flex justify-end rounded-b-2xl">
           <button
             onClick={onClose}
-            className="font-bold border border-gray-200 hover:bg-white hover:text-black min-w-[100px] sm:min-w-[120px] h-10 sm:h-11 text-sm sm:text-base rounded-md flex items-center justify-center transition-colors"
+            className="font-semibold border border-gray-200 hover:bg-white hover:text-black min-w-[100px] sm:min-w-[120px] h-10 sm:h-11 text-sm sm:text-base rounded-md flex items-center justify-center transition-colors"
           >
             Close
           </button>

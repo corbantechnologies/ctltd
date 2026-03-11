@@ -55,7 +55,7 @@ export default function DivisionDetail() {
   return (
     <div className="space-y-10 pb-20">
       {/* Navigation & Breadcrumb */}
-      <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+      <div className="flex items-center gap-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
         <button
           onClick={() => router.back()}
           className="flex items-center gap-2 hover:text-corporate-primary transition-colors"
@@ -74,14 +74,14 @@ export default function DivisionDetail() {
             <div className="w-10 h-10 rounded-xl bg-corporate-primary flex items-center justify-center text-white shadow-xl shadow-corporate-primary/20">
               <Building2 className="w-5 h-5" />
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-corporate-primary">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-corporate-primary">
               Institutional Intelligence
             </p>
           </div>
-          <h1 className="text-4xl font-bold text-slate-900 tracking-tight italic">
+          <h1 className="text-4xl font-semibold text-slate-900 tracking-tight italic">
             {division?.name} <span className="text-corporate-primary">Protocol</span>
           </h1>
-          <p className="text-slate-400 font-bold mt-3 text-sm max-w-2xl leading-relaxed">
+          <p className="text-slate-400 font-semibold mt-3 text-sm max-w-2xl leading-relaxed">
             Consolidated operational overview and financial audit trail for the <span className="text-slate-900">{division?.name}</span> unit.
             Monitoring resource utilization and mission-critical ledger entries.
           </p>
@@ -91,12 +91,12 @@ export default function DivisionDetail() {
           {division?.is_active ? (
             <div className="flex items-center gap-2 px-5 py-3 bg-emerald-50 text-emerald-600 rounded-xl border border-emerald-100">
               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[10px] font-black uppercase tracking-widest">Active Operational Status</span>
+              <span className="text-[10px] font-semibold uppercase tracking-widest">Active Operational Status</span>
             </div>
           ) : (
             <div className="flex items-center gap-2 px-5 py-3 bg-slate-100 text-slate-400 rounded-xl border border-slate-200">
               <div className="w-2 h-2 rounded-full bg-slate-300" />
-              <span className="text-[10px] font-black uppercase tracking-widest">Unit Offline</span>
+              <span className="text-[10px] font-semibold uppercase tracking-widest">Unit Offline</span>
             </div>
           )}
         </div>
@@ -106,13 +106,13 @@ export default function DivisionDetail() {
         <Tabs.List className="inline-flex p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner">
           <Tabs.Trigger
             value="overview"
-            className="px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
             Unit Summary
           </Tabs.Trigger>
           <Tabs.Trigger
             value="financials"
-            className="px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="px-8 py-3 rounded-xl text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
             Financial Audit
           </Tabs.Trigger>
@@ -132,10 +132,10 @@ export default function DivisionDetail() {
                     <stat.icon className="w-6 h-6" />
                   </div>
                   <div>
-                    <p className="text-slate-400 font-bold uppercase tracking-widest text-[9px] mb-1">
+                    <p className="text-slate-400 font-semibold uppercase tracking-widest text-[9px] mb-1">
                       {stat.label}
                     </p>
-                    <h3 className="text-xl font-bold text-slate-900 tracking-tight">
+                    <h3 className="text-xl font-semibold text-slate-900 tracking-tight">
                       {stat.value}
                     </h3>
                   </div>
@@ -149,14 +149,14 @@ export default function DivisionDetail() {
             <div className="lg:col-span-2 space-y-6">
               <div className="flex items-center justify-between px-2">
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+                  <h2 className="text-2xl font-semibold text-slate-900 tracking-tight">
                     Associated <span className="text-corporate-primary">Ecosystem</span>
                   </h2>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-1">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 mt-1">
                     Stakeholders & Personnel mapped to this unit
                   </p>
                 </div>
-                <div className="px-5 py-2 bg-slate-900 text-white rounded-2xl text-[10px] font-black border border-slate-800 uppercase shadow-xl shadow-slate-900/20">
+                <div className="px-5 py-2 bg-slate-900 text-white rounded-2xl text-[10px] font-semibold border border-slate-800 uppercase shadow-xl shadow-slate-900/20">
                   {division?.partners?.length || 0} Registered
                 </div>
               </div>
@@ -172,10 +172,10 @@ export default function DivisionDetail() {
                         <Users className="w-6 h-6" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-slate-900 group-hover:text-corporate-primary transition-colors">
+                        <h4 className="font-semibold text-slate-900 group-hover:text-corporate-primary transition-colors">
                           {partner.name || `Partner ${partner.reference.slice(0, 8)}`}
                         </h4>
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
+                        <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mt-0.5">
                           {partner.role || "Corporate Partner"}
                         </p>
                       </div>
@@ -186,7 +186,7 @@ export default function DivisionDetail() {
                     <div className="w-16 h-16 rounded-3xl bg-slate-100 flex items-center justify-center text-slate-300 mb-4">
                       <Users className="w-8 h-8" />
                     </div>
-                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">No active partnerships detected</p>
+                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest">No active partnerships detected</p>
                   </div>
                 )}
               </div>
@@ -199,20 +199,20 @@ export default function DivisionDetail() {
                 <div className="relative z-10 space-y-6">
                   <div className="flex items-center gap-3">
                     <Activity className="w-5 h-5 text-corporate-primary" />
-                    <h3 className="text-lg font-bold tracking-tight">Mission Status</h3>
+                    <h3 className="text-lg font-semibold tracking-tight">Mission Status</h3>
                   </div>
                   <div className="space-y-4">
                     <div className="flex justify-between items-center py-3 border-b border-white/5">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Audit Frequency</span>
-                      <span className="text-xs font-bold">Real-time</span>
+                      <span className="text-[10px] font-semibold uppercase tracking-widest text-white/40">Audit Frequency</span>
+                      <span className="text-xs font-semibold">Real-time</span>
                     </div>
                     <div className="flex justify-between items-center py-3 border-b border-white/5">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Ledger Health</span>
-                      <span className="text-xs font-bold text-emerald-400">Stable</span>
+                      <span className="text-[10px] font-semibold uppercase tracking-widest text-white/40">Ledger Health</span>
+                      <span className="text-xs font-semibold text-emerald-400">Stable</span>
                     </div>
                     <div className="flex justify-between items-center py-3">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Classification</span>
-                      <span className="text-xs font-bold uppercase tracking-tighter">Strategic Unit</span>
+                      <span className="text-[10px] font-semibold uppercase tracking-widest text-white/40">Classification</span>
+                      <span className="text-xs font-semibold uppercase tracking-tighter">Strategic Unit</span>
                     </div>
                   </div>
                 </div>
@@ -225,14 +225,14 @@ export default function DivisionDetail() {
           <div className="bg-white rounded-[3rem] border border-slate-200 shadow-2xl shadow-slate-100 overflow-hidden">
             <div className="p-10 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 bg-slate-50/30">
               <div>
-                <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
+                <h3 className="text-2xl font-semibold text-slate-900 tracking-tight">
                   Financial <span className="text-corporate-primary">Audit Trail</span>
                 </h3>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-1">
+                <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-[0.2em] mt-1">
                   Immutable Mission Ledger Logs
                 </p>
               </div>
-              <div className="px-5 py-2.5 bg-white text-slate-900 rounded-2xl text-[10px] font-black border border-slate-200 uppercase shadow-sm">
+              <div className="px-5 py-2.5 bg-white text-slate-900 rounded-2xl text-[10px] font-semibold border border-slate-200 uppercase shadow-sm">
                 {division?.journal_entries?.length || 0} Transactions Found
               </div>
             </div>
@@ -241,12 +241,12 @@ export default function DivisionDetail() {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-slate-50 border-b border-slate-100">
-                    <th className="py-6 px-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Timestamp</th>
-                    <th className="py-6 px-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Reference</th>
-                    <th className="py-6 px-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Category</th>
-                    <th className="py-6 px-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 text-right">Debit</th>
-                    <th className="py-6 px-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 text-right">Credit</th>
-                    <th className="py-6 px-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 text-center">Action</th>
+                    <th className="py-6 px-10 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">Timestamp</th>
+                    <th className="py-6 px-10 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">Reference</th>
+                    <th className="py-6 px-10 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">Category</th>
+                    <th className="py-6 px-10 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 text-right">Debit</th>
+                    <th className="py-6 px-10 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 text-right">Credit</th>
+                    <th className="py-6 px-10 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 text-center">Action</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -254,10 +254,10 @@ export default function DivisionDetail() {
                     division.journal_entries.map((entry: any) => (
                       <tr key={entry.reference} className="hover:bg-slate-50/50 transition-colors group">
                         <td className="py-8 px-10">
-                          <p className="text-sm font-bold text-slate-900">
+                          <p className="text-sm font-semibold text-slate-900">
                             {new Date(entry.created_at).toLocaleDateString()}
                           </p>
-                          <p className="text-[10px] font-bold text-slate-400 mt-1 uppercase">
+                          <p className="text-[10px] font-semibold text-slate-400 mt-1 uppercase">
                             {new Date(entry.created_at).toLocaleTimeString()}
                           </p>
                         </td>
@@ -266,23 +266,23 @@ export default function DivisionDetail() {
                             <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center text-corporate-primary">
                               <Receipt className="w-4 h-4" />
                             </div>
-                            <p className="text-sm font-bold text-slate-900 tracking-tight">
+                            <p className="text-sm font-semibold text-slate-900 tracking-tight">
                               {entry.reference}
                             </p>
                           </div>
                         </td>
                         <td className="py-8 px-10">
-                          <span className="px-3 py-1 bg-slate-900 text-[9px] font-black text-white rounded-lg uppercase tracking-widest">
+                          <span className="px-3 py-1 bg-slate-900 text-[9px] font-semibold text-white rounded-lg uppercase tracking-widest">
                             {entry.journal}
                           </span>
                         </td>
                         <td className="py-8 px-10 text-right">
-                          <p className="text-sm font-bold text-slate-500">
+                          <p className="text-sm font-semibold text-slate-500">
                             {entry.currency} {parseFloat(entry.debit).toLocaleString(undefined, { minimumFractionDigits: 2 })}
                           </p>
                         </td>
                         <td className="py-8 px-10 text-right">
-                          <p className="text-sm font-bold text-corporate-primary">
+                          <p className="text-sm font-semibold text-corporate-primary">
                             {entry.currency} {parseFloat(entry.credit).toLocaleString(undefined, { minimumFractionDigits: 2 })}
                           </p>
                         </td>
@@ -302,7 +302,7 @@ export default function DivisionDetail() {
                           <div className="w-20 h-20 rounded-[2rem] bg-slate-50 flex items-center justify-center text-slate-200 mb-6">
                             <History className="w-10 h-10" />
                           </div>
-                          <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.3em]">No transactional data available</p>
+                          <p className="text-xs font-semibold text-slate-400 uppercase tracking-[0.3em]">No transactional data available</p>
                         </div>
                       </td>
                     </tr>

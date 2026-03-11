@@ -252,7 +252,7 @@ export default function FiscalYearJournals({
                       `}</style>
                     </div>
                     <span
-                      className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-none inline-block ${journal.is_posted
+                      className={`px-2.5 py-1 rounded-full text-[9px] font-semibold uppercase tracking-widest border-none inline-block ${journal.is_posted
                         ? "bg-green-50 text-green-600 shadow-sm shadow-green-100"
                         : "bg-orange-50 text-orange-600 shadow-sm shadow-orange-100"
                         }`}
@@ -264,14 +264,14 @@ export default function FiscalYearJournals({
                   <div className="space-y-3">
                     <div>
                       <h3
-                        className="text-base font-bold text-black tracking-tight leading-snug transition-colors mb-1.5 italic"
+                        className="text-base font-semibold text-black tracking-tight leading-snug transition-colors mb-1.5 italic"
                         style={{
                           color: "black",
                         }}
                       >
                         {journal.description || "No Description Provided"}
                       </h3>
-                      <div className="flex items-center gap-2 text-gray-400 font-bold uppercase text-[9px] tracking-[0.2em]">
+                      <div className="flex items-center gap-2 text-gray-400 font-semibold uppercase text-[9px] tracking-[0.2em]">
                         <Calendar className="w-3 h-3" />
                         {new Date(journal.date).toLocaleDateString(undefined, {
                           year: "numeric",
@@ -283,10 +283,10 @@ export default function FiscalYearJournals({
 
                     <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
                       <div className="flex flex-col">
-                        <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400">
+                        <span className="text-[9px] font-semibold uppercase tracking-widest text-gray-400">
                           Registry Ref
                         </span>
-                        <span className="text-xs font-mono font-bold text-black">
+                        <span className="text-xs font-mono font-semibold text-black">
                           {journal.reference}
                         </span>
                       </div>
@@ -381,17 +381,17 @@ export default function FiscalYearJournals({
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex flex-col md:flex-row justify-between items-center bg-white p-4 rounded-2xl border border-gray-100 shadow-sm mt-6 gap-4">
-          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center md:text-left">
+          <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest text-center md:text-left">
             Showing{" "}
-            <span className="text-black font-bold">
+            <span className="text-black font-semibold">
               {(currentPage - 1) * itemsPerPage + 1}
             </span>{" "}
             to{" "}
-            <span className="text-black font-bold">
+            <span className="text-black font-semibold">
               {Math.min(currentPage * itemsPerPage, filteredJournals.length)}
             </span>{" "}
             of{" "}
-            <span className="text-black font-bold">
+            <span className="text-black font-semibold">
               {filteredJournals.length}
             </span>{" "}
             journals
@@ -400,7 +400,7 @@ export default function FiscalYearJournals({
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="flex items-center justify-center border border-gray-200 rounded-lg bg-white transition-all hover:bg-gray-50 hover:text-black disabled:opacity-30 h-8 px-3 font-bold text-gray-500 text-[10px] uppercase tracking-wider shrink-0"
+              className="flex items-center justify-center border border-gray-200 rounded-lg bg-white transition-all hover:bg-gray-50 hover:text-black disabled:opacity-30 h-8 px-3 font-semibold text-gray-500 text-[10px] uppercase tracking-wider shrink-0"
             >
               <ChevronLeft className="w-3.5 h-3.5 mr-1" /> Prev
             </button>
@@ -409,7 +409,7 @@ export default function FiscalYearJournals({
                 <button
                   key={i + 1}
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`flex items-center justify-center w-8 h-8 rounded-lg transition-all font-bold text-xs border ${currentPage === i + 1
+                  className={`flex items-center justify-center w-8 h-8 rounded-lg transition-all font-semibold text-xs border ${currentPage === i + 1
                     ? "text-white border-transparent shadow-md"
                     : "bg-white border-gray-200 hover:bg-gray-50 text-gray-400"
                     }`}
@@ -429,7 +429,7 @@ export default function FiscalYearJournals({
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="flex items-center justify-center border border-gray-200 rounded-lg bg-white transition-all hover:bg-gray-50 hover:text-black disabled:opacity-30 h-8 px-3 font-bold text-gray-500 text-[10px] uppercase tracking-wider"
+              className="flex items-center justify-center border border-gray-200 rounded-lg bg-white transition-all hover:bg-gray-50 hover:text-black disabled:opacity-30 h-8 px-3 font-semibold text-gray-500 text-[10px] uppercase tracking-wider"
             >
               Next <ChevronRight className="w-3.5 h-3.5 ml-1" />
             </button>
@@ -442,10 +442,10 @@ export default function FiscalYearJournals({
           <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center text-gray-300 mx-auto mb-4">
             <History className="w-8 h-8" />
           </div>
-          <h3 className="text-xl font-bold text-black tracking-tight mb-2 uppercase tracking-widest italic scale-95">
+          <h3 className="text-xl font-semibold text-black tracking-tight mb-2 uppercase tracking-widest italic scale-95">
             No Journals Found
           </h3>
-          <p className="text-gray-400 font-bold max-w-sm mx-auto text-xs">
+          <p className="text-gray-400 font-semibold max-w-sm mx-auto text-xs">
             This fiscal year does not contain any journal entries matching your
             criteria.
           </p>
