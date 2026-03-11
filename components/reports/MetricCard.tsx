@@ -27,7 +27,7 @@ export function MetricCard({ title, value, currency = "KES", trend, description,
                 )}
             </CardHeader>
             <CardContent>
-                <div className={cn("text-2xl font-semibold font-mono tracking-tight break-words", value < 0 && "text-red-500")}>
+                <div className={cn("font-mono tracking-tight break-words", value < 0 && "text-red-500")}>
                     {formatCurrency(value, currency)}
                 </div>
                 {description && (

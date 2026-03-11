@@ -40,7 +40,7 @@ export default function ReportsDashboard() {
     return (
         <div className="space-y-6 p-4 sm:p-0">
             <div>
-                <h2 className="text-xl md:text-xl font-semibold tracking-tight text-corporate-foreground">Financial Reports</h2>
+                <h2 className="font-semibold tracking-tight text-corporate-foreground">Financial Reports</h2>
                 <p className="text-slate-400 text-sm mt-1">Overview of your financial performance and position.</p>
             </div>
 

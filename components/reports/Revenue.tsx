@@ -18,15 +18,15 @@ export function RevenueReport({ data }: { data: RevenueData }) {
                 <CardTitle>Revenue Breakdown</CardTitle>
                 <CardDescription>{data.financial_year}</CardDescription>
             </CardHeader>
-            <CardContent className="p-5 sm:p-6">
-                <div className="mb-6 flex flex-col">
-                    <span className="text-sm font-medium text-corporate-muted">Total Group Revenue</span>
-                    <span className="text-3xl font-semibold font-mono">{formatCurrency(data.group_total_revenue, data.currency)}</span>
+            <CardContent className="p-1 sm:p-1">
+                <div className="mb-2 flex flex-col">
+                    <span className="text-xs text-corporate-muted">Total Group Revenue</span>
+                    <span className="font-semibold font-mono">{formatCurrency(data.group_total_revenue, data.currency)}</span>
                 </div>
 
-                <hr className="mb-6 border-black/10" />
+                <hr className="mb-2 border-black/10" />
 
-                <div className="space-y-4">
+                <div className="space-y-2">
                     {data.breakdown.map((item, idx) => {
                         const percent = data.group_total_revenue ? (item.revenue / data.group_total_revenue) : 0;
                         return (
