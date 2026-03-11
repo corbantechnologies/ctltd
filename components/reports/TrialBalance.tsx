@@ -46,15 +46,15 @@ export function TrialBalanceReport({ data }: { data: TrialBalanceData }) {
                                 </div>
 
                                 <div className="col-span-12 md:col-span-6 flex flex-col gap-1 md:contents mt-2 md:mt-0">
-                                    <div className="flex justify-between items-center md:block text-right font-mono text-corporate-muted">
+                                    <div className="flex justify-between items-center md:block md:col-span-2 text-right font-mono text-corporate-muted">
                                         <span className="text-xs md:hidden text-green-500">Debit</span>
                                         <span className="text-xs md:text-sm">{row.debit > 0 ? formatNumber(row.debit) : "-"}</span>
                                     </div>
-                                    <div className="flex justify-between items-center md:block text-right font-mono text-corporate-muted">
+                                    <div className="flex justify-between items-center md:block md:col-span-2 text-right font-mono text-corporate-muted">
                                         <span className="text-xs md:hidden text-red-500">Credit</span>
                                         <span className="text-xs md:text-sm">{row.credit > 0 ? formatNumber(row.credit) : "-"}</span>
                                     </div>
-                                    <div className={`flex justify-between items-center md:block text-right font-mono font-medium ${row.balance < 0 ? "text-red-500" : ""}`}>
+                                    <div className={`flex justify-between items-center md:block md:col-span-2 text-right font-mono font-medium ${row.balance < 0 ? "text-red-500" : ""}`}>
                                         <span className="text-xs md:hidden">Balance</span>
                                         <span className="text-xs md:text-sm">{formatNumber(row.balance)}</span>
                                     </div>
