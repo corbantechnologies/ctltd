@@ -45,8 +45,8 @@ export default function CreateDivisionModal() {
 
   return (
     <>
-      <button onClick={() => setOpen(true)} className="h-14 px-8 bg-slate-900 hover:bg-corporate-primary text-white rounded-2xl font-semibold text-sm tracking-tight transition-all shadow-xl hover:shadow-corporate-primary/20 active:scale-[0.98] flex items-center gap-3 group">
-        <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+      <button onClick={() => setOpen(true)} className="h-14 px-8 bg-slate-900 hover:bg-corporate-primary text-white rounded font-semibold text-sm tracking-tight transition-all shadow-xl hover:shadow-corporate-primary/20 active:scale-[0.98] flex items-center gap-3 group">
+        <div className="w-8 h-8 rounded bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
           <Plus className="w-4 h-4" />
         </div>
         Establish New Division
@@ -57,10 +57,10 @@ export default function CreateDivisionModal() {
           <div className="fixed inset-0 bg-slate-950/40 backdrop-blur-md animate-in fade-in duration-300" onClick={() => setOpen(false)} />
           <div className="relative w-full max-w-lg bg-white rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden z-[101] animate-in zoom-in-95 fade-in duration-300">
             <div className="bg-slate-900 p-8 text-white relative">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-corporate-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-corporate-primary/10 rounded blur-3xl -translate-y-1/2 translate-x-1/2" />
 
               <div className="flex items-center gap-4 relative z-10">
-                <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/10">
+                <div className="w-12 h-12 rounded bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/10">
                   <Database className="w-6 h-6" />
                 </div>
                 <div>
@@ -73,7 +73,7 @@ export default function CreateDivisionModal() {
                 </div>
               </div>
 
-              <button type="button" onClick={() => setOpen(false)} className="absolute top-8 right-8 p-2 rounded-xl bg-white/5 hover:bg-white/10 text-white/40 hover:text-white transition-all border border-white/5 z-10">
+              <button type="button" onClick={() => setOpen(false)} className="absolute top-8 right-8 p-2 rounded bg-white/5 hover:bg-white/10 text-white/40 hover:text-white transition-all border border-white/5 z-10">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -92,7 +92,7 @@ export default function CreateDivisionModal() {
                     name="name"
                     type="text"
                     placeholder="e.g. Strategic Operations, Digital Assets"
-                    className="w-full h-14 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-corporate-primary/30 focus:ring-0 transition-all font-semibold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
+                    className="w-full h-14 rounded border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-corporate-primary/30 focus:ring-0 transition-all font-semibold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.name}
@@ -104,8 +104,8 @@ export default function CreateDivisionModal() {
                   )}
                 </div>
 
-                <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-slate-200 transition-colors group cursor-pointer" onClick={() => formik.setFieldValue('is_active', !formik.values.is_active)}>
-                  <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${formik.values.is_active ? 'bg-corporate-primary border-corporate-primary shadow-lg shadow-orange-500/20' : 'bg-white border-slate-200'}`}>
+                <div className="flex items-center gap-4 p-4 bg-slate-50 rounded border border-slate-100 hover:border-slate-200 transition-colors group cursor-pointer" onClick={() => formik.setFieldValue('is_active', !formik.values.is_active)}>
+                  <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all ${formik.values.is_active ? 'bg-corporate-primary border-corporate-primary shadow-lg shadow-orange-500/20' : 'bg-white border-slate-200'}`}>
                     {formik.values.is_active && <Plus className="w-4 h-4 text-white rotate-45" />}
                   </div>
                   <div>
@@ -121,8 +121,8 @@ export default function CreateDivisionModal() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-slate-200 transition-colors group cursor-pointer" onClick={() => formik.setFieldValue('is_public', !formik.values.is_public)}>
-                  <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${formik.values.is_public ? 'bg-corporate-primary border-corporate-primary shadow-lg shadow-orange-500/20' : 'bg-white border-slate-200'}`}>
+                <div className="flex items-center gap-4 p-4 bg-slate-50 rounded border border-slate-100 hover:border-slate-200 transition-colors group cursor-pointer" onClick={() => formik.setFieldValue('is_public', !formik.values.is_public)}>
+                  <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all ${formik.values.is_public ? 'bg-corporate-primary border-corporate-primary shadow-lg shadow-orange-500/20' : 'bg-white border-slate-200'}`}>
                     {formik.values.is_public && <Plus className="w-4 h-4 text-white rotate-45" />}
                   </div>
                   <div>

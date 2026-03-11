@@ -98,7 +98,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="sticky top-0 w-full z-40 bg-slate-900 border-b border-slate-800 py-3 pr-2 shadow-2xl">
-        <div className="mx-auto px-6 lg:px-12 flex justify-between items-center">
+        <div className="mx-auto px-4 flex justify-between items-center">
           {/* Logo */}
           <Link
             href="/"
@@ -116,13 +116,13 @@ export default function Navbar() {
           {/* Controls & Nav */}
           <div className="flex items-center gap-6">
             <div className="hidden sm:flex flex-col items-end">
-              <span className="text-sm font-semibold text-white leading-none tracking-tight">
+              <span className="text-sm text-white leading-none">
                 {isLoading
                   ? "Loading..."
                   : `${account?.first_name} ${account?.last_name}`}
               </span>
               <span className={cn(
-                "text-[10px] uppercase font-semibold tracking-[0.2em] mt-1.5 px-3 py-1 rounded-full border shadow-sm",
+                "text-[10px] uppercase mt-1.5 px-3 py-1 rounded border shadow-sm",
                 isDirector
                   ? "text-corporate-primary bg-corporate-primary/5 border-corporate-primary/20 shadow-corporate-primary/5"
                   : isFinance
@@ -135,9 +135,9 @@ export default function Navbar() {
 
             <button
               onClick={() => setMenuOpen(true)}
-              className="p-3 rounded-2xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all border border-slate-800 hover:border-slate-700 shadow-2xl group"
+              className="p-2 rounded text-slate-400 hover:text-white hover:bg-slate-800 transition-all border border-slate-800 hover:border-slate-700 shadow-2xl group"
             >
-              <Menu className="w-6 h-6 group-hover:scale-110 transition-transform" />
+              <Menu className="w-5 h-5 group-hover:scale-110 transition-transform" />
             </button>
           </div>
         </div>
@@ -163,7 +163,7 @@ export default function Navbar() {
       >
         <div className="flex flex-col h-full">
           {/* Drawer Header */}
-          <div className="p-8 border-b border-slate-800 flex items-center justify-between bg-slate-900/50 backdrop-blur-xl">
+          <div className="p-2 border-b border-slate-800 flex items-center justify-between bg-slate-900/50 backdrop-blur-xl">
             <Image
               src="/logo.png"
               alt="Logo"
@@ -173,17 +173,17 @@ export default function Navbar() {
             />
             <button
               onClick={() => setMenuOpen(false)}
-              className="p-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition-colors border border-transparent hover:border-slate-700"
+              className="p-2 rounded hover:bg-slate-800 text-slate-400 hover:text-white transition-colors border border-transparent hover:border-slate-700"
             >
               <X className="w-6 h-6" />
             </button>
           </div>
 
           {/* User Info Section */}
-          <div className="p-8 bg-gradient-to-b from-slate-900 to-slate-950/50 border-b border-slate-800">
+          <div className="p-2 bg-gradient-to-b from-slate-900 to-slate-950/50 border-b border-slate-800">
             <div className="flex items-center gap-5">
               <div className={cn(
-                "w-16 h-16 rounded-[1.25rem] flex items-center justify-center text-white font-semibold text-2xl border shadow-2xl transition-transform hover:scale-105",
+                "w-8 h-8 rounded flex items-center justify-center text-white text-sm border shadow transition-transform hover:scale-105",
                 isDirector
                   ? "bg-corporate-primary border-corporate-primary/20 shadow-corporate-primary/10"
                   : isFinance
@@ -194,12 +194,12 @@ export default function Navbar() {
                 {account?.last_name?.[0]}
               </div>
               <div>
-                <p className="font-semibold text-white text-xl tracking-tight italic">
+                <p className="text-white text-xl tracking-tight">
                   {account?.first_name} {account?.last_name}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   <div className={cn(
-                    "inline-flex items-center px-3 py-1 rounded-full border",
+                    "inline-flex items-center px-2 py-1 rounded border",
                     isDirector
                       ? "bg-corporate-primary/10 border-corporate-primary/20"
                       : isFinance
@@ -207,15 +207,15 @@ export default function Navbar() {
                         : "bg-slate-800 border-slate-700"
                   )}>
                     <span className={cn(
-                      "text-[9px] font-semibold uppercase tracking-[0.2em]",
+                      "text-[9px] font-semibold uppercase",
                       isDirector ? "text-corporate-primary" : isFinance ? "text-emerald-500" : "text-slate-400"
                     )}>
                       {isDirector ? "Executive Director" : isFinance ? "Finance Controller" : "Portal User"}
                     </span>
                   </div>
                   {activeYear && (
-                    <div className="inline-flex items-center px-3 py-1 rounded-full border bg-slate-800 border-slate-700 shadow-inner">
-                      <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                    <div className="inline-flex items-center px-2 py-1 rounded border bg-slate-800 border-slate-700 shadow-inner">
+                      <span className="text-[9px] font-semibold uppercase text-slate-400">
                         FY: {activeYear.code}
                       </span>
                     </div>
@@ -226,7 +226,7 @@ export default function Navbar() {
           </div>
 
           {/* Navigation Links */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-2 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
+          <div className="flex-1 overflow-y-auto p-2 space-y-2 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
             {navItems
               .filter((item) => item.show)
               .map((item) => {
@@ -236,7 +236,7 @@ export default function Navbar() {
                     key={item.name}
                     href={item.href}
                     className={cn(
-                      "flex items-center justify-between p-4 rounded-2xl font-semibold text-[11px] uppercase tracking-widest transition-all group border border-transparent",
+                      "flex items-center justify-between p-2 rounded text-[11px] uppercase transition-all group border border-transparent",
                       isActive
                         ? "bg-slate-800/80 text-white border-slate-700 shadow-xl"
                         : "text-slate-500 hover:bg-slate-800/40 hover:text-white hover:border-slate-800/50",
@@ -245,7 +245,7 @@ export default function Navbar() {
                     <div className="flex items-center gap-4">
                       <div
                         className={cn(
-                          "w-11 h-11 rounded-xl flex items-center justify-center transition-all group-hover:scale-110 shadow-lg",
+                          "w-8 h-8 rounded flex items-center justify-center transition-all group-hover:scale-110 shadow-lg",
                           isActive
                             ? isDirector
                               ? "bg-corporate-primary text-white shadow-corporate-primary/20"
@@ -269,10 +269,10 @@ export default function Navbar() {
           </div>
 
           {/* Footer Action */}
-          <div className="p-8 border-t border-slate-800 bg-slate-900/50 backdrop-blur-xl">
+          <div className="p-4 border-t border-slate-800 bg-slate-900/50 backdrop-blur-xl">
             <button
               onClick={() => signOut({ callbackUrl: "/auth/login" })}
-              className="w-full h-14 bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white rounded-2xl font-semibold flex items-center justify-center gap-3 transition-all border border-red-500/20 shadow-lg shadow-red-500/5 group"
+              className="w-full h-14 bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white rounded font-semibold flex items-center justify-center gap-3 transition-all border border-red-500/20 shadow-lg shadow-red-500/5 group"
             >
               <LogOut className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
               Sign Out Securely

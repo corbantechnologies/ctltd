@@ -33,7 +33,7 @@ export default function FinancePartnersPage() {
         </div>
         <button
           onClick={() => setOpenCreatePartner(true)}
-          className="flex items-center justify-center gap-1.5 h-9 px-4 bg-[#045138] hover:bg-black text-white rounded-xl font-semibold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95"
+          className="flex items-center justify-center gap-1.5 h-9 px-4 bg-[#045138] hover:bg-black text-white rounded font-semibold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95"
         >
           <Plus className="w-3.5 h-3.5" />
           Register Partner

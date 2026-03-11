@@ -57,20 +57,20 @@ export default function CreatePartnerType({
   });
 
   return (
-    <div className={cn("w-full bg-white rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden", className)}>
-      <div className="bg-slate-900 p-8 text-white relative">
-        <div className={cn("absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-20", rolePrefix === "director" ? "bg-corporate-primary" : "bg-emerald-600")} />
+    <div className={cn("w-full bg-white rounded shadow overflow-hidden", className)}>
+      <div className="bg-slate-900 p-4 text-white relative">
+        <div className={cn("absolute top-0 right-0 w-32 h-32 rounded blur-3xl -translate-y-1/2 translate-x-1/2 opacity-20", rolePrefix === "director" ? "bg-corporate-primary" : "bg-emerald-600")} />
 
         <div className="flex items-center justify-between relative z-10">
           <div className="flex items-center gap-4">
-            <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center text-white border border-white/10 backdrop-blur-md shadow-lg", primaryColorClass)}>
+            <div className={cn("w-12 h-12 rounded flex items-center justify-center text-white border border-white/10 backdrop-blur-md shadow-lg", primaryColorClass)}>
               <Users className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold tracking-tight italic">
+              <h2 className="text-xl">
                 Define <span className={primaryTextClass}>Partner Type</span>
               </h2>
-              <p className="text-slate-400 font-semibold uppercase text-[10px] tracking-widest mt-1">
+              <p className="text-slate-400 text-[10px] mt-1">
                 Ecosystem Classification Logic
               </p>
             </div>
@@ -79,7 +79,7 @@ export default function CreatePartnerType({
             <button
               type="button"
               onClick={onClose}
-              className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-white/40 hover:text-white transition-all border border-white/5"
+              className="p-2 rounded bg-white/5 hover:bg-white/10 text-white/40 hover:text-white transition-all border border-white/5"
             >
               <X className="w-5 h-5" />
             </button>
@@ -87,13 +87,13 @@ export default function CreatePartnerType({
         </div>
       </div>
 
-      <div className="p-8">
+      <div className="p-4">
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           <div className="space-y-6">
             <div className="space-y-2">
               <label
                 htmlFor="name"
-                className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block"
+                className="text-sm ml-1 block"
               >
                 Category Nomenclature <span className="text-red-500">*</span>
               </label>
@@ -103,7 +103,7 @@ export default function CreatePartnerType({
                 type="text"
                 required
                 placeholder="e.g. Strategic Supplier, Retail Client"
-                className="w-full h-14 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-emerald-600/30 focus:ring-0 transition-all font-semibold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
+                className="w-full h-14 rounded border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-emerald-600/30 focus:ring-0 transition-all font-semibold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
@@ -118,7 +118,7 @@ export default function CreatePartnerType({
             <div className="space-y-2">
               <label
                 htmlFor="description"
-                className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block"
+                className="text-sm ml-1 block"
               >
                 Functional Definition <span className="text-red-500">*</span>
               </label>
@@ -127,7 +127,7 @@ export default function CreatePartnerType({
                 name="description"
                 required
                 placeholder="Provide a comprehensive operational definition for this partner category..."
-                className="w-full min-h-[140px] rounded-2xl border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-emerald-600/30 focus:ring-0 transition-all font-semibold p-6 text-sm text-slate-900 placeholder:text-slate-300 resize-none focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
+                className="w-full min-h-[140px] rounded border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-emerald-600/30 focus:ring-0 transition-all font-semibold p-6 text-sm text-slate-900 placeholder:text-slate-300 resize-none focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.description}
@@ -136,11 +136,11 @@ export default function CreatePartnerType({
           </div>
 
           <div
-            className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-slate-200 transition-colors group cursor-pointer"
+            className="flex items-center gap-4 p-4 bg-slate-50 rounded border border-slate-100 hover:border-slate-200 transition-colors group cursor-pointer"
             onClick={() => formik.setFieldValue("is_active", !formik.values.is_active)}
           >
             <div className={cn(
-              "w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all",
+              "w-6 h-6 rounded border-2 flex items-center justify-center transition-all",
               formik.values.is_active ? cn(primaryColorClass, "border-transparent shadow-lg", primaryShadowClass) : "bg-white border-slate-200"
             )}>
               {formik.values.is_active && <Plus className="w-4 h-4 text-white rotate-45" />}
@@ -160,7 +160,7 @@ export default function CreatePartnerType({
               type="submit"
               disabled={formik.isSubmitting}
               className={cn(
-                "w-full h-16 text-white rounded-[1.25rem] font-semibold text-base transition-all shadow-xl active:scale-[0.98] group relative overflow-hidden",
+                "w-full h-10 text-white rounded text-base transition-all shadow-xl active:scale-[0.98] group relative overflow-hidden",
                 primaryColorClass,
                 primaryShadowClass,
                 "hover:brightness-110"

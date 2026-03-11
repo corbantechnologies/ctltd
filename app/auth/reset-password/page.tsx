@@ -63,8 +63,8 @@ export default function ResetPassword() {
       {/* Premium Dark Hero Section (Matches Public Style) */}
       <div className="relative pt-24 pb-32 lg:pt-32 lg:pb-40 overflow-hidden bg-slate-900 border-b border-slate-800">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-corporate-primary/10 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[100px] -translate-x-1/4 translate-y-1/4" />
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-corporate-primary/10 rounded blur-[120px] translate-x-1/3 -translate-y-1/3" />
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/5 rounded blur-[100px] -translate-x-1/4 translate-y-1/4" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
@@ -80,7 +80,7 @@ export default function ResetPassword() {
             </Link>
           </div>
 
-          <div className="inline-flex items-center rounded-full bg-slate-800/80 backdrop-blur-md px-4 py-1.5 text-xs font-semibold text-corporate-primary border border-slate-700/50 mb-6 uppercase tracking-widest shadow-inner">
+          <div className="inline-flex items-center rounded bg-slate-800/80 backdrop-blur-md px-4 py-1.5 text-xs font-semibold text-corporate-primary border border-slate-700/50 mb-6 uppercase tracking-widest shadow-inner">
             Credential Workspace
           </div>
 
@@ -100,7 +100,7 @@ export default function ResetPassword() {
             <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-corporate-primary via-orange-400 to-yellow-400 opacity-80" />
 
             <div className="flex justify-center mb-8">
-              <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center border border-slate-100 group-hover:scale-110 transition-transform duration-500 shadow-sm">
+              <div className="w-16 h-16 bg-slate-50 rounded flex items-center justify-center border border-slate-100 group-hover:scale-110 transition-transform duration-500 shadow-sm">
                 <ShieldCheck className="w-8 h-8 text-corporate-primary" />
               </div>
             </div>
@@ -125,7 +125,7 @@ export default function ResetPassword() {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       className={cn(
-                        "w-full h-14 pl-12 pr-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-900 focus:bg-white focus:border-corporate-primary outline-none transition-all",
+                        "w-full h-14 pl-12 pr-4 bg-slate-50 border border-slate-200 rounded text-sm font-semibold text-slate-900 focus:bg-white focus:border-corporate-primary outline-none transition-all",
                         formik.touched.email && formik.errors.email && "border-red-500 bg-red-50/10"
                       )}
                     />
@@ -155,7 +155,7 @@ export default function ResetPassword() {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       className={cn(
-                        "w-full h-14 pl-12 pr-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-900 focus:bg-white focus:border-corporate-primary outline-none transition-all tracking-widest",
+                        "w-full h-14 pl-12 pr-4 bg-slate-50 border border-slate-200 rounded text-sm font-semibold text-slate-900 focus:bg-white focus:border-corporate-primary outline-none transition-all tracking-widest",
                         formik.touched.code && formik.errors.code && "border-red-500 bg-red-50/10"
                       )}
                     />
@@ -187,7 +187,7 @@ export default function ResetPassword() {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       className={cn(
-                        "w-full h-14 pl-12 pr-12 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-900 focus:bg-white focus:border-corporate-primary outline-none transition-all",
+                        "w-full h-14 pl-12 pr-12 bg-slate-50 border border-slate-200 rounded text-sm font-semibold text-slate-900 focus:bg-white focus:border-corporate-primary outline-none transition-all",
                         formik.touched.password && formik.errors.password && "border-red-500 bg-red-50/10"
                       )}
                     />
@@ -212,7 +212,7 @@ export default function ResetPassword() {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       className={cn(
-                        "w-full h-14 pl-12 pr-12 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-900 focus:bg-white focus:border-corporate-primary outline-none transition-all",
+                        "w-full h-14 pl-12 pr-12 bg-slate-50 border border-slate-200 rounded text-sm font-semibold text-slate-900 focus:bg-white focus:border-corporate-primary outline-none transition-all",
                         formik.touched.confirmPassword && formik.errors.confirmPassword && "border-red-500 bg-red-50/10"
                       )}
                     />
@@ -221,7 +221,7 @@ export default function ResetPassword() {
               </div>
 
               {(formik.touched.password && formik.errors.password) || (formik.touched.confirmPassword && formik.errors.confirmPassword) ? (
-                <div className="p-4 bg-red-50 rounded-2xl border border-red-100 flex items-start gap-3">
+                <div className="p-4 bg-red-50 rounded border border-red-100 flex items-start gap-3">
                   <ShieldAlert className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
                   <p className="text-xs font-semibold text-red-500 leading-relaxed">
                     {formik.errors.password || formik.errors.confirmPassword}
@@ -241,7 +241,7 @@ export default function ResetPassword() {
               <button
                 disabled={loading}
                 type="submit"
-                className="w-full h-14 bg-corporate-primary hover:bg-orange-600 text-white rounded-xl font-semibold transition-all shadow-lg shadow-orange-900/10 flex items-center justify-center gap-3 active:scale-[0.98] disabled:opacity-50 group/btn"
+                className="w-full h-14 bg-corporate-primary hover:bg-orange-600 text-white rounded font-semibold transition-all shadow-lg shadow-orange-900/10 flex items-center justify-center gap-3 active:scale-[0.98] disabled:opacity-50 group/btn"
               >
                 {loading ? (
                   <>

@@ -10,7 +10,7 @@ export default function COAPage() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <div className="w-6 h-6 rounded-md bg-[#D0402B] flex items-center justify-center text-white shadow-md shadow-[#D0402B]/20">
+            <div className="w-6 h-6 rounded bg-[#D0402B] flex items-center justify-center text-white shadow-md shadow-[#D0402B]/20">
               <Database className="w-3 h-3" />
             </div>
             <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[#D0402B]">

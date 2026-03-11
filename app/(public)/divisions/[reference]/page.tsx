@@ -19,13 +19,13 @@ export default function DivisionPage() {
         return (
             <div className="min-h-screen bg-slate-50 flex flex-col pt-32 px-6">
                 <div className="max-w-6xl mx-auto w-full space-y-12 animate-pulse">
-                    <div className="h-64 w-full bg-slate-200 rounded-3xl" />
+                    <div className="h-64 w-full bg-slate-200 rounded" />
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                         <div className="lg:col-span-2 space-y-6">
-                            <div className="h-12 w-3/4 bg-slate-200 rounded-xl" />
-                            <div className="h-32 w-full bg-slate-200 rounded-xl" />
+                            <div className="h-12 w-3/4 bg-slate-200 rounded" />
+                            <div className="h-32 w-full bg-slate-200 rounded" />
                         </div>
-                        <div className="h-96 w-full bg-slate-200 rounded-3xl" />
+                        <div className="h-96 w-full bg-slate-200 rounded" />
                     </div>
                 </div>
             </div>
@@ -35,8 +35,8 @@ export default function DivisionPage() {
     if (isError || !division) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center text-center bg-slate-50 px-6">
-                <div className="bg-white p-12 rounded-3xl shadow-sm border border-slate-200 max-w-lg w-full">
-                    <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="bg-white p-12 rounded shadow-sm border border-slate-200 max-w-lg w-full">
+                    <div className="w-20 h-20 bg-red-50 rounded flex items-center justify-center mx-auto mb-6">
                         <Building2 className="w-10 h-10 text-red-500" />
                     </div>
                     <h1 className="text-3xl font-bold text-slate-900 mb-4">Division Unavailable</h1>
@@ -45,7 +45,7 @@ export default function DivisionPage() {
                     </p>
                     <button
                         onClick={() => router.push('/divisions')}
-                        className="inline-flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white px-8 py-3.5 rounded-xl font-semibold transition-colors w-full"
+                        className="inline-flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white px-8 py-3.5 rounded font-semibold transition-colors w-full"
                     >
                         <ArrowLeft className="w-5 h-5 mr-2" /> Back to Divisions
                     </button>
@@ -60,8 +60,8 @@ export default function DivisionPage() {
             <div className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 overflow-hidden bg-slate-900 border-b border-slate-800">
                 {/* Abstract Background Effects */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-corporate-primary/10 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
-                    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[100px] -translate-x-1/4 translate-y-1/4" />
+                    <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-corporate-primary/10 rounded blur-[120px] translate-x-1/3 -translate-y-1/3" />
+                    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/5 rounded blur-[100px] -translate-x-1/4 translate-y-1/4" />
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
                 </div>
 
@@ -86,7 +86,7 @@ export default function DivisionPage() {
                         </div>
 
                         <div className="flex-1">
-                            <div className="inline-flex items-center rounded-full bg-slate-800/80 backdrop-blur-md px-4 py-1.5 text-[10px] font-semibold text-corporate-primary border border-slate-700/50 mb-4 sm:mb-6 uppercase tracking-[0.2em] shadow-inner">
+                            <div className="inline-flex items-center rounded bg-slate-800/80 backdrop-blur-md px-4 py-1.5 text-[10px] font-semibold text-corporate-primary border border-slate-700/50 mb-4 sm:mb-6 uppercase tracking-[0.2em] shadow-inner">
                                 Enterprise Division
                             </div>
                             <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold text-white tracking-tight mb-4 leading-[1.1]">
@@ -114,7 +114,7 @@ export default function DivisionPage() {
                                     {division.description && (
                                         <Tabs.Trigger
                                             value="overview"
-                                            className="px-6 py-3 rounded-full text-[11px] sm:text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none whitespace-nowrap"
+                                            className="px-6 py-3 rounded text-[11px] sm:text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none whitespace-nowrap"
                                         >
                                             Strategic Overview
                                         </Tabs.Trigger>
@@ -122,7 +122,7 @@ export default function DivisionPage() {
                                     {division.services && (
                                         <Tabs.Trigger
                                             value="services"
-                                            className="px-6 py-3 rounded-full text-[11px] sm:text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none whitespace-nowrap"
+                                            className="px-6 py-3 rounded text-[11px] sm:text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none whitespace-nowrap"
                                         >
                                             Core Services
                                         </Tabs.Trigger>
@@ -130,7 +130,7 @@ export default function DivisionPage() {
                                     {division.projects && (
                                         <Tabs.Trigger
                                             value="projects"
-                                            className="px-6 py-3 rounded-full text-[11px] sm:text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none whitespace-nowrap"
+                                            className="px-6 py-3 rounded text-[11px] sm:text-sm font-bold tracking-wide transition-all data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-slate-50 data-[state=inactive]:text-slate-500 hover:data-[state=inactive]:bg-slate-100 hover:data-[state=inactive]:text-slate-900 focus:outline-none whitespace-nowrap"
                                         >
                                             Key Initiatives
                                         </Tabs.Trigger>
@@ -142,21 +142,21 @@ export default function DivisionPage() {
 
                             <Tabs.Content value="overview" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
                                 <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-orange-50 flex items-center justify-center border border-orange-100 shadow-sm shrink-0">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded sm:rounded bg-orange-50 flex items-center justify-center border border-orange-100 shadow-sm shrink-0">
                                         <Target className="w-5 h-5 sm:w-6 sm:h-6 text-corporate-primary" />
                                     </div>
                                     <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight italic uppercase italic">
                                         Strategic Overview
                                     </h2>
                                 </div>
-                                <div className="prose prose-base sm:prose-lg prose-slate prose-orange max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:font-semibold prose-a:text-corporate-primary hover:prose-a:text-orange-600 prose-p:leading-relaxed prose-img:rounded-3xl prose-img:shadow-lg prose-strong:text-slate-900 border-l-2 sm:border-l-4 border-slate-200 pl-4 sm:pl-8 ml-2 sm:ml-6">
+                                <div className="prose prose-base sm:prose-lg prose-slate prose-orange max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:font-semibold prose-a:text-corporate-primary hover:prose-a:text-orange-600 prose-p:leading-relaxed prose-img:rounded prose-img:shadow-lg prose-strong:text-slate-900 border-l-2 sm:border-l-4 border-slate-200 pl-4 sm:pl-8 ml-2 sm:ml-6">
                                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.description}</ReactMarkdown>
                                 </div>
                             </Tabs.Content>
 
                             <Tabs.Content value="services" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
                                 <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-blue-50 flex items-center justify-center border border-blue-100 shadow-sm shrink-0">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded sm:rounded bg-blue-50 flex items-center justify-center border border-blue-100 shadow-sm shrink-0">
                                         <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                                     </div>
                                     <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight italic uppercase italic">
@@ -172,7 +172,7 @@ export default function DivisionPage() {
 
                             <Tabs.Content value="projects" className="space-y-8 animate-in fade-in duration-500 focus:outline-none mt-4">
                                 <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-emerald-50 flex items-center justify-center border border-emerald-100 shadow-sm shrink-0">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded sm:rounded bg-emerald-50 flex items-center justify-center border border-emerald-100 shadow-sm shrink-0">
                                         <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600" />
                                     </div>
                                     <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight italic uppercase italic">
@@ -197,8 +197,8 @@ export default function DivisionPage() {
                                 <h3 className="text-xl font-semibold text-slate-900 mb-8 pt-2">Division Connect</h3>
 
                                 <ul className="space-y-6 text-left">
-                                    <li className="flex items-start gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
-                                        <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
+                                    <li className="flex items-start gap-4 p-4 rounded hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+                                        <div className="w-10 h-10 rounded bg-slate-100 flex items-center justify-center shrink-0">
                                             <Globe className="w-5 h-5 text-slate-600" />
                                         </div>
                                         <div>
@@ -215,12 +215,12 @@ export default function DivisionPage() {
                         {/* Leadership Spot */}
                         {division.director_details && (
                             <div className="bg-slate-900 rounded-[2rem] p-8 relative overflow-hidden text-center border border-slate-800">
-                                <div className="absolute top-0 right-0 w-48 h-48 bg-corporate-primary/20 rounded-full blur-[60px] translate-x-1/2 -translate-y-1/2" />
+                                <div className="absolute top-0 right-0 w-48 h-48 bg-corporate-primary/20 rounded blur-[60px] translate-x-1/2 -translate-y-1/2" />
 
                                 <div className="relative z-10">
                                     <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Division Leadership</p>
 
-                                    <div className="w-20 h-20 bg-slate-800 rounded-full border-2 border-slate-700 flex items-center justify-center mx-auto mb-5 shadow-inner">
+                                    <div className="w-20 h-20 bg-slate-800 rounded border-2 border-slate-700 flex items-center justify-center mx-auto mb-5 shadow-inner">
                                         <UserCheck className="w-8 h-8 text-corporate-primary" />
                                     </div>
 
@@ -231,7 +231,7 @@ export default function DivisionPage() {
 
                                     <button
                                         onClick={() => router.push('/contact')}
-                                        className="w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 rounded-xl transition-colors border border-white/10"
+                                        className="w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 rounded transition-colors border border-white/10"
                                     >
                                         Request Meeting
                                     </button>

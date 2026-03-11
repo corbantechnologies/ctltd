@@ -72,13 +72,13 @@ export default function CreateJournal({
 
   return (
     <div
-      className={`mx-auto w-full border-black/5 shadow-2xl rounded-xl overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
+      className={`mx-auto w-full border-black/5 shadow-2xl rounded overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
     >
       <div className="p-8 border-b border-black/5 bg-gradient-to-r from-white to-gray-50/50">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-4">
             <div
-              className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
+              className="w-12 h-12 rounded flex items-center justify-center text-white shadow-lg"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
@@ -100,7 +100,7 @@ export default function CreateJournal({
               type="button"
               onClick={onClose}
 
-              className="hover:bg-red-50 hover:text-red-500 rounded-full text-black/40 p-2"
+              className="hover:bg-red-50 hover:text-red-500 rounded text-black/40 p-2"
             >
               <X className="w-5 h-5" />
             </button>
@@ -125,7 +125,7 @@ export default function CreateJournal({
                 type="text"
                 required
                 placeholder="e.g., FY2025/2026"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
                 onChange={formik.handleChange}
                 value={formik.values.financial_year}
               />
@@ -144,7 +144,7 @@ export default function CreateJournal({
                 name="date"
                 type="date"
                 required
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
                 onChange={formik.handleChange}
                 value={formik.values.date}
               />
@@ -163,7 +163,7 @@ export default function CreateJournal({
                 name="journal_type"
                 required
                 disabled={isLoadingTypes}
-                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-medium focus:ring-[#045138]/30 appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-medium focus:ring-[#045138]/30 appearance-none"
                 onChange={formik.handleChange}
                 value={formik.values.journal_type}
               >
@@ -190,7 +190,7 @@ export default function CreateJournal({
               name="description"
               required
               placeholder="Provide a clear description of this journal batch (e.g., 'January 2026 sales and expenses')"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[120px] rounded-2xl focus:bg-slate-50 transition-all font-medium p-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[120px] rounded focus:bg-slate-50 transition-all font-medium p-5"
               onChange={formik.handleChange}
               value={formik.values.description}
             />
@@ -206,7 +206,7 @@ export default function CreateJournal({
             <select
               name="currency"
               required
-              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm font-medium focus:ring-[#045138]/30 appearance-none"
+              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 text-sm font-medium focus:ring-[#045138]/30 appearance-none"
               onChange={formik.handleChange}
               value={formik.values.currency}
             >

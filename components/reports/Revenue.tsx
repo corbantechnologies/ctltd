@@ -35,9 +35,9 @@ export function RevenueReport({ data }: { data: RevenueData }) {
                                     <span className="font-medium">{item.division}</span>
                                     <span className="font-mono">{formatCurrency(item.revenue, data.currency)}</span>
                                 </div>
-                                <div className="h-2 w-full bg-corporate-secondary rounded-full overflow-hidden">
+                                <div className="h-2 w-full bg-corporate-secondary rounded overflow-hidden">
                                     <div
-                                        className="h-full bg-corporate-primary rounded-full"
+                                        className="h-full bg-corporate-primary rounded"
                                         style={{ width: `${percent * 100}%` }}
                                     />
                                 </div>
@@ -48,7 +48,7 @@ export function RevenueReport({ data }: { data: RevenueData }) {
                 </div>
 
                 {data.warning && (
-                    <div className="mt-6 p-3 bg-red-50 text-red-600 text-sm rounded-lg flex items-start gap-2">
+                    <div className="mt-6 p-3 bg-red-50 text-red-600 text-sm rounded flex items-start gap-2">
                         <span>⚠️</span>
                         <span>{data.warning}</span>
                     </div>

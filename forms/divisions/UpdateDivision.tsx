@@ -55,7 +55,7 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
     <div className="w-full max-w-2xl border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
       <div className="bg-orange-50/50 p-8 border-b border-black/5">
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-12 h-12 rounded-2xl bg-black flex items-center justify-center text-white shadow-lg">
+          <div className="w-12 h-12 rounded bg-black flex items-center justify-center text-white shadow-lg">
             <Edit3 className="w-6 h-6" />
           </div>
           <div>
@@ -82,7 +82,7 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
               name="name"
               type="text"
               placeholder="e.g. Sales, Marketing, HR"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 focus:ring-corporate-primary/20 transition-all font-semibold px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 focus:ring-corporate-primary/20 transition-all font-semibold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
@@ -94,12 +94,12 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
             )}
           </div>
 
-          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-2xl border border-black/5 transition-colors">
+          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded border border-black/5 transition-colors">
             <input
               id="is_active"
               name="is_active"
               type="checkbox"
-              className="w-5 h-5 rounded-lg border-black/5 text-corporate-primary focus:ring-corporate-primary/20"
+              className="w-5 h-5 rounded border-black/5 text-corporate-primary focus:ring-corporate-primary/20"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               checked={formik.values.is_active}
@@ -112,12 +112,12 @@ export default function UpdateDivision({ division }: UpdateDivisionProps) {
             </label>
           </div>
 
-          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded-2xl border border-black/5 transition-colors">
+          <div className="flex items-center gap-3 p-4 bg-orange-50/30 rounded border border-black/5 transition-colors">
             <input
               id="is_public"
               name="is_public"
               type="checkbox"
-              className="w-5 h-5 rounded-lg border-black/5 text-corporate-primary focus:ring-corporate-primary/20"
+              className="w-5 h-5 rounded border-black/5 text-corporate-primary focus:ring-corporate-primary/20"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               checked={formik.values.is_public}

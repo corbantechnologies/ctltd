@@ -134,7 +134,7 @@ export default function JournalsList({
             <input
               type="text"
               placeholder="Search journals by description or reference..."
-              className="pl-11 h-12 w-full bg-white/80 border border-black/5 rounded-2xl transition-all font-medium text-sm shadow-inner focus:outline-none focus:ring-2"
+              className="pl-11 h-12 w-full bg-white/80 border border-black/5 rounded transition-all font-medium text-sm shadow-inner focus:outline-none focus:ring-2"
               style={{
                 ["--tw-ring-color" as any]: `${primaryColor}33`,
                 borderColor: "rgba(0,0,0,0.05)", // default
@@ -147,10 +147,10 @@ export default function JournalsList({
             />
           </div>
 
-          <div className="flex items-center gap-2 bg-white/80 p-1.5 rounded-2xl border border-black/5 shadow-sm">
+          <div className="flex items-center gap-2 bg-white/80 p-1.5 rounded border border-black/5 shadow-sm">
             <button
               onClick={() => setView("grid")}
-              className="flex items-center justify-center w-10 h-10 rounded-xl transition-all"
+              className="flex items-center justify-center w-10 h-10 rounded transition-all"
               style={{
                 backgroundColor: view === "grid" ? primaryColor : "transparent",
                 color: view === "grid" ? "white" : "rgba(0,0,0,0.4)",
@@ -164,7 +164,7 @@ export default function JournalsList({
             </button>
             <button
               onClick={() => setView("table")}
-              className="flex items-center justify-center w-10 h-10 rounded-xl transition-all"
+              className="flex items-center justify-center w-10 h-10 rounded transition-all"
               style={{
                 backgroundColor:
                   view === "table" ? primaryColor : "transparent",
@@ -191,7 +191,7 @@ export default function JournalsList({
                 setTypeFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full h-12 pl-11 pr-4 rounded-xl border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-semibold text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white"
+              className="w-full h-12 pl-11 pr-4 rounded border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-semibold text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white"
             >
               <option value="all">All Journal Types</option>
               {journalTypes?.map((type) => (
@@ -212,7 +212,7 @@ export default function JournalsList({
                 setStartDate(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full pl-11 h-12 bg-white/80 border border-black/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-semibold text-[10px] uppercase tracking-widest shadow-sm"
+              className="w-full pl-11 h-12 bg-white/80 border border-black/5 rounded focus:outline-none focus:ring-2 focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-semibold text-[10px] uppercase tracking-widest shadow-sm"
               title="Start Date"
             />
           </div>
@@ -227,7 +227,7 @@ export default function JournalsList({
                 setEndDate(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full pl-11 h-12 bg-white/80 border border-black/5 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-semibold text-[10px] uppercase tracking-widest shadow-sm"
+              className="w-full pl-11 h-12 bg-white/80 border border-black/5 rounded focus:outline-none focus:ring-2 focus:ring-[#D0402B]/20 focus:border-[#D0402B] transition-all font-semibold text-[10px] uppercase tracking-widest shadow-sm"
               title="End Date"
             />
           </div>
@@ -240,7 +240,7 @@ export default function JournalsList({
                 setSelectedMonth(e.target.value);
                 setCurrentPage(1);
               }}
-              className="flex-1 h-12 px-4 rounded-xl border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-semibold text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white"
+              className="flex-1 h-12 px-4 rounded border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-semibold text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white"
             >
               <option value="all">Every Month</option>
               {[
@@ -269,7 +269,7 @@ export default function JournalsList({
                 setSelectedYear(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-24 h-12 px-2 rounded-xl border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-semibold text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white text-center"
+              className="w-24 h-12 px-2 rounded border border-black/5 bg-white/80 focus:ring-2 focus:ring-[#D0402B]/10 outline-none transition-all font-semibold text-[10px] uppercase tracking-widest appearance-none text-black/60 cursor-pointer shadow-sm hover:bg-white text-center"
               title="Filter by Year"
             >
               <option value="all">Year</option>
@@ -291,7 +291,7 @@ export default function JournalsList({
               selectedYear !== "all") && (
                 <button
                   onClick={clearFilters}
-                  className="flex items-center justify-center h-12 w-12 border border-black/5 rounded-xl bg-white/80 hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-all text-black/40 shadow-sm"
+                  className="flex items-center justify-center h-12 w-12 border border-black/5 rounded bg-white/80 hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-all text-black/40 shadow-sm"
                   title="Clear Filters"
                 >
                   <X className="w-4 h-4" />
@@ -314,7 +314,7 @@ export default function JournalsList({
                 <div className="p-8">
                   <div className="flex justify-between items-start mb-6">
                     <div
-                      className="w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-sm group-hover:text-white"
+                      className="w-12 h-12 rounded flex items-center justify-center transition-all duration-500 shadow-sm group-hover:text-white"
                       style={{
                         backgroundColor: `${primaryColor}0D`, // 5% opacity
                         color: primaryColor,
@@ -338,7 +338,7 @@ export default function JournalsList({
                       `}</style>
                     </div>
                     <span
-                      className={`px-4 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-widest inline-block ${journal.is_posted
+                      className={`px-4 py-1.5 rounded text-[10px] font-semibold uppercase tracking-widest inline-block ${journal.is_posted
                         ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
                         : "bg-orange-500/10 text-orange-600 shadow-sm shadow-orange-500/10"
                         }`}
@@ -371,7 +371,7 @@ export default function JournalsList({
                           {journal.reference}
                         </span>
                       </div>
-                      <div className="w-8 h-8 rounded-full bg-black/5 flex items-center justify-center text-black/20 group-hover:bg-[#D0402B]/10 group-hover:text-[#D0402B] transition-all">
+                      <div className="w-8 h-8 rounded bg-black/5 flex items-center justify-center text-black/20 group-hover:bg-[#D0402B]/10 group-hover:text-[#D0402B] transition-all">
                         <ArrowUpRight className="w-4 h-4" />
                       </div>
                     </div>
@@ -426,7 +426,7 @@ export default function JournalsList({
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center text-black/40 group-hover:bg-[#D0402B]/10 group-hover:text-[#D0402B] transition-all">
+                        <div className="w-8 h-8 rounded bg-black/5 flex items-center justify-center text-black/40 group-hover:bg-[#D0402B]/10 group-hover:text-[#D0402B] transition-all">
                           <FileText className="w-4 h-4" />
                         </div>
                         <span className="text-sm font-medium text-black group-hover:text-[#D0402B] transition-colors">
@@ -461,7 +461,7 @@ export default function JournalsList({
                     <td className="py-2.5 px-4 text-right border-b border-black/5">
                       <div className="flex items-center justify-end gap-4 font-mono font-semibold text-xs text-black/40 group-hover:text-black">
                         {journal.reference}
-                        <div className="w-7 h-7 rounded-md bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-lg hover:bg-[#D0402B]">
+                        <div className="w-7 h-7 rounded bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-lg hover:bg-[#D0402B]">
                           <ArrowUpRight className="w-3.5 h-3.5" />
                         </div>
                       </div>
@@ -496,7 +496,7 @@ export default function JournalsList({
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="flex items-center justify-center border border-black/5 rounded-xl bg-white/80 transition-all hover:bg-[#D0402B] hover:text-white disabled:opacity-30 h-10 px-4 font-semibold"
+              className="flex items-center justify-center border border-black/5 rounded bg-white/80 transition-all hover:bg-[#D0402B] hover:text-white disabled:opacity-30 h-10 px-4 font-semibold"
             >
               <ChevronLeft className="w-4 h-4 mr-1" /> Prev
             </button>
@@ -505,7 +505,7 @@ export default function JournalsList({
                 <button
                   key={i + 1}
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`flex items-center justify-center w-10 h-10 border rounded-xl transition-all font-semibold ${currentPage === i + 1
+                  className={`flex items-center justify-center w-10 h-10 border rounded transition-all font-semibold ${currentPage === i + 1
                     ? "bg-[#D0402B] border-transparent text-white shadow-lg shadow-[#D0402B]/20"
                     : "bg-white/80 border-black/5 hover:bg-black/5"
                     }`}
@@ -526,7 +526,7 @@ export default function JournalsList({
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="flex items-center justify-center border border-black/5 rounded-xl bg-white/80 transition-all hover:bg-[#D0402B] hover:text-white disabled:opacity-30 h-10 px-4 font-semibold"
+              className="flex items-center justify-center border border-black/5 rounded bg-white/80 transition-all hover:bg-[#D0402B] hover:text-white disabled:opacity-30 h-10 px-4 font-semibold"
             >
               Next <ChevronRight className="w-4 h-4 ml-1" />
             </button>
@@ -536,7 +536,7 @@ export default function JournalsList({
 
       {filteredJournals.length === 0 && !isLoadingJournals && (
         <div className="py-24 text-center bg-white/40 rounded-[40px] border border-dashed border-black/10">
-          <div className="w-20 h-20 rounded-3xl bg-black/5 flex items-center justify-center text-black/10 mx-auto mb-6">
+          <div className="w-20 h-20 rounded bg-black/5 flex items-center justify-center text-black/10 mx-auto mb-6">
             <History className="w-10 h-10" />
           </div>
           <h3 className="text-xl font-semibold text-black tracking-tight mb-2 uppercase tracking-widest italic scale-95">

@@ -146,22 +146,22 @@ export default function FinanceDashboard() {
         </Tabs.List>
 
         <Tabs.Content value="overview" className="space-y-10 focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {stats.slice(0, 4).map((stat, i) => (
               <div
                 key={i}
-                className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-2xl shadow-slate-100 relative overflow-hidden group hover:-translate-y-1 transition-all duration-500"
+                className="bg-white p-4 rounded border border-slate-200 shadow-2xl shadow-slate-100 relative overflow-hidden group hover:-translate-y-1 transition-all duration-500"
               >
-                <div className={cn("absolute top-0 right-0 w-24 h-24 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-30 group-hover:opacity-60 transition-opacity", stat.bg)} />
+                <div className={cn("absolute top-0 right-0 w-24 h-24 rounded blur-3xl -translate-y-1/2 translate-x-1/2 opacity-30 group-hover:opacity-60 transition-opacity", stat.bg)} />
                 <div className="relative z-10 flex flex-col gap-4">
-                  <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center shadow-inner", stat.bg, stat.color)}>
+                  <div className={cn("w-8 h-8 rounded flex items-center justify-center shadow-inner", stat.bg, stat.color)}>
                     <stat.icon className="w-6 h-6" />
                   </div>
                   <div>
-                    <p className="text-slate-400 font-semibold uppercase tracking-widest text-[9px] mb-1">
+                    <p className="text-slate-400 font-semibold text-[10px] mb-1">
                       {stat.label}
                     </p>
-                    <h3 className="text-2xl font-semibold text-slate-900 tracking-tight">
+                    <h3 className="font-semibold text-slate-900 tracking-tight">
                       {stat.value}
                     </h3>
                   </div>
@@ -171,26 +171,28 @@ export default function FinanceDashboard() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-1">
               <AccountDistributionChart data={coas || []} />
             </div>
-            <div className="space-y-8">
+            <div className="space-y-8 lg:col-span-1">
               <RecentActivityFeed entries={entries || []} />
-              <div className="bg-slate-900 p-8 rounded-[2.5rem] border border-slate-800 shadow-2xl relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-600/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-emerald-600/30 transition-colors" />
+            </div>
+            <div className="space-y-8 lg:col-span-1">
+              <div className="bg-slate-900 p-4 rounded border border-slate-800 shadow-xl relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-600/20 rounded blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-emerald-600/30 transition-colors" />
                 <div className="relative z-10">
                   <h3 className="text-xl font-semibold text-white tracking-tight mb-6">Tactical Actions</h3>
                   <div className="space-y-4">
                     <button
                       onClick={() => setOpenCreateJournalType(true)}
-                      className="w-full h-14 bg-white/10 hover:bg-white/20 text-white rounded-2xl border border-white/10 font-semibold text-sm transition-all flex items-center justify-center gap-3 group/btn"
+                      className="w-full h-14 bg-white/10 hover:bg-white/20 text-white rounded border border-white/10 text-sm transition-all flex items-center justify-center gap-3 group/btn"
                     >
                       <Plus className="w-4 h-4 group-hover/btn:rotate-90 transition-transform text-emerald-400" />
                       Add Journal Type
                     </button>
                     <button
                       onClick={() => setOpenCreatePartnerType(true)}
-                      className="w-full h-14 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl shadow-lg shadow-emerald-600/20 font-semibold text-sm transition-all flex items-center justify-center gap-3"
+                      className="w-full h-14 bg-emerald-600 hover:bg-emerald-500 text-white rounded shadow-lg shadow-emerald-600/20 text-sm transition-all flex items-center justify-center gap-3"
                     >
                       <Plus className="w-4 h-4" />
                       Add Partner Category
@@ -214,7 +216,7 @@ export default function FinanceDashboard() {
                   </h2>
                   <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Active Sub-ledgers</p>
                 </div>
-                <div className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[10px] font-semibold border border-slate-200 uppercase">
+                <div className="px-3 py-1 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold border border-slate-200 uppercase">
                   {divisions?.length || 0} Total
                 </div>
               </div>
@@ -222,9 +224,9 @@ export default function FinanceDashboard() {
                 {divisions?.map((division) => (
                   <div
                     key={division.reference}
-                    className="group bg-white p-5 rounded-2xl border border-slate-200 hover:border-emerald-600/20 hover:shadow-xl hover:shadow-slate-100 transition-all flex items-center gap-4"
+                    className="group bg-white p-5 rounded border border-slate-200 hover:border-emerald-600/20 hover:shadow-xl hover:shadow-slate-100 transition-all flex items-center gap-4"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-inner">
+                    <div className="w-10 h-10 rounded bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-inner">
                       <Layers className="w-4 h-4" />
                     </div>
                     <h3 className="font-semibold text-slate-900 text-sm">
@@ -247,7 +249,7 @@ export default function FinanceDashboard() {
                 </div>
                 <button
                   onClick={() => setOpenCreateJournalType(true)}
-                  className="p-2 bg-emerald-50 text-emerald-600 rounded-xl hover:bg-emerald-600 hover:text-white transition-all border border-emerald-100 hover:shadow-lg hover:shadow-emerald-600/20"
+                  className="p-2 bg-emerald-50 text-emerald-600 rounded hover:bg-emerald-600 hover:text-white transition-all border border-emerald-100 hover:shadow-lg hover:shadow-emerald-600/20"
                 >
                   <Plus className="w-4 h-4" />
                 </button>
@@ -256,10 +258,10 @@ export default function FinanceDashboard() {
                 {journalTypes?.map((type) => (
                   <div
                     key={type.reference}
-                    className="group bg-white p-5 rounded-2xl border border-slate-200 hover:border-emerald-600/20 hover:shadow-xl hover:shadow-slate-100 transition-all flex flex-col gap-2"
+                    className="group bg-white p-5 rounded border border-slate-200 hover:border-emerald-600/20 hover:shadow-xl hover:shadow-slate-100 transition-all flex flex-col gap-2"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-inner">
+                      <div className="w-10 h-10 rounded bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-inner">
                         <Settings2 className="w-4 h-4" />
                       </div>
                       <h3 className="font-semibold text-slate-900 text-sm">{type.name}</h3>
@@ -284,7 +286,7 @@ export default function FinanceDashboard() {
                 </div>
                 <button
                   onClick={() => setOpenCreatePartnerType(true)}
-                  className="p-2 bg-emerald-50 text-emerald-600 rounded-xl hover:bg-emerald-600 hover:text-white transition-all border border-emerald-100 hover:shadow-lg hover:shadow-emerald-600/20"
+                  className="p-2 bg-emerald-50 text-emerald-600 rounded hover:bg-emerald-600 hover:text-white transition-all border border-emerald-100 hover:shadow-lg hover:shadow-emerald-600/20"
                 >
                   <Plus className="w-4 h-4" />
                 </button>
@@ -293,10 +295,10 @@ export default function FinanceDashboard() {
                 {partnerTypes?.map((type) => (
                   <div
                     key={type.reference}
-                    className="group bg-white p-5 rounded-2xl border border-slate-200 hover:border-emerald-600/20 hover:shadow-xl hover:shadow-slate-100 transition-all flex flex-col gap-2"
+                    className="group bg-white p-5 rounded border border-slate-200 hover:border-emerald-600/20 hover:shadow-xl hover:shadow-slate-100 transition-all flex flex-col gap-2"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-inner">
+                      <div className="w-10 h-10 rounded bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-inner">
                         <Briefcase className="w-4 h-4" />
                       </div>
                       <h3 className="font-semibold text-slate-900 text-sm">{type.name}</h3>

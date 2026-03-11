@@ -63,11 +63,11 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
                     </p>
                 </div>
                 <div className="hidden md:flex items-center gap-2">
-                    <kbd className="px-3 py-1.5 rounded-xl bg-slate-900 text-white text-[9px] font-semibold shadow-2xl tracking-tighter shadow-slate-900/20">
+                    <kbd className="px-3 py-1.5 rounded bg-slate-900 text-white text-[9px] font-semibold shadow-2xl tracking-tighter shadow-slate-900/20">
                         CMD
                     </kbd>
                     <span className="text-slate-300 font-semibold">+</span>
-                    <kbd className="px-3 py-1.5 rounded-xl bg-slate-900 text-white text-[9px] font-semibold shadow-2xl tracking-tighter shadow-slate-900/20">
+                    <kbd className="px-3 py-1.5 rounded bg-slate-900 text-white text-[9px] font-semibold shadow-2xl tracking-tighter shadow-slate-900/20">
                         K
                     </kbd>
                 </div>
@@ -84,12 +84,12 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
                             <div className="flex items-center border-b border-slate-100 px-6" cmdk-input-wrapper="">
                                 <Search className="mr-3 h-5 w-5 shrink-0 text-slate-400" />
                                 <Command.Input
-                                    className="flex h-20 w-full rounded-md bg-transparent py-3 text-lg font-medium text-slate-900 outline-none placeholder:text-slate-400 disabled:cursor-not-allowed disabled:opacity-50"
+                                    className="flex h-20 w-full rounded bg-transparent py-3 text-lg font-medium text-slate-900 outline-none placeholder:text-slate-400 disabled:cursor-not-allowed disabled:opacity-50"
                                     placeholder="Looking for something specific?"
                                 />
                                 <button
                                     onClick={() => setOpen(false)}
-                                    className="p-2 rounded-xl hover:bg-slate-100 text-slate-400 transition-colors"
+                                    className="p-2 rounded hover:bg-slate-100 text-slate-400 transition-colors"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
@@ -101,19 +101,19 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
 
                                 <Command.Group heading={<span className="px-4 py-2 text-[10px] font-semibold uppercase tracking-widest text-slate-400 block mb-2">Navigation</span>}>
                                     <Command.Item
-                                        className="flex cursor-pointer select-none items-center rounded-2xl px-4 py-4 text-slate-600 outline-none hover:bg-slate-100 hover:text-slate-900 aria-selected:bg-slate-100 aria-selected:text-slate-900 transition-all mb-1 group"
+                                        className="flex cursor-pointer select-none items-center rounded px-4 py-4 text-slate-600 outline-none hover:bg-slate-100 hover:text-slate-900 aria-selected:bg-slate-100 aria-selected:text-slate-900 transition-all mb-1 group"
                                         onSelect={() => runCommand(() => router.push(`/${role}/dashboard`))}
                                     >
-                                        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
+                                        <div className="w-10 h-10 rounded bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
                                             <Calculator className="h-5 w-5" />
                                         </div>
                                         <span className="font-semibold">Command Dashboard</span>
                                     </Command.Item>
                                     <Command.Item
-                                        className="flex cursor-pointer select-none items-center rounded-2xl px-4 py-4 text-slate-600 outline-none hover:bg-slate-100 hover:text-slate-900 aria-selected:bg-slate-100 aria-selected:text-slate-900 transition-all mb-1 group"
+                                        className="flex cursor-pointer select-none items-center rounded px-4 py-4 text-slate-600 outline-none hover:bg-slate-100 hover:text-slate-900 aria-selected:bg-slate-100 aria-selected:text-slate-900 transition-all mb-1 group"
                                         onSelect={() => runCommand(() => router.push(`/${role}/coa`))}
                                     >
-                                        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
+                                        <div className="w-10 h-10 rounded bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
                                             <Layers className="h-5 w-5" />
                                         </div>
                                         <span className="font-semibold">Chart of Accounts</span>
@@ -124,10 +124,10 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
                                     {coas?.slice(0, 8).map((coa) => (
                                         <Command.Item
                                             key={coa.reference}
-                                            className="flex cursor-pointer select-none items-center rounded-2xl px-4 py-4 text-slate-600 outline-none hover:bg-slate-100 hover:text-slate-900 aria-selected:bg-slate-100 aria-selected:text-slate-900 transition-all mb-1 group"
+                                            className="flex cursor-pointer select-none items-center rounded px-4 py-4 text-slate-600 outline-none hover:bg-slate-100 hover:text-slate-900 aria-selected:bg-slate-100 aria-selected:text-slate-900 transition-all mb-1 group"
                                             onSelect={() => runCommand(() => router.push(`/${role}/coa/${coa.reference}`))}
                                         >
-                                            <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
+                                            <div className="w-10 h-10 rounded bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
                                                 <FileText className="h-5 w-5" />
                                             </div>
                                             <div className="flex flex-col">
@@ -142,10 +142,10 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
                                     {books?.slice(0, 8).map((book) => (
                                         <Command.Item
                                             key={book.reference}
-                                            className="flex cursor-pointer select-none items-center rounded-2xl px-4 py-4 text-slate-600 outline-none hover:bg-slate-100 hover:text-slate-900 aria-selected:bg-slate-100 aria-selected:text-slate-900 transition-all mb-1 group"
+                                            className="flex cursor-pointer select-none items-center rounded px-4 py-4 text-slate-600 outline-none hover:bg-slate-100 hover:text-slate-900 aria-selected:bg-slate-100 aria-selected:text-slate-900 transition-all mb-1 group"
                                             onSelect={() => runCommand(() => router.push(`/${role}/books/${book.reference}`))}
                                         >
-                                            <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
+                                            <div className="w-10 h-10 rounded bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white border border-transparent group-hover:border-slate-200 transition-all">
                                                 <Book className="h-5 w-5" />
                                             </div>
                                             <span className="font-semibold">{book.name}</span>

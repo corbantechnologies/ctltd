@@ -94,7 +94,7 @@ export default function CreateBook({
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-4">
             <div
-              className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
+              className="w-12 h-12 rounded flex items-center justify-center text-white shadow-lg"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
@@ -116,7 +116,7 @@ export default function CreateBook({
               type="button"
               onClick={onClose}
 
-              className="hover:bg-red-50 hover:text-red-500 rounded-full p-2"
+              className="hover:bg-red-50 hover:text-red-500 rounded p-2"
             >
               <X className="w-5 h-5" />
             </button>
@@ -138,7 +138,7 @@ export default function CreateBook({
                 name="code"
                 type="text"
                 placeholder="e.g. BK-100"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.code}
@@ -163,7 +163,7 @@ export default function CreateBook({
                 name="name"
                 type="text"
                 placeholder="e.g. Main Cash Book"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
@@ -188,7 +188,7 @@ export default function CreateBook({
               id="account_type"
               name="account_type"
               disabled={isLoadingCOAs || !!initialCOA}
-              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold ring-offset-white transition-all appearance-none cursor-pointer disabled:opacity-50"
+              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold ring-offset-white transition-all appearance-none cursor-pointer disabled:opacity-50"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.account_type}
@@ -210,7 +210,7 @@ export default function CreateBook({
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <div
-              className={`flex flex-col items-center justify-center p-4 rounded-2xl border border-black/5 transition-all gap-2 group cursor-pointer ${formik.values.is_active ? "bg-black/5" : "bg-white"}`}
+              className={`flex flex-col items-center justify-center p-4 rounded border border-black/5 transition-all gap-2 group cursor-pointer ${formik.values.is_active ? "bg-black/5" : "bg-white"}`}
               onClick={() =>
                 formik.setFieldValue("is_active", !formik.values.is_active)
               }
@@ -224,7 +224,7 @@ export default function CreateBook({
                 name="is_active"
                 checked={formik.values.is_active}
                 onChange={formik.handleChange}
-                className="w-5 h-5 rounded-lg transition-colors cursor-pointer"
+                className="w-5 h-5 rounded transition-colors cursor-pointer"
                 style={{ accentColor: primaryColor }}
               />
               <span className="text-[10px] font-semibold uppercase text-black/60 group-hover:text-black">
@@ -232,7 +232,7 @@ export default function CreateBook({
               </span>
             </div>
             <div
-              className={`flex flex-col items-center justify-center p-4 rounded-2xl border border-black/5 transition-all gap-2 group cursor-pointer ${formik.values.is_bank ? "bg-black/5" : "bg-white"}`}
+              className={`flex flex-col items-center justify-center p-4 rounded border border-black/5 transition-all gap-2 group cursor-pointer ${formik.values.is_bank ? "bg-black/5" : "bg-white"}`}
               onClick={() =>
                 formik.setFieldValue("is_bank", !formik.values.is_bank)
               }
@@ -245,7 +245,7 @@ export default function CreateBook({
                 name="is_bank"
                 checked={formik.values.is_bank}
                 onChange={formik.handleChange}
-                className="w-5 h-5 rounded-lg transition-colors cursor-pointer"
+                className="w-5 h-5 rounded transition-colors cursor-pointer"
                 style={{ accentColor: primaryColor }}
               />
               <span className="text-[10px] font-semibold uppercase text-black/60 group-hover:text-black">
@@ -253,7 +253,7 @@ export default function CreateBook({
               </span>
             </div>
             <div
-              className={`flex flex-col items-center justify-center p-4 rounded-2xl border border-black/5 transition-all gap-2 group cursor-pointer ${formik.values.is_tax ? "bg-black/5" : "bg-white"}`}
+              className={`flex flex-col items-center justify-center p-4 rounded border border-black/5 transition-all gap-2 group cursor-pointer ${formik.values.is_tax ? "bg-black/5" : "bg-white"}`}
               onClick={() =>
                 formik.setFieldValue("is_tax", !formik.values.is_tax)
               }
@@ -266,7 +266,7 @@ export default function CreateBook({
                 name="is_tax"
                 checked={formik.values.is_tax}
                 onChange={formik.handleChange}
-                className="w-5 h-5 rounded-lg transition-colors cursor-pointer"
+                className="w-5 h-5 rounded transition-colors cursor-pointer"
                 style={{ accentColor: primaryColor }}
               />
               <span className="text-[10px] font-semibold uppercase text-black/60 group-hover:text-black">
@@ -274,7 +274,7 @@ export default function CreateBook({
               </span>
             </div>
             <div
-              className={`flex flex-col items-center justify-center p-4 rounded-2xl border border-black/5 transition-all gap-2 group cursor-pointer ${formik.values.is_cash ? "bg-black/5" : "bg-white"}`}
+              className={`flex flex-col items-center justify-center p-4 rounded border border-black/5 transition-all gap-2 group cursor-pointer ${formik.values.is_cash ? "bg-black/5" : "bg-white"}`}
               onClick={() =>
                 formik.setFieldValue("is_cash", !formik.values.is_cash)
               }
@@ -287,7 +287,7 @@ export default function CreateBook({
                 name="is_cash"
                 checked={formik.values.is_cash}
                 onChange={formik.handleChange}
-                className="w-5 h-5 rounded-lg transition-colors cursor-pointer"
+                className="w-5 h-5 rounded transition-colors cursor-pointer"
                 style={{ accentColor: primaryColor }}
               />
               <span className="text-[10px] font-semibold uppercase text-black/60 group-hover:text-black">
@@ -307,7 +307,7 @@ export default function CreateBook({
               id="description"
               name="description"
               placeholder="Provide a brief description of this book..."
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[120px] rounded-2xl focus:bg-slate-50 transition-all font-semibold p-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[120px] rounded focus:bg-slate-50 transition-all font-semibold p-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.description}

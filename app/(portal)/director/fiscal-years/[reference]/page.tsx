@@ -43,7 +43,7 @@ export default function FiscalYearDetail() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-[#045138] flex items-center justify-center text-white shadow-xl shadow-[#045138]/20">
+            <div className="w-14 h-14 rounded bg-[#045138] flex items-center justify-center text-white shadow-xl shadow-[#045138]/20">
               <CalendarRange className="w-7 h-7" />
             </div>
             <div>
@@ -51,19 +51,19 @@ export default function FiscalYearDetail() {
                 {fiscalYear.code}
               </h1>
               <div className="flex items-center gap-3 mt-2">
-                <span className="bg-black text-white border-none font-semibold text-[10px] uppercase tracking-widest px-3 py-1 rounded-lg inline-block">
+                <span className="bg-black text-white border-none font-semibold text-[10px] uppercase tracking-widest px-3 py-1 rounded inline-block">
                   REF: {fiscalYear.reference}
                 </span>
                 {fiscalYear.is_active ? (
-                  <div className="flex items-center gap-1.5 text-green-600 bg-green-50 px-3 py-1 rounded-full border border-green-100">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                  <div className="flex items-center gap-1.5 text-green-600 bg-green-50 px-3 py-1 rounded border border-green-100">
+                    <div className="w-1.5 h-1.5 rounded bg-green-500 animate-pulse" />
                     <span className="text-[10px] font-semibold uppercase tracking-widest">
                       Active
                     </span>
                   </div>
                 ) : (
-                  <div className="flex items-center gap-1.5 text-gray-400 bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
-                    <div className="w-1.5 h-1.5 rounded-full bg-gray-300" />
+                  <div className="flex items-center gap-1.5 text-gray-400 bg-gray-50 px-3 py-1 rounded border border-gray-100">
+                    <div className="w-1.5 h-1.5 rounded bg-gray-300" />
                     <span className="text-[10px] font-semibold uppercase tracking-widest">
                       Closed
                     </span>
@@ -77,10 +77,10 @@ export default function FiscalYearDetail() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded shadow-sm">
           <div className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+              <div className="w-12 h-12 rounded bg-black/5 flex items-center justify-center text-black/40">
                 <Calendar className="w-5 h-5" />
               </div>
               <div>
@@ -99,10 +99,10 @@ export default function FiscalYearDetail() {
           </div>
         </div>
 
-        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded shadow-sm">
           <div className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+              <div className="w-12 h-12 rounded bg-black/5 flex items-center justify-center text-black/40">
                 <Calendar className="w-5 h-5" />
               </div>
               <div>
@@ -121,11 +121,11 @@ export default function FiscalYearDetail() {
           </div>
         </div>
 
-        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl shadow-sm">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded shadow-sm">
           <div className="p-6">
             <div className="flex items-center gap-4">
               <div
-                className={`w-12 h-12 rounded-xl flex items-center justify-center ${fiscalYear.is_active
+                className={`w-12 h-12 rounded flex items-center justify-center ${fiscalYear.is_active
                   ? "bg-green-500/10 text-green-600"
                   : "bg-black/5 text-black/40"
                   }`}

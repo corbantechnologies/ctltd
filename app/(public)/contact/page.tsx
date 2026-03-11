@@ -58,7 +58,7 @@ export default function Contact() {
       <section className="relative pt-12 pb-24 lg:pt-40 lg:pb-32 overflow-hidden border-b border-slate-200 bg-white">
         <div className="absolute inset-0 bg-grid-slate-100 pointer-events-none opacity-40 mx-auto max-w-7xl" />
         <div className="container mx-auto px-6 relative z-10 text-center lg:text-left max-w-6xl flex flex-col items-center lg:items-start">
-          <span className="mb-6 inline-flex items-center rounded-full bg-slate-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-corporate-primary border border-slate-200 shadow-sm">
+          <span className="mb-6 inline-flex items-center rounded bg-slate-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-corporate-primary border border-slate-200 shadow-sm">
             Contact Us
           </span>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-slate-900 mb-8 leading-[1.1]">
@@ -83,7 +83,7 @@ export default function Contact() {
                 </h2>
                 <div className="space-y-6">
                   <div className="flex items-start gap-5 group">
-                    <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-corporate-primary shadow-sm group-hover:border-corporate-primary/30 transition-all">
+                    <div className="w-12 h-12 rounded bg-white border border-slate-200 flex items-center justify-center text-corporate-primary shadow-sm group-hover:border-corporate-primary/30 transition-all">
                       <Mail className="w-6 h-6" />
                     </div>
                     <div>
@@ -96,7 +96,7 @@ export default function Contact() {
                     </div>
                   </div>
                   <div className="flex items-start gap-5 group">
-                    <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-corporate-primary shadow-sm group-hover:border-corporate-primary/30 transition-all">
+                    <div className="w-12 h-12 rounded bg-white border border-slate-200 flex items-center justify-center text-corporate-primary shadow-sm group-hover:border-corporate-primary/30 transition-all">
                       <Phone className="w-6 h-6" />
                     </div>
                     <div>
@@ -109,7 +109,7 @@ export default function Contact() {
                     </div>
                   </div>
                   <div className="flex items-start gap-5 group">
-                    <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-corporate-primary shadow-sm group-hover:border-corporate-primary/30 transition-all">
+                    <div className="w-12 h-12 rounded bg-white border border-slate-200 flex items-center justify-center text-corporate-primary shadow-sm group-hover:border-corporate-primary/30 transition-all">
                       <MapPin className="w-6 h-6" />
                     </div>
                     <div>
@@ -124,10 +124,10 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8 bg-slate-900 rounded-2xl shadow-lg relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-corporate-primary/20 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
+              <div className="p-6 sm:p-8 bg-slate-900 rounded shadow-lg relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-corporate-primary/20 rounded blur-3xl translate-x-1/2 -translate-y-1/2" />
                 <div className="relative z-10 flex items-center gap-6">
-                  <div className="w-12 h-12 rounded-xl bg-corporate-primary/20 border border-corporate-primary/30 flex items-center justify-center text-corporate-primary">
+                  <div className="w-12 h-12 rounded bg-corporate-primary/20 border border-corporate-primary/30 flex items-center justify-center text-corporate-primary">
                     <Clock className="w-6 h-6" />
                   </div>
                   <div>
@@ -144,15 +144,15 @@ export default function Contact() {
 
             {/* Form */}
             <div className="lg:col-span-7">
-              <div className="bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm">
+              <div className="bg-white p-6 sm:p-10 rounded border border-slate-200 shadow-sm">
                 {success && (
-                  <div className="mb-8 bg-green-50 border border-green-200 text-green-700 rounded-lg p-4 flex items-center gap-3">
+                  <div className="mb-8 bg-green-50 border border-green-200 text-green-700 rounded p-4 flex items-center gap-3">
                     <Send className="w-5 h-5" />
                     <span className="font-medium text-sm">Thanks! Your message has been sent. We&apos;ll reply within 24 hours.</span>
                   </div>
                 )}
                 {error && (
-                  <div className="mb-8 bg-red-50 border border-red-200 text-red-700 rounded-lg p-4 flex items-center gap-3">
+                  <div className="mb-8 bg-red-50 border border-red-200 text-red-700 rounded p-4 flex items-center gap-3">
                     <span className="font-medium text-sm">{error}</span>
                   </div>
                 )}
@@ -177,7 +177,7 @@ export default function Contact() {
                         id="name"
                         name="name"
                         placeholder="John Doe"
-                        className="w-full h-12 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-corporate-primary/20 focus:border-corporate-primary transition-all px-4 font-medium text-slate-900"
+                        className="w-full h-12 rounded border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-corporate-primary/20 focus:border-corporate-primary transition-all px-4 font-medium text-slate-900"
                         required
                       />
                     </div>
@@ -193,7 +193,7 @@ export default function Contact() {
                         name="email"
                         type="email"
                         placeholder="john@company.com"
-                        className="w-full h-12 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-corporate-primary/20 focus:border-corporate-primary transition-all px-4 font-medium text-slate-900"
+                        className="w-full h-12 rounded border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-corporate-primary/20 focus:border-corporate-primary transition-all px-4 font-medium text-slate-900"
                         required
                       />
                     </div>
@@ -210,14 +210,14 @@ export default function Contact() {
                       name="message"
                       rows={5}
                       placeholder="Tell us about your technical requirements..."
-                      className="w-full rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-corporate-primary/20 focus:border-corporate-primary transition-all p-4 font-medium min-h-[160px] resize-y text-slate-900"
+                      className="w-full rounded border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-corporate-primary/20 focus:border-corporate-primary transition-all p-4 font-medium min-h-[160px] resize-y text-slate-900"
                       required
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-corporate-primary hover:bg-orange-600 text-white font-medium py-3.5 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2 group/btn disabled:opacity-70 disabled:cursor-not-allowed mt-2"
+                    className="w-full bg-corporate-primary hover:bg-orange-600 text-white font-medium py-3.5 rounded shadow-sm transition-colors flex items-center justify-center gap-2 group/btn disabled:opacity-70 disabled:cursor-not-allowed mt-2"
                     disabled={loading}
                   >
                     {loading ? (

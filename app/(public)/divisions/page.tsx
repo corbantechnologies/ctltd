@@ -13,7 +13,7 @@ export default function DivisionsIndexPage() {
             <section className="relative pt-40 pb-24 overflow-hidden border-b border-black/5 bg-white">
                 <div className="absolute inset-0 bg-grid-white pointer-events-none opacity-40" />
                 <div className="mx-auto px-6 relative z-10 text-center lg:text-left max-w-6xl">
-                    <span className="mb-4 inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-corporate-primary border border-slate-200 shadow-sm">
+                    <span className="mb-4 inline-flex items-center rounded bg-slate-100 px-3 py-1 text-xs font-semibold text-corporate-primary border border-slate-200 shadow-sm">
                         Enterprise Sectors
                     </span>
                     <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-8 leading-tight">
@@ -32,7 +32,7 @@ export default function DivisionsIndexPage() {
                     {isLoading ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {[1, 2, 3, 4, 5, 6].map((i) => (
-                                <div key={i} className="h-72 bg-white rounded-2xl border border-slate-200 animate-pulse" />
+                                <div key={i} className="h-72 bg-white rounded border border-slate-200 animate-pulse" />
                             ))}
                         </div>
                     ) : (
@@ -41,9 +41,9 @@ export default function DivisionsIndexPage() {
                                 <Link
                                     key={division.reference}
                                     href={`/divisions/${division.reference}`}
-                                    className="group bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-all hover:border-orange-200 flex flex-col h-full"
+                                    className="group bg-white p-8 rounded shadow-sm border border-slate-200 hover:shadow-md transition-all hover:border-orange-200 flex flex-col h-full"
                                 >
-                                    <div className="bg-slate-50 w-14 h-14 rounded-xl flex items-center justify-center mb-6 border border-slate-100 group-hover:scale-110 transition-all overflow-hidden p-2">
+                                    <div className="bg-slate-50 w-14 h-14 rounded flex items-center justify-center mb-6 border border-slate-100 group-hover:scale-110 transition-all overflow-hidden p-2">
                                         {division.logo ? (
                                             <img src={division.logo} alt={division.name} className="w-full h-full object-contain" />
                                         ) : (

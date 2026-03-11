@@ -218,7 +218,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                     <td className="py-2.5 px-4 border-b border-black/5">
                       <div className="flex items-center gap-3">
                         <div
-                          className="w-8 h-8 rounded-lg flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105"
+                          className="w-8 h-8 rounded flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105"
                           style={{ backgroundColor: primaryColor }}
                         >
                           <Users className="w-4 h-4" />

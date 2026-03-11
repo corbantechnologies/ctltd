@@ -14,7 +14,7 @@ export default function About() {
       <section className="relative pt-12 pb-24 lg:pt-40 lg:pb-32 overflow-hidden border-b border-slate-200 bg-white">
         <div className="absolute inset-0 bg-grid-slate-100 pointer-events-none opacity-40 mx-auto max-w-7xl" />
         <div className="container mx-auto px-6 relative z-10 text-center lg:text-left max-w-6xl flex flex-col items-center lg:items-start">
-          <span className="mb-6 inline-flex items-center rounded-full bg-slate-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-corporate-primary border border-slate-200 shadow-sm">
+          <span className="mb-6 inline-flex items-center rounded bg-slate-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-corporate-primary border border-slate-200 shadow-sm">
             Our Mission
           </span>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-slate-900 mb-8 leading-[1.1]">
@@ -48,7 +48,7 @@ export default function About() {
                 "Security as a core pillar of every deployment",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center mt-1">
+                  <div className="flex-shrink-0 w-8 h-8 rounded bg-orange-100 flex items-center justify-center mt-1">
                     <CheckCircle2 className="w-5 h-5 text-corporate-primary" />
                   </div>
                   <span className="text-lg text-slate-700 font-medium leading-tight">{item}</span>
@@ -57,11 +57,11 @@ export default function About() {
             </ul>
           </div>
           <div className="relative group w-full max-w-md mx-auto lg:max-w-none">
-            <div className="relative bg-white border border-slate-200 p-6 sm:p-10 rounded-3xl shadow-xl shadow-slate-200/50">
+            <div className="relative bg-white border border-slate-200 p-6 sm:p-10 rounded shadow-xl shadow-slate-200/50">
               <div className="grid grid-cols-2 gap-8 sm:gap-10">
                 {stats.map((stat) => (
                   <div key={stat.label} className="space-y-4 flex flex-col items-center text-center">
-                    <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center text-corporate-primary shadow-sm border border-slate-100">
+                    <div className="w-14 h-14 rounded bg-slate-50 flex items-center justify-center text-corporate-primary shadow-sm border border-slate-100">
                       <stat.icon className="w-7 h-7" />
                     </div>
                     <div>

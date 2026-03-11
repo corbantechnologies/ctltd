@@ -60,12 +60,12 @@ export default function PartnerDetailPage() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => router.back()}
-              className="flex items-center justify-center w-10 h-10 rounded-full border border-black/5 bg-white shadow-sm hover:bg-black/5 transition-colors"
+              className="flex items-center justify-center w-10 h-10 rounded border border-black/5 bg-white shadow-sm hover:bg-black/5 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
             <span
-              className={`px-4 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-widest border-none ${partner.is_active
+              className={`px-4 py-1.5 rounded text-[10px] font-semibold uppercase tracking-widest border-none ${partner.is_active
                 ? "bg-green-500/10 text-green-600 shadow-sm shadow-green-500/10"
                 : "bg-red-500/10 text-red-600 shadow-sm shadow-red-500/10"
                 }`}
@@ -78,11 +78,11 @@ export default function PartnerDetailPage() {
               {partner.name}
             </h1>
             <div className="flex flex-wrap gap-4 text-sm font-semibold ">
-              <span className="flex items-center gap-2 bg-white/50 px-3 py-1 rounded-lg border border-black/5">
+              <span className="flex items-center gap-2 bg-white/50 px-3 py-1 rounded border border-black/5">
                 <Building2 className="w-4 h-4" /> {partner.partner_type}
               </span>
               {(partner.division || "Global") && (
-                <span className="bg-[#045138]/10 text-[#045138] px-3 py-1 rounded-lg uppercase tracking-wider text-[10px]">
+                <span className="bg-[#045138]/10 text-[#045138] px-3 py-1 rounded uppercase tracking-wider text-[10px]">
                   {partner.division || "Global Division"}
                 </span>
               )}
@@ -92,7 +92,7 @@ export default function PartnerDetailPage() {
 
         <button
           onClick={() => setOpenUpdatePartner(true)}
-          className="flex items-center justify-center gap-2 h-12 px-4 bg-white hover:bg-black/5 text-black border border-black/5 rounded-xl font-semibold text-xs uppercase tracking-widest shadow-sm transition-colors"
+          className="flex items-center justify-center gap-2 h-12 px-4 bg-white hover:bg-black/5 text-black border border-black/5 rounded font-semibold text-xs uppercase tracking-widest shadow-sm transition-colors"
         >
           <Edit2 className="w-4 h-4" />
           Edit Profile
@@ -101,10 +101,10 @@ export default function PartnerDetailPage() {
 
       {/* Info Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded overflow-hidden shadow-sm">
           <div className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+              <div className="w-12 h-12 rounded bg-black/5 flex items-center justify-center text-black/40">
                 <Calendar className="w-5 h-5" />
               </div>
               <div>
@@ -121,10 +121,10 @@ export default function PartnerDetailPage() {
           </div>
         </div>
 
-        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded overflow-hidden shadow-sm">
           <div className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+              <div className="w-12 h-12 rounded bg-black/5 flex items-center justify-center text-black/40">
                 <Hash className="w-5 h-5" />
               </div>
               <div>
@@ -139,10 +139,10 @@ export default function PartnerDetailPage() {
           </div>
         </div>
 
-        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded overflow-hidden shadow-sm">
           <div className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+              <div className="w-12 h-12 rounded bg-black/5 flex items-center justify-center text-black/40">
                 <Building2 className="w-5 h-5" />
               </div>
               <div>
@@ -157,10 +157,10 @@ export default function PartnerDetailPage() {
           </div>
         </div>
 
-        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm">
+        <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded overflow-hidden shadow-sm">
           <div className="p-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center text-black/40">
+              <div className="w-12 h-12 rounded bg-black/5 flex items-center justify-center text-black/40">
                 <Phone className="w-5 h-5" />
               </div>
               <div>
@@ -177,17 +177,17 @@ export default function PartnerDetailPage() {
       </div>
 
       {/* Transaction History (Journal Entries) */}
-      <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl shadow-black/5 pb-24">
+      <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded overflow-hidden shadow-xl shadow-black/5 pb-24">
         <div className="p-8 border-b border-black/5 flex flex-row items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-600">
+            <div className="w-10 h-10 rounded bg-orange-500/10 flex items-center justify-center text-orange-600">
               <History className="w-5 h-5" />
             </div>
             <h3 className="text-xl font-semibold text-black tracking-tight">
               Transaction Ledger
             </h3>
           </div>
-          <span className="bg-black/5 px-3 py-1 rounded-full text-xs font-semibold text-black/60">
+          <span className="bg-black/5 px-3 py-1 rounded text-xs font-semibold text-black/60">
             {partner.journal_entries?.length || 0} Records
           </span>
         </div>
@@ -197,7 +197,7 @@ export default function PartnerDetailPage() {
               <thead>
                 <tr className="bg-black/5 border-b border-black/5 text-left">
                   <th className="py-2 px-4">
-                    <span className="bg-black/5 text-black border-none font-semibold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-lg inline-block">
+                    <span className="bg-black/5 text-black border-none font-semibold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded inline-block">
                       Book & Date
                     </span>
                   </th>

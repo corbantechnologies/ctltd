@@ -72,7 +72,7 @@ export default function UpdateCOA({
       >
         <div className="flex items-center gap-4 mb-4">
           <div
-            className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg"
+            className="w-12 h-12 rounded flex items-center justify-center text-white shadow-lg"
             style={{
               backgroundColor: primaryColor,
               boxShadow: `0 10px 15px -3px ${primaryColor}4D`,
@@ -94,7 +94,7 @@ export default function UpdateCOA({
                 type="button"
                 onClick={onClose}
 
-                className="hover:bg-red-50 hover:text-red-500 rounded-full text-black/40 p-2"
+                className="hover:bg-red-50 hover:text-red-500 rounded text-black/40 p-2"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -103,7 +103,7 @@ export default function UpdateCOA({
         </div>
       </div>
       <div className="p-8">
-        <div className="mb-6 p-4 bg-black/5 rounded-2xl border border-black/5">
+        <div className="mb-6 p-4 bg-black/5 rounded border border-black/5">
           <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-1">
             Account Code (Read-only)
           </p>
@@ -123,7 +123,7 @@ export default function UpdateCOA({
               name="name"
               type="text"
               placeholder="e.g. Cash in Bank"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded-2xl focus:bg-slate-50 transition-all font-semibold px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
