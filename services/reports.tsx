@@ -3,7 +3,7 @@
 import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
 
-interface PnL {
+export interface PnL {
     revenue: number;
     cost_of_sales: number;
     gross_profit: number;
@@ -18,7 +18,7 @@ interface PnL {
     end_date: string | null;
 }
 
-interface BalanceSheet {
+export interface BalanceSheet {
     assets: {
         current: {
             debit: number;
@@ -63,7 +63,7 @@ interface BalanceSheet {
     currency: string;
 }
 
-interface TrialBalance {
+export interface TrialBalance {
     trial_balance: {
         code: string;
         name: string;
@@ -83,7 +83,7 @@ interface TrialBalance {
     currency: string;
 }
 
-interface Revenue {
+export interface Revenue {
     group_total_revenue: number;
     breakdown: {
         division: string;
@@ -94,7 +94,7 @@ interface Revenue {
     warning: string | null;
 }
 
-interface CashBalance {
+export interface CashBalance {
     cash_balance: number;
     currency: string;
     division: string;
