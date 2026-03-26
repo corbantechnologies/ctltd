@@ -8,22 +8,42 @@ interface PnL {
     cost_of_sales: number;
     gross_profit: number;
     operating_expenses: number;
+    operating_profit: number;
+    other_income: number;
+    non_operating_expense: number;
     net_profit: number;
     division: string;
-    financial_year: string;
     currency: string;
+    start_date: string | null;
+    end_date: string | null;
 }
 
 interface BalanceSheet {
     assets: {
-        debit: number;
-        credit: number;
-        net: number;
+        current: {
+            debit: number;
+            credit: number;
+            net: number;
+        };
+        non_current: {
+            debit: number;
+            credit: number;
+            net: number;
+        };
+        total: number;
     };
     liabilities: {
-        debit: number;
-        credit: number;
-        net: number;
+        current: {
+            debit: number;
+            credit: number;
+            net: number;
+        };
+        non_current: {
+            debit: number;
+            credit: number;
+            net: number;
+        };
+        total: number;
     };
     equity: {
         debit: number;
@@ -39,7 +59,7 @@ interface BalanceSheet {
     total_liabilities_and_equity: number;
     balance_check: number;
     division: string;
-    financial_year: string;
+    as_of_date: string;
     currency: string;
 }
 

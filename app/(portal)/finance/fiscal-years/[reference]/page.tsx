@@ -40,6 +40,8 @@ export default function FiscalYearDetail() {
   const [openPartnerType, setOpenPartnerType] = useState(false);
   const [openJournalType, setOpenJournalType] = useState(false);
 
+  const [menuView, setMenuView] = useState<'main' | 'journals'>('main');
+
   const [selectedJournalType, setSelectedJournalType] = useState<
     string | undefined
   >();
@@ -114,7 +116,7 @@ export default function FiscalYearDetail() {
         {/* Quick Actions Dropdown */}
         {fiscalYear.is_active && (
           <div className="flex items-center gap-2">
-            <DropdownMenu.Root>
+            <DropdownMenu.Root onOpenChange={(open) => { if (!open) setTimeout(() => setMenuView('main'), 200); }}>
               <DropdownMenu.Trigger asChild>
                 <button
                   className="flex items-center justify-center h-9 px-4 bg-[#045138] hover:bg-black text-white rounded text-[10px] uppercase font-semibold tracking-wider transition-all shadow-md active:scale-95 gap-2"
@@ -125,91 +127,112 @@ export default function FiscalYearDetail() {
                 </button>
               </DropdownMenu.Trigger>
               <DropdownMenu.Portal>
-                <DropdownMenu.Content align="end" className="z-50 w-64 rounded p-2 bg-white shadow-xl border border-black/5 animate-in fade-in zoom-in-95">
-                  <div className="text-xs uppercase tracking-widest text-black/40 font-semibold px-2 py-1.5">
-                    Transactions
-                  </div>
+                <DropdownMenu.Content align="end" className="z-50 w-64 rounded p-2 bg-white shadow-xl border border-black/5 overflow-hidden animate-in fade-in zoom-in-95">
+                  {menuView === 'main' && (
+                    <div className="animate-in fade-in slide-in-from-left-2 duration-200">
+                      <div className="text-xs uppercase tracking-widest text-black/40 font-semibold px-2 py-1.5">
+                        Transactions
+                      </div>
 
-                  <DropdownMenu.Sub>
-                    <DropdownMenu.SubTrigger className="flex items-center outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer">
-                      <div className="w-7 h-7 rounded bg-[#045138]/10 text-[#045138] flex items-center justify-center mr-3">
-                        <Plus className="w-4 h-4" />
+                      <DropdownMenu.Item
+                        onSelect={(e) => {
+                          e.preventDefault();
+                          setMenuView('journals');
+                        }}
+                        className="flex items-center outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
+                      >
+                        <div className="w-7 h-7 rounded bg-[#045138]/10 text-[#045138] flex items-center justify-center mr-3">
+                          <Plus className="w-4 h-4" />
+                        </div>
+                        <div className="flex flex-col text-left flex-1">
+                          <span className="font-semibold text-xs">Journal Batch</span>
+                          <span className="text-[9px] text-black/50">Record new entry</span>
+                        </div>
+                        <ChevronDown className="w-3 h-3 opacity-50 ml-1 -rotate-90" />
+                      </DropdownMenu.Item>
+
+                      <DropdownMenu.Separator className="my-1 bg-black/5 h-px" />
+
+                      <div className="text-xs uppercase tracking-widest text-black/40 font-semibold px-2 py-1.5">
+                        Entities & Configuration
                       </div>
-                      <div className="flex flex-col text-left flex-1">
-                        <span className="font-semibold text-xs">Journal Batch</span>
-                        <span className="text-[9px] text-black/50">Record new entry</span>
-                      </div>
-                      <ChevronDown className="w-3 h-3 opacity-50 ml-1 -rotate-90" />
-                    </DropdownMenu.SubTrigger>
-                    <DropdownMenu.Portal>
-                      <DropdownMenu.SubContent className="z-50 w-56 p-2 bg-white border border-black/5 rounded shadow-xl ml-2 animate-in fade-in slide-in-from-left-2">
-                        <div className="text-[10px] uppercase tracking-widest text-black/40 font-semibold px-2 py-1.5">
+                      <DropdownMenu.Item
+                        onSelect={() => setOpenPartner(true)}
+                        className="flex items-center outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
+                      >
+                        <div className="w-7 h-7 rounded bg-orange-50 text-orange-600 flex items-center justify-center mr-3">
+                          <UserPlus className="w-4 h-4" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold text-xs">New Partner</span>
+                          <span className="text-[9px] text-black/50">Register supplier/customer</span>
+                        </div>
+                      </DropdownMenu.Item>
+
+                      <DropdownMenu.Item
+                        onSelect={() => setOpenPartnerType(true)}
+                        className="flex items-center outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
+                      >
+                        <div className="w-7 h-7 rounded bg-blue-50 text-blue-600 flex items-center justify-center mr-3">
+                          <Settings2 className="w-4 h-4" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold text-xs">Partner Type</span>
+                          <span className="text-[9px] text-black/50">Define partner category</span>
+                        </div>
+                      </DropdownMenu.Item>
+
+                      <DropdownMenu.Item
+                        onSelect={() => setOpenJournalType(true)}
+                        className="flex items-center outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
+                      >
+                        <div className="w-7 h-7 rounded bg-purple-50 text-purple-600 flex items-center justify-center mr-3">
+                          <BookPlus className="w-4 h-4" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-semibold text-xs">Journal Type</span>
+                          <span className="text-[9px] text-black/50">Configure ledger types</span>
+                        </div>
+                      </DropdownMenu.Item>
+                    </div>
+                  )}
+
+                  {menuView === 'journals' && (
+                    <div className="animate-in fade-in slide-in-from-right-2 duration-200">
+                      <div className="flex items-center gap-2 px-2 py-1.5 mb-2 border-b border-black/5 pb-2">
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setMenuView('main');
+                          }}
+                          className="p-1 hover:bg-black/5 rounded text-black/60 transition-colors cursor-pointer"
+                        >
+                          <ChevronDown className="w-4 h-4 rotate-90" />
+                        </button>
+                        <div className="text-[10px] uppercase tracking-widest text-black/40 font-semibold">
                           Select Journal Type
                         </div>
-                        <div className="max-h-64 overflow-y-auto">
+                      </div>
+                      <div className="max-h-64 overflow-y-auto">
+                        <DropdownMenu.Item
+                          onSelect={() => handleCreateJournal()}
+                          className="outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
+                        >
+                          <span className="font-semibold text-xs text-black/60">General (No Type)</span>
+                        </DropdownMenu.Item>
+                        {journalTypes?.map((type) => (
                           <DropdownMenu.Item
-                            onClick={() => handleCreateJournal()}
-                            className="outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
+                            key={type.reference}
+                            onSelect={() => handleCreateJournal(type.name)}
+                            className="outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer flex items-center justify-between"
                           >
-                            <span className="font-semibold text-xs text-black/60">General (No Type)</span>
+                            <span className="font-semibold text-xs">{type.name}</span>
                           </DropdownMenu.Item>
-                          {journalTypes?.map((type) => (
-                            <DropdownMenu.Item
-                              key={type.reference}
-                              onClick={() => handleCreateJournal(type.name)}
-                              className="outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer flex items-center justify-between"
-                            >
-                              <span className="font-semibold text-xs">{type.name}</span>
-                            </DropdownMenu.Item>
-                          ))}
-                        </div>
-                      </DropdownMenu.SubContent>
-                    </DropdownMenu.Portal>
-                  </DropdownMenu.Sub>
-
-                  <DropdownMenu.Separator className="my-1 bg-black/5 h-px" />
-
-                  <div className="text-xs uppercase tracking-widest text-black/40 font-semibold px-2 py-1.5">
-                    Entities & Configuration
-                  </div>
-                  <DropdownMenu.Item
-                    onClick={() => setOpenPartner(true)}
-                    className="flex items-center outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
-                  >
-                    <div className="w-7 h-7 rounded bg-orange-50 text-orange-600 flex items-center justify-center mr-3">
-                      <UserPlus className="w-4 h-4" />
+                        ))}
+                      </div>
                     </div>
-                    <div className="flex flex-col">
-                      <span className="font-semibold text-xs">New Partner</span>
-                      <span className="text-[9px] text-black/50">Register supplier/customer</span>
-                    </div>
-                  </DropdownMenu.Item>
-
-                  <DropdownMenu.Item
-                    onClick={() => setOpenPartnerType(true)}
-                    className="flex items-center outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
-                  >
-                    <div className="w-7 h-7 rounded bg-blue-50 text-blue-600 flex items-center justify-center mr-3">
-                      <Settings2 className="w-4 h-4" />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="font-semibold text-xs">Partner Type</span>
-                      <span className="text-[9px] text-black/50">Define partner category</span>
-                    </div>
-                  </DropdownMenu.Item>
-
-                  <DropdownMenu.Item
-                    onClick={() => setOpenJournalType(true)}
-                    className="flex items-center outline-none rounded p-2 focus:bg-[#045138]/5 focus:text-[#045138] cursor-pointer"
-                  >
-                    <div className="w-7 h-7 rounded bg-purple-50 text-purple-600 flex items-center justify-center mr-3">
-                      <BookPlus className="w-4 h-4" />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="font-semibold text-xs">Journal Type</span>
-                      <span className="text-[9px] text-black/50">Configure ledger types</span>
-                    </div>
-                  </DropdownMenu.Item>
+                  )}
                 </DropdownMenu.Content>
               </DropdownMenu.Portal>
             </DropdownMenu.Root>
