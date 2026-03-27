@@ -170,7 +170,7 @@ export default function JournalEntriesPage() {
             {isLoadingEntries ? (
                 <LoadingSpinner />
             ) : entries && entries.length > 0 ? (
-                <div className="bg-white/60 backdrop-blur-xl rounded-[32px] border border-black/5 overflow-hidden shadow-xl shadow-black/5">
+                <div className="bg-white/60 backdrop-blur-xl rounded border border-black/5 overflow-hidden shadow-xl shadow-black/5">
                     <div className="overflow-x-auto">
                         <table className="w-full">
                             <thead>
@@ -211,10 +211,10 @@ export default function JournalEntriesPage() {
                                         </td>
                                         <td className="py-4 px-6 border-b border-black/5">
                                             <div className="flex flex-col">
-                                                <span className="text-sm font-medium text-black group-hover:text-emerald-600 transition-colors">
+                                                <span className="text-sm text-black group-hover:text-emerald-600 transition-colors">
                                                     {entry.journal}
                                                 </span>
-                                                <span className="text-[10px] font-semibold text-black/30 uppercase tracking-widest mt-1">
+                                                <span className="text-[10px] text-black/30 uppercase tracking-widest mt-1">
                                                     {entry.division}
                                                 </span>
                                             </div>
