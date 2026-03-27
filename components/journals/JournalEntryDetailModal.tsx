@@ -87,7 +87,7 @@ export default function JournalEntryDetailModal({
                 {entry.journal}
               </span>
             </div>
-            <h2 className="text-xl sm:text-3xl font-semibold text-gray-900 tracking-tight leading-tight">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 tracking-tight leading-tight">
               Journal Entry Details
             </h2>
             <div className="text-xs sm:text-sm text-gray-500 flex items-center gap-1.5 sm:gap-2">
@@ -131,7 +131,8 @@ export default function JournalEntryDetailModal({
                   Debit
                 </div>
                 <div
-                  className={`text-2xl sm:text-3xl font-semibold tracking-tight ${parseFloat(entry.debit) > 0 ? "text-green-700" : "text-gray-400"}`}
+                  className={`text-base sm:text-lg font-semibold tracking-tight truncate ${parseFloat(entry.debit) > 0 ? "text-green-700" : "text-gray-400"}`}
+                  title={formatCurrency(entry.debit, entry.currency)}
                 >
                   {formatCurrency(entry.debit, entry.currency)}
                 </div>
@@ -148,7 +149,8 @@ export default function JournalEntryDetailModal({
                   Credit
                 </div>
                 <div
-                  className={`text-2xl sm:text-3xl font-semibold tracking-tight ${parseFloat(entry.credit) > 0 ? "text-orange-700" : "text-gray-400"}`}
+                  className={`text-base sm:text-lg font-semibold tracking-tight truncate ${parseFloat(entry.credit) > 0 ? "text-orange-700" : "text-gray-400"}`}
+                  title={formatCurrency(entry.credit, entry.currency)}
                 >
                   {formatCurrency(entry.credit, entry.currency)}
                 </div>
@@ -160,7 +162,7 @@ export default function JournalEntryDetailModal({
                   <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 block mb-1">
                     Currency
                   </span>
-                  <span className="text-lg sm:text-xl font-semibold text-gray-900">
+                  <span className="text-sm sm:text-base font-semibold text-gray-900 truncate">
                     {entry.currency}
                   </span>
                 </div>
@@ -168,7 +170,7 @@ export default function JournalEntryDetailModal({
                   <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 block mb-1">
                     Exchange Rate
                   </span>
-                  <span className="text-lg sm:text-xl font-semibold text-gray-900">
+                  <span className="text-sm sm:text-base font-semibold text-gray-900 truncate">
                     {entry.exchange_rate}
                   </span>
                 </div>
@@ -201,7 +203,7 @@ export default function JournalEntryDetailModal({
               </div>
               Entity & Classification
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 sm:gap-y-8 gap-x-12 p-5 sm:p-8 bg-gray-50 rounded border border-gray-100">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 sm:gap-y-6 gap-x-8 p-4 sm:p-6 bg-gray-50 rounded border border-gray-100">
               <DetailItem
                 icon={Book}
                 label="Account Book"
@@ -237,7 +239,7 @@ export default function JournalEntryDetailModal({
               </div>
               Documentation
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 sm:gap-y-8 gap-x-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 sm:gap-y-6 gap-x-8">
               <DetailItem
                 icon={CreditCard}
                 label="Payment Method"
