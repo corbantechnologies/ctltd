@@ -10,7 +10,7 @@ export function useFetchJournalEntries() {
   return useQuery({
     queryKey: ["journalentries"],
     queryFn: () => getJournalEntries(header),
-    enabled: true,
+    enabled: !!header.headers.Authorization,
   });
 }
 
@@ -20,6 +20,6 @@ export function useFetchJournalEntry(reference: string) {
   return useQuery({
     queryKey: ["journalentry", reference],
     queryFn: () => getJournalEntry(reference, header),
-    enabled: !!reference,
+    enabled: !!reference && !!header.headers.Authorization,
   });
 }

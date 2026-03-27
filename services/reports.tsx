@@ -3,27 +3,47 @@
 import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
 
-interface PnL {
+export interface PnL {
     revenue: number;
     cost_of_sales: number;
     gross_profit: number;
     operating_expenses: number;
+    operating_profit: number;
+    other_income: number;
+    non_operating_expense: number;
     net_profit: number;
     division: string;
-    financial_year: string;
     currency: string;
+    start_date: string | null;
+    end_date: string | null;
 }
 
-interface BalanceSheet {
+export interface BalanceSheet {
     assets: {
-        debit: number;
-        credit: number;
-        net: number;
+        current: {
+            debit: number;
+            credit: number;
+            net: number;
+        };
+        non_current: {
+            debit: number;
+            credit: number;
+            net: number;
+        };
+        total: number;
     };
     liabilities: {
-        debit: number;
-        credit: number;
-        net: number;
+        current: {
+            debit: number;
+            credit: number;
+            net: number;
+        };
+        non_current: {
+            debit: number;
+            credit: number;
+            net: number;
+        };
+        total: number;
     };
     equity: {
         debit: number;
@@ -39,11 +59,11 @@ interface BalanceSheet {
     total_liabilities_and_equity: number;
     balance_check: number;
     division: string;
-    financial_year: string;
+    as_of_date: string;
     currency: string;
 }
 
-interface TrialBalance {
+export interface TrialBalance {
     trial_balance: {
         code: string;
         name: string;
@@ -63,7 +83,7 @@ interface TrialBalance {
     currency: string;
 }
 
-interface Revenue {
+export interface Revenue {
     group_total_revenue: number;
     breakdown: {
         division: string;
@@ -74,7 +94,7 @@ interface Revenue {
     warning: string | null;
 }
 
-interface CashBalance {
+export interface CashBalance {
     cash_balance: number;
     currency: string;
     division: string;

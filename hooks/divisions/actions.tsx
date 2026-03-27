@@ -10,7 +10,7 @@ export function useFetchDivisions() {
   return useQuery({
     queryKey: ["divisions"],
     queryFn: () => getDivisions(header),
-    enabled: true,
+    enabled: !!header.headers.Authorization,
   });
 }
 
@@ -20,7 +20,7 @@ export function useFetchDivision(reference: string) {
   return useQuery({
     queryKey: ["division", reference],
     queryFn: () => getDivision(reference, header),
-    enabled: !!reference,
+    enabled: !!reference && !!header.headers.Authorization,
   });
 }
 

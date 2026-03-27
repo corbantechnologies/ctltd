@@ -10,7 +10,7 @@ export function useFetchPNL() {
     return useQuery({
         queryKey: ["pnl"],
         queryFn: () => getPNL(header),
-        enabled: true,
+        enabled: !!header.headers.Authorization,
     });
 }
 
@@ -20,7 +20,7 @@ export function useFetchBalanceSheet() {
     return useQuery({
         queryKey: ["balance-sheet"],
         queryFn: () => getBalanceSheet(header),
-        enabled: true,
+        enabled: !!header.headers.Authorization,
     });
 }
 
@@ -30,7 +30,7 @@ export function useFetchTrialBalance() {
     return useQuery({
         queryKey: ["trial-balance"],
         queryFn: () => getTrialBalance(header),
-        enabled: true,
+        enabled: !!header.headers.Authorization,
     });
 }
 
@@ -40,7 +40,7 @@ export function useFetchRevenue() {
     return useQuery({
         queryKey: ["revenue"],
         queryFn: () => getRevenue(header),
-        enabled: true,
+        enabled: !!header.headers.Authorization,
     });
 }
 
@@ -50,7 +50,7 @@ export function useFetchCashBalance() {
     return useQuery({
         queryKey: ["cash-balance"],
         queryFn: () => getCashBalance(header),
-        enabled: true,
+        enabled: !!header.headers.Authorization,
     });
 }
 
