@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFetchJournalEntries } from "@/hooks/journalentries/actions";
 import { useFetchDivisions } from "@/hooks/divisions/actions";
 import { useFetchFinancialYears } from "@/hooks/financialyears/actions";
@@ -17,6 +17,7 @@ export default function JournalEntriesPage() {
     const [endDate, setEndDate] = useState("");
     const [division, setDivision] = useState("");
     const [financialYear, setFinancialYear] = useState("");
+    const [initialYearSet, setInitialYearSet] = useState(false);
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState("20");
     
@@ -38,6 +39,17 @@ export default function JournalEntriesPage() {
 
     const { data: divisions, isLoading: isLoadingDivisions } = useFetchDivisions();
     const { data: years, isLoading: isLoadingYears } = useFetchFinancialYears();
+
+    useEffect(() => {
+        if (years && !initialYearSet) {
+            const active = years.find((y: any) => y.is_active);
+            if (active) {
+                setFinancialYear(active.reference);
+            }
+            // Mark as initialized so user can clear it later without it auto-resetting
+            setInitialYearSet(true); 
+        }
+    }, [years, initialYearSet]);
 
     // Modal state
     const [selectedEntry, setSelectedEntry] = useState<JournalEntry | null>(null);
@@ -199,9 +211,9 @@ export default function JournalEntriesPage() {
                                         className="hover:bg-white/80 transition-all cursor-pointer group"
                                         onClick={() => setSelectedEntry(entry)}
                                     >
-                                        <td className="py-4 px-6 border-b border-black/5">
+                                        <td className="py-2 px-4 border-b border-black/5">
                                             <div className="flex flex-col">
-                                                <span className="text-sm font-medium text-black">
+                                                <span className="text-sm text-black">
                                                     {new Date(entry.created_at).toLocaleDateString()}
                                                 </span>
                                                 <span className="text-[10px] font-mono text-black/40 mt-1 uppercase">
@@ -209,29 +221,29 @@ export default function JournalEntriesPage() {
                                                 </span>
                                             </div>
                                         </td>
-                                        <td className="py-4 px-6 border-b border-black/5">
+                                        <td className="py-2 px-4 border-b border-black/5">
                                             <div className="flex flex-col">
                                                 <span className="text-sm text-black group-hover:text-emerald-600 transition-colors">
                                                     {entry.journal}
                                                 </span>
-                                                <span className="text-[10px] text-black/30 uppercase mt-1">
+                                                <span className="text-xs text-black/30 uppercase mt-1">
                                                     {entry.division}
                                                 </span>
                                             </div>
                                         </td>
-                                        <td className="py-4 px-6 text-right border-b border-black/5">
-                                            <span className="font-mono text-sm font-semibold">
+                                        <td className="py-2 px-4 text-right border-b border-black/5">
+                                            <span className="font-mono text-sm">
                                                 {formatNumber(Number(entry.debit))}
                                             </span>
                                             <div className="text-[9px] text-black/40 uppercase mt-1">{entry.currency}</div>
                                         </td>
-                                        <td className="py-4 px-6 text-right border-b border-black/5">
-                                            <span className="font-mono text-sm font-semibold">
+                                        <td className="py-2 px-4 text-right border-b border-black/5">
+                                            <span className="font-mono text-sm">
                                                 {formatNumber(Number(entry.credit))}
                                             </span>
                                             <div className="text-[9px] text-black/40 uppercase mt-1">{entry.currency}</div>
                                         </td>
-                                        <td className="py-4 px-6 text-right border-b border-black/5">
+                                        <td className="py-2 px-4 text-right border-b border-black/5">
                                             <div className="flex items-center justify-end gap-2 text-black/40 group-hover:text-black">
                                                 {entry.document_number || "N/A"}
                                                 <div className="w-7 h-7 rounded bg-black/5 text-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-sm hover:bg-emerald-600 hover:text-white">
