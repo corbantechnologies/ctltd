@@ -10,7 +10,7 @@ export function useFetchBooks() {
   return useQuery({
     queryKey: ["books"],
     queryFn: () => getBooks(header),
-    enabled: true,
+    enabled: !!header && !!header.headers.Authorization,.headers.Authorization,
   });
 }
 
@@ -20,6 +20,6 @@ export function useFetchBook(reference: string) {
   return useQuery({
     queryKey: ["book", reference],
     queryFn: () => getBook(reference, header),
-    enabled: !!reference,
+    enabled: !!reference && !!header.headers.Authorization,
   });
 }

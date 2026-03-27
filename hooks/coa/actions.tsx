@@ -10,7 +10,7 @@ export function useFetchCOAs() {
   return useQuery({
     queryKey: ["coas"],
     queryFn: () => getCOAs(header),
-    enabled: true,
+    enabled: !!header && !!header.headers.Authorization,.headers.Authorization,
   });
 }
 
@@ -20,6 +20,6 @@ export function useFetchCOA(reference: string) {
   return useQuery({
     queryKey: ["coa", reference],
     queryFn: () => getCOA(reference, header),
-    enabled: !!reference,
+    enabled: !!reference && !!header.headers.Authorization,
   });
 }

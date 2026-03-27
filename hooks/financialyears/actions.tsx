@@ -10,7 +10,7 @@ export function useFetchFinancialYears() {
   return useQuery({
     queryKey: ["financialyears"],
     queryFn: () => getFinancialYears(header),
-    enabled: true,
+    enabled: !!header && !!header.headers.Authorization,.headers.Authorization,
   });
 }
 
@@ -20,6 +20,6 @@ export function useFetchFinancialYear(reference: string) {
   return useQuery({
     queryKey: ["financialyear", reference],
     queryFn: () => getFinancialYear(reference, header),
-    enabled: !!reference,
+    enabled: !!reference && !!header.headers.Authorization,
   });
 }

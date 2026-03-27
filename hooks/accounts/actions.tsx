@@ -13,6 +13,6 @@ export function useFetchAccount() {
   return useQuery({
     queryKey: ["account", member_code],
     queryFn: () => getAccount(member_code!, header),
-    enabled: !!member_code,
+    enabled: !!member && !!header.headers.Authorization,_code,
   });
 }
