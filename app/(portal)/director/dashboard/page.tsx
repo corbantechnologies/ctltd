@@ -30,7 +30,8 @@ export default function DirectorDashboard() {
   const { data: coas, isLoading: coaLoading } = useFetchCOAs();
   const { data: books, isLoading: booksLoading } = useFetchBooks();
   const { data: years, isLoading: yearsLoading } = useFetchFinancialYears();
-  const { data: entries, isLoading: entriesLoading } = useFetchJournalEntries();
+  const { data: entriesResponse, isLoading: entriesLoading } = useFetchJournalEntries();
+  const entries = entriesResponse?.results || [];
   const { data: divisions, isLoading: divisionsLoading } = useFetchDivisions();
 
   const isLoading = accountLoading || coaLoading || booksLoading || yearsLoading || entriesLoading || divisionsLoading;

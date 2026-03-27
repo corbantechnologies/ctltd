@@ -74,6 +74,12 @@ export default function Navbar() {
       show: isDirector || isFinance,
     },
     {
+      name: "Journals",
+      href: `/${rolePrefix}/journal-entries`,
+      icon: FileText,
+      show: isDirector || isFinance,
+    },
+    {
       name: "Fiscal Year",
       href: activeYear
         ? `/${rolePrefix}/fiscal-years/${activeYear.reference}`
