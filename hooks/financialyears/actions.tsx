@@ -10,7 +10,7 @@ export function useFetchFinancialYears() {
   return useQuery({
     queryKey: ["financialyears"],
     queryFn: () => getFinancialYears(header),
-    enabled: !!header && !!header.headers.Authorization,.headers.Authorization,
+    enabled: !!header.headers.Authorization,
   });
 }
 

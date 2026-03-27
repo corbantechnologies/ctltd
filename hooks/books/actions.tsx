@@ -10,7 +10,7 @@ export function useFetchBooks() {
   return useQuery({
     queryKey: ["books"],
     queryFn: () => getBooks(header),
-    enabled: !!header && !!header.headers.Authorization,.headers.Authorization,
+    enabled: !!header.headers.Authorization,
   });
 }
 

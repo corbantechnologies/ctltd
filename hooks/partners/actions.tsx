@@ -10,7 +10,7 @@ export function useFetchPartners() {
   return useQuery({
     queryKey: ["partners"],
     queryFn: () => getPartners(header),
-    enabled: !!header && !!header.headers.Authorization,.headers.Authorization,
+    enabled: !!header.headers.Authorization,
   });
 }
 

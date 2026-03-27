@@ -18,7 +18,7 @@ function useAxiosAuth() {
 
   const authenticationHeader = {
     headers: {
-      Authorization: tokens ? "Token " + tokens : "",
+      Authorization: "Token " + tokens,
       "Content-Type": "multipart/form-data",
     },
   };

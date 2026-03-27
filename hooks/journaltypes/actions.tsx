@@ -10,7 +10,7 @@ export function useFetchJournalTypes() {
   return useQuery({
     queryKey: ["journaltypes"],
     queryFn: () => getJournalTypes(header),
-    enabled: !!header && !!header.headers.Authorization,.headers.Authorization,
+    enabled: !!header.headers.Authorization,
   });
 }
 

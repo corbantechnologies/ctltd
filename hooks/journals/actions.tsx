@@ -10,7 +10,7 @@ export function useFetchJournals() {
   return useQuery({
     queryKey: ["journals"],
     queryFn: () => getJournals(header),
-    enabled: !!header && !!header.headers.Authorization,.headers.Authorization,
+    enabled: !!header.headers.Authorization,
   });
 }
 
