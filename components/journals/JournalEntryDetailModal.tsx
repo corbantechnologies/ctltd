@@ -119,7 +119,7 @@ export default function JournalEntryDetailModal({
               </div>
               Financials
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {/* Debit Card */}
               <div
                 className={`p-5 sm:p-6 rounded border transition-all ${parseFloat(entry.debit) > 0 ? "bg-green-50/50 border-green-200 shadow-sm" : "bg-gray-50 border-gray-100 opacity-60"}`}
