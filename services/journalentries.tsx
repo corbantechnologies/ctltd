@@ -63,12 +63,21 @@ export const createJournalEntry = async (
   return response.data;
 };
 
-export const getJournalEntries = async (headers: {
-  headers: { Authorization: string };
-}): Promise<JournalEntry[]> => {
+export const getJournalEntries = async (
+  headers: { headers: { Authorization: string } },
+  filters?: Record<string, string>
+): Promise<PaginatedResponse<JournalEntry>> => {
+  const queryParams = new URLSearchParams();
+  if (filters) {
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) queryParams.append(key, value);
+    });
+  }
+  const queryString = queryParams.toString() ? `?${queryParams.toString()}` : '';
+  
   const response: AxiosResponse<PaginatedResponse<JournalEntry>> =
-    await apiActions.get(`/api/v1/journalentries/`, headers);
-  return response.data.results || [];
+    await apiActions.get(`/api/v1/journalentries/${queryString}`, headers);
+  return response.data;
 };
 
 export const getJournalEntry = async (

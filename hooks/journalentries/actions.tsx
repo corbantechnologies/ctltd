@@ -4,12 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosAuth from "../authentication/useAxiosAuth";
 import { getJournalEntries, getJournalEntry } from "@/services/journalentries";
 
-export function useFetchJournalEntries() {
+export function useFetchJournalEntries(filters?: Record<string, string>) {
   const header = useAxiosAuth();
 
   return useQuery({
-    queryKey: ["journalentries"],
-    queryFn: () => getJournalEntries(header),
+    queryKey: ["journalentries", filters],
+    queryFn: () => getJournalEntries(header, filters),
     enabled: !!header.headers.Authorization,
   });
 }

@@ -40,7 +40,8 @@ export default function FinanceDashboard() {
   const { data: coas } = useFetchCOAs();
   const { data: books } = useFetchBooks();
   const { data: years } = useFetchFinancialYears();
-  const { data: entries } = useFetchJournalEntries();
+  const { data: entriesResponse } = useFetchJournalEntries();
+  const entries = entriesResponse?.results || [];
 
   const [openCreateJournalType, setOpenCreateJournalType] = useState(false);
   const [openCreatePartnerType, setOpenCreatePartnerType] = useState(false);
