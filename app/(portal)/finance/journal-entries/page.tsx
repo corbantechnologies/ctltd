@@ -10,6 +10,19 @@ import { formatNumber } from "@/tools/format";
 import JournalEntryDetailModal from "@/components/journals/JournalEntryDetailModal";
 import { JournalEntry } from "@/services/journalentries";
 
+function useDebounce<T>(value: T, delay: number): T {
+    const [debouncedValue, setDebouncedValue] = useState<T>(value);
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedValue(value);
+        }, delay);
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [value, delay]);
+    return debouncedValue;
+}
+
 export default function JournalEntriesPage() {
     // Filter states
     const [searchQuery, setSearchQuery] = useState("");
@@ -21,12 +34,15 @@ export default function JournalEntriesPage() {
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState("20");
     
+    // Debounce the text search to avoid refetching on every single keystroke
+    const debouncedSearchQuery = useDebounce(searchQuery, 500);
+    
     // Active filters sent to API
     const activeFilters: Record<string, string> = {
         page: page.toString(),
         limit: limit,
     };
-    if (searchQuery) activeFilters["search"] = searchQuery;
+    if (debouncedSearchQuery) activeFilters["search"] = debouncedSearchQuery;
     if (startDate) activeFilters["start_date"] = startDate;
     if (endDate) activeFilters["end_date"] = endDate;
     if (division) activeFilters["division"] = division;
