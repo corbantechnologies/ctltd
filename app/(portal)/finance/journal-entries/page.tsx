@@ -68,7 +68,7 @@ export default function JournalEntriesPage() {
             </div>
 
             {/* Filter Section */}
-            <div className="bg-white/40 p-6 rounded-[32px] border border-white/60 backdrop-blur-md shadow-sm space-y-6">
+            <div className="bg-white/40 p-6 rounded border border-white/60 backdrop-blur-md shadow-sm space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                     {/* Search */}
                     <div className="relative group lg:col-span-2">
@@ -170,7 +170,7 @@ export default function JournalEntriesPage() {
             {isLoadingEntries ? (
                 <LoadingSpinner />
             ) : entries && entries.length > 0 ? (
-                <div className="bg-white/60 backdrop-blur-xl rounded border border-black/5 overflow-hidden shadow-xl shadow-black/5">
+                <div className="bg-white/60 backdrop-blur-xl border border-black/5 overflow-hidden shadow-xl shadow-black/5">
                     <div className="overflow-x-auto">
                         <table className="w-full">
                             <thead>
@@ -214,7 +214,7 @@ export default function JournalEntriesPage() {
                                                 <span className="text-sm text-black group-hover:text-emerald-600 transition-colors">
                                                     {entry.journal}
                                                 </span>
-                                                <span className="text-[10px] text-black/30 uppercase tracking-widest mt-1">
+                                                <span className="text-[10px] text-black/30 uppercase mt-1">
                                                     {entry.division}
                                                 </span>
                                             </div>
@@ -223,13 +223,13 @@ export default function JournalEntriesPage() {
                                             <span className="font-mono text-sm font-semibold">
                                                 {formatNumber(Number(entry.debit))}
                                             </span>
-                                            <div className="text-[9px] text-black/40 uppercase tracking-widest mt-1">{entry.currency}</div>
+                                            <div className="text-[9px] text-black/40 uppercase mt-1">{entry.currency}</div>
                                         </td>
                                         <td className="py-4 px-6 text-right border-b border-black/5">
                                             <span className="font-mono text-sm font-semibold">
                                                 {formatNumber(Number(entry.credit))}
                                             </span>
-                                            <div className="text-[9px] text-black/40 uppercase tracking-widest mt-1">{entry.currency}</div>
+                                            <div className="text-[9px] text-black/40 uppercase mt-1">{entry.currency}</div>
                                         </td>
                                         <td className="py-4 px-6 text-right border-b border-black/5">
                                             <div className="flex items-center justify-end gap-2 text-black/40 group-hover:text-black">
@@ -291,7 +291,7 @@ export default function JournalEntriesPage() {
                     </div>
                 </div>
             ) : (
-                <div className="py-24 text-center bg-white/40 rounded-[40px] border border-dashed border-black/10">
+                <div className="py-24 text-center bg-white/40 rounded border border-dashed border-black/10">
                     <div className="w-20 h-20 rounded bg-black/5 flex items-center justify-center text-black/10 mx-auto mb-6">
                         <Filter className="w-10 h-10" />
                     </div>
