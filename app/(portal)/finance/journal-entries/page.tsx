@@ -96,8 +96,8 @@ export default function JournalEntriesPage() {
             </div>
 
             {/* Filter Section */}
-            <div className="bg-white/40 p-6 rounded border border-white/60 backdrop-blur-md shadow-sm space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="bg-white/40 p-4 sm:p-6 rounded border border-white/60 backdrop-blur-md shadow-sm space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
                     {/* Search */}
                     <div className="relative group lg:col-span-2">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 transition-colors" />
@@ -164,8 +164,8 @@ export default function JournalEntriesPage() {
                 </div>
 
                 {/* Dates */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-black/5">
-                    <div className="relative group w-full lg:w-1/2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-4 border-t border-black/5">
+                    <div className="relative group w-full">
                         <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 group-focus-within:text-emerald-600 transition-colors" />
                         <input
                             type="date"
@@ -227,7 +227,7 @@ export default function JournalEntriesPage() {
                                         className="hover:bg-white/80 transition-all cursor-pointer group"
                                         onClick={() => setSelectedEntry(entry)}
                                     >
-                                        <td className="py-2 px-4 border-b border-black/5">
+                                        <td className="py-2 px-4 border-b border-black/5 whitespace-nowrap">
                                             <div className="flex flex-col">
                                                 <span className="text-sm text-black">
                                                     {new Date(entry.created_at).toLocaleDateString()}
@@ -237,7 +237,7 @@ export default function JournalEntriesPage() {
                                                 </span>
                                             </div>
                                         </td>
-                                        <td className="py-2 px-4 border-b border-black/5">
+                                        <td className="py-2.5 px-4 border-b border-black/5 whitespace-nowrap">
                                             <div className="flex flex-col">
                                                 <span className="text-sm text-black group-hover:text-emerald-600 transition-colors">
                                                     {entry.journal}
@@ -247,19 +247,19 @@ export default function JournalEntriesPage() {
                                                 </span>
                                             </div>
                                         </td>
-                                        <td className="py-2 px-4 text-right border-b border-black/5">
+                                        <td className="py-2.5 px-4 text-right border-b border-black/5 whitespace-nowrap">
                                             <span className="font-mono text-sm">
                                                 {formatNumber(Number(entry.debit))}
                                             </span>
                                             <div className="text-[9px] text-black/40 uppercase mt-1">{entry.currency}</div>
                                         </td>
-                                        <td className="py-2 px-4 text-right border-b border-black/5">
+                                        <td className="py-2.5 px-4 text-right border-b border-black/5 whitespace-nowrap">
                                             <span className="font-mono text-sm">
                                                 {formatNumber(Number(entry.credit))}
                                             </span>
                                             <div className="text-[9px] text-black/40 uppercase mt-1">{entry.currency}</div>
                                         </td>
-                                        <td className="py-2 px-4 text-right border-b border-black/5">
+                                        <td className="py-2.5 px-4 text-right border-b border-black/5 whitespace-nowrap">
                                             <div className="flex items-center justify-end gap-2 text-black/40 group-hover:text-black">
                                                 {entry.document_number || "N/A"}
                                                 <div className="w-7 h-7 rounded bg-black/5 text-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-sm hover:bg-emerald-600 hover:text-white">
@@ -275,7 +275,7 @@ export default function JournalEntriesPage() {
 
                     {/* Pagination Footer */}
                     <div className="border-t border-black/5 bg-white/50 p-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <div className="flex items-center gap-4">
+                        <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4">
                             <span className="text-xs font-semibold text-black/50 uppercase tracking-widest">
                                 Limit:
                             </span>
