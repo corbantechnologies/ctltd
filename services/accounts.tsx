@@ -18,8 +18,22 @@ export interface User {
   is_employee: boolean;
   is_director: boolean;
   is_finance: boolean;
+  is_sales: boolean;
+  is_purchasing: boolean;
+  is_inventory: boolean;
+  is_production: boolean;
+  is_quality: boolean;
+  is_maintenance: boolean;
+  is_hr: boolean;
+  is_operations: boolean;
   is_superuser: boolean;
   is_staff: boolean;
+}
+
+export interface createMember {
+  email: string;
+  first_name: string;
+  last_name: string;
 }
 
 export interface forgotPassword {
@@ -56,6 +70,23 @@ export const resetPassword = async (data: resetPassword): Promise<any> => {
   const response: AxiosResponse<any> = await apiActions.post(
     `/api/v1/auth/password/reset/`,
     data
+  );
+  return response.data;
+};
+
+// Member Accounts
+export const createOperations = async (data: createMember): Promise<User> => {
+  const response: AxiosResponse<User> = await apiActions.post(
+    `/api/v1/auth/signup/operations/`,
+    data,
+  );
+  return response.data;
+};
+
+export const createSales = async (data: createMember): Promise<User> => {
+  const response: AxiosResponse<User> = await apiActions.post(
+    `/api/v1/auth/signup/sales/`,
+    data,
   );
   return response.data;
 };

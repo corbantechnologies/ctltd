@@ -28,15 +28,18 @@ export default function Navbar() {
 
   const isDirector = account?.is_director;
   const isFinance = account?.is_finance;
+  const isOperations = account?.is_operations;
   const isEmployee = account?.is_employee;
 
   const rolePrefix = isDirector
     ? "director"
     : isFinance
       ? "finance"
-      : isEmployee
-        ? "employee"
-        : "portal";
+      : isOperations
+        ? "operations"
+        : isEmployee
+          ? "employee"
+          : "portal";
 
   // Close menu on navigation
   useEffect(() => {
