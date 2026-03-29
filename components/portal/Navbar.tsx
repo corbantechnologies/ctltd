@@ -28,15 +28,18 @@ export default function Navbar() {
 
   const isDirector = account?.is_director;
   const isFinance = account?.is_finance;
+  const isOperations = account?.is_operations;
   const isEmployee = account?.is_employee;
 
   const rolePrefix = isDirector
     ? "director"
     : isFinance
       ? "finance"
-      : isEmployee
-        ? "employee"
-        : "portal";
+      : isOperations
+        ? "operations"
+        : isEmployee
+          ? "employee"
+          : "portal";
 
   // Close menu on navigation
   useEffect(() => {
@@ -53,25 +56,31 @@ export default function Navbar() {
       name: "Dashboard",
       href: `/${rolePrefix}/dashboard`,
       icon: LayoutDashboard,
-      show: isDirector || isFinance,
+      show: isDirector || isFinance || isOperations,
     },
     {
       name: "Reports",
       href: `/${rolePrefix}/reports`,
       icon: FileText,
-      show: isDirector || isFinance,
+      show: isDirector || isFinance || isOperations,
     },
     {
       name: "Divisions",
       href: `/${rolePrefix}/divisions`,
       icon: Database,
-      show: isDirector,
+      show: isDirector || isOperations,
+    },
+    {
+      name: "Leads",
+      href: `/${rolePrefix}/leads`,
+      icon: Database,
+      show: isDirector || isOperations,
     },
     {
       name: "COA",
       href: `/${rolePrefix}/coa`,
       icon: FileText,
-      show: isDirector || isFinance,
+      show: isDirector || isFinance || isOperations,
     },
     {
       name: "Fiscal Year",
@@ -91,7 +100,7 @@ export default function Navbar() {
       name: "Partners",
       href: `/${rolePrefix}/partners`,
       icon: FileText,
-      show: isDirector || isFinance,
+      show: isDirector || isFinance || isOperations,
     },
     {
       name: "Financials",
@@ -133,9 +142,11 @@ export default function Navbar() {
                   ? "text-corporate-primary bg-corporate-primary/5 border-corporate-primary/20 shadow-corporate-primary/5"
                   : isFinance
                     ? "text-emerald-500 bg-emerald-500/5 border-emerald-500/20 shadow-emerald-500/5"
-                    : "text-slate-400 bg-slate-800 border-slate-700"
+                    : isOperations
+                      ? "text-blue-500 bg-blue-500/5 border-blue-500/20 shadow-blue-500/5"
+                      : "text-slate-400 bg-slate-800 border-slate-700"
               )}>
-                {isDirector ? "Executive Director" : isFinance ? "Finance Controller" : "Portal User"}
+                {isDirector ? "Executive Director" : isFinance ? "Finance Controller" : isOperations ? "Operations Officer" : "Portal User"}
               </span>
             </div>
 

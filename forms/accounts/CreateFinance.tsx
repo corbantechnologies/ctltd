@@ -1,45 +1,39 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { createDivision } from "@/services/divisions";
+import { createFinance } from "@/services/accounts";
 import { useFormik } from "formik";
-import { DivisionSchema } from "@/validation";
+import { CreateMemberSchema } from "@/validation";
 import { toast } from "react-hot-toast";
-import { Loader2, Database, Shield, Plus, X } from "lucide-react";
-import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
-import { useRouter } from "next/navigation";
+import { Loader2, Users, Shield, Plus, X } from "lucide-react";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
-interface Props {
+interface CreateFinanceProps {
   trigger?: React.ReactNode;
 }
 
-export default function CreateDivisionModal({ trigger }: Props) {
-  const header = useAxiosAuth();
-  const router = useRouter();
+export default function CreateFinance({ trigger }: CreateFinanceProps) {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      is_active: true,
-      is_public: true,
+      first_name: "",
+      last_name: "",
+      email: "",
     },
-    validationSchema: DivisionSchema,
+    validationSchema: CreateMemberSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
-        await createDivision(values, header);
-        toast.success("Division established successfully");
-        queryClient.invalidateQueries({ queryKey: ["divisions"] });
-        router.refresh();
+        await createFinance(values);
+        toast.success("Finance member established successfully");
+        queryClient.invalidateQueries({ queryKey: ["finance"] });
         resetForm();
         setOpen(false);
-      } catch (error) {
+      } catch (error: any) {
         const errorMessage =
-          (error as any)?.response?.data?.message ||
-          "Failed to establish division";
+          error?.response?.data?.message ||
+          "Failed to establish finance member";
         toast.error(errorMessage);
       } finally {
         setSubmitting(false);
@@ -55,7 +49,7 @@ export default function CreateDivisionModal({ trigger }: Props) {
             <div className="w-8 h-8 rounded bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
               <Plus className="w-4 h-4" />
             </div>
-            Establish New Division
+            Establish Finance Member
           </button>
         )}
       </div>
@@ -69,14 +63,14 @@ export default function CreateDivisionModal({ trigger }: Props) {
 
               <div className="flex items-center gap-4 relative z-10">
                 <div className="w-12 h-12 rounded bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/10">
-                  <Database className="w-6 h-6" />
+                  <Users className="w-6 h-6" />
                 </div>
                 <div>
                   <h2 className="text-xl font-semibold tracking-tight italic">
-                    Establish <span className="text-corporate-primary">Division</span>
+                    Establish <span className="text-corporate-primary">Finance</span>
                   </h2>
                   <p className="text-slate-400 font-semibold uppercase text-[10px] tracking-widest mt-1">
-                    Corporate Infrastructure Unit
+                    System Access Provisioning
                   </p>
                 </div>
               </div>
@@ -88,62 +82,77 @@ export default function CreateDivisionModal({ trigger }: Props) {
 
             <div className="p-8">
               <form onSubmit={formik.handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="first_name"
+                      className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block"
+                    >
+                      First Name
+                    </label>
+                    <input
+                      id="first_name"
+                      name="first_name"
+                      type="text"
+                      placeholder="e.g. John"
+                      className="w-full h-14 rounded border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-corporate-primary/30 focus:ring-0 transition-all font-semibold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-corporate-primary/20"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.first_name}
+                    />
+                    {formik.touched.first_name && formik.errors.first_name && (
+                      <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1 mt-1">
+                        {formik.errors.first_name}
+                      </p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="last_name"
+                      className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block"
+                    >
+                      Last Name
+                    </label>
+                    <input
+                      id="last_name"
+                      name="last_name"
+                      type="text"
+                      placeholder="e.g. Doe"
+                      className="w-full h-14 rounded border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-corporate-primary/30 focus:ring-0 transition-all font-semibold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-corporate-primary/20"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.last_name}
+                    />
+                    {formik.touched.last_name && formik.errors.last_name && (
+                      <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1 mt-1">
+                        {formik.errors.last_name}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
                 <div className="space-y-2">
                   <label
-                    htmlFor="name"
+                    htmlFor="email"
                     className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block"
                   >
-                    Division Nomenclature
+                    Email Address
                   </label>
                   <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="e.g. Strategic Operations, Digital Assets"
-                    className="w-full h-14 rounded border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-corporate-primary/30 focus:ring-0 transition-all font-semibold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-transparent"
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="e.g. john@example.com"
+                    className="w-full h-14 rounded border border-slate-200 bg-slate-50 focus:bg-slate-50 focus:border-corporate-primary/30 focus:ring-0 transition-all font-semibold px-6 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-corporate-primary/20"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.name}
+                    value={formik.values.email}
                   />
-                  {formik.touched.name && formik.errors.name && (
+                  {formik.touched.email && formik.errors.email && (
                     <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1 mt-1">
-                      {formik.errors.name}
+                      {formik.errors.email}
                     </p>
                   )}
-                </div>
-
-                <div className="flex items-center gap-4 p-4 bg-slate-50 rounded border border-slate-100 hover:border-slate-200 transition-colors group cursor-pointer" onClick={() => formik.setFieldValue('is_active', !formik.values.is_active)}>
-                  <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all ${formik.values.is_active ? 'bg-corporate-primary border-corporate-primary shadow-lg shadow-orange-500/20' : 'bg-white border-slate-200'}`}>
-                    {formik.values.is_active && <Plus className="w-4 h-4 text-white rotate-45" />}
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="is_active"
-                      className="text-sm font-semibold text-slate-900 cursor-pointer block"
-                    >
-                      Active Status
-                    </label>
-                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mt-0.5">
-                      Enable immediate unit operations
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 p-4 bg-slate-50 rounded border border-slate-100 hover:border-slate-200 transition-colors group cursor-pointer" onClick={() => formik.setFieldValue('is_public', !formik.values.is_public)}>
-                  <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all ${formik.values.is_public ? 'bg-corporate-primary border-corporate-primary shadow-lg shadow-orange-500/20' : 'bg-white border-slate-200'}`}>
-                    {formik.values.is_public && <Plus className="w-4 h-4 text-white rotate-45" />}
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="is_public"
-                      className="text-sm font-semibold text-slate-900 cursor-pointer block"
-                    >
-                      Public Status
-                    </label>
-                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mt-0.5">
-                      Enable public visibility
-                    </p>
-                  </div>
                 </div>
 
                 <div className="pt-4">
@@ -157,7 +166,7 @@ export default function CreateDivisionModal({ trigger }: Props) {
                     ) : (
                       <div className="flex items-center justify-center gap-3">
                         <Shield className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                        Establish Unit
+                        Establish Member
                       </div>
                     )}
                   </button>

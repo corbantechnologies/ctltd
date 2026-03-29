@@ -15,6 +15,8 @@ interface CustomUser extends User {
   is_director?: boolean;
   is_employee?: boolean;
   is_finance?: boolean;
+  is_operations?: boolean;
+  is_sales?: boolean;
   is_superuser?: boolean;
 }
 
@@ -58,6 +60,8 @@ export default function Login() {
           router.push("/employee/dashboard");
         } else if (session?.user?.is_finance === true) {
           router.push("/finance/dashboard");
+        } else if (session?.user?.is_operations === true) {
+          router.push("/operations/dashboard");
         } else if (session?.user?.is_superuser === true) {
           router.push("/director/dashboard");
         } else {

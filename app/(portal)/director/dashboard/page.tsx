@@ -3,7 +3,7 @@
 import { useFetchAccount } from "@/hooks/accounts/actions";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import DivisionsList from "@/components/divisions/DivisionsList";
-import CreateDivisionModal from "@/forms/divisions/CreateDivisionModal";
+import DirectorActionsMenu from "@/components/portal/DirectorActionsMenu";
 import {
   Building2,
   Layers,
@@ -107,7 +107,7 @@ export default function DirectorDashboard() {
             Corporate infrastructure and strategic audit trail monitoring active.
           </p>
         </div>
-        <CreateDivisionModal />
+        <DirectorActionsMenu />
       </div>
 
       <Tabs.Root defaultValue="overview" className="space-y-10">
@@ -132,7 +132,7 @@ export default function DirectorDashboard() {
             {stats.map((stat, i) => (
               <div
                 key={i}
-                className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-2xl shadow-slate-100 relative overflow-hidden group hover:-translate-y-1 transition-all duration-500"
+                className="bg-white p-6 rounded border border-slate-200 shadow-2xl shadow-slate-100 relative overflow-hidden group hover:-translate-y-1 transition-all duration-500"
               >
                 <div className={cn("absolute top-0 right-0 w-24 h-24 rounded blur-3xl -translate-y-1/2 translate-x-1/2 opacity-30 group-hover:opacity-60 transition-opacity", stat.bg)} />
                 <div className="relative z-10 flex flex-col gap-4">
@@ -178,7 +178,7 @@ export default function DirectorDashboard() {
                 <span className="text-[10px] font-semibold uppercase tracking-widest">System Online</span>
               </div>
             </div>
-            <div className="bg-slate-50/50 p-1 rounded-[3rem] border border-slate-100">
+            <div className="bg-slate-50/50 p-1 rounded border border-slate-100">
               <DivisionsList rolePrefix="director" />
             </div>
           </div>
