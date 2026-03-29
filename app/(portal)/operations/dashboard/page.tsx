@@ -5,6 +5,7 @@ import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import LeadsList from "@/components/leads/LeadsList";
 import DivisionsList from "@/components/divisions/DivisionsList";
 import ProductsList from "@/components/products/ProductsList";
+import PartnersList from "@/components/partners/PartnersList";
 import OperationsActionsMenu from "@/components/portal/OperationsActionsMenu";
 import {
   Users,
@@ -189,6 +190,28 @@ export default function OperationsDashboard() {
                 
                 <div className="bg-slate-50/50 p-1 rounded border border-slate-100">
                     <ProductsList rolePrefix="operations" />
+                </div>
+            </div>
+
+            {/* Partnerships Management Section */}
+            <div className="space-y-8 pt-10 border-t border-slate-100">
+                <div className="flex items-center justify-between">
+                <div>
+                    <h2 className="text-2xl font-semibold text-slate-900 tracking-tight uppercase italic">
+                    Ecosystem <span className="text-purple-600">Partnerships</span>
+                    </h2>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mt-1">
+                    Strategic Vendors & Relationship Network
+                    </p>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-purple-50 text-purple-600 rounded border border-purple-100 shadow-sm animate-pulse">
+                    <div className="w-2 h-2 rounded bg-purple-500" />
+                    <span className="text-[10px] font-semibold uppercase tracking-widest">Relationships Linked</span>
+                </div>
+                </div>
+                
+                <div className="bg-slate-50/50 p-1 rounded border border-slate-100">
+                    <PartnersList rolePrefix="operations" />
                 </div>
             </div>
 

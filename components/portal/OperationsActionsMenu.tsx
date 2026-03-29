@@ -2,15 +2,17 @@
 
 import { useRef } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { Plus, ChevronDown, Database, Users, Activity, Package } from "lucide-react";
+import { Plus, ChevronDown, Database, Users, Package } from "lucide-react";
 import CreateDivisionModal from "@/forms/divisions/CreateDivisionModal";
 import CreateLead from "@/forms/leads/CreateLead";
 import CreateProduct from "@/forms/products/CreateProduct";
+import CreatePartner from "@/forms/partners/CreatePartner";
 
 export default function OperationsActionsMenu() {
   const divisionTriggerRef = useRef<HTMLDivElement>(null);
   const leadTriggerRef = useRef<HTMLDivElement>(null);
   const productTriggerRef = useRef<HTMLDivElement>(null);
+  const partnerTriggerRef = useRef<HTMLDivElement>(null);
 
   return (
     <div>
@@ -18,6 +20,7 @@ export default function OperationsActionsMenu() {
       <CreateDivisionModal trigger={<div ref={divisionTriggerRef} className="hidden" />} />
       <CreateLead trigger={<div ref={leadTriggerRef} className="hidden" />} />
       <CreateProduct trigger={<div ref={productTriggerRef} className="hidden" />} />
+      <CreatePartner trigger={<div ref={partnerTriggerRef} className="hidden" />} rolePrefix="operations" />
 
       {/* The Dropdown Menu */}
       <DropdownMenu.Root>
@@ -52,6 +55,14 @@ export default function OperationsActionsMenu() {
               Establish Product
             </DropdownMenu.Item>
 
+            <DropdownMenu.Item
+              onSelect={() => partnerTriggerRef.current?.click()}
+              className="flex items-center gap-3 p-3 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
+            >
+              <Users className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
+              Register Partner
+            </DropdownMenu.Item>
+
             <DropdownMenu.Separator className="h-px bg-slate-100 my-1 mx-2" />
 
             <DropdownMenu.Item
@@ -67,3 +78,4 @@ export default function OperationsActionsMenu() {
     </div>
   );
 }
+

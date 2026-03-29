@@ -1,13 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
-
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 import { createPartner } from "@/services/partners";
 import { useFormik } from "formik";
 import { PartnerSchema } from "@/validation";
-
-
-
-
 import { toast } from "react-hot-toast";
 import { Loader2, UserPlus, ShieldCheck, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
@@ -21,6 +16,7 @@ interface CreatePartnerProps {
   onSuccess?: () => void;
   onClose?: () => void;
   className?: string;
+  trigger?: React.ReactNode;
 }
 
 export default function CreatePartner({
@@ -28,10 +24,12 @@ export default function CreatePartner({
   onSuccess,
   onClose,
   className,
+  trigger,
 }: CreatePartnerProps) {
   const header = useAxiosAuth();
   const router = useRouter();
   const queryClient = useQueryClient();
+  const [open, setOpen] = useState(false);
   const { data: partnerTypes, isLoading: isLoadingTypes } =
     useFetchPartnerTypes();
   const { data: divisions, isLoading: isLoadingDivisions } =
@@ -60,6 +58,7 @@ export default function CreatePartner({
         queryClient.invalidateQueries({ queryKey: ["partners"] });
         resetForm();
         router.refresh();
+        setOpen(false);
         if (onSuccess) onSuccess();
       } catch (error: any) {
         toast.error(
@@ -71,9 +70,14 @@ export default function CreatePartner({
     },
   });
 
-  return (
+  const handleClose = () => {
+    setOpen(false);
+    if (onClose) onClose();
+  };
+
+  const formBody = (
     <div
-      className={`w-full border-black/5 shadow-2xl rounded bg-white/80 backdrop-blur-xl ${className}`}
+      className={cn("w-full border-black/5 shadow-2xl rounded bg-white/80 backdrop-blur-xl", className)}
     >
       <div
         className="p-4 border-b border-black/5"
@@ -91,24 +95,21 @@ export default function CreatePartner({
               <UserPlus className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-2xl font-semibold text-black tracking-tight">
-                Register New Partner
+              <h2 className="text-2xl font-semibold text-black tracking-tight uppercase italic">
+                Register <span className="text-slate-900">Partner</span>
               </h2>
-              <p className="text-black/50 font-medium text-sm mt-1">
+              <p className="text-black/50 font-semibold uppercase text-[10px] tracking-widest mt-1">
                 Ecosystem Relationship Hub
               </p>
             </div>
           </div>
-          {onClose && (
-            <button
-              type="button"
-              onClick={onClose}
-
-              className="hover:bg-red-50 hover:text-red-500 rounded p-2"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={handleClose}
+            className="hover:bg-red-50 hover:text-red-500 rounded p-2 transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
       </div>
       <div className="p-8">
@@ -118,15 +119,16 @@ export default function CreatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="name"
-                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1 block"
               >
                 Partner Name
               </label>
               <input
                 id="name"
                 name="name"
+                required
                 placeholder="Full Entity Name"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-white transition-all font-bold px-5 text-sm"
                 style={{
                   color: primaryColor,
                 }}
@@ -135,7 +137,7 @@ export default function CreatePartner({
                 value={formik.values.name}
               />
               {formik.touched.name && formik.errors.name && (
-                <p className="text-xs font-semibold text-red-500 ml-1">
+                <p className="text-[10px] font-semibold text-red-500 uppercase ml-1">
                   {formik.errors.name}
                 </p>
               )}
@@ -144,7 +146,7 @@ export default function CreatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="email"
-                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1 block"
               >
                 Email Address
               </label>
@@ -152,8 +154,9 @@ export default function CreatePartner({
                 id="email"
                 name="email"
                 type="email"
+                required
                 placeholder="contact@entity.com"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-white transition-all font-bold px-5 text-sm"
                 style={{
                   color: primaryColor,
                 }}
@@ -162,7 +165,7 @@ export default function CreatePartner({
                 value={formik.values.email}
               />
               {formik.touched.email && formik.errors.email && (
-                <p className="text-xs font-semibold text-red-500 ml-1">
+                <p className="text-[10px] font-semibold text-red-500 uppercase ml-1">
                   {formik.errors.email}
                 </p>
               )}
@@ -173,7 +176,7 @@ export default function CreatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="phone"
-                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1 block"
               >
                 Phone Number
               </label>
@@ -181,7 +184,7 @@ export default function CreatePartner({
                 id="phone"
                 name="phone"
                 placeholder="+254..."
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-white transition-all font-bold px-5 text-sm"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
@@ -191,15 +194,16 @@ export default function CreatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="partner_type"
-                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1 block"
               >
                 Partner Category
               </label>
               <select
                 id="partner_type"
                 name="partner_type"
+                required
                 disabled={isLoadingTypes}
-                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-medium transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold transition-all appearance-none cursor-pointer"
                 style={{
                   color: primaryColor,
                 }}
@@ -214,25 +218,21 @@ export default function CreatePartner({
                   </option>
                 ))}
               </select>
-              {formik.touched.partner_type && formik.errors.partner_type && (
-                <p className="text-xs font-semibold text-red-500 ml-1">
-                  {formik.errors.partner_type}
-                </p>
-              )}
             </div>
 
             <div className="space-y-2">
               <label
                 htmlFor="division"
-                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1 block"
               >
                 Assigned Division
               </label>
               <select
                 id="division"
                 name="division"
+                required
                 disabled={isLoadingDivisions}
-                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-medium transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold transition-all appearance-none cursor-pointer"
                 style={{
                   color: primaryColor,
                 }}
@@ -257,7 +257,7 @@ export default function CreatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="tax_pin"
-                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1 block"
               >
                 Tax PIN (KRA)
               </label>
@@ -265,7 +265,7 @@ export default function CreatePartner({
                 id="tax_pin"
                 name="tax_pin"
                 placeholder="P0XXXXXXXX"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-white transition-all font-bold px-5 text-sm"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.tax_pin}
@@ -275,14 +275,14 @@ export default function CreatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="currency"
-                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1 block"
               >
                 Preferred Currency
               </label>
               <select
                 id="currency"
                 name="currency"
-                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-medium focus:ring-corporate-primary/20 transition-all appearance-none"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold transition-all appearance-none cursor-pointer"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.currency}
@@ -297,7 +297,7 @@ export default function CreatePartner({
             <div className="space-y-2">
               <label
                 htmlFor="wht_rate"
-                className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1 block"
               >
                 WHT Rate (%)
               </label>
@@ -307,23 +307,18 @@ export default function CreatePartner({
                 type="number"
                 step="0.01"
                 placeholder="0.00"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-white transition-all font-bold px-5 text-sm"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.wht_rate}
               />
-              {formik.touched.wht_rate && formik.errors.wht_rate && (
-                <p className="text-xs font-semibold text-red-500 ml-1">
-                  {formik.errors.wht_rate}
-                </p>
-              )}
             </div>
           </div>
 
           <div className="space-y-2">
             <label
               htmlFor="payment_terms"
-              className="text-sm font-semibold uppercase tracking-widest text-black/40 ml-1"
+              className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1 block"
             >
               Payment Terms / Notes
             </label>
@@ -331,7 +326,7 @@ export default function CreatePartner({
               id="payment_terms"
               name="payment_terms"
               placeholder="e.g. Net 30, Pay on Delivery"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-white transition-all font-bold px-5 text-sm"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.payment_terms}
@@ -343,21 +338,20 @@ export default function CreatePartner({
             style={{ backgroundColor: `${primaryColor}0D` }}
           >
             <input
-              id="is_active"
+              id="is_active_chk"
               name="is_active"
               type="checkbox"
-              className="w-5 h-5 rounded border-black/5 focus:ring-0"
+              className="w-5 h-5 rounded border-black/5 focus:ring-0 cursor-pointer"
               style={{
                 accentColor: primaryColor,
-                color: primaryColor,
               }}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               checked={formik.values.is_active}
             />
             <label
-              htmlFor="is_active"
-              className="text-sm font-semibold text-black"
+              htmlFor="is_active_chk"
+              className="text-sm font-bold text-slate-800 cursor-pointer"
             >
               Set Partner as Active
             </label>
@@ -367,7 +361,7 @@ export default function CreatePartner({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[1.25rem] font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 text-white rounded font-bold text-base transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center gap-3"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,
@@ -376,10 +370,10 @@ export default function CreatePartner({
               {formik.isSubmitting ? (
                 <Loader2 className="w-6 h-6 animate-spin" />
               ) : (
-                <div className="flex items-center gap-3">
+                <>
                   <ShieldCheck className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                  Finalize Registration
-                </div>
+                  Finalize Structural Registration
+                </>
               )}
             </button>
           </div>
@@ -387,4 +381,26 @@ export default function CreatePartner({
       </div>
     </div>
   );
+
+  return (
+    <>
+      {trigger && (
+        <div onClick={() => setOpen(true)} className="contents">
+          {trigger}
+        </div>
+      )}
+
+      {!trigger && formBody}
+
+      {open && trigger && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-slate-950/40 backdrop-blur-md animate-in fade-in duration-300" onClick={handleClose} />
+          <div className="relative w-full max-w-2xl bg-white rounded shadow-2xl border border-slate-200 overflow-hidden z-[101] animate-in zoom-in-95 fade-in duration-300">
+            {formBody}
+          </div>
+        </div>
+      )}
+    </>
+  );
 }
+
