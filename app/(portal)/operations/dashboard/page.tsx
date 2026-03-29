@@ -4,6 +4,7 @@ import { useFetchAccount } from "@/hooks/accounts/actions";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import LeadsList from "@/components/leads/LeadsList";
 import DivisionsList from "@/components/divisions/DivisionsList";
+import ProductsList from "@/components/products/ProductsList";
 import OperationsActionsMenu from "@/components/portal/OperationsActionsMenu";
 import {
   Users,
@@ -11,9 +12,11 @@ import {
   CalendarRange,
   Briefcase,
   Activity,
+  Package,
 } from "lucide-react";
 import { useFetchDivisions } from "@/hooks/divisions/actions";
 import { useFetchLeads } from "@/hooks/leads/actions";
+import { useFetchProducts } from "@/hooks/products/actions";
 import { useFetchFinancialYears } from "@/hooks/financialyears/actions";
 import { useFetchPartners } from "@/hooks/partners/actions";
 import { GlobalSearch } from "@/components/navigation/GlobalSearch";
@@ -25,10 +28,11 @@ export default function OperationsDashboard() {
   const { data: account, isLoading: accountLoading } = useFetchAccount();
   const { data: divisions, isLoading: divisionsLoading } = useFetchDivisions();
   const { data: leads, isLoading: leadsLoading } = useFetchLeads();
+  const { data: products, isLoading: productsLoading } = useFetchProducts();
   const { data: years, isLoading: yearsLoading } = useFetchFinancialYears();
   const { data: partners, isLoading: partnersLoading } = useFetchPartners();
 
-  const isLoading = accountLoading || divisionsLoading || leadsLoading || yearsLoading || partnersLoading;
+  const isLoading = accountLoading || divisionsLoading || leadsLoading || productsLoading || yearsLoading || partnersLoading;
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -41,7 +45,7 @@ export default function OperationsDashboard() {
       label: "Operational Units",
       value: divisions?.length || 0,
       icon: Building2,
-      description: "Total Divisions",
+      description: "Active Divisions",
       color: "text-blue-600",
       bg: "bg-blue-50",
     },
@@ -54,18 +58,18 @@ export default function OperationsDashboard() {
       bg: "bg-corporate-primary/10",
     },
     {
-      label: "Fiscal Context",
-      value: activeYear?.code || "N/A",
-      icon: CalendarRange,
-      description: activeYear ? "Active Year" : "No active year",
-      color: "text-emerald-600",
-      bg: "bg-emerald-50",
+      label: "Product Portfolio",
+      value: products?.length || 0,
+      icon: Package,
+      description: "Active Units",
+      color: "text-amber-600",
+      bg: "bg-amber-50",
     },
     {
-      label: "Onboarded Accounts",
+      label: "Partnerships",
       value: partners?.length || 0,
       icon: Briefcase,
-      description: "Total Partners",
+      description: "Onboarded Accounts",
       color: "text-purple-600",
       bg: "bg-purple-50",
     },
@@ -162,7 +166,29 @@ export default function OperationsDashboard() {
                 </div>
                 
                 <div className="bg-slate-50/50 p-1 rounded border border-slate-100">
-                <LeadsList rolePrefix="operations" />
+                    <LeadsList rolePrefix="operations" />
+                </div>
+            </div>
+
+             {/* Product Inventory Section */}
+             <div className="space-y-8 pt-10 border-t border-slate-100">
+                <div className="flex items-center justify-between">
+                <div>
+                    <h2 className="text-2xl font-semibold text-slate-900 tracking-tight uppercase italic">
+                    Portfolio <span className="text-amber-600">Inventory</span>
+                    </h2>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mt-1">
+                    Active Goods & Services Database
+                    </p>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-amber-50 text-amber-600 rounded border border-amber-100 shadow-sm animate-pulse">
+                    <div className="w-2 h-2 rounded bg-amber-500" />
+                    <span className="text-[10px] font-semibold uppercase tracking-widest">Inventory Linked</span>
+                </div>
+                </div>
+                
+                <div className="bg-slate-50/50 p-1 rounded border border-slate-100">
+                    <ProductsList rolePrefix="operations" />
                 </div>
             </div>
 

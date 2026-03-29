@@ -2,19 +2,22 @@
 
 import { useRef } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { Plus, ChevronDown, Database, Users, Activity } from "lucide-react";
+import { Plus, ChevronDown, Database, Users, Activity, Package } from "lucide-react";
 import CreateDivisionModal from "@/forms/divisions/CreateDivisionModal";
 import CreateLead from "@/forms/leads/CreateLead";
+import CreateProduct from "@/forms/products/CreateProduct";
 
 export default function OperationsActionsMenu() {
   const divisionTriggerRef = useRef<HTMLDivElement>(null);
   const leadTriggerRef = useRef<HTMLDivElement>(null);
+  const productTriggerRef = useRef<HTMLDivElement>(null);
 
   return (
     <div>
       {/* Hidden triggers connected to the self-contained modals */}
       <CreateDivisionModal trigger={<div ref={divisionTriggerRef} className="hidden" />} />
       <CreateLead trigger={<div ref={leadTriggerRef} className="hidden" />} />
+      <CreateProduct trigger={<div ref={productTriggerRef} className="hidden" />} />
 
       {/* The Dropdown Menu */}
       <DropdownMenu.Root>
@@ -39,6 +42,14 @@ export default function OperationsActionsMenu() {
             >
               <Users className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
               Capture New Lead
+            </DropdownMenu.Item>
+
+            <DropdownMenu.Item
+              onSelect={() => productTriggerRef.current?.click()}
+              className="flex items-center gap-3 p-3 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
+            >
+              <Package className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
+              Establish Product
             </DropdownMenu.Item>
 
             <DropdownMenu.Separator className="h-px bg-slate-100 my-1 mx-2" />
