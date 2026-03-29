@@ -55,7 +55,7 @@ export default function BooksList({
     return filteredBooks.slice(start, start + itemsPerPage);
   }, [filteredBooks, currentPage]);
 
-  const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
+  const primaryColor = rolePrefix === "director" ? "#D0402B" : rolePrefix === "operations" ? "#2563EB" : "#045138";
 
   if (!books || books.length === 0) {
     return (

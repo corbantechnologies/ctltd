@@ -47,9 +47,9 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
     return filteredDivisions.slice(start, start + itemsPerPage);
   }, [filteredDivisions, currentPage]);
 
-  const primaryColorClass = rolePrefix === "director" ? "text-corporate-primary" : "text-emerald-600";
-  const primaryBgClass = rolePrefix === "director" ? "bg-corporate-primary" : "bg-emerald-600";
-  const primaryBorderClass = rolePrefix === "director" ? "border-corporate-primary/20" : "border-emerald-600/20";
+  const primaryColorClass = rolePrefix === "director" ? "text-corporate-primary" : rolePrefix === "operations" ? "text-blue-600" : "text-emerald-600";
+  const primaryBgClass = rolePrefix === "director" ? "bg-corporate-primary" : rolePrefix === "operations" ? "bg-blue-600" : "bg-emerald-600";
+  const primaryBorderClass = rolePrefix === "director" ? "border-corporate-primary/20" : rolePrefix === "operations" ? "border-blue-600/20" : "border-emerald-600/20";
 
   if (isLoading) {
     return <LoadingSpinner />;

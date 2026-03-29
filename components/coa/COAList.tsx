@@ -53,7 +53,7 @@ export default function COAList({ rolePrefix }: COAListProps) {
     return filteredCOAs.slice(start, start + itemsPerPage);
   }, [filteredCOAs, currentPage]);
 
-  const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
+  const primaryColor = rolePrefix === "director" ? "#D0402B" : rolePrefix === "operations" ? "#2563EB" : "#045138";
 
   if (isLoading) {
     return <LoadingSpinner />;
