@@ -37,7 +37,8 @@ export default function CreateLead({ trigger }: CreateLeadProps) {
       try {
         await createLead(values, header);
         toast.success("Lead captured successfully");
-        queryClient.invalidateQueries({ queryKey: ["leads"] });
+        await queryClient.invalidateQueries({ queryKey: ["leads"] });
+        await queryClient.refetchQueries({ queryKey: ["leads"] });
         router.refresh();
         resetForm();
         setOpen(false);

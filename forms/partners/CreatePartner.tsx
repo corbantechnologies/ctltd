@@ -55,7 +55,8 @@ export default function CreatePartner({
       try {
         await createPartner(values, header);
         toast.success("Partner registered successfully");
-        queryClient.invalidateQueries({ queryKey: ["partners"] });
+        await queryClient.invalidateQueries({ queryKey: ["partners"] });
+        await queryClient.refetchQueries({ queryKey: ["partners"] });
         resetForm();
         router.refresh();
         setOpen(false);

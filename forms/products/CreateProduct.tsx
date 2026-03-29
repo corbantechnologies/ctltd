@@ -45,7 +45,8 @@ export default function CreateProduct({ trigger }: Props) {
       try {
         await createProduct(values as any, header);
         toast.success("Product portfolio expanded successfully");
-        queryClient.invalidateQueries({ queryKey: ["products"] });
+        await queryClient.invalidateQueries({ queryKey: ["products"] });
+        await queryClient.refetchQueries({ queryKey: ["products"] });
         router.refresh();
         resetForm();
         setOpen(false);

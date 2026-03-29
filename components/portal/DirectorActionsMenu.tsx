@@ -6,11 +6,13 @@ import { Plus, ChevronDown, Database, Users } from "lucide-react";
 import CreateDivisionModal from "@/forms/divisions/CreateDivisionModal";
 import CreateOperations from "@/forms/accounts/CreateOperations";
 import CreateSales from "@/forms/accounts/CreateSales";
+import CreateFinance from "@/forms/accounts/CreateFinance";
 
 export default function DirectorActionsMenu() {
   const divisionTriggerRef = useRef<HTMLDivElement>(null);
   const operationsTriggerRef = useRef<HTMLDivElement>(null);
   const salesTriggerRef = useRef<HTMLDivElement>(null);
+  const financeTriggerRef = useRef<HTMLDivElement>(null);
 
   return (
     <div>
@@ -18,6 +20,7 @@ export default function DirectorActionsMenu() {
       <CreateDivisionModal trigger={<div ref={divisionTriggerRef} className="hidden" />} />
       <CreateOperations trigger={<div ref={operationsTriggerRef} className="hidden" />} />
       <CreateSales trigger={<div ref={salesTriggerRef} className="hidden" />} />
+      <CreateFinance trigger={<div ref={financeTriggerRef} className="hidden" />} />
 
       {/* The Dropdown Menu */}
       <DropdownMenu.Root>
@@ -45,6 +48,8 @@ export default function DirectorActionsMenu() {
               Establish Division
             </DropdownMenu.Item>
 
+            <DropdownMenu.Separator className="h-px bg-slate-100 my-1 mx-2" />
+
             <DropdownMenu.Item
               onSelect={() => operationsTriggerRef.current?.click()}
               className="flex items-center gap-3 p-3 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
@@ -59,6 +64,14 @@ export default function DirectorActionsMenu() {
             >
               <Users className="w-4 h-4 text-slate-400 group-hover:text-emerald-500 transition-colors" />
               Establish Sales Member
+            </DropdownMenu.Item>
+
+            <DropdownMenu.Item
+              onSelect={() => financeTriggerRef.current?.click()}
+              className="flex items-center gap-3 p-3 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
+            >
+              <Users className="w-4 h-4 text-slate-400 group-hover:text-corporate-primary transition-colors" />
+              Establish Finance Member
             </DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu.Portal>

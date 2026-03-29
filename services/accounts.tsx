@@ -82,6 +82,14 @@ export const resetPassword = async (data: resetPassword): Promise<any> => {
 };
 
 // Member Accounts
+export const createFinance = async (data: createMember): Promise<User> => {
+  const response: AxiosResponse<User> = await apiActions.post(
+    `/api/v1/auth/signup/finance/`,
+    data,
+  );
+  return response.data;
+};
+
 export const createOperations = async (data: createMember): Promise<User> => {
   const response: AxiosResponse<User> = await apiActions.post(
     `/api/v1/auth/signup/operations/`,
