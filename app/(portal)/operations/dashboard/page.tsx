@@ -55,8 +55,8 @@ export default function OperationsDashboard() {
       value: leads?.length || 0,
       icon: Users,
       description: "Pipeline Leads",
-      color: "text-corporate-primary",
-      bg: "bg-corporate-primary/10",
+      color: "text-blue-600",
+      bg: "bg-blue-50",
     },
     {
       label: "Product Portfolio",
@@ -219,7 +219,7 @@ export default function OperationsDashboard() {
             <div className="space-y-8 pt-10 border-t border-slate-100">
                 <div className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-2xl font-semibold text-slate-900 tracking-tight uppercase italic text-corporate-primary">
+                    <h2 className="text-2xl font-semibold text-slate-900 tracking-tight uppercase italic text-blue-600">
                     Unit <span className="text-slate-900">Infrastructure</span>
                     </h2>
                     <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mt-1">

@@ -56,7 +56,7 @@ export default function Navbar() {
       name: "Dashboard",
       href: `/${rolePrefix}/dashboard`,
       icon: LayoutDashboard,
-      show: isDirector || isFinance,
+      show: isDirector || isFinance || isOperations,
     },
     {
       name: "Reports",
