@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { toast } from "react-hot-toast";
 import { Loader2, Users, Shield, Plus, X, Building2, Mail, Phone, Globe, Tag, UserPlus } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useFetchDivisions } from "@/hooks/divisions/actions";
@@ -15,6 +16,7 @@ interface CreateLeadProps {
 
 export default function CreateLead({ trigger }: CreateLeadProps) {
   const header = useAxiosAuth();
+  const router = useRouter();
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
   const { data: divisions } = useFetchDivisions();
@@ -36,6 +38,7 @@ export default function CreateLead({ trigger }: CreateLeadProps) {
         await createLead(values, header);
         toast.success("Lead captured successfully");
         queryClient.invalidateQueries({ queryKey: ["leads"] });
+        router.refresh();
         resetForm();
         setOpen(false);
       } catch (error: any) {

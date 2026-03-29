@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { toast } from "react-hot-toast";
 import { Loader2, Shield, X, Activity, CheckCircle2, AlertCircle, User, Building2, Mail, Phone, Globe, Tag } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
@@ -17,6 +18,7 @@ interface UpdateLeadProps {
 
 export default function UpdateLead({ lead, trigger }: UpdateLeadProps) {
   const header = useAxiosAuth();
+  const router = useRouter();
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
   const { data: divisions } = useFetchDivisions();
@@ -55,6 +57,7 @@ export default function UpdateLead({ lead, trigger }: UpdateLeadProps) {
         
         queryClient.invalidateQueries({ queryKey: ["leads"] });
         queryClient.invalidateQueries({ queryKey: ["partners"] });
+        router.refresh();
         setOpen(false);
       } catch (error: any) {
         const errorMessage = error?.response?.data?.message || "Failed to update lead";
