@@ -36,6 +36,13 @@ export interface createMember {
   last_name: string;
 }
 
+export interface activateAccount {
+  uidb64: string; // picked from the urlparams
+  token: string; // picked from the urlparams
+  password: string;
+  password_confirmation: string;
+}
+
 export interface forgotPassword {
   email: string;
 }
@@ -86,6 +93,14 @@ export const createOperations = async (data: createMember): Promise<User> => {
 export const createSales = async (data: createMember): Promise<User> => {
   const response: AxiosResponse<User> = await apiActions.post(
     `/api/v1/auth/signup/sales/`,
+    data,
+  );
+  return response.data;
+};
+
+export const activateAccount = async (data: activateAccount): Promise<User> => {
+  const response: AxiosResponse<User> = await apiActions.patch(
+    `/api/v1/auth/password/activate-account/`,
     data,
   );
   return response.data;

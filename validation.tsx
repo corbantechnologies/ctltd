@@ -139,6 +139,19 @@ const CreateMemberSchema = Yup.object().shape({
   last_name: Yup.string().required("Last name is required"),
 });
 
+const ActivateAccountSchema = Yup.object().shape({
+  password: Yup.string()
+    .min(8, "Password cannot be less than 8 characters")
+    .required("Password is required")
+    .matches(
+      /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+      "Password must contain at least 8 characters, one uppercase, one number and one special case character"
+    ),
+  password_confirmation: Yup.string()
+    .required("Password Confirmation is required")
+    .oneOf([Yup.ref("password")], "Passwords must match"),
+});
+
 export {
   LoginSchema,
   ResetPasswordSchema,
@@ -152,4 +165,5 @@ export {
   JournalSchema,
   JournalEntrySchema,
   CreateMemberSchema,
+  ActivateAccountSchema,
 };

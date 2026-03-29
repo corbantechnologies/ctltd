@@ -44,7 +44,7 @@ export default function CreateDivision() {
   });
 
   return (
-    <div className="w-full max-w-2xl border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
+    <div className="w-full max-w-2xl border-black/5 shadow-2xl rounded overflow-hidden bg-white/80 backdrop-blur-xl">
       <div className="bg-orange-50/50 p-8 border-b border-black/5">
         <div className="flex items-center gap-4 mb-4">
           <div className="w-12 h-12 rounded bg-corporate-primary flex items-center justify-center text-white shadow-lg shadow-orange-500/30">
@@ -128,7 +128,7 @@ export default function CreateDivision() {
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 bg-black hover:bg-corporate-primary text-white rounded-[20px] font-semibold text-lg transition-all shadow-xl hover:shadow-orange-500/20 active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 bg-black hover:bg-corporate-primary text-white rounded font-semibold text-lg transition-all shadow-xl hover:shadow-orange-500/20 active:scale-[0.98] group flex items-center justify-center"
             >
               {formik.isSubmitting ? (
                 <Loader2 className="w-6 h-6 animate-spin" />

@@ -63,7 +63,7 @@ export default function CreateDivisionModal({ trigger }: Props) {
       {open && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="fixed inset-0 bg-slate-950/40 backdrop-blur-md animate-in fade-in duration-300" onClick={() => setOpen(false)} />
-          <div className="relative w-full max-w-lg bg-white rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden z-[101] animate-in zoom-in-95 fade-in duration-300">
+          <div className="relative w-full max-w-lg bg-white rounded shadow-2xl border border-slate-200 overflow-hidden z-[101] animate-in zoom-in-95 fade-in duration-300">
             <div className="bg-slate-900 p-8 text-white relative">
               <div className="absolute top-0 right-0 w-32 h-32 bg-corporate-primary/10 rounded blur-3xl -translate-y-1/2 translate-x-1/2" />
 
@@ -150,7 +150,7 @@ export default function CreateDivisionModal({ trigger }: Props) {
                   <button
                     type="submit"
                     disabled={formik.isSubmitting}
-                    className="w-full h-16 bg-slate-900 hover:bg-corporate-primary text-white rounded-[1.25rem] font-semibold text-base transition-all shadow-xl hover:shadow-corporate-primary/20 active:scale-[0.98] group relative overflow-hidden flex items-center justify-center"
+                    className="w-full h-16 bg-slate-900 hover:bg-corporate-primary text-white rounded font-semibold text-base transition-all shadow-xl hover:shadow-corporate-primary/20 active:scale-[0.98] group relative overflow-hidden flex items-center justify-center"
                   >
                     {formik.isSubmitting ? (
                       <Loader2 className="w-6 h-6 animate-spin mx-auto" />
