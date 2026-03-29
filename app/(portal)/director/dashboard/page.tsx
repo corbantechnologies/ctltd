@@ -3,7 +3,7 @@
 import { useFetchAccount } from "@/hooks/accounts/actions";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import DivisionsList from "@/components/divisions/DivisionsList";
-import CreateDivisionModal from "@/forms/divisions/CreateDivisionModal";
+import DirectorActionsMenu from "@/components/portal/DirectorActionsMenu";
 import {
   Building2,
   Layers,
@@ -107,7 +107,7 @@ export default function DirectorDashboard() {
             Corporate infrastructure and strategic audit trail monitoring active.
           </p>
         </div>
-        <CreateDivisionModal />
+        <DirectorActionsMenu />
       </div>
 
       <Tabs.Root defaultValue="overview" className="space-y-10">

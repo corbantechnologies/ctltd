@@ -133,6 +133,12 @@ const JournalEntrySchema = Yup.object().shape({
   project: Yup.string().nullable(),
 });
 
+const CreateMemberSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  first_name: Yup.string().required("First name is required"),
+  last_name: Yup.string().required("Last name is required"),
+});
+
 export {
   LoginSchema,
   ResetPasswordSchema,
@@ -145,4 +151,5 @@ export {
   JournalTypeSchema,
   JournalSchema,
   JournalEntrySchema,
+  CreateMemberSchema,
 };
