@@ -57,7 +57,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
 
   if (!divisions || divisions.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center p-16 bg-slate-50 rounded-[3rem] border-2 border-dashed border-slate-200">
+      <div className="flex flex-col items-center justify-center p-16 bg-slate-50 rounded border-2 border-dashed border-slate-200">
         <div className="w-20 h-20 rounded bg-white flex items-center justify-center text-slate-200 mb-6 shadow-xl border border-slate-100">
           <Database className="w-10 h-10" />
         </div>
@@ -85,7 +85,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
               setSearchQuery(e.target.value);
               setCurrentPage(1);
             }}
-            className="w-full h-16 pl-14 pr-6 rounded-[1.5rem] border border-slate-200 bg-white/80 backdrop-blur-md focus:bg-white focus:border-slate-900 focus:ring-0 transition-all font-semibold text-sm text-slate-900 shadow-sm"
+            className="w-full h-16 pl-14 pr-6 rounded border border-slate-200 bg-white/80 backdrop-blur-md focus:bg-white focus:border-slate-900 focus:ring-0 transition-all font-semibold text-sm text-slate-900 shadow-sm"
           />
         </div>
 
@@ -134,7 +134,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
                 href={`/${rolePrefix}/divisions/${division.reference}`}
                 className="group block"
               >
-                <div className="bg-white border border-slate-200 shadow-2xl shadow-slate-100 rounded-[2.5rem] p-8 hover:-translate-y-2 transition-all duration-500 relative overflow-hidden group-hover:shadow-corporate-primary/10">
+                <div className="bg-white border border-slate-200 shadow-2xl shadow-slate-100 rounded p-8 hover:-translate-y-2 transition-all duration-500 relative overflow-hidden group-hover:shadow-corporate-primary/10">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-corporate-primary/5 transition-colors" />
 
                   <div className="flex justify-between items-start mb-8 relative z-10">
@@ -171,7 +171,7 @@ export default function DivisionsList({ rolePrefix }: DivisionsListProps) {
             ))}
           </div>
         ) : (
-          <div className="bg-white border border-slate-200 rounded-[2.5rem] shadow-2xl shadow-slate-100 overflow-hidden relative">
+          <div className="bg-white border border-slate-200 rounded shadow-2xl shadow-slate-100 overflow-hidden relative">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>

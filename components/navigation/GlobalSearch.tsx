@@ -9,7 +9,7 @@ import { useFetchCOAs } from "@/hooks/coa/actions";
 import { useFetchBooks } from "@/hooks/books/actions";
 import { cn } from "@/lib/utils";
 
-export function GlobalSearch({ role = "finance" }: { role?: "finance" | "director" }) {
+export function GlobalSearch({ role = "finance" }: { role?: "finance" | "director" | "operations" }) {
     const [open, setOpen] = useState(false);
     const router = useRouter();
 
@@ -39,17 +39,17 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
                 onClick={() => setOpen(true)}
                 className={cn(
                     "w-full flex items-center gap-3 md:gap-5 px-2 md:px-4 py-2 md:py-2 rounded border border-slate-200 bg-white shadow-slate-100 transition-all group text-left relative overflow-hidden",
-                    role === "director" ? "hover:border-corporate-primary/40" : "hover:border-emerald-600/40"
+                    role === "director" ? "hover:border-corporate-primary/40" : role === "operations" ? "hover:border-blue-600/40" : "hover:border-emerald-600/40"
                 )}
             >
                 <div className={cn(
                     "absolute top-0 right-0 w-32 h-32 rounded -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-10 transition-opacity",
-                    role === "director" ? "bg-corporate-primary" : "bg-emerald-600"
+                    role === "director" ? "bg-corporate-primary" : role === "operations" ? "bg-blue-600" : "bg-emerald-600"
                 )} />
 
                 <div className={cn(
                     "w-8 h-8 rounded flex items-center justify-center transition-all shadow-inner",
-                    role === "director" ? "bg-slate-50 group-hover:bg-corporate-primary group-hover:text-white" : "bg-slate-50 group-hover:bg-emerald-600 group-hover:text-white",
+                    role === "director" ? "bg-slate-50 group-hover:bg-corporate-primary group-hover:text-white" : role === "operations" ? "bg-slate-50 group-hover:bg-blue-600 group-hover:text-white" : "bg-slate-50 group-hover:bg-emerald-600 group-hover:text-white",
                     "text-slate-400"
                 )}>
                     <Search className="w-5 h-5" />

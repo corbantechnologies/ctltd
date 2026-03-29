@@ -16,6 +16,7 @@ interface CustomUser extends User {
   is_employee?: boolean;
   is_finance?: boolean;
   is_operations?: boolean;
+  is_sales?: boolean;
   is_superuser?: boolean;
 }
 
