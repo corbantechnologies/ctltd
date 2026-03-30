@@ -1,9 +1,13 @@
 "use client";
 
 import COAList from "@/components/coa/COAList";
-import { Database } from "lucide-react";
+import CreateCOA from "@/forms/coa/CreateCOA";
+import { Database, Plus } from "lucide-react";
+import { useState } from "react";
 
 export default function COAPage() {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="space-y-6 pb-6">
       {/* Header Section */}
@@ -25,11 +29,34 @@ export default function COAPage() {
             oversee all general ledger accounts.
           </p>
         </div>
+
+        <button
+          onClick={() => setOpen(true)}
+          className="flex items-center gap-2 px-6 py-3 bg-[#2563EB] text-white rounded text-[10px] font-semibold uppercase tracking-widest shadow-lg shadow-[#2563EB]/20 hover:bg-[#1d4ed8] transition-all active:scale-[0.98]"
+        >
+          <Plus className="w-3.5 h-3.5" />
+          Register Account
+        </button>
       </div>
 
       <div className="pt-4 border-t border-black/5">
         <COAList rolePrefix="operations" />
       </div>
+
+      {/* Manual Modal Implementation */}
+      {open && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-slate-950/40 backdrop-blur-md animate-in fade-in duration-300" onClick={() => setOpen(false)} />
+          <div className="relative w-full max-w-2xl bg-white rounded shadow-2xl border border-slate-200 overflow-hidden z-[101] animate-in zoom-in-95 fade-in duration-300">
+            <CreateCOA
+              rolePrefix="operations"
+              onSuccess={() => setOpen(false)}
+              onClose={() => setOpen(false)}
+              className="border-none shadow-none rounded"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

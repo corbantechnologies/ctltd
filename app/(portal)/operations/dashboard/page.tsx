@@ -88,11 +88,11 @@ export default function OperationsDashboard() {
             <div className="w-8 h-8 rounded bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
               <Activity className="w-4 h-4" />
             </div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-blue-600">
+            <p className="text-[10px] font-semibold uppercase text-blue-600">
               Operational Command Hub
             </p>
           </div>
-          <h1 className="text-3xl md:text-4xl font-semibold text-slate-900 tracking-tight italic">
+          <h1 className="text-lg md:text-xl font-semibold text-slate-900 tracking-tight italic">
             Operations <span className="text-blue-600">Insight</span>
           </h1>
           <p className="text-slate-400 font-semibold mt-2 text-sm max-w-lg">
@@ -107,13 +107,13 @@ export default function OperationsDashboard() {
         <Tabs.List className="flex w-full overflow-x-auto md:inline-flex md:w-auto p-1.5 bg-slate-100 rounded border border-slate-200 shadow-inner scrollbar-hide">
           <Tabs.Trigger
             value="health"
-            className="shrink-0 whitespace-nowrap px-8 py-3 rounded text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="shrink-0 whitespace-nowrap px-4 py-3 rounded text-[10px] font-semibold uppercase transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
             System Health
           </Tabs.Trigger>
           <Tabs.Trigger
             value="reports"
-            className="shrink-0 whitespace-nowrap px-8 py-3 rounded text-[10px] font-semibold uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
+            className="shrink-0 whitespace-nowrap px-4 py-3 rounded text-[10px] font-semibold uppercase transition-all data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-md data-[state=active]:border data-[state=active]:border-slate-100 text-slate-400 hover:text-slate-600"
           >
             Tactical Reports
           </Tabs.Trigger>
@@ -136,7 +136,7 @@ export default function OperationsDashboard() {
                     <p className="text-slate-400 font-semibold uppercase tracking-widest text-[9px] mb-1">
                       {stat.label}
                     </p>
-                    <h3 className="text-2xl font-semibold text-slate-900 tracking-tight">
+                    <h3 className="text-lg font-semibold text-slate-900 tracking-tight">
                       {stat.value}
                     </h3>
                     <p className="text-[10px] font-semibold text-slate-400 mt-1 uppercase tracking-tighter">
@@ -148,12 +148,12 @@ export default function OperationsDashboard() {
             ))}
           </div>
 
-          <div className="space-y-16">
+          <div className="space-y-12">
             {/* Leads Management Section */}
             <div className="space-y-8">
                 <div className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-2xl font-semibold text-slate-900 tracking-tight uppercase italic">
+                    <h2 className="text-lg font-semibold text-slate-900 tracking-tight uppercase italic">
                     Pipeline <span className="text-blue-600">Dynamics</span>
                     </h2>
                     <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mt-1">
@@ -175,7 +175,7 @@ export default function OperationsDashboard() {
              <div className="space-y-8 pt-10 border-t border-slate-100">
                 <div className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-2xl font-semibold text-slate-900 tracking-tight uppercase italic">
+                    <h2 className="text-lg font-semibold text-slate-900 tracking-tight uppercase italic">
                     Portfolio <span className="text-amber-600">Inventory</span>
                     </h2>
                     <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mt-1">
@@ -197,7 +197,7 @@ export default function OperationsDashboard() {
             <div className="space-y-8 pt-10 border-t border-slate-100">
                 <div className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-2xl font-semibold text-slate-900 tracking-tight uppercase italic">
+                    <h2 className="text-lg font-semibold text-slate-900 tracking-tight uppercase italic">
                     Ecosystem <span className="text-purple-600">Partnerships</span>
                     </h2>
                     <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mt-1">
@@ -219,7 +219,7 @@ export default function OperationsDashboard() {
             <div className="space-y-8 pt-10 border-t border-slate-100">
                 <div className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-2xl font-semibold text-slate-900 tracking-tight uppercase italic text-blue-600">
+                    <h2 className="text-lg font-semibold text-slate-900 tracking-tight uppercase italic text-blue-600">
                     Unit <span className="text-slate-900">Infrastructure</span>
                     </h2>
                     <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mt-1">

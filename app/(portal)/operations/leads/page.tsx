@@ -1,7 +1,8 @@
 "use client";
 
 import LeadsList from "@/components/leads/LeadsList";
-import { Users } from "lucide-react";
+import CreateLead from "@/forms/leads/CreateLead";
+import { Users, Plus } from "lucide-react";
 
 export default function LeadsPage() {
   return (
@@ -24,6 +25,15 @@ export default function LeadsPage() {
             Monitor incoming leads, qualify opportunities, and drive the initial pipeline cycle from first contact to engagement.
           </p>
         </div>
+
+        <CreateLead
+          trigger={
+            <button className="flex items-center gap-2 px-6 py-3 bg-[#2563EB] text-white rounded text-[10px] font-semibold uppercase tracking-widest shadow-lg shadow-[#2563EB]/20 hover:bg-[#1d4ed8] transition-all active:scale-[0.98]">
+              <Plus className="w-3.5 h-3.5" />
+              Capture Lead
+            </button>
+          }
+        />
       </div>
 
       <div className="pt-4 border-t border-black/5">
