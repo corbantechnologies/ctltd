@@ -3,6 +3,7 @@
 import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
 import { PaginatedResponse } from "./general";
+import { QuotationLine } from "./quotationlines";
 
 export interface Quotation {
     id: string;
@@ -20,7 +21,29 @@ export interface Quotation {
     updated_by: string;
     payment_account?: string;
     terms_and_conditions?: string;
-    lines?: any[];
+    lines?: QuotationLine[];
+}
+
+interface createQuotationData {
+    lead?: string;
+    partner?: string;
+    date: string;
+    expiry_date: string;
+    status: "DRAFT";
+    notes: string;
+    payment_account?: string;
+    terms_and_conditions?: string;
+}
+
+interface updateQuotationData {
+    lead?: string;
+    partner?: string;
+    date?: string;
+    expiry_date?: string;
+    status?: "DRAFT" | "SENT" | "ACCEPTED" | "REJECTED" | "EXPIRED";
+    notes?: string;
+    payment_account?: string;
+    terms_and_conditions?: string;
 }
 
 export const getQuotations = async (headers: {
@@ -42,6 +65,19 @@ export const getQuotation = async (
     return response.data;
 };
 
+export const updateQuotation = async (
+    reference: string,
+    data: updateQuotationData,
+    headers: { headers: { Authorization: string } }
+): Promise<Quotation> => {
+    const response: AxiosResponse<Quotation> = await apiActions.patch(
+        `/api/v1/quotations/${reference}/`,
+        data,
+        headers
+    );
+    return response.data;
+};
+
 export const convertQuotationToInvoice = async (
     reference: string,
     headers: { headers: { Authorization: string } }
@@ -55,7 +91,7 @@ export const convertQuotationToInvoice = async (
 };
 
 export const createQuotation = async (
-    data: any,
+    data: createQuotationData,
     headers: { headers: { Authorization: string } }
 ): Promise<Quotation> => {
     const response: AxiosResponse<Quotation> = await apiActions.post(

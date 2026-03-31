@@ -47,13 +47,13 @@ export default function LeadDetailPage() {
   };
 
   return (
-    <div className="space-y-10 pb-20 max-w-7xl mx-auto">
+    <div className="space-y-10 pb-20 container px-4 mx-auto">
       {/* Dynamic Breadcrumbs & Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div className="space-y-4 w-full">
           <Link
             href="/operations/leads"
-            className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-blue-600 transition-colors group"
+            className="inline-flex items-center gap-2 text-[10px] font-bold uppercase text-slate-400 hover:text-blue-600 transition-colors group"
           >
             <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
             Back to Pipeline
@@ -67,11 +67,11 @@ export default function LeadDetailPage() {
                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600">
                   Lead Profile Case
                 </p>
-                <span className={cn("px-3 py-0.5 rounded text-[9px] font-bold uppercase tracking-widest border shadow-sm", statusColors[lead.status] || "bg-slate-50 text-slate-600 border-slate-200")}>
+                <span className={cn("px-3 py-0.5 rounded text-[9px] font-bold uppercase border shadow-sm", statusColors[lead.status] || "bg-slate-50 text-slate-600 border-slate-200")}>
                   {lead.status}
                 </span>
               </div>
-              <h1 className="text-3xl font-semibold text-slate-900 tracking-tight italic">
+              <h1 className="text-xl font-semibold text-slate-900 tracking-tight italic">
                 {lead.first_name} <span className="text-blue-600">{lead.last_name}</span>
               </h1>
             </div>

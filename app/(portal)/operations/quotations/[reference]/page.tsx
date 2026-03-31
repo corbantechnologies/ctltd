@@ -1,7 +1,8 @@
 "use client"
 
 import { useParams, useRouter } from "next/navigation";
-import { useFetchQuotation, useConvertQuotationToInvoice } from "@/hooks/quotations/actions";
+import { useFetchQuotation } from "@/hooks/quotations/actions";
+import { convertQuotationToInvoice } from "@/services/quotations";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import {
    FileText,
@@ -20,17 +21,35 @@ import {
    RefreshCw
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { downloadPDF } from "@/lib/download";
 import { toast } from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function QuotationDetailPage() {
    const { reference } = useParams();
    const router = useRouter();
    const headers = useAxiosAuth();
+   const queryClient = useQueryClient();
    const { data: quotation, isLoading } = useFetchQuotation(reference as string);
-   console.log(quotation);
-   const convertMutation = useConvertQuotationToInvoice(reference as string, "operations");
+   const [isPending, setIsPending] = useState(false);
+
+   const handleConvert = async () => {
+      setIsPending(true);
+      try {
+         const data = await convertQuotationToInvoice(reference as string, headers);
+         queryClient.invalidateQueries({ queryKey: ["quotations"] });
+         queryClient.invalidateQueries({ queryKey: ["invoices"] });
+         toast.success("Quotation successfully converted to Invoice");
+         router.push(`/operations/invoices/${data.invoice_reference}`);
+      } catch (error: any) {
+         const message = error.response?.data?.error || "Conversion failed";
+         toast.error(message);
+      } finally {
+         setIsPending(false);
+      }
+   };
 
    const handleDownload = async () => {
       if (!quotation) return;
@@ -75,11 +94,11 @@ export default function QuotationDetailPage() {
 
                {quotation.status === "ACCEPTED" && (
                   <button
-                     disabled={convertMutation.isPending}
-                     onClick={() => convertMutation.mutate()}
+                     disabled={isPending}
+                     onClick={handleConvert}
                      className="px-8 py-3 bg-blue-600 text-white rounded text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-slate-900 transition-all shadow-xl shadow-blue-600/20 flex items-center gap-3"
                   >
-                     {convertMutation.isPending ? <RefreshCw className="w-4 h-4 animate-spin" /> : <MoveRight className="w-4 h-4" />}
+                     {isPending ? <RefreshCw className="w-4 h-4 animate-spin" /> : <MoveRight className="w-4 h-4" />}
                      Initiate Invoice
                   </button>
                )}

@@ -52,10 +52,10 @@ export default function LeadActionsMenu({ lead, rolePrefix }: LeadActionsMenuPro
       {/* The Dropdown Menu */}
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
-          <button className="h-14 px-8 bg-slate-900 border border-slate-800 text-white rounded font-bold text-sm uppercase tracking-widest transition-all shadow-2xl active:scale-[0.98] flex items-center gap-4 group data-[state=open]:bg-blue-600 data-[state=open]:border-blue-500">
+          <button className="h-10 px-6 bg-slate-900 border border-slate-800 text-white rounded text-sm transition-all shadow-2xl active:scale-[0.98] flex items-center gap-4 group data-[state=open]:bg-blue-600 data-[state=open]:border-blue-500">
             <span className="flex items-center gap-3">
               <MoreVertical className="w-4.5 h-4.5 text-blue-400 group-hover:text-white transition-colors" />
-              Case Actions
+              Actions
             </span>
             <ChevronDown className="w-4 h-4 text-white/50 group-hover:text-white transition-transform duration-300 group-data-[state=open]:rotate-180" />
           </button>

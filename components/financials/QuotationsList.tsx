@@ -1,9 +1,13 @@
 "use client";
 
-import { useFetchQuotations, useConvertQuotationToInvoice } from "@/hooks/quotations/actions";
+import { useFetchQuotations } from "@/hooks/quotations/actions";
+import { convertQuotationToInvoice } from "@/services/quotations";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { downloadPDF } from "@/lib/download";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 import {
   FileBadge,
   ArrowRight,
@@ -137,7 +141,7 @@ export default function QuotationsList({ rolePrefix }: QuotationsListProps) {
                   </td>
                   <td className="py-6 px-8 text-right">
                     <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      {quotation.status === "ACCEPTED" && quotation.partner && (
+                      {quotation.status === "ACCEPTED" && (quotation.partner || quotation.lead) && (
                         <ConvertQuotationToInvoiceButton quotation={quotation} rolePrefix={rolePrefix} />
                       )}
                       <button
@@ -160,16 +164,34 @@ export default function QuotationsList({ rolePrefix }: QuotationsListProps) {
 }
 
 function ConvertQuotationToInvoiceButton({ quotation, rolePrefix }: { quotation: any, rolePrefix: string }) {
-  const mutation = useConvertQuotationToInvoice(quotation.reference, rolePrefix);
+  const [isPending, setIsPending] = useState(false);
+  const authHeaders = useAxiosAuth();
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const handleConvert = async () => {
+    setIsPending(true);
+    try {
+      const data = await convertQuotationToInvoice(quotation.reference, authHeaders);
+      queryClient.invalidateQueries({ queryKey: ["quotations"] });
+      queryClient.invalidateQueries({ queryKey: ["invoices"] });
+      toast.success("Quotation successfully converted to Invoice");
+      router.push(`/${rolePrefix}/invoices/${data.invoice_reference}`);
+    } catch (error: any) {
+      toast.error(error.response?.data?.error || "Conversion failed");
+    } finally {
+      setIsPending(false);
+    }
+  }
 
   return (
     <button
-      disabled={mutation.isPending}
-      onClick={() => mutation.mutate()}
+      disabled={isPending}
+      onClick={handleConvert}
       className="w-10 h-10 rounded bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center shadow-lg active:scale-90 disabled:opacity-50"
       title="Convert to Invoice"
     >
-      {mutation.isPending ? (
+      {isPending ? (
         <RefreshCw className="w-4.5 h-4.5 animate-spin" />
       ) : (
         <RefreshCw className="w-4.5 h-4.5" />
