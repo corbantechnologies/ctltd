@@ -30,7 +30,7 @@ export interface Lead {
     updated_by: string;
     created_at: string;
     updated_at: string;
-
+    partner_reference?: string;
 }
 
 interface createLead {
@@ -114,16 +114,14 @@ export const getLead = async (
     return response.data;
 };
 
-// This is a patch request that changes the lead status to qualified
-// API automatically creates a partner
 export const convertLeadToPartner = async (
-
     reference: string,
+    partner_type: string,
     headers: { headers: { Authorization: string } }
-): Promise<Lead> => {
-    const response: AxiosResponse<Lead> = await apiActions.patch(
+): Promise<{ message: string; partner_reference: string; partner_name: string }> => {
+    const response: AxiosResponse<{ message: string; partner_reference: string; partner_name: string }> = await apiActions.patch(
         `/api/v1/leads/${reference}/convert/`,
-        {},
+        { partner_type },
         headers
     );
     return response.data;

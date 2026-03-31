@@ -1,9 +1,9 @@
-"use client";
-
 import { useFetchLead } from "@/hooks/leads/actions";
 import { useParams, useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import UpdateLead from "@/forms/leads/UpdateLead";
+import ConvertLeadModal from "@/forms/leads/ConvertLeadModal";
+import InteractionTimeline from "@/components/crm/InteractionTimeline";
 import {
   Users,
   Building2,
@@ -17,6 +17,8 @@ import {
   Edit,
   ClipboardList,
   Fingerprint,
+  UserCheck,
+  ExternalLink,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -70,20 +72,46 @@ export default function LeadDetailPage() {
           </div>
         </div>
 
-        <UpdateLead
-          lead={lead}
-          trigger={
-            <button className="flex items-center gap-3 px-8 py-4 bg-slate-900 hover:bg-blue-600 text-white rounded-xl font-semibold text-sm tracking-tight transition-all shadow-2xl hover:shadow-blue-600/20 active:scale-[0.98] group">
-              <Edit className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-              Modify Identity
-            </button>
-          }
-        />
+        <div className="flex items-center gap-3">
+          {lead.status === "QUALIFIED" && (
+            <ConvertLeadModal
+              leadReference={lead.reference}
+              leadName={`${lead.first_name} ${lead.last_name}`}
+              rolePrefix="operations"
+              trigger={
+                <button className="flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-sm uppercase tracking-widest transition-all shadow-2xl shadow-blue-600/20 active:scale-[0.98] group">
+                  <UserCheck className="w-4.5 h-4.5 group-hover:scale-110 transition-transform" />
+                  Convert to Partner
+                </button>
+              }
+            />
+          )}
+
+          {lead.status === "WON" && lead.partner_reference && (
+            <Link
+              href={`/operations/partners/${lead.partner_reference}`}
+              className="flex items-center gap-3 px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm uppercase tracking-widest transition-all shadow-2xl shadow-emerald-600/20 active:scale-[0.98] group"
+            >
+              <ExternalLink className="w-4.5 h-4.5 group-hover:translate-x-1 transition-transform" />
+              View Partner Profile
+            </Link>
+          )}
+
+          <UpdateLead
+            lead={lead}
+            trigger={
+              <button className="flex items-center gap-3 px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-semibold text-sm tracking-tight transition-all shadow-2xl active:scale-[0.98] group">
+                <Edit className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+                Modify Identity
+              </button>
+            }
+          />
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left Column: Essential Bio */}
-        <div className="lg:col-span-2 space-y-8">
+        {/* Left Column: Essential Bio & Timeline */}
+        <div className="lg:col-span-2 space-y-12">
           <div className="bg-white p-10 rounded-[32px] border border-slate-100 shadow-2xl shadow-slate-100/50 relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-50 group-hover:bg-blue-100 transition-colors" />
             
@@ -138,6 +166,14 @@ export default function LeadDetailPage() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Activity Timeline Integration */}
+          <div className="bg-white p-10 rounded-[40px] border border-slate-100 shadow-2xl shadow-slate-100/50">
+            <InteractionTimeline 
+              leadId={lead.id} 
+              rolePrefix="operations" 
+            />
           </div>
         </div>
 
@@ -206,4 +242,4 @@ export default function LeadDetailPage() {
       </div>
     </div>
   );
-}
+}

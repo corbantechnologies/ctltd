@@ -83,6 +83,24 @@ export default function Navbar() {
       show: isDirector || isFinance || isOperations,
     },
     {
+      name: "Quotations",
+      href: `/${rolePrefix}/quotations`,
+      icon: FileText,
+      show: isDirector || isOperations,
+    },
+    {
+      name: "Invoices",
+      href: `/${rolePrefix}/invoices`,
+      icon: FileText,
+      show: isDirector || isFinance || isOperations,
+    },
+    {
+      name: "Receipts",
+      href: `/${rolePrefix}/receipts`,
+      icon: FileText,
+      show: isDirector || isFinance || isOperations,
+    },
+    {
       name: "Fiscal Year",
       href: activeYear
         ? `/${rolePrefix}/fiscal-years/${activeYear.reference}`

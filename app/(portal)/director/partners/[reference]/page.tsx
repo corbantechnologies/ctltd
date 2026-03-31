@@ -156,6 +156,14 @@ export default function PartnerDetailPage() {
         </div>
       </div>
 
+      {/* Activity Timeline Integration */}
+      <div className="bg-white p-10 rounded-[48px] border border-black/5 shadow-2xl shadow-black/5">
+            <InteractionTimeline 
+                partnerId={partner.id} 
+                rolePrefix="director" 
+            />
+      </div>
+
       {/* Transaction History (Journal Entries) */}
       <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded overflow-hidden shadow-xl shadow-black/5 pb-24">
         <div className="p-8 border-b border-black/5 flex flex-row items-center justify-between">
