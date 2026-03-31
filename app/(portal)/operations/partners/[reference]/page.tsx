@@ -18,10 +18,13 @@ import {
   Building2,
   Plus,
   ClipboardList,
+  Settings,
+  ChevronDown
 } from "lucide-react";
-import CreateQuotationModal from "@/forms/quotations/CreateQuotationModal";
+import CreatePartnerQuotation from "@/forms/quotations/CreatePartnerQuotation";
 import CreateInvoiceModal from "@/forms/financials/CreateInvoiceModal";
 import InteractionTimeline from "@/components/crm/InteractionTimeline";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 
 export default function PartnerDetailPage() {
@@ -73,28 +76,48 @@ export default function PartnerDetailPage() {
 
         <div className="flex items-center gap-3">
           {partner && (
-            <>
-              <CreateQuotationModal 
-                rolePrefix="operations"
-                initialPartner={{ code: partner.code, name: partner.name }}
-                trigger={
-                  <button className="flex items-center gap-2 px-6 py-2.5 bg-slate-900 hover:bg-blue-600 text-white rounded font-bold text-[10px] uppercase tracking-widest transition-all shadow-xl active:scale-95 group">
-                     <ClipboardList className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                     New Quotation
+            <div className="flex items-center gap-3">
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger asChild>
+                  <button className="h-11 px-6 bg-slate-900 text-white rounded font-bold text-[10px] uppercase tracking-widest flex items-center gap-3 hover:bg-blue-600 transition-all shadow-xl active:scale-95 group border-2 border-transparent">
+                    <Settings className="w-4 h-4 text-blue-400 group-hover:text-white transition-colors" />
+                    Actions
+                    <ChevronDown className="w-3.5 h-3.5 opacity-50" />
                   </button>
-                }
-              />
-              <CreateInvoiceModal 
-                rolePrefix="operations"
-                initialPartner={{ reference: partner.code, name: partner.name }}
-                trigger={
-                  <button className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-slate-900 text-white rounded font-bold text-[10px] uppercase tracking-widest transition-all shadow-xl shadow-blue-600/10 active:scale-95 group">
-                     <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform" />
-                     Initiate Invoice
-                  </button>
-                }
-              />
-            </>
+                </DropdownMenu.Trigger>
+
+                <DropdownMenu.Portal>
+                  <DropdownMenu.Content align="end" sideOffset={12} className="z-[100] w-64 p-2 bg-white rounded shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border border-slate-100 animate-in fade-in zoom-in-95 data-[side=bottom]:slide-in-from-top-2">
+                    <div className="px-3 py-2 mb-1 border-b border-slate-50">
+                        <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">Available Operations</p>
+                    </div>
+
+                    <CreatePartnerQuotation
+                      rolePrefix="operations"
+                      partnerCode={partner.code}
+                      partnerName={partner.name}
+                      trigger={
+                        <DropdownMenu.Item onSelect={(e) => e.preventDefault()} className="flex items-center gap-3 p-3 rounded text-[10px] font-bold uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 cursor-pointer outline-none transition-colors group">
+                          <ClipboardList className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
+                          New Quotation
+                        </DropdownMenu.Item>
+                      }
+                    />
+
+                    <CreateInvoiceModal 
+                      rolePrefix="operations"
+                      initialPartner={{ reference: partner.code, name: partner.name }}
+                      trigger={
+                        <DropdownMenu.Item onSelect={(e) => e.preventDefault()} className="flex items-center gap-3 p-3 rounded text-[10px] font-bold uppercase tracking-widest text-slate-600 hover:text-emerald-600 hover:bg-emerald-50 cursor-pointer outline-none transition-colors group">
+                          <Plus className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 transition-colors" />
+                          Initiate Invoice
+                        </DropdownMenu.Item>
+                      }
+                    />
+                  </DropdownMenu.Content>
+                </DropdownMenu.Portal>
+              </DropdownMenu.Root>
+            </div>
           )}
           {partner?.is_active ? (
             <span className="bg-green-500/10 text-green-600 border-none font-semibold text-[10px] uppercase tracking-wider px-4 py-2 rounded">
