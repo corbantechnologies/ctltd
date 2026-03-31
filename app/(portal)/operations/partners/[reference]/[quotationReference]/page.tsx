@@ -26,7 +26,7 @@ import { deleteQuotationLine, QuotationLine } from "@/services/quotationlines";
 import { useQueryClient } from "@tanstack/react-query";
 import CreateQuotationLine from "@/forms/quotationlines/CreateQuotationLine";
 import UpdateQuotationLine from "@/forms/quotationlines/UpdateQuotationLine";
-import { downloadPDF } from "@/lib/download";
+import { downloadQuotation } from "@/services/quotations";
 
 export default function PartnerQuotationDetailPage() {
   const { reference, quotationReference } = useParams();
@@ -54,9 +54,7 @@ export default function PartnerQuotationDetailPage() {
   };
 
   const handleDownload = async () => {
-    const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-    const url = `${backendUrl}/api/v1/quotations/${quotation.reference}/download/`;
-    await downloadPDF(url, `Quotation_${quotation.code}.pdf`, authHeaders);
+    await downloadQuotation(quotation.reference, quotation.code, authHeaders);
   };
 
   const handleDeleteLine = async (lineRef: string) => {
@@ -73,11 +71,26 @@ export default function PartnerQuotationDetailPage() {
 
   const subtotal = quotation.lines?.reduce((sum, line) => sum + Number(line.total_price), 0) || 0;
 
+  const getStatusStyles = (status: string) => {
+    switch (status) {
+      case "ACCEPTED":
+        return "bg-emerald-50 text-emerald-700 border-emerald-100 ring-emerald-500/20";
+      case "SENT":
+        return "bg-blue-50 text-blue-700 border-blue-100 ring-blue-500/20";
+      case "REJECTED":
+        return "bg-red-50 text-red-700 border-red-100 ring-red-500/20";
+      case "EXPIRED":
+        return "bg-amber-50 text-amber-700 border-amber-100 ring-amber-500/20";
+      default:
+        return "bg-slate-50 text-slate-600 border-slate-200 ring-slate-500/10";
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50/50 pb-20 animate-in fade-in duration-700">
       {/* Navigation Header */}
-      <div className="border-b border-slate-100 sticky top-0 bg-white/80 backdrop-blur-md z-30">
-        <div className="container mx-auto px-6 h-20 flex items-center justify-between text-black">
+      <div className="border-b border-slate-100 sticky top-0 bg-white/80 backdrop-blur-md z-30 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 mb-12">
+        <div className="h-20 flex items-center justify-between text-black">
           <button
             onClick={() => router.back()}
             className="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest hover:text-blue-600 transition-colors"
@@ -94,21 +107,29 @@ export default function PartnerQuotationDetailPage() {
                <Download className="w-3.5 h-3.5" />
                Download PDF
             </button>
-            <div className="h-8 w-px bg-slate-100" />
-            <div className="flex flex-col items-end">
-              <span className="text-[10px] font-bold uppercase tracking-widest leading-none mb-1 text-slate-400">Process State</span>
-              <span className={cn(
-                "px-3 py-1 rounded text-[9px] font-bold uppercase tracking-widest border",
-                quotation.status === "DRAFT" ? "bg-slate-50 border-slate-200" : "bg-blue-50 text-blue-600 border-blue-100"
-              )}>
-                {quotation.status}
-              </span>
+            <div className="flex items-center gap-4">
+              <div className="flex flex-col items-end mr-1">
+                <span className="text-[10px] font-bold uppercase tracking-widest leading-none mb-1 text-slate-400">Process State</span>
+                <div className={cn(
+                  "flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border shadow-sm ring-1",
+                  getStatusStyles(quotation.status)
+                )}>
+                  <div className={cn(
+                    "w-1.5 h-1.5 rounded-full animate-pulse",
+                    quotation.status === "ACCEPTED" ? "bg-emerald-500" : 
+                    quotation.status === "SENT" ? "bg-blue-500" :
+                    quotation.status === "REJECTED" ? "bg-red-500" :
+                    quotation.status === "EXPIRED" ? "bg-amber-500" : "bg-slate-400"
+                  )} />
+                  {quotation.status}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-6 pt-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* Left Column: Quotation Build Area */}
         <div className="lg:col-span-8 space-y-12">
           <div className="space-y-6">

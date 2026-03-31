@@ -211,7 +211,11 @@ export default function LeadDetailPage() {
                 <tbody className="divide-y divide-slate-50">
                   {lead.quotations && lead.quotations.length > 0 ? (
                     lead.quotations.map((q) => (
-                      <tr key={q.reference} className="group hover:bg-slate-50/50 transition-colors">
+                      <tr 
+                        key={q.reference} 
+                        onClick={() => router.push(`/operations/leads/${lead.reference}/${q.reference}`)}
+                        className="group hover:bg-slate-50/50 transition-colors cursor-pointer"
+                      >
                         <td className="py-5 px-8">
                           <p className="text-sm font-bold text-slate-900 tracking-tight">{q.code}</p>
                           <p className="text-[10px] font-semibold text-slate-400 uppercase">{q.reference.slice(0, 8)}...</p>
@@ -228,13 +232,12 @@ export default function LeadDetailPage() {
                           </span>
                         </td>
                         <td className="py-5 px-8 text-right">
-                          <Link
-                            href={`/operations/leads/${lead.reference}/${q.reference}`}
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded text-[10px] font-bold uppercase tracking-widest hover:bg-blue-600 transition-all opacity-0 group-hover:opacity-100 active:scale-95"
+                          <div
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded text-[10px] font-bold uppercase tracking-widest hover:bg-blue-600 transition-all active:scale-95"
                           >
                             Build
                             <ArrowRight className="w-3 h-3" />
-                          </Link>
+                          </div>
                         </td>
                       </tr>
                     ))

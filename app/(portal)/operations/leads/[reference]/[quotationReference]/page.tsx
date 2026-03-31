@@ -25,7 +25,7 @@ import { deleteQuotationLine, QuotationLine } from "@/services/quotationlines";
 import { useQueryClient } from "@tanstack/react-query";
 import CreateQuotationLine from "@/forms/quotationlines/CreateQuotationLine";
 import UpdateQuotationLine from "@/forms/quotationlines/UpdateQuotationLine";
-import { downloadPDF } from "@/lib/download";
+import { downloadQuotation } from "@/services/quotations";
 
 export default function LeadQuotationDetailPage() {
   const { reference, quotationReference } = useParams();
@@ -53,14 +53,12 @@ export default function LeadQuotationDetailPage() {
   };
 
   const handleDownload = async () => {
-    const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-    const url = `${backendUrl}/api/v1/quotations/${quotation.reference}/download/`;
-    await downloadPDF(url, `Quotation_${quotation.code}.pdf`, authHeaders);
+    await downloadQuotation(quotation.reference, quotation.code, authHeaders);
   };
 
   const handleDeleteLine = async (lineRef: string) => {
     if (!confirm("Remove this line item?")) return;
-    
+
     try {
       await deleteQuotationLine(lineRef, authHeaders);
       toast.success("Item removed");
@@ -72,11 +70,26 @@ export default function LeadQuotationDetailPage() {
 
   const subtotal = quotation.lines?.reduce((sum, line) => sum + Number(line.total_price), 0) || 0;
 
+  const getStatusStyles = (status: string) => {
+    switch (status) {
+      case "ACCEPTED":
+        return "bg-emerald-50 text-emerald-700 border-emerald-100 ring-emerald-500/20";
+      case "SENT":
+        return "bg-blue-50 text-blue-700 border-blue-100 ring-blue-500/20";
+      case "REJECTED":
+        return "bg-red-50 text-red-700 border-red-100 ring-red-500/20";
+      case "EXPIRED":
+        return "bg-amber-50 text-amber-700 border-amber-100 ring-amber-500/20";
+      default:
+        return "bg-slate-50 text-slate-600 border-slate-200 ring-slate-500/10";
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50/50 pb-20 animate-in fade-in duration-700">
       {/* Navigation Header */}
-      <div className="border-b border-slate-100 sticky top-0 bg-white/80 backdrop-blur-md z-30">
-        <div className="container mx-auto px-6 h-20 flex items-center justify-between text-black">
+      <div className="border-b border-slate-100 sticky top-0 bg-white/80 backdrop-blur-md z-30 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 mb-12">
+        <div className="h-20 flex items-center justify-between text-black">
           <button
             onClick={() => router.back()}
             className="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest hover:text-blue-600 transition-colors"
@@ -87,27 +100,35 @@ export default function LeadQuotationDetailPage() {
 
           <div className="flex items-center gap-6">
             <button
-               onClick={handleDownload}
-               className="flex items-center gap-2 px-4 py-2 rounded bg-white border border-slate-200 text-[10px] font-bold uppercase tracking-widest hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all shadow-sm active:scale-95"
+              onClick={handleDownload}
+              className="flex items-center gap-2 px-4 py-2 rounded bg-white border border-slate-200 text-[10px] font-bold uppercase tracking-widest hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all shadow-sm active:scale-95"
             >
-               <Download className="w-3.5 h-3.5" />
-               Download PDF
+              <Download className="w-3.5 h-3.5" />
+              Download PDF
             </button>
-            <div className="h-8 w-px bg-slate-100" />
-            <div className="flex flex-col items-end">
-              <span className="text-[10px] font-bold uppercase tracking-widest leading-none mb-1 text-slate-400">Build State</span>
-              <span className={cn(
-                "px-3 py-1 rounded text-[9px] font-bold uppercase tracking-widest border",
-                quotation.status === "DRAFT" ? "bg-slate-50 border-slate-200" : "bg-blue-50 text-blue-600 border-blue-100"
-              )}>
-                {quotation.status}
-              </span>
+            <div className="flex items-center gap-4">
+              <div className="flex flex-col items-end mr-1">
+                <span className="text-[10px] font-bold uppercase tracking-widest leading-none mb-1 text-slate-400">Process State</span>
+                <div className={cn(
+                  "flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border shadow-sm ring-1",
+                  getStatusStyles(quotation.status)
+                )}>
+                  <div className={cn(
+                    "w-1.5 h-1.5 rounded-full animate-pulse",
+                    quotation.status === "ACCEPTED" ? "bg-emerald-500" : 
+                    quotation.status === "SENT" ? "bg-blue-500" :
+                    quotation.status === "REJECTED" ? "bg-red-500" :
+                    quotation.status === "EXPIRED" ? "bg-amber-500" : "bg-slate-400"
+                  )} />
+                  {quotation.status}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-6 pt-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* Left Column: Quotation Build Area */}
         <div className="lg:col-span-8 space-y-12">
           <div className="space-y-6">
@@ -148,10 +169,10 @@ export default function LeadQuotationDetailPage() {
                 <tbody className="divide-y divide-slate-50">
                   {quotation.lines?.length === 0 ? (
                     <tr>
-                        <td colSpan={5} className="py-20 px-8 text-center text-black/20">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2">No components allocated</p>
-                            <p className="text-xs italic">Initialize the proposal by adding your first project component.</p>
-                        </td>
+                      <td colSpan={5} className="py-20 px-8 text-center text-black/20">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2">No components allocated</p>
+                        <p className="text-xs italic">Initialize the proposal by adding your first project component.</p>
+                      </td>
                     </tr>
                   ) : (
                     quotation.lines?.map((line) => (
@@ -176,14 +197,14 @@ export default function LeadQuotationDetailPage() {
                           </p>
                         </td>
                         <td className="py-8 px-8 text-right space-x-2">
-                          <button 
+                          <button
                             onClick={() => setSelectedLine(line)}
                             className="p-2 text-black/20 hover:text-blue-600 transition-colors opacity-0 group-hover:opacity-100"
                             title="Edit"
                           >
                             <Edit2 className="w-4 h-4" />
                           </button>
-                          <button 
+                          <button
                             onClick={() => handleDeleteLine(line.reference)}
                             className="p-2 text-black/20 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
                             title="Delete"
@@ -214,7 +235,7 @@ export default function LeadQuotationDetailPage() {
                     <Building2 className="w-3.5 h-3.5" /> Account
                   </span>
                   <span className="text-sm font-bold text-slate-900 italic tracking-tight uppercase truncate max-w-[150px]">
-                     {quotation.lead_details?.company_name || `${quotation.lead_details?.first_name} ${quotation.lead_details?.last_name}` || quotation.partner_details?.name || "Direct Discovery"}
+                    {quotation.lead_details?.company_name || `${quotation.lead_details?.first_name} ${quotation.lead_details?.last_name}` || quotation.partner_details?.name || "Direct Discovery"}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
@@ -255,9 +276,9 @@ export default function LeadQuotationDetailPage() {
             </div>
 
             <button
-                className="w-full py-5 bg-slate-900 text-white rounded font-bold text-[11px] uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-3"
+              className="w-full py-5 bg-slate-900 text-white rounded font-bold text-[11px] uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-3"
             >
-                Commit & Finalize
+              Commit & Finalize
             </button>
           </div>
 
@@ -276,18 +297,18 @@ export default function LeadQuotationDetailPage() {
       {/* Initialize Modal */}
       {isCreateModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-start justify-center p-4 sm:p-6 lg:p-8 overflow-y-auto">
-          <div 
+          <div
             className="fixed inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300"
             onClick={() => setIsCreateModalOpen(false)}
           />
           <div className="relative w-full max-w-2xl animate-in zoom-in-95 fade-in duration-300 my-auto">
-            <CreateQuotationLine 
-                quotationCode={quotation.code}
-                onClose={() => setIsCreateModalOpen(false)}
-                onSuccess={() => {
-                    setIsCreateModalOpen(false);
-                    invalidate();
-                }}
+            <CreateQuotationLine
+              quotationCode={quotation.code}
+              onClose={() => setIsCreateModalOpen(false)}
+              onSuccess={() => {
+                setIsCreateModalOpen(false);
+                invalidate();
+              }}
             />
           </div>
         </div>
@@ -296,18 +317,18 @@ export default function LeadQuotationDetailPage() {
       {/* Update Modal */}
       {selectedLine && (
         <div className="fixed inset-0 z-[100] flex items-start justify-center p-4 sm:p-6 lg:p-8 overflow-y-auto">
-          <div 
+          <div
             className="fixed inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300"
             onClick={() => setSelectedLine(null)}
           />
           <div className="relative w-full max-w-2xl animate-in zoom-in-95 fade-in duration-300 my-auto">
-            <UpdateQuotationLine 
-                line={selectedLine}
-                onClose={() => setSelectedLine(null)}
-                onSuccess={() => {
-                    setSelectedLine(null);
-                    invalidate();
-                }}
+            <UpdateQuotationLine
+              line={selectedLine}
+              onClose={() => setSelectedLine(null)}
+              onSuccess={() => {
+                setSelectedLine(null);
+                invalidate();
+              }}
             />
           </div>
         </div>

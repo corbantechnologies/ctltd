@@ -2,7 +2,7 @@
 
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import { useFetchPartner } from "@/hooks/partners/actions";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import {
   UserCircle,
   History,
@@ -32,6 +32,7 @@ import Link from "next/link";
 
 export default function PartnerDetailPage() {
   const { reference } = useParams<{ reference: string }>();
+  const router = useRouter();
 
   const { isLoading: isLoadingPartner, data: partner } =
     useFetchPartner(reference);
@@ -231,16 +232,16 @@ export default function PartnerDetailPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-black/5 bg-black/5">
-                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase text-black">
                     Proposal Code
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase text-black">
                     Issue Date
                   </th>
-                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase text-black">
                     Status
                   </th>
-                  <th className="text-right py-2 px-4 text-[10px] font-semibold uppercase tracking-wider text-black/60 text-center">
+                  <th className="text-left py-2 px-4 text-[10px] font-semibold uppercase text-black">
                     Actions
                   </th>
                 </tr>
@@ -248,7 +249,11 @@ export default function PartnerDetailPage() {
               <tbody className="divide-y divide-black/5">
                 {partner?.quotations && partner.quotations.length > 0 ? (
                   partner.quotations.map((q) => (
-                    <tr key={q.reference} className="hover:bg-blue-50/20 transition-colors group">
+                    <tr 
+                      key={q.reference} 
+                      onClick={() => router.push(`/operations/partners/${partner?.reference}/${q.reference}`)}
+                      className="hover:bg-blue-50/20 transition-colors group cursor-pointer"
+                    >
                       <td className="py-2.5 px-4 border-b border-black/5">
                         <p className="text-sm font-semibold text-black">{q.code}</p>
                         <p className="text-[10px] font-bold text-black/30 uppercase mt-0.5">{q.reference.slice(0, 12)}</p>
@@ -265,14 +270,13 @@ export default function PartnerDetailPage() {
                         </span>
                       </td>
                       <td className="py-2.5 px-4 border-b border-black/5">
-                        <div className="flex justify-center">
-                          <Link
-                            href={`/operations/partners/${partner.reference}/${q.reference}`}
-                            className="w-10 h-10 rounded bg-slate-900 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-[#2563EB] active:scale-90"
+                        <div className="flex justify-end">
+                          <div
+                            className="w-10 h-10 rounded bg-slate-900 text-white flex items-center justify-center transition-all hover:bg-[#2563EB] active:scale-90"
                             title="Build Quotation Lines"
                           >
                             <ArrowRight className="w-4 h-4" />
-                          </Link>
+                          </div>
                         </div>
                       </td>
                     </tr>
@@ -377,7 +381,7 @@ export default function PartnerDetailPage() {
                       </td>
                       <td className="py-2.5 px-4 border-b border-black/5">
                         <div className="flex justify-center">
-                          <button className="w-7 h-7 rounded bg-black text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-[#2563EB]">
+                          <button className="w-7 h-7 rounded bg-black text-white flex items-center justify-center transition-all hover:bg-[#2563EB]">
                             <ArrowUpRight className="w-3.5 h-3.5" />
                           </button>
                         </div>

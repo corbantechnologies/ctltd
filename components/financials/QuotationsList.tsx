@@ -1,10 +1,9 @@
 "use client";
 
 import { useFetchQuotations } from "@/hooks/quotations/actions";
-import { convertQuotationToInvoice } from "@/services/quotations";
+import { convertQuotationToInvoice, downloadQuotation, Quotation } from "@/services/quotations";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
-import { downloadPDF } from "@/lib/download";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -36,6 +35,7 @@ export default function QuotationsList({ rolePrefix }: QuotationsListProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const router = useRouter();
 
   const headers = useAxiosAuth();
   const { isLoading, data: quotations } = useFetchQuotations();
@@ -72,10 +72,8 @@ export default function QuotationsList({ rolePrefix }: QuotationsListProps) {
     }
   };
 
-  const handleDownload = async (quotation: any) => {
-    const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-    const url = `${backendUrl}/api/v1/quotations/${quotation.reference}/download/`;
-    await downloadPDF(url, `Quotation_${quotation.code}.pdf`, headers);
+  const handleDownload = async (quotation: Quotation) => {
+    await downloadQuotation(quotation.reference, quotation.code, headers);
   };
 
   const getViewLink = (quotation: any) => {
@@ -119,7 +117,11 @@ export default function QuotationsList({ rolePrefix }: QuotationsListProps) {
             </thead>
             <tbody className="divide-y divide-slate-100">
               {paginatedQuotations.map((quotation) => (
-                <tr key={quotation.reference} className="group hover:bg-slate-50/50 transition-colors">
+                <tr 
+                  key={quotation.reference} 
+                  onClick={() => router.push(getViewLink(quotation))}
+                  className="group hover:bg-slate-50/50 transition-colors cursor-pointer"
+                >
                   <td className="py-6 px-8">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 rounded bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-slate-900 group-hover:text-white transition-all shadow-inner">
@@ -154,19 +156,23 @@ export default function QuotationsList({ rolePrefix }: QuotationsListProps) {
                     </div>
                   </td>
                   <td className="py-6 px-8 text-right">
-                    <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Link 
-                        href={getViewLink(quotation)}
+                    <div className="flex items-center justify-end gap-2 transition-opacity">
+                      <div 
                         className="w-10 h-10 rounded bg-slate-100 text-slate-400 hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center shadow-lg active:scale-90"
                         title="View & Edit Components"
                       >
                          <ArrowRight className="w-4.5 h-4.5" />
-                      </Link>
+                      </div>
                       {quotation.status === "ACCEPTED" && (quotation.partner || quotation.lead) && (
-                        <ConvertQuotationToInvoiceButton quotation={quotation} rolePrefix={rolePrefix} />
+                        <div onClick={(e) => e.stopPropagation()}>
+                          <ConvertQuotationToInvoiceButton quotation={quotation} rolePrefix={rolePrefix} />
+                        </div>
                       )}
                       <button
-                        onClick={() => handleDownload(quotation)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDownload(quotation);
+                        }}
                         className="w-10 h-10 rounded bg-slate-100 text-slate-400 hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center shadow-lg active:scale-90"
                         title="Download PDF"
                       >

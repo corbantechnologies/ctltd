@@ -1,9 +1,8 @@
-"use client"
-
 import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
 import { PaginatedResponse } from "./general";
 import { QuotationLine } from "./quotationlines";
+import { downloadPDF } from "@/lib/download";
 
 export interface LeadDetail {
     id: string;
@@ -123,4 +122,13 @@ export const createQuotation = async (
         headers
     );
     return response.data;
+};
+
+export const downloadQuotation = async (
+    reference: string,
+    code: string,
+    headers: { headers: { Authorization: string } }
+): Promise<void> => {
+    const url = `/api/v1/quotations/${reference}/download/`;
+    await downloadPDF(url, `Quotation_${code}.pdf`, headers);
 };
