@@ -17,7 +17,8 @@ import {
   AlertCircle,
   X,
   UserCircle,
-  Download
+  Download,
+  RefreshCw,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
@@ -38,6 +39,7 @@ export default function PartnerQuotationDetailPage() {
   const { data: quotation, isLoading: isQuotationLoading } = useFetchQuotation(quotationReference as string);
 
   // Modal States
+  const [isDownloading, setIsDownloading] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [selectedLine, setSelectedLine] = useState<QuotationLine | null>(null);
 
@@ -54,7 +56,12 @@ export default function PartnerQuotationDetailPage() {
   };
 
   const handleDownload = async () => {
-    await downloadQuotation(quotation.reference, quotation.code, authHeaders);
+    setIsDownloading(true);
+    try {
+      await downloadQuotation(quotation.reference, quotation.code, authHeaders);
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   const handleDeleteLine = async (lineRef: string) => {
@@ -102,10 +109,15 @@ export default function PartnerQuotationDetailPage() {
           <div className="flex items-center gap-6">
             <button
                onClick={handleDownload}
-               className="flex items-center gap-2 px-4 py-2 rounded bg-white border border-slate-200 text-[10px] font-bold uppercase tracking-widest hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all shadow-sm active:scale-95"
+               disabled={isDownloading}
+               className="flex items-center gap-2 px-4 py-2 rounded bg-white border border-slate-200 text-[10px] font-bold uppercase tracking-widest hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all shadow-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-               <Download className="w-3.5 h-3.5" />
-               Download PDF
+               {isDownloading ? (
+                 <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+               ) : (
+                 <Download className="w-3.5 h-3.5" />
+               )}
+               {isDownloading ? "Downloading..." : "Download PDF"}
             </button>
             <div className="flex items-center gap-4">
               <div className="flex flex-col items-end mr-1">
