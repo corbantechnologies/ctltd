@@ -21,17 +21,19 @@ export interface PaymentAccount {
     updated_at: string;
 }
 
-export const getPaymentAccounts = async (): Promise<PaymentAccount[]> => {
+export const getPaymentAccounts = async (headers: { headers: { Authorization: string } }): Promise<PaymentAccount[]> => {
     const response: AxiosResponse<PaginatedResponse<PaymentAccount>> =
-        await apiActions.get(`/api/v1/paymentaccounts/`);
+        await apiActions.get(`/api/v1/paymentaccounts/`, headers);
     return response.data.results || [];
 };
 
 export const getPaymentAccount = async (
     reference: string,
+    headers: { headers: { Authorization: string } }
 ): Promise<PaymentAccount> => {
     const response: AxiosResponse<PaymentAccount> = await apiActions.get(
-        `/api/v1/paymentaccounts/${reference}/`
+        `/api/v1/paymentaccounts/${reference}/`,
+        headers
     );
     return response.data;
 };

@@ -26,6 +26,7 @@ import { deleteQuotationLine, QuotationLine } from "@/services/quotationlines";
 import { useQueryClient } from "@tanstack/react-query";
 import CreateQuotationLine from "@/forms/quotationlines/CreateQuotationLine";
 import UpdateQuotationLine from "@/forms/quotationlines/UpdateQuotationLine";
+import FinalizeQuotation from "@/forms/quotations/FinalizeQuotation";
 import { downloadQuotation } from "@/services/quotations";
 
 export default function LeadQuotationDetailPage() {
@@ -40,6 +41,7 @@ export default function LeadQuotationDetailPage() {
   // Modal States
   const [isDownloading, setIsDownloading] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isFinalizeModalOpen, setIsFinalizeModalOpen] = useState(false);
   const [selectedLine, setSelectedLine] = useState<QuotationLine | null>(null);
 
   if (isQuotationLoading) return <LoadingSpinner />;
@@ -288,7 +290,9 @@ export default function LeadQuotationDetailPage() {
             </div>
 
             <button
-              className="w-full py-5 bg-slate-900 text-white rounded font-bold text-[11px] uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-3"
+              onClick={() => setIsFinalizeModalOpen(true)}
+              disabled={quotation.status !== "DRAFT"}
+              className="w-full py-5 bg-slate-900 text-white rounded font-bold text-[11px] uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Commit & Finalize
             </button>
@@ -345,6 +349,14 @@ export default function LeadQuotationDetailPage() {
           </div>
         </div>
       )}
+
+      {/* Finalize Modal */}
+      <FinalizeQuotation
+        quotationReference={quotation.reference}
+        isOpen={isFinalizeModalOpen}
+        onOpenChange={setIsFinalizeModalOpen}
+        onSuccess={invalidate}
+      />
     </div>
   );
 }

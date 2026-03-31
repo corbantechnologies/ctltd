@@ -14,17 +14,19 @@ export interface TermsAndConditions {
     updated_at: string;
 }
 
-export const getTermsAndConditions = async (): Promise<TermsAndConditions[]> => {
+export const getTermsAndConditions = async (headers: { headers: { Authorization: string } }): Promise<TermsAndConditions[]> => {
     const response: AxiosResponse<PaginatedResponse<TermsAndConditions>> =
-        await apiActions.get(`/api/v1/termsandconditions/`);
+        await apiActions.get(`/api/v1/termsandconditions/`, headers);
     return response.data.results || [];
 };
 
 export const getTermsAndCondition = async (
     reference: string,
+    headers: { headers: { Authorization: string } }
 ): Promise<TermsAndConditions> => {
     const response: AxiosResponse<TermsAndConditions> = await apiActions.get(
-        `/api/v1/termsandconditions/${reference}/`
+        `/api/v1/termsandconditions/${reference}/`,
+        headers
     );
     return response.data;
 };
