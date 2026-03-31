@@ -5,6 +5,22 @@ import { AxiosResponse } from "axios";
 import { PaginatedResponse } from "./general";
 import { QuotationLine } from "./quotationlines";
 
+export interface LeadDetail {
+    id: string;
+    reference: string;
+    first_name: string;
+    last_name: string;
+    company_name: string;
+    division: string;
+}
+
+export interface PartnerDetail {
+    id: string;
+    code: string;
+    name: string;
+    reference: string;
+}
+
 export interface Quotation {
     id: string;
     reference: string;
@@ -21,10 +37,12 @@ export interface Quotation {
     updated_at: string;
     created_by: string;
     updated_by: string;
-    quotation_total: string;
+    quotation_total: string | number;
     payment_account?: string;
     terms_and_conditions?: string;
     lines?: QuotationLine[];
+    lead_details?: LeadDetail | null;
+    partner_details?: PartnerDetail | null;
 }
 
 interface createQuotationData {

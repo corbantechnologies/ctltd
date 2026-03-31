@@ -15,7 +15,8 @@ import {
   Edit2,
   Hash,
   AlertCircle,
-  X
+  X,
+  Download,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
@@ -24,6 +25,7 @@ import { deleteQuotationLine, QuotationLine } from "@/services/quotationlines";
 import { useQueryClient } from "@tanstack/react-query";
 import CreateQuotationLine from "@/forms/quotationlines/CreateQuotationLine";
 import UpdateQuotationLine from "@/forms/quotationlines/UpdateQuotationLine";
+import { downloadPDF } from "@/lib/download";
 
 export default function LeadQuotationDetailPage() {
   const { reference, quotationReference } = useParams();
@@ -50,6 +52,12 @@ export default function LeadQuotationDetailPage() {
     queryClient.invalidateQueries({ queryKey: ["quotation", quotationReference] });
   };
 
+  const handleDownload = async () => {
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+    const url = `${backendUrl}/api/v1/quotations/${quotation.reference}/download/`;
+    await downloadPDF(url, `Quotation_${quotation.code}.pdf`, authHeaders);
+  };
+
   const handleDeleteLine = async (lineRef: string) => {
     if (!confirm("Remove this line item?")) return;
     
@@ -68,21 +76,29 @@ export default function LeadQuotationDetailPage() {
     <div className="min-h-screen bg-slate-50/50 pb-20 animate-in fade-in duration-700">
       {/* Navigation Header */}
       <div className="border-b border-slate-100 sticky top-0 bg-white/80 backdrop-blur-md z-30">
-        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="container mx-auto px-6 h-20 flex items-center justify-between text-black">
           <button
             onClick={() => router.back()}
-            className="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-black hover:text-blue-600 transition-colors"
+            className="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest hover:text-blue-600 transition-colors"
           >
             <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             Back to Case Study
           </button>
 
           <div className="flex items-center gap-6">
+            <button
+               onClick={handleDownload}
+               className="flex items-center gap-2 px-4 py-2 rounded bg-white border border-slate-200 text-[10px] font-bold uppercase tracking-widest hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all shadow-sm active:scale-95"
+            >
+               <Download className="w-3.5 h-3.5" />
+               Download PDF
+            </button>
+            <div className="h-8 w-px bg-slate-100" />
             <div className="flex flex-col items-end">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-black leading-none mb-1">Status Control</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest leading-none mb-1 text-slate-400">Build State</span>
               <span className={cn(
                 "px-3 py-1 rounded text-[9px] font-bold uppercase tracking-widest border",
-                quotation.status === "DRAFT" ? "bg-slate-50 text-black border-slate-200" : "bg-blue-50 text-blue-600 border-blue-100"
+                quotation.status === "DRAFT" ? "bg-slate-50 border-slate-200" : "bg-blue-50 text-blue-600 border-blue-100"
               )}>
                 {quotation.status}
               </span>
@@ -102,9 +118,9 @@ export default function LeadQuotationDetailPage() {
                 </div>
                 <div>
                   <h1 className="text-lg font-bold text-slate-900 tracking-tight italic">
-                    Drafting <span className="text-blue-600">Quotation</span>
+                    Build <span className="text-blue-600">Quotation</span>
                   </h1>
-                  <p className="text-sm text-black font-medium">Build and refine your strategic proposal</p>
+                  <p className="text-sm text-black font-medium text-black/60">Proposal: <span className="text-slate-900 font-bold">{quotation.code}</span></p>
                 </div>
               </div>
 
@@ -197,7 +213,9 @@ export default function LeadQuotationDetailPage() {
                   <span className="text-[10px] font-bold text-black uppercase tracking-widest flex items-center gap-2">
                     <Building2 className="w-3.5 h-3.5" /> Account
                   </span>
-                  <span className="text-sm font-bold text-slate-900 italic tracking-tight uppercase">{quotation.lead || quotation.partner || "Direct Access"}</span>
+                  <span className="text-sm font-bold text-slate-900 italic tracking-tight uppercase truncate max-w-[150px]">
+                     {quotation.lead_details?.company_name || `${quotation.lead_details?.first_name} ${quotation.lead_details?.last_name}` || quotation.partner_details?.name || "Direct Discovery"}
+                  </span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-bold text-black uppercase tracking-widest flex items-center gap-2">

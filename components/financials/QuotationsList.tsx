@@ -8,6 +8,7 @@ import { downloadPDF } from "@/lib/download";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   FileBadge,
   ArrowRight,
@@ -44,8 +45,9 @@ export default function QuotationsList({ rolePrefix }: QuotationsListProps) {
     return quotations.filter(
       (quotation) =>
         quotation.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (quotation.partner?.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        (quotation.lead?.toLowerCase().includes(searchQuery.toLowerCase()))
+        (quotation.partner_details?.name?.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (quotation.lead_details?.company_name?.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (quotation.lead_details?.first_name?.toLowerCase().includes(searchQuery.toLowerCase()))
     );
   }, [quotations, searchQuery]);
 
@@ -74,6 +76,16 @@ export default function QuotationsList({ rolePrefix }: QuotationsListProps) {
     const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
     const url = `${backendUrl}/api/v1/quotations/${quotation.reference}/download/`;
     await downloadPDF(url, `Quotation_${quotation.code}.pdf`, headers);
+  };
+
+  const getViewLink = (quotation: any) => {
+    if (quotation.lead_details) {
+      return `/${rolePrefix}/leads/${quotation.lead_details.reference}/${quotation.reference}`;
+    }
+    if (quotation.partner_details) {
+      return `/${rolePrefix}/partners/${quotation.partner_details.reference}/${quotation.reference}`;
+    }
+    return "#";
   };
 
   if (isLoading) return <LoadingSpinner />;
@@ -124,7 +136,9 @@ export default function QuotationsList({ rolePrefix }: QuotationsListProps) {
                   <td className="py-6 px-8">
                     <div className="flex items-center gap-2">
                       <Building2 className="w-3.5 h-3.5 text-slate-300" />
-                      <span className="text-sm font-semibold text-slate-700">{quotation.partner || quotation.lead || "Discovery Lead"}</span>
+                      <span className="text-sm font-semibold text-slate-700 truncate max-w-[150px]">
+                        {quotation.partner_details?.name || quotation.lead_details?.company_name || `${quotation.lead_details?.first_name} ${quotation.lead_details?.last_name}` || "Direct Discovery"}
+                      </span>
                     </div>
                   </td>
                   <td className="py-6 px-8">
@@ -141,6 +155,13 @@ export default function QuotationsList({ rolePrefix }: QuotationsListProps) {
                   </td>
                   <td className="py-6 px-8 text-right">
                     <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Link 
+                        href={getViewLink(quotation)}
+                        className="w-10 h-10 rounded bg-slate-100 text-slate-400 hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center shadow-lg active:scale-90"
+                        title="View & Edit Components"
+                      >
+                         <ArrowRight className="w-4.5 h-4.5" />
+                      </Link>
                       {quotation.status === "ACCEPTED" && (quotation.partner || quotation.lead) && (
                         <ConvertQuotationToInvoiceButton quotation={quotation} rolePrefix={rolePrefix} />
                       )}

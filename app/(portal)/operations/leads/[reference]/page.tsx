@@ -19,6 +19,7 @@ import {
   Tag,
   Calendar,
   ArrowLeft,
+  ArrowRight,
   Activity,
   Edit,
   ClipboardList,
@@ -182,6 +183,70 @@ export default function LeadDetailPage() {
                   <p className="text-base font-semibold text-slate-900 tracking-widest">{lead.tax_pin || "Not Disclosed"}</p>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Linked Quotations Section */}
+          <div className="bg-white border border-slate-100 rounded overflow-hidden shadow-2xl shadow-slate-100/50">
+            <div className="p-8 border-b border-slate-50 flex items-center justify-between bg-slate-50/30">
+              <div className="flex items-center gap-3">
+                <ClipboardList className="w-5 h-5 text-blue-600" />
+                <h3 className="text-sm font-bold uppercase tracking-widest text-slate-900">Recent Proposals</h3>
+              </div>
+              <span className="px-3 py-1 bg-white border border-slate-100 rounded text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                {lead.quotations?.length || 0} Records
+              </span>
+            </div>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-white border-b border-slate-50">
+                    <th className="py-4 px-8 text-[10px] font-bold uppercase tracking-widest text-slate-400">Code</th>
+                    <th className="py-4 px-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">Date</th>
+                    <th className="py-4 px-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">Status</th>
+                    <th className="py-4 px-8 text-[10px] font-bold uppercase tracking-widest text-slate-400 text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-50">
+                  {lead.quotations && lead.quotations.length > 0 ? (
+                    lead.quotations.map((q) => (
+                      <tr key={q.reference} className="group hover:bg-slate-50/50 transition-colors">
+                        <td className="py-5 px-8">
+                          <p className="text-sm font-bold text-slate-900 tracking-tight">{q.code}</p>
+                          <p className="text-[10px] font-semibold text-slate-400 uppercase">{q.reference.slice(0, 8)}...</p>
+                        </td>
+                        <td className="py-5 px-4">
+                          <p className="text-sm font-medium text-slate-600">{new Date(q.date).toLocaleDateString()}</p>
+                        </td>
+                        <td className="py-5 px-4">
+                          <span className={cn(
+                            "px-2 py-0.5 rounded text-[9px] font-bold uppercase border",
+                            q.status === "DRAFT" ? "bg-slate-50 text-slate-600 border-slate-100" : "bg-blue-50 text-blue-600 border-blue-100"
+                          )}>
+                            {q.status}
+                          </span>
+                        </td>
+                        <td className="py-5 px-8 text-right">
+                          <Link
+                            href={`/operations/leads/${lead.reference}/${q.reference}`}
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded text-[10px] font-bold uppercase tracking-widest hover:bg-blue-600 transition-all opacity-0 group-hover:opacity-100 active:scale-95"
+                          >
+                            Build
+                            <ArrowRight className="w-3 h-3" />
+                          </Link>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={4} className="py-12 px-8 text-center">
+                        <p className="text-xs font-medium text-slate-400 italic">No Quotations Initialized</p>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
             </div>
           </div>
 

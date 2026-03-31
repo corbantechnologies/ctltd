@@ -4,6 +4,7 @@ import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
 import { PaginatedResponse } from "./general";
 import { JournalEntry } from "./journalentries";
+import { Quotation } from "./quotations";
 
 export interface PartnerType {
   name: string;
@@ -29,6 +30,7 @@ export interface Partner {
   partner_type: string;
   division: string;
   journal_entries: JournalEntry[];
+  quotations: Quotation[];
 }
 
 interface createPartner {
