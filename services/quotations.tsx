@@ -9,8 +9,10 @@ export interface Quotation {
     id: string;
     reference: string;
     code: string;
-    lead?: string;
-    partner?: string;
+    // there are can either be a lead or a partner
+    lead?: string; // lead reference
+    partner?: string; // partner code
+    title: string;
     date: string;
     expiry_date: string;
     status: "DRAFT" | "SENT" | "ACCEPTED" | "REJECTED" | "EXPIRED";
@@ -26,8 +28,9 @@ export interface Quotation {
 }
 
 interface createQuotationData {
-    lead?: string;
-    partner?: string;
+    // there are can either be a lead or a partner
+    lead?: string; // lead reference
+    partner?: string; // partner code
     date: string;
     expiry_date: string;
     status: "DRAFT";
@@ -37,8 +40,9 @@ interface createQuotationData {
 }
 
 interface updateQuotationData {
-    lead?: string;
-    partner?: string;
+    // there are can either be a lead or a partner
+    lead?: string; // lead reference
+    partner?: string; // partner code
     date?: string;
     expiry_date?: string;
     status?: "DRAFT" | "SENT" | "ACCEPTED" | "REJECTED" | "EXPIRED";

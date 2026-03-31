@@ -3,6 +3,7 @@
 import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
 import { PaginatedResponse } from "./general";
+import { Quotation } from "./quotations";
 
 // Lead status
 // STATUS_CHOICES = (
@@ -31,7 +32,7 @@ export interface Lead {
     created_at: string;
     updated_at: string;
     partner_reference?: string;
-    lines?: string[];
+    quotations?: Quotation[]
 }
 
 interface createLead {

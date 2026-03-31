@@ -24,7 +24,7 @@ import { useRouter } from "next/navigation";
 interface CreateQuotationModalProps {
   rolePrefix: string;
   initialLead?: { reference: string; name: string };
-  initialPartner?: { reference: string; name: string };
+  initialPartner?: { code: string; name: string };
   trigger: React.ReactNode;
 }
 
@@ -40,9 +40,9 @@ export default function CreateQuotationModal({
   const authHeaders = useAxiosAuth();
 
   // Form State
-  const [selectedEntity, setSelectedEntity] = useState<{ type: "LEAD" | "PARTNER"; reference: string } | null>(
-    initialLead ? { type: "LEAD", reference: initialLead.reference } :
-      initialPartner ? { type: "PARTNER", reference: initialPartner.reference } : null
+  const [selectedEntity, setSelectedEntity] = useState<{ type: "LEAD" | "PARTNER"; id: string } | null>(
+    initialLead ? { type: "LEAD", id: initialLead.reference } :
+      initialPartner ? { type: "PARTNER", id: initialPartner.code } : null
   );
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [expiryDate, setExpiryDate] = useState(
@@ -62,13 +62,19 @@ export default function CreateQuotationModal({
 
     setIsPending(true);
     try {
-      const payload = {
-        [selectedEntity.type.toLowerCase()]: selectedEntity.reference,
+      // Build payload based on entity type
+      const payload: any = {
         date,
         expiry_date: expiryDate,
         notes,
         status: "DRAFT" as const
       };
+
+      if (selectedEntity.type === "LEAD") {
+        payload.lead = selectedEntity.id; // lead reference
+      } else {
+        payload.partner = selectedEntity.id; // partner code
+      }
 
       const data = await createQuotation(payload, authHeaders);
       
@@ -77,7 +83,7 @@ export default function CreateQuotationModal({
 
       // Navigate to the lead quotation detail page to add lines
       if (selectedEntity.type === "LEAD") {
-        router.push(`/${rolePrefix}/leads/${selectedEntity.reference}/${data.reference}`);
+        router.push(`/${rolePrefix}/leads/${selectedEntity.id}/${data.reference}`);
       } else {
         // Fallback for partners if needed
         router.push(`/${rolePrefix}/quotations/${data.reference}`);
@@ -128,8 +134,8 @@ export default function CreateQuotationModal({
                   <select
                     className="w-full h-16 pl-16 pr-6 rounded bg-slate-50 border-2 border-transparent focus:border-blue-600 focus:bg-white appearance-none font-bold text-slate-900 transition-all outline-none"
                     onChange={(e) => {
-                      const [type, ref] = e.target.value.split(":");
-                      setSelectedEntity({ type: type as any, reference: ref });
+                      const [type, id] = e.target.value.split(":");
+                      setSelectedEntity({ type: type as any, id });
                     }}
                   >
                     <option value="">Identify Case Subject...</option>
@@ -140,13 +146,14 @@ export default function CreateQuotationModal({
                     </optgroup>
                     <optgroup label="Partners">
                       {partners?.map(p => (
-                        <option key={p.reference} value={`PARTNER:${p.reference}`}>{p.name}</option>
+                        <option key={p.reference} value={`PARTNER:${p.code}`}>{p.name}</option>
                       ))}
                     </optgroup>
                   </select>
                 </div>
               </div>
             )}
+
 
             {/* Date Controls */}
             <div className="grid grid-cols-2 gap-6">

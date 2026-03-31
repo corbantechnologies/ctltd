@@ -76,7 +76,7 @@ export default function PartnerDetailPage() {
             <>
               <CreateQuotationModal 
                 rolePrefix="operations"
-                initialPartner={{ reference: partner.reference, name: partner.name }}
+                initialPartner={{ code: partner.code, name: partner.name }}
                 trigger={
                   <button className="flex items-center gap-2 px-6 py-2.5 bg-slate-900 hover:bg-blue-600 text-white rounded font-bold text-[10px] uppercase tracking-widest transition-all shadow-xl active:scale-95 group">
                      <ClipboardList className="w-4 h-4 group-hover:scale-110 transition-transform" />

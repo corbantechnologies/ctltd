@@ -8,7 +8,8 @@ import UpdateLead from "@/forms/leads/UpdateLead";
 import ConvertLeadModal from "@/forms/leads/ConvertLeadModal";
 import InteractionTimeline from "@/components/crm/InteractionTimeline";
 import CreateQuotationModal from "@/forms/quotations/CreateQuotationModal";
-import LeadActionsMenu from "@/components/leads/LeadActionsMenu";
+import CreateLeadQuotation from "@/forms/quotations/CreateLeadQuotation";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import {
   Users,
   Building2,
@@ -24,6 +25,8 @@ import {
   Fingerprint,
   UserCheck,
   ExternalLink,
+  ChevronDown,
+  Settings,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -33,6 +36,8 @@ export default function LeadDetailPage() {
   const router = useRouter();
   const { data, isLoading } = useFetchLead(reference as string);
   const lead = data as Lead | undefined;
+
+  console.log(lead);
 
   if (isLoading) return <LoadingSpinner />;
   if (!lead) return <div>Lead not found.</div>;
@@ -59,29 +64,66 @@ export default function LeadDetailPage() {
             Back to Pipeline
           </Link>
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded bg-blue-600 flex items-center justify-center text-white shadow-2xl shadow-blue-500/30">
-              <Users className="w-6 h-6" />
+            <div className="w-8 h-8 rounded bg-blue-600 flex items-center justify-center text-white shadow-2xl shadow-blue-500/30">
+              <Users className="w-4 h-4" />
             </div>
             <div>
               <div className="flex items-center gap-3 mb-1">
-                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600">
+                <p className="text-[10px] font-bold uppercase text-blue-600">
                   Lead Profile Case
                 </p>
                 <span className={cn("px-3 py-0.5 rounded text-[9px] font-bold uppercase border shadow-sm", statusColors[lead.status] || "bg-slate-50 text-slate-600 border-slate-200")}>
                   {lead.status}
                 </span>
               </div>
-              <h1 className="text-xl font-semibold text-slate-900 tracking-tight italic">
+              <h1 className="text-xl font-semibold text-slate-900">
                 {lead.first_name} <span className="text-blue-600">{lead.last_name}</span>
               </h1>
             </div>
           </div>
         </div>
 
-        <LeadActionsMenu
-          lead={lead}
-          rolePrefix="operations"
-        />
+        <div className="flex items-center gap-3">
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger asChild>
+              <button className="h-11 px-6 bg-slate-900 text-white rounded font-bold text-[10px] uppercase tracking-widest flex items-center gap-3 hover:bg-blue-600 transition-all shadow-xl active:scale-95 group border-2 border-transparent">
+                <Settings className="w-4 h-4 text-blue-400 group-hover:text-white transition-colors" />
+                Actions
+                <ChevronDown className="w-3.5 h-3.5 opacity-50" />
+              </button>
+            </DropdownMenu.Trigger>
+
+            <DropdownMenu.Portal>
+              <DropdownMenu.Content align="end" sideOffset={12} className="z-[100] w-64 p-2 bg-white rounded shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border border-slate-100 animate-in fade-in zoom-in-95 data-[side=bottom]:slide-in-from-top-2">
+                 <div className="px-3 py-2 mb-1 border-b border-slate-50">
+                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">Available Operations</p>
+                 </div>
+
+                 <CreateLeadQuotation
+                    rolePrefix="operations"
+                    leadReference={lead.reference}
+                    leadName={`${lead.first_name} ${lead.last_name}`}
+                    trigger={
+                      <DropdownMenu.Item onSelect={(e) => e.preventDefault()} className="flex items-center gap-3 p-3 rounded text-[10px] font-bold uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 cursor-pointer outline-none transition-colors group">
+                        <ClipboardList className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
+                        New Quotation
+                      </DropdownMenu.Item>
+                    }
+                  />
+
+                  <UpdateLead
+                    lead={lead}
+                    trigger={
+                      <DropdownMenu.Item onSelect={(e) => e.preventDefault()} className="flex items-center gap-3 p-3 rounded text-[10px] font-bold uppercase tracking-widest text-slate-600 hover:text-amber-600 hover:bg-amber-50 cursor-pointer outline-none transition-colors group">
+                        <Edit className="w-4 h-4 text-slate-400 group-hover:text-amber-600 transition-colors" />
+                        Modify Identity
+                      </DropdownMenu.Item>
+                    }
+                  />
+              </DropdownMenu.Content>
+            </DropdownMenu.Portal>
+          </DropdownMenu.Root>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
