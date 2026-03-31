@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import { useFetchPartner } from "@/hooks/partners/actions";
 import { useParams, useRouter } from "next/navigation";
@@ -20,10 +21,12 @@ import {
   Plus,
   ClipboardList,
   Settings,
-  ChevronDown
+  ChevronDown,
+  UserCog
 } from "lucide-react";
 import CreatePartnerQuotation from "@/forms/quotations/CreatePartnerQuotation";
 import CreateInvoiceModal from "@/forms/financials/CreateInvoiceModal";
+import UpdatePartner from "@/forms/partners/UpdatePartner";
 import InteractionTimeline from "@/components/crm/InteractionTimeline";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { cn } from "@/lib/utils";
@@ -33,6 +36,7 @@ import Link from "next/link";
 export default function PartnerDetailPage() {
   const { reference } = useParams<{ reference: string }>();
   const router = useRouter();
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
   const { isLoading: isLoadingPartner, data: partner } =
     useFetchPartner(reference);
@@ -118,6 +122,14 @@ export default function PartnerDetailPage() {
                         </DropdownMenu.Item>
                       }
                     />
+
+                    <DropdownMenu.Item 
+                      onSelect={() => setIsUpdateModalOpen(true)}
+                      className="flex items-center gap-3 p-3 rounded text-[10px] font-bold uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 cursor-pointer outline-none transition-colors group border-t border-slate-50 mt-1"
+                    >
+                      <UserCog className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
+                      Modify Profile
+                    </DropdownMenu.Item>
                   </DropdownMenu.Content>
                 </DropdownMenu.Portal>
               </DropdownMenu.Root>
@@ -407,6 +419,13 @@ export default function PartnerDetailPage() {
           </div>
         </div>
       </div>
+
+      <UpdatePartner 
+        partner={partner} 
+        rolePrefix="operations" 
+        isOpen={isUpdateModalOpen} 
+        onOpenChange={setIsUpdateModalOpen} 
+      />
     </div>
   );
 }

@@ -124,6 +124,18 @@ export const createQuotation = async (
     return response.data;
 };
 
+export const sendQuotation = async (
+    reference: string,
+    headers: { headers: { Authorization: string } }
+): Promise<Quotation> => {
+    const response: AxiosResponse<Quotation> = await apiActions.post(
+        `/api/v1/quotations/${reference}/send/`,
+        {},
+        headers
+    );
+    return response.data;
+};
+
 export const downloadQuotation = async (
     reference: string,
     code: string,

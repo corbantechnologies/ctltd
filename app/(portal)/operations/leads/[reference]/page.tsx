@@ -30,12 +30,14 @@ import {
   Settings,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import React, { useState } from "react";
 import Link from "next/link";
 
 export default function LeadDetailPage() {
   const { reference } = useParams();
   const router = useRouter();
   const { data, isLoading } = useFetchLead(reference as string);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const lead = data as Lead | undefined;
 
   console.log(lead);
@@ -112,15 +114,13 @@ export default function LeadDetailPage() {
                     }
                   />
 
-                  <UpdateLead
-                    lead={lead}
-                    trigger={
-                      <DropdownMenu.Item onSelect={(e) => e.preventDefault()} className="flex items-center gap-3 p-3 rounded text-[10px] font-bold uppercase tracking-widest text-slate-600 hover:text-amber-600 hover:bg-amber-50 cursor-pointer outline-none transition-colors group">
-                        <Edit className="w-4 h-4 text-slate-400 group-hover:text-amber-600 transition-colors" />
-                        Modify Identity
-                      </DropdownMenu.Item>
-                    }
-                  />
+                  <DropdownMenu.Item 
+                    onSelect={() => setIsUpdateModalOpen(true)} 
+                    className="flex items-center gap-3 p-3 rounded text-[10px] font-bold uppercase tracking-widest text-slate-600 hover:text-amber-600 hover:bg-amber-50 cursor-pointer outline-none transition-colors group"
+                  >
+                    <Edit className="w-4 h-4 text-slate-400 group-hover:text-amber-600 transition-colors" />
+                    Modify Identity
+                  </DropdownMenu.Item>
               </DropdownMenu.Content>
             </DropdownMenu.Portal>
           </DropdownMenu.Root>
@@ -325,6 +325,12 @@ export default function LeadDetailPage() {
           </div>
         </div>
       </div>
+
+      <UpdateLead 
+        lead={lead} 
+        isOpen={isUpdateModalOpen} 
+        onOpenChange={setIsUpdateModalOpen} 
+      />
     </div>
   );
 }
