@@ -8,14 +8,14 @@ import { useFetchProducts } from "@/hooks/products/actions";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 
 interface CreateQuotationLineProps {
-  quotationId: string;
+  quotationCode: string;
   onSuccess?: () => void;
   onClose?: () => void;
   className?: string;
 }
 
 export default function CreateQuotationLine({
-  quotationId,
+  quotationCode,
   onSuccess,
   onClose,
   className,
@@ -36,13 +36,14 @@ export default function CreateQuotationLine({
       try {
         await createQuotationLine({
           ...values,
-          quotation: quotationId,
+          quotation: quotationCode,
           total_price: values.quantity * values.unit_price,
         }, authHeaders);
         
         toast.success("Line item added successfully");
         if (onSuccess) onSuccess();
       } catch (error: any) {
+        console.log(error);
         toast.error(
           error?.response?.data?.error || "Failed to add item",
         );
@@ -54,9 +55,9 @@ export default function CreateQuotationLine({
 
   return (
     <div
-      className={`mx-auto w-full border border-slate-100 shadow-2xl rounded overflow-hidden bg-white backdrop-blur-xl ${className}`}
+      className={`mx-auto w-full border border-slate-100 shadow-2xl rounded overflow-hidden bg-white backdrop-blur-xl flex flex-col ${className}`}
     >
-      <div className="p-8 border-b border-slate-100 bg-gradient-to-r from-white to-slate-50/50">
+      <div className="p-8 border-b border-slate-100 bg-gradient-to-r from-white to-slate-50/50 flex-shrink-0">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-4">
             <div
@@ -89,7 +90,7 @@ export default function CreateQuotationLine({
         </div>
       </div>
 
-      <div className="p-8">
+      <div className="p-8 overflow-y-auto max-h-[min(80vh,600px)]">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="md:col-span-2 space-y-2">
@@ -103,7 +104,7 @@ export default function CreateQuotationLine({
                 id="product"
                 name="product"
                 required
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5 appearance-none"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5 appearance-none text-slate-900"
                 onChange={(e) => {
                     const product = products?.find(p => p.name === e.target.value);
                     formik.setFieldValue("product", e.target.value);
@@ -131,7 +132,7 @@ export default function CreateQuotationLine({
                 name="quantity"
                 type="number"
                 required
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5 text-slate-900"
                 onChange={formik.handleChange}
                 value={formik.values.quantity}
               />
@@ -149,7 +150,7 @@ export default function CreateQuotationLine({
                 name="unit_price"
                 type="number"
                 required
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5 text-slate-900"
                 onChange={formik.handleChange}
                 value={formik.values.unit_price}
               />
@@ -167,7 +168,7 @@ export default function CreateQuotationLine({
                 name="description"
                 rows={3}
                 placeholder="Details of this specific component..."
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600/20 w-full p-5 rounded focus:bg-slate-50 transition-all font-medium resize-none text-sm"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600/20 w-full p-5 rounded focus:bg-slate-50 transition-all font-medium resize-none text-sm text-slate-900"
                 onChange={formik.handleChange}
                 value={formik.values.description}
               />

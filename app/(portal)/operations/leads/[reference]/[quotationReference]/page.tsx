@@ -132,7 +132,7 @@ export default function LeadQuotationDetailPage() {
                 <tbody className="divide-y divide-slate-50">
                   {quotation.lines?.length === 0 ? (
                     <tr>
-                        <td colSpan={5} className="py-20 px-8 text-center text-slate-300">
+                        <td colSpan={5} className="py-20 px-8 text-center text-black/20">
                             <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2">No components allocated</p>
                             <p className="text-xs italic">Initialize the proposal by adding your first project component.</p>
                         </td>
@@ -155,21 +155,21 @@ export default function LeadQuotationDetailPage() {
                           </p>
                         </td>
                         <td className="py-8 px-4 text-right">
-                          <p className="text-sm font-bold text-slate-900 tabular-nums tracking-tight">
+                          <p className="text-sm font-bold text-black tabular-nums tracking-tight">
                             {line.total_price.toLocaleString('en-KE', { minimumFractionDigits: 2 })}
                           </p>
                         </td>
                         <td className="py-8 px-8 text-right space-x-2">
                           <button 
                             onClick={() => setSelectedLine(line)}
-                            className="p-2 text-slate-300 hover:text-blue-600 transition-colors opacity-0 group-hover:opacity-100"
+                            className="p-2 text-black/20 hover:text-blue-600 transition-colors opacity-0 group-hover:opacity-100"
                             title="Edit"
                           >
                             <Edit2 className="w-4 h-4" />
                           </button>
                           <button 
                             onClick={() => handleDeleteLine(line.reference)}
-                            className="p-2 text-slate-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+                            className="p-2 text-black/20 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
                             title="Delete"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -217,18 +217,18 @@ export default function LeadQuotationDetailPage() {
             <div className="space-y-6">
               <p className="text-[10px] font-bold uppercase tracking-widest text-black border-b border-slate-200 pb-2">Financial Synthesis</p>
               <div className="space-y-4">
-                <div className="flex justify-between items-center text-slate-500">
+                <div className="flex justify-between items-center text-black/60">
                   <span className="text-[10px] font-bold uppercase tracking-widest">Sub-Extension</span>
                   <span className="text-sm font-bold tabular-nums">{subtotal.toLocaleString('en-KE', { minimumFractionDigits: 2 })}</span>
                 </div>
-                <div className="flex justify-between items-center text-slate-500">
+                <div className="flex justify-between items-center text-black/60">
                   <span className="text-[10px] font-bold uppercase tracking-widest">Adjustment (0%)</span>
                   <span className="text-sm font-bold">0.00</span>
                 </div>
                 <div className="pt-6 border-t border-slate-200">
                   <div className="flex justify-between items-end">
-                    <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-900 mb-1">Theoretical Total</span>
-                    <p className="text-3xl font-bold text-slate-900 tracking-tighter tabular-nums leading-none">
+                    <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-black mb-1">Theoretical Total</span>
+                    <p className="text-3xl font-bold text-black tracking-tighter tabular-nums leading-none">
                       {subtotal.toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
                     </p>
                   </div>
@@ -248,7 +248,7 @@ export default function LeadQuotationDetailPage() {
               <AlertCircle className="w-3.5 h-3.5" />
               Strategic Notes
             </p>
-            <p className="text-xs text-slate-500 leading-relaxed italic font-medium">
+            <p className="text-xs text-black/60 leading-relaxed italic font-medium">
               "{quotation.notes || "No strategic notes provided for this phase. Recommendation: Outline the specific value proposition before finalizing issuance."}"
             </p>
           </div>
@@ -257,14 +257,14 @@ export default function LeadQuotationDetailPage() {
 
       {/* Initialize Modal */}
       {isCreateModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 lg:p-8">
+        <div className="fixed inset-0 z-[100] flex items-start justify-center p-4 sm:p-6 lg:p-8 overflow-y-auto">
           <div 
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300"
             onClick={() => setIsCreateModalOpen(false)}
           />
-          <div className="relative w-full max-w-2xl animate-in zoom-in-95 fade-in duration-300">
+          <div className="relative w-full max-w-2xl animate-in zoom-in-95 fade-in duration-300 my-auto">
             <CreateQuotationLine 
-                quotationId={quotation.id}
+                quotationCode={quotation.code}
                 onClose={() => setIsCreateModalOpen(false)}
                 onSuccess={() => {
                     setIsCreateModalOpen(false);
@@ -277,12 +277,12 @@ export default function LeadQuotationDetailPage() {
 
       {/* Update Modal */}
       {selectedLine && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 lg:p-8">
+        <div className="fixed inset-0 z-[100] flex items-start justify-center p-4 sm:p-6 lg:p-8 overflow-y-auto">
           <div 
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300"
             onClick={() => setSelectedLine(null)}
           />
-          <div className="relative w-full max-w-2xl animate-in zoom-in-95 fade-in duration-300">
+          <div className="relative w-full max-w-2xl animate-in zoom-in-95 fade-in duration-300 my-auto">
             <UpdateQuotationLine 
                 line={selectedLine}
                 onClose={() => setSelectedLine(null)}

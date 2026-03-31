@@ -53,9 +53,9 @@ export default function UpdateQuotationLine({
 
   return (
     <div
-      className={`mx-auto w-full border border-slate-100 shadow-2xl rounded overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
+      className={`mx-auto w-full border border-slate-100 shadow-2xl rounded overflow-hidden bg-white backdrop-blur-xl flex flex-col ${className}`}
     >
-      <div className="p-8 border-b border-slate-100 bg-gradient-to-r from-white to-slate-50/50">
+      <div className="p-8 border-b border-slate-100 bg-gradient-to-r from-white to-slate-50/50 flex-shrink-0">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-4">
             <div
@@ -68,10 +68,10 @@ export default function UpdateQuotationLine({
               <Package className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-2xl font-semibold text-slate-900 tracking-tight">
+              <h2 className="text-2xl font-semibold text-black tracking-tight">
                 Update Row Component
               </h2>
-              <p className="text-slate-400 font-medium text-sm mt-1">
+              <p className="text-black font-medium text-sm mt-1">
                 Refining asset configuration
               </p>
             </div>
@@ -80,7 +80,7 @@ export default function UpdateQuotationLine({
             <button
               type="button"
               onClick={onClose}
-              className="hover:bg-slate-100 rounded text-slate-400 p-2 transition-colors"
+              className="hover:bg-slate-100 rounded text-black p-2 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -88,13 +88,13 @@ export default function UpdateQuotationLine({
         </div>
       </div>
 
-      <div className="p-8">
+      <div className="p-8 overflow-y-auto max-h-[min(80vh,600px)]">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="md:col-span-2 space-y-2">
               <label
                 htmlFor="product"
-                className="text-sm font-semibold uppercase tracking-widest text-slate-400 ml-1 flex items-center gap-1"
+                className="text-sm font-semibold uppercase tracking-widest text-black ml-1 flex items-center gap-1"
               >
                 Physical Asset <span className="text-amber-500 text-xs font-semibold">*</span>
               </label>
@@ -102,7 +102,7 @@ export default function UpdateQuotationLine({
                 id="product"
                 name="product"
                 required
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5 appearance-none"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5 appearance-none text-slate-900"
                 onChange={(e) => {
                     const product = products?.find(p => p.name === e.target.value);
                     formik.setFieldValue("product", e.target.value);
@@ -121,7 +121,7 @@ export default function UpdateQuotationLine({
             <div className="space-y-2">
               <label
                 htmlFor="quantity"
-                className="text-sm font-semibold uppercase tracking-widest text-slate-400 ml-1 flex items-center gap-1"
+                className="text-sm font-semibold uppercase tracking-widest text-black ml-1 flex items-center gap-1"
               >
                 Quantity <span className="text-amber-500 text-xs font-semibold">*</span>
               </label>
@@ -130,7 +130,7 @@ export default function UpdateQuotationLine({
                 name="quantity"
                 type="number"
                 required
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5 text-slate-900"
                 onChange={formik.handleChange}
                 value={formik.values.quantity}
               />
@@ -139,7 +139,7 @@ export default function UpdateQuotationLine({
             <div className="space-y-2">
               <label
                 htmlFor="unit_price"
-                className="text-sm font-semibold uppercase tracking-widest text-slate-400 ml-1 flex items-center gap-1"
+                className="text-sm font-semibold uppercase tracking-widest text-black ml-1 flex items-center gap-1"
               >
                 Unit Rate <span className="text-amber-500 text-xs font-semibold">*</span>
               </label>
@@ -148,7 +148,7 @@ export default function UpdateQuotationLine({
                 name="unit_price"
                 type="number"
                 required
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5 text-slate-900"
                 onChange={formik.handleChange}
                 value={formik.values.unit_price}
               />
@@ -157,7 +157,7 @@ export default function UpdateQuotationLine({
             <div className="md:col-span-2 space-y-2">
               <label
                 htmlFor="description"
-                className="text-sm font-semibold uppercase tracking-widest text-slate-400 ml-1 flex items-center gap-1"
+                className="text-sm font-semibold uppercase tracking-widest text-black ml-1 flex items-center gap-1"
               >
                 Strategic Context
               </label>
@@ -166,7 +166,7 @@ export default function UpdateQuotationLine({
                 name="description"
                 rows={3}
                 placeholder="Details of this specific component..."
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-600/20 w-full p-5 rounded focus:bg-slate-50 transition-all font-medium resize-none text-sm"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-600/20 w-full p-5 rounded focus:bg-slate-50 transition-all font-medium resize-none text-sm text-slate-900"
                 onChange={formik.handleChange}
                 value={formik.values.description}
               />
