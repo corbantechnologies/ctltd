@@ -34,6 +34,18 @@ export interface DivisionSummaryRow {
   total_credit: number;
 }
 
+export interface PartnerSummaryRow {
+  partner__name: string;
+  total_debit: number;
+  total_credit: number;
+}
+
+export interface ProjectSummaryRow {
+  project: string;
+  total_debit: number;
+  total_credit: number;
+}
+
 export interface FinancialMonthDetail extends FinancialMonth {
   report: {
     total_debits: number;
@@ -41,6 +53,8 @@ export interface FinancialMonthDetail extends FinancialMonth {
     net_movement: number;
     book_summary: BookSummaryRow[];
     division_summary: DivisionSummaryRow[];
+    partner_summary: PartnerSummaryRow[];
+    project_summary: ProjectSummaryRow[];
     journals: {
         reference: string;
         code: string;

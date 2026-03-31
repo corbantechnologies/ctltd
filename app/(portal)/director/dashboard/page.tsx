@@ -186,7 +186,7 @@ export default function DirectorDashboard() {
 
         <Tabs.Content value="financials" className="focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700">
           <div>
-            <ReportsDashboard />
+            <ReportsDashboard rolePrefix="director" />
           </div>
         </Tabs.Content>
       </Tabs.Root>
