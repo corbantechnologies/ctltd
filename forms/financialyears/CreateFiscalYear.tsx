@@ -166,7 +166,7 @@ export default function CreateFiscalYear({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[1.25rem] font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 text-white rounded font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,

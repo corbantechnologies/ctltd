@@ -23,8 +23,8 @@ export default function OperationsJournalsDetailPage() {
   const { reference, journal_reference } = useParams();
   const router = useRouter();
   const { data: fiscalYear } = useFetchFinancialYear(reference as string);
-  const { 
-    isLoading, 
+  const {
+    isLoading,
     data: journal,
   } = useFetchJournal(journal_reference as string);
 
@@ -90,8 +90,8 @@ export default function OperationsJournalsDetailPage() {
             </button>
             <span
               className={`px-4 py-1.5 rounded text-[10px] font-bold uppercase tracking-widest ${journal.is_posted
-                  ? "bg-emerald-50 text-emerald-600"
-                  : "bg-blue-50 text-blue-600"
+                ? "bg-emerald-50 text-emerald-600"
+                : "bg-blue-50 text-blue-600"
                 }`}
             >
               {journal.is_posted ? (
@@ -110,14 +110,14 @@ export default function OperationsJournalsDetailPage() {
               {journal.description || "Untitled Batch"}
             </h1>
             <div className="flex flex-wrap gap-4 text-xs font-bold text-black/40 mt-1 uppercase tracking-wider">
-                <span className="flex items-center gap-2">
-                    <Calendar className="w-3.5 h-3.5" />
-                    {new Date(journal.date).toLocaleDateString()}
-                </span>
-                <span className="text-black/10">|</span>
-                <span className="text-blue-600">
-                    {journal.journal_type}
-                </span>
+              <span className="flex items-center gap-2">
+                <Calendar className="w-3.5 h-3.5" />
+                {new Date(journal.date).toLocaleDateString()}
+              </span>
+              <span className="text-black/10">|</span>
+              <span className="text-blue-600">
+                {journal.journal_type}
+              </span>
             </div>
           </div>
         </div>
@@ -125,38 +125,38 @@ export default function OperationsJournalsDetailPage() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-bold">
-        <div className="p-6 bg-white border border-black/5 rounded-2xl shadow-sm">
-            <p className="text-[9px] font-bold uppercase tracking-widest text-black/40 mb-1">Total Debits</p>
-            <p className="text-xl font-bold text-black font-mono">
-                {new Intl.NumberFormat("en-KE", { style: "currency", currency: journal.currency }).format(totalDebit)}
-            </p>
+        <div className="p-6 bg-white border border-black/5 rounded shadow-sm">
+          <p className="text-[9px] font-bold uppercase tracking-widest text-black/40 mb-1">Total Debits</p>
+          <p className="text-xl font-bold text-black font-mono">
+            {new Intl.NumberFormat("en-KE", { style: "currency", currency: journal.currency }).format(totalDebit)}
+          </p>
         </div>
-        <div className="p-6 bg-white border border-black/5 rounded-2xl shadow-sm">
-            <p className="text-[9px] font-bold uppercase tracking-widest text-black/40 mb-1">Total Credits</p>
-            <p className="text-xl font-bold text-black font-mono">
-                {new Intl.NumberFormat("en-KE", { style: "currency", currency: journal.currency }).format(totalCredit)}
-            </p>
+        <div className="p-6 bg-white border border-black/5 rounded shadow-sm">
+          <p className="text-[9px] font-bold uppercase tracking-widest text-black/40 mb-1">Total Credits</p>
+          <p className="text-xl font-bold text-black font-mono">
+            {new Intl.NumberFormat("en-KE", { style: "currency", currency: journal.currency }).format(totalCredit)}
+          </p>
         </div>
         <div className={cn(
-            "p-6 border rounded-2xl shadow-sm border-black/5 transition-all font-bold",
-            isBalanced ? "bg-emerald-50/50" : "bg-red-50"
+          "p-6 border rounded shadow-sm border-black/5 transition-all font-bold",
+          isBalanced ? "bg-emerald-50/50" : "bg-red-50"
         )}>
-            <p className="text-[9px] font-bold uppercase tracking-widest text-black/40 mb-1">Balance Integrity</p>
-            <div className="flex items-center gap-2">
-                <span className={cn("text-xl font-bold uppercase tracking-tighter", isBalanced ? "text-emerald-700" : "text-red-700")}>
-                    {isBalanced ? "Balanced" : "Unbalanced"}
-                </span>
-                {!isBalanced && (
-                    <span className="text-[9px] font-bold px-2 py-0.5 bg-red-600 text-white rounded">
-                        Diff: {Math.abs(totalDebit - totalCredit).toLocaleString()}
-                    </span>
-                )}
-            </div>
+          <p className="text-[9px] font-bold uppercase tracking-widest text-black/40 mb-1">Balance Integrity</p>
+          <div className="flex items-center gap-2">
+            <span className={cn("text-xl font-bold uppercase tracking-tighter", isBalanced ? "text-emerald-700" : "text-red-700")}>
+              {isBalanced ? "Balanced" : "Unbalanced"}
+            </span>
+            {!isBalanced && (
+              <span className="text-[9px] font-bold px-2 py-0.5 bg-red-600 text-white rounded">
+                Diff: {Math.abs(totalDebit - totalCredit).toLocaleString()}
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
       {/* Entries List */}
-      <div className="bg-white border border-black/5 rounded-2xl overflow-hidden shadow-sm">
+      <div className="bg-white border border-black/5 rounded overflow-hidden shadow-sm">
         <div className="p-6 border-b border-black/5 flex justify-between items-center bg-slate-50/50">
           <h3 className="text-xs font-bold uppercase tracking-widest text-black flex items-center gap-3">
             <Receipt className="w-4 h-4 text-blue-600" />
@@ -167,36 +167,36 @@ export default function OperationsJournalsDetailPage() {
           </span>
         </div>
         <div className="overflow-x-auto font-medium">
-            <table className="w-full text-left">
-                <thead>
-                    <tr className="bg-white border-b border-black/5">
-                        <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">Account Book</th>
-                        <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">Partner / Division</th>
-                        <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">Debit</th>
-                        <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">Credit</th>
-                    </tr>
-                </thead>
-                <tbody className="divide-y divide-black/5 text-sm">
-                    {journal.journal_entries.map((entry) => (
-                    <tr key={entry.reference} className="hover:bg-slate-50 transition-colors cursor-pointer group" onClick={() => setSelectedEntry(entry)}>
-                        <td className="py-4 px-6">
-                            <div className="font-bold text-black transition-colors">{entry.book}</div>
-                            <div className="text-[9px] font-bold text-black/30 uppercase tracking-widest mt-0.5">{entry.code}</div>
-                        </td>
-                        <td className="py-4 px-6">
-                            <div className="font-bold text-black">{entry.partner || "—"}</div>
-                            <div className="text-[9px] font-bold text-black/30 uppercase tracking-widest mt-0.5">{entry.division}</div>
-                        </td>
-                        <td className="py-4 px-6 text-right font-mono font-bold text-black/60">
-                            {parseFloat(entry.debit) > 0 ? parseFloat(entry.debit).toLocaleString() : "—"}
-                        </td>
-                        <td className="py-4 px-6 text-right font-mono font-bold text-black/60">
-                            {parseFloat(entry.credit) > 0 ? parseFloat(entry.credit).toLocaleString() : "—"}
-                        </td>
-                    </tr>
-                    ))}
-                </tbody>
-            </table>
+          <table className="w-full text-left">
+            <thead>
+              <tr className="bg-white border-b border-black/5">
+                <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">Account Book</th>
+                <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40">Partner / Division</th>
+                <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">Debit</th>
+                <th className="py-4 px-6 text-[10px] font-bold uppercase tracking-widest text-black/40 text-right">Credit</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-black/5 text-sm">
+              {journal.journal_entries.map((entry) => (
+                <tr key={entry.reference} className="hover:bg-slate-50 transition-colors cursor-pointer group" onClick={() => setSelectedEntry(entry)}>
+                  <td className="py-4 px-6">
+                    <div className="font-bold text-black transition-colors">{entry.book}</div>
+                    <div className="text-[9px] font-bold text-black/30 uppercase tracking-widest mt-0.5">{entry.code}</div>
+                  </td>
+                  <td className="py-4 px-6">
+                    <div className="font-bold text-black">{entry.partner || "—"}</div>
+                    <div className="text-[9px] font-bold text-black/30 uppercase tracking-widest mt-0.5">{entry.division}</div>
+                  </td>
+                  <td className="py-4 px-6 text-right font-mono font-bold text-black/60">
+                    {parseFloat(entry.debit) > 0 ? parseFloat(entry.debit).toLocaleString() : "—"}
+                  </td>
+                  <td className="py-4 px-6 text-right font-mono font-bold text-black/60">
+                    {parseFloat(entry.credit) > 0 ? parseFloat(entry.credit).toLocaleString() : "—"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
 

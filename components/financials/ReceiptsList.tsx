@@ -69,12 +69,12 @@ export default function ReceiptsList({ rolePrefix }: ReceiptsListProps) {
             placeholder="Search receipts by code, invoice..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full h-16 pl-14 pr-6 rounded-3xl border border-slate-200 bg-white focus:border-slate-900 focus:ring-0 transition-all font-semibold text-sm shadow-sm"
+            className="w-full h-16 pl-14 pr-6 rounded border border-slate-200 bg-white focus:border-slate-900 focus:ring-0 transition-all font-semibold text-sm shadow-sm"
           />
         </div>
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-[32px] shadow-2xl shadow-slate-100/50 overflow-hidden">
+      <div className="bg-white border border-slate-200 rounded shadow-2xl shadow-slate-100/50 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -91,7 +91,7 @@ export default function ReceiptsList({ rolePrefix }: ReceiptsListProps) {
                 <tr key={receipt.reference} className="group hover:bg-slate-50/50 transition-colors">
                   <td className="py-6 px-8">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:bg-slate-900 group-hover:text-white transition-all shadow-inner border border-emerald-100">
+                      <div className="w-12 h-12 rounded bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:bg-slate-900 group-hover:text-white transition-all shadow-inner border border-emerald-100">
                         <FileCheck className="w-5 h-5" />
                       </div>
                       <div>
@@ -102,18 +102,18 @@ export default function ReceiptsList({ rolePrefix }: ReceiptsListProps) {
                   </td>
                   <td className="py-6 px-8">
                     <div className="flex items-center gap-2">
-                       <Calendar className="w-3.5 h-3.5 text-slate-300" />
-                       <span className="text-sm font-semibold text-slate-700 underline decoration-slate-200 underline-offset-4">{receipt.invoice}</span>
+                      <Calendar className="w-3.5 h-3.5 text-slate-300" />
+                      <span className="text-sm font-semibold text-slate-700 underline decoration-slate-200 underline-offset-4">{receipt.invoice}</span>
                     </div>
                   </td>
                   <td className="py-6 px-8">
                     <div className="flex items-center gap-2 text-sm font-bold text-emerald-600">
-                       <Banknote className="w-4 h-4" />
-                       {new Intl.NumberFormat('en-KE', { style: 'currency', currency: 'KES' }).format(receipt.amount)}
+                      <Banknote className="w-4 h-4" />
+                      {new Intl.NumberFormat('en-KE', { style: 'currency', currency: 'KES' }).format(receipt.amount)}
                     </div>
                   </td>
                   <td className="py-6 px-8">
-                    <div className={cn("inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border", 
+                    <div className={cn("inline-flex items-center gap-2 px-3 py-1 rounded text-[10px] font-bold uppercase tracking-widest border",
                       receipt.is_posted ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-amber-50 text-amber-600 border-amber-100")}>
                       {receipt.is_posted ? <ShieldCheck className="w-3.5 h-3.5" /> : <Clock className="w-3.5 h-3.5" />}
                       {receipt.is_posted ? "POSTED" : "PENDING POST"}
@@ -124,7 +124,7 @@ export default function ReceiptsList({ rolePrefix }: ReceiptsListProps) {
                       {rolePrefix === "finance" && !receipt.is_posted && (
                         <button
                           onClick={() => markAsPostedMutation.mutate(receipt.reference)}
-                          className="w-10 h-10 rounded-xl bg-slate-900 text-white hover:bg-emerald-600 transition-all flex items-center justify-center shadow-lg active:scale-90"
+                          className="w-10 h-10 rounded bg-slate-900 text-white hover:bg-emerald-600 transition-all flex items-center justify-center shadow-lg active:scale-90"
                           title="Confirm Ledger Posting"
                         >
                           <ShieldCheck className="w-4.5 h-4.5" />
@@ -132,13 +132,13 @@ export default function ReceiptsList({ rolePrefix }: ReceiptsListProps) {
                       )}
                       <button
                         onClick={() => handleDownload(receipt)}
-                        className="w-10 h-10 rounded-xl bg-slate-100 text-slate-400 hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center shadow-lg active:scale-90"
+                        className="w-10 h-10 rounded bg-slate-100 text-slate-400 hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center shadow-lg active:scale-90"
                         title="Download PDF"
                       >
                         <Download className="w-4.5 h-4.5" />
                       </button>
                       <button
-                        className="w-10 h-10 rounded-xl bg-slate-100 text-slate-400 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center shadow-lg active:scale-90"
+                        className="w-10 h-10 rounded bg-slate-100 text-slate-400 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center shadow-lg active:scale-90"
                         title="Resend to Email"
                       >
                         <Send className="w-4 h-4" />
@@ -162,14 +162,14 @@ export default function ReceiptsList({ rolePrefix }: ReceiptsListProps) {
             <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              className="w-12 h-12 rounded-xl border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-slate-900 hover:text-white transition-all disabled:opacity-30"
+              className="w-12 h-12 rounded border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-slate-900 hover:text-white transition-all disabled:opacity-30"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              className="w-12 h-12 rounded-xl border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-slate-900 hover:text-white transition-all disabled:opacity-30"
+              className="w-12 h-12 rounded border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-slate-900 hover:text-white transition-all disabled:opacity-30"
             >
               <ChevronRight className="w-5 h-5" />
             </button>

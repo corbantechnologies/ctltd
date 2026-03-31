@@ -1,4 +1,5 @@
 import { useFetchLead } from "@/hooks/leads/actions";
+import { Lead } from "@/services/leads";
 import { useParams, useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import UpdateLead from "@/forms/leads/UpdateLead";
@@ -26,7 +27,8 @@ import Link from "next/link";
 export default function LeadDetailPage() {
   const { reference } = useParams();
   const router = useRouter();
-  const { data: lead, isLoading } = useFetchLead(reference as string);
+  const { data, isLoading } = useFetchLead(reference as string);
+  const lead = data as Lead | undefined;
 
   if (isLoading) return <LoadingSpinner />;
   if (!lead) return <div>Lead not found.</div>;
@@ -45,15 +47,15 @@ export default function LeadDetailPage() {
       {/* Dynamic Breadcrumbs & Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div className="space-y-4 w-full">
-            <Link 
-                href="/operations/leads"
-                className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-blue-600 transition-colors group"
-            >
-                <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
-                Back to Pipeline
-            </Link>
+          <Link
+            href="/operations/leads"
+            className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-blue-600 transition-colors group"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
+            Back to Pipeline
+          </Link>
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-2xl shadow-blue-500/30">
+            <div className="w-14 h-14 rounded bg-blue-600 flex items-center justify-center text-white shadow-2xl shadow-blue-500/30">
               <Users className="w-6 h-6" />
             </div>
             <div>
@@ -61,7 +63,7 @@ export default function LeadDetailPage() {
                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600">
                   Lead Profile Case
                 </p>
-                <span className={cn("px-3 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border shadow-sm", statusColors[lead.status] || "bg-slate-50 text-slate-600 border-slate-200")}>
+                <span className={cn("px-3 py-0.5 rounded text-[9px] font-bold uppercase tracking-widest border shadow-sm", statusColors[lead.status] || "bg-slate-50 text-slate-600 border-slate-200")}>
                   {lead.status}
                 </span>
               </div>
@@ -79,7 +81,7 @@ export default function LeadDetailPage() {
               leadName={`${lead.first_name} ${lead.last_name}`}
               rolePrefix="operations"
               trigger={
-                <button className="flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-sm uppercase tracking-widest transition-all shadow-2xl shadow-blue-600/20 active:scale-[0.98] group">
+                <button className="flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded font-bold text-sm uppercase tracking-widest transition-all shadow-2xl shadow-blue-600/20 active:scale-[0.98] group">
                   <UserCheck className="w-4.5 h-4.5 group-hover:scale-110 transition-transform" />
                   Convert to Partner
                 </button>
@@ -90,7 +92,7 @@ export default function LeadDetailPage() {
           {lead.status === "WON" && lead.partner_reference && (
             <Link
               href={`/operations/partners/${lead.partner_reference}`}
-              className="flex items-center gap-3 px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm uppercase tracking-widest transition-all shadow-2xl shadow-emerald-600/20 active:scale-[0.98] group"
+              className="flex items-center gap-3 px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded font-bold text-sm uppercase tracking-widest transition-all shadow-2xl shadow-emerald-600/20 active:scale-[0.98] group"
             >
               <ExternalLink className="w-4.5 h-4.5 group-hover:translate-x-1 transition-transform" />
               View Partner Profile
@@ -100,7 +102,7 @@ export default function LeadDetailPage() {
           <UpdateLead
             lead={lead}
             trigger={
-              <button className="flex items-center gap-3 px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-semibold text-sm tracking-tight transition-all shadow-2xl active:scale-[0.98] group">
+              <button className="flex items-center gap-3 px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded font-semibold text-sm tracking-tight transition-all shadow-2xl active:scale-[0.98] group">
                 <Edit className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                 Modify Identity
               </button>
@@ -112,9 +114,9 @@ export default function LeadDetailPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column: Essential Bio & Timeline */}
         <div className="lg:col-span-2 space-y-12">
-          <div className="bg-white p-10 rounded-[32px] border border-slate-100 shadow-2xl shadow-slate-100/50 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-50 group-hover:bg-blue-100 transition-colors" />
-            
+          <div className="bg-white p-10 rounded border border-slate-100 shadow-2xl shadow-slate-100/50 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded blur-3xl -translate-y-1/2 translate-x-1/2 opacity-50 group-hover:bg-blue-100 transition-colors" />
+
             <div className="relative z-10 space-y-10">
               <div className="flex items-center gap-3">
                 <Fingerprint className="w-5 h-5 text-blue-600" />
@@ -142,9 +144,9 @@ export default function LeadDetailPage() {
             </div>
           </div>
 
-          <div className="bg-white p-10 rounded-[32px] border border-slate-100 shadow-2xl shadow-slate-100/50 relative overflow-hidden group">
-             <div className="absolute top-0 right-0 w-64 h-64 bg-amber-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-50 group-hover:bg-amber-100 transition-colors" />
-            
+          <div className="bg-white p-10 rounded border border-slate-100 shadow-2xl shadow-slate-100/50 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-50 rounded blur-3xl -translate-y-1/2 translate-x-1/2 opacity-50 group-hover:bg-amber-100 transition-colors" />
+
             <div className="relative z-10 space-y-10">
               <div className="flex items-center gap-3">
                 <Building2 className="w-5 h-5 text-amber-600" />
@@ -169,19 +171,19 @@ export default function LeadDetailPage() {
           </div>
 
           {/* Activity Timeline Integration */}
-          <div className="bg-white p-10 rounded-[40px] border border-slate-100 shadow-2xl shadow-slate-100/50">
-            <InteractionTimeline 
-              leadId={lead.id} 
-              rolePrefix="operations" 
+          <div className="bg-white p-10 rounded border border-slate-100 shadow-2xl shadow-slate-100/50">
+            <InteractionTimeline
+              leadId={lead.id}
+              rolePrefix="operations"
             />
           </div>
         </div>
 
         {/* Right Column: Communications Hub */}
         <div className="space-y-8">
-          <div className="bg-slate-900 p-8 rounded-[32px] text-white shadow-2xl shadow-slate-900/20 relative overflow-hidden group">
-             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-            
+          <div className="bg-slate-900 p-8 rounded text-white shadow-2xl shadow-slate-900/20 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/20 rounded blur-3xl -translate-y-1/2 translate-x-1/2" />
+
             <div className="relative z-10 space-y-8">
               <div className="flex items-center gap-3">
                 <Activity className="w-5 h-5 text-blue-400" />
@@ -189,9 +191,9 @@ export default function LeadDetailPage() {
               </div>
 
               <div className="space-y-8">
-                <div className="p-5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                <div className="p-5 rounded bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-blue-600/20 flex items-center justify-center text-blue-400">
+                    <div className="w-10 h-10 rounded bg-blue-600/20 flex items-center justify-center text-blue-400">
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
@@ -201,9 +203,9 @@ export default function LeadDetailPage() {
                   </div>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                <div className="p-5 rounded bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-emerald-600/20 flex items-center justify-center text-emerald-400">
+                    <div className="w-10 h-10 rounded bg-emerald-600/20 flex items-center justify-center text-emerald-400">
                       <Phone className="w-5 h-5" />
                     </div>
                     <div>
@@ -216,30 +218,30 @@ export default function LeadDetailPage() {
             </div>
           </div>
 
-          <div className="bg-slate-50 p-8 rounded-[32px] border border-slate-200">
+          <div className="bg-slate-50 p-8 rounded border border-slate-200">
             <div className="flex items-center gap-3 mb-6">
-                <ClipboardList className="w-4 h-4 text-slate-400" />
-                <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Pipeline Timeline</h3>
+              <ClipboardList className="w-4 h-4 text-slate-400" />
+              <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Pipeline Timeline</h3>
             </div>
             <div className="space-y-6">
-                <div className="flex gap-4">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 ring-4 ring-blue-50" />
-                    <div>
-                        <p className="text-[11px] font-bold text-slate-900">Lead Established</p>
-                        <p className="text-[10px] font-semibold text-slate-400">{new Date(lead.created_at).toDateString()}</p>
-                    </div>
+              <div className="flex gap-4">
+                <div className="w-1.5 h-1.5 rounded bg-blue-600 mt-1.5 ring-4 ring-blue-50" />
+                <div>
+                  <p className="text-[11px] font-bold text-slate-900">Lead Established</p>
+                  <p className="text-[10px] font-semibold text-slate-400">{new Date(lead.created_at).toDateString()}</p>
                 </div>
-                <div className="flex gap-4">
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 mt-1.5 ring-4 ring-slate-100" />
-                    <div>
-                        <p className="text-[11px] font-bold text-slate-900">Last Synced</p>
-                        <p className="text-[10px] font-semibold text-slate-400">{new Date(lead.updated_at).toDateString()}</p>
-                    </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="w-1.5 h-1.5 rounded bg-slate-300 mt-1.5 ring-4 ring-slate-100" />
+                <div>
+                  <p className="text-[11px] font-bold text-slate-900">Last Synced</p>
+                  <p className="text-[10px] font-semibold text-slate-400">{new Date(lead.updated_at).toDateString()}</p>
                 </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+}

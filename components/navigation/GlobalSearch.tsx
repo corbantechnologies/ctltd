@@ -79,7 +79,7 @@ export function GlobalSearch({ role = "finance" }: { role?: "finance" | "directo
                         className="fixed inset-0 bg-slate-950/40 backdrop-blur-md z-[100] animate-in fade-in duration-300"
                         onClick={() => setOpen(false)}
                     />
-                    <div className="fixed top-[5%] sm:top-[15%] left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] max-w-2xl bg-white/90 backdrop-blur-2xl rounded-[2rem] shadow-2xl border border-slate-200 p-0 overflow-hidden z-[101] animate-in zoom-in-95 fade-in duration-300 max-h-[90vh] flex flex-col">
+                    <div className="fixed top-[5%] sm:top-[15%] left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] max-w-2xl bg-white/90 backdrop-blur-2xl rounded shadow-2xl border border-slate-200 p-0 overflow-hidden z-[101] animate-in zoom-in-95 fade-in duration-300 max-h-[90vh] flex flex-col">
                         <Command className="w-full">
                             <div className="flex items-center border-b border-slate-100 px-6" cmdk-input-wrapper="">
                                 <Search className="mr-3 h-5 w-5 shrink-0 text-slate-400" />

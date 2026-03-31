@@ -39,9 +39,9 @@ export default function ReportsDashboard({ rolePrefix = "director" }: { rolePref
 
     return (
         <div className="space-y-10 p-4 sm:p-0">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-slate-50 p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-slate-50 p-6 rounded border border-slate-100 shadow-sm">
                 <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-900 shadow-sm">
+                    <div className="w-12 h-12 rounded bg-white border border-slate-200 flex items-center justify-center text-slate-900 shadow-sm">
                         <CalendarRange className="w-6 h-6" />
                     </div>
                     <div>
@@ -49,9 +49,9 @@ export default function ReportsDashboard({ rolePrefix = "director" }: { rolePref
                         <p className="text-slate-400 text-[11px] font-medium uppercase tracking-widest mt-0.5">Monthly Financial Snapshots</p>
                     </div>
                 </div>
-                <a 
+                <a
                     href={`/${rolePrefix}/fiscal-years`}
-                    className="px-6 py-3 rounded-xl bg-slate-900 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-slate-900/20 active:scale-95"
+                    className="px-6 py-3 rounded bg-slate-900 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-slate-900/20 active:scale-95"
                 >
                     View Audit Trail
                 </a>

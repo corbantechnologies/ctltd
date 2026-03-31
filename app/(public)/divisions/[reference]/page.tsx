@@ -76,7 +76,7 @@ export default function DivisionPage() {
 
                     <div className="flex flex-col md:flex-row gap-8 sm:gap-10 items-start md:items-center">
                         {/* Division Logo Bubble */}
-                        <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 shrink-0 bg-white rounded-[1.5rem] sm:rounded-[2rem] p-4 flex items-center justify-center shadow-2xl shadow-black/50 border-4 border-slate-800/50 relative overflow-hidden group">
+                        <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 shrink-0 bg-white rounded sm:rounded p-4 flex items-center justify-center shadow-2xl shadow-black/50 border-4 border-slate-800/50 relative overflow-hidden group">
                             <div className="absolute inset-0 bg-gradient-to-tr from-slate-100 to-white z-0" />
                             {division.logo ? (
                                 <img src={division.logo} alt={division.name} className="w-full h-full object-contain relative z-10 group-hover:scale-105 transition-transform duration-500" />
@@ -163,7 +163,7 @@ export default function DivisionPage() {
                                         Core Services
                                     </h2>
                                 </div>
-                                <div className="bg-slate-50 border border-slate-200 p-6 sm:p-12 rounded-[1.5rem] sm:rounded-[2rem]">
+                                <div className="bg-slate-50 border border-slate-200 p-6 sm:p-12 rounded sm:rounded">
                                     <div className="prose prose-base sm:prose-lg prose-slate prose-orange max-w-none prose-ul:space-y-4 prose-li:marker:text-corporate-primary prose-li:marker:font-bold prose-li:pl-2">
                                         <ReactMarkdown remarkPlugins={[remarkGfm]}>{division.services}</ReactMarkdown>
                                     </div>
@@ -191,7 +191,7 @@ export default function DivisionPage() {
 
                         {/* Executive Contact Card */}
                         {division.website && (
-                            <div className="bg-white border text-center border-slate-200 rounded-[2rem] p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden group">
+                            <div className="bg-white border text-center border-slate-200 rounded p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden group">
                                 <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-corporate-primary via-orange-400 to-yellow-400" />
 
                                 <h3 className="text-xl font-semibold text-slate-900 mb-8 pt-2">Division Connect</h3>
@@ -214,7 +214,7 @@ export default function DivisionPage() {
 
                         {/* Leadership Spot */}
                         {division.director_details && (
-                            <div className="bg-slate-900 rounded-[2rem] p-8 relative overflow-hidden text-center border border-slate-800">
+                            <div className="bg-slate-900 rounded p-8 relative overflow-hidden text-center border border-slate-800">
                                 <div className="absolute top-0 right-0 w-48 h-48 bg-corporate-primary/20 rounded blur-[60px] translate-x-1/2 -translate-y-1/2" />
 
                                 <div className="relative z-10">

@@ -12,8 +12,8 @@ export default function AuthLayout({
       <div className="hidden lg:flex flex-col justify-between bg-[#1a1c1e] p-12 text-white relative overflow-hidden">
         {/* Abstract Background Effects */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-corporate-primary/10 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/3" />
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[80px] -translate-x-1/4 translate-y-1/4" />
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-corporate-primary/10 rounded blur-[100px] translate-x-1/3 -translate-y-1/3" />
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded blur-[80px] -translate-x-1/4 translate-y-1/4" />
         </div>
 
         <div className="relative z-10 flex items-center gap-2">

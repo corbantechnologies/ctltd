@@ -84,12 +84,12 @@ export default function QuotationsList({ rolePrefix }: QuotationsListProps) {
             placeholder="Search quotations by code, client, or lead..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full h-16 pl-14 pr-6 rounded-3xl border border-slate-200 bg-white focus:border-slate-900 focus:ring-0 transition-all font-semibold text-sm shadow-sm"
+            className="w-full h-16 pl-14 pr-6 rounded border border-slate-200 bg-white focus:border-slate-900 focus:ring-0 transition-all font-semibold text-sm shadow-sm"
           />
         </div>
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-[32px] shadow-2xl shadow-slate-100/50 overflow-hidden">
+      <div className="bg-white border border-slate-200 rounded shadow-2xl shadow-slate-100/50 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -106,7 +106,7 @@ export default function QuotationsList({ rolePrefix }: QuotationsListProps) {
                 <tr key={quotation.reference} className="group hover:bg-slate-50/50 transition-colors">
                   <td className="py-6 px-8">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-slate-900 group-hover:text-white transition-all shadow-inner">
+                      <div className="w-12 h-12 rounded bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-slate-900 group-hover:text-white transition-all shadow-inner">
                         <FileBadge className="w-5 h-5" />
                       </div>
                       <div>
@@ -119,18 +119,18 @@ export default function QuotationsList({ rolePrefix }: QuotationsListProps) {
                   </td>
                   <td className="py-6 px-8">
                     <div className="flex items-center gap-2">
-                       <Building2 className="w-3.5 h-3.5 text-slate-300" />
-                       <span className="text-sm font-semibold text-slate-700">{quotation.partner || quotation.lead || "Discovery Lead"}</span>
+                      <Building2 className="w-3.5 h-3.5 text-slate-300" />
+                      <span className="text-sm font-semibold text-slate-700">{quotation.partner || quotation.lead || "Discovery Lead"}</span>
                     </div>
                   </td>
                   <td className="py-6 px-8">
                     <div className="flex items-center gap-2 text-xs font-bold text-slate-500">
-                       <Calendar className="w-3.5 h-3.5 text-slate-300" />
-                       {new Intl.DateTimeFormat('en-GB').format(new Date(quotation.expiry_date))}
+                      <Calendar className="w-3.5 h-3.5 text-slate-300" />
+                      {new Intl.DateTimeFormat('en-GB').format(new Date(quotation.expiry_date))}
                     </div>
                   </td>
                   <td className="py-6 px-8">
-                    <div className={cn("inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border", getStatusStyle(quotation.status))}>
+                    <div className={cn("inline-flex items-center gap-2 px-3 py-1 rounded text-[10px] font-bold uppercase tracking-widest border", getStatusStyle(quotation.status))}>
                       {quotation.status === "ACCEPTED" ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Clock className="w-3.5 h-3.5" />}
                       {quotation.status}
                     </div>
@@ -138,11 +138,11 @@ export default function QuotationsList({ rolePrefix }: QuotationsListProps) {
                   <td className="py-6 px-8 text-right">
                     <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                       {quotation.status === "ACCEPTED" && quotation.partner && (
-                         <ConvertQuotationToInvoiceButton quotation={quotation} rolePrefix={rolePrefix} />
+                        <ConvertQuotationToInvoiceButton quotation={quotation} rolePrefix={rolePrefix} />
                       )}
                       <button
                         onClick={() => handleDownload(quotation)}
-                        className="w-10 h-10 rounded-xl bg-slate-100 text-slate-400 hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center shadow-lg active:scale-90"
+                        className="w-10 h-10 rounded bg-slate-100 text-slate-400 hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center shadow-lg active:scale-90"
                         title="Download PDF"
                       >
                         <Download className="w-4.5 h-4.5" />
@@ -166,7 +166,7 @@ function ConvertQuotationToInvoiceButton({ quotation, rolePrefix }: { quotation:
     <button
       disabled={mutation.isPending}
       onClick={() => mutation.mutate()}
-      className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center shadow-lg active:scale-90 disabled:opacity-50"
+      className="w-10 h-10 rounded bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center shadow-lg active:scale-90 disabled:opacity-50"
       title="Convert to Invoice"
     >
       {mutation.isPending ? (

@@ -239,7 +239,7 @@ export default function PartnersList({ rolePrefix }: PartnersListProps) {
                       {partner.division}
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
-                      <span className="bg-white border border-black/5 text-black/70 font-semibold text-[10px] px-2 py-0.5 rounded-sm shadow-none inline-block">
+                      <span className="bg-white border border-black/5 text-black/70 font-semibold text-[10px] px-2 py-0.5 rounded shadow-none inline-block">
                         {partner.partner_type}
                       </span>
                     </td>

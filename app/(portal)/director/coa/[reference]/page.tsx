@@ -92,7 +92,7 @@ export default function COADetailPage() {
 
       {/* Meta Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="border border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+        <div className="border border-black/5 bg-white/50 backdrop-blur-xl rounded overflow-hidden shadow-sm">
           <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded bg-[#D0402B]/5 flex items-center justify-center text-[#D0402B]">
@@ -110,7 +110,7 @@ export default function COADetailPage() {
           </div>
         </div>
 
-        <div className="border border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+        <div className="border border-black/5 bg-white/50 backdrop-blur-xl rounded overflow-hidden shadow-sm">
           <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded bg-[#D0402B]/5 flex items-center justify-center text-[#D0402B]">

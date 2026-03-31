@@ -122,7 +122,7 @@ export default function JournalsList({
   return (
     <div className="space-y-6">
       {/* Controls Section */}
-      <div className="bg-white/40 p-6 rounded-[32px] border border-white/60 backdrop-blur-md shadow-sm space-y-6">
+      <div className="bg-white/40 p-6 rounded border border-white/60 backdrop-blur-md shadow-sm space-y-6">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
           <div className="relative w-full lg:w-96 group">
             <Search
@@ -310,7 +310,7 @@ export default function JournalsList({
               href={`/${rolePrefix}/fiscal-years/${linkPrefix}/${journal.reference}`}
               className="group block"
             >
-              <div className="h-full border border-black/5 bg-white/60 backdrop-blur-xl rounded-[32px] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group-hover:bg-white/90">
+              <div className="h-full border border-black/5 bg-white/60 backdrop-blur-xl rounded overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group-hover:bg-white/90">
                 <div className="p-8">
                   <div className="flex justify-between items-start mb-6">
                     <div
@@ -383,7 +383,7 @@ export default function JournalsList({
         </div>
       ) : (
         /* Table View */
-        <div className="bg-white/60 backdrop-blur-xl rounded-[32px] border border-black/5 overflow-hidden shadow-xl shadow-black/5">
+        <div className="bg-white/60 backdrop-blur-xl rounded border border-black/5 overflow-hidden shadow-xl shadow-black/5">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -435,7 +435,7 @@ export default function JournalsList({
                       </div>
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
-                      <span className="bg-white/50 border border-black/5 text-black/60 font-semibold text-[9px] uppercase px-2 py-0.5 rounded-sm inline-block">
+                      <span className="bg-white/50 border border-black/5 text-black/60 font-semibold text-[9px] uppercase px-2 py-0.5 rounded inline-block">
                         {journal.journal_type}
                       </span>
                     </td>
@@ -476,7 +476,7 @@ export default function JournalsList({
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex justify-between items-center bg-white/40 p-6 rounded-[24px] border border-white/60 backdrop-blur-md shadow-sm mt-8">
+        <div className="flex justify-between items-center bg-white/40 p-6 rounded border border-white/60 backdrop-blur-md shadow-sm mt-8">
           <p className="text-xs font-semibold text-black/40 uppercase tracking-widest">
             Showing{" "}
             <span className="text-black font-semibold">
@@ -535,7 +535,7 @@ export default function JournalsList({
       )}
 
       {filteredJournals.length === 0 && !isLoadingJournals && (
-        <div className="py-24 text-center bg-white/40 rounded-[40px] border border-dashed border-black/10">
+        <div className="py-24 text-center bg-white/40 rounded border border-dashed border-black/10">
           <div className="w-20 h-20 rounded bg-black/5 flex items-center justify-center text-black/10 mx-auto mb-6">
             <History className="w-10 h-10" />
           </div>

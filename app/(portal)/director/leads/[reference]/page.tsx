@@ -1,6 +1,7 @@
 "use client";
 
 import { useFetchLead } from "@/hooks/leads/actions";
+import { Lead } from "@/services/leads";
 import { useParams, useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import UpdateLead from "@/forms/leads/UpdateLead";
@@ -29,7 +30,8 @@ import Link from "next/link";
 export default function DirectorLeadDetailPage() {
   const { reference } = useParams();
   const router = useRouter();
-  const { data: lead, isLoading } = useFetchLead(reference as string);
+  const { data, isLoading } = useFetchLead(reference as string);
+  const lead = data as Lead | undefined;
 
   if (isLoading) return <LoadingSpinner />;
   if (!lead) return <div>Lead not found.</div>;
@@ -65,7 +67,7 @@ export default function DirectorLeadDetailPage() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div className="space-y-4 w-full">
           <div className="flex items-center gap-5">
-            <div className="w-16 h-16 rounded-2xl bg-[#D0402B] flex items-center justify-center text-white shadow-2xl shadow-[#D0402B]/30 transition-transform hover:scale-105 active:scale-95">
+            <div className="w-16 h-16 rounded bg-[#D0402B] flex items-center justify-center text-white shadow-2xl shadow-[#D0402B]/30 transition-transform hover:scale-105 active:scale-95">
               <Users className="w-7 h-7" />
             </div>
             <div>
@@ -91,7 +93,7 @@ export default function DirectorLeadDetailPage() {
               leadName={`${lead.first_name} ${lead.last_name}`}
               rolePrefix="director"
               trigger={
-                <button className="flex items-center gap-3 px-8 py-4 bg-[#D0402B] hover:bg-black text-white rounded-xl font-bold text-sm uppercase tracking-widest transition-all shadow-2xl shadow-[#D0402B]/20 active:scale-[0.98] group">
+                <button className="flex items-center gap-3 px-8 py-4 bg-[#D0402B] hover:bg-black text-white rounded font-bold text-sm uppercase tracking-widest transition-all shadow-2xl shadow-[#D0402B]/20 active:scale-[0.98] group">
                   <UserCheck className="w-4.5 h-4.5 group-hover:scale-110 transition-transform" />
                   Convert to Partner
                 </button>
@@ -102,7 +104,7 @@ export default function DirectorLeadDetailPage() {
           {lead.status === "WON" && lead.partner_reference && (
             <Link
               href={`/director/partners/${lead.partner_reference}`}
-              className="flex items-center gap-3 px-8 py-4 bg-black hover:bg-slate-800 text-white rounded-xl font-bold text-sm uppercase tracking-widest transition-all shadow-2xl active:scale-[0.98] group"
+              className="flex items-center gap-3 px-8 py-4 bg-black hover:bg-slate-800 text-white rounded font-bold text-sm uppercase tracking-widest transition-all shadow-2xl active:scale-[0.98] group"
             >
               <ExternalLink className="w-4.5 h-4.5 group-hover:translate-x-1 transition-transform" />
               View Partner Profile
@@ -112,7 +114,7 @@ export default function DirectorLeadDetailPage() {
           <UpdateLead
             lead={lead}
             trigger={
-              <button className="flex items-center gap-3 px-8 py-4 bg-slate-100 hover:bg-white text-slate-900 border border-slate-200 rounded-xl font-semibold text-sm tracking-tight transition-all shadow-sm active:scale-[0.98] group">
+              <button className="flex items-center gap-3 px-8 py-4 bg-slate-100 hover:bg-white text-slate-900 border border-slate-200 rounded font-semibold text-sm tracking-tight transition-all shadow-sm active:scale-[0.98] group">
                 <Edit className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                 Modify Identity
               </button>
@@ -125,8 +127,8 @@ export default function DirectorLeadDetailPage() {
         <div className="lg:col-span-2 space-y-12">
           {/* Metadata Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white p-10 rounded-[32px] border border-black/5 shadow-xl shadow-black/5 relative overflow-hidden group">
-               <div className="absolute top-0 right-0 w-48 h-48 bg-[#D0402B]/5 rounded-full blur-3xl opacity-50 group-hover:bg-[#D0402B]/10 transition-colors" />
+            <div className="bg-white p-10 rounded border border-black/5 shadow-xl shadow-black/5 relative overflow-hidden group">
+               <div className="absolute top-0 right-0 w-48 h-48 bg-[#D0402B]/5 rounded blur-3xl opacity-50 group-hover:bg-[#D0402B]/10 transition-colors" />
                <div className="relative z-10 space-y-8">
                   <div className="flex items-center gap-3 text-[#D0402B]">
                     <ShieldCheck className="w-5 h-5" />
@@ -151,8 +153,8 @@ export default function DirectorLeadDetailPage() {
                </div>
             </div>
 
-            <div className="bg-white p-10 rounded-[32px] border border-black/5 shadow-xl shadow-black/5 relative overflow-hidden group">
-               <div className="absolute top-0 right-0 w-48 h-48 bg-black/5 rounded-full blur-3xl opacity-50 group-hover:bg-black/10 transition-colors" />
+            <div className="bg-white p-10 rounded border border-black/5 shadow-xl shadow-black/5 relative overflow-hidden group">
+               <div className="absolute top-0 right-0 w-48 h-48 bg-black/5 rounded blur-3xl opacity-50 group-hover:bg-black/10 transition-colors" />
                <div className="relative z-10 space-y-8">
                   <div className="flex items-center gap-3 text-black">
                     <Building2 className="w-5 h-5" />
@@ -179,7 +181,7 @@ export default function DirectorLeadDetailPage() {
           </div>
 
           {/* Interaction Timeline Integration */}
-          <div className="bg-white p-10 rounded-[48px] border border-black/5 shadow-2xl shadow-black/5">
+          <div className="bg-white p-10 rounded border border-black/5 shadow-2xl shadow-black/5">
                 <InteractionTimeline 
                     leadId={lead.id} 
                     rolePrefix="director" 
@@ -188,9 +190,9 @@ export default function DirectorLeadDetailPage() {
         </div>
 
         <div className="space-y-8">
-           <div className="bg-black p-10 rounded-[40px] text-white shadow-2xl shadow-[#D0402B]/10 relative overflow-hidden group">
+           <div className="bg-black p-10 rounded text-white shadow-2xl shadow-[#D0402B]/10 relative overflow-hidden group">
               {/* Decorative accent */}
-              <div className="absolute top-0 right-0 w-40 h-40 bg-[#D0402B]/30 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2" />
+              <div className="absolute top-0 right-0 w-40 h-40 bg-[#D0402B]/30 rounded blur-[60px] -translate-y-1/2 translate-x-1/2" />
               
               <div className="relative z-10 space-y-10">
                  <div className="flex items-center gap-3 text-[#D0402B]">
@@ -199,9 +201,9 @@ export default function DirectorLeadDetailPage() {
                  </div>
 
                  <div className="space-y-6">
-                    <div className="p-6 rounded-3xl bg-white/5 border border-white/5 hover:bg-[#D0402B]/10 transition-all group/card">
+                    <div className="p-6 rounded bg-white/5 border border-white/5 hover:bg-[#D0402B]/10 transition-all group/card">
                         <div className="flex items-center gap-5">
-                            <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white/40 group-hover/card:text-white group-hover/card:bg-[#D0402B] transition-all">
+                            <div className="w-12 h-12 rounded bg-white/5 flex items-center justify-center text-white/40 group-hover/card:text-white group-hover/card:bg-[#D0402B] transition-all">
                                 <Mail className="w-6 h-6" />
                             </div>
                             <div className="overflow-hidden">
@@ -211,9 +213,9 @@ export default function DirectorLeadDetailPage() {
                         </div>
                     </div>
 
-                    <div className="p-6 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all group/card">
+                    <div className="p-6 rounded bg-white/5 border border-white/5 hover:bg-white/10 transition-all group/card">
                         <div className="flex items-center gap-5">
-                            <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white/40 group-hover/card:text-white group-hover/card:bg-slate-700 transition-all">
+                            <div className="w-12 h-12 rounded bg-white/5 flex items-center justify-center text-white/40 group-hover/card:text-white group-hover/card:bg-slate-700 transition-all">
                                 <Phone className="w-6 h-6" />
                             </div>
                             <div>
@@ -226,21 +228,21 @@ export default function DirectorLeadDetailPage() {
               </div>
            </div>
 
-           <div className="bg-slate-100/50 p-10 rounded-[40px] border border-black/5 text-black">
+           <div className="bg-slate-100/50 p-10 rounded border border-black/5 text-black">
               <div className="flex items-center gap-3 mb-8">
                   <ClipboardList className="w-5 h-5 text-black/30" />
                   <h3 className="text-[11px] font-bold uppercase tracking-widest">Pipeline Log</h3>
               </div>
               <div className="space-y-8">
                   <div className="flex gap-5">
-                      <div className="w-2 h-2 rounded-full bg-[#D0402B] mt-2 ring-8 ring-[#D0402B]/5" />
+                      <div className="w-2 h-2 rounded bg-[#D0402B] mt-2 ring-8 ring-[#D0402B]/5" />
                       <div>
                           <p className="text-xs font-bold text-black tracking-tight">Lead Ingestion</p>
                           <p className="text-[10px] font-semibold text-black/40">{new Date(lead.created_at).toDateString()}</p>
                       </div>
                   </div>
                   <div className="flex gap-5">
-                      <div className="w-2 h-2 rounded-full bg-black mt-2 ring-8 ring-black/5" />
+                      <div className="w-2 h-2 rounded bg-black mt-2 ring-8 ring-black/5" />
                       <div>
                           <p className="text-xs font-bold text-black tracking-tight">Latest Profile Sync</p>
                           <p className="text-[10px] font-semibold text-black/40">{new Date(lead.updated_at).toDateString()}</p>

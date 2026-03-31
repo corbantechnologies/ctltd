@@ -124,7 +124,7 @@ export default function DivisionDetail() {
             {quickStats.map((stat, i) => (
               <div
                 key={i}
-                className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-2xl shadow-slate-100 relative overflow-hidden group hover:-translate-y-1 transition-all duration-500"
+                className="bg-white p-8 rounded border border-slate-200 shadow-2xl shadow-slate-100 relative overflow-hidden group hover:-translate-y-1 transition-all duration-500"
               >
                 <div className={cn("absolute top-0 right-0 w-24 h-24 rounded blur-3xl -translate-y-1/2 translate-x-1/2 opacity-30 group-hover:opacity-60 transition-opacity", stat.bg)} />
                 <div className="relative z-10 flex flex-col gap-4">
@@ -166,7 +166,7 @@ export default function DivisionDetail() {
                   division.partners.map((partner: any) => (
                     <div
                       key={partner.reference}
-                      className="group bg-white p-6 rounded-[2.5rem] border border-slate-200 hover:border-corporate-primary/20 hover:shadow-2xl hover:shadow-slate-100 transition-all flex items-center gap-5"
+                      className="group bg-white p-6 rounded border border-slate-200 hover:border-corporate-primary/20 hover:shadow-2xl hover:shadow-slate-100 transition-all flex items-center gap-5"
                     >
                       <div className="w-14 h-14 rounded bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-corporate-primary group-hover:text-white transition-all shadow-inner border border-slate-100">
                         <Users className="w-6 h-6" />
@@ -182,7 +182,7 @@ export default function DivisionDetail() {
                     </div>
                   ))
                 ) : (
-                  <div className="col-span-2 py-20 bg-slate-50/50 rounded-[3rem] border border-dashed border-slate-200 flex flex-col items-center justify-center text-center">
+                  <div className="col-span-2 py-20 bg-slate-50/50 rounded border border-dashed border-slate-200 flex flex-col items-center justify-center text-center">
                     <div className="w-16 h-16 rounded bg-slate-100 flex items-center justify-center text-slate-300 mb-4">
                       <Users className="w-8 h-8" />
                     </div>
@@ -194,7 +194,7 @@ export default function DivisionDetail() {
 
             {/* Side Info */}
             <div className="space-y-8">
-              <div className="bg-slate-900 p-10 rounded-[3rem] text-white border border-slate-800 shadow-2xl relative overflow-hidden group">
+              <div className="bg-slate-900 p-10 rounded text-white border border-slate-800 shadow-2xl relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-corporate-primary/10 rounded blur-[100px] -translate-y-1/2 translate-x-1/2" />
                 <div className="relative z-10 space-y-6">
                   <div className="flex items-center gap-3">
@@ -222,7 +222,7 @@ export default function DivisionDetail() {
         </Tabs.Content>
 
         <Tabs.Content value="financials" className="focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <div className="bg-white rounded-[3rem] border border-slate-200 shadow-2xl shadow-slate-100 overflow-hidden">
+          <div className="bg-white rounded border border-slate-200 shadow-2xl shadow-slate-100 overflow-hidden">
             <div className="p-10 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 bg-slate-50/30">
               <div>
                 <h3 className="text-2xl font-semibold text-slate-900 tracking-tight">
@@ -299,7 +299,7 @@ export default function DivisionDetail() {
                     <tr>
                       <td colSpan={6} className="py-32 text-center">
                         <div className="flex flex-col items-center justify-center">
-                          <div className="w-20 h-20 rounded-[2rem] bg-slate-50 flex items-center justify-center text-slate-200 mb-6">
+                          <div className="w-20 h-20 rounded bg-slate-50 flex items-center justify-center text-slate-200 mb-6">
                             <History className="w-10 h-10" />
                           </div>
                           <p className="text-xs font-semibold text-slate-400 uppercase tracking-[0.3em]">No transactional data available</p>

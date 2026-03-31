@@ -145,8 +145,8 @@ export default function ProductsList({ rolePrefix }: ProductsListProps) {
                     <div className="w-14 h-14 rounded flex items-center justify-center transition-all duration-500 border border-slate-100 shadow-inner bg-slate-50 group-hover:bg-slate-900 group-hover:text-white group-hover:scale-110 group-hover:shadow-lg">
                       <Package className="w-6 h-6" />
                     </div>
-                    <div className={cn("px-4 py-1.5 rounded text-[10px] font-semibold uppercase tracking-widest flex items-center gap-2 shadow-sm border", 
-                        product.is_active ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-slate-50 text-slate-400 border-slate-100")}>
+                    <div className={cn("px-4 py-1.5 rounded text-[10px] font-semibold uppercase tracking-widest flex items-center gap-2 shadow-sm border",
+                      product.is_active ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-slate-50 text-slate-400 border-slate-100")}>
                       <div className={cn("w-2 h-2 rounded", product.is_active ? "bg-emerald-500 animate-pulse" : "bg-slate-300")} />
                       {product.is_active ? "Market Ready" : "Internal Build"}
                     </div>
@@ -157,37 +157,37 @@ export default function ProductsList({ rolePrefix }: ProductsListProps) {
                       {product.name}
                     </h3>
                     <div className="flex items-center gap-2 mt-2">
-                        <Tag className="w-3.5 h-3.5 text-slate-400" />
-                        <span className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">{product.product_type}</span>
-                        <div className="w-1 h-1 rounded-full bg-slate-200" />
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">{product.billing_cycle}</span>
+                      <Tag className="w-3.5 h-3.5 text-slate-400" />
+                      <span className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">{product.product_type}</span>
+                      <div className="w-1 h-1 rounded bg-slate-200" />
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">{product.billing_cycle}</span>
                     </div>
-                    
+
                     <div className="mt-4 flex items-center justify-between">
-                        <div>
-                            <p className="text-[9px] font-semibold text-slate-400 uppercase tracking-widest mb-1">Valuation</p>
-                            <div className="flex items-center gap-1 text-slate-900 font-bold">
-                                <span className="text-xs">KES</span>
-                                <span className="text-lg tracking-tight">{Number(product.unit_price).toLocaleString()}</span>
-                            </div>
+                      <div>
+                        <p className="text-[9px] font-semibold text-slate-400 uppercase tracking-widest mb-1">Valuation</p>
+                        <div className="flex items-center gap-1 text-slate-900 font-bold">
+                          <span className="text-xs">KES</span>
+                          <span className="text-lg tracking-tight">{Number(product.unit_price).toLocaleString()}</span>
                         </div>
-                        {product.product_type === "GOODS" && (
-                            <div className="text-right">
-                                <p className="text-[9px] font-semibold text-slate-400 uppercase tracking-widest mb-1">Inventory</p>
-                                <span className={cn("text-xs font-bold px-2 py-0.5 rounded border", product.quantity > 5 ? "bg-slate-50 text-slate-900" : "bg-red-50 text-red-600 border-red-100")}>
-                                    {product.quantity} units
-                                </span>
-                            </div>
-                        )}
+                      </div>
+                      {product.product_type === "GOODS" && (
+                        <div className="text-right">
+                          <p className="text-[9px] font-semibold text-slate-400 uppercase tracking-widest mb-1">Inventory</p>
+                          <span className={cn("text-xs font-bold px-2 py-0.5 rounded border", product.quantity > 5 ? "bg-slate-50 text-slate-900" : "bg-red-50 text-red-600 border-red-100")}>
+                            {product.quantity} units
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
 
                   <div className="pt-6 border-t border-slate-100 flex items-center justify-between relative z-10">
                     <UpdateProductModal product={product} trigger={
-                        <button className={cn("text-[10px] font-semibold uppercase tracking-widest flex items-center gap-2 hover:opacity-80 transition-opacity", primaryColorClass)}>
-                            <Edit className="w-3.5 h-3.5" />
-                            Update Unit
-                        </button>
+                      <button className={cn("text-[10px] font-semibold uppercase tracking-widest flex items-center gap-2 hover:opacity-80 transition-opacity", primaryColorClass)}>
+                        <Edit className="w-3.5 h-3.5" />
+                        Update Unit
+                      </button>
                     } />
                     <Link href={`/${rolePrefix}/products/${product.reference}`} className="w-10 h-10 rounded bg-slate-50 flex items-center justify-center text-slate-300 hover:bg-slate-900 hover:text-white group-hover:rotate-45 transition-all">
                       <ArrowRight className="w-5 h-5" />
@@ -239,19 +239,19 @@ export default function ProductsList({ rolePrefix }: ProductsListProps) {
                       </td>
                       <td className="py-6 px-8">
                         <div className="flex flex-col">
-                            <span className="text-sm font-semibold text-slate-700 tracking-tight">{product.product_type}</span>
-                            <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">{product.billing_cycle}</span>
+                          <span className="text-sm font-semibold text-slate-700 tracking-tight">{product.product_type}</span>
+                          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">{product.billing_cycle}</span>
                         </div>
                       </td>
                       <td className="py-6 px-8">
                         <div className="flex flex-col">
-                            <div className="flex items-center gap-1 text-sm font-bold text-slate-900">
-                                <span className="text-[10px] text-slate-400">KES</span>
-                                {Number(product.unit_price).toLocaleString()}
-                            </div>
-                            <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
-                                {product.product_type === "GOODS" ? `${product.quantity} In Stock` : "Service Base"}
-                            </span>
+                          <div className="flex items-center gap-1 text-sm font-bold text-slate-900">
+                            <span className="text-[10px] text-slate-400">KES</span>
+                            {Number(product.unit_price).toLocaleString()}
+                          </div>
+                          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
+                            {product.product_type === "GOODS" ? `${product.quantity} In Stock` : "Service Base"}
+                          </span>
                         </div>
                       </td>
                       <td className="py-6 px-8">
@@ -263,17 +263,17 @@ export default function ProductsList({ rolePrefix }: ProductsListProps) {
                       </td>
                       <td className="py-6 px-8 text-right">
                         <div className="flex items-center justify-end gap-2">
-                             <UpdateProductModal product={product} trigger={
-                                <button className="inline-flex items-center justify-center w-10 h-10 rounded bg-slate-100 text-slate-400 hover:bg-blue-600 hover:text-white transition-all border border-transparent hover:shadow-lg group/edit">
-                                    <Edit className="w-4 h-4" />
-                                </button>
-                            } />
-                            <Link
-                                href={`/${rolePrefix}/products/${product.reference}`}
-                                className="inline-flex items-center justify-center w-12 h-12 rounded bg-slate-100 text-slate-400 hover:bg-slate-900 hover:text-white transition-all border border-transparent hover:border-slate-800 hover:shadow-xl hover:rotate-12 group/btn"
-                            >
-                                <ArrowRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-1" />
-                            </Link>
+                          <UpdateProductModal product={product} trigger={
+                            <button className="inline-flex items-center justify-center w-10 h-10 rounded bg-slate-100 text-slate-400 hover:bg-blue-600 hover:text-white transition-all border border-transparent hover:shadow-lg group/edit">
+                              <Edit className="w-4 h-4" />
+                            </button>
+                          } />
+                          <Link
+                            href={`/${rolePrefix}/products/${product.reference}`}
+                            className="inline-flex items-center justify-center w-12 h-12 rounded bg-slate-100 text-slate-400 hover:bg-slate-900 hover:text-white transition-all border border-transparent hover:border-slate-800 hover:shadow-xl hover:rotate-12 group/btn"
+                          >
+                            <ArrowRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-1" />
+                          </Link>
                         </div>
                       </td>
                     </tr>

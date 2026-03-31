@@ -1,15 +1,15 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import { 
-  useFetchFinancialMonth, 
+import {
+  useFetchFinancialMonth,
 } from "@/hooks/financialmonths/actions";
 import FinancialMonthReport from "@/components/financialmonths/FinancialMonthReport";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
-import { 
-  ChevronLeft, 
-  Download, 
-  Lock, 
+import {
+  ChevronLeft,
+  Download,
+  Lock,
   TrendingDown,
   Loader2
 } from "lucide-react";
@@ -22,7 +22,7 @@ export default function OperationsMonthDetailPage() {
   const router = useRouter();
   const headers = useAxiosAuth();
   const { data: month, isLoading } = useFetchFinancialMonth(monthRef as string);
-  
+
   const [isDownloading, setIsDownloading] = useState(false);
 
   if (isLoading) return <LoadingSpinner />;
@@ -80,7 +80,7 @@ export default function OperationsMonthDetailPage() {
               <li>/</li>
               <li>
                 <button onClick={() => router.push(`/operations/fiscal-years/${reference}`)} className="hover:text-black">
-                   {month.financial_year || "Current Year"}
+                  {month.financial_year || "Current Year"}
                 </button>
               </li>
               <li>/</li>
@@ -89,75 +89,75 @@ export default function OperationsMonthDetailPage() {
           </nav>
 
           <div className="flex items-center gap-6">
-             <button 
-               onClick={() => router.back()}
-               className="w-12 h-12 rounded bg-black/5 flex items-center justify-center text-black/20 hover:bg-black hover:text-white transition-all shadow-xl shadow-black/5 border border-black/5"
-             >
-               <ChevronLeft className="w-6 h-6 shrink-0" />
-             </button>
-             <div>
-                <h1 className="text-2xl font-semibold text-black tracking-tighter italic leading-none flex items-center gap-3">
-                  {month.name}
-                  {month.is_closed ? (
-                    <div className="w-2.5 h-2.5 rounded-full bg-gray-300" />
-                  ) : (
-                    <div className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
-                  )}
-                </h1>
-                <p className="text-[10px] font-semibold text-black/30 uppercase tracking-[0.4em] mt-2">
-                   Fiscal Period Reflection
-                </p>
-             </div>
+            <button
+              onClick={() => router.back()}
+              className="w-12 h-12 rounded bg-black/5 flex items-center justify-center text-black/20 hover:bg-black hover:text-white transition-all shadow-xl shadow-black/5 border border-black/5"
+            >
+              <ChevronLeft className="w-6 h-6 shrink-0" />
+            </button>
+            <div>
+              <h1 className="text-2xl font-semibold text-black tracking-tighter italic leading-none flex items-center gap-3">
+                {month.name}
+                {month.is_closed ? (
+                  <div className="w-2.5 h-2.5 rounded bg-gray-300" />
+                ) : (
+                  <div className="w-2.5 h-2.5 rounded bg-blue-500 animate-pulse" />
+                )}
+              </h1>
+              <p className="text-[10px] font-semibold text-black/30 uppercase tracking-[0.4em] mt-2">
+                Fiscal Period Reflection
+              </p>
+            </div>
           </div>
         </div>
 
         {/* Action Buttons */}
         <div className="flex items-center gap-3 self-end md:self-center">
-           <button 
-             onClick={handleDownload}
-             disabled={isDownloading}
-             className="h-10 px-6 rounded-full bg-white border border-black/5 shadow-2xl flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black/70 hover:bg-black hover:text-white transition-all disabled:opacity-50"
-           >
-             {isDownloading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
-             {isDownloading ? "Generating..." : "Snapshot"}
-           </button>
+          <button
+            onClick={handleDownload}
+            disabled={isDownloading}
+            className="h-10 px-6 rounded bg-white border border-black/5 shadow-2xl flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black/70 hover:bg-black hover:text-white transition-all disabled:opacity-50"
+          >
+            {isDownloading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+            {isDownloading ? "Generating..." : "Snapshot"}
+          </button>
         </div>
       </div>
 
       {/* Audit Alert */}
       {month.is_closed ? (
         <div className="bg-black/5 border border-black/5 rounded p-6 flex items-center gap-6 shadow-inner">
-           <div className="w-12 h-12 rounded bg-white flex items-center justify-center text-black shadow-xl shrink-0">
-              <Lock className="w-5 h-5" />
-           </div>
-           <div>
-              <p className="text-sm font-bold text-black tracking-tight">Period Finalized</p>
-              <p className="text-[11px] text-black/40 font-medium">This month is locked and only available for audit and view.</p>
-           </div>
+          <div className="w-12 h-12 rounded bg-white flex items-center justify-center text-black shadow-xl shrink-0">
+            <Lock className="w-5 h-5" />
+          </div>
+          <div>
+            <p className="text-sm font-bold text-black tracking-tight">Period Finalized</p>
+            <p className="text-[11px] text-black/40 font-medium">This month is locked and only available for audit and view.</p>
+          </div>
         </div>
       ) : (
-         <div className="bg-blue-600/5 border border-blue-600/10 rounded p-6 flex items-center gap-6 shadow-inner">
-           <div className="w-12 h-12 rounded bg-white flex items-center justify-center text-blue-600 shadow-xl shrink-0">
-              <TrendingDown className="w-5 h-5" />
-           </div>
-           <div>
-              <p className="text-sm font-bold text-blue-600 tracking-tight">Active Observation</p>
-              <p className="text-[11px] text-blue-600/40 font-medium">Monitoring period progress in real-time. Unposted journals detected: <b>{month.unposted_journals_count}</b>.</p>
-           </div>
+        <div className="bg-blue-600/5 border border-blue-600/10 rounded p-6 flex items-center gap-6 shadow-inner">
+          <div className="w-12 h-12 rounded bg-white flex items-center justify-center text-blue-600 shadow-xl shrink-0">
+            <TrendingDown className="w-5 h-5" />
+          </div>
+          <div>
+            <p className="text-sm font-bold text-blue-600 tracking-tight">Active Observation</p>
+            <p className="text-[11px] text-blue-600/40 font-medium">Monitoring period progress in real-time. Unposted journals detected: <b>{month.unposted_journals_count}</b>.</p>
+          </div>
         </div>
       )}
 
       {/* Main Report Section */}
       <div className="pt-6">
-         <div className="flex items-center gap-4 mb-8">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.5em] text-black/30">Financial <span className="text-black">Audit Report</span></h2>
-            <div className="flex-1 h-px bg-gray-100" />
-         </div>
-         
-         <FinancialMonthReport
-            month={month}
-            rolePrefix="operations"
-         />
+        <div className="flex items-center gap-4 mb-8">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.5em] text-black/30">Financial <span className="text-black">Audit Report</span></h2>
+          <div className="flex-1 h-px bg-gray-100" />
+        </div>
+
+        <FinancialMonthReport
+          month={month}
+          rolePrefix="operations"
+        />
       </div>
     </div>
   );

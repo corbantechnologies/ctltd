@@ -8,7 +8,7 @@ export default function FinanceInvoicesPage() {
     <div className="space-y-10 pb-20">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-corporate-primary flex items-center justify-center text-white shadow-2xl shadow-corporate-primary/30">
+          <div className="w-14 h-14 rounded bg-corporate-primary flex items-center justify-center text-white shadow-2xl shadow-corporate-primary/30">
             <Landmark className="w-6 h-6" />
           </div>
           <div>
@@ -22,9 +22,9 @@ export default function FinanceInvoicesPage() {
         </div>
       </div>
 
-      <div className="bg-slate-50/50 p-1 rounded-[40px] border border-slate-100">
-        <div className="bg-white p-10 rounded-[38px] shadow-sm">
-            <InvoicesList rolePrefix="finance" />
+      <div className="bg-slate-50/50 p-1 rounded border border-slate-100">
+        <div className="bg-white p-10 rounded shadow-sm">
+          <InvoicesList rolePrefix="finance" />
         </div>
       </div>
     </div>

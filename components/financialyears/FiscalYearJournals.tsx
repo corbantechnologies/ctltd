@@ -438,7 +438,7 @@ export default function FiscalYearJournals({
       )}
 
       {filteredJournals.length === 0 && !isLoadingTypes && (
-        <div className="py-16 text-center bg-white rounded-[32px] border border-dashed border-gray-200">
+        <div className="py-16 text-center bg-white rounded border border-dashed border-gray-200">
           <div className="w-16 h-16 rounded bg-gray-50 flex items-center justify-center text-gray-300 mx-auto mb-4">
             <History className="w-8 h-8" />
           </div>

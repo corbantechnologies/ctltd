@@ -39,7 +39,7 @@ export default function JournalsDetailPage() {
     data: journal,
     refetch: refetchJournal,
   } = useFetchJournal(journal_reference as string);
-  
+
   const [entryMode, setEntryMode] = useState<"single" | "multiline" | null>(null);
   const [showAddPopover, setShowAddPopover] = useState(false);
   const [openUpdateJournal, setOpenUpdateJournal] = useState(false);
@@ -192,38 +192,38 @@ export default function JournalsDetailPage() {
                 </button>
 
                 {showAddPopover && (
-                  <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-slate-200 rounded-xl shadow-2xl z-[60] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-slate-200 rounded shadow-2xl z-[60] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
                     <div className="p-1">
-                      <button 
+                      <button
                         onClick={() => {
-                            setEntryMode("single");
-                            setShowAddPopover(false);
+                          setEntryMode("single");
+                          setShowAddPopover(false);
                         }}
-                        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 rounded-lg transition-colors group text-left"
+                        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 rounded transition-colors group text-left"
                       >
-                         <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                            <Square className="w-4 h-4" />
-                         </div>
-                         <div className="flex flex-col">
-                            <span className="text-xs font-bold text-slate-900">Record Single Entry</span>
-                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Fast 1-to-1 Mapping</span>
-                         </div>
+                        <div className="w-8 h-8 rounded bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                          <Square className="w-4 h-4" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-xs font-bold text-slate-900">Record Single Entry</span>
+                          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Fast 1-to-1 Mapping</span>
+                        </div>
                       </button>
 
-                      <button 
-                         onClick={() => {
-                            setEntryMode("multiline");
-                            setShowAddPopover(false);
+                      <button
+                        onClick={() => {
+                          setEntryMode("multiline");
+                          setShowAddPopover(false);
                         }}
-                        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 rounded-lg transition-colors group text-left"
+                        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 rounded transition-colors group text-left"
                       >
-                         <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-                            <Rows className="w-4 h-4" />
-                         </div>
-                         <div className="flex flex-col">
-                            <span className="text-xs font-bold text-slate-900">Multi-line Batch</span>
-                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Splits & Complex Lists</span>
-                         </div>
+                        <div className="w-8 h-8 rounded bg-indigo-50 flex items-center justify-center text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                          <Rows className="w-4 h-4" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-xs font-bold text-slate-900">Multi-line Batch</span>
+                          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Splits & Complex Lists</span>
+                        </div>
                       </button>
                     </div>
                   </div>
@@ -397,25 +397,25 @@ export default function JournalsDetailPage() {
           {(() => {
             const batchTotals = { debit: totalDebit, credit: totalCredit, balance: totalDebit - totalCredit };
             return entryMode === "single" ? (
-               <SingleJournalEntry
-                  rolePrefix="finance"
-                  journalReference={journal.code}
-                  currentTotals={batchTotals}
-                  onSuccess={() => setEntryMode(null)}
-                  onClose={() => setEntryMode(null)}
-                  refetch={refetchJournal}
-                  className="min-h-screen border-none shadow-none rounded-none"
-               />
+              <SingleJournalEntry
+                rolePrefix="finance"
+                journalReference={journal.code}
+                currentTotals={batchTotals}
+                onSuccess={() => setEntryMode(null)}
+                onClose={() => setEntryMode(null)}
+                refetch={refetchJournal}
+                className="min-h-screen border-none shadow-none rounded-none"
+              />
             ) : (
-               <MultiLineJournalEntry
-                  rolePrefix="finance"
-                  journalReference={journal.code}
-                  currentTotals={batchTotals}
-                  onSuccess={() => setEntryMode(null)}
-                  onClose={() => setEntryMode(null)}
-                  refetch={refetchJournal}
-                  className="min-h-screen border-none shadow-none rounded-none"
-               />
+              <MultiLineJournalEntry
+                rolePrefix="finance"
+                journalReference={journal.code}
+                currentTotals={batchTotals}
+                onSuccess={() => setEntryMode(null)}
+                onClose={() => setEntryMode(null)}
+                refetch={refetchJournal}
+                className="min-h-screen border-none shadow-none rounded-none"
+              />
             );
           })()}
         </div>

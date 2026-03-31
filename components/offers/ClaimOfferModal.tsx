@@ -52,7 +52,7 @@ export function ClaimOfferModal({
   if (success) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
-        <div className="relative w-full sm:max-w-md rounded-[40px] border-none p-12 text-center space-y-8 animate-in zoom-in-95 duration-300 bg-white" onClick={(e) => e.stopPropagation()}>
+        <div className="relative w-full sm:max-w-md rounded border-none p-12 text-center space-y-8 animate-in zoom-in-95 duration-300 bg-white" onClick={(e) => e.stopPropagation()}>
           <div className="w-24 h-24 bg-corporate-primary/10 rounded flex items-center justify-center mx-auto mb-4">
             <CheckCircle2 className="w-12 h-12 text-corporate-primary" />
           </div>
@@ -80,7 +80,7 @@ export function ClaimOfferModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
-      <div className="relative w-full overflow-y-auto max-h-[90vh] sm:max-w-lg rounded-[48px] border-none p-0 shadow-2xl animate-in fade-in zoom-in-95 duration-300 bg-white" onClick={(e) => e.stopPropagation()}>
+      <div className="relative w-full overflow-y-auto max-h-[90vh] sm:max-w-lg rounded border-none p-0 shadow-2xl animate-in fade-in zoom-in-95 duration-300 bg-white" onClick={(e) => e.stopPropagation()}>
         <div className="relative">
           {/* Header Backdrop */}
           <div className="bg-black p-12 text-white relative overflow-hidden">
@@ -180,7 +180,7 @@ export function ClaimOfferModal({
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white rounded-[24px] py-6 text-xl font-semibold shadow-2xl shadow-orange-500/20 transition-all active:scale-95 disabled:opacity-50"
+                className="w-full flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white rounded py-6 text-xl font-semibold shadow-2xl shadow-orange-500/20 transition-all active:scale-95 disabled:opacity-50"
               >
                 {loading ? (
                   <Loader2 className="w-6 h-6 animate-spin" />

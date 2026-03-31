@@ -19,7 +19,7 @@ export default function FinancialMonthsList({
 
   if (!months || months.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center p-12 bg-gray-50 rounded-xl border border-dashed border-gray-200">
+      <div className="flex flex-col items-center justify-center p-12 bg-gray-50 rounded border border-dashed border-gray-200">
         <p className="text-sm font-semibold text-gray-400 uppercase tracking-widest text-center">
           No months generated for this fiscal year yet.
         </p>
@@ -32,7 +32,7 @@ export default function FinancialMonthsList({
       {months.map((month) => {
         const isLocked = month.is_closed;
         const allPosted = month.unposted_journals_count === 0;
-        
+
         return (
           <Link
             key={month.reference}
@@ -41,7 +41,7 @@ export default function FinancialMonthsList({
           >
             <div className="h-full bg-white border border-gray-100 rounded p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group-hover:border-black/5">
               <div className="flex justify-between items-start mb-3">
-                <div 
+                <div
                   className="w-10 h-10 rounded flex items-center justify-center text-white shadow-md shadow-black/5"
                   style={{ backgroundColor: primaryColor }}
                 >
@@ -55,7 +55,7 @@ export default function FinancialMonthsList({
                     </div>
                   ) : (
                     <div className="flex items-center gap-1 text-[9px] font-bold uppercase py-0.5 px-2 rounded bg-green-50 text-green-600 border border-green-100">
-                      <div className="w-1 h-1 rounded-full bg-green-500 animate-pulse" />
+                      <div className="w-1 h-1 rounded bg-green-500 animate-pulse" />
                       Active
                     </div>
                   )}
