@@ -2,13 +2,13 @@
 
 import { useRef } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { 
-  ChevronDown, 
-  ClipboardList, 
-  UserCheck, 
-  ExternalLink, 
+import {
+  ChevronDown,
+  ClipboardList,
+  UserCheck,
+  ExternalLink,
   Edit,
-  MoreVertical 
+  MoreVertical
 } from "lucide-react";
 import { Lead } from "@/services/leads";
 import CreateQuotationModal from "@/forms/quotations/CreateQuotationModal";
@@ -55,26 +55,26 @@ export default function LeadActionsMenu({ lead, rolePrefix }: LeadActionsMenuPro
           <button className="h-14 px-8 bg-slate-900 border border-slate-800 text-white rounded font-bold text-sm uppercase tracking-widest transition-all shadow-2xl active:scale-[0.98] flex items-center gap-4 group data-[state=open]:bg-blue-600 data-[state=open]:border-blue-500">
             <span className="flex items-center gap-3">
               <MoreVertical className="w-4.5 h-4.5 text-blue-400 group-hover:text-white transition-colors" />
-               Case Actions
+              Case Actions
             </span>
             <ChevronDown className="w-4 h-4 text-white/50 group-hover:text-white transition-transform duration-300 group-data-[state=open]:rotate-180" />
           </button>
         </DropdownMenu.Trigger>
-        
+
         <DropdownMenu.Portal>
           <DropdownMenu.Content
             align="end"
             sideOffset={12}
-            className="z-[200] w-72 p-2 bg-white rounded-xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border border-slate-100 animate-in fade-in zoom-in-95 data-[side=bottom]:slide-in-from-top-2"
+            className="z-[200] w-72 p-2 bg-white rounded shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border border-slate-100 animate-in fade-in zoom-in-95 data-[side=bottom]:slide-in-from-top-2"
           >
             <div className="px-3 py-2 mb-1 border-b border-slate-50">
-               <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">Available Operations</p>
+              <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">Available Operations</p>
             </div>
 
             {!isWon && (
               <DropdownMenu.Item
                 onSelect={() => quotationTriggerRef.current?.click()}
-                className="flex items-center gap-3 p-3 rounded-lg text-xs font-bold uppercase tracking-widest text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
+                className="flex items-center gap-3 p-3 rounded text-xs font-bold uppercase tracking-widest text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
               >
                 <ClipboardList className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
                 Generate Quotation
@@ -84,7 +84,7 @@ export default function LeadActionsMenu({ lead, rolePrefix }: LeadActionsMenuPro
             {isQualified && (
               <DropdownMenu.Item
                 onSelect={() => convertTriggerRef.current?.click()}
-                className="flex items-center gap-3 p-3 rounded-lg text-xs font-bold uppercase tracking-widest text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
+                className="flex items-center gap-3 p-3 rounded text-xs font-bold uppercase tracking-widest text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
               >
                 <UserCheck className="w-4 h-4 text-slate-400 group-hover:text-amber-600 transition-colors" />
                 Convert to Partner
@@ -95,7 +95,7 @@ export default function LeadActionsMenu({ lead, rolePrefix }: LeadActionsMenuPro
               <DropdownMenu.Item asChild>
                 <Link
                   href={`/${rolePrefix}/partners/${lead.partner_reference}`}
-                  className="flex items-center gap-3 p-3 rounded-lg text-xs font-bold uppercase tracking-widest text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
+                  className="flex items-center gap-3 p-3 rounded text-xs font-bold uppercase tracking-widest text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
                 >
                   <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 transition-colors" />
                   View Partner Profile
@@ -107,7 +107,7 @@ export default function LeadActionsMenu({ lead, rolePrefix }: LeadActionsMenuPro
 
             <DropdownMenu.Item
               onSelect={() => updateTriggerRef.current?.click()}
-              className="flex items-center gap-3 p-3 rounded-lg text-xs font-bold uppercase tracking-widest text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
+              className="flex items-center gap-3 p-3 rounded text-xs font-bold uppercase tracking-widest text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
             >
               <Edit className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
               Modify Identity

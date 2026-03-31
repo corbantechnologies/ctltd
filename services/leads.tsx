@@ -31,6 +31,7 @@ export interface Lead {
     created_at: string;
     updated_at: string;
     partner_reference?: string;
+    lines?: string[];
 }
 
 interface createLead {
@@ -55,7 +56,7 @@ interface updateLead {
     tax_pin: string; // optional
     division: string; // division name
     status: string; // optional
-    
+
 }
 
 export const createLead = async (
