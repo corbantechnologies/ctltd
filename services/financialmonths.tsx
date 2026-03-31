@@ -6,6 +6,7 @@ import { AxiosResponse } from "axios";
 export interface FinancialMonth {
   id: string;
   reference: string;
+  financial_year: string;
   name: string; // "JAN2024"
   month: number;
   year: number;

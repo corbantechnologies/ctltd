@@ -24,23 +24,25 @@ import { useQueryClient } from "@tanstack/react-query";
 import SearchableSelect from "@/components/portal/SearchableSelect";
 import { cn } from "@/lib/utils";
 
-interface CreateJournalEntryProps {
+export interface MultiLineJournalEntryProps {
   rolePrefix?: string;
   journalReference?: string;
+  currentTotals?: { debit: number; credit: number; balance: number };
   onSuccess?: () => void;
   onClose?: () => void;
   className?: string;
-  refetch: () => void;
+  refetch: (options?: any) => Promise<any>;
 }
 
-export default function CreateJournalEntry({
+export default function MultiLineJournalEntry({
   rolePrefix = "finance",
   journalReference,
+  currentTotals,
   onSuccess,
   onClose,
   className,
   refetch,
-}: CreateJournalEntryProps) {
+}: MultiLineJournalEntryProps) {
   const header = useAxiosAuth();
   const queryClient = useQueryClient();
   const primaryColor = rolePrefix === "director" ? "#D0402B" : "#045138";
@@ -157,6 +159,28 @@ export default function CreateJournalEntry({
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Batch Reference: {journalReference}</p>
             </div>
           </div>
+
+          {currentTotals && (
+            <div className="hidden md:flex items-center gap-6 px-5 py-2.5 bg-white border border-slate-200 rounded-xl shadow-sm">
+                <div className="flex flex-col">
+                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Batch DR</span>
+                    <span className="text-xs font-bold text-emerald-600 leading-none">{currentTotals.debit.toLocaleString()}</span>
+                </div>
+                <div className="w-px h-5 bg-slate-100" />
+                <div className="flex flex-col">
+                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Batch CR</span>
+                    <span className="text-xs font-bold text-indigo-600 leading-none">{currentTotals.credit.toLocaleString()}</span>
+                </div>
+                <div className="w-px h-5 bg-slate-100" />
+                <div className="flex flex-col">
+                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Diff</span>
+                    <span className={cn("text-xs font-bold leading-none", currentTotals.balance === 0 ? "text-slate-400" : "text-red-500")}>
+                        {Math.abs(currentTotals.balance).toLocaleString()}
+                    </span>
+                </div>
+            </div>
+          )}
+
           {onClose && (
             <button onClick={onClose} className="p-2 hover:bg-red-50 hover:text-red-500 rounded-full transition-colors">
               <X className="w-5 h-5" />

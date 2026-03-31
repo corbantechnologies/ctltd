@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useFetchJournal } from "@/hooks/journals/actions";
 import { postJournal } from "@/services/journals";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
-import CreateJournalEntry from "@/forms/journalentries/CreateJournalEntry";
+import SingleJournalEntry from "@/forms/journalentries/SingleJournalEntry";
+import MultiLineJournalEntry from "@/forms/journalentries/MultiLineJournalEntry";
 import UpdateJournal from "@/forms/journals/UpdateJournal";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
@@ -13,16 +15,19 @@ import {
   Calendar,
   CheckCircle2,
   Clock,
-  FileText,
   Plus,
   Receipt,
   Edit2,
   Lock,
+  ChevronDown,
+  Rows,
+  Square
 } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
 import JournalEntryDetailModal from "@/components/journals/JournalEntryDetailModal";
 import { JournalEntry } from "@/services/journalentries";
+import { cn } from "@/lib/utils";
 
 export default function JournalsDetailPage() {
   const { reference, journal_reference } = useParams();
@@ -34,7 +39,9 @@ export default function JournalsDetailPage() {
     data: journal,
     refetch: refetchJournal,
   } = useFetchJournal(journal_reference as string);
-  const [openAddEntry, setOpenAddEntry] = useState(false);
+  
+  const [entryMode, setEntryMode] = useState<"single" | "multiline" | null>(null);
+  const [showAddPopover, setShowAddPopover] = useState(false);
   const [openUpdateJournal, setOpenUpdateJournal] = useState(false);
   const [selectedEntry, setSelectedEntry] = useState<JournalEntry | null>(null);
   const [isPosting, setIsPosting] = useState(false);
@@ -68,7 +75,6 @@ export default function JournalsDetailPage() {
       await postJournal(journal.reference, header);
       toast.success("Journal posted successfully");
       refetchJournal();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast.error(error?.response?.data?.message || "Failed to post journal");
     } finally {
@@ -175,13 +181,54 @@ export default function JournalsDetailPage() {
 
           {!journal.is_posted && (
             <>
-              <button
-                onClick={() => setOpenAddEntry(true)}
-                className="flex items-center justify-center px-4 h-12 bg-[#D0402B] border border-black/5 text-white hover:bg-[#D0402B]/90 font-semibold uppercase text-xs tracking-widest rounded shadow-sm transition-colors"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Add Entry
-              </button>
+              <div className="relative">
+                <button
+                  onClick={() => setShowAddPopover(!showAddPopover)}
+                  className="flex items-center justify-center px-4 h-12 bg-[#D0402B] border border-black/5 text-white hover:bg-[#D0402B]/90 font-bold uppercase text-[10px] tracking-widest rounded shadow-sm transition-all active:scale-95"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Entry
+                  <ChevronDown className={cn("w-3 h-3 ml-3 transition-transform", showAddPopover && "rotate-180")} />
+                </button>
+
+                {showAddPopover && (
+                  <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-slate-200 rounded-xl shadow-2xl z-[60] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="p-1">
+                      <button 
+                        onClick={() => {
+                            setEntryMode("single");
+                            setShowAddPopover(false);
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 rounded-lg transition-colors group text-left"
+                      >
+                         <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                            <Square className="w-4 h-4" />
+                         </div>
+                         <div className="flex flex-col">
+                            <span className="text-xs font-bold text-slate-900">Record Single Entry</span>
+                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Fast 1-to-1 Mapping</span>
+                         </div>
+                      </button>
+
+                      <button 
+                         onClick={() => {
+                            setEntryMode("multiline");
+                            setShowAddPopover(false);
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 rounded-lg transition-colors group text-left"
+                      >
+                         <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                            <Rows className="w-4 h-4" />
+                         </div>
+                         <div className="flex flex-col">
+                            <span className="text-xs font-bold text-slate-900">Multi-line Batch</span>
+                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Splits & Complex Lists</span>
+                         </div>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
 
               <button
                 onClick={handlePostJournal}
@@ -213,7 +260,7 @@ export default function JournalsDetailPage() {
               Total Debit
             </p>
             <p
-              className="text-xl font-semibold text-black tracking-tight truncate"
+              className="text-xl font-semibold text-black tracking-tight underline decoration-dotted decoration-emerald-500"
               title={new Intl.NumberFormat("en-KE", {
                 style: "currency",
                 currency: journal.currency,
@@ -232,7 +279,7 @@ export default function JournalsDetailPage() {
               Total Credit
             </p>
             <p
-              className="text-xl font-semibold text-black tracking-tight truncate"
+              className="text-xl font-semibold text-black tracking-tight underline decoration-dotted decoration-indigo-500"
               title={new Intl.NumberFormat("en-KE", {
                 style: "currency",
                 currency: journal.currency,
@@ -289,21 +336,13 @@ export default function JournalsDetailPage() {
         </div>
         <div className="p-0">
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-gray-50 border-y border-gray-200 text-left">
-                  <th className="py-3 px-4 text-xs font-semibold text-gray-600">
-                    Account Book
-                  </th>
-                  <th className="py-3 px-4 text-xs font-semibold text-gray-600">
-                    Partner / Division
-                  </th>
-                  <th className="py-3 px-4 text-xs font-semibold text-gray-600 text-right">
-                    Debit
-                  </th>
-                  <th className="py-3 px-4 text-xs font-semibold text-gray-600 text-right">
-                    Credit
-                  </th>
+                <tr className="bg-gray-50 border-y border-gray-200">
+                  <th className="py-4 px-6 text-xs font-bold text-slate-500 uppercase tracking-widest">Account Book</th>
+                  <th className="py-4 px-6 text-xs font-bold text-slate-500 uppercase tracking-widest">Partner / Division</th>
+                  <th className="py-4 px-6 text-xs font-bold text-slate-500 uppercase tracking-widest text-right">Debit</th>
+                  <th className="py-4 px-6 text-xs font-bold text-slate-500 uppercase tracking-widest text-right">Credit</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -313,18 +352,15 @@ export default function JournalsDetailPage() {
                     className="hover:bg-gray-50/50 transition-colors cursor-pointer group"
                     onClick={() => setSelectedEntry(entry)}
                   >
-                    <td className="py-3 px-4">
-                      <div className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">{entry.book}</div>
+                    <td className="py-4 px-6">
+                      <div className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{entry.book}</div>
+                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">{entry.code}</div>
                     </td>
-                    <td className="py-3 px-4">
-                      <div className="text-sm font-medium text-gray-900">
-                        {entry.partner || "—"}
-                      </div>
-                      <div className="text-xs text-gray-500 mt-0.5">
-                        {entry.division}
-                      </div>
+                    <td className="py-4 px-6">
+                      <div className="text-sm font-bold text-slate-800">{entry.partner || "—"}</div>
+                      <div className="text-xs font-semibold text-slate-400 mt-0.5">{entry.division}</div>
                     </td>
-                    <td className="py-3 px-4 text-right font-mono text-sm text-gray-700">
+                    <td className="py-4 px-6 text-right font-mono text-sm font-bold text-emerald-600">
                       {parseFloat(entry.debit) > 0
                         ? new Intl.NumberFormat("en-KE", {
                           style: "decimal",
@@ -332,7 +368,7 @@ export default function JournalsDetailPage() {
                         }).format(parseFloat(entry.debit))
                         : "—"}
                     </td>
-                    <td className="py-3 px-4 text-right font-mono text-sm text-gray-700">
+                    <td className="py-4 px-6 text-right font-mono text-sm font-bold text-indigo-600">
                       {parseFloat(entry.credit) > 0
                         ? new Intl.NumberFormat("en-KE", {
                           style: "decimal",
@@ -344,8 +380,8 @@ export default function JournalsDetailPage() {
                 ))}
                 {journal.journal_entries.length === 0 && (
                   <tr>
-                    <td colSpan={4} className="py-12 text-center text-gray-400 text-sm">
-                      No entries recorded yet.
+                    <td colSpan={4} className="py-20 text-center text-gray-300 font-bold uppercase tracking-widest text-[10px]">
+                      No transaction records found in this batch.
                     </td>
                   </tr>
                 )}
@@ -355,17 +391,33 @@ export default function JournalsDetailPage() {
         </div>
       </div>
 
-      {/* Manual Modal Implementation for Create Journal Entry */}
-      {openAddEntry && (
-        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
-          <CreateJournalEntry
-            rolePrefix="finance"
-            journalReference={journal.code}
-            onSuccess={() => setOpenAddEntry(false)}
-            onClose={() => setOpenAddEntry(false)}
-            refetch={refetchJournal}
-            className="min-h-screen border-none shadow-none rounded"
-          />
+      {/* Advanced Unified Entry Modal */}
+      {entryMode && (
+        <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-300">
+          {(() => {
+            const batchTotals = { debit: totalDebit, credit: totalCredit, balance: totalDebit - totalCredit };
+            return entryMode === "single" ? (
+               <SingleJournalEntry
+                  rolePrefix="finance"
+                  journalReference={journal.code}
+                  currentTotals={batchTotals}
+                  onSuccess={() => setEntryMode(null)}
+                  onClose={() => setEntryMode(null)}
+                  refetch={refetchJournal}
+                  className="min-h-screen border-none shadow-none rounded-none"
+               />
+            ) : (
+               <MultiLineJournalEntry
+                  rolePrefix="finance"
+                  journalReference={journal.code}
+                  currentTotals={batchTotals}
+                  onSuccess={() => setEntryMode(null)}
+                  onClose={() => setEntryMode(null)}
+                  refetch={refetchJournal}
+                  className="min-h-screen border-none shadow-none rounded-none"
+               />
+            );
+          })()}
         </div>
       )}
 
