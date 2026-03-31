@@ -1,7 +1,8 @@
 "use client";
 
 import ReceiptsList from "@/components/financials/ReceiptsList";
-import { FileCheck, Search } from "lucide-react";
+import { FileCheck, Search, Plus } from "lucide-react";
+import CreateReceiptModal from "@/forms/financials/CreateReceiptModal";
 
 export default function OperationsReceiptsPage() {
   return (
@@ -20,6 +21,16 @@ export default function OperationsReceiptsPage() {
             </h1>
           </div>
         </div>
+
+        <CreateReceiptModal 
+          rolePrefix="operations"
+          trigger={
+            <button className="flex items-center gap-3 px-8 py-4 bg-slate-900 hover:bg-emerald-600 text-white rounded font-bold text-sm uppercase tracking-widest transition-all shadow-2xl active:scale-95 group">
+              <Plus className="w-4.5 h-4.5 group-hover:rotate-90 transition-transform" />
+              Record Payment
+            </button>
+          }
+        />
       </div>
 
       <div className="bg-slate-50/50 p-1 rounded border border-slate-100">

@@ -2,6 +2,7 @@
 
 import InvoicesList from "@/components/financials/InvoicesList";
 import { FileText, Plus } from "lucide-react";
+import CreateInvoiceModal from "@/forms/financials/CreateInvoiceModal";
 
 export default function OperationsInvoicesPage() {
   return (
@@ -21,10 +22,15 @@ export default function OperationsInvoicesPage() {
           </div>
         </div>
 
-        <button className="flex items-center gap-3 px-8 py-4 bg-slate-900 hover:bg-blue-600 text-white rounded font-bold text-sm uppercase tracking-widest transition-all shadow-2xl shadow-slate-900/10 active:scale-95 group">
-          <Plus className="w-4.5 h-4.5 group-hover:rotate-90 transition-transform" />
-          Create New Invoice
-        </button>
+        <CreateInvoiceModal 
+          rolePrefix="operations"
+          trigger={
+            <button className="flex items-center gap-3 px-8 py-4 bg-slate-900 hover:bg-blue-600 text-white rounded font-bold text-sm uppercase tracking-widest transition-all shadow-2xl shadow-slate-900/10 active:scale-95 group">
+              <Plus className="w-4.5 h-4.5 group-hover:rotate-90 transition-transform" />
+              Create New Invoice
+            </button>
+          }
+        />
       </div>
 
       <div className="bg-slate-50/50 p-1 rounded border border-slate-100">

@@ -20,6 +20,7 @@ export interface Quotation {
     updated_by: string;
     payment_account?: string;
     terms_and_conditions?: string;
+    lines?: any[];
 }
 
 export const getQuotations = async (headers: {
@@ -48,6 +49,18 @@ export const convertQuotationToInvoice = async (
     const response: AxiosResponse<{ message: string; invoice_reference: string; invoice_code: string }> = await apiActions.post(
         `/api/v1/quotations/${reference}/convert/`,
         {},
+        headers
+    );
+    return response.data;
+};
+
+export const createQuotation = async (
+    data: any,
+    headers: { headers: { Authorization: string } }
+): Promise<Quotation> => {
+    const response: AxiosResponse<Quotation> = await apiActions.post(
+        `/api/v1/quotations/`,
+        data,
         headers
     );
     return response.data;

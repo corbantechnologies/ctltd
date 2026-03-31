@@ -30,6 +30,8 @@ const interactionIcons = {
   NOTE: MessageSquare,
 };
 
+const DEFAULT_COLOR = "bg-slate-50 text-slate-600 border-slate-100";
+
 const interactionColors = {
   CALL: "bg-blue-50 text-blue-600 border-blue-100",
   EMAIL: "bg-purple-50 text-purple-600 border-purple-100",
@@ -68,12 +70,14 @@ export default function InteractionTimeline({ leadId, partnerId, rolePrefix }: I
         <div className="relative space-y-8 before:absolute before:inset-y-0 before:left-[19px] before:w-px before:bg-slate-200">
           {interactions.map((interaction) => {
             const Icon = interactionIcons[interaction.interaction_type] || MessageSquare;
+            const colorClass = interactionColors[interaction.interaction_type] || DEFAULT_COLOR;
+            
             return (
               <div key={interaction.id} className="relative pl-12 group">
                 {/* Timeline Dot/Icon */}
                 <div className={cn(
                   "absolute left-0 top-0 w-10 h-10 rounded border flex items-center justify-center transition-transform group-hover:scale-110 group-hover:rotate-12 z-10",
-                  interactionColors[interaction.interaction_type]
+                  colorClass
                 )}>
                   <Icon className="w-5 h-5" />
                 </div>
@@ -96,7 +100,7 @@ export default function InteractionTimeline({ leadId, partnerId, rolePrefix }: I
                     </div>
                     <span className={cn(
                       "px-2.5 py-1 rounded text-[9px] font-bold uppercase tracking-widest",
-                      interactionColors[interaction.interaction_type]
+                      colorClass
                     )}>
                       {interaction.interaction_type}
                     </span>

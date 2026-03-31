@@ -1,7 +1,8 @@
 "use client";
 
 import InvoicesList from "@/components/financials/InvoicesList";
-import { Landmark, FileText } from "lucide-react";
+import { Landmark, FileText, Plus } from "lucide-react";
+import CreateInvoiceModal from "@/forms/financials/CreateInvoiceModal";
 
 export default function FinanceInvoicesPage() {
   return (
@@ -20,6 +21,16 @@ export default function FinanceInvoicesPage() {
             </h1>
           </div>
         </div>
+
+        <CreateInvoiceModal 
+          rolePrefix="finance"
+          trigger={
+            <button className="flex items-center gap-2.5 px-8 py-3.5 bg-slate-900 hover:bg-emerald-600 text-white rounded font-bold text-[11px] uppercase tracking-widest transition-all shadow-xl active:scale-95 group">
+               <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform" />
+               New Invoice
+            </button>
+          }
+        />
       </div>
 
       <div className="bg-slate-50/50 p-1 rounded border border-slate-100">

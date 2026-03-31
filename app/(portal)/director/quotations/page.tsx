@@ -1,7 +1,8 @@
 "use client";
 
 import QuotationsList from "@/components/financials/QuotationsList";
-import { FileBadge, Plus, Zap } from "lucide-react";
+import { FileBadge, Plus, Zap, ClipboardList } from "lucide-react";
+import CreateQuotationModal from "@/forms/quotations/CreateQuotationModal";
 
 export default function DirectorQuotationsPage() {
   return (
@@ -27,6 +28,16 @@ export default function DirectorQuotationsPage() {
             </h1>
           </div>
         </div>
+
+        <CreateQuotationModal 
+          rolePrefix="director"
+          trigger={
+            <button className="flex items-center gap-3 px-8 py-4 bg-black hover:bg-[#D0402B] text-white rounded font-bold text-sm uppercase tracking-widest transition-all shadow-2xl shadow-black/20 active:scale-95 group">
+               <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
+               New Quotation
+            </button>
+          }
+        />
       </div>
 
       {/* Main Content with Premium Framing */}

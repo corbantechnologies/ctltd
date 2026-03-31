@@ -5,7 +5,8 @@ import useAxiosAuth from "../authentication/useAxiosAuth";
 import { 
     getQuotations, 
     getQuotation, 
-    convertQuotationToInvoice 
+    convertQuotationToInvoice,
+    createQuotation
 } from "@/services/quotations";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -45,6 +46,25 @@ export function useConvertQuotationToInvoice(reference: string, rolePrefix: stri
         },
         onError: (error: any) => {
             const message = error.response?.data?.error || "Conversion failed";
+            toast.error(message);
+        },
+    });
+}
+
+export function useCreateQuotation(rolePrefix: string) {
+    const header = useAxiosAuth();
+    const queryClient = useQueryClient();
+    const router = useRouter();
+
+    return useMutation({
+        mutationFn: (data: any) => createQuotation(data, header),
+        onSuccess: (data) => {
+            queryClient.invalidateQueries({ queryKey: ["quotations"] });
+            toast.success("Quotation created successfully");
+            router.push(`/${rolePrefix}/quotations/${data.reference}`);
+        },
+        onError: (error: any) => {
+            const message = error.response?.data?.error || "Creation failed";
             toast.error(message);
         },
     });

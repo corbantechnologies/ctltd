@@ -7,6 +7,7 @@ import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import UpdateLead from "@/forms/leads/UpdateLead";
 import ConvertLeadModal from "@/forms/leads/ConvertLeadModal";
 import InteractionTimeline from "@/components/crm/InteractionTimeline";
+import CreateQuotationModal from "@/forms/quotations/CreateQuotationModal";
 import {
   Users,
   Building2,
@@ -87,6 +88,19 @@ export default function DirectorLeadDetailPage() {
         </div>
 
         <div className="flex items-center gap-3">
+          {lead.status !== "WON" && (
+            <CreateQuotationModal 
+              rolePrefix="director"
+              initialLead={{ reference: lead.reference, name: `${lead.first_name} ${lead.last_name}` }}
+              trigger={
+                <button className="flex items-center gap-3 px-8 py-4 bg-black hover:bg-slate-800 text-white rounded font-bold text-sm uppercase tracking-widest transition-all shadow-2xl active:scale-[0.98] group">
+                   <ClipboardList className="w-4.5 h-4.5 group-hover:scale-110 transition-transform" />
+                   Generate Quotation
+                </button>
+              }
+            />
+          )}
+
           {lead.status === "QUALIFIED" && (
             <ConvertLeadModal
               leadReference={lead.reference}

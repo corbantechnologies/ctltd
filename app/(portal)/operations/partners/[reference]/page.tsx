@@ -16,7 +16,12 @@ import {
   Calendar,
   Hash,
   Building2,
+  Plus,
+  ClipboardList,
 } from "lucide-react";
+import CreateQuotationModal from "@/forms/quotations/CreateQuotationModal";
+import CreateInvoiceModal from "@/forms/financials/CreateInvoiceModal";
+import InteractionTimeline from "@/components/crm/InteractionTimeline";
 
 
 export default function PartnerDetailPage() {
@@ -66,7 +71,31 @@ export default function PartnerDetailPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          {partner && (
+            <>
+              <CreateQuotationModal 
+                rolePrefix="operations"
+                initialPartner={{ reference: partner.reference, name: partner.name }}
+                trigger={
+                  <button className="flex items-center gap-2 px-6 py-2.5 bg-slate-900 hover:bg-blue-600 text-white rounded font-bold text-[10px] uppercase tracking-widest transition-all shadow-xl active:scale-95 group">
+                     <ClipboardList className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                     New Quotation
+                  </button>
+                }
+              />
+              <CreateInvoiceModal 
+                rolePrefix="operations"
+                initialPartner={{ reference: partner.code, name: partner.name }}
+                trigger={
+                  <button className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-slate-900 text-white rounded font-bold text-[10px] uppercase tracking-widest transition-all shadow-xl shadow-blue-600/10 active:scale-95 group">
+                     <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform" />
+                     Initiate Invoice
+                  </button>
+                }
+              />
+            </>
+          )}
           {partner?.is_active ? (
             <span className="bg-green-500/10 text-green-600 border-none font-semibold text-[10px] uppercase tracking-wider px-4 py-2 rounded">
               Active Partnership

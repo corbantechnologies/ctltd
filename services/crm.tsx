@@ -2,6 +2,7 @@
 
 import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
+import { PaginatedResponse } from "./general";
 
 export interface Interaction {
     id: string;
@@ -34,11 +35,11 @@ export const getInteractions = async (
     params: { lead?: string; partner?: string },
     headers: { headers: { Authorization: string } }
 ): Promise<Interaction[]> => {
-    const response: AxiosResponse<Interaction[]> = await apiActions.get(
+    const response: AxiosResponse<PaginatedResponse<Interaction>> = await apiActions.get(
         `/api/v1/interactions/`,
         { ...headers, params }
     );
-    return response.data;
+    return response.data.results || [];
 };
 
 export const createInteraction = async (

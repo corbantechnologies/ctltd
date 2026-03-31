@@ -20,6 +20,7 @@ export interface Invoice {
     updated_at: string;
     payment_account?: string;
     terms_and_conditions?: string;
+    lines?: any[];
 }
 
 export interface Receipt {
@@ -94,6 +95,30 @@ export const markReceiptAsPosted = async (
     const response: AxiosResponse<{ message: string }> = await apiActions.patch(
         `/api/v1/receipts/${reference}/posted/`,
         {},
+        headers
+    );
+    return response.data;
+};
+
+export const createInvoice = async (
+    data: any,
+    headers: { headers: { Authorization: string } }
+): Promise<Invoice> => {
+    const response: AxiosResponse<Invoice> = await apiActions.post(
+        `/api/v1/invoices/`,
+        data,
+        headers
+    );
+    return response.data;
+};
+
+export const createReceipt = async (
+    data: any,
+    headers: { headers: { Authorization: string } }
+): Promise<Receipt> => {
+    const response: AxiosResponse<Receipt> = await apiActions.post(
+        `/api/v1/receipts/`,
+        data,
         headers
     );
     return response.data;

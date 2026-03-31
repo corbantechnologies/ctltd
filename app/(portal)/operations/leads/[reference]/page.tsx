@@ -1,3 +1,5 @@
+"use client"
+
 import { useFetchLead } from "@/hooks/leads/actions";
 import { Lead } from "@/services/leads";
 import { useParams, useRouter } from "next/navigation";
@@ -5,6 +7,8 @@ import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import UpdateLead from "@/forms/leads/UpdateLead";
 import ConvertLeadModal from "@/forms/leads/ConvertLeadModal";
 import InteractionTimeline from "@/components/crm/InteractionTimeline";
+import CreateQuotationModal from "@/forms/quotations/CreateQuotationModal";
+import LeadActionsMenu from "@/components/leads/LeadActionsMenu";
 import {
   Users,
   Building2,
@@ -74,41 +78,10 @@ export default function LeadDetailPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          {lead.status === "QUALIFIED" && (
-            <ConvertLeadModal
-              leadReference={lead.reference}
-              leadName={`${lead.first_name} ${lead.last_name}`}
-              rolePrefix="operations"
-              trigger={
-                <button className="flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded font-bold text-sm uppercase tracking-widest transition-all shadow-2xl shadow-blue-600/20 active:scale-[0.98] group">
-                  <UserCheck className="w-4.5 h-4.5 group-hover:scale-110 transition-transform" />
-                  Convert to Partner
-                </button>
-              }
-            />
-          )}
-
-          {lead.status === "WON" && lead.partner_reference && (
-            <Link
-              href={`/operations/partners/${lead.partner_reference}`}
-              className="flex items-center gap-3 px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded font-bold text-sm uppercase tracking-widest transition-all shadow-2xl shadow-emerald-600/20 active:scale-[0.98] group"
-            >
-              <ExternalLink className="w-4.5 h-4.5 group-hover:translate-x-1 transition-transform" />
-              View Partner Profile
-            </Link>
-          )}
-
-          <UpdateLead
-            lead={lead}
-            trigger={
-              <button className="flex items-center gap-3 px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded font-semibold text-sm tracking-tight transition-all shadow-2xl active:scale-[0.98] group">
-                <Edit className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                Modify Identity
-              </button>
-            }
-          />
-        </div>
+        <LeadActionsMenu
+          lead={lead}
+          rolePrefix="operations"
+        />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

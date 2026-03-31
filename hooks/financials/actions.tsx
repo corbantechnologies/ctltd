@@ -8,8 +8,11 @@ import {
     markInvoiceAsPaid, 
     getReceipts, 
     getReceipt, 
-    markReceiptAsPosted 
+    markReceiptAsPosted,
+    createInvoice,
+    createReceipt
 } from "@/services/financials";
+import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 
 export function useFetchInvoices() {
@@ -84,6 +87,44 @@ export function useMarkReceiptAsPosted() {
         },
         onError: (error: any) => {
             const message = error.response?.data?.error || "Failed to mark receipt as posted";
+            toast.error(message);
+        },
+    });
+}
+
+export function useCreateInvoice(rolePrefix: string) {
+    const header = useAxiosAuth();
+    const queryClient = useQueryClient();
+    const router = useRouter();
+
+    return useMutation({
+        mutationFn: (data: any) => createInvoice(data, header),
+        onSuccess: (data) => {
+            queryClient.invalidateQueries({ queryKey: ["invoices"] });
+            toast.success("Invoice created successfully");
+            router.push(`/${rolePrefix}/invoices/${data.reference}`);
+        },
+        onError: (error: any) => {
+            const message = error.response?.data?.error || "Failed to create invoice";
+            toast.error(message);
+        },
+    });
+}
+
+export function useCreateReceipt(rolePrefix: string) {
+    const header = useAxiosAuth();
+    const queryClient = useQueryClient();
+    const router = useRouter();
+
+    return useMutation({
+        mutationFn: (data: any) => createReceipt(data, header),
+        onSuccess: (data) => {
+            queryClient.invalidateQueries({ queryKey: ["receipts"] });
+            toast.success("Receipt recorded successfully");
+            router.push(`/${rolePrefix}/receipts/${data.reference}`);
+        },
+        onError: (error: any) => {
+            const message = error.response?.data?.error || "Failed to record receipt";
             toast.error(message);
         },
     });
