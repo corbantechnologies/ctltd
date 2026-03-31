@@ -12,15 +12,17 @@ import SearchableSelect from "@/components/portal/SearchableSelect";
 
 interface CreateJournalProps {
   initialJournalType?: string;
+  fiscalYear?: string;
   rolePrefix?: string;
   onSuccess?: () => void;
   onClose?: () => void;
   className?: string;
-  refetch: () => void;
+  refetch: (options?: any) => Promise<any>;
 }
 
 export default function CreateJournal({
   initialJournalType,
+  fiscalYear,
   rolePrefix = "finance",
   onSuccess,
   onClose,
