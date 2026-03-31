@@ -3,17 +3,13 @@
 import { useParams, useRouter } from "next/navigation";
 import { 
   useFetchFinancialMonth, 
-  useReopenFinancialMonth 
 } from "@/hooks/financialmonths/actions";
 import FinancialMonthReport from "@/components/financialmonths/FinancialMonthReport";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import { 
-  Calendar, 
   ChevronLeft, 
   Download, 
   Lock, 
-  Unlock, 
-  CheckCircle2,
   TrendingDown,
   Loader2
 } from "lucide-react";
@@ -21,14 +17,12 @@ import { useState } from "react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { toast } from "react-hot-toast";
 
-export default function DirectorMonthDetailPage() {
+export default function OperationsMonthDetailPage() {
   const { reference, monthRef } = useParams();
   const router = useRouter();
   const headers = useAxiosAuth();
   const { data: month, isLoading } = useFetchFinancialMonth(monthRef as string);
-  const reopenMutation = useReopenFinancialMonth();
   
-  const [isProcessing, setIsProcessing] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
 
   if (isLoading) return <LoadingSpinner />;
@@ -37,20 +31,6 @@ export default function DirectorMonthDetailPage() {
       Period Not Found.
     </div>
   );
-
-  const handleReopen = async () => {
-    if (!window.confirm(`Are you sure you want to RE-OPEN ${month.name}? This should only be done for authorized corrections.`)) return;
-    
-    setIsProcessing(true);
-    try {
-      await reopenMutation.mutateAsync(month.reference);
-      toast.success("Month re-opened successfully.");
-    } catch (error: any) {
-      toast.error(error?.response?.data?.detail || "Failed to re-open month.");
-    } finally {
-      setIsProcessing(false);
-    }
-  };
 
   const handleDownload = async () => {
     setIsDownloading(true);
@@ -91,16 +71,16 @@ export default function DirectorMonthDetailPage() {
           <nav>
             <ol className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-black/30">
               <li>
-                <button onClick={() => router.push('/director/dashboard')} className="hover:text-black">Dashboard</button>
+                <button onClick={() => router.push('/operations/dashboard')} className="hover:text-black">Dashboard</button>
               </li>
               <li>/</li>
               <li>
-                <button onClick={() => router.push('/director/fiscal-years')} className="hover:text-black">Years</button>
+                <button onClick={() => router.push('/operations/fiscal-years')} className="hover:text-black">Years</button>
               </li>
               <li>/</li>
               <li>
-                <button onClick={() => router.push(`/director/fiscal-years/${reference}`)} className="hover:text-black">
-                  {month.financial_year || "Current Year"}
+                <button onClick={() => router.push(`/operations/fiscal-years/${reference}`)} className="hover:text-black">
+                   {month.financial_year || "Current Year"}
                 </button>
               </li>
               <li>/</li>
@@ -121,7 +101,7 @@ export default function DirectorMonthDetailPage() {
                   {month.is_closed ? (
                     <div className="w-2.5 h-2.5 rounded-full bg-gray-300" />
                   ) : (
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
                   )}
                 </h1>
                 <p className="text-[10px] font-semibold text-black/30 uppercase tracking-[0.4em] mt-2">
@@ -141,17 +121,6 @@ export default function DirectorMonthDetailPage() {
              {isDownloading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
              {isDownloading ? "Generating..." : "Snapshot"}
            </button>
-
-           {month.is_closed && (
-             <button 
-               onClick={handleReopen}
-               disabled={isProcessing}
-               className="h-10 px-6 rounded-full bg-[#D0402B]/5 border border-[#D0402B]/20 text-[#D0402B] flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:bg-[#D0402B] hover:text-white transition-all disabled:opacity-50 shadow-lg shadow-[#D0402B]/10"
-             >
-               <Unlock className="w-4 h-4 font-bold" />
-               Re-open
-             </button>
-           )}
         </div>
       </div>
 
@@ -167,13 +136,13 @@ export default function DirectorMonthDetailPage() {
            </div>
         </div>
       ) : (
-         <div className="bg-[#D0402B]/5 border border-[#D0402B]/10 rounded p-6 flex items-center gap-6 shadow-inner">
-           <div className="w-12 h-12 rounded bg-white flex items-center justify-center text-[#D0402B] shadow-xl shrink-0">
+         <div className="bg-blue-600/5 border border-blue-600/10 rounded p-6 flex items-center gap-6 shadow-inner">
+           <div className="w-12 h-12 rounded bg-white flex items-center justify-center text-blue-600 shadow-xl shrink-0">
               <TrendingDown className="w-5 h-5" />
            </div>
            <div>
-              <p className="text-sm font-bold text-[#D0402B] tracking-tight">Active Observation</p>
-              <p className="text-[11px] text-[#D0402B]/40 font-medium">Monitoring period progress in real-time. Unposted journals detected: <b>{month.unposted_journals_count}</b>.</p>
+              <p className="text-sm font-bold text-blue-600 tracking-tight">Active Observation</p>
+              <p className="text-[11px] text-blue-600/40 font-medium">Monitoring period progress in real-time. Unposted journals detected: <b>{month.unposted_journals_count}</b>.</p>
            </div>
         </div>
       )}
@@ -187,7 +156,7 @@ export default function DirectorMonthDetailPage() {
          
          <FinancialMonthReport
             month={month}
-            rolePrefix="director"
+            rolePrefix="operations"
          />
       </div>
     </div>

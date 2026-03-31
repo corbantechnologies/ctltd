@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, BookOpen, ChevronRight, FileText, Globe, Layers, LayoutGrid, List, Receipt } from "lucide-react";
+import { Activity, BookOpen, ChevronRight, FileText, Globe, Layers, LayoutGrid, List, Receipt, Users } from "lucide-react";
 import { FinancialMonthDetail } from "@/services/financialmonths";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 
@@ -138,6 +138,82 @@ export default function FinancialMonthReport({
                 {month.report.division_summary.length === 0 && (
                   <tr>
                     <td colSpan={3} className="p-8 text-center text-gray-300 italic">No entries recorded.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Project Allocation Summary */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-3">
+             <div className="w-6 h-6 rounded bg-black/5 flex items-center justify-center text-black/40">
+                <Layers className="w-3.5 h-3.5" />
+             </div>
+             <h2 className="text-xs font-bold uppercase tracking-widest text-black">Summary by Project</h2>
+             <div className="flex-1 h-px bg-gray-100" />
+          </div>
+          
+          <div className="bg-white border border-gray-100 rounded overflow-hidden shadow-sm">
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="bg-gray-50/50 border-b border-gray-100">
+                  <th className="text-left p-3 font-semibold text-black/40 uppercase tracking-widest">Project Tag</th>
+                  <th className="text-right p-3 font-semibold text-black/40 uppercase tracking-widest">Debit</th>
+                  <th className="text-right p-3 font-semibold text-black/40 uppercase tracking-widest">Credit</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-50">
+                {month.report.project_summary.map((row, i) => (
+                  <tr key={i} className="hover:bg-gray-50 transition-colors">
+                    <td className="p-3 font-bold text-black italic">{row.project}</td>
+                    <td className="p-3 text-right font-medium text-black">{row.total_debit.toLocaleString()}</td>
+                    <td className="p-3 text-right font-medium text-black">{row.total_credit.toLocaleString()}</td>
+                  </tr>
+                ))}
+                {month.report.project_summary.length === 0 && (
+                  <tr>
+                    <td colSpan={3} className="p-8 text-center text-gray-300 italic">No project allocations.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* Partner Involvement Summary */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-3">
+             <div className="w-6 h-6 rounded bg-black/5 flex items-center justify-center text-black/40">
+                <Users className="w-3.5 h-3.5" />
+             </div>
+             <h2 className="text-xs font-bold uppercase tracking-widest text-black">Summary by Partner</h2>
+             <div className="flex-1 h-px bg-gray-100" />
+          </div>
+
+          <div className="bg-white border border-gray-100 rounded overflow-hidden shadow-sm">
+             <table className="w-full text-xs">
+              <thead>
+                <tr className="bg-gray-50/50 border-b border-gray-100">
+                  <th className="text-left p-3 font-semibold text-black/40 uppercase tracking-widest">Partner</th>
+                  <th className="text-right p-3 font-semibold text-black/40 uppercase tracking-widest">Debit</th>
+                  <th className="text-right p-3 font-semibold text-black/40 uppercase tracking-widest">Credit</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-50">
+                {month.report.partner_summary.map((row, i) => (
+                  <tr key={i} className="hover:bg-gray-50 transition-colors">
+                    <td className="p-3 text-black font-semibold italic">{row.partner__name}</td>
+                    <td className="p-3 text-right font-medium text-black">{row.total_debit.toLocaleString()}</td>
+                    <td className="p-3 text-right font-medium text-black">{row.total_credit.toLocaleString()}</td>
+                  </tr>
+                ))}
+                {month.report.partner_summary.length === 0 && (
+                  <tr>
+                    <td colSpan={3} className="p-8 text-center text-gray-300 italic">No partner activity.</td>
                   </tr>
                 )}
               </tbody>
