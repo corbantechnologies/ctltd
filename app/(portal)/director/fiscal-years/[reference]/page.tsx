@@ -2,9 +2,11 @@
 
 import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
 import FiscalYearJournals from "@/components/financialyears/FiscalYearJournals";
+import FinancialMonthsList from "@/components/financialmonths/FinancialMonthsList";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import { CalendarRange, Calendar, Activity } from "lucide-react";
 import { useParams } from "next/navigation";
+import { useState } from "react";
 
 
 export default function FiscalYearDetail() {
@@ -12,6 +14,7 @@ export default function FiscalYearDetail() {
   const { isLoading, data: fiscalYear } = useFetchFinancialYear(
     reference as string,
   );
+  const [activeTab, setActiveTab] = useState<'journals' | 'months'>('journals');
 
   if (isLoading) return <LoadingSpinner />;
   if (!fiscalYear)
@@ -148,21 +151,57 @@ export default function FiscalYearDetail() {
         </div>
       </div>
 
-      {/* Associated Journals Section */}
-      <div className="space-y-6">
-        <div className="flex items-center gap-4">
-          <div className="flex-1 h-px bg-gray-100" />
-          <h2 className="text-xs font-semibold uppercase tracking-[0.3em] text-black">
-            Period Journal Entries
-          </h2>
-          <div className="flex-1 h-px bg-gray-100" />
+      {/* Main Layout Grid */}
+      <div className="space-y-6 pt-2">
+        {/* Tab Switcher */}
+        <div className="flex border-b border-gray-100">
+           <button
+             onClick={() => setActiveTab('journals')}
+             className={`px-6 py-3 text-[10px] uppercase font-bold tracking-widest transition-all border-b-2 ${activeTab === 'journals' ? 'border-[#D0402B] text-[#D0402B]' : 'border-transparent text-black/30 hover:text-black'}`}
+           >
+             Journals
+           </button>
+           <button
+             onClick={() => setActiveTab('months')}
+             className={`px-6 py-3 text-[10px] uppercase font-bold tracking-widest transition-all border-b-2 ${activeTab === 'months' ? 'border-[#D0402B] text-[#D0402B]' : 'border-transparent text-black/30 hover:text-black'}`}
+           >
+             Months
+           </button>
         </div>
 
-        <FiscalYearJournals
-          journals={fiscalYear.journals || []}
-          rolePrefix="director"
-          fiscalYearReference={reference as string}
-        />
+        {activeTab === 'journals' ? (
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <div className="flex-1 h-px bg-gray-100" />
+              <h2 className="text-xs font-semibold uppercase tracking-[0.3em] text-black">
+                Period Journal Entries
+              </h2>
+              <div className="flex-1 h-px bg-gray-100" />
+            </div>
+
+            <FiscalYearJournals
+              journals={fiscalYear.journals || []}
+              rolePrefix="director"
+              fiscalYearReference={reference as string}
+            />
+          </div>
+        ) : (
+          <div className="space-y-6 animate-in fade-in duration-300">
+            <div className="flex items-center gap-4">
+              <div className="flex-1 h-px bg-gray-100" />
+              <h2 className="text-xs font-semibold uppercase tracking-[0.3em] text-black">
+                Financial Periods
+              </h2>
+              <div className="flex-1 h-px bg-gray-100" />
+            </div>
+
+            <FinancialMonthsList
+              months={fiscalYear.months || []}
+              rolePrefix="director"
+              fiscalYearReference={reference as string}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

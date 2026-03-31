@@ -52,12 +52,12 @@ interface createJournalEntry {
 }
 
 export const createJournalEntry = async (
-  formData: createJournalEntry | FormData,
+  payload: createJournalEntry | FormData | createJournalEntry[],
   headers: { headers: { Authorization: string } }
-): Promise<JournalEntry> => {
-  const response: AxiosResponse<JournalEntry> = await apiActions.post(
+): Promise<JournalEntry | JournalEntry[]> => {
+  const response: AxiosResponse<JournalEntry | JournalEntry[]> = await apiActions.post(
     `/api/v1/journalentries/`,
-    formData,
+    payload,
     headers
   );
   return response.data;

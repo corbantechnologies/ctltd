@@ -81,7 +81,7 @@ export default function CreateLead({ trigger }: CreateLeadProps) {
                   <h2 className="text-xl font-semibold tracking-tight italic">
                     Capture <span className="text-blue-500">New Lead</span>
                   </h2>
-                  <p className="text-slate-400 font-semibold uppercase text-[10px] tracking-widest mt-1">
+                  <p className="text-black font-semibold uppercase text-[10px] tracking-widest mt-1">
                     Prospect Intake & Pipeline Entry
                   </p>
                 </div>
@@ -96,7 +96,7 @@ export default function CreateLead({ trigger }: CreateLeadProps) {
               <form onSubmit={formik.handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label htmlFor="first_name" className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block">
+                    <label htmlFor="first_name" className="text-[10px] font-semibold uppercase tracking-widest text-black ml-1 block">
                       First Name
                     </label>
                     <input
@@ -113,7 +113,7 @@ export default function CreateLead({ trigger }: CreateLeadProps) {
                     )}
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="last_name" className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block">
+                    <label htmlFor="last_name" className="text-[10px] font-semibold uppercase tracking-widest text-black ml-1 block">
                       Last Name
                     </label>
                     <input
@@ -133,7 +133,7 @@ export default function CreateLead({ trigger }: CreateLeadProps) {
 
                 <div className="grid grid-cols-2 gap-6">
                     <div className="space-y-2">
-                        <label htmlFor="email" className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block">
+                        <label htmlFor="email" className="text-[10px] font-semibold uppercase tracking-widest text-black ml-1 block">
                             Email Address
                         </label>
                         <div className="relative">
@@ -153,7 +153,7 @@ export default function CreateLead({ trigger }: CreateLeadProps) {
                         )}
                     </div>
                     <div className="space-y-2">
-                        <label htmlFor="phone" className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block">
+                        <label htmlFor="phone" className="text-[10px] font-semibold uppercase tracking-widest text-black ml-1 block">
                             Phone Number
                         </label>
                         <div className="relative">
@@ -176,7 +176,7 @@ export default function CreateLead({ trigger }: CreateLeadProps) {
 
                 <div className="grid grid-cols-2 gap-6">
                     <div className="space-y-2">
-                        <label htmlFor="company_name" className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block">
+                        <label htmlFor="company_name" className="text-[10px] font-semibold uppercase tracking-widest text-black ml-1 block">
                             Company Name
                         </label>
                         <div className="relative">
@@ -196,7 +196,7 @@ export default function CreateLead({ trigger }: CreateLeadProps) {
                         )}
                     </div>
                     <div className="space-y-2">
-                        <label htmlFor="country" className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block">
+                        <label htmlFor="country" className="text-[10px] font-semibold uppercase tracking-widest text-black ml-1 block">
                             Country
                         </label>
                         <div className="relative">
@@ -219,7 +219,7 @@ export default function CreateLead({ trigger }: CreateLeadProps) {
 
                 <div className="grid grid-cols-2 gap-6">
                     <div className="space-y-2">
-                        <label htmlFor="division" className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block">
+                        <label htmlFor="division" className="text-[10px] font-semibold uppercase tracking-widest text-black ml-1 block">
                             Division Assignment
                         </label>
                         <select
@@ -240,7 +240,7 @@ export default function CreateLead({ trigger }: CreateLeadProps) {
                         )}
                     </div>
                     <div className="space-y-2">
-                        <label htmlFor="tax_pin" className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 ml-1 block">
+                        <label htmlFor="tax_pin" className="text-[10px] font-semibold uppercase tracking-widest text-black ml-1 block">
                             Tax PIN (Optional)
                         </label>
                         <div className="relative">

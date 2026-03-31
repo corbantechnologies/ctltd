@@ -3,6 +3,7 @@
 import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
 import { useFetchJournalTypes } from "@/hooks/journaltypes/actions";
 import FiscalYearJournals from "@/components/financialyears/FiscalYearJournals";
+import FinancialMonthsList from "@/components/financialmonths/FinancialMonthsList";
 import LoadingSpinner from "@/components/portal/LoadingSpinner";
 import {
   CalendarRange,
@@ -45,6 +46,7 @@ export default function FiscalYearDetail() {
   const [selectedJournalType, setSelectedJournalType] = useState<
     string | undefined
   >();
+  const [activeTab, setActiveTab] = useState<'journals' | 'months'>('journals');
   const queryClient = useQueryClient();
 
   if (isLoading || isLoadingTypes) return <LoadingSpinner />;
@@ -347,22 +349,54 @@ export default function FiscalYearDetail() {
       </div>
 
       {/* Main Layout Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 pt-2">
-        {/* Associated Journals Section (Left - 4/5) */}
-        <div className="lg:col-span-12 space-y-4 order-2 lg:order-1 w-full">
-          <div className="flex items-center gap-3">
-            <h2 className="text-base font-semibold text-black tracking-tight">
-              Period Journals
-            </h2>
-            <div className="flex-1 h-px bg-gray-100" />
-          </div>
-
-          <FiscalYearJournals
-            journals={fiscalYear.journals || []}
-            rolePrefix="finance"
-            fiscalYearReference={reference as string}
-          />
+      <div className="space-y-6 pt-2">
+        {/* Tab Switcher */}
+        <div className="flex border-b border-gray-100">
+           <button
+             onClick={() => setActiveTab('journals')}
+             className={`px-6 py-3 text-[10px] uppercase font-bold tracking-widest transition-all border-b-2 ${activeTab === 'journals' ? 'border-[#045138] text-[#045138]' : 'border-transparent text-black/30 hover:text-black'}`}
+           >
+             Journals
+           </button>
+           <button
+             onClick={() => setActiveTab('months')}
+             className={`px-6 py-3 text-[10px] uppercase font-bold tracking-widest transition-all border-b-2 ${activeTab === 'months' ? 'border-[#045138] text-[#045138]' : 'border-transparent text-black/30 hover:text-black'}`}
+           >
+             Months
+           </button>
         </div>
+
+        {activeTab === 'journals' ? (
+          <div className="space-y-4 w-full">
+            <div className="flex items-center gap-3">
+              <h2 className="text-base font-semibold text-black tracking-tight">
+                Associated Journals
+              </h2>
+              <div className="flex-1 h-px bg-gray-100" />
+            </div>
+
+            <FiscalYearJournals
+              journals={fiscalYear.journals || []}
+              rolePrefix="finance"
+              fiscalYearReference={reference as string}
+            />
+          </div>
+        ) : (
+          <div className="space-y-4 w-full animate-in fade-in duration-300">
+             <div className="flex items-center gap-3">
+              <h2 className="text-base font-semibold text-black tracking-tight">
+                Financial Periods
+              </h2>
+              <div className="flex-1 h-px bg-gray-100" />
+            </div>
+            
+            <FinancialMonthsList
+              months={fiscalYear.months || []}
+              rolePrefix="finance"
+              fiscalYearReference={reference as string}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

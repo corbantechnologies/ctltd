@@ -49,6 +49,7 @@ export default function CreateBook({
       is_bank: false,
       is_tax: false,
       is_cash: false,
+      is_current: true,
       description: "",
     },
     enableReinitialize: true,
@@ -290,8 +291,29 @@ export default function CreateBook({
                 className="w-5 h-5 rounded transition-colors cursor-pointer"
                 style={{ accentColor: primaryColor }}
               />
-              <span className="text-[10px] font-semibold uppercase text-black/60 group-hover:text-black">
+              <span className="text-[10px] font-semibold uppercase text-black/60 group-hover:text-black text-center leading-tight">
                 Cash
+              </span>
+            </div>
+            <div
+              className={`flex flex-col items-center justify-center p-4 rounded border border-black/5 transition-all gap-2 group cursor-pointer ${formik.values.is_current ? "bg-black/5" : "bg-white"}`}
+              onClick={() =>
+                formik.setFieldValue("is_current", !formik.values.is_current)
+              }
+              style={{
+                borderColor: formik.values.is_current ? primaryColor : undefined,
+              }}
+            >
+              <input
+                type="checkbox"
+                name="is_current"
+                checked={formik.values.is_current}
+                onChange={formik.handleChange}
+                className="w-5 h-5 rounded transition-colors cursor-pointer"
+                style={{ accentColor: primaryColor }}
+              />
+              <span className="text-[10px] font-semibold uppercase text-black/60 group-hover:text-black text-center leading-tight">
+                Current
               </span>
             </div>
           </div>

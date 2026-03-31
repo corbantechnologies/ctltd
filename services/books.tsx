@@ -13,6 +13,7 @@ interface Book {
   is_bank: boolean;
   is_tax: boolean;
   is_cash: boolean;
+  is_current: boolean;
   description: string;
   created_at: string;
   updated_at: string;
@@ -30,7 +31,18 @@ interface createBook {
   is_bank: boolean;
   is_tax: boolean;
   is_cash: boolean;
+  is_current: boolean;
   description: string;
+}
+
+interface updateBook {
+  name?: string;
+  is_active?: boolean;
+  is_bank?: boolean;
+  is_tax?: boolean;
+  is_cash?: boolean;
+  is_current?: boolean;
+  description?: string;
 }
 
 // finance responsibilities
