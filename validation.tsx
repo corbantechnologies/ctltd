@@ -39,6 +39,23 @@ const COASchema = Yup.object().shape({
     .oneOf(["DEBIT", "CREDIT"], "Must be DEBIT or CREDIT")
     .required("Normal balance is required"),
   order: Yup.number().required("Order is required"),
+  report_role: Yup.string()
+    .oneOf(
+      [
+        "ASSET",
+        "LIABILITY",
+        "EQUITY",
+        "REVENUE",
+        "EXPENSE",
+        "COGS",
+        "OTHER_INCOME",
+        "NON_OPERATING_EXPENSE",
+        "CAPITAL_EXPENDITURE",
+        "NONE",
+      ],
+      "Invalid report role"
+    )
+    .required("Report role is required"),
   is_active: Yup.boolean().default(true),
 });
 
@@ -50,6 +67,7 @@ const BookSchema = Yup.object().shape({
   is_bank: Yup.boolean().default(false),
   is_tax: Yup.boolean().default(false),
   is_cash: Yup.boolean().default(false),
+  is_current: Yup.boolean().default(true),
   description: Yup.string(),
 });
 

@@ -24,7 +24,7 @@ interface Journal {
 export type { Journal };
 
 interface createJournal {
-  financial_year: string;
+  financial_year?: string;
   journal_type: string;
   date: string;
   description: string;

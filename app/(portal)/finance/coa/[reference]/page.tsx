@@ -199,30 +199,40 @@ export default function FinanceCOADetailPage() {
         />
       </div>
 
-      {/* Manual Modal Implementation */}
+      {/* Elegant Modal Implementation for Update */}
       {open && (
-        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
-          <UpdateCOA
-            coa={{ name: coa.name, code: coa.code, reference: coa.reference }}
-            rolePrefix="finance"
-            onSuccess={() => setOpen(false)}
-            onClose={() => setOpen(false)}
-            className="min-h-screen border-none shadow-none rounded"
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 lg:p-8">
+          <div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300"
+            onClick={() => setOpen(false)}
           />
+          <div className="relative w-full max-w-4xl animate-in zoom-in-95 fade-in duration-300">
+            <UpdateCOA
+              coa={coa as any}
+              rolePrefix="finance"
+              onSuccess={() => setOpen(false)}
+              onClose={() => setOpen(false)}
+            />
+          </div>
         </div>
       )}
-
-      {/* Manual Modal Implementation for Create Book */}
+ 
+      {/* Elegant Modal Implementation for Create Book */}
       {openCreateBook && (
-        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
-          <CreateBook
-            rolePrefix="finance"
-            initialCOA={coa.name}
-            onSuccess={() => setOpenCreateBook(false)}
-            onClose={() => setOpenCreateBook(false)}
-            className="min-h-screen border-none shadow-none rounded"
-            refetch={refetchCOA}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 lg:p-8">
+          <div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300"
+            onClick={() => setOpenCreateBook(false)}
           />
+          <div className="relative w-full max-w-4xl animate-in zoom-in-95 fade-in duration-300">
+            <CreateBook
+              rolePrefix="finance"
+              initialCOA={coa.name}
+              onSuccess={() => setOpenCreateBook(false)}
+              onClose={() => setOpenCreateBook(false)}
+              refetch={refetchCOA}
+            />
+          </div>
         </div>
       )}
     </div>

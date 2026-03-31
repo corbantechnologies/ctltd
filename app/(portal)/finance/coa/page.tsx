@@ -43,15 +43,20 @@ export default function FinanceCOAPage() {
         <COAList rolePrefix="finance" />
       </div>
 
-      {/* Manual Modal Implementation */}
+      {/* Elegant Modal Implementation */}
       {open && (
-        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
-          <CreateCOA
-            rolePrefix="finance"
-            onSuccess={() => setOpen(false)}
-            onClose={() => setOpen(false)}
-            className="min-h-screen border-none shadow-none rounded"
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 lg:p-8">
+          <div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300"
+            onClick={() => setOpen(false)}
           />
+          <div className="relative w-full max-w-4xl animate-in zoom-in-95 fade-in duration-300">
+            <CreateCOA
+              rolePrefix="finance"
+              onSuccess={() => setOpen(false)}
+              onClose={() => setOpen(false)}
+            />
+          </div>
         </div>
       )}
     </div>

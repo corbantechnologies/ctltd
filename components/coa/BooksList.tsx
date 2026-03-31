@@ -192,21 +192,18 @@ export default function BooksList({
                       </span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1.5">
-                        {book.is_tax && (
-                          <span className="bg-orange-500/10 text-orange-600 border-none text-[8px] font-semibold px-1.5 py-0.5 rounded flex items-center">
-                            <Percent className="w-2 h-2 mr-1" />
-                            TAX
-                          </span>
-                        )}
+                      <div className="flex items-center gap-1.5 overflow-hidden">
                         {book.is_bank && (
                           <span className="bg-blue-500/10 text-blue-600 border-none text-[8px] font-semibold px-1.5 py-0.5 rounded inline-block">
                             BANK
                           </span>
                         )}
+                        <span className={`border-none text-[8px] font-semibold px-1.5 py-0.5 rounded inline-block truncate ${book.is_current ? "bg-green-500/10 text-green-600" : "bg-orange-500/10 text-orange-600"}`}>
+                          {book.is_current ? "CURRENT" : "LONG-TERM"}
+                        </span>
                       </div>
                       <ArrowRight
-                        className="w-4 h-4 text-black/20 transition-all"
+                        className="w-4 h-4 text-black/20 transition-all ml-2 flex-shrink-0"
                         style={
                           {
                             "--group-hover-text": primaryColor,
@@ -278,7 +275,7 @@ export default function BooksList({
                       </p>
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">
-                      <div className="flex gap-1.5">
+                      <div className="flex gap-1.5 flex-wrap">
                         {book.is_tax && (
                           <span className="bg-orange-500/10 text-orange-600 border-none text-[8px] font-semibold px-1.5 py-0.5 rounded inline-block">
                             TAX
@@ -289,11 +286,9 @@ export default function BooksList({
                             BANK
                           </span>
                         )}
-                        {!book.is_tax && !book.is_bank && (
-                          <span className="text-[10px] text-black/20 font-semibold">
-                            —
-                          </span>
-                        )}
+                        <span className={`border-none text-[8px] font-semibold px-1.5 py-0.5 rounded inline-block ${book.is_current ? "bg-green-500/10 text-green-600" : "bg-orange-500/10 text-orange-600"}`}>
+                          {book.is_current ? "CURRENT" : "LONG-TERM"}
+                        </span>
                       </div>
                     </td>
                     <td className="py-2.5 px-4 border-b border-black/5">

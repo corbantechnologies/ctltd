@@ -38,6 +38,8 @@ export default function CreateCOA({
       name: "",
       normal_balance: "DEBIT",
       order: 0,
+      report_role: "NONE",
+      is_current: true,
       is_active: true,
     },
     validationSchema: COASchema,
@@ -59,9 +61,22 @@ export default function CreateCOA({
     },
   });
 
+  const reportRoles = [
+    "ASSET",
+    "LIABILITY",
+    "EQUITY",
+    "REVENUE",
+    "EXPENSE",
+    "COGS",
+    "OTHER_INCOME",
+    "NON_OPERATING_EXPENSE",
+    "CAPITAL_EXPENDITURE",
+    "NONE",
+  ];
+
   return (
     <div
-      className={`w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
+      className={`mx-auto w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
     >
       <div
         className="p-8 border-b border-black/5"
@@ -91,8 +106,7 @@ export default function CreateCOA({
             <button
               type="button"
               onClick={onClose}
-
-              className="hover:bg-red-50 hover:text-red-500 rounded p-2"
+              className="hover:bg-red-50 hover:text-red-500 rounded p-2 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -164,7 +178,7 @@ export default function CreateCOA({
               id="name"
               name="name"
               type="text"
-              placeholder="e.g. Liabilitiess"
+              placeholder="e.g. Liquidity Fund"
               className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -178,52 +192,85 @@ export default function CreateCOA({
             )}
           </div>
 
-          <div className="space-y-2">
-            <label
-              htmlFor="normal_balance"
-              className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
-            >
-              Normal Balance
-            </label>
-            <select
-              id="normal_balance"
-              name="normal_balance"
-              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold ring-offset-white transition-all appearance-none cursor-pointer"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.normal_balance}
-              style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
-            >
-              <option value="DEBIT">DEBIT</option>
-              <option value="CREDIT">CREDIT</option>
-            </select>
-            {formik.touched.normal_balance && formik.errors.normal_balance && (
-              <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
-                {formik.errors.normal_balance}
-              </p>
-            )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <label
+                htmlFor="normal_balance"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
+              >
+                Normal Balance
+              </label>
+              <select
+                id="normal_balance"
+                name="normal_balance"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold ring-offset-white transition-all appearance-none cursor-pointer"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.normal_balance}
+                style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
+              >
+                <option value="DEBIT">DEBIT</option>
+                <option value="CREDIT">CREDIT</option>
+              </select>
+              {formik.touched.normal_balance && formik.errors.normal_balance && (
+                <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
+                  {formik.errors.normal_balance}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <label
+                htmlFor="report_role"
+                className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
+              >
+                Report Role
+              </label>
+              <select
+                id="report_role"
+                name="report_role"
+                className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 py-2 text-sm font-semibold ring-offset-white transition-all appearance-none cursor-pointer"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.report_role}
+                style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
+              >
+                {reportRoles.map((role) => (
+                  <option key={role} value={role}>
+                    {role}
+                  </option>
+                ))}
+              </select>
+              {formik.touched.report_role && formik.errors.report_role && (
+                <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
+                  {formik.errors.report_role}
+                </p>
+              )}
+            </div>
           </div>
 
-          <div className="flex items-center gap-3 p-4 bg-black/5 rounded border border-black/5">
-            <input
-              id="is_active"
-              name="is_active"
-              type="checkbox"
-              className="w-5 h-5 rounded border-black/5 transition-colors cursor-pointer"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              checked={formik.values.is_active}
-              style={{ accentColor: primaryColor }}
-            />
-            <label
-              htmlFor="is_active"
-              className="text-sm font-semibold text-black cursor-pointer"
-            >
-              Set as Active Account
-            </label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex items-center gap-3 p-4 bg-black/5 rounded border border-black/5 hover:bg-black/10 transition-colors cursor-pointer group">
+              <input
+                id="is_active"
+                name="is_active"
+                type="checkbox"
+                className="w-5 h-5 rounded border-black/5 transition-colors cursor-pointer"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                checked={formik.values.is_active}
+                style={{ accentColor: primaryColor }}
+              />
+              <label
+                htmlFor="is_active"
+                className="text-sm font-semibold text-black cursor-pointer group-hover:text-opacity-70 transition-opacity"
+              >
+                Active Account
+              </label>
+            </div>
           </div>
 
-          <div className="pt-4">
+          <div className="pt-4 pb-2">
             <button
               type="submit"
               disabled={formik.isSubmitting}

@@ -10,6 +10,7 @@ interface COA {
   name: string;
   normal_balance: string;
   order: number;
+  report_role: string;
   is_active: boolean;
   reference: string;
   created_at: string;
@@ -22,11 +23,16 @@ interface createCOA {
   name: string;
   normal_balance: string; //Normal balance for the chart of account. Side where balances normally increase: DEBIT or CREDIT
   order: number; // Sort order in financial statements (e.g., Assets=10, Liabilities=20, Equity=30, Revenue=40, Expenses=50)
+  report_role: string;
   is_active: boolean; //defaults true
 }
 
 interface updateCOA {
-  name: string;
+  name?: string;
+  report_role?: string;
+  normal_balance?: string;
+  order?: number;
+  is_active?: boolean;
 }
 
 // finance responsibilities
