@@ -19,6 +19,7 @@ export interface Quotation {
     updated_at: string;
     created_by: string;
     updated_by: string;
+    quotation_total: string;
     payment_account?: string;
     terms_and_conditions?: string;
     lines?: QuotationLine[];

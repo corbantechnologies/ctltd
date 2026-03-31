@@ -47,10 +47,10 @@ export default function LeadDetailPage() {
   };
 
   return (
-    <div className="space-y-10 pb-20 container px-4 mx-auto">
+    <div className="space-y-6 pb-6">
       {/* Dynamic Breadcrumbs & Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-        <div className="space-y-4 w-full">
+        <div className="space-y-2 w-full">
           <Link
             href="/operations/leads"
             className="inline-flex items-center gap-2 text-[10px] font-bold uppercase text-slate-400 hover:text-blue-600 transition-colors group"

@@ -62,7 +62,7 @@ export default function LeadQuotationDetailPage() {
     }
   };
 
-  const subtotal = quotation.lines?.reduce((sum, line) => sum + line.total_price, 0) || 0;
+  const subtotal = quotation.lines?.reduce((sum, line) => sum + Number(line.total_price), 0) || 0;
 
   return (
     <div className="min-h-screen bg-slate-50/50 pb-20 animate-in fade-in duration-700">
