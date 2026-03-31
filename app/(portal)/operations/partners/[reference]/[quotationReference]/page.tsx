@@ -28,7 +28,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import CreateQuotationLine from "@/forms/quotationlines/CreateQuotationLine";
 import UpdateQuotationLine from "@/forms/quotationlines/UpdateQuotationLine";
 import FinalizeQuotation from "@/forms/quotations/FinalizeQuotation";
-import { downloadQuotation } from "@/services/quotations";
+import { downloadQuotation, updateQuotation } from "@/services/quotations";
 
 export default function PartnerQuotationDetailPage() {
   const { reference, quotationReference } = useParams();
@@ -66,6 +66,18 @@ export default function PartnerQuotationDetailPage() {
     }
   };
 
+  const handleUpdateStatus = async (newStatus: "ACCEPTED" | "REJECTED") => {
+    if (!confirm(`Are you sure you want to mark this quotation as ${newStatus}?`)) return;
+
+    try {
+      await updateQuotation(quotation.reference, { status: newStatus }, authHeaders);
+      toast.success(`Quotation updated to ${newStatus}`);
+      invalidate();
+    } catch (error: any) {
+      toast.error("Failed to update status");
+    }
+  };
+
   const handleDeleteLine = async (lineRef: string) => {
     if (!confirm("Remove this line item?")) return;
     
@@ -79,6 +91,7 @@ export default function PartnerQuotationDetailPage() {
   };
 
   const subtotal = quotation.lines?.reduce((sum, line) => sum + Number(line.total_price), 0) || 0;
+  const isReadOnly = quotation.status !== "DRAFT";
 
   const getStatusStyles = (status: string) => {
     switch (status) {
@@ -160,13 +173,15 @@ export default function PartnerQuotationDetailPage() {
                 </div>
               </div>
 
-              <button
-                onClick={() => setIsCreateModalOpen(true)}
-                className="h-12 px-6 rounded bg-blue-600 text-white flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:bg-slate-900 transition-all shadow-xl shadow-blue-600/20 active:scale-95"
-              >
-                <Plus className="w-4 h-4" />
-                Add Component
-              </button>
+              {!isReadOnly && (
+                <button
+                  onClick={() => setIsCreateModalOpen(true)}
+                  className="h-12 px-6 rounded bg-blue-600 text-white flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:bg-slate-900 transition-all shadow-xl shadow-blue-600/20 active:scale-95"
+                >
+                  <Plus className="w-4 h-4" />
+                  Add Component
+                </button>
+              )}
             </div>
 
             {/* Line Items Table */}
@@ -212,20 +227,24 @@ export default function PartnerQuotationDetailPage() {
                           </p>
                         </td>
                         <td className="py-8 px-8 text-right space-x-2">
-                          <button 
-                            onClick={() => setSelectedLine(line)}
-                            className="p-2 text-black/20 hover:text-blue-600 transition-colors opacity-0 group-hover:opacity-100"
-                            title="Edit"
-                          >
-                            <Edit2 className="w-4 h-4" />
-                          </button>
-                          <button 
-                            onClick={() => handleDeleteLine(line.reference)}
-                            className="p-2 text-black/20 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
-                            title="Delete"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
+                          {!isReadOnly && (
+                            <>
+                              <button 
+                                onClick={() => setSelectedLine(line)}
+                                className="p-2 text-black/20 hover:text-blue-600 transition-colors opacity-0 group-hover:opacity-100"
+                                title="Edit"
+                              >
+                                <Edit2 className="w-4 h-4" />
+                              </button>
+                              <button 
+                                onClick={() => handleDeleteLine(line.reference)}
+                                className="p-2 text-black/20 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+                                title="Delete"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </>
+                          )}
                         </td>
                       </tr>
                     ))
@@ -290,13 +309,37 @@ export default function PartnerQuotationDetailPage() {
               </div>
             </div>
 
-            <button
-                onClick={() => setIsFinalizeModalOpen(true)}
-                disabled={quotation.status !== "DRAFT"}
-                className="w-full py-5 bg-slate-900 text-white rounded font-bold text-[11px] uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-                Authorize & Finalize
-            </button>
+            {quotation.status === "DRAFT" && (
+              <button
+                  onClick={() => setIsFinalizeModalOpen(true)}
+                  className="w-full py-5 bg-slate-900 text-white rounded font-bold text-[11px] uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-3"
+              >
+                  Authorize & Finalize
+              </button>
+            )}
+
+            {quotation.status === "SENT" && (
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={() => handleUpdateStatus("ACCEPTED")}
+                  className="w-full py-4 bg-emerald-600 text-white rounded font-bold text-[10px] uppercase tracking-widest hover:bg-emerald-700 transition-all shadow-md active:scale-[0.98] flex items-center justify-center gap-3"
+                >
+                  Accept Proposal
+                </button>
+                <button
+                  onClick={() => handleUpdateStatus("REJECTED")}
+                  className="w-full py-4 bg-red-600 text-white rounded font-bold text-[10px] uppercase tracking-widest hover:bg-red-700 transition-all shadow-md active:scale-[0.98] flex items-center justify-center gap-3"
+                >
+                  Reject Proposal
+                </button>
+              </div>
+            )}
+
+            {isReadOnly && quotation.status !== "SENT" && (
+              <div className="py-4 px-6 bg-slate-100 border border-slate-200 rounded text-center">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Status Locked: {quotation.status}</p>
+              </div>
+            )}
           </div>
 
           <div className="bg-white p-10 border border-slate-100 rounded space-y-6">
