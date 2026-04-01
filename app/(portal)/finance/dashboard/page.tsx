@@ -316,7 +316,7 @@ export default function FinanceDashboard() {
 
         <Tabs.Content value="reports" className="focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700">
           <div>
-            <ReportsDashboard />
+            <ReportsDashboard rolePrefix="finance" />
           </div>
         </Tabs.Content>
       </Tabs.Root>
