@@ -53,6 +53,7 @@ export default function CreateJournal({
         refetch();
         if (onSuccess) onSuccess();
       } catch (error: any) {
+        console.log(error);
         toast.error(
           error?.response?.data?.message || "Failed to create journal batch",
         );
