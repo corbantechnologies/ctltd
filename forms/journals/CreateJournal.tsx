@@ -9,6 +9,7 @@ import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useFetchJournalTypes } from "@/hooks/journaltypes/actions";
 import { useQueryClient } from "@tanstack/react-query";
 import SearchableSelect from "@/components/portal/SearchableSelect";
+import { formatBackendError } from "@/lib/error-handler";
 
 interface CreateJournalProps {
   initialJournalType?: string;
@@ -54,7 +55,7 @@ export default function CreateJournal({
         if (onSuccess) onSuccess();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to create journal batch",
+          formatBackendError(error, "Failed to create journal batch")
         );
       } finally {
         setSubmitting(false);
