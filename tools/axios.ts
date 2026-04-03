@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:8000";
+const BASE_URL = typeof window !== "undefined" ? "" : BACKEND_URL;
 
 export default axios?.create({
   baseURL: BASE_URL,
