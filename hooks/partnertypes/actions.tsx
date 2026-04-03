@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import useAxiosAuth from "../authentication/useAxiosAuth";
-import { getPartnerTypes, getPartnerType } from "@/services/partnertypes";
+import { getPartnerTypes } from "@/services/partners";
 
 export function useFetchPartnerTypes() {
   const header = useAxiosAuth();
@@ -10,16 +10,6 @@ export function useFetchPartnerTypes() {
   return useQuery({
     queryKey: ["partnertypes"],
     queryFn: () => getPartnerTypes(header),
-    enabled: !!header.headers.Authorization,
-  });
-}
-
-export function useFetchPartnerType(reference: string) {
-  const header = useAxiosAuth();
-
-  return useQuery({
-    queryKey: ["partnertype", reference],
-    queryFn: () => getPartnerType(reference, header),
-    enabled: !!reference && !!header.headers.Authorization,
+    enabled: !!header.headers.Authorization && header.headers.Authorization !== "Token undefined",
   });
 }

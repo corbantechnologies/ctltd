@@ -46,9 +46,9 @@ export default function CreateFiscalYear({
 
   return (
     <div
-      className={`mx-auto w-full border-black/5 shadow-2xl rounded overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
+      className={`mx-auto w-full border-black/5 shadow-2xl rounded overflow-hidden bg-white/80 backdrop-blur-xl flex flex-col ${className}`}
     >
-      <div className="p-8 border-b border-black/5 bg-gradient-to-r from-white to-gray-50/50">
+      <div className="p-8 border-b border-black/5 bg-gradient-to-r from-white to-gray-50/50 flex-shrink-0">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-4">
             <div
@@ -81,7 +81,7 @@ export default function CreateFiscalYear({
         </div>
       </div>
 
-      <div className="p-8">
+      <div className="p-8 overflow-y-auto max-h-[min(80vh,600px)]">
         <form onSubmit={formik.handleSubmit} className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
@@ -98,7 +98,7 @@ export default function CreateFiscalYear({
                 type="text"
                 required
                 placeholder="e.g., FY2025/2026"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-red-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-red-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5 text-black"
                 onChange={formik.handleChange}
                 value={formik.values.code}
               />
@@ -117,7 +117,7 @@ export default function CreateFiscalYear({
                 type="number"
                 step="0.01"
                 placeholder="0.00"
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-red-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-red-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5 text-black"
                 onChange={formik.handleChange}
                 value={formik.values.estimated_profit}
               />
@@ -136,7 +136,7 @@ export default function CreateFiscalYear({
                 name="start_date"
                 type="date"
                 required
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-red-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-red-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5 text-black"
                 onChange={formik.handleChange}
                 value={formik.values.start_date}
               />
@@ -155,7 +155,7 @@ export default function CreateFiscalYear({
                 name="end_date"
                 type="date"
                 required
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-red-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-red-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-medium px-5 text-black"
                 onChange={formik.handleChange}
                 value={formik.values.end_date}
               />
@@ -166,7 +166,7 @@ export default function CreateFiscalYear({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[1.25rem] font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 text-white rounded font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,

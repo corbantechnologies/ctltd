@@ -62,7 +62,7 @@ export default function UpdatePartnerType({
   });
 
   return (
-    <div className="w-full max-w-2xl border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl">
+    <div className="w-full max-w-2xl border-black/5 shadow-2xl rounded overflow-hidden bg-white/80 backdrop-blur-xl">
       <div className="bg-orange-50/50 p-8 border-b border-black/5">
         <div className="flex items-center gap-4 mb-4">
           <div className="w-12 h-12 rounded bg-black flex items-center justify-center text-white shadow-lg">
@@ -127,7 +127,7 @@ export default function UpdatePartnerType({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded-[20px] font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
             >
               {formik.isSubmitting ? (
                 <Loader2 className="w-6 h-6 animate-spin" />

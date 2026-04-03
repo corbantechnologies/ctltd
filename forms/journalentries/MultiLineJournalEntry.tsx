@@ -4,14 +4,14 @@
 import React, { useState, useMemo } from "react";
 import { useFormik, FieldArray, FormikProvider } from "formik";
 import { toast } from "react-hot-toast";
-import { 
-  Loader2, 
-  Receipt, 
-  Plus, 
-  X, 
-  Trash2, 
-  AlertCircle, 
-  CheckCircle2, 
+import {
+  Loader2,
+  Receipt,
+  Plus,
+  X,
+  Trash2,
+  AlertCircle,
+  CheckCircle2,
   FileUp,
   CreditCard
 } from "lucide-react";
@@ -51,17 +51,17 @@ export default function MultiLineJournalEntry({
   const { data: partners, isLoading: isLoadingPartners } = useFetchPartners();
   const { data: divisions, isLoading: isLoadingDivisions } = useFetchDivisions();
 
-  const bookOptions = useMemo(() => 
-    books?.map(b => ({ value: b.name, label: b.name, secondaryLabel: b.code })) || [], 
-  [books]);
-  
-  const partnerOptions = useMemo(() => 
-    partners?.map(p => ({ value: p.name, label: p.name })) || [], 
-  [partners]);
+  const bookOptions = useMemo(() =>
+    books?.map(b => ({ value: b.name, label: b.name, secondaryLabel: b.code })) || [],
+    [books]);
 
-  const divisionOptions = useMemo(() => 
-    divisions?.map(d => ({ value: d.name, label: d.name, secondaryLabel: d.code })) || [], 
-  [divisions]);
+  const partnerOptions = useMemo(() =>
+    partners?.map(p => ({ value: p.name, label: p.name })) || [],
+    [partners]);
+
+  const divisionOptions = useMemo(() =>
+    divisions?.map(d => ({ value: d.name, label: d.name, secondaryLabel: d.code })) || [],
+    [divisions]);
 
   const formik = useFormik({
     initialValues: {
@@ -81,7 +81,7 @@ export default function MultiLineJournalEntry({
       // Final split check
       const totalDebit = values.lines.reduce((sum, l) => sum + (Number(l.debit) || 0), 0);
       const totalCredit = values.lines.reduce((sum, l) => sum + (Number(l.credit) || 0), 0);
-      
+
       if (Math.abs(totalDebit - totalCredit) > 0.01) {
         toast.error(`Out of Balance: Difference is ${Math.abs(totalDebit - totalCredit).toFixed(2)}`);
         setSubmitting(false);
@@ -119,7 +119,7 @@ export default function MultiLineJournalEntry({
         // Note: For multi-line with file, it's safer to use the service in a loop 
         // or a dedicated multi-part batch. Here we will use the bulk create endpoint if the backend is updated.
         // For simplicity and file support, if there's a file, we link it to the first entry.
-        
+
         await createService(payload as any, header);
 
         toast.success("Batch transaction recorded successfully");
@@ -144,12 +144,12 @@ export default function MultiLineJournalEntry({
 
   return (
     <FormikProvider value={formik}>
-      <div className={cn("w-full bg-white border border-slate-200 shadow-2xl rounded-[1.5rem] overflow-hidden flex flex-col max-h-[90vh]", className)}>
+      <div className={cn("w-full bg-white border border-slate-200 shadow-2xl rounded overflow-hidden flex flex-col max-h-[90vh]", className)}>
         {/* Header */}
         <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div 
-              className="w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-lg"
+            <div
+              className="w-12 h-12 rounded flex items-center justify-center text-white shadow-lg"
               style={{ backgroundColor: primaryColor }}
             >
               <Receipt className="w-6 h-6" />
@@ -161,28 +161,28 @@ export default function MultiLineJournalEntry({
           </div>
 
           {currentTotals && (
-            <div className="hidden md:flex items-center gap-6 px-5 py-2.5 bg-white border border-slate-200 rounded-xl shadow-sm">
-                <div className="flex flex-col">
-                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Batch DR</span>
-                    <span className="text-xs font-bold text-emerald-600 leading-none">{currentTotals.debit.toLocaleString()}</span>
-                </div>
-                <div className="w-px h-5 bg-slate-100" />
-                <div className="flex flex-col">
-                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Batch CR</span>
-                    <span className="text-xs font-bold text-indigo-600 leading-none">{currentTotals.credit.toLocaleString()}</span>
-                </div>
-                <div className="w-px h-5 bg-slate-100" />
-                <div className="flex flex-col">
-                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Diff</span>
-                    <span className={cn("text-xs font-bold leading-none", currentTotals.balance === 0 ? "text-slate-400" : "text-red-500")}>
-                        {Math.abs(currentTotals.balance).toLocaleString()}
-                    </span>
-                </div>
+            <div className="hidden md:flex items-center gap-6 px-5 py-2.5 bg-white border border-slate-200 rounded shadow-sm">
+              <div className="flex flex-col">
+                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Batch DR</span>
+                <span className="text-xs font-bold text-emerald-600 leading-none">{currentTotals.debit.toLocaleString()}</span>
+              </div>
+              <div className="w-px h-5 bg-slate-100" />
+              <div className="flex flex-col">
+                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Batch CR</span>
+                <span className="text-xs font-bold text-indigo-600 leading-none">{currentTotals.credit.toLocaleString()}</span>
+              </div>
+              <div className="w-px h-5 bg-slate-100" />
+              <div className="flex flex-col">
+                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Diff</span>
+                <span className={cn("text-xs font-bold leading-none", currentTotals.balance === 0 ? "text-slate-400" : "text-red-500")}>
+                  {Math.abs(currentTotals.balance).toLocaleString()}
+                </span>
+              </div>
             </div>
           )}
 
           {onClose && (
-            <button onClick={onClose} className="p-2 hover:bg-red-50 hover:text-red-500 rounded-full transition-colors">
+            <button onClick={onClose} className="p-2 hover:bg-red-50 hover:text-red-500 rounded transition-colors">
               <X className="w-5 h-5" />
             </button>
           )}
@@ -190,72 +190,72 @@ export default function MultiLineJournalEntry({
 
         <div className="flex-1 overflow-y-auto p-6 space-y-8">
           {/* Metadata Section */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 p-5 bg-slate-50/50 rounded-2xl border border-slate-100">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 p-5 bg-slate-50/50 rounded border border-slate-100">
             <div className="space-y-2 md:col-span-1">
-                <label className="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-1">Payment Channel</label>
-                <select 
-                    name="payment_method"
-                    value={formik.values.payment_method}
-                    onChange={formik.handleChange}
-                    className="w-full h-11 bg-white border border-slate-200 rounded-lg px-3 text-xs font-semibold focus:ring-4 focus:ring-emerald-600/10 transition-all outline-none"
-                >
-                    <option value="BANK_TRANSFER">Bank Transfer</option>
-                    <option value="CASH">Cash</option>
-                    <option value="MOBILE_MONEY">M-Pesa / Mobile</option>
-                    <option value="CHEQUE">Cheque</option>
-                </select>
+              <label className="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-1">Payment Channel</label>
+              <select
+                name="payment_method"
+                value={formik.values.payment_method}
+                onChange={formik.handleChange}
+                className="w-full h-11 bg-white border border-slate-200 rounded px-3 text-xs font-semibold focus:ring-4 focus:ring-emerald-600/10 transition-all outline-none"
+              >
+                <option value="BANK_TRANSFER">Bank Transfer</option>
+                <option value="CASH">Cash</option>
+                <option value="MOBILE_MONEY">M-Pesa / Mobile</option>
+                <option value="CHEQUE">Cheque</option>
+              </select>
             </div>
 
             <div className="space-y-2 md:col-span-1">
-                <label className="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-1">Evidence Type</label>
-                <select 
-                    name="source_document"
-                    value={formik.values.source_document}
-                    onChange={formik.handleChange}
-                    className="w-full h-11 bg-white border border-slate-200 rounded-lg px-3 text-xs font-semibold focus:ring-4 focus:ring-emerald-600/10 transition-all outline-none"
-                >
-                    <option value="INVOICE">Invoice</option>
-                    <option value="RECEIPT">Receipt</option>
-                    <option value="KRA_INVOICE">KRA Invoice</option>
-                    <option value="MOBILE_MONEY">M-Pesa Msg</option>
-                </select>
+              <label className="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-1">Evidence Type</label>
+              <select
+                name="source_document"
+                value={formik.values.source_document}
+                onChange={formik.handleChange}
+                className="w-full h-11 bg-white border border-slate-200 rounded px-3 text-xs font-semibold focus:ring-4 focus:ring-emerald-600/10 transition-all outline-none"
+              >
+                <option value="INVOICE">Invoice</option>
+                <option value="RECEIPT">Receipt</option>
+                <option value="KRA_INVOICE">KRA Invoice</option>
+                <option value="MOBILE_MONEY">M-Pesa Msg</option>
+              </select>
             </div>
 
             <div className="space-y-2 md:col-span-1">
-                <label className="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-1">Ref Number</label>
-                <input 
-                    name="document_number"
-                    placeholder="e.g. INV-001"
-                    value={formik.values.document_number}
-                    onChange={formik.handleChange}
-                    className="w-full h-11 bg-white border border-slate-200 rounded-lg px-4 text-xs font-semibold focus:ring-4 focus:ring-emerald-600/10 transition-all outline-none"
-                />
+              <label className="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-1">Ref Number</label>
+              <input
+                name="document_number"
+                placeholder="e.g. INV-001"
+                value={formik.values.document_number}
+                onChange={formik.handleChange}
+                className="w-full h-11 bg-white border border-slate-200 rounded px-4 text-xs font-semibold focus:ring-4 focus:ring-emerald-600/10 transition-all outline-none"
+              />
             </div>
 
             <div className="space-y-2 md:col-span-1">
-                <label className="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-1">Attach Link/File</label>
-                <div className="flex h-11 bg-white border border-slate-200 rounded-lg items-center px-3 gap-2 text-slate-400 hover:border-slate-300 transition-colors cursor-pointer">
-                    <FileUp className="w-4 h-4" />
-                    <span className="text-[10px] font-semibold truncate">{formik.values.document_file?.name || "Upload Proof..."}</span>
-                    <input type="file" className="hidden" />
-                </div>
+              <label className="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-1">Attach Link/File</label>
+              <div className="flex h-11 bg-white border border-slate-200 rounded items-center px-3 gap-2 text-slate-400 hover:border-slate-300 transition-colors cursor-pointer">
+                <FileUp className="w-4 h-4" />
+                <span className="text-[10px] font-semibold truncate">{formik.values.document_file?.name || "Upload Proof..."}</span>
+                <input type="file" className="hidden" />
+              </div>
             </div>
           </div>
 
           {/* Transaction Lines */}
           <div className="space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-               <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
-                 <CreditCard className="w-3.5 h-3.5" />
-                 Ledger Distribution
-               </h3>
-               <button 
+              <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
+                <CreditCard className="w-3.5 h-3.5" />
+                Ledger Distribution
+              </h3>
+              <button
                 type="button"
                 onClick={() => formik.setFieldValue("lines", [...formik.values.lines, { book: "", partner: "", division: "", debit: 0, credit: 0, project: "" }])}
-                className="text-[10px] font-bold text-emerald-600 hover:text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
-               >
-                 <Plus className="w-3 h-3" /> Add Row
-               </button>
+                className="text-[10px] font-bold text-emerald-600 hover:text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded transition-colors flex items-center gap-1.5"
+              >
+                <Plus className="w-3 h-3" /> Add Row
+              </button>
             </div>
 
             <FieldArray name="lines">
@@ -263,76 +263,76 @@ export default function MultiLineJournalEntry({
                 <div className="space-y-3">
                   {formik.values.lines.map((line, index) => (
                     <div key={index} className={cn(
-                        "group grid grid-cols-1 md:grid-cols-12 gap-3 items-end p-4 rounded-xl border border-slate-100 transition-all",
-                        line.debit > 0 ? "bg-emerald-50/20 border-emerald-100" : line.credit > 0 ? "bg-indigo-50/20 border-indigo-100" : "bg-white"
+                      "group grid grid-cols-1 md:grid-cols-12 gap-3 items-end p-4 rounded border border-slate-100 transition-all",
+                      line.debit > 0 ? "bg-emerald-50/20 border-emerald-100" : line.credit > 0 ? "bg-indigo-50/20 border-indigo-100" : "bg-white"
                     )}>
                       <div className="md:col-span-3">
-                        <SearchableSelect 
-                            label={`Account Book #${index + 1}`}
-                            options={bookOptions}
-                            value={line.book}
-                            onChange={(val) => formik.setFieldValue(`lines.${index}.book`, val)}
-                            placeholder="Search Ledger..."
-                            disabled={isLoadingBooks}
+                        <SearchableSelect
+                          label={`Account Book #${index + 1}`}
+                          options={bookOptions}
+                          value={line.book}
+                          onChange={(val) => formik.setFieldValue(`lines.${index}.book`, val)}
+                          placeholder="Search Ledger..."
+                          disabled={isLoadingBooks}
                         />
                       </div>
                       <div className="md:col-span-2">
-                        <SearchableSelect 
-                            label="Division"
-                            options={divisionOptions}
-                            value={line.division}
-                            onChange={(val) => formik.setFieldValue(`lines.${index}.division`, val)}
-                            placeholder="Select..."
-                            disabled={isLoadingDivisions}
+                        <SearchableSelect
+                          label="Division"
+                          options={divisionOptions}
+                          value={line.division}
+                          onChange={(val) => formik.setFieldValue(`lines.${index}.division`, val)}
+                          placeholder="Select..."
+                          disabled={isLoadingDivisions}
                         />
                       </div>
                       <div className="md:col-span-2">
-                        <SearchableSelect 
-                            label="Partner (Optional)"
-                            options={partnerOptions}
-                            value={line.partner}
-                            onChange={(val) => formik.setFieldValue(`lines.${index}.partner`, val)}
-                            placeholder="No Partner"
-                            disabled={isLoadingPartners}
+                        <SearchableSelect
+                          label="Partner (Optional)"
+                          options={partnerOptions}
+                          value={line.partner}
+                          onChange={(val) => formik.setFieldValue(`lines.${index}.partner`, val)}
+                          placeholder="No Partner"
+                          disabled={isLoadingPartners}
                         />
                       </div>
                       <div className="md:col-span-2">
                         <label className="text-[9px] font-bold uppercase tracking-widest text-emerald-600/60 ml-1">Debit Amount</label>
-                        <input 
-                            type="number"
-                            name={`lines.${index}.debit`}
-                            value={line.debit || ""}
-                            onChange={(e) => {
-                                formik.setFieldValue(`lines.${index}.debit`, e.target.value);
-                                if(Number(e.target.value) > 0) formik.setFieldValue(`lines.${index}.credit`, 0);
-                            }}
-                            className="w-full h-11 bg-white border border-emerald-100 rounded-lg px-4 text-sm font-bold text-emerald-700 outline-none focus:ring-4 focus:ring-emerald-600/10 placeholder:text-emerald-200"
-                            placeholder="0.00"
+                        <input
+                          type="number"
+                          name={`lines.${index}.debit`}
+                          value={line.debit || ""}
+                          onChange={(e) => {
+                            formik.setFieldValue(`lines.${index}.debit`, e.target.value);
+                            if (Number(e.target.value) > 0) formik.setFieldValue(`lines.${index}.credit`, 0);
+                          }}
+                          className="w-full h-11 bg-white border border-emerald-100 rounded px-4 text-sm font-bold text-emerald-700 outline-none focus:ring-4 focus:ring-emerald-600/10 placeholder:text-emerald-200"
+                          placeholder="0.00"
                         />
                       </div>
                       <div className="md:col-span-2">
                         <label className="text-[9px] font-bold uppercase tracking-widest text-indigo-600/60 ml-1">Credit Amount</label>
-                        <input 
-                            type="number"
-                            name={`lines.${index}.credit`}
-                            value={line.credit || ""}
-                            onChange={(e) => {
-                                formik.setFieldValue(`lines.${index}.credit`, e.target.value);
-                                if(Number(e.target.value) > 0) formik.setFieldValue(`lines.${index}.debit`, 0);
-                            }}
-                            className="w-full h-11 bg-white border border-indigo-100 rounded-lg px-4 text-sm font-bold text-indigo-700 outline-none focus:ring-4 focus:ring-indigo-600/10 placeholder:text-indigo-200"
-                            placeholder="0.00"
+                        <input
+                          type="number"
+                          name={`lines.${index}.credit`}
+                          value={line.credit || ""}
+                          onChange={(e) => {
+                            formik.setFieldValue(`lines.${index}.credit`, e.target.value);
+                            if (Number(e.target.value) > 0) formik.setFieldValue(`lines.${index}.debit`, 0);
+                          }}
+                          className="w-full h-11 bg-white border border-indigo-100 rounded px-4 text-sm font-bold text-indigo-700 outline-none focus:ring-4 focus:ring-indigo-600/10 placeholder:text-indigo-200"
+                          placeholder="0.00"
                         />
                       </div>
                       <div className="md:col-span-1 flex justify-center pb-1">
-                        <button 
-                            type="button"
-                            onClick={() => index > 0 && remove(index)}
-                            className={cn(
-                                "p-2.5 rounded-lg transition-all",
-                                index === 0 ? "opacity-20 cursor-not-allowed text-slate-300" : "text-slate-300 hover:text-red-500 hover:bg-red-50"
-                            )}
-                            disabled={index === 0}
+                        <button
+                          type="button"
+                          onClick={() => index > 0 && remove(index)}
+                          className={cn(
+                            "p-2.5 rounded transition-all",
+                            index === 0 ? "opacity-20 cursor-not-allowed text-slate-300" : "text-slate-300 hover:text-red-500 hover:bg-red-50"
+                          )}
+                          disabled={index === 0}
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
@@ -349,39 +349,39 @@ export default function MultiLineJournalEntry({
         <div className="p-6 bg-slate-900 text-white">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex gap-8">
-                <div className="flex flex-col">
-                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Total Debit</span>
-                    <span className="text-lg font-bold text-emerald-400">{formik.values.currency} {totals.debit.toLocaleString()}</span>
+              <div className="flex flex-col">
+                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Total Debit</span>
+                <span className="text-lg font-bold text-emerald-400">{formik.values.currency} {totals.debit.toLocaleString()}</span>
+              </div>
+              <div className="flex flex-col border-l border-slate-700 pl-8">
+                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Total Credit</span>
+                <span className="text-lg font-bold text-indigo-400">{formik.values.currency} {totals.credit.toLocaleString()}</span>
+              </div>
+              <div className="flex flex-col border-l border-slate-700 pl-8">
+                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Balance</span>
+                <div className="flex items-center gap-2">
+                  <span className={cn("text-lg font-bold", totals.balance === 0 ? "text-white" : "text-red-400")}>
+                    {totals.balance.toLocaleString()}
+                  </span>
+                  {totals.balance === 0 ? <CheckCircle2 className="w-5 h-5 text-emerald-400" /> : <AlertCircle className="w-5 h-5 text-red-500 animate-pulse" />}
                 </div>
-                <div className="flex flex-col border-l border-slate-700 pl-8">
-                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Total Credit</span>
-                    <span className="text-lg font-bold text-indigo-400">{formik.values.currency} {totals.credit.toLocaleString()}</span>
-                </div>
-                <div className="flex flex-col border-l border-slate-700 pl-8">
-                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Balance</span>
-                    <div className="flex items-center gap-2">
-                        <span className={cn("text-lg font-bold", totals.balance === 0 ? "text-white" : "text-red-400")}>
-                            {totals.balance.toLocaleString()}
-                        </span>
-                        {totals.balance === 0 ? <CheckCircle2 className="w-5 h-5 text-emerald-400" /> : <AlertCircle className="w-5 h-5 text-red-500 animate-pulse" />}
-                    </div>
-                </div>
+              </div>
             </div>
 
             <button
               onClick={() => formik.handleSubmit()}
               disabled={formik.isSubmitting || totals.balance !== 0}
               className={cn(
-                "h-14 px-10 rounded-xl font-bold text-sm transition-all shadow-xl flex items-center justify-center gap-2.5",
+                "h-14 px-10 rounded font-bold text-sm transition-all shadow-xl flex items-center justify-center gap-2.5",
                 totals.balance === 0 && !formik.isSubmitting
-                    ? "bg-emerald-600 text-white hover:bg-emerald-500 active:scale-95"
-                    : "bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-700"
+                  ? "bg-emerald-600 text-white hover:bg-emerald-500 active:scale-95"
+                  : "bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-700"
               )}
             >
               {formik.isSubmitting ? <Loader2 className="animate-spin w-5 h-5" /> : (
                 <>
-                    <Plus className="w-4 h-4" />
-                    RECORD TRANSACTION
+                  <Plus className="w-4 h-4" />
+                  RECORD TRANSACTION
                 </>
               )}
             </button>

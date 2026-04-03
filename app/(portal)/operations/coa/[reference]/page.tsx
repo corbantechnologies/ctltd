@@ -75,7 +75,7 @@ export default function COADetailPage() {
 
       {/* Meta Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="border border-black/5 bg-white/50 backdrop-blur-xl rounded-[28px] overflow-hidden shadow-sm">
+        <div className="border border-black/5 bg-white/50 backdrop-blur-xl rounded overflow-hidden shadow-sm">
           <div className="p-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded bg-[#2563EB]/5 flex items-center justify-center text-[#2563EB]">

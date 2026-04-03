@@ -3,16 +3,13 @@
 
 import { updateJournal } from "@/services/journals";
 import { useFormik } from "formik";
-
-
-
-
-
 import { toast } from "react-hot-toast";
 import { Loader2, Edit3, Save, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
+import { formatBackendError } from "@/lib/error-handler";
+import { cn } from "@/lib/utils";
 
 interface UpdateJournalProps {
   journal: {
@@ -51,11 +48,7 @@ export default function UpdateJournal({
       try {
         await updateJournal(
           journal.reference,
-          {
-            description: values.description,
-            date: values.date,
-            currency: values.currency,
-          },
+          values,
           header,
         );
         toast.success("Journal batch updated successfully");
@@ -67,7 +60,7 @@ export default function UpdateJournal({
         onClose?.();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to update journal batch",
+          formatBackendError(error, "Failed to update journal batch")
         );
       } finally {
         setSubmitting(false);
@@ -77,18 +70,22 @@ export default function UpdateJournal({
 
   return (
     <div
-      className={`mx-auto border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
+      className={cn(
+        "mx-auto border border-slate-200 shadow-2xl rounded-2xl overflow-hidden bg-white/95 backdrop-blur-xl",
+        className
+      )}
     >
-      <div className="bg-orange-50/50 p-8 border-b border-black/5">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="w-12 h-12 rounded bg-black flex items-center justify-center text-white shadow-lg">
-            <Edit3 className="w-6 h-6" />
+      <div className="bg-slate-50/50 p-8 border-b border-slate-100/50">
+        <div className="flex items-center gap-5">
+          <div className="w-14 h-14 rounded-2xl bg-black flex items-center justify-center text-white shadow-xl shadow-black/20 ring-4 ring-black/5">
+            <Edit3 className="w-7 h-7" />
           </div>
           <div>
-            <h2 className="text-2xl font-semibold text-black tracking-tight">
+            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
               Update Journal Batch
             </h2>
-            <p className="text-black/50 font-semibold uppercase text-[10px] tracking-widest mt-1">
+            <p className="text-slate-400 font-bold uppercase text-[10px] tracking-[0.2em] mt-1.5 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               Refine Transaction Batch
             </p>
           </div>
@@ -97,10 +94,9 @@ export default function UpdateJournal({
               <button
                 type="button"
                 onClick={onClose}
-
-                className="hover:bg-red-50 hover:text-red-500 rounded text-black/40 p-2"
+                className="hover:bg-red-50 hover:text-red-500 rounded-xl text-slate-400 p-2.5 transition-colors group active:scale-95"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
               </button>
             </div>
           )}
@@ -108,28 +104,32 @@ export default function UpdateJournal({
       </div>
 
       <div className="p-8">
-        {/* Static info */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="p-4 bg-black/5 rounded border border-black/5">
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-1">
+        {/* Static info - ALWAYS STACKED */}
+        <div className="space-y-4 mb-8">
+          <div className="p-5 bg-slate-50/50 rounded-2xl border border-slate-100 flex flex-col gap-1.5 shadow-sm group hover:border-slate-200 transition-colors">
+            <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 ml-0.5">
               Batch Reference
             </p>
-            <p className="font-semibold text-black">{journal.reference}</p>
-          </div>
-          <div className="p-4 bg-black/5 rounded border border-black/5">
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-black/40 mb-1">
-              Category
+            <p className="font-bold text-slate-800 break-all text-sm leading-relaxed">
+              {journal.reference}
             </p>
-            <p className="font-semibold text-black">{journal.journal_type}</p>
+          </div>
+          <div className="p-5 bg-slate-50/50 rounded-2xl border border-slate-100 flex flex-col gap-1.5 shadow-sm group hover:border-slate-200 transition-colors">
+            <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 ml-0.5">
+              Journal Category
+            </p>
+            <p className="font-bold text-slate-800 text-sm">
+              {journal.journal_type}
+            </p>
           </div>
         </div>
 
         {/* Editable fields */}
         <form onSubmit={formik.handleSubmit} className="space-y-6">
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             <label
               htmlFor="date"
-              className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
+              className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 ml-1.5"
             >
               Transaction Date
             </label>
@@ -137,61 +137,69 @@ export default function UpdateJournal({
               id="date"
               name="date"
               type="date"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-slate-50 transition-all font-semibold px-5"
+              className="border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-4 focus:ring-emerald-600/10 w-full h-14 rounded-2xl focus:bg-white focus:border-emerald-600 focus:shadow-sm transition-all font-bold px-6 text-sm"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.date}
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             <label
               htmlFor="description"
-              className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1"
+              className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 ml-1.5"
             >
-              Description
+              Batch Description
             </label>
             <textarea
               id="description"
               name="description"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full min-h-[120px] rounded focus:bg-slate-50 transition-all font-semibold p-5"
+              className="border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-4 focus:ring-emerald-600/10 w-full min-h-[140px] rounded-2xl focus:bg-white focus:border-emerald-600 focus:shadow-sm transition-all font-bold p-6 text-sm resize-none leading-relaxed"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.description}
+              placeholder="Describe the transaction batch..."
             />
           </div>
 
-          <div className="space-y-2">
-            <label className="text-[10px] font-semibold uppercase tracking-widest text-black/40 ml-1">
-              Currency
+          <div className="space-y-2.5">
+            <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 ml-1.5">
+              Base Currency
             </label>
-            <select
-              name="currency"
-              className="focus:outline-none focus:ring-2 focus:ring-emerald-600/20 flex h-14 w-full rounded border border-slate-200 bg-slate-50 px-5 text-sm font-semibold focus:ring-corporate-primary/20 appearance-none"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.currency}
-            >
-              <option value="KES">KES</option>
-              <option value="USD">USD</option>
-              <option value="EUR">EUR</option>
-              <option value="GBP">GBP</option>
-            </select>
+            <div className="relative">
+              <select
+                name="currency"
+                className="focus:outline-none focus:ring-4 focus:ring-emerald-600/10 flex h-14 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-6 text-sm font-bold focus:bg-white focus:border-emerald-600 transition-all appearance-none"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.currency}
+              >
+                <option value="KES">KES (Kenyan Shilling)</option>
+                <option value="USD">USD (US Dollar)</option>
+                <option value="EUR">EUR (Euro)</option>
+                <option value="GBP">GBP (British Pound)</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-6 text-slate-400">
+                <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                  <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                </svg>
+              </div>
+            </div>
           </div>
 
-          <div className="pt-4">
+          <div className="pt-6">
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 bg-corporate-primary hover:bg-black text-white rounded-[20px] font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-black hover:to-slate-800 text-white rounded-2xl font-bold text-base tracking-wide transition-all shadow-[0_12px_24px_-10px_rgba(5,150,105,0.4)] active:scale-[0.98] active:shadow-inner group flex items-center justify-center gap-3 disabled:opacity-50 disabled:active:scale-100"
             >
               {formik.isSubmitting ? (
-                <Loader2 className="w-6 h-6 animate-spin" />
+                <Loader2 className="w-6 h-6 animate-spin text-white/80" />
               ) : (
-                <div className="flex items-center gap-3">
-                  <Save className="w-5 h-5" />
-                  Save Changes
-                </div>
+                <>
+                  <Save className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  <span>Update Batch Details</span>
+                </>
               )}
             </button>
           </div>

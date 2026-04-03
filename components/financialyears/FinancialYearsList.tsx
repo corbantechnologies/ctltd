@@ -53,7 +53,7 @@ export default function FinancialYearsList({
 
   if (!financialYears || financialYears.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center p-12 bg-gray-50 rounded-[32px] border-2 border-dashed border-gray-200">
+      <div className="flex flex-col items-center justify-center p-12 bg-gray-50 rounded border-2 border-dashed border-gray-200">
         <div className="w-16 h-16 rounded bg-white flex items-center justify-center text-gray-400 mb-4 shadow-sm border border-gray-100">
           <CalendarRange className="w-8 h-8" />
         </div>

@@ -236,7 +236,7 @@ export default function BookDetailPage() {
                         </div>
                       </td>
                       <td className="py-2.5 px-4 border-b border-black/5">
-                        <span className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-semibold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none inline-block">
+                        <span className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-semibold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded shadow-none inline-block">
                           {entry.division || "Entity Core"}
                         </span>
                       </td>

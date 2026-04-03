@@ -37,11 +37,11 @@ export default function OperationsActionsMenu() {
           <DropdownMenu.Content
             align="end"
             sideOffset={8}
-            className="z-[200] w-64 p-2 bg-white rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 animate-in fade-in zoom-in-95 data-[side=bottom]:slide-in-from-top-2"
+            className="z-[200] w-64 p-2 bg-white rounded shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 animate-in fade-in zoom-in-95 data-[side=bottom]:slide-in-from-top-2"
           >
             <DropdownMenu.Item
               onSelect={() => leadTriggerRef.current?.click()}
-              className="flex items-center gap-3 p-3 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
+              className="flex items-center gap-3 p-3 rounded text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
             >
               <Users className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
               Capture New Lead
@@ -49,7 +49,7 @@ export default function OperationsActionsMenu() {
 
             <DropdownMenu.Item
               onSelect={() => productTriggerRef.current?.click()}
-              className="flex items-center gap-3 p-3 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
+              className="flex items-center gap-3 p-3 rounded text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
             >
               <Package className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
               Establish Product
@@ -57,7 +57,7 @@ export default function OperationsActionsMenu() {
 
             <DropdownMenu.Item
               onSelect={() => partnerTriggerRef.current?.click()}
-              className="flex items-center gap-3 p-3 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
+              className="flex items-center gap-3 p-3 rounded text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
             >
               <Users className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
               Register Partner
@@ -67,7 +67,7 @@ export default function OperationsActionsMenu() {
 
             <DropdownMenu.Item
               onSelect={() => divisionTriggerRef.current?.click()}
-              className="flex items-center gap-3 p-3 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
+              className="flex items-center gap-3 p-3 rounded text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 cursor-pointer transition-colors outline-none group data-[highlighted]:bg-slate-50 data-[highlighted]:text-slate-900"
             >
               <Database className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
               Establish Division

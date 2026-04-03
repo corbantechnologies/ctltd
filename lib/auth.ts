@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {
         const { email, password } = credentials as { email: string; password: string };
         try {
           const response = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/token/`,
+            `${process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_BASE_URL || "http://127.0.0.1:8000"}/api/v1/auth/token/`,
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },

@@ -4,11 +4,11 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { toast } from "react-hot-toast";
-import { 
-  Loader2, 
-  Receipt, 
-  Plus, 
-  X, 
+import {
+  Loader2,
+  Receipt,
+  Plus,
+  X,
   FileUp,
   CreditCard,
   Building2,
@@ -113,11 +113,11 @@ export default function SingleJournalEntry({
   const divisionOptions = divisions?.map(d => ({ value: d.name, label: d.name, secondaryLabel: d.code })) || [];
 
   return (
-    <div className={cn("mx-auto w-full border border-slate-200 shadow-2xl rounded-[1.5rem] overflow-hidden bg-white max-h-[90vh] flex flex-col", className)}>
+    <div className={cn("mx-auto w-full border border-slate-200 shadow-2xl rounded overflow-hidden bg-white max-h-[90vh] flex flex-col", className)}>
       <div className="p-8 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
         <div className="flex items-center gap-5">
-          <div 
-            className="w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-xl rotate-3 hover:rotate-0 transition-transform duration-300"
+          <div
+            className="w-14 h-14 rounded flex items-center justify-center text-white shadow-xl rotate-3 hover:rotate-0 transition-transform duration-300"
             style={{ backgroundColor: primaryColor }}
           >
             <Receipt className="w-7 h-7" />
@@ -127,9 +127,9 @@ export default function SingleJournalEntry({
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Batch Unit: {journalReference}</p>
           </div>
         </div>
-        
+
         {currentTotals && (
-          <div className="hidden md:flex items-center gap-6 px-6 py-3 bg-white border border-slate-200 rounded-2xl shadow-sm">
+          <div className="hidden md:flex items-center gap-6 px-6 py-3 bg-white border border-slate-200 rounded shadow-sm">
             <div className="flex flex-col">
               <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">DR Progress</span>
               <span className="text-xs font-bold text-emerald-600">{currentTotals.debit.toLocaleString()}</span>
@@ -150,7 +150,7 @@ export default function SingleJournalEntry({
         )}
 
         {onClose && (
-          <button type="button" onClick={onClose} className="p-2.5 hover:bg-red-50 hover:text-red-500 rounded-full text-slate-300 transition-colors active:scale-95">
+          <button type="button" onClick={onClose} className="p-2.5 hover:bg-red-50 hover:text-red-500 rounded text-slate-300 transition-colors active:scale-95">
             <X className="w-5 h-5" />
           </button>
         )}
@@ -160,179 +160,179 @@ export default function SingleJournalEntry({
         <form id="single-entry-form" onSubmit={formik.handleSubmit} className="space-y-10">
           {/* Mapping Section */}
           <div className="space-y-4">
-             <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
-                <Building2 className="w-4 h-4 text-emerald-600" />
-                <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Classification & Mapping</h3>
-             </div>
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-2">
-                <SearchableSelect 
-                  label="Account Book"
-                  required
-                  options={bookOptions}
-                  value={formik.values.book}
-                  onChange={(val) => formik.setFieldValue("book", val)}
-                  placeholder="Select Ledger..."
-                  disabled={isLoadingBooks}
-                />
-                <SearchableSelect 
-                  label="Division"
-                  required
-                  options={divisionOptions}
-                  value={formik.values.division}
-                  onChange={(val) => formik.setFieldValue("division", val)}
-                  placeholder="Select Division..."
-                  disabled={isLoadingDivisions}
-                />
-                <SearchableSelect 
-                  label="Partner (Optional)"
-                  options={partnerOptions}
-                  value={formik.values.partner}
-                  onChange={(val) => formik.setFieldValue("partner", val)}
-                  placeholder="No Partner"
-                  disabled={isLoadingPartners}
-                />
-             </div>
+            <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
+              <Building2 className="w-4 h-4 text-emerald-600" />
+              <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Classification & Mapping</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-2">
+              <SearchableSelect
+                label="Account Book"
+                required
+                options={bookOptions}
+                value={formik.values.book}
+                onChange={(val) => formik.setFieldValue("book", val)}
+                placeholder="Select Ledger..."
+                disabled={isLoadingBooks}
+              />
+              <SearchableSelect
+                label="Division"
+                required
+                options={divisionOptions}
+                value={formik.values.division}
+                onChange={(val) => formik.setFieldValue("division", val)}
+                placeholder="Select Division..."
+                disabled={isLoadingDivisions}
+              />
+              <SearchableSelect
+                label="Partner (Optional)"
+                options={partnerOptions}
+                value={formik.values.partner}
+                onChange={(val) => formik.setFieldValue("partner", val)}
+                placeholder="No Partner"
+                disabled={isLoadingPartners}
+              />
+            </div>
           </div>
 
           {/* Financials Section */}
           <div className="space-y-4">
-             <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
-                <CreditCard className="w-4 h-4 text-indigo-600" />
-                <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Financial Recognition</h3>
-             </div>
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-2">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Currency</label>
-                  <select 
-                    name="currency"
-                    value={formik.values.currency}
-                    onChange={formik.handleChange}
-                    className="w-full h-14 bg-slate-50 border border-slate-200 rounded-xl px-5 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-emerald-600/10 focus:bg-white focus:border-emerald-600 transition-all appearance-none"
-                  >
-                    <option value="KES">KES</option>
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                   <label className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 ml-1">Debit Amount (KES)</label>
-                   <input 
-                     type="number"
-                     name="debit"
-                     placeholder="0.00"
-                     value={formik.values.debit || ""}
-                     onChange={(e) => {
-                        formik.setFieldValue("debit", e.target.value);
-                        if(Number(e.target.value) > 0) formik.setFieldValue("credit", 0);
-                     }}
-                     className="w-full h-14 bg-emerald-50/30 border border-emerald-100 rounded-xl px-5 text-sm font-bold text-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-600/10 transition-all placeholder:text-emerald-200"
-                   />
-                </div>
-                <div className="space-y-2">
-                   <label className="text-[10px] font-bold uppercase tracking-widest text-rose-600 ml-1">Credit Amount (KES)</label>
-                   <input 
-                     type="number"
-                     name="credit"
-                     placeholder="0.00"
-                     value={formik.values.credit || ""}
-                     onChange={(e) => {
-                        formik.setFieldValue("credit", e.target.value);
-                        if(Number(e.target.value) > 0) formik.setFieldValue("debit", 0);
-                     }}
-                     className="w-full h-14 bg-rose-50/30 border border-rose-100 rounded-xl px-5 text-sm font-bold text-rose-700 focus:outline-none focus:ring-4 focus:ring-rose-600/10 transition-all placeholder:text-rose-200"
-                   />
-                </div>
-                <div className="space-y-2">
-                   <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1 truncate">Exchange Rate</label>
-                   <input 
-                     type="number"
-                     name="exchange_rate"
-                     step="0.0001"
-                     value={formik.values.exchange_rate}
-                     onChange={formik.handleChange}
-                     className="w-full h-14 bg-slate-50 border border-slate-200 rounded-xl px-5 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-slate-600/10 transition-all"
-                   />
-                </div>
-             </div>
+            <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
+              <CreditCard className="w-4 h-4 text-indigo-600" />
+              <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Financial Recognition</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-2">
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Currency</label>
+                <select
+                  name="currency"
+                  value={formik.values.currency}
+                  onChange={formik.handleChange}
+                  className="w-full h-14 bg-slate-50 border border-slate-200 rounded px-5 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-emerald-600/10 focus:bg-white focus:border-emerald-600 transition-all appearance-none"
+                >
+                  <option value="KES">KES</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                </select>
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 ml-1">Debit Amount (KES)</label>
+                <input
+                  type="number"
+                  name="debit"
+                  placeholder="0.00"
+                  value={formik.values.debit || ""}
+                  onChange={(e) => {
+                    formik.setFieldValue("debit", e.target.value);
+                    if (Number(e.target.value) > 0) formik.setFieldValue("credit", 0);
+                  }}
+                  className="w-full h-14 bg-emerald-50/30 border border-emerald-100 rounded px-5 text-sm font-bold text-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-600/10 transition-all placeholder:text-emerald-200"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-rose-600 ml-1">Credit Amount (KES)</label>
+                <input
+                  type="number"
+                  name="credit"
+                  placeholder="0.00"
+                  value={formik.values.credit || ""}
+                  onChange={(e) => {
+                    formik.setFieldValue("credit", e.target.value);
+                    if (Number(e.target.value) > 0) formik.setFieldValue("debit", 0);
+                  }}
+                  className="w-full h-14 bg-rose-50/30 border border-rose-100 rounded px-5 text-sm font-bold text-rose-700 focus:outline-none focus:ring-4 focus:ring-rose-600/10 transition-all placeholder:text-rose-200"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1 truncate">Exchange Rate</label>
+                <input
+                  type="number"
+                  name="exchange_rate"
+                  step="0.0001"
+                  value={formik.values.exchange_rate}
+                  onChange={formik.handleChange}
+                  className="w-full h-14 bg-slate-50 border border-slate-200 rounded px-5 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-slate-600/10 transition-all"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Documentation Section */}
           <div className="space-y-6">
-             <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
-                <FileUp className="w-4 h-4 text-slate-500" />
-                <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Evidence & Notes</h3>
-             </div>
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="space-y-2">
-                   <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Payment Method</label>
-                   <select 
-                        name="payment_method"
-                        value={formik.values.payment_method}
-                        onChange={formik.handleChange}
-                        className="w-full h-14 bg-slate-50 border border-slate-200 rounded-xl px-5 text-sm font-semibold transition-all outline-none"
-                    >
-                        <option value="BANK_TRANSFER">Bank Transfer</option>
-                        <option value="CASH">Cash</option>
-                        <option value="MOBILE_MONEY">M-Pesa / Mobile</option>
-                    </select>
+            <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
+              <FileUp className="w-4 h-4 text-slate-500" />
+              <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Evidence & Notes</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Payment Method</label>
+                <select
+                  name="payment_method"
+                  value={formik.values.payment_method}
+                  onChange={formik.handleChange}
+                  className="w-full h-14 bg-slate-50 border border-slate-200 rounded px-5 text-sm font-semibold transition-all outline-none"
+                >
+                  <option value="BANK_TRANSFER">Bank Transfer</option>
+                  <option value="CASH">Cash</option>
+                  <option value="MOBILE_MONEY">M-Pesa / Mobile</option>
+                </select>
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Document #</label>
+                <input
+                  name="document_number"
+                  placeholder="REF-001"
+                  value={formik.values.document_number}
+                  onChange={formik.handleChange}
+                  className="w-full h-14 bg-slate-50 border border-slate-200 rounded px-5 text-sm font-semibold outline-none"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Attach Link/File</label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    id="single-file-upload"
+                    className="hidden"
+                    onChange={(e) => formik.setFieldValue("document_file", e.currentTarget.files?.[0])}
+                  />
+                  <label
+                    htmlFor="single-file-upload"
+                    className="flex h-14 bg-slate-50 border-2 border-dashed border-slate-200 rounded items-center px-5 gap-3 text-slate-400 hover:border-emerald-600/30 hover:bg-emerald-50/20 transition-all cursor-pointer group"
+                  >
+                    <FileUp className="w-4 h-4 group-hover:text-emerald-600" />
+                    <span className="text-[10px] font-bold uppercase truncate group-hover:text-emerald-600">
+                      {formik.values.document_file?.name || "Upload Proof"}
+                    </span>
+                  </label>
                 </div>
-                <div className="space-y-2">
-                   <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Document #</label>
-                   <input 
-                        name="document_number"
-                        placeholder="REF-001"
-                        value={formik.values.document_number}
-                        onChange={formik.handleChange}
-                        className="w-full h-14 bg-slate-50 border border-slate-200 rounded-xl px-5 text-sm font-semibold outline-none"
-                    />
-                </div>
-                <div className="space-y-2">
-                   <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Attach Link/File</label>
-                   <div className="relative">
-                      <input 
-                          type="file" 
-                          id="single-file-upload"
-                          className="hidden"
-                          onChange={(e) => formik.setFieldValue("document_file", e.currentTarget.files?.[0])}
-                      />
-                      <label 
-                        htmlFor="single-file-upload"
-                        className="flex h-14 bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl items-center px-5 gap-3 text-slate-400 hover:border-emerald-600/30 hover:bg-emerald-50/20 transition-all cursor-pointer group"
-                      >
-                          <FileUp className="w-4 h-4 group-hover:text-emerald-600" />
-                          <span className="text-[10px] font-bold uppercase truncate group-hover:text-emerald-600">
-                             {formik.values.document_file?.name || "Upload Proof"}
-                          </span>
-                      </label>
-                   </div>
-                </div>
-             </div>
-             <textarea 
-                name="notes"
-                placeholder="Narrative summary for this entry..."
-                rows={3}
-                value={formik.values.notes}
-                onChange={formik.handleChange}
-                className="w-full bg-slate-50 border border-slate-200 rounded-2xl p-5 text-sm font-semibold outline-none focus:ring-4 focus:ring-slate-600/10 focus:bg-white focus:border-slate-400 transition-all resize-none"
-             />
+              </div>
+            </div>
+            <textarea
+              name="notes"
+              placeholder="Narrative summary for this entry..."
+              rows={3}
+              value={formik.values.notes}
+              onChange={formik.handleChange}
+              className="w-full bg-slate-50 border border-slate-200 rounded p-5 text-sm font-semibold outline-none focus:ring-4 focus:ring-slate-600/10 focus:bg-white focus:border-slate-400 transition-all resize-none"
+            />
           </div>
         </form>
       </div>
 
       <div className="p-8 border-t border-slate-100 bg-slate-50/50">
-          <button 
-            type="submit"
-            form="single-entry-form"
-            disabled={formik.isSubmitting}
-            className="w-full h-16 bg-slate-900 border border-black text-white rounded-2xl font-bold text-sm shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
-          >
-            {formik.isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (
-              <>
-                 <Plus className="w-4 h-4" />
-                 RECORD TRANSACTION
-              </>
-            )}
-          </button>
+        <button
+          type="submit"
+          form="single-entry-form"
+          disabled={formik.isSubmitting}
+          className="w-full h-16 bg-slate-900 border border-black text-white rounded font-bold text-sm shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+        >
+          {formik.isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (
+            <>
+              <Plus className="w-4 h-4" />
+              RECORD TRANSACTION
+            </>
+          )}
+        </button>
       </div>
     </div>
   );

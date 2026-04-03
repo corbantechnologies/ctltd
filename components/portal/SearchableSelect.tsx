@@ -93,14 +93,14 @@ export default function SearchableSelect({
       </div>
 
       {isOpen && (
-        <div className="absolute z-50 w-full mt-2 bg-white border border-slate-200 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-150">
+        <div className="absolute z-50 w-full mt-2 bg-white border border-slate-200 rounded shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-150">
           <div className="p-3 border-b border-slate-100 bg-slate-50/50">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-black/30" />
               <input
                 autoFocus
                 type="text"
-                className="w-full bg-white border border-slate-200 rounded-lg pl-9 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600/20 font-medium"
+                className="w-full bg-white border border-slate-200 rounded pl-9 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600/20 font-medium"
                 placeholder="Type to filter..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -115,7 +115,7 @@ export default function SearchableSelect({
                 <div
                   key={opt.value}
                   className={cn(
-                    "flex items-center justify-between px-3 py-2.5 rounded-lg cursor-pointer transition-colors group",
+                    "flex items-center justify-between px-3 py-2.5 rounded cursor-pointer transition-colors group",
                     value === opt.value ? "bg-emerald-50" : "hover:bg-slate-50"
                   )}
                   onClick={(e) => {

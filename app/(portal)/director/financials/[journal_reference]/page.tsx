@@ -207,7 +207,7 @@ export default function JournalDetailPage() {
                         </div>
                       </td>
                       <td className="py-2.5 px-4 border-b border-black/5">
-                        <span className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-semibold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none inline-block">
+                        <span className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-semibold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded shadow-none inline-block">
                           {entry.division || "Entity Core"}
                         </span>
                       </td>
@@ -269,7 +269,7 @@ export default function JournalDetailPage() {
 
       {/* Notes / Meta Footer */}
       {journal?.description && (
-        <div className="p-8 bg-black/[0.02] border border-black/5 rounded-[32px] border-dashed">
+        <div className="p-8 bg-black/[0.02] border border-black/5 rounded border-dashed">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded bg-black/5 flex items-center justify-center text-black/40">
               <FileText className="w-4 h-4" />

@@ -16,7 +16,12 @@ import {
   Calendar,
   Hash,
   Building2,
+  Plus,
+  ClipboardList,
 } from "lucide-react";
+import CreateQuotationModal from "@/forms/quotations/CreateQuotationModal";
+import CreateInvoiceModal from "@/forms/financials/CreateInvoiceModal";
+import InteractionTimeline from "@/components/crm/InteractionTimeline";
 
 
 export default function PartnerDetailPage() {
@@ -66,7 +71,31 @@ export default function PartnerDetailPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          {partner && (
+            <>
+              <CreateQuotationModal 
+                rolePrefix="director"
+                initialPartner={{ code: partner.code, name: partner.name }}
+                trigger={
+                  <button className="flex items-center gap-2 px-6 py-2.5 bg-black hover:bg-[#D0402B] text-white rounded font-bold text-[10px] uppercase tracking-widest transition-all shadow-xl active:scale-95 group">
+                     <ClipboardList className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                     New Quotation
+                  </button>
+                }
+              />
+              <CreateInvoiceModal 
+                rolePrefix="director"
+                initialPartner={{ reference: partner.code, name: partner.name }}
+                trigger={
+                  <button className="flex items-center gap-2 px-6 py-2.5 bg-[#D0402B] hover:bg-black text-white rounded font-bold text-[10px] uppercase tracking-widest transition-all shadow-xl shadow-[#D0402B]/10 active:scale-95 group">
+                     <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform" />
+                     Initiate Invoice
+                  </button>
+                }
+              />
+            </>
+          )}
           {partner?.is_active ? (
             <span className="bg-green-500/10 text-green-600 border-none font-semibold text-[10px] uppercase tracking-wider px-4 py-2 rounded">
               Active Partnership
@@ -156,6 +185,14 @@ export default function PartnerDetailPage() {
         </div>
       </div>
 
+      {/* Activity Timeline Integration */}
+      <div className="bg-white p-10 rounded border border-black/5 shadow-2xl shadow-black/5">
+        <InteractionTimeline
+          partnerId={partner?.reference || ""}
+          rolePrefix="director"
+        />
+      </div>
+
       {/* Transaction History (Journal Entries) */}
       <div className="border border-black/5 bg-white/60 backdrop-blur-xl rounded overflow-hidden shadow-xl shadow-black/5 pb-24">
         <div className="p-8 border-b border-black/5 flex flex-row items-center justify-between">
@@ -221,7 +258,7 @@ export default function PartnerDetailPage() {
                         </div>
                       </td>
                       <td className="py-2.5 px-4 border-b border-black/5">
-                        <span className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-semibold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-sm shadow-none inline-block">
+                        <span className="bg-black/5 text-black hover:bg-black hover:text-white transition-all border-none font-semibold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded shadow-none inline-block">
                           {entry.journal}
                         </span>
                       </td>

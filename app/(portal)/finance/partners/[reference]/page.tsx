@@ -16,16 +16,15 @@ import {
   Mail,
   MoreHorizontal,
   Phone,
-  Receipt,
-  ShieldCheck,
-  Wallet,
+  UserCog,
 } from "lucide-react";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 export default function PartnerDetailPage() {
-  const { reference } = useParams();
+  const { reference } = useParams<{ reference: string }>();
   const router = useRouter();
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const { isLoading, data: partner } = useFetchPartner(reference as string);
-  const [openUpdatePartner, setOpenUpdatePartner] = useState(false);
 
   if (isLoading) return <LoadingSpinner />;
   if (!partner)
@@ -90,13 +89,23 @@ export default function PartnerDetailPage() {
           </div>
         </div>
 
-        <button
-          onClick={() => setOpenUpdatePartner(true)}
-          className="flex items-center justify-center gap-2 h-12 px-4 bg-white hover:bg-black/5 text-black border border-black/5 rounded font-semibold text-xs uppercase tracking-widest shadow-sm transition-colors"
-        >
-          <Edit2 className="w-4 h-4" />
-          Edit Profile
-        </button>
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger asChild>
+            <button className="flex items-center justify-center gap-2 h-12 px-4 bg-white hover:bg-black/5 text-black border border-black/5 rounded font-semibold text-xs uppercase tracking-widest shadow-sm transition-colors">
+              <Edit2 className="w-4 h-4" />
+              Manage
+            </button>
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Content className="bg-white border border-black/5 shadow-xl rounded p-1 w-48 z-50">
+            <DropdownMenu.Item 
+              onSelect={() => setIsUpdateModalOpen(true)}
+              className="flex items-center gap-3 p-3 rounded text-[10px] font-bold uppercase tracking-widest text-slate-600 hover:text-blue-600 hover:bg-blue-50 cursor-pointer outline-none transition-colors group border-t border-slate-50 mt-1"
+            >
+              <UserCog className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
+              Modify Profile
+            </DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>
       </div>
 
       {/* Info Grid */}
@@ -255,18 +264,12 @@ export default function PartnerDetailPage() {
         </div>
       </div>
 
-      {/* Manual Modal Implementation for Update Partner */}
-      {openUpdatePartner && (
-        <div className="fixed inset-0 z-50 bg-white overflow-y-auto animate-in slide-in-from-bottom-10 duration-200">
-          <UpdatePartner
-            partner={partner}
-            rolePrefix="finance"
-            onSuccess={() => setOpenUpdatePartner(false)}
-            onClose={() => setOpenUpdatePartner(false)}
-            className="min-h-screen border-none shadow-none rounded"
-          />
-        </div>
-      )}
+      <UpdatePartner 
+        partner={partner} 
+        rolePrefix="finance" 
+        isOpen={isUpdateModalOpen} 
+        onOpenChange={setIsUpdateModalOpen} 
+      />
     </div>
   );
 }

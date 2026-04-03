@@ -4,6 +4,15 @@ import { apiActions } from "@/tools/axios";
 import { AxiosResponse } from "axios";
 import { PaginatedResponse } from "./general";
 import { JournalEntry } from "./journalentries";
+import { Quotation } from "./quotations";
+
+export interface PartnerType {
+  name: string;
+  code: string;
+  description: string;
+  is_active: boolean;
+  reference: string;
+}
 
 export interface Partner {
   code: string;
@@ -21,6 +30,7 @@ export interface Partner {
   partner_type: string;
   division: string;
   journal_entries: JournalEntry[];
+  quotations: Quotation[];
 }
 
 interface createPartner {
@@ -106,4 +116,12 @@ export const getPartner = async (
     headers
   );
   return response.data;
+};
+
+export const getPartnerTypes = async (headers: {
+  headers: { Authorization: string };
+}): Promise<PartnerType[]> => {
+  const response: AxiosResponse<PaginatedResponse<PartnerType>> =
+    await apiActions.get(`/api/v1/partnertypes/`, headers);
+  return response.data.results || [];
 };

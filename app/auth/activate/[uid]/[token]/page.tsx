@@ -71,7 +71,7 @@ export default function ActivateAccountPage() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               className={cn(
-                "w-full h-11 pl-4 pr-11 bg-blue-50/40 border border-slate-200 rounded-lg text-sm text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all",
+                "w-full h-11 pl-4 pr-11 bg-blue-50/40 border border-slate-200 rounded text-sm text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all",
                 formik.touched.password && formik.errors.password && "border-red-500 bg-red-50"
               )}
             />
@@ -104,7 +104,7 @@ export default function ActivateAccountPage() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               className={cn(
-                "w-full h-11 pl-4 pr-11 bg-blue-50/40 border border-slate-200 rounded-lg text-sm text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all",
+                "w-full h-11 pl-4 pr-11 bg-blue-50/40 border border-slate-200 rounded text-sm text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all",
                 formik.touched.password_confirmation && formik.errors.password_confirmation && "border-red-500 bg-red-50"
               )}
             />
@@ -126,7 +126,7 @@ export default function ActivateAccountPage() {
         <button
           disabled={loading}
           type="submit"
-          className="w-full h-11 mt-4 bg-[#2170ed] hover:bg-blue-600 text-white rounded-lg font-semibold transition-all shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-50"
+          className="w-full h-11 mt-4 bg-[#2170ed] hover:bg-blue-600 text-white rounded font-semibold transition-all shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-50"
         >
           {loading ? (
             <>

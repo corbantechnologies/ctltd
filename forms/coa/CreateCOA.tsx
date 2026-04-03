@@ -76,7 +76,7 @@ export default function CreateCOA({
 
   return (
     <div
-      className={`mx-auto w-full border-black/5 shadow-2xl rounded-[32px] overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
+      className={`mx-auto w-full border-black/5 shadow-2xl rounded overflow-hidden bg-white/80 backdrop-blur-xl ${className}`}
     >
       <div
         className="p-8 border-b border-black/5"
@@ -274,7 +274,7 @@ export default function CreateCOA({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 text-white rounded-[20px] font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
+              className="w-full h-16 text-white rounded font-semibold text-lg transition-all shadow-xl active:scale-[0.98] group flex items-center justify-center"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}4D`,

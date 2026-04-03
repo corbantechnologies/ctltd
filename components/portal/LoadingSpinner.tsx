@@ -1,8 +1,18 @@
 "use client";
 
 import { Loader } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export default function LoadingSpinner() {
+interface LoadingSpinnerProps {
+  className?: string;
+  isFullScreen?: boolean;
+}
+
+export default function LoadingSpinner({ className, isFullScreen = true }: LoadingSpinnerProps) {
+  if (!isFullScreen) {
+     return <Loader className={cn("animate-spin text-corporate-primary", className)} />;
+  }
+
   return (
     <div
       className="
@@ -13,7 +23,7 @@ export default function LoadingSpinner() {
         backdrop-blur-sm
       "
     >
-      <Loader className="h-12 w-12 animate-spin text-corporate-primary" />
+      <Loader className={cn("h-12 w-12 animate-spin text-corporate-primary", className)} />
     </div>
   );
 }

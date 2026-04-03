@@ -61,7 +61,7 @@ export default function ForgotPassword() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 className={cn(
-                  "w-full h-11 px-4 bg-blue-50/40 border border-slate-200 rounded-lg text-sm text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all",
+                  "w-full h-11 px-4 bg-blue-50/40 border border-slate-200 rounded text-sm text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all",
                   formik.touched.email && formik.errors.email && "border-red-500 bg-red-50"
                 )}
               />
@@ -76,7 +76,7 @@ export default function ForgotPassword() {
           <button
             disabled={loading}
             type="submit"
-            className="w-full h-11 mt-4 bg-[#2170ed] hover:bg-blue-600 text-white rounded-lg font-semibold transition-all shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-50"
+            className="w-full h-11 mt-4 bg-[#2170ed] hover:bg-blue-600 text-white rounded font-semibold transition-all shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-50"
           >
             {loading ? (
               <>
@@ -100,7 +100,7 @@ export default function ForgotPassword() {
         </form>
       ) : (
         <div className="text-center space-y-8 animate-in fade-in zoom-in-95 duration-500">
-          <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center border border-blue-100 mx-auto">
+          <div className="w-16 h-16 bg-blue-50 rounded flex items-center justify-center border border-blue-100 mx-auto">
             <Mail className="w-8 h-8 text-blue-600 animate-pulse" />
           </div>
 
@@ -114,7 +114,7 @@ export default function ForgotPassword() {
 
           <Link
             href="/auth/reset-password"
-            className="w-full h-11 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-semibold transition-all shadow-md flex items-center justify-center gap-2 active:scale-[0.98]"
+            className="w-full h-11 bg-slate-900 hover:bg-slate-800 text-white rounded font-semibold transition-all shadow-md flex items-center justify-center gap-2 active:scale-[0.98]"
           >
             <span>Enter Recovery Code</span>
             <ArrowRight className="w-4 h-4" />
@@ -125,7 +125,7 @@ export default function ForgotPassword() {
           </p>
         </div>
       )}
-      
+
       <div className="mt-8 pt-6 text-center text-sm font-medium text-slate-500 border-t border-slate-100">
         New to Corban Technologies?{" "}
         <Link

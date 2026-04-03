@@ -9,6 +9,7 @@ import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useFetchJournalTypes } from "@/hooks/journaltypes/actions";
 import { useQueryClient } from "@tanstack/react-query";
 import SearchableSelect from "@/components/portal/SearchableSelect";
+import { formatBackendError } from "@/lib/error-handler";
 
 interface CreateJournalProps {
   initialJournalType?: string;
@@ -54,7 +55,7 @@ export default function CreateJournal({
         if (onSuccess) onSuccess();
       } catch (error: any) {
         toast.error(
-          error?.response?.data?.message || "Failed to create journal batch",
+          formatBackendError(error, "Failed to create journal batch")
         );
       } finally {
         setSubmitting(false);
@@ -71,7 +72,7 @@ export default function CreateJournal({
   return (
     <div
       className={cn(
-        "mx-auto w-full border border-slate-200 shadow-2xl rounded-[1.25rem] overflow-hidden bg-white",
+        "mx-auto w-full border border-slate-200 shadow-2xl rounded overflow-hidden bg-white",
         className
       )}
     >
@@ -79,7 +80,7 @@ export default function CreateJournal({
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-5">
             <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-xl rotate-3 hover:rotate-0 transition-transform duration-300"
+              className="w-14 h-14 rounded flex items-center justify-center text-white shadow-xl rotate-3 hover:rotate-0 transition-transform duration-300"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 12px 20px -8px ${primaryColor}80`,
@@ -100,7 +101,7 @@ export default function CreateJournal({
             <button
               type="button"
               onClick={onClose}
-              className="hover:bg-red-50 hover:text-red-500 rounded-full text-slate-300 p-2.5 transition-all active:scale-95"
+              className="hover:bg-red-50 hover:text-red-500 rounded text-slate-300 p-2.5 transition-all active:scale-95"
             >
               <X className="w-5 h-5" />
             </button>
@@ -124,7 +125,7 @@ export default function CreateJournal({
                   name="date"
                   type="date"
                   required
-                  className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-4 focus:ring-emerald-600/10 w-full h-14 rounded-xl focus:bg-white focus:border-emerald-600 transition-all font-semibold px-5 text-sm"
+                  className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-4 focus:ring-emerald-600/10 w-full h-14 rounded focus:bg-white focus:border-emerald-600 transition-all font-semibold px-5 text-sm"
                   onChange={formik.handleChange}
                   value={formik.values.date}
                 />
@@ -157,7 +158,7 @@ export default function CreateJournal({
               name="description"
               required
               placeholder="Provide a clear description of this journal batch (e.g., 'Jan 2026 Admin Expenses')"
-              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-4 focus:ring-emerald-600/10 w-full min-h-[120px] rounded-2xl focus:bg-white focus:border-emerald-600 transition-all font-semibold p-5 text-sm resize-none"
+              className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-4 focus:ring-emerald-600/10 w-full min-h-[120px] rounded focus:bg-white focus:border-emerald-600 transition-all font-semibold p-5 text-sm resize-none"
               onChange={formik.handleChange}
               value={formik.values.description}
             />
@@ -174,7 +175,7 @@ export default function CreateJournal({
               <select
                 name="currency"
                 required
-                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-4 focus:ring-emerald-600/10 w-full h-14 rounded-xl focus:bg-white focus:border-emerald-600 transition-all font-semibold px-5 text-sm appearance-none"
+                className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-4 focus:ring-emerald-600/10 w-full h-14 rounded focus:bg-white focus:border-emerald-600 transition-all font-semibold px-5 text-sm appearance-none"
                 onChange={formik.handleChange}
                 value={formik.values.currency}
               >
@@ -188,7 +189,7 @@ export default function CreateJournal({
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-14 text-white rounded-xl font-bold text-sm transition-all shadow-lg active:scale-[0.98] group flex items-center justify-center relative overflow-hidden"
+              className="w-full h-14 text-white rounded font-bold text-sm transition-all shadow-lg active:scale-[0.98] group flex items-center justify-center relative overflow-hidden"
               style={{
                 backgroundColor: primaryColor,
                 boxShadow: `0 10px 20px -5px ${primaryColor}60`,
