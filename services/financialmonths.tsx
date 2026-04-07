@@ -21,48 +21,81 @@ export interface FinancialMonth {
   updated_at: string;
 }
 
-export interface BookSummaryRow {
-  book__code: string;
-  book__name: string;
-  total_debit: number;
-  total_credit: number;
+export interface PNLSummary {
+  revenue: number;
+  cost_of_sales: number;
+  gross_profit: number;
+  operating_expenses: number;
+  operating_profit: number;
+  other_income: number;
+  non_operating_expense: number;
+  net_profit: number;
+  currency: string;
 }
 
-export interface DivisionSummaryRow {
-  division__name: string;
-  total_debit: number;
-  total_credit: number;
+export interface BalanceSheet {
+  assets: {
+    current: { total: number; net: number };
+    non_current: { total: number; net: number };
+  };
+  liabilities: {
+    current: { total: number; net: number };
+    non_current: { total: number; net: number };
+    total: number;
+  };
+  equity: { net: number };
+  total_assets: number;
+  total_liabilities_and_equity: number;
 }
 
-export interface PartnerSummaryRow {
-  partner__name: string;
-  total_debit: number;
-  total_credit: number;
+export interface CashFlow {
+  operating: {
+    net_profit: number;
+    ar_change: number;
+    ap_change: number;
+    net_operating_cash: number;
+  };
 }
 
-export interface ProjectSummaryRow {
+export interface ProjectProfitability {
   project: string;
-  total_debit: number;
-  total_credit: number;
+  revenue: number;
+  expenses: number;
+  net_profit: number;
 }
 
 export interface FinancialMonthDetail extends FinancialMonth {
   report: {
-    total_debits: number;
-    total_credits: number;
-    net_movement: number;
-    book_summary: BookSummaryRow[];
-    division_summary: DivisionSummaryRow[];
-    partner_summary: PartnerSummaryRow[];
-    project_summary: ProjectSummaryRow[];
+    month_name: string;
+    company_name: string;
+    pnl: PNLSummary;
+    balance_sheet: BalanceSheet;
+    cash_flow: CashFlow;
+    projects: ProjectProfitability[];
+    mom_growth: {
+      revenue_growth: number;
+      expense_growth: number;
+      profit_growth: number;
+    };
+    trial_balance: {
+        totals: {
+            total_debit: number;
+            total_credit: number;
+            net_balance: number;
+        }
+    };
+    kpis: {
+      net_margin: number;
+      current_ratio: number;
+    };
     journals: {
-        reference: string;
-        code: string;
-        date: string;
-        description: string;
-        journal_type: string;
-        is_posted: boolean;
-        status: string;
+      reference: string;
+      code: string;
+      date: string;
+      description: string;
+      journal_type: string;
+      is_posted: boolean;
+      status: string;
     }[];
   };
 }
