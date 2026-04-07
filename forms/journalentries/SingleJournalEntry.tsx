@@ -61,7 +61,7 @@ export default function SingleJournalEntry({
       currency: "KES",
       exchange_rate: "1",
       payment_method: "BANK_TRANSFER",
-      source_document: "INVOICE",
+      source_document: "",
       document_number: "",
       document_file: null as File | null,
       notes: "",
@@ -262,7 +262,22 @@ export default function SingleJournalEntry({
               <FileUp className="w-4 h-4 text-slate-500" />
               <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Evidence & Notes</h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Evidence Type</label>
+                <select
+                  name="source_document"
+                  value={formik.values.source_document}
+                  onChange={formik.handleChange}
+                  className="w-full h-14 bg-slate-50 border border-slate-200 rounded px-5 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-emerald-600/10 transition-all outline-none"
+                >
+                  <option value="">Select Evidence...</option>
+                  <option value="INVOICE">Invoice</option>
+                  <option value="RECEIPT">Receipt</option>
+                  <option value="KRA_INVOICE">KRA Invoice</option>
+                  <option value="MOBILE_MONEY">M-Pesa Msg</option>
+                </select>
+              </div>
               <div className="space-y-2">
                 <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Payment Method</label>
                 <select
