@@ -50,13 +50,14 @@ export default function FinancialMonthReport({
 
   if (!month) return <LoadingSpinner />;
 
-  const report = month.report;
-  const pnl = report.pnl;
-  const kpis = report.kpis;
+  const report = month.report || {};
+  const pnl = report.pnl || { revenue: 0, cost_of_sales: 0, gross_profit: 0, operating_expenses: 0, net_profit: 0, other_income: 0, non_operating_expense: 0 };
+  const kpis = report.kpis || { net_margin: 0, current_ratio: 0 };
+  const momGrowth = report.mom_growth || { revenue_growth: 0, profit_growth: 0 };
   
   const chartData = [
     { name: 'Revenue', value: pnl.revenue, color: theme.color },
-    { name: 'Expenses', value: pnl.operating_expenses + pnl.cost_of_sales + pnl.non_operating_expense, color: '#94a3b8' },
+    { name: 'Expenses', value: (pnl.operating_expenses || 0) + (pnl.cost_of_sales || 0) + (pnl.non_operating_expense || 0), color: '#94a3b8' },
     { name: 'Net Profit', value: pnl.net_profit, color: pnl.net_profit >= 0 ? '#10b981' : '#ef4444' },
   ];
 
@@ -68,27 +69,27 @@ export default function FinancialMonthReport({
         {[
           {
             label: "Total Revenue",
-            value: `KES ${pnl.revenue.toLocaleString()}`,
-            growth: report.mom_growth.revenue_growth,
+            value: `KES ${(pnl.revenue || 0).toLocaleString()}`,
+            growth: momGrowth.revenue_growth,
             icon: TrendingUp,
             suffix: "Revenue"
           },
           {
             label: "Net Profit",
-            value: `KES ${pnl.net_profit.toLocaleString()}`,
-            growth: report.mom_growth.profit_growth,
+            value: `KES ${(pnl.net_profit || 0).toLocaleString()}`,
+            growth: momGrowth.profit_growth,
             icon: Wallet,
             suffix: "Profit"
           },
           {
             label: "Net Margin",
-            value: `${kpis.net_margin}%`,
+            value: `${kpis.net_margin || 0}%`,
             icon: Activity,
             sublabel: "Profitability"
           },
           {
             label: "Current Ratio",
-            value: kpis.current_ratio.toFixed(2),
+            value: (kpis.current_ratio || 0).toFixed(2),
             icon: Briefcase,
             sublabel: "Liquidity"
           },
@@ -128,27 +129,27 @@ export default function FinancialMonthReport({
                 <tbody className="divide-y divide-slate-50">
                   <tr className="bg-slate-50/50">
                     <td className="p-4 text-slate-500 font-medium">Operations Revenue</td>
-                    <td className="p-4 text-right font-bold text-slate-900">KES {pnl.revenue.toLocaleString()}</td>
+                    <td className="p-4 text-right font-bold text-slate-900">KES {(pnl.revenue || 0).toLocaleString()}</td>
                   </tr>
                   <tr>
                     <td className="p-4 text-slate-500">Cost of Goods Sold (COGS)</td>
-                    <td className="p-4 text-right text-rose-600 font-medium">- {pnl.cost_of_sales.toLocaleString()}</td>
+                    <td className="p-4 text-right text-rose-600 font-medium">- {(pnl.cost_of_sales || 0).toLocaleString()}</td>
                   </tr>
                   <tr className="bg-slate-50 font-bold border-y border-slate-100">
                     <td className="p-4 text-slate-900 uppercase tracking-tighter italic">Gross Profit</td>
-                    <td className="p-4 text-right text-slate-900 text-sm">KES {pnl.gross_profit.toLocaleString()}</td>
+                    <td className="p-4 text-right text-slate-900 text-sm">KES {(pnl.gross_profit || 0).toLocaleString()}</td>
                   </tr>
                   <tr>
                     <td className="p-4 pl-8 text-slate-400 italic">Operating Expenses (OpEx)</td>
-                    <td className="p-4 text-right text-rose-600">- {pnl.operating_expenses.toLocaleString()}</td>
+                    <td className="p-4 text-right text-rose-600">- {(pnl.operating_expenses || 0).toLocaleString()}</td>
                   </tr>
                   <tr>
                     <td className="p-4 pl-8 text-slate-400 italic">Other Items (Net)</td>
-                    <td className="p-4 text-right text-slate-600 italic">{(pnl.other_income - pnl.non_operating_expense).toLocaleString()}</td>
+                    <td className="p-4 text-right text-slate-600 italic">{((pnl.other_income || 0) - (pnl.non_operating_expense || 0)).toLocaleString()}</td>
                   </tr>
                   <tr className="bg-slate-900 text-white font-bold">
                     <td className="p-5 uppercase tracking-widest text-[10px]">Net Monthly Performance</td>
-                    <td className="p-5 text-right text-base tracking-tight">KES {pnl.net_profit.toLocaleString()}</td>
+                    <td className="p-5 text-right text-base tracking-tight">KES {(pnl.net_profit || 0).toLocaleString()}</td>
                   </tr>
                 </tbody>
               </table>
@@ -169,15 +170,15 @@ export default function FinancialMonthReport({
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-50">
-                    {report.projects.slice(0, 5).map((p, i) => (
+                    {(report.projects || []).slice(0, 5).map((p: any, i: number) => (
                       <tr key={i} className="hover:bg-slate-50 transition-colors">
                         <td className="p-3 font-bold text-slate-800 italic">{p.project}</td>
                         <td className={cn("p-3 text-right font-bold", p.net_profit >= 0 ? "text-emerald-500" : "text-rose-500")}>
-                          {p.net_profit.toLocaleString()}
+                          {(p.net_profit || 0).toLocaleString()}
                         </td>
                       </tr>
                     ))}
-                    {report.projects.length === 0 && (
+                    {(!report.projects || report.projects.length === 0) && (
                       <tr>
                         <td colSpan={2} className="p-8 text-center text-slate-300 italic">No project data.</td>
                       </tr>
@@ -194,16 +195,16 @@ export default function FinancialMonthReport({
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-slate-500">Total Assets</span>
-                    <span className="font-bold text-slate-900">{report.balance_sheet.total_assets.toLocaleString()}</span>
+                    <span className="font-bold text-slate-900">{(report.balance_sheet?.total_assets || 0).toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-slate-500">Total Liabilities</span>
-                    <span className="font-bold text-rose-600">{report.balance_sheet.liabilities.total.toLocaleString()}</span>
+                    <span className="font-bold text-rose-600">{(report.balance_sheet?.liabilities?.total || 0).toLocaleString()}</span>
                   </div>
                   <div className="h-px bg-slate-200 my-2" />
                   <div className="flex justify-between items-center text-xs font-black">
                     <span className="text-slate-900 uppercase">Shareholder Equity</span>
-                    <span className="text-emerald-600">{report.balance_sheet.equity.net.toLocaleString()}</span>
+                    <span className="text-emerald-600">{(report.balance_sheet?.equity?.net || 0).toLocaleString()}</span>
                   </div>
                 </div>
               </div>
@@ -220,20 +221,20 @@ export default function FinancialMonthReport({
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                 <div>
                   <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">Accrual Profit</p>
-                  <p className="text-lg font-bold text-slate-900">{pnl.net_profit.toLocaleString()}</p>
+                  <p className="text-lg font-bold text-slate-900">{(pnl.net_profit || 0).toLocaleString()}</p>
                 </div>
                 <div className="relative">
                   <div className="absolute inset-y-0 -left-4 flex items-center text-slate-200 hidden md:flex"><ChevronRight className="w-5 h-5" /></div>
                   <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">WC Adjustments</p>
-                  <p className={cn("text-lg font-bold", (report.cash_flow.operating.ar_change + report.cash_flow.operating.ap_change) >= 0 ? "text-emerald-500" : "text-rose-500")}>
-                    {(report.cash_flow.operating.ar_change + report.cash_flow.operating.ap_change).toLocaleString()}
+                  <p className={cn("text-lg font-bold", ((report.cash_flow?.operating?.ar_change || 0) + (report.cash_flow?.operating?.ap_change || 0)) >= 0 ? "text-emerald-500" : "text-rose-500")}>
+                    {((report.cash_flow?.operating?.ar_change || 0) + (report.cash_flow?.operating?.ap_change || 0)).toLocaleString()}
                   </p>
                   <div className="absolute inset-y-0 -right-4 flex items-center text-slate-200 hidden md:flex"><ChevronRight className="w-5 h-5" /></div>
                 </div>
                 <div className={cn("rounded-lg p-3", theme.bg)}>
                   <p className="text-[10px] font-bold text-slate-500 uppercase mb-1">Net Cash Impact</p>
-                  <p className={cn("text-xl font-bold", report.cash_flow.operating.net_operating_cash >= 0 ? "text-emerald-600" : "text-rose-600")}>
-                    {report.cash_flow.operating.net_operating_cash.toLocaleString()}
+                  <p className={cn("text-xl font-bold", (report.cash_flow?.operating?.net_operating_cash || 0) >= 0 ? "text-emerald-600" : "text-rose-600")}>
+                    {(report.cash_flow?.operating?.net_operating_cash || 0).toLocaleString()}
                   </p>
                 </div>
               </div>
@@ -287,20 +288,20 @@ export default function FinancialMonthReport({
                 <div className="space-y-3">
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-slate-500 font-medium">System Debits</span>
-                    <span className="font-mono font-bold text-slate-700">{report.trial_balance.totals.total_debit.toLocaleString()}</span>
+                    <span className="font-mono font-bold text-slate-700">{(report.trial_balance?.totals?.total_debit || 0).toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-slate-500 font-medium">System Credits</span>
-                    <span className="font-mono font-bold text-slate-700">{report.trial_balance.totals.total_credit.toLocaleString()}</span>
+                    <span className="font-mono font-bold text-slate-700">{(report.trial_balance?.totals?.total_credit || 0).toLocaleString()}</span>
                   </div>
                   <div className="pt-3 border-t border-slate-200 mt-2">
                     <div className="flex justify-between items-center">
                       <span className="text-[9px] font-black uppercase text-slate-400">Balance Integrity</span>
                       <span className={cn(
                         "text-xs font-black",
-                        Math.abs(report.trial_balance.totals.net_balance) < 0.01 ? "text-emerald-600" : "text-rose-600"
+                        Math.abs(report.trial_balance?.totals?.net_balance || 0) < 0.01 ? "text-emerald-600" : "text-rose-600"
                       )}>
-                        {Math.abs(report.trial_balance.totals.net_balance) < 0.01 ? "VERIFIED" : report.trial_balance.totals.net_balance.toFixed(4)}
+                        {Math.abs(report.trial_balance?.totals?.net_balance || 0) < 0.01 ? "VERIFIED" : (report.trial_balance?.totals?.net_balance || 0).toFixed(4)}
                       </span>
                     </div>
                   </div>
@@ -311,10 +312,10 @@ export default function FinancialMonthReport({
                 <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4">Journal Volume</h4>
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full border-4 border-slate-200 border-t-slate-800 flex items-center justify-center">
-                    <span className="text-xs font-black">{month.journals_count}</span>
+                    <span className="text-xs font-black">{month.journals_count || 0}</span>
                   </div>
                   <p className="text-[10px] text-slate-500 font-medium leading-relaxed italic">
-                    {month.journals_count} transaction batches recorded and processed in this period.
+                    {month.journals_count || 0} transaction batches recorded and processed in this period.
                   </p>
                 </div>
               </div>
@@ -341,7 +342,7 @@ export default function FinancialMonthReport({
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
-              {report.journals.slice(0, 10).map((j) => (
+              {(report.journals || []).slice(0, 10).map((j: any) => (
                 <tr key={j.reference} className="hover:bg-slate-50 transition-colors">
                   <td className="p-4 text-slate-700 font-medium">{j.description || "No description provided"}</td>
                   <td className="p-4 text-center">
@@ -361,7 +362,7 @@ export default function FinancialMonthReport({
               ))}
             </tbody>
           </table>
-          {report.journals.length > 10 && (
+          {(report.journals || []).length > 10 && (
             <div className="bg-slate-50 p-3 text-center border-t border-slate-100">
               <span className="text-[10px] text-slate-400 font-bold italic tracking-widest uppercase">
                 Plus {report.journals.length - 10} additional journal batches recorded in this period
