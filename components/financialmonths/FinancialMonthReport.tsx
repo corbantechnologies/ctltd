@@ -94,14 +94,14 @@ export default function FinancialMonthReport({
             sublabel: "Liquidity"
           },
         ].map((kpi, i) => (
-          <div key={i} className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+          <div key={i} className="bg-white p-5 rounded border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-3">
-              <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center", theme.bg, theme.text)}>
+              <div className={cn("w-10 h-10 rounded flex items-center justify-center", theme.bg, theme.text)}>
                 <kpi.icon className="w-5 h-5" />
               </div>
               {kpi.growth !== undefined && (
                 <span className={cn(
-                  "text-[10px] font-bold px-2 py-0.5 rounded-full",
+                  "text-[10px] font-bold px-2 py-0.5 rounded",
                   kpi.growth >= 0 ? "bg-emerald-50 text-emerald-600" : "bg-rose-50 text-rose-600"
                 )}>
                   {kpi.growth >= 0 ? "+" : ""}{kpi.growth}% MoM
@@ -121,10 +121,10 @@ export default function FinancialMonthReport({
           {/* INCOME STATEMENT SUMMARY */}
           <section className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="h-4 w-1 bg-slate-900 rounded-full" />
+              <div className="h-4 w-1 bg-slate-900 rounded" />
               <h2 className="text-sm font-bold uppercase tracking-widest text-slate-800 italic">Income Statement Summary</h2>
             </div>
-            <div className="bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm">
+            <div className="bg-white border border-slate-100 rounded overflow-hidden shadow-sm">
               <table className="w-full text-xs">
                 <tbody className="divide-y divide-slate-50">
                   <tr className="bg-slate-50/50">
@@ -161,7 +161,7 @@ export default function FinancialMonthReport({
             {/* Project Profitability Table */}
             <section className="space-y-4">
               <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Top Projects Performance</h3>
-              <div className="bg-white border border-slate-100 rounded-xl overflow-hidden">
+              <div className="bg-white border border-slate-100 rounded overflow-hidden">
                 <table className="w-full text-[11px]">
                   <thead>
                     <tr className="bg-slate-50 text-slate-400 text-left border-b border-slate-100">
@@ -191,7 +191,7 @@ export default function FinancialMonthReport({
             {/* Position Snapshot */}
             <section className="space-y-4">
               <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Position Snapshot</h3>
-              <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4">
+              <div className="bg-slate-50 border border-slate-200 rounded p-5 space-y-4">
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-slate-500">Total Assets</span>
@@ -214,10 +214,10 @@ export default function FinancialMonthReport({
           {/* CASH FLOW ADJUSTMENTS */}
           <section className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="h-4 w-1 bg-slate-900 rounded-full" />
+              <div className="h-4 w-1 bg-slate-900 rounded" />
               <h2 className="text-sm font-bold uppercase tracking-widest text-slate-800 italic">Cash Flow Indirect Conversion</h2>
             </div>
-            <div className="bg-white border border-slate-100 rounded-xl p-6 shadow-sm">
+            <div className="bg-white border border-slate-100 rounded p-6 shadow-sm">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                 <div>
                   <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">Accrual Profit</p>
@@ -231,7 +231,7 @@ export default function FinancialMonthReport({
                   </p>
                   <div className="absolute inset-y-0 -right-4 flex items-center text-slate-200 hidden md:flex"><ChevronRight className="w-5 h-5" /></div>
                 </div>
-                <div className={cn("rounded-lg p-3", theme.bg)}>
+                <div className={cn("rounded p-3", theme.bg)}>
                   <p className="text-[10px] font-bold text-slate-500 uppercase mb-1">Net Cash Impact</p>
                   <p className={cn("text-xl font-bold", (report.cash_flow?.operating?.net_operating_cash || 0) >= 0 ? "text-emerald-600" : "text-rose-600")}>
                     {(report.cash_flow?.operating?.net_operating_cash || 0).toLocaleString()}
@@ -251,7 +251,7 @@ export default function FinancialMonthReport({
               <BarChart3 className="w-4 h-4 text-slate-400" />
               Performance Chart
             </h3>
-            <div className="bg-white border border-slate-100 rounded-xl p-6 h-[320px] shadow-sm">
+            <div className="bg-white border border-slate-100 rounded p-6 h-[320px] shadow-sm">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
@@ -282,7 +282,7 @@ export default function FinancialMonthReport({
 
           {/* AUDIT & TECHNICALS */}
           <section className="space-y-4">
-            <div className={cn("p-6 rounded-xl border space-y-6 shadow-sm", theme.bg, theme.border)}>
+            <div className={cn("p-6 rounded border space-y-6 shadow-sm", theme.bg, theme.border)}>
               <div>
                 <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4">Audit Trial Balance</h4>
                 <div className="space-y-3">
@@ -311,7 +311,7 @@ export default function FinancialMonthReport({
               <div className="pt-4 border-t border-slate-200">
                 <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4">Journal Volume</h4>
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full border-4 border-slate-200 border-t-slate-800 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded border-4 border-slate-200 border-t-slate-800 flex items-center justify-center">
                     <span className="text-xs font-black">{month.journals_count || 0}</span>
                   </div>
                   <p className="text-[10px] text-slate-500 font-medium leading-relaxed italic">
@@ -328,10 +328,10 @@ export default function FinancialMonthReport({
       {/* DETAILED JOURNAL LIST (COLLAPSIBLE/REDUCED) */}
       <section className="space-y-4">
         <div className="flex items-center gap-3">
-          <div className="h-4 w-1 bg-slate-300 rounded-full" />
+          <div className="h-4 w-1 bg-slate-300 rounded" />
           <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-slate-400 italic">Journal Register Highlights</h2>
         </div>
-        <div className="bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm">
+        <div className="bg-white border border-slate-100 rounded overflow-hidden shadow-sm">
           <table className="w-full text-[11px]">
             <thead>
               <tr className="bg-slate-50 text-slate-400 text-left border-b border-slate-100 uppercase tracking-tighter">
@@ -350,10 +350,10 @@ export default function FinancialMonthReport({
                   </td>
                   <td className="p-4 text-center">
                     <div className={cn(
-                      "inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full font-bold uppercase text-[8px]",
+                      "inline-flex items-center gap-1.5 px-2 py-0.5 rounded font-bold uppercase text-[8px]",
                       j.is_posted ? "bg-emerald-50 text-emerald-600" : "bg-amber-50 text-amber-600"
                     )}>
-                      <div className={cn("w-1 h-1 rounded-full", j.is_posted ? "bg-emerald-500" : "bg-amber-500")} />
+                      <div className={cn("w-1 h-1 rounded", j.is_posted ? "bg-emerald-500" : "bg-amber-500")} />
                       {j.is_posted ? "Posted" : "Draft"}
                     </div>
                   </td>
