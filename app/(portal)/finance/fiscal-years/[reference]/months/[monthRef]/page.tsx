@@ -15,18 +15,24 @@ import {
   Lock,
   Unlock,
   AlertCircle,
-  CheckCircle2
+  CheckCircle2,
+  Loader2
 } from "lucide-react";
 import { useState } from "react";
+import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
+import { downloadPDF } from "@/lib/download";
+import { toast } from "react-hot-toast";
 
 export default function FinanceMonthDetailPage() {
   const { reference, monthRef } = useParams();
   const router = useRouter();
   const { data: month, isLoading, refetch } = useFetchFinancialMonth(monthRef as string);
+  const headers = useAxiosAuth();
   const closeMutation = useCloseFinancialMonth();
   const reopenMutation = useReopenFinancialMonth();
 
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   if (isLoading) return <LoadingSpinner />;
   if (!month) return (
@@ -41,8 +47,9 @@ export default function FinanceMonthDetailPage() {
     setIsProcessing(true);
     try {
       await closeMutation.mutateAsync(month.reference);
+      toast.success("Month closed successfully.");
     } catch (error: any) {
-      alert(error?.response?.data?.detail || "Failed to close month.");
+      toast.error(error?.response?.data?.detail || "Failed to close month.");
     } finally {
       setIsProcessing(false);
     }
@@ -54,16 +61,26 @@ export default function FinanceMonthDetailPage() {
     setIsProcessing(true);
     try {
       await reopenMutation.mutateAsync(month.reference);
+      toast.success("Month re-opened successfully.");
     } catch (error: any) {
-      alert(error?.response?.data?.detail || "Failed to re-open month.");
+      toast.error(error?.response?.data?.detail || "Failed to re-open month.");
     } finally {
       setIsProcessing(false);
     }
   };
 
-  const handleDownload = () => {
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/financialmonths/${month.reference}/download/`;
-    window.open(url, '_blank');
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    try {
+      const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/financialmonths/${month.reference}/download/`;
+      await downloadPDF(url, `monthly_report_${month.name}.pdf`, headers);
+      toast.success("Report downloaded successfully.");
+    } catch (error) {
+      console.error("Download error:", error);
+      toast.error("Failed to generate report PDF.");
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   return (
@@ -116,10 +133,11 @@ export default function FinanceMonthDetailPage() {
         <div className="flex items-center gap-2">
           <button
             onClick={handleDownload}
-            className="h-9 px-4 rounded border border-gray-100 bg-white shadow-sm flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black/60 hover:bg-black hover:text-white transition-all"
+            disabled={isDownloading}
+            className="h-9 px-4 rounded border border-gray-100 bg-white shadow-sm flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black/60 hover:bg-black hover:text-white transition-all disabled:opacity-50"
           >
-            <Download className="w-3.5 h-3.5" />
-            Report
+            {isDownloading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
+            {isDownloading ? "Generating..." : "Report"}
           </button>
 
           {month.is_closed ? (
