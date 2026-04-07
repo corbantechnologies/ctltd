@@ -329,7 +329,7 @@ export default function FinancialMonthReport({
       <section className="space-y-4">
         <div className="flex items-center gap-3">
           <div className="h-4 w-1 bg-slate-300 rounded" />
-          <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-slate-400 italic">Journal Register Highlights</h2>
+          <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-slate-400 italic">Complete Journal Register</h2>
         </div>
         <div className="bg-white border border-slate-100 rounded overflow-hidden shadow-sm">
           <table className="w-full text-[11px]">
@@ -342,7 +342,7 @@ export default function FinancialMonthReport({
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
-              {(report.journals || []).slice(0, 10).map((j: any) => (
+              {(report.journals || []).map((j: any) => (
                 <tr key={j.reference} className="hover:bg-slate-50 transition-colors">
                   <td className="p-4 text-slate-700 font-medium">{j.description || "No description provided"}</td>
                   <td className="p-4 text-center">
@@ -362,13 +362,6 @@ export default function FinancialMonthReport({
               ))}
             </tbody>
           </table>
-          {(report.journals || []).length > 10 && (
-            <div className="bg-slate-50 p-3 text-center border-t border-slate-100">
-              <span className="text-[10px] text-slate-400 font-bold italic tracking-widest uppercase">
-                Plus {report.journals.length - 10} additional journal batches recorded in this period
-              </span>
-            </div>
-          )}
         </div>
       </section>
 
