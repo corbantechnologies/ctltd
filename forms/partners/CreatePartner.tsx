@@ -155,7 +155,6 @@ export default function CreatePartner({
                 id="email"
                 name="email"
                 type="email"
-                required
                 placeholder="contact@entity.com"
                 className="border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 w-full h-14 rounded focus:bg-white transition-all font-bold px-5 text-sm"
                 style={{
