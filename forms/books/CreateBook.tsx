@@ -4,11 +4,6 @@
 import { createBook } from "@/services/books";
 import { useFormik } from "formik";
 import { BookSchema } from "@/validation";
-
-
-
-
-
 import { toast } from "react-hot-toast";
 import { Loader2, BookOpen, Plus, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
@@ -77,6 +72,7 @@ export default function CreateBook({
         resetForm();
         if (onSuccess) onSuccess();
       } catch (error: any) {
+        console.log(error);
         toast.error(error?.response?.data?.message || "Failed to create book");
       } finally {
         setSubmitting(false);
