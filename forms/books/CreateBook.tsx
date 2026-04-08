@@ -3,7 +3,6 @@
 
 import { createBook } from "@/services/books";
 import { useFormik } from "formik";
-import { BookSchema } from "@/validation";
 import { toast } from "react-hot-toast";
 import { Loader2, BookOpen, Plus, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
@@ -48,7 +47,6 @@ export default function CreateBook({
       description: "",
     },
     enableReinitialize: true,
-    validationSchema: BookSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
         await createBook(values, header);
@@ -141,11 +139,6 @@ export default function CreateBook({
                 value={formik.values.code}
                 style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
               />
-              {formik.touched.code && formik.errors.code && (
-                <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
-                  {formik.errors.code}
-                </p>
-              )}
             </div>
 
             <div className="space-y-2">
@@ -166,11 +159,6 @@ export default function CreateBook({
                 value={formik.values.name}
                 style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
               />
-              {formik.touched.name && formik.errors.name && (
-                <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
-                  {formik.errors.name}
-                </p>
-              )}
             </div>
           </div>
 
@@ -198,11 +186,6 @@ export default function CreateBook({
                 </option>
               ))}
             </select>
-            {formik.touched.account_type && formik.errors.account_type && (
-              <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
-                {formik.errors.account_type}
-              </p>
-            )}
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
