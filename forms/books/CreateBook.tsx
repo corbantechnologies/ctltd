@@ -2,13 +2,14 @@
 "use client";
 
 import { createBook } from "@/services/books";
-import { useFormik } from "formik";
+import { useFormik, FormikHelpers } from "formik";
 import { toast } from "react-hot-toast";
 import { Loader2, BookOpen, Plus, X } from "lucide-react";
 import useAxiosAuth from "@/hooks/authentication/useAxiosAuth";
 import { useRouter } from "next/navigation";
 import { useFetchCOAs } from "@/hooks/coa/actions";
 import { useQueryClient } from "@tanstack/react-query";
+import { formatBackendError } from "@/lib/error-handler";
 
 interface CreateBookProps {
   rolePrefix?: string;
@@ -47,7 +48,10 @@ export default function CreateBook({
       description: "",
     },
     enableReinitialize: true,
-    onSubmit: async (values, { setSubmitting, resetForm }) => {
+    onSubmit: async (
+      values,
+      { setSubmitting, resetForm, setErrors }: FormikHelpers<any>
+    ) => {
       try {
         await createBook(values, header);
         toast.success("Account Book created successfully");
@@ -70,8 +74,13 @@ export default function CreateBook({
         resetForm();
         if (onSuccess) onSuccess();
       } catch (error: any) {
-        console.log(error);
-        toast.error(error?.response?.data?.message || "Failed to create book");
+        console.log("Creation Error:", error);
+        const errorMessage = formatBackendError(error, "Failed to create book");
+        toast.error(errorMessage);
+
+        if (error.response?.data) {
+          setErrors(error.response.data);
+        }
       } finally {
         setSubmitting(false);
       }
@@ -139,6 +148,11 @@ export default function CreateBook({
                 value={formik.values.code}
                 style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
               />
+              {formik.errors.code && (
+                <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
+                  {formik.errors.code as string}
+                </p>
+              )}
             </div>
 
             <div className="space-y-2">
@@ -159,6 +173,11 @@ export default function CreateBook({
                 value={formik.values.name}
                 style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
               />
+              {formik.errors.name && (
+                <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
+                  {formik.errors.name as string}
+                </p>
+              )}
             </div>
           </div>
 
@@ -186,6 +205,11 @@ export default function CreateBook({
                 </option>
               ))}
             </select>
+            {formik.errors.account_type && (
+              <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
+                {formik.errors.account_type as string}
+              </p>
+            )}
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -314,6 +338,11 @@ export default function CreateBook({
               value={formik.values.description}
               style={{ ["--tw-ring-color" as any]: `${primaryColor}33` }}
             />
+            {formik.errors.description && (
+              <p className="text-[10px] font-semibold text-red-500 uppercase tracking-widest ml-1">
+                {formik.errors.description as string}
+              </p>
+            )}
           </div>
 
           <div className="pt-4">
