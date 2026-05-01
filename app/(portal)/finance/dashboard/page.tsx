@@ -60,7 +60,7 @@ export default function FinanceDashboard() {
     },
     {
       label: "Active Fiscal Year",
-      value: years?.find((y: any) => y.is_active)?.code || "N/A",
+      value: years?.find((y: { is_active: boolean; code: string }) => y.is_active)?.code || "N/A",
       icon: CalendarRange,
       description: `${years?.length || 0} Years Configured`,
       color: "text-blue-600",
@@ -171,7 +171,7 @@ export default function FinanceDashboard() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
             <div className="lg:col-span-1">
               <AccountDistributionChart data={coas || []} />
             </div>
