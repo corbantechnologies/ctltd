@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import useAxiosAuth from "../authentication/useAxiosAuth";
-import { getPNL, getBalanceSheet, getTrialBalance, getRevenue, getCashBalance } from "@/services/reports";
+import { getPNL, getBalanceSheet, getTrialBalance, getRevenue, getCashBalance, getGLStatement } from "@/services/reports";
 
 export function useFetchPNL() {
     const header = useAxiosAuth();
@@ -53,4 +53,15 @@ export function useFetchCashBalance() {
         enabled: !!header.headers.Authorization,
     });
 }
+
+export function useFetchGLStatement(bookReference: string, params: { start_date?: string; end_date?: string; division?: string } = {}) {
+    const header = useAxiosAuth();
+
+    return useQuery({
+        queryKey: ["gl-statement", bookReference, params],
+        queryFn: () => getGLStatement(bookReference, params, header),
+        enabled: !!bookReference && !!header.headers.Authorization,
+    });
+}
+
 
