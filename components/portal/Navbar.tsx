@@ -83,6 +83,12 @@ export default function Navbar() {
       show: isDirector || isFinance || isOperations,
     },
     {
+      name: "Books",
+      href: `/${rolePrefix}/books`,
+      icon: FileText,
+      show: isFinance,
+    },
+    {
       name: "Quotations",
       href: `/${rolePrefix}/quotations`,
       icon: FileText,
