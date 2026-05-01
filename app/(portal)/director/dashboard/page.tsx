@@ -51,7 +51,7 @@ export default function DirectorDashboard() {
     },
     {
       label: "Active Fiscal Year",
-      value: years?.find((y: any) => y.is_active)?.code || "N/A",
+      value: years?.find((y: { is_active: boolean; code: string }) => y.is_active)?.code || "N/A",
       icon: CalendarRange,
       description: `${years?.length || 0} Years Configured`,
       color: "text-emerald-600",
@@ -128,7 +128,7 @@ export default function DirectorDashboard() {
 
         <Tabs.Content value="overview" className="space-y-10 focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700">
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
             {stats.map((stat, i) => (
               <div
                 key={i}
@@ -155,7 +155,7 @@ export default function DirectorDashboard() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
             <div className="lg:col-span-2">
               <AccountDistributionChart data={coas || []} />
             </div>

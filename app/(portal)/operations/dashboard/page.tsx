@@ -39,7 +39,7 @@ export default function OperationsDashboard() {
     return <LoadingSpinner />;
   }
 
-  const activeYear = years?.find((y: any) => y.is_active);
+  const activeYear = years?.find((y: { is_active: boolean; code: string }) => y.is_active);
 
   const stats = [
     {
@@ -121,7 +121,7 @@ export default function OperationsDashboard() {
 
         <Tabs.Content value="health" className="space-y-16 focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700">
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {stats.map((stat, i) => (
               <div
                 key={i}

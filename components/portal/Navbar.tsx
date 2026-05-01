@@ -83,6 +83,12 @@ export default function Navbar() {
       show: isDirector || isFinance || isOperations,
     },
     {
+      name: "Books",
+      href: `/${rolePrefix}/books`,
+      icon: FileText,
+      show: isFinance,
+    },
+    {
       name: "Quotations",
       href: `/${rolePrefix}/quotations`,
       icon: FileText,
@@ -170,7 +176,7 @@ export default function Navbar() {
 
             <button
               onClick={() => setMenuOpen(true)}
-              className="p-2 rounded text-slate-400 hover:text-white hover:bg-slate-800 transition-all border border-slate-800 hover:border-slate-700 shadow-2xl group"
+              className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded text-slate-400 hover:text-white hover:bg-slate-800 transition-all border border-slate-800 hover:border-slate-700 shadow-2xl group"
             >
               <Menu className="w-5 h-5 group-hover:scale-110 transition-transform" />
             </button>
