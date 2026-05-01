@@ -15,6 +15,7 @@ interface Book {
   is_cash: boolean;
   is_current: boolean;
   description: string;
+  balance: number;
   created_at: string;
   updated_at: string;
   reference: string;

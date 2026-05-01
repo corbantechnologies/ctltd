@@ -125,3 +125,41 @@ export const getCashBalance = async (headers: { headers: { Authorization: string
     const response: AxiosResponse<CashBalance> = await apiActions.get(`/api/v1/reports/cash-balance/`, headers);
     return response.data;
 }
+
+export interface GLStatementEntry {
+    id: number;
+    date: string;
+    journal_code: string;
+    description: string;
+    debit: number;
+    credit: number;
+    balance: number;
+    partner: string | null;
+}
+
+export interface GLStatement {
+    book_code: string;
+    book_name: string;
+    opening_balance: number;
+    closing_balance: number;
+    entries: GLStatementEntry[];
+    start_date: string | null;
+    end_date: string | null;
+    currency: string;
+    error?: string;
+}
+
+export const getGLStatement = async (
+    bookReference: string,
+    params: { start_date?: string; end_date?: string; division?: string } = {},
+    headers: { headers: { Authorization: string } }
+): Promise<GLStatement> => {
+    const query = new URLSearchParams();
+    query.append("book_reference", bookReference);
+    if (params.start_date) query.append("start_date", params.start_date);
+    if (params.end_date) query.append("end_date", params.end_date);
+    if (params.division) query.append("division", params.division);
+
+    const response: AxiosResponse<GLStatement> = await apiActions.get(`/api/v1/reports/gl-statement/?${query.toString()}`, headers);
+    return response.data;
+}
