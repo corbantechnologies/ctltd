@@ -96,33 +96,56 @@ export interface Revenue {
 
 export interface CashBalance {
     cash_balance: number;
+    cash_only: number;
+    bank_balance: number;
     currency: string;
     division: string;
-    financial_year: string;
+    as_of_date: string;
+    warning?: string;
 }
 
-export const getPNL = async (headers: { headers: { Authorization: string } }): Promise<PnL> => {
-    const response: AxiosResponse<PnL> = await apiActions.get(`/api/v1/reports/pnl/`, headers);
+export const getPNL = async (
+    headers: { headers: { Authorization: string } },
+    params: Record<string, string> = {}
+): Promise<PnL> => {
+    const q = new URLSearchParams(params).toString();
+    const response: AxiosResponse<PnL> = await apiActions.get(`/api/v1/reports/pnl/${q ? `?${q}` : ""}`, headers);
     return response.data;
 }
 
-export const getBalanceSheet = async (headers: { headers: { Authorization: string } }): Promise<BalanceSheet> => {
-    const response: AxiosResponse<BalanceSheet> = await apiActions.get(`/api/v1/reports/balance-sheet/`, headers);
+export const getBalanceSheet = async (
+    headers: { headers: { Authorization: string } },
+    params: Record<string, string> = {}
+): Promise<BalanceSheet> => {
+    const q = new URLSearchParams(params).toString();
+    const response: AxiosResponse<BalanceSheet> = await apiActions.get(`/api/v1/reports/balance-sheet/${q ? `?${q}` : ""}`, headers);
     return response.data;
 }
 
-export const getTrialBalance = async (headers: { headers: { Authorization: string } }): Promise<TrialBalance> => {
-    const response: AxiosResponse<TrialBalance> = await apiActions.get(`/api/v1/reports/trial-balance/`, headers);
+export const getTrialBalance = async (
+    headers: { headers: { Authorization: string } },
+    params: Record<string, string> = {}
+): Promise<TrialBalance> => {
+    const q = new URLSearchParams(params).toString();
+    const response: AxiosResponse<TrialBalance> = await apiActions.get(`/api/v1/reports/trial-balance/${q ? `?${q}` : ""}`, headers);
     return response.data;
 }
 
-export const getRevenue = async (headers: { headers: { Authorization: string } }): Promise<Revenue> => {
-    const response: AxiosResponse<Revenue> = await apiActions.get(`/api/v1/reports/revenue/`, headers);
+export const getRevenue = async (
+    headers: { headers: { Authorization: string } },
+    params: Record<string, string> = {}
+): Promise<Revenue> => {
+    const q = new URLSearchParams(params).toString();
+    const response: AxiosResponse<Revenue> = await apiActions.get(`/api/v1/reports/revenue/${q ? `?${q}` : ""}`, headers);
     return response.data;
 }
 
-export const getCashBalance = async (headers: { headers: { Authorization: string } }): Promise<CashBalance> => {
-    const response: AxiosResponse<CashBalance> = await apiActions.get(`/api/v1/reports/cash-balance/`, headers);
+export const getCashBalance = async (
+    headers: { headers: { Authorization: string } },
+    params: Record<string, string> = {}
+): Promise<CashBalance> => {
+    const q = new URLSearchParams(params).toString();
+    const response: AxiosResponse<CashBalance> = await apiActions.get(`/api/v1/reports/cash-balance/${q ? `?${q}` : ""}`, headers);
     return response.data;
 }
 
