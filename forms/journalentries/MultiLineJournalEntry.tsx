@@ -144,7 +144,7 @@ export default function MultiLineJournalEntry({
 
   return (
     <FormikProvider value={formik}>
-      <div className={cn("w-full bg-white border border-slate-200 shadow-2xl rounded overflow-hidden flex flex-col max-h-[90vh]", className)}>
+      <form onSubmit={formik.handleSubmit} className={cn("w-full bg-white border border-slate-200 shadow-2xl rounded overflow-hidden flex flex-col max-h-[90vh]", className)}>
         {/* Header */}
         <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -234,11 +234,20 @@ export default function MultiLineJournalEntry({
 
             <div className="space-y-2 md:col-span-1">
               <label className="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-1">Attach Link/File</label>
-              <div className="flex h-11 bg-white border border-slate-200 rounded items-center px-3 gap-2 text-slate-400 hover:border-slate-300 transition-colors cursor-pointer">
+              <label className="flex h-11 bg-white border border-slate-200 rounded items-center px-3 gap-2 text-slate-400 hover:border-slate-300 transition-colors cursor-pointer">
                 <FileUp className="w-4 h-4" />
                 <span className="text-[10px] font-semibold truncate">{formik.values.document_file?.name || "Upload Proof..."}</span>
-                <input type="file" className="hidden" />
-              </div>
+                <input 
+                  type="file" 
+                  className="hidden" 
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      formik.setFieldValue("document_file", file);
+                    }
+                  }}
+                />
+              </label>
             </div>
           </div>
 
@@ -303,8 +312,10 @@ export default function MultiLineJournalEntry({
                           name={`lines.${index}.debit`}
                           value={line.debit || ""}
                           onChange={(e) => {
-                            formik.setFieldValue(`lines.${index}.debit`, e.target.value);
-                            if (Number(e.target.value) > 0) formik.setFieldValue(`lines.${index}.credit`, 0);
+                            const val = e.target.value;
+                            const newLine = { ...line, debit: val };
+                            if (Number(val) > 0) newLine.credit = 0;
+                            formik.setFieldValue(`lines.${index}`, newLine);
                           }}
                           className="w-full h-11 bg-white border border-emerald-100 rounded px-4 text-sm font-bold text-emerald-700 outline-none focus:ring-4 focus:ring-emerald-600/10 placeholder:text-emerald-200"
                           placeholder="0.00"
@@ -317,8 +328,10 @@ export default function MultiLineJournalEntry({
                           name={`lines.${index}.credit`}
                           value={line.credit || ""}
                           onChange={(e) => {
-                            formik.setFieldValue(`lines.${index}.credit`, e.target.value);
-                            if (Number(e.target.value) > 0) formik.setFieldValue(`lines.${index}.debit`, 0);
+                            const val = e.target.value;
+                            const newLine = { ...line, credit: val };
+                            if (Number(val) > 0) newLine.debit = 0;
+                            formik.setFieldValue(`lines.${index}`, newLine);
                           }}
                           className="w-full h-11 bg-white border border-indigo-100 rounded px-4 text-sm font-bold text-indigo-700 outline-none focus:ring-4 focus:ring-indigo-600/10 placeholder:text-indigo-200"
                           placeholder="0.00"
@@ -369,7 +382,7 @@ export default function MultiLineJournalEntry({
             </div>
 
             <button
-              onClick={() => formik.handleSubmit()}
+              type="submit"
               disabled={formik.isSubmitting || totals.balance !== 0}
               className={cn(
                 "h-14 px-10 rounded font-bold text-sm transition-all shadow-xl flex items-center justify-center gap-2.5",
@@ -387,7 +400,7 @@ export default function MultiLineJournalEntry({
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </FormikProvider>
   );
 }
