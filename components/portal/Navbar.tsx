@@ -65,6 +65,12 @@ export default function Navbar() {
       show: isDirector || isFinance || isOperations,
     },
     {
+      name: "General Ledger",
+      href: `/${rolePrefix}/gl-statement`,
+      icon: FileText,
+      show: isFinance,
+    },
+    {
       name: "Divisions",
       href: `/${rolePrefix}/divisions`,
       icon: Database,
