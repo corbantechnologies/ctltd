@@ -124,7 +124,7 @@ export default function FinancialMonthReport({
               <div className="h-4 w-1 bg-slate-900 rounded" />
               <h2 className="text-sm font-bold uppercase tracking-widest text-slate-800 italic">Income Statement Summary</h2>
             </div>
-            <div className="bg-white border border-slate-100 rounded overflow-hidden shadow-sm">
+            <div className="bg-white border border-slate-100 rounded overflow-hidden shadow-sm overflow-x-auto">
               <table className="w-full text-xs">
                 <tbody className="divide-y divide-slate-50">
                   <tr className="bg-slate-50/50">
@@ -161,7 +161,7 @@ export default function FinancialMonthReport({
             {/* Project Profitability Table */}
             <section className="space-y-4">
               <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Top Projects Performance</h3>
-              <div className="bg-white border border-slate-100 rounded overflow-hidden">
+              <div className="bg-white border border-slate-100 rounded overflow-hidden overflow-x-auto">
                 <table className="w-full text-[11px]">
                   <thead>
                     <tr className="bg-slate-50 text-slate-400 text-left border-b border-slate-100">
@@ -331,7 +331,7 @@ export default function FinancialMonthReport({
           <div className="h-4 w-1 bg-slate-300 rounded" />
           <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-slate-400 italic">Complete Journal Register</h2>
         </div>
-        <div className="bg-white border border-slate-100 rounded overflow-hidden shadow-sm">
+        <div className="bg-white border border-slate-100 rounded overflow-hidden shadow-sm overflow-x-auto">
           <table className="w-full text-[11px]">
             <thead>
               <tr className="bg-slate-50 text-slate-400 text-left border-b border-slate-100 uppercase tracking-tighter">
