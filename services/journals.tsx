@@ -70,9 +70,9 @@ export const postJournal = async (
   reference: string,
   headers: { headers: { Authorization: string } }
 ): Promise<Journal> => {
-  const response: AxiosResponse<Journal> = await apiActions.patch(
-    `/api/v1/journals/${reference}/`,
-    { is_posted: true },
+  const response: AxiosResponse<Journal> = await apiActions.post(
+    `/api/v1/journals/${reference}/post/`,
+    {},
     headers
   );
   return response.data;

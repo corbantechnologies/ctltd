@@ -45,6 +45,8 @@ export default function CreateBook({
       is_tax: false,
       is_cash: false,
       is_current: true,
+      is_ar: false,
+      is_ap: false,
       description: "",
     },
     enableReinitialize: true,
@@ -317,6 +319,48 @@ export default function CreateBook({
               />
               <span className="text-[10px] font-semibold uppercase text-black/60 group-hover:text-black text-center leading-tight">
                 Current
+              </span>
+            </div>
+            <div
+              className={`flex flex-col items-center justify-center p-4 rounded border border-black/5 transition-all gap-2 group cursor-pointer ${formik.values.is_ar ? "bg-black/5" : "bg-white"}`}
+              onClick={() =>
+                formik.setFieldValue("is_ar", !formik.values.is_ar)
+              }
+              style={{
+                borderColor: formik.values.is_ar ? primaryColor : undefined,
+              }}
+            >
+              <input
+                type="checkbox"
+                name="is_ar"
+                checked={formik.values.is_ar}
+                onChange={formik.handleChange}
+                className="w-5 h-5 rounded transition-colors cursor-pointer"
+                style={{ accentColor: primaryColor }}
+              />
+              <span className="text-[10px] font-semibold uppercase text-black/60 group-hover:text-black text-center leading-tight">
+                Receivable
+              </span>
+            </div>
+            <div
+              className={`flex flex-col items-center justify-center p-4 rounded border border-black/5 transition-all gap-2 group cursor-pointer ${formik.values.is_ap ? "bg-black/5" : "bg-white"}`}
+              onClick={() =>
+                formik.setFieldValue("is_ap", !formik.values.is_ap)
+              }
+              style={{
+                borderColor: formik.values.is_ap ? primaryColor : undefined,
+              }}
+            >
+              <input
+                type="checkbox"
+                name="is_ap"
+                checked={formik.values.is_ap}
+                onChange={formik.handleChange}
+                className="w-5 h-5 rounded transition-colors cursor-pointer"
+                style={{ accentColor: primaryColor }}
+              />
+              <span className="text-[10px] font-semibold uppercase text-black/60 group-hover:text-black text-center leading-tight">
+                Payable
               </span>
             </div>
           </div>
