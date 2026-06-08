@@ -11,7 +11,7 @@ const careers = [
                 {
                     name: "Phase 1 (Immediate Revenue Share)",
                     details: [
-                        "25% to 30% of all recurring subscription or transactional fees from financial institutions (SACCOs, MFIs, Lenders) you onboard.",
+                        "20% to 30% of all recurring subscription or transactional fees from financial institutions (SACCOs, MFIs, Lenders) you onboard.",
                         "15% to 20% of the total contract value for custom enterprise software development projects you secure."
                     ]
                 },
