@@ -133,20 +133,29 @@ export default async function CareerDetail({ params }: { params: Promise<{ id: s
                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-corporate-primary/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
                <div className="relative z-10">
                  <h2 className="text-2xl md:text-3xl font-semibold mb-4">Ready to Apply?</h2>
-                 <p className="text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed text-lg">
+                 <p className="text-slate-300 mb-6 max-w-2xl mx-auto leading-relaxed text-lg">
                    {career.howToApply.instruction}
-                   <br/><br/>
-                   {/* FIXED: Added 'break-all sm:break-words' to prevent long string overflow visible in 143738.png */}
-                   <span className="text-white font-medium block bg-slate-800 p-4 sm:p-6 rounded border border-slate-700 text-left break-all sm:break-words">
-                     {career.howToApply.prompt}
-                   </span>
                  </p>
+                 
+                 {/* Instruction Box with clean layout and dedicated email display */}
+                 <div className="text-white font-medium block bg-slate-800 p-5 sm:p-6 rounded border border-slate-700 text-left mb-8 max-w-2xl mx-auto space-y-4">
+                   <p className="leading-relaxed text-slate-200 break-words">
+                     Please send us a brief introduction highlighting your background in business development or sales. In your note, briefly walk us through the strategy or approach you would take to get our financial core infrastructure in front of your first three institutional clients.
+                   </p>
+                   <div className="pt-2 border-t border-slate-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                     <span className="text-xs uppercase tracking-wider text-slate-400">Submit via Email:</span>
+                     <span className="text-corporate-primary font-mono select-all break-all text-sm sm:text-base">
+                       {career.howToApply.email}
+                     </span>
+                   </div>
+                 </div>
+
                  <a 
                    href={`mailto:${career.howToApply.email}?subject=Application: ${career.title}`}
-                   className="inline-flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white px-6 py-4 sm:px-8 rounded font-semibold transition-colors shadow-lg shadow-orange-900/20 w-full sm:w-auto"
+                   className="inline-flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white px-8 py-4 rounded font-semibold transition-colors shadow-lg shadow-orange-900/20 max-w-full w-full sm:w-auto"
                  >
                    <Mail className="mr-2 w-5 h-5 flex-shrink-0" />
-                   <span className="truncate">Email Your Application</span>
+                   <span>Email Your Application</span>
                  </a>
                </div>
             </div>
