@@ -1,6 +1,12 @@
 import { MapPin, Briefcase, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import careers from "@/careers/careers";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Careers",
+  description: "Join our team at Corban Technologies LTD. Explore our open positions and help build the future of digital infrastructure in East Africa.",
+};
 
 export default function CareersPage() {
   return (

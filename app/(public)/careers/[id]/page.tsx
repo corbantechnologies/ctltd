@@ -2,6 +2,23 @@ import { notFound } from "next/navigation";
 import careers from "@/careers/careers";
 import { ArrowLeft, MapPin, Briefcase, Mail } from "lucide-react";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const career = careers.find((c) => c.id.toString() === resolvedParams.id);
+
+  if (!career) {
+    return {
+      title: "Role Not Found",
+    };
+  }
+
+  return {
+    title: career.title,
+    description: career.about.substring(0, 160) + "...",
+  };
+}
 
 export function generateStaticParams() {
   return careers.map((career) => ({
