@@ -52,11 +52,11 @@ export default function Footer() {
             Company
           </h4>
           <ul className="space-y-3">
-            {["Divisions", "About", "Contact"].map(
+            {["Divisions", "About", "Contact", "Careers"].map(
               (item) => (
                 <li key={item}>
                   <Link
-                    href={item === "Divisions" ? "/divisions" : `/${item.toLowerCase()}`}
+                    href={item === "Divisions" ? "/divisions" : item === "Careers" ? "/careers" : `/${item.toLowerCase()}`}
                     className="text-slate-500 hover:text-corporate-primary text-sm transition-colors"
                   >
                     {item}
