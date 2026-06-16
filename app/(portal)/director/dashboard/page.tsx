@@ -30,11 +30,18 @@ export default function DirectorDashboard() {
   const { data: coas, isLoading: coaLoading } = useFetchCOAs();
   const { data: books, isLoading: booksLoading } = useFetchBooks();
   const { data: years, isLoading: yearsLoading } = useFetchFinancialYears();
-  const { data: entriesResponse, isLoading: entriesLoading } = useFetchJournalEntries();
+  const { data: entriesResponse, isLoading: entriesLoading } =
+    useFetchJournalEntries();
   const entries = entriesResponse?.results || [];
   const { data: divisions, isLoading: divisionsLoading } = useFetchDivisions();
 
-  const isLoading = accountLoading || coaLoading || booksLoading || yearsLoading || entriesLoading || divisionsLoading;
+  const isLoading =
+    accountLoading ||
+    coaLoading ||
+    booksLoading ||
+    yearsLoading ||
+    entriesLoading ||
+    divisionsLoading;
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -51,7 +58,9 @@ export default function DirectorDashboard() {
     },
     {
       label: "Active Fiscal Year",
-      value: years?.find((y: { is_active: boolean; code: string }) => y.is_active)?.code || "N/A",
+      value:
+        years?.find((y: { is_active: boolean; code: string }) => y.is_active)
+          ?.code || "N/A",
       icon: CalendarRange,
       description: `${years?.length || 0} Years Configured`,
       color: "text-emerald-600",
@@ -89,7 +98,7 @@ export default function DirectorDashboard() {
       <GlobalSearch role="director" />
 
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
             <div className="w-8 h-8 rounded bg-corporate-primary flex items-center justify-center text-white shadow-lg shadow-corporate-primary/20">
@@ -99,12 +108,14 @@ export default function DirectorDashboard() {
               Executive Command Center
             </p>
           </div>
-          <h1 className="text-3xl md:text-4xl font-semibold text-slate-900 tracking-tight italic">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 tracking-tight italic">
             Director <span className="text-corporate-primary">Overview</span>
           </h1>
           <p className="text-slate-400 font-semibold mt-2 text-sm max-w-lg">
-            Welcome back, <span className="text-slate-900">{account?.first_name}</span>.
-            Corporate infrastructure and strategic audit trail monitoring active.
+            Welcome back,{" "}
+            <span className="text-slate-900">{account?.first_name}</span>.
+            Corporate infrastructure and strategic audit trail monitoring
+            active.
           </p>
         </div>
         <DirectorActionsMenu />
@@ -126,7 +137,10 @@ export default function DirectorDashboard() {
           </Tabs.Trigger>
         </Tabs.List>
 
-        <Tabs.Content value="overview" className="space-y-10 focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <Tabs.Content
+          value="overview"
+          className="space-y-10 focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700"
+        >
           {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
             {stats.map((stat, i) => (
@@ -134,9 +148,20 @@ export default function DirectorDashboard() {
                 key={i}
                 className="bg-white p-6 rounded border border-slate-200 shadow-2xl shadow-slate-100 relative overflow-hidden group hover:-translate-y-1 transition-all duration-500"
               >
-                <div className={cn("absolute top-0 right-0 w-24 h-24 rounded blur-3xl -translate-y-1/2 translate-x-1/2 opacity-30 group-hover:opacity-60 transition-opacity", stat.bg)} />
+                <div
+                  className={cn(
+                    "absolute top-0 right-0 w-24 h-24 rounded blur-3xl -translate-y-1/2 translate-x-1/2 opacity-30 group-hover:opacity-60 transition-opacity",
+                    stat.bg,
+                  )}
+                />
                 <div className="relative z-10 flex flex-col gap-4">
-                  <div className={cn("w-12 h-12 rounded flex items-center justify-center shadow-inner", stat.bg, stat.color)}>
+                  <div
+                    className={cn(
+                      "w-12 h-12 rounded flex items-center justify-center shadow-inner",
+                      stat.bg,
+                      stat.color,
+                    )}
+                  >
                     <stat.icon className="w-6 h-6" />
                   </div>
                   <div>
@@ -175,7 +200,9 @@ export default function DirectorDashboard() {
               </div>
               <div className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-600 rounded border border-emerald-100 shadow-sm animate-pulse">
                 <div className="w-2 h-2 rounded bg-emerald-500" />
-                <span className="text-[10px] font-semibold uppercase tracking-widest">System Online</span>
+                <span className="text-[10px] font-semibold uppercase tracking-widest">
+                  System Online
+                </span>
               </div>
             </div>
             <div className="bg-slate-50/50 p-1 rounded border border-slate-100">
@@ -184,7 +211,10 @@ export default function DirectorDashboard() {
           </div>
         </Tabs.Content>
 
-        <Tabs.Content value="financials" className="focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <Tabs.Content
+          value="financials"
+          className="focus-visible:outline-none animate-in fade-in slide-in-from-bottom-4 duration-700"
+        >
           <div>
             <ReportsDashboard rolePrefix="director" />
           </div>

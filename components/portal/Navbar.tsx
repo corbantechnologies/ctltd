@@ -64,7 +64,7 @@ export default function Navbar() {
         ? `/${rolePrefix}/fiscal-years/${activeYear.reference}`
         : `/${rolePrefix}/fiscal-years`,
       icon: FileText,
-      show: isDirector || isFinance,
+      show: isDirector || isFinance || isOperations,
     },
     {
       name: "Reports",

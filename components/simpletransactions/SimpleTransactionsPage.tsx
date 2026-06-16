@@ -32,13 +32,10 @@ export default function SimpleTransactionsPage() {
   const [showForm, setShowForm] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
-  const [limit] = useState("20");
+  const limit = "20";
   const debouncedSearch = useDebounce(searchQuery, 500);
 
-  const activeFilters: Record<string, string> = {
-    page: page.toString(),
-    limit,
-  };
+  const activeFilters: Record<string, string> = { page: page.toString(), limit };
   if (debouncedSearch) activeFilters["search"] = debouncedSearch;
 
   const { data: response, isLoading } = useFetchSimpleTransactions(activeFilters);
@@ -54,20 +51,20 @@ export default function SimpleTransactionsPage() {
     .reduce((sum, t) => sum + parseFloat(t.amount), 0);
 
   return (
-    <div className="space-y-6 pb-20">
+    <div className="space-y-5 pb-24">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3">
         <div>
-          <h1 className="text-xl text-slate-900 tracking-tight">
+          <h1 className="text-lg sm:text-xl text-slate-900 tracking-tight">
             Quick <span className="text-slate-600">Transactions</span>
           </h1>
-          <p className="text-slate-400 mt-1 text-sm max-w-lg">
+          <p className="text-slate-400 mt-1 text-xs sm:text-sm max-w-lg">
             Log day-to-day transactions. A Journal Entry is auto-generated for each record.
           </p>
         </div>
         <button
           onClick={() => setShowForm(true)}
-          className="flex items-center gap-2 bg-slate-900 text-white px-5 h-11 rounded font-semibold text-sm hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/20 active:scale-95"
+          className="flex items-center gap-2 bg-slate-900 text-white px-4 sm:px-5 h-10 sm:h-11 rounded font-semibold text-sm hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/20 active:scale-95 w-full sm:w-auto justify-center"
         >
           <Plus className="w-4 h-4" />
           Log Transaction
@@ -75,48 +72,48 @@ export default function SimpleTransactionsPage() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white/60 backdrop-blur-sm rounded border border-black/5 p-4 flex items-center gap-4 shadow-sm">
-          <div className="w-10 h-10 rounded bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
-            <ArrowDownLeft className="w-5 h-5 text-emerald-600" />
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
+        <div className="bg-white/60 backdrop-blur-sm rounded border border-black/5 p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 shadow-sm">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+            <ArrowDownLeft className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
           </div>
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">Money In (Page)</p>
-            <p className="text-lg font-bold text-emerald-600 font-mono mt-0.5">
+            <p className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest text-slate-400">In</p>
+            <p className="text-sm sm:text-base font-bold text-emerald-600 font-mono mt-0.5">
               {formatNumber(totalIn)}
             </p>
           </div>
         </div>
-        <div className="bg-white/60 backdrop-blur-sm rounded border border-black/5 p-4 flex items-center gap-4 shadow-sm">
-          <div className="w-10 h-10 rounded bg-red-500/10 flex items-center justify-center flex-shrink-0">
-            <ArrowUpRight className="w-5 h-5 text-red-500" />
+        <div className="bg-white/60 backdrop-blur-sm rounded border border-black/5 p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 shadow-sm">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded bg-red-500/10 flex items-center justify-center flex-shrink-0">
+            <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-red-500" />
           </div>
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">Money Out (Page)</p>
-            <p className="text-lg font-bold text-red-600 font-mono mt-0.5">
+            <p className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest text-slate-400">Out</p>
+            <p className="text-sm sm:text-base font-bold text-red-600 font-mono mt-0.5">
               {formatNumber(totalOut)}
             </p>
           </div>
         </div>
-        <div className="bg-white/60 backdrop-blur-sm rounded border border-black/5 p-4 flex items-center gap-4 shadow-sm">
-          <div className="w-10 h-10 rounded bg-slate-900/10 flex items-center justify-center flex-shrink-0">
-            <Zap className="w-5 h-5 text-slate-700" />
+        <div className="bg-white/60 backdrop-blur-sm rounded border border-black/5 p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 shadow-sm">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded bg-slate-900/10 flex items-center justify-center flex-shrink-0">
+            <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-slate-700" />
           </div>
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">Total Records</p>
-            <p className="text-lg font-bold text-slate-900 font-mono mt-0.5">{totalCount}</p>
+            <p className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest text-slate-400">Total</p>
+            <p className="text-sm sm:text-base font-bold text-slate-900 font-mono mt-0.5">{totalCount}</p>
           </div>
         </div>
       </div>
 
       {/* Search */}
-      <div className="bg-white/40 p-4 rounded border border-white/60 backdrop-blur-md shadow-sm flex gap-3 items-center">
+      <div className="bg-white/40 p-3 sm:p-4 rounded border border-white/60 backdrop-blur-md shadow-sm flex gap-2 sm:gap-3">
         <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20" />
+          <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20" />
           <input
             type="text"
-            placeholder="Search by description, reference, partner..."
-            className="pl-11 h-11 w-full bg-white/80 border border-black/5 rounded font-medium text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-slate-900/20"
+            placeholder="Search transactions..."
+            className="pl-10 sm:pl-11 h-10 sm:h-11 w-full bg-white/80 border border-black/5 rounded font-medium text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-slate-900/20"
             value={searchQuery}
             onChange={(e) => { setSearchQuery(e.target.value); setPage(1); }}
           />
@@ -124,19 +121,20 @@ export default function SimpleTransactionsPage() {
         {searchQuery && (
           <button
             onClick={() => { setSearchQuery(""); setPage(1); }}
-            className="h-11 w-11 flex items-center justify-center border border-black/5 rounded bg-white/80 hover:bg-red-50 hover:text-red-500 transition-all text-black/40 shadow-sm"
+            className="h-10 sm:h-11 w-10 sm:w-11 flex items-center justify-center border border-black/5 rounded bg-white/80 hover:bg-red-50 hover:text-red-500 transition-all text-black/40 shadow-sm flex-shrink-0"
           >
             <X className="w-4 h-4" />
           </button>
         )}
       </div>
 
-      {/* List */}
+      {/* List — mobile card layout, desktop table */}
       {isLoading ? (
         <LoadingSpinner />
       ) : transactions.length > 0 ? (
         <div className="bg-white/60 backdrop-blur-xl border border-black/5 overflow-hidden shadow-xl shadow-black/5 rounded">
-          <div className="overflow-x-auto">
+          {/* Desktop Table — hidden on mobile */}
+          <div className="hidden sm:block overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="bg-black/5 border-b border-black/5">
@@ -162,9 +160,7 @@ export default function SimpleTransactionsPage() {
                     <td className="py-3 px-4">
                       <div className="flex flex-col">
                         <span className="text-sm text-black font-medium">{t.name}</span>
-                        {t.partner && (
-                          <span className="text-xs text-black/40 mt-0.5">{t.partner}</span>
-                        )}
+                        {t.partner && <span className="text-xs text-black/40 mt-0.5">{t.partner}</span>}
                         <span className="text-[10px] text-black/30 mt-0.5 uppercase">{t.division}</span>
                       </div>
                     </td>
@@ -177,14 +173,9 @@ export default function SimpleTransactionsPage() {
                     <td className="py-3 px-4 text-right whitespace-nowrap">
                       <div className={cn(
                         "inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-sm font-mono font-bold",
-                        t.transaction_type === "MONEY_IN"
-                          ? "bg-emerald-50 text-emerald-700"
-                          : "bg-red-50 text-red-700"
+                        t.transaction_type === "MONEY_IN" ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-700"
                       )}>
-                        {t.transaction_type === "MONEY_IN"
-                          ? <ArrowDownLeft className="w-3 h-3" />
-                          : <ArrowUpRight className="w-3 h-3" />
-                        }
+                        {t.transaction_type === "MONEY_IN" ? <ArrowDownLeft className="w-3 h-3" /> : <ArrowUpRight className="w-3 h-3" />}
                         {formatNumber(parseFloat(t.amount))}
                       </div>
                     </td>
@@ -207,8 +198,51 @@ export default function SimpleTransactionsPage() {
             </table>
           </div>
 
+          {/* Mobile Card List — shown only on mobile */}
+          <div className="sm:hidden divide-y divide-black/5">
+            {transactions.map((t: SimpleTransaction) => (
+              <div key={t.reference} className="p-4 flex items-start justify-between gap-3">
+                <div className="flex items-start gap-3 flex-1 min-w-0">
+                  <div className={cn(
+                    "w-9 h-9 rounded flex items-center justify-center flex-shrink-0 mt-0.5",
+                    t.transaction_type === "MONEY_IN" ? "bg-emerald-50" : "bg-red-50"
+                  )}>
+                    {t.transaction_type === "MONEY_IN"
+                      ? <ArrowDownLeft className="w-4 h-4 text-emerald-600" />
+                      : <ArrowUpRight className="w-4 h-4 text-red-500" />}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-slate-900 truncate">{t.name}</p>
+                    <p className="text-[10px] text-slate-400 mt-0.5 uppercase">{t.ledger_book} · via {t.payment_method}</p>
+                    <p className="text-[10px] text-slate-400 mt-0.5 font-mono">{t.code}</p>
+                  </div>
+                </div>
+                <div className="text-right flex-shrink-0">
+                  <p className={cn(
+                    "font-mono font-bold text-sm",
+                    t.transaction_type === "MONEY_IN" ? "text-emerald-600" : "text-red-600"
+                  )}>
+                    {t.transaction_type === "MONEY_IN" ? "+" : "-"}{formatNumber(parseFloat(t.amount))}
+                  </p>
+                  <p className="text-[10px] text-slate-400 mt-1">
+                    {new Date(t.date).toLocaleDateString("en-KE", { day: "2-digit", month: "short" })}
+                  </p>
+                  {t.journal ? (
+                    <span className="inline-flex items-center gap-0.5 text-[9px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded uppercase mt-1">
+                      <CheckCircle className="w-2.5 h-2.5" /> Auto-journaled
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-0.5 text-[9px] font-semibold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded uppercase mt-1">
+                      <AlertCircle className="w-2.5 h-2.5" /> Pending
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
           {/* Pagination */}
-          <div className="border-t border-black/5 bg-white/50 p-4 flex justify-between items-center gap-4">
+          <div className="border-t border-black/5 bg-white/50 p-3 sm:p-4 flex justify-between items-center gap-3">
             <span className="text-xs font-semibold text-black/50 uppercase tracking-widest">
               {totalCount} records
             </span>
@@ -216,17 +250,17 @@ export default function SimpleTransactionsPage() {
               <button
                 onClick={() => setPage(Math.max(1, page - 1))}
                 disabled={page === 1}
-                className="h-8 px-4 rounded border border-black/10 bg-white font-semibold text-xs text-black/70 hover:bg-black/5 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="h-8 px-3 sm:px-4 rounded border border-black/10 bg-white font-semibold text-xs text-black/70 hover:bg-black/5 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Prev
               </button>
-              <span className="text-xs font-semibold text-black/50 mx-2 uppercase tracking-widest">
-                Page {page} of {Math.max(1, totalPages)}
+              <span className="text-xs font-semibold text-black/50 uppercase tracking-widest">
+                {page}/{Math.max(1, totalPages)}
               </span>
               <button
                 onClick={() => setPage(Math.min(totalPages, page + 1))}
                 disabled={page >= totalPages}
-                className="h-8 px-4 rounded border border-black/10 bg-slate-900 text-white font-semibold text-xs hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="h-8 px-3 sm:px-4 rounded border border-black/10 bg-slate-900 text-white font-semibold text-xs hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Next
               </button>
@@ -234,19 +268,19 @@ export default function SimpleTransactionsPage() {
           </div>
         </div>
       ) : (
-        <div className="py-24 text-center bg-white/40 rounded border border-dashed border-black/10">
-          <div className="w-20 h-20 rounded bg-black/5 flex items-center justify-center text-black/10 mx-auto mb-6">
-            <Zap className="w-10 h-10" />
+        <div className="py-16 sm:py-24 text-center bg-white/40 rounded border border-dashed border-black/10">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded bg-black/5 flex items-center justify-center text-black/10 mx-auto mb-4 sm:mb-6">
+            <Zap className="w-8 h-8 sm:w-10 sm:h-10" />
           </div>
-          <h3 className="text-base font-semibold text-black tracking-tight mb-2 uppercase">
+          <h3 className="text-sm sm:text-base font-semibold text-black tracking-tight mb-2 uppercase">
             No Transactions Yet
           </h3>
-          <p className="text-black/30 font-semibold max-w-sm mx-auto text-sm mb-6">
+          <p className="text-black/30 font-semibold max-w-xs sm:max-w-sm mx-auto text-sm mb-5 sm:mb-6">
             Log your first transaction and a journal entry will be automatically generated.
           </p>
           <button
             onClick={() => setShowForm(true)}
-            className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 h-11 rounded font-semibold text-sm hover:bg-slate-800 transition-all"
+            className="inline-flex items-center gap-2 bg-slate-900 text-white px-5 sm:px-6 h-10 sm:h-11 rounded font-semibold text-sm hover:bg-slate-800 transition-all"
           >
             <Plus className="w-4 h-4" />
             Log First Transaction
@@ -254,10 +288,10 @@ export default function SimpleTransactionsPage() {
         </div>
       )}
 
-      {/* Modal Form */}
+      {/* Modal */}
       {showForm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full sm:max-w-2xl animate-in slide-in-from-bottom-4 sm:zoom-in-95 duration-300">
             <CreateSimpleTransaction
               onSuccess={() => setShowForm(false)}
               onClose={() => setShowForm(false)}

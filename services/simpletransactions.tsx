@@ -41,7 +41,7 @@ export interface CreateSimpleTransaction {
 }
 
 export const createSimpleTransaction = async (
-  data: CreateSimpleTransaction,
+  data: CreateSimpleTransaction | FormData,
   headers: { headers: { Authorization: string } }
 ): Promise<SimpleTransaction> => {
   const response: AxiosResponse<SimpleTransaction> = await apiActions.post(
