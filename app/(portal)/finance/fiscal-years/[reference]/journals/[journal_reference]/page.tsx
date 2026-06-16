@@ -17,7 +17,8 @@ import {
   Plus,
   Receipt,
   Edit2,
-  Lock
+  Lock,
+  FileText
 } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { useFetchFinancialYear } from "@/hooks/financialyears/actions";
@@ -160,6 +161,30 @@ export default function JournalsDetailPage() {
               <span className="bg-[#045138]/10 text-[#045138] px-3 py-1 rounded">
                 {journal.journal_type}
               </span>
+              {journal.source_transaction && (
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded flex items-center gap-1.5 border border-slate-200">
+                    <Receipt className="w-3.5 h-3.5" />
+                    Source: {journal.source_transaction.code}
+                  </span>
+                  {journal.source_transaction.document_number && (
+                    <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded flex items-center gap-1.5 border border-slate-200 font-mono">
+                      Ref: {journal.source_transaction.document_number}
+                    </span>
+                  )}
+                  {journal.source_transaction.document_url && (
+                    <a
+                      href={journal.source_transaction.document_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="bg-blue-50 hover:bg-blue-100 text-blue-600 transition-colors px-3 py-1 rounded flex items-center gap-1.5 border border-blue-200 cursor-pointer"
+                    >
+                      <FileText className="w-3.5 h-3.5" />
+                      View Document
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
