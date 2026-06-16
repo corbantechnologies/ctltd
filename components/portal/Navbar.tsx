@@ -59,6 +59,14 @@ export default function Navbar() {
       show: isDirector || isFinance || isOperations,
     },
     {
+      name: "Fiscal Year",
+      href: activeYear
+        ? `/${rolePrefix}/fiscal-years/${activeYear.reference}`
+        : `/${rolePrefix}/fiscal-years`,
+      icon: FileText,
+      show: isDirector || isFinance,
+    },
+    {
       name: "Reports",
       href: `/${rolePrefix}/reports`,
       icon: FileText,
@@ -112,14 +120,7 @@ export default function Navbar() {
       icon: FileText,
       show: isDirector || isFinance || isOperations,
     },
-    {
-      name: "Fiscal Year",
-      href: activeYear
-        ? `/${rolePrefix}/fiscal-years/${activeYear.reference}`
-        : `/${rolePrefix}/fiscal-years`,
-      icon: FileText,
-      show: isDirector || isFinance,
-    },
+ 
     {
       name: "Ledger",
       href: `/${rolePrefix}/journal-entries`,
@@ -137,6 +138,18 @@ export default function Navbar() {
       href: `/${rolePrefix}/financials`,
       icon: FileText,
       show: isDirector,
+    },
+    {
+      name: "Transactions",
+      href: isEmployee ? `/employee/transactions` : `/${rolePrefix}/simple-transactions`,
+      icon: FileText,
+      show: isDirector || isFinance || isOperations || isEmployee,
+    },
+    {
+      name: "Dashboard",
+      href: `/employee/dashboard`,
+      icon: LayoutDashboard,
+      show: isEmployee,
     },
   ];
 
@@ -174,9 +187,11 @@ export default function Navbar() {
                     ? "text-emerald-500 bg-emerald-500/5 border-emerald-500/20 shadow-emerald-500/5"
                     : isOperations
                       ? "text-blue-500 bg-blue-500/5 border-blue-500/20 shadow-blue-500/5"
-                      : "text-slate-400 bg-slate-800 border-slate-700"
+                      : isEmployee
+                        ? "text-slate-300 bg-slate-800 border-slate-700"
+                        : "text-slate-400 bg-slate-800 border-slate-700"
               )}>
-                {isDirector ? "Executive Director" : isFinance ? "Finance Controller" : isOperations ? "Operations Officer" : "Portal User"}
+                {isDirector ? "Executive Director" : isFinance ? "Finance Controller" : isOperations ? "Operations Officer" : isEmployee ? "Field Staff" : "Portal User"}
               </span>
             </div>
 
@@ -255,9 +270,9 @@ export default function Navbar() {
                   )}>
                     <span className={cn(
                       "text-[9px] font-semibold uppercase",
-                      isDirector ? "text-corporate-primary" : isFinance ? "text-emerald-500" : "text-slate-400"
+                      isDirector ? "text-corporate-primary" : isFinance ? "text-emerald-500" : isOperations ? "text-blue-400" : isEmployee ? "text-slate-300" : "text-slate-400"
                     )}>
-                      {isDirector ? "Executive Director" : isFinance ? "Finance Controller" : "Portal User"}
+                      {isDirector ? "Executive Director" : isFinance ? "Finance Controller" : isOperations ? "Operations Officer" : isEmployee ? "Field Staff" : "Portal User"}
                     </span>
                   </div>
                   {activeYear && (
