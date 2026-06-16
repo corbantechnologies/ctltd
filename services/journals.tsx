@@ -19,6 +19,13 @@ interface Journal {
   updated_at: string;
   reference: string;
   journal_entries: JournalEntry[];
+  source_transaction?: {
+    reference: string;
+    code: string;
+    document_url: string | null;
+    document_number: string | null;
+    source_document: string | null;
+  } | null;
 }
 
 export type { Journal };
