@@ -51,7 +51,7 @@ export function ClaimOfferModal({
 
   if (success) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
+      <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
         <div className="relative w-full sm:max-w-md rounded border-none p-12 text-center space-y-8 animate-in zoom-in-95 duration-300 bg-white" onClick={(e) => e.stopPropagation()}>
           <div className="w-24 h-24 bg-corporate-primary/10 rounded flex items-center justify-center mx-auto mb-4">
             <CheckCircle2 className="w-12 h-12 text-corporate-primary" />
@@ -79,7 +79,7 @@ export function ClaimOfferModal({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
       <div className="relative w-full overflow-y-auto max-h-[90vh] sm:max-w-lg rounded border-none p-0 shadow-2xl animate-in fade-in zoom-in-95 duration-300 bg-white" onClick={(e) => e.stopPropagation()}>
         <div className="relative">
           {/* Header Backdrop */}

@@ -149,7 +149,7 @@ export default function ReportsDashboard({ rolePrefix = "director" }: { rolePref
                         </p>
                     </div>
                 </div>
-                <div className="flex items-center gap-3 flex-wrap">
+                <div className="flex items-center gap-2 flex-wrap sm:gap-3">
                     {/* GL Statement shortcut */}
                     <Link
                         href={`/${rolePrefix}/reports/gl-statement`}
