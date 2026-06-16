@@ -59,16 +59,28 @@ export default function Navbar() {
       show: isDirector || isFinance || isOperations,
     },
     {
-      name: "Fiscal Year",
+      name: "Current Fiscal Year",
       href: activeYear
         ? `/${rolePrefix}/fiscal-years/${activeYear.reference}`
         : `/${rolePrefix}/fiscal-years`,
+      icon: FileText,
+      show: !!activeYear && (isDirector || isFinance || isOperations),
+    },
+    {
+      name: "All Fiscal Years",
+      href: `/${rolePrefix}/fiscal-years`,
       icon: FileText,
       show: isDirector || isFinance || isOperations,
     },
     {
       name: "Reports",
       href: `/${rolePrefix}/reports`,
+      icon: FileText,
+      show: isDirector || isFinance || isOperations,
+    },
+    {
+      name: "GL Statements",
+      href: `/${rolePrefix}/reports/gl-statement`,
       icon: FileText,
       show: isDirector || isFinance || isOperations,
     },
