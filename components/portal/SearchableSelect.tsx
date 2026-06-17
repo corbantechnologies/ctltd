@@ -109,7 +109,7 @@ export default function SearchableSelect({
             </div>
           </div>
 
-          <div className="max-h-[300px] overflow-y-auto p-1">
+          <div className="max-h-[40vh] overflow-y-auto p-1">
             {filteredOptions.length > 0 ? (
               filteredOptions.map((opt) => (
                 <div

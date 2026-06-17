@@ -75,16 +75,16 @@ export default function UpdateJournal({
         className
       )}
     >
-      <div className="bg-slate-50/50 p-8 border-b border-slate-100/50">
-        <div className="flex items-center gap-5">
-          <div className="w-14 h-14 rounded-2xl bg-black flex items-center justify-center text-white shadow-xl shadow-black/20 ring-4 ring-black/5">
-            <Edit3 className="w-7 h-7" />
+      <div className="bg-slate-50/50 p-4 sm:p-6 border-b border-slate-100/50">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-black flex items-center justify-center text-white shadow-lg shadow-black/20 ring-2 ring-black/5 flex-shrink-0">
+            <Edit3 className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+            <h2 className="text-base sm:text-xl font-bold text-slate-900 tracking-tight">
               Update Journal Batch
             </h2>
-            <p className="text-slate-400 font-bold uppercase text-[10px] tracking-[0.2em] mt-1.5 flex items-center gap-2">
+            <p className="text-slate-400 font-bold uppercase text-[10px] tracking-[0.2em] mt-0.5 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               Refine Transaction Batch
             </p>
@@ -94,7 +94,7 @@ export default function UpdateJournal({
               <button
                 type="button"
                 onClick={onClose}
-                className="hover:bg-red-50 hover:text-red-500 rounded-xl text-slate-400 p-2.5 transition-colors group active:scale-95"
+                className="hover:bg-red-50 hover:text-red-500 rounded-xl text-slate-400 p-2 transition-colors group active:scale-95"
               >
                 <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
               </button>
@@ -103,7 +103,7 @@ export default function UpdateJournal({
         </div>
       </div>
 
-      <div className="p-8">
+      <div className="p-4 sm:p-6 overflow-y-auto">
         {/* Static info - ALWAYS STACKED */}
         <div className="space-y-4 mb-8">
           <div className="p-5 bg-slate-50/50 rounded-2xl border border-slate-100 flex flex-col gap-1.5 shadow-sm group hover:border-slate-200 transition-colors">
@@ -187,11 +187,11 @@ export default function UpdateJournal({
             </div>
           </div>
 
-          <div className="pt-6">
+          <div className="pt-4">
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="w-full h-16 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-black hover:to-slate-800 text-white rounded-2xl font-bold text-base tracking-wide transition-all shadow-[0_12px_24px_-10px_rgba(5,150,105,0.4)] active:scale-[0.98] active:shadow-inner group flex items-center justify-center gap-3 disabled:opacity-50 disabled:active:scale-100"
+              className="w-full h-12 sm:h-14 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-black hover:to-slate-800 text-white rounded-xl font-bold text-sm tracking-wide transition-all shadow-[0_8px_16px_-6px_rgba(5,150,105,0.4)] active:scale-[0.98] active:shadow-inner group flex items-center justify-center gap-3 disabled:opacity-50 disabled:active:scale-100"
             >
               {formik.isSubmitting ? (
                 <Loader2 className="w-6 h-6 animate-spin text-white/80" />

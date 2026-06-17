@@ -76,23 +76,23 @@ export default function CreateJournal({
         className
       )}
     >
-      <div className="p-8 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center gap-5">
+      <div className="p-4 sm:p-6 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-center gap-3">
             <div
-              className="w-14 h-14 rounded flex items-center justify-center text-white shadow-xl rotate-3 hover:rotate-0 transition-transform duration-300"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded flex items-center justify-center text-white shadow-lg flex-shrink-0"
               style={{
                 backgroundColor: primaryColor,
-                boxShadow: `0 12px 20px -8px ${primaryColor}80`,
+                boxShadow: `0 8px 16px -4px ${primaryColor}80`,
               }}
             >
-              <Book className="w-7 h-7" />
+              <Book className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+              <h2 className="text-base sm:text-xl font-bold text-slate-900 tracking-tight">
                 Initialize Journal Batch
               </h2>
-              <p className="text-slate-400 font-semibold text-[10px] uppercase tracking-widest mt-1">
+              <p className="text-slate-400 font-semibold text-[10px] uppercase tracking-widest mt-0.5">
                 Header Reconciliation Unit
               </p>
             </div>
@@ -101,7 +101,7 @@ export default function CreateJournal({
             <button
               type="button"
               onClick={onClose}
-              className="hover:bg-red-50 hover:text-red-500 rounded text-slate-300 p-2.5 transition-all active:scale-95"
+              className="hover:bg-red-50 hover:text-red-500 rounded text-slate-300 p-2 transition-all active:scale-95 flex-shrink-0"
             >
               <X className="w-5 h-5" />
             </button>
@@ -109,9 +109,9 @@ export default function CreateJournal({
         </div>
       </div>
 
-      <div className="p-8 pb-10">
-        <form onSubmit={formik.handleSubmit} className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="p-4 sm:p-6 pb-8 overflow-y-auto">
+        <form onSubmit={formik.handleSubmit} className="space-y-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label
                 htmlFor="date"
@@ -164,7 +164,7 @@ export default function CreateJournal({
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
             <div className="space-y-2">
               <label
                 htmlFor="currency"

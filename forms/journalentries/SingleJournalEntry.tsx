@@ -113,30 +113,38 @@ export default function SingleJournalEntry({
   const divisionOptions = divisions?.map(d => ({ value: d.name, label: d.name, secondaryLabel: d.code })) || [];
 
   return (
-    <div className={cn("mx-auto w-full border border-slate-200 shadow-2xl rounded overflow-hidden bg-white max-h-[90vh] flex flex-col", className)}>
-      <div className="p-8 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
-        <div className="flex items-center gap-5">
-          <div
-            className="w-14 h-14 rounded flex items-center justify-center text-white shadow-xl rotate-3 hover:rotate-0 transition-transform duration-300"
-            style={{ backgroundColor: primaryColor }}
-          >
-            <Receipt className="w-7 h-7" />
+    <div className={cn("mx-auto w-full border border-slate-200 shadow-2xl rounded overflow-hidden bg-white flex flex-col", className)}>
+      <div className="p-4 sm:p-6 border-b border-slate-100 bg-slate-50/50">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded flex items-center justify-center text-white shadow-lg flex-shrink-0"
+              style={{ backgroundColor: primaryColor }}
+            >
+              <Receipt className="w-5 h-5 sm:w-6 sm:h-6" />
+            </div>
+            <div>
+              <h2 className="text-base sm:text-xl font-bold text-slate-900 tracking-tight">Record Single Transaction</h2>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Batch: {journalReference}</p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Record Single Transaction</h2>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Batch Unit: {journalReference}</p>
-          </div>
+
+          {onClose && (
+            <button type="button" onClick={onClose} className="p-2 hover:bg-red-50 hover:text-red-500 rounded text-slate-300 transition-colors active:scale-95 flex-shrink-0">
+              <X className="w-5 h-5" />
+            </button>
+          )}
         </div>
 
         {currentTotals && (
-          <div className="hidden md:flex items-center gap-6 px-6 py-3 bg-white border border-slate-200 rounded shadow-sm">
+          <div className="mt-3 flex items-center gap-4 px-4 py-2.5 bg-white border border-slate-200 rounded shadow-sm w-full">
             <div className="flex flex-col">
-              <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">DR Progress</span>
+              <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">DR</span>
               <span className="text-xs font-bold text-emerald-600">{currentTotals.debit.toLocaleString()}</span>
             </div>
             <div className="w-px h-6 bg-slate-100" />
             <div className="flex flex-col">
-              <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">CR Progress</span>
+              <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">CR</span>
               <span className="text-xs font-bold text-indigo-600">{currentTotals.credit.toLocaleString()}</span>
             </div>
             <div className="w-px h-6 bg-slate-100" />
@@ -148,23 +156,17 @@ export default function SingleJournalEntry({
             </div>
           </div>
         )}
-
-        {onClose && (
-          <button type="button" onClick={onClose} className="p-2.5 hover:bg-red-50 hover:text-red-500 rounded text-slate-300 transition-colors active:scale-95">
-            <X className="w-5 h-5" />
-          </button>
-        )}
       </div>
 
-      <div className="flex-1 overflow-y-auto p-8 space-y-10">
-        <form id="single-entry-form" onSubmit={formik.handleSubmit} className="space-y-10">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+        <form id="single-entry-form" onSubmit={formik.handleSubmit} className="space-y-6">
           {/* Mapping Section */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
               <Building2 className="w-4 h-4 text-emerald-600" />
               <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Classification & Mapping</h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
               <SearchableSelect
                 label="Account Book"
                 required
@@ -200,7 +202,7 @@ export default function SingleJournalEntry({
               <CreditCard className="w-4 h-4 text-indigo-600" />
               <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Financial Recognition</h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-2">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
               <div className="space-y-2">
                 <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Currency</label>
                 <select
@@ -262,7 +264,7 @@ export default function SingleJournalEntry({
               <FileUp className="w-4 h-4 text-slate-500" />
               <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Evidence & Notes</h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="space-y-2">
                 <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Evidence Type</label>
                 <select
@@ -334,12 +336,12 @@ export default function SingleJournalEntry({
         </form>
       </div>
 
-      <div className="p-8 border-t border-slate-100 bg-slate-50/50">
+      <div className="p-4 sm:p-6 border-t border-slate-100 bg-slate-50/50">
         <button
           type="submit"
           form="single-entry-form"
           disabled={formik.isSubmitting}
-          className="w-full h-16 bg-slate-900 border border-black text-white rounded font-bold text-sm shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+          className="w-full h-12 sm:h-14 bg-slate-900 border border-black text-white rounded font-bold text-sm shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
         >
           {formik.isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (
             <>
