@@ -2,6 +2,23 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
+/* Google Sans Variable Font */
+@font-face {
+    font-family: "Google Sans";
+    src: url("/fonts/GoogleSans-VariableFont.ttf") format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Google Sans";
+    src: url("/fonts/GoogleSans-Italic.ttf") format("truetype");
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
 @theme {
     --color-corporate-background: #FFFFFF;
     --color-corporate-primary: #eb8a0c;
@@ -11,7 +28,7 @@
     --color-corporate-foreground: #18181b;
     --color-border: #E5E5E5;
 
-    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-sans: "Google Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 :root {

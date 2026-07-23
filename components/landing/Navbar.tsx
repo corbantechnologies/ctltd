@@ -18,6 +18,7 @@ export default function Navbar() {
 
   const navItems = [
     { name: "Divisions", href: "/divisions" },
+    { name: "SACCO Platform", href: "/sacco-platform" },
     { name: "About", href: "/about" },
     { name: "Careers", href: "/careers" },
     { name: "Contact", href: "/contact" },
