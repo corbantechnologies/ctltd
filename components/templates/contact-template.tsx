@@ -119,7 +119,7 @@ export function ContactTemplate({ userName }: ContactTemplateProps) {
               Need immediate assistance?
             </p>
             <a
-              href="https://wa.me/254710584581"
+              href="https://wa.me/254768978865"
               style={{
                 display: "inline-block",
                 backgroundColor: "#25D366",

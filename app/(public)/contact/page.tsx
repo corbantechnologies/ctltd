@@ -104,7 +104,7 @@ export default function Contact() {
                         Call Anywhere
                       </p>
                       <p className="text-lg font-medium text-slate-900">
-                        +254 710 584 581
+                        +254 768 978 865
                       </p>
                     </div>
                   </div>
