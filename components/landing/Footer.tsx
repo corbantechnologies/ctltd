@@ -77,7 +77,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/products/retail" className="hover:text-corporate-primary transition-colors">
+                <Link href="/products/gift-shop" className="hover:text-corporate-primary transition-colors">
                   3. Retail &amp; E-Shop (GearHouse &amp; Clate)
                 </Link>
               </li>
@@ -131,7 +131,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <span className="text-slate-500">SASRA &amp; KRA Compliance</span>
+                <span className="text-slate-500">Double-Entry Accounting &amp; KRA Ready</span>
               </li>
               <li>
                 <span className="text-slate-500">99.9% Uptime Guarantee</span>

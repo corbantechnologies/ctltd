@@ -140,7 +140,7 @@ export default function Contact() {
                   <p className="text-xs font-semibold text-white">Full Regulatory &amp; SLA Backing</p>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  All deployments are covered by data isolation guarantees, KRA/SASRA compliance support, and 99.9% cloud uptime SLAs.
+                  All deployments are covered by data isolation guarantees, KRA compliance support, and 99.9% cloud uptime SLAs.
                 </p>
               </div>
             </div>

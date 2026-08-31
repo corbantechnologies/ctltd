@@ -310,7 +310,7 @@ export default function SaccoPlatformPage() {
                   "Member directory with real-time financial summaries",
                   "GL reports: Balance Sheet, Trial Balance, Profit & Loss",
                   "Annual AGM dividend batch computation and distribution",
-                  "Active member audit export for SASRA compliance",
+                  "Active member audit export and balance sheets",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2 text-xs text-slate-700">
                     <CheckCircle className="h-3.5 w-3.5 text-corporate-primary shrink-0 mt-0.5" />

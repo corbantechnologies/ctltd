@@ -27,7 +27,7 @@ export default function About() {
     },
     {
       title: "Kenyan Regulatory & Telecom Compliance",
-      desc: "Deep integration with Safaricom Daraja M-Pesa APIs, SASRA cooperative reporting standards, and KRA PAYE tax schedules.",
+      desc: "Deep integration with Safaricom Daraja M-Pesa APIs, cooperative accounting standards, and KRA PAYE tax schedules.",
     },
     {
       title: "24/7 Managed Operations & Support",

@@ -66,7 +66,7 @@ export default function Home() {
               </div>
               <div className="space-y-0.5">
                 <p className="font-semibold text-slate-900">100% Kenyan</p>
-                <p className="text-[11px] text-slate-500">KRA &amp; SASRA Compliant</p>
+                <p className="text-[11px] text-slate-500">KRA &amp; M-Pesa Rails</p>
               </div>
             </div>
           </div>

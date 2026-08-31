@@ -1,163 +1,171 @@
-import { Metadata } from "next";
 import Link from "next/link";
-import { getAllProducts } from "@/lib/data/products";
-import { CheckCircle2, ArrowRight, Layers } from "lucide-react";
+import {
+  Building2,
+  BookOpen,
+  ShoppingBag,
+  Send,
+  Truck,
+  Ticket,
+  ArrowRight,
+  ShieldCheck,
+  FolderTree,
+  ExternalLink,
+  ChevronRight,
+} from "lucide-react";
+import { getAllCategories, getProjectsByCategory } from "@/lib/data/products";
 
-export const metadata: Metadata = {
-  title: "Products & Platforms | Corban Technologies LTD",
+export const metadata = {
+  title: "Products & Systems Directory | Corban Technologies LTD",
   description:
-    "Explore Corban Technologies' 6 core enterprise software platforms: SACCO core banking, financial intelligence, retail POS, marketing CRM, logistics, and digital event ticketing.",
+    "Explore our full suite of enterprise software divisions: SACCO core banking, SME general ledgers & finance, retail POS & e-commerce, telecom marketing, fleet logistics, and digital event ticketing.",
+};
+
+const iconMap: Record<string, typeof Building2> = {
+  Building2,
+  BookOpen,
+  ShoppingBag,
+  Send,
+  Truck,
+  Ticket,
 };
 
 export default function ProductsPage() {
-  const productsList = getAllProducts();
+  const categories = getAllCategories();
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
-      {/* Header */}
-      <section className="relative w-full bg-white border-b border-slate-200 pt-16 pb-14">
+    <div className="w-full bg-white min-h-screen">
+      {/* Top Banner Header */}
+      <section className="w-full bg-slate-50/80 border-b border-slate-200 py-12">
         <div className="w-full px-6 sm:px-10 lg:px-16">
           <div className="max-w-4xl space-y-3">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-slate-100 border border-slate-200 text-xs font-semibold text-corporate-primary">
-              <Layers className="w-3.5 h-3.5" />
-              Software Portfolio &amp; Platform Rankings
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-white border border-slate-200 text-xs font-semibold text-corporate-primary">
+              <FolderTree className="w-3.5 h-3.5" />
+              Corporate Systems Portfolio
             </div>
-            <h1 className="text-xl sm:text-2xl font-semibold text-slate-900 tracking-tight">
-              Enterprise Platforms Engineered &amp; Cloud-Hosted by Corban Technologies
+            <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
+              Enterprise Software &amp; Platform Divisions
             </h1>
             <p className="text-sm text-slate-600 leading-relaxed max-w-3xl">
-              Over the past year, our engineers have developed, tested, and deployed 6 core systems tailored for Kenyan and East African enterprise workflows. Every platform is backed by dedicated cloud hosting, database isolation, and 99.9% uptime.
+              Over the year, Corban Technologies has built, refined, and deployed mission-critical production platforms across key East African industries. Click on any division or specific project below to explore architectures, verified features, mockups, and live platform links.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Product List */}
-      <section className="py-12 bg-slate-50 flex-grow">
+      {/* Categories / Folders Grid */}
+      <section className="w-full py-12">
         <div className="w-full px-6 sm:px-10 lg:px-16 space-y-8">
-          {productsList.map((product) => (
-            <div
-              key={product.id}
-              id={product.id}
-              className="p-6 sm:p-8 rounded bg-white border border-slate-200 shadow-sm"
-            >
-              {/* Product Header */}
-              <div className="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-slate-200 gap-4">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2.5">
-                    <span className="px-2 py-0.5 rounded bg-slate-900 text-white text-xs font-semibold">
-                      Rank #{product.rank}
-                    </span>
-                    <span
-                      className={`text-xs font-semibold px-2.5 py-0.5 rounded border ${
-                        product.statusTone === "emerald"
-                          ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-                          : product.statusTone === "blue"
-                          ? "bg-blue-50 text-blue-700 border-blue-200"
-                          : "bg-amber-50 text-amber-700 border-amber-200"
-                      }`}
-                    >
-                      {product.statusBadge}
-                    </span>
-                    {product.domain && (
-                      <span className="text-xs font-mono text-slate-500">
-                        {product.domain}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {categories.map((category) => {
+              const Icon = iconMap[category.iconName] || Building2;
+              const categoryProjects = getProjectsByCategory(category.slug);
+
+              return (
+                <div
+                  key={category.id}
+                  className="rounded border border-slate-200 bg-white hover:border-slate-300 transition-all p-6 flex flex-col justify-between shadow-xs hover:shadow-sm"
+                >
+                  <div className="space-y-4">
+                    {/* Header Row */}
+                    <div className="flex items-start justify-between gap-3">
+                      <Link
+                        href={`/products/${category.slug}`}
+                        className="p-2.5 rounded bg-slate-50 border border-slate-200 text-corporate-primary hover:bg-slate-100 transition-colors"
+                      >
+                        <Icon className="w-5 h-5" />
+                      </Link>
+                      <span className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
+                        Division #{category.rank}
                       </span>
-                    )}
-                  </div>
-                  <h2 className="text-lg font-semibold text-slate-900 mt-1">
-                    {product.name}
-                  </h2>
-                  <p className="text-xs font-medium text-corporate-primary">
-                    {product.category}
-                  </p>
-                </div>
+                    </div>
 
-                <div className="flex items-center gap-2 shrink-0">
-                  <Link
-                    href={`/products/${product.slug}`}
-                    className="px-4 py-2 rounded bg-corporate-primary hover:bg-orange-600 text-white text-xs font-semibold transition-colors shadow-sm inline-flex items-center gap-1.5"
-                  >
-                    View Platform Details <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                  <Link
-                    href={`/contact?product=${product.slug}`}
-                    className="px-4 py-2 rounded bg-slate-50 hover:bg-slate-100 text-slate-800 border border-slate-200 text-xs font-semibold transition-colors inline-flex items-center gap-1.5"
-                  >
-                    Request Demo
-                  </Link>
-                </div>
-              </div>
+                    {/* Title & Tagline (Clickable) */}
+                    <div>
+                      <Link
+                        href={`/products/${category.slug}`}
+                        className="text-lg font-semibold text-slate-900 hover:text-corporate-primary tracking-tight transition-colors block"
+                      >
+                        {category.name}
+                      </Link>
+                      <p className="text-xs text-corporate-primary font-medium mt-0.5">
+                        {category.tagline}
+                      </p>
+                    </div>
 
-              {/* Product Details Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
-                {/* Left: Description & Specs */}
-                <div className="lg:col-span-6 space-y-6">
-                  <div>
-                    <p className="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-2">
-                      Overview &amp; Architecture
-                    </p>
+                    {/* Description */}
                     <p className="text-xs text-slate-600 leading-relaxed">
-                      {product.summary}
+                      {category.description}
                     </p>
-                  </div>
 
-                  {/* Specs Matrix */}
-                  <div className="grid grid-cols-2 gap-2 text-xs">
-                    {product.specs.map((spec, idx) => (
-                      <div
-                        key={idx}
-                        className="p-2.5 rounded bg-slate-50 border border-slate-200/80"
-                      >
-                        <p className="text-[10px] uppercase font-semibold text-slate-500">
-                          {spec.label}
-                        </p>
-                        <p className="font-semibold text-slate-900 text-xs mt-0.5">
-                          {spec.value}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                    <span className="text-[11px] font-medium text-slate-500 mr-1">
-                      Tech Stack:
-                    </span>
-                    {product.techStack.map((tech, idx) => (
-                      <span
-                        key={idx}
-                        className="text-[10px] font-medium text-slate-700 px-2 py-0.5 rounded bg-slate-100 border border-slate-200"
-                      >
-                        {tech}
+                    {/* Clickable Projects in this folder */}
+                    <div className="pt-3 border-t border-slate-100 space-y-2.5">
+                      <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+                        Platforms in this Division ({category.projectCount}):
                       </span>
-                    ))}
+                      <div className="flex flex-col gap-2">
+                        {categoryProjects.map((proj) => (
+                          <Link
+                            key={proj.id}
+                            href={`/products/${category.slug}/${proj.slug}`}
+                            className="p-2.5 rounded bg-slate-50 border border-slate-200 hover:bg-white hover:border-corporate-primary hover:shadow-xs transition-all flex items-center justify-between text-xs group"
+                          >
+                            <div className="flex items-center gap-2">
+                              <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                              <span className="font-semibold text-slate-900 group-hover:text-corporate-primary transition-colors">
+                                {proj.name}
+                              </span>
+                            </div>
+                            <span className="text-[11px] font-mono text-corporate-primary font-semibold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                              Details <ChevronRight className="w-3.5 h-3.5" />
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Actions & Big Button */}
+                  <div className="pt-5 mt-4 border-t border-slate-100 space-y-3">
+                    <div className="flex items-center justify-between text-[11px] text-slate-500">
+                      <span>Status:</span>
+                      <span className="font-semibold text-emerald-700">{category.statusBadge}</span>
+                    </div>
+
+                    <Link
+                      href={`/products/${category.slug}`}
+                      className="w-full py-2.5 px-4 rounded bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold flex items-center justify-between transition-colors shadow-xs"
+                    >
+                      <span>Explore Division &amp; Mockups</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
                   </div>
                 </div>
+              );
+            })}
+          </div>
 
-                {/* Right: Capabilities Checklist */}
-                <div className="lg:col-span-6 space-y-3">
-                  <p className="text-xs font-semibold text-slate-900 uppercase tracking-wider">
-                    Core Capabilities &amp; Modules
-                  </p>
-                  <ul className="space-y-2">
-                    {product.highlights.map((highlight, idx) => (
-                      <li
-                        key={idx}
-                        className="p-2.5 rounded bg-slate-50 border border-slate-200/80 flex items-start gap-2.5 text-xs text-slate-700"
-                      >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-corporate-primary shrink-0 mt-0.5" />
-                        <div>
-                          <p className="font-semibold text-slate-900">{highlight.title}</p>
-                          <p className="text-[11px] text-slate-600 mt-0.5">{highlight.desc}</p>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+          {/* Bottom Trust Assurance Bar */}
+          <div className="p-6 rounded bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded bg-white border border-slate-200 text-emerald-600">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-slate-900">
+                  Direct Integration &amp; SLA Deployment
+                </h3>
+                <p className="text-xs text-slate-600">
+                  Every product is deployed in isolated cloud environments with Safaricom Daraja API rails and 99.9% uptime SLA.
+                </p>
               </div>
             </div>
-          ))}
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition-colors shrink-0 shadow-sm"
+            >
+              Request Custom Enterprise Deployment <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
       </section>
     </div>

@@ -28,7 +28,7 @@ const tracks: IndustryTrack[] = [
       "Branch Admin Operations Workspace",
       "Safaricom Daraja Paybill STK & B2C Integration",
       "Full GL Accounting & Automatic Double-Entry Ledger",
-      "SASRA-compliant loan appraisals & dividend formulas",
+      "Cooperative accounting & dividend formulas",
     ],
     ctaLink: "/products/sacco",
   },
@@ -46,7 +46,7 @@ const tracks: IndustryTrack[] = [
       "Real-time inventory stock level tracking & alerts",
       "Multi-branch daily reconciliation reports",
     ],
-    ctaLink: "/products/retail",
+    ctaLink: "/products/gift-shop",
   },
   {
     id: "marketing",

@@ -31,7 +31,7 @@ const metrics: Metric[] = [
   {
     value: "100%",
     label: "Kenyan Compliant",
-    sublabel: "KRA, SASRA & Daraja",
+    sublabel: "KRA Tax & Daraja Rails",
     icon: ShieldCheck,
   },
 ];
