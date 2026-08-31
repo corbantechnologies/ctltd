@@ -116,7 +116,7 @@ export default function ProductsPage() {
                               </span>
                             </div>
                             <span className="text-[11px] font-mono text-corporate-primary font-semibold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                              Details <ChevronRight className="w-3.5 h-3.5" />
+                              <ChevronRight className="w-3.5 h-3.5" />
                             </span>
                           </Link>
                         ))}
