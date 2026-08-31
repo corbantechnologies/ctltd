@@ -1,81 +1,143 @@
-import { Users, History, Building2, Globe, CheckCircle2 } from "lucide-react";
+import { Metadata } from "next";
+import Link from "next/link";
+import { Users, History, Building2, Globe, CheckCircle2, ArrowRight } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "About Us | Corban Technologies LTD",
+  description:
+    "Corban Technologies LTD is a Kenyan software engineering and enterprise cloud hosting company based in Mombasa. We build, deploy, and manage mission-critical platforms.",
+};
 
 export default function About() {
   const stats = [
-    { label: "Founded", value: "2025", icon: History },
-    { label: "Active Clients", value: "50+", icon: Users },
-    { label: "Live SACCOs", value: "3+", icon: Building2 },
-    { label: "Kenyan Built", value: "100%", icon: Globe },
+    { label: "Founded", value: "2025", icon: History, sub: "Mombasa, Kenya" },
+    { label: "Active Deployments", value: "50+", icon: Users, sub: "Enterprises & SMEs" },
+    { label: "Live SACCOs", value: "3 Cooperatives", icon: Building2, sub: "Core Banking & M-Pesa" },
+    { label: "Engineering & Hosting", value: "100%", icon: Globe, sub: "Kenyan Built & Compliant" },
+  ];
+
+  const pillars = [
+    {
+      title: "Custom Engineering & Architecture",
+      desc: "We design every platform to match the actual regulatory, accounting, and operational requirements of East African enterprises.",
+    },
+    {
+      title: "Dedicated Cloud Hosting & DevOps",
+      desc: "Multi-tenant database schema isolation, automated point-in-time backups, and 99.9% uptime SLA hosted on Google Cloud Platform and modern edge infrastructure.",
+    },
+    {
+      title: "Kenyan Regulatory & Telecom Compliance",
+      desc: "Deep integration with Safaricom Daraja M-Pesa APIs, cooperative accounting standards, and KRA PAYE tax schedules.",
+    },
+    {
+      title: "24/7 Managed Operations & Support",
+      desc: "Continuous health monitoring, proactive security updates, and dedicated local engineering support based out of Mombasa.",
+    },
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-white">
       {/* About Hero */}
-      <section className="relative pt-12 pb-24 lg:pt-40 lg:pb-32 overflow-hidden border-b border-slate-200 bg-white">
-        <div className="absolute inset-0 bg-grid-slate-100 pointer-events-none opacity-40 mx-auto max-w-7xl" />
-        <div className="container mx-auto px-6 relative z-10 text-center lg:text-left max-w-6xl flex flex-col items-center lg:items-start">
-          <span className="mb-6 inline-flex items-center rounded bg-slate-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-corporate-primary border border-slate-200 shadow-sm">
-            Our Mission
-          </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-slate-900 mb-8 leading-[1.1]">
-            Engineering the{" "}
-            <span className="text-corporate-primary">Future.</span>
-          </h1>
-          <p className="text-slate-500 text-lg md:text-xl max-w-2xl leading-relaxed text-center lg:text-left">
-            Founded in Mombasa, Corban Technologies LTD is an East African company dedicated to driving digital transformation for small and medium-sized enterprises. Our top-tier engineers build reliable, efficient, and future-proof systems, allowing you to focus entirely on your core business operations.
-          </p>
+      <section className="relative pt-16 pb-16 border-b border-slate-200 bg-white">
+        <div className="w-full px-6 sm:px-10 lg:px-16">
+          <div className="max-w-4xl space-y-4">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-slate-100 border border-slate-200 text-xs font-semibold text-corporate-primary">
+              <Building2 className="w-3.5 h-3.5" />
+              About Corban Technologies LTD
+            </span>
+            <h1 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 leading-snug">
+              Engineering and Hosting the Digital Backbone for East African Businesses
+            </h1>
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl">
+              Founded in Mombasa, Corban Technologies LTD is a technology engineering firm dedicated to building, refining, and cloud-hosting reliable software platforms for cooperatives, retail enterprises, logistics operators, and growing SMEs across Kenya and East Africa.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section className="py-20 lg:py-32 bg-slate-50 flex-grow">
-        <div className="container max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          <div className="space-y-8 text-center lg:text-left">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 leading-[1.1]">
-              Local Insight,{" "}
-              <span className="text-corporate-primary block sm:inline mt-2 sm:mt-0">Global Standards.</span>
-            </h2>
-            <p className="text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              From rural SACCOs to fast-growing SMEs — we deliver secure,
-              scalable systems that work reliably even in low-bandwidth
-              environments across East Africa.
-            </p>
-            <ul className="space-y-6 text-left max-w-lg mx-auto lg:mx-0">
-              {[
-                "Deep understanding of Kenyan financial compliance",
-                "Scalable infrastructure designed for local connectivity",
-                "Customer-first engineering philosophy",
-                "Security as a core pillar of every deployment",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded bg-orange-100 flex items-center justify-center mt-1">
-                    <CheckCircle2 className="w-5 h-5 text-corporate-primary" />
-                  </div>
-                  <span className="text-lg text-slate-700 font-medium leading-tight">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="relative group w-full max-w-md mx-auto lg:max-w-none">
-            <div className="relative bg-white border border-slate-200 p-6 sm:p-10 rounded shadow-xl shadow-slate-200/50">
-              <div className="grid grid-cols-2 gap-8 sm:gap-10">
-                {stats.map((stat) => (
-                  <div key={stat.label} className="space-y-4 flex flex-col items-center text-center">
-                    <div className="w-14 h-14 rounded bg-slate-50 flex items-center justify-center text-corporate-primary shadow-sm border border-slate-100">
-                      <stat.icon className="w-7 h-7" />
-                    </div>
-                    <div>
-                      <div className="text-3xl sm:text-4xl font-semibold text-slate-900 mb-1">
-                        {stat.value}
-                      </div>
-                      <div className="text-xs uppercase tracking-widest font-bold text-slate-400">
-                        {stat.label}
-                      </div>
-                    </div>
-                  </div>
-                ))}
+      {/* Stats Matrix */}
+      <section className="py-12 bg-slate-50 border-b border-slate-200">
+        <div className="w-full px-6 sm:px-10 lg:px-16">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {stats.map((stat) => (
+              <div
+                key={stat.label}
+                className="p-4 rounded bg-white border border-slate-200 space-y-2 shadow-sm"
+              >
+                <div className="w-7 h-7 rounded bg-slate-50 border border-slate-200 flex items-center justify-center text-corporate-primary">
+                  <stat.icon className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <p className="text-base font-semibold text-slate-900 font-mono">
+                    {stat.value}
+                  </p>
+                  <p className="text-xs font-semibold text-slate-800">
+                    {stat.label}
+                  </p>
+                  <p className="text-[11px] text-slate-500">
+                    {stat.sub}
+                  </p>
+                </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Philosophy & Approach */}
+      <section className="py-16 bg-white border-b border-slate-200">
+        <div className="w-full px-6 sm:px-10 lg:px-16">
+          <div className="mb-10 pb-4 border-b border-slate-200">
+            <p className="text-xs font-semibold text-corporate-primary uppercase tracking-wider mb-1">
+              Our Methodology
+            </p>
+            <h2 className="text-lg font-semibold text-slate-900">
+              The Corban 360-Degree Delivery Model
+            </h2>
+            <p className="text-sm text-slate-600 mt-1 max-w-3xl">
+              Most software vendors hand over a codebase and leave you to figure out hosting, compliance, and backups. At Corban, we handle the entire lifecycle.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {pillars.map((pillar, idx) => (
+              <div
+                key={idx}
+                className="p-5 rounded bg-slate-50 border border-slate-200 space-y-2"
+              >
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-corporate-primary shrink-0" />
+                  <h3 className="text-sm font-semibold text-slate-900">
+                    {pillar.title}
+                  </h3>
+                </div>
+                <p className="text-xs text-slate-600 leading-relaxed pl-6">
+                  {pillar.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-14 bg-slate-50">
+        <div className="w-full px-6 sm:px-10 lg:px-16">
+          <div className="p-8 rounded bg-slate-900 text-white flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="space-y-1 max-w-2xl">
+              <h3 className="text-base font-semibold text-white">
+                Partner With Mombasa&apos;s Leading Engineering Team
+              </h3>
+              <p className="text-xs text-slate-300">
+                Ready to deploy your next platform? Speak directly with our lead architects.
+              </p>
             </div>
+            <Link
+              href="/contact"
+              className="px-5 py-2.5 rounded bg-corporate-primary hover:bg-orange-600 text-white text-xs font-semibold transition-colors shadow-sm inline-flex items-center gap-1.5 shrink-0"
+            >
+              Get in Touch <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
       </section>

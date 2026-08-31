@@ -1,295 +1,354 @@
-import type { Metadata } from "next"
-import Link from "next/link"
-import Image from "next/image"
+import type { Metadata } from "next";
+import Link from "next/link";
 import {
-    Users, PiggyBank, CreditCard, Smartphone, BarChart3,
-    BookOpen, ShieldCheck, Settings, GitBranch, Receipt,
-    CheckCircle, ArrowRight, Upload, Download, CalendarDays,
-    Banknote, Scale, Building2, TrendingUp, Wallet,
-    AlertCircle, FileDown, Activity, Globe, ExternalLink,
-    FileSpreadsheet, Mail, UserCheck
-} from "lucide-react"
+  Users,
+  PiggyBank,
+  CreditCard,
+  Smartphone,
+  BarChart3,
+  BookOpen,
+  Settings,
+  Receipt,
+  CheckCircle,
+  ArrowRight,
+  Globe,
+  ExternalLink,
+  ShieldCheck,
+  Building2,
+} from "lucide-react";
 
 export const metadata: Metadata = {
-    title: "SACCO Platform | Corban Technologies LTD",
-    description: "The CTLTD SACCO Platform — a complete digital cooperative management system powering SACCOs, Chamas, and Microfinances across Kenya. Built by Corban Technologies.",
-    keywords: ["SACCO System", "Cooperative Management", "Fintech Kenya", "CTLTD SACCO", "Wananchi Mali", "Corban Technologies"],
-}
+  title: "SACCO & Cooperative Platform | Corban Technologies LTD",
+  description:
+    "The Wananchi Mali SACCO Platform — a complete digital cooperative management system powering 3 live SACCOs across Kenya. Built and cloud-hosted by Corban Technologies.",
+};
 
 const highlights = [
-    { icon: Users, label: "Member Management", desc: "Full CRM with bulk onboarding, NOK tracking, and role-based access" },
-    { icon: PiggyBank, label: "Multi-Pot Savings", desc: "Deposits, Share Capital, Holiday, Emergency — all tracked in real-time" },
-    { icon: CreditCard, label: "Dual Loan Engine", desc: "Diminishing Balance and Flat Rate interest logic for any cooperative type" },
-    { icon: Smartphone, label: "M-Pesa Integration", desc: "Live Daraja API — STK Push deposits and B2C loan disbursements" },
-    { icon: BookOpen, label: "Full GL Accounting", desc: "Automatic double-entry posting on every transaction" },
-    { icon: BarChart3, label: "Executive Reporting", desc: "Balance Sheet, P&L, Trial Balance, and Debtors list — live" },
-]
+  { icon: Users, label: "Member CRM", desc: "Full CRM with bulk CSV onboarding, NOK tracking, and role-based access" },
+  { icon: PiggyBank, label: "Multi-Pot Savings", desc: "Share Capital, Holiday, Emergency, and monthly deposits tracked in real time" },
+  { icon: CreditCard, label: "Dual Loan Engine", desc: "Diminishing Balance and Flat Rate interest logic for any cooperative model" },
+  { icon: Smartphone, label: "M-Pesa Daraja API", desc: "Live Safaricom Daraja STK Push deposits and B2C loan disbursements" },
+  { icon: BookOpen, label: "Full GL Accounting", desc: "Automatic double-entry posting on every transaction with zero manual work" },
+  { icon: BarChart3, label: "Executive Reporting", desc: "Live Balance Sheet, Trial Balance, Profit & Loss, and Debtors ledger" },
+];
 
 const onboardingSteps = [
-    { step: "01", title: "SACCO Configuration", desc: "Name, logo, fee types, savings products, and loan products are set up by the Wananchi Mali team." },
-    { step: "02", title: "Payment Accounts", desc: "M-Pesa paybills, bank accounts, and Daraja API credentials are linked to GL control accounts." },
-    { step: "03", title: "Chart of Accounts", desc: "GL accounts are built or imported. Opening balances are posted via journal batches." },
-    { step: "04", title: "Member Onboarding", desc: "Members are loaded via bulk CSV. Each receives a unique member number and an email activation link." },
-    { step: "05", title: "Go Live", desc: "Admins process bulk payments via CSV, receive M-Pesa deposits in real-time, and approve loans from the admin portal." },
-]
+  { step: "01", title: "SACCO Configuration", desc: "SACCO brand, fee structures, savings products, and loan models are set up." },
+  { step: "02", title: "Payment & Daraja Setup", desc: "M-Pesa paybills, bank accounts, and Safaricom Daraja credentials linked to GL accounts." },
+  { step: "03", title: "Chart of Accounts (COA)", desc: "Double-entry GL accounts are mapped and opening balances posted via journals." },
+  { step: "04", title: "Bulk Member Loading", desc: "Members loaded via bulk CSV. Each receives a unique member ID and login portal link." },
+  { step: "05", title: "Live Operations", desc: "Process bulk payments, receive automated M-Pesa deposits, and approve loans live." },
+];
 
 const modules = [
-    {
-        icon: Users,
-        title: "Member CRM",
-        color: "text-blue-600",
-        bg: "bg-blue-50",
-        items: ["Unique member numbers", "Bulk CSV creation", "NOK management", "Role-based access (Member / Admin / Superuser)", "Active members CSV export for audits"],
-    },
-    {
-        icon: PiggyBank,
-        title: "Savings & Deposits",
-        color: "text-emerald-600",
-        bg: "bg-emerald-50",
-        items: ["Multiple savings pots per member", "Real-time balance tracking", "M-Pesa STK Push deposits", "Bulk CSV deposit upload with pre-filled templates", "Transaction Date auto-fill (end of month)"],
-    },
-    {
-        icon: Receipt,
-        title: "Fee Payments",
-        color: "text-yellow-600",
-        bg: "bg-yellow-50",
-        items: ["Multiple fee types per SACCO", "Outstanding balance shown in CSV template", "Bulk CSV upload with GL auto-posting", "Per-row payment method support", "Cleared account detection (no double-paying)"],
-    },
-    {
-        icon: CreditCard,
-        title: "Loan Management",
-        color: "text-purple-600",
-        bg: "bg-purple-50",
-        items: ["Member loan application portal", "Auto eligibility from savings multiples", "Guarantor workflow", "Admin appraisal & approval", "Repayment schedule & penalty tracking"],
-    },
-    {
-        icon: Smartphone,
-        title: "M-Pesa / Fintech",
-        color: "text-green-600",
-        bg: "bg-green-50",
-        items: ["Full Daraja API (Safaricom)", "STK Push for savings", "B2C disbursement for loans", "Real-time callback processing", "Automatic GL entry on confirmation"],
-    },
-    {
-        icon: BookOpen,
-        title: "GL Accounting",
-        color: "text-red-600",
-        bg: "bg-red-50",
-        items: ["Double-entry General Ledger", "Trial Balance, Balance Sheet, P&L", "Cash Book & Debtors list", "Manual journal batches", "Year-based financial filtering"],
-    },
-]
+  {
+    icon: Users,
+    title: "Member CRM & Directory",
+    items: [
+      "Unique SACCO member numbering",
+      "Bulk CSV member creation with instant validation",
+      "Next of Kin (NOK) relationship tracking",
+      "Role-based access (Member, Admin, Superuser)",
+      "Active members CSV export for regulatory audits",
+    ],
+  },
+  {
+    icon: PiggyBank,
+    title: "Savings & Deposit Tracking",
+    items: [
+      "Multiple savings pots per member (Shares, Holiday, Emergency)",
+      "Real-time balance computation and statement downloads",
+      "M-Pesa STK Push instant deposit confirmation",
+      "Bulk CSV deposit upload with pre-filled templates",
+      "Automated monthly contribution reminders",
+    ],
+  },
+  {
+    icon: Receipt,
+    title: "Fee Payments & Dues",
+    items: [
+      "Multiple recurring and one-off fee types",
+      "Outstanding balance visible in bulk templates",
+      "Double-entry GL auto-posting on fee receipt",
+      "Cleared account detection preventing overpayments",
+    ],
+  },
+  {
+    icon: CreditCard,
+    title: "Loan Engine & Appraisal",
+    items: [
+      "Member self-service loan application portal",
+      "Automated eligibility calculation based on savings ratio",
+      "Guarantor request and digital approval workflow",
+      "Diminishing balance & flat rate interest schedules",
+      "Repayment tracking with penalty rules",
+    ],
+  },
+  {
+    icon: Smartphone,
+    title: "Safaricom Daraja Integration",
+    items: [
+      "Sub-second C2B STK Push deposits",
+      "Automated B2C disbursement for approved loans",
+      "High-reliability webhook listener engine",
+      "Automatic journal entry on M-Pesa receipt",
+    ],
+  },
+  {
+    icon: BookOpen,
+    title: "Double-Entry GL Accounting",
+    items: [
+      "Automatic double-entry general ledger on every transaction",
+      "Trial Balance, Balance Sheet, and P&L reports",
+      "Manual journal batches and bank reconciliations",
+      "Year-filtered financial statements",
+    ],
+  },
+];
 
 export default function SaccoPlatformPage() {
-    return (
-        <div className="flex flex-col min-h-screen">
+  return (
+    <div className="flex flex-col min-h-screen bg-white">
+      {/* ── HERO ──────────────────────────────────────────────────────── */}
+      <section className="relative bg-white border-b border-slate-200 pt-16 pb-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-3xl space-y-5">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-slate-100 border border-slate-200 text-xs font-semibold text-corporate-primary">
+                <Building2 className="w-3.5 h-3.5" />
+                Wananchi Mali · Flagship SACCO Platform
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-700">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                3 Kenyan SACCOs Running Live
+              </span>
+            </div>
 
-            {/* ── HERO ──────────────────────────────────────────────────── */}
-            <section className="relative bg-slate-900 text-white pt-24 pb-20 overflow-hidden">
-                <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <div className="absolute -top-1/2 -right-1/3 w-[700px] h-[700px] bg-corporate-primary/10 rounded-full blur-3xl opacity-30" />
-                    <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-emerald-600/10 rounded-full blur-3xl opacity-20" />
-                </div>
-                <div className="container mx-auto px-6 relative z-10 max-w-5xl">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-800 border border-slate-700 text-xs font-semibold text-corporate-primary mb-8">
-                        <Activity className="h-3.5 w-3.5" />
-                        Wananchi Mali Division · SACCO Platform
-                    </div>
-                    <h1 className="text-3xl sm:text-5xl font-bold tracking-tight mb-5 max-w-3xl leading-tight">
-                        The Complete Digital SACCO Management System
-                    </h1>
-                    <p className="text-slate-300 text-base sm:text-lg max-w-2xl mb-10 leading-relaxed">
-                        Built by Corban Technologies and delivered through our Wananchi Mali division. A fully integrated platform covering members, loans, savings, fees, M-Pesa, and accounting — deployed as a white-label solution for cooperatives across Kenya.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4">
-                        <Link
-                            href="https://www.wananchimali.com/platform"
-                            target="_blank"
-                            className="inline-flex items-center gap-2 px-7 py-3 bg-corporate-primary hover:bg-orange-600 text-white text-sm font-semibold rounded transition-colors shadow-lg shadow-orange-900/20"
-                        >
-                            Full Platform Details <ExternalLink className="h-4 w-4" />
-                        </Link>
-                        <Link
-                            href="/contact"
-                            className="inline-flex items-center gap-2 px-7 py-3 bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium rounded ring-1 ring-slate-700 transition-colors"
-                        >
-                            Request a Demo <ArrowRight className="h-4 w-4" />
-                        </Link>
-                    </div>
-                </div>
-            </section>
+            <h1 className="text-xl sm:text-2xl font-semibold text-slate-900 tracking-tight leading-snug">
+              The Complete Digital Core Banking System for SACCOs &amp; Cooperatives
+            </h1>
 
-            {/* ── HIGHLIGHTS ──────────────────────────────────────────────── */}
-            <section className="py-16 bg-slate-50 border-b border-slate-200">
-                <div className="container mx-auto px-6 max-w-6xl">
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        {highlights.map((h) => (
-                            <div key={h.label} className="bg-white border border-slate-200 rounded p-5 flex flex-col gap-3">
-                                <div className="w-8 h-8 bg-slate-50 border border-slate-100 rounded flex items-center justify-center">
-                                    <h.icon className="h-4 w-4 text-corporate-primary" />
-                                </div>
-                                <div>
-                                    <div className="text-sm font-semibold text-slate-900">{h.label}</div>
-                                    <div className="text-xs text-slate-500 mt-0.5 leading-relaxed">{h.desc}</div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <p className="text-sm text-slate-600 leading-relaxed max-w-2xl">
+              Engineered and cloud-hosted by Corban Technologies. A fully integrated cooperative platform covering member CRM, savings pots, loans, fees, Safaricom Daraja M-Pesa, and automated double-entry GL accounting.
+            </p>
 
-            {/* ── ONBOARDING ──────────────────────────────────────────────── */}
-            <section className="py-20 bg-white">
-                <div className="container mx-auto px-6 max-w-5xl">
-                    <div className="mb-12">
-                        <div className="text-xs font-semibold text-corporate-primary uppercase tracking-wider mb-3">Getting Started</div>
-                        <h2 className="text-2xl font-bold text-slate-900 mb-2">From Setup to Go-Live in 5 Steps</h2>
-                        <p className="text-slate-500 text-sm max-w-xl">Our team handles the full configuration. Your staff are trained and ready before the first member is onboarded.</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {onboardingSteps.map((s, i) => (
-                            <div key={s.step} className={`border rounded p-5 flex flex-col gap-3 ${i === 4 ? "lg:col-span-1 sm:col-span-2" : ""}`}>
-                                <div className="text-3xl font-bold text-slate-100">{s.step}</div>
-                                <div>
-                                    <div className="text-sm font-bold text-slate-900 mb-1">{s.title}</div>
-                                    <div className="text-xs text-slate-500 leading-relaxed">{s.desc}</div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ── MODULES ─────────────────────────────────────────────────── */}
-            <section className="py-20 bg-slate-50">
-                <div className="container mx-auto px-6 max-w-6xl">
-                    <div className="mb-12">
-                        <div className="text-xs font-semibold text-corporate-primary uppercase tracking-wider mb-3">Core Modules</div>
-                        <h2 className="text-2xl font-bold text-slate-900 mb-2">Everything a SACCO Needs in One System</h2>
-                        <p className="text-slate-500 text-sm max-w-xl">Every module shares the same data. A loan disbursement posts to the GL. An M-Pesa payment updates balances and triggers an email. Nothing is manual.</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {modules.map((m) => (
-                            <div key={m.title} className="bg-white border border-slate-200 rounded overflow-hidden">
-                                <div className="flex items-center gap-3 px-4 py-3 border-b border-slate-100">
-                                    <div className={`w-7 h-7 rounded flex items-center justify-center ${m.bg}`}>
-                                        <m.icon className={`h-3.5 w-3.5 ${m.color}`} />
-                                    </div>
-                                    <span className="text-sm font-semibold text-slate-900">{m.title}</span>
-                                </div>
-                                <ul className="px-4 py-3 space-y-1.5">
-                                    {m.items.map((item) => (
-                                        <li key={item} className="flex items-start gap-2 text-xs text-slate-600">
-                                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 flex-shrink-0 mt-1.5" />
-                                            {item}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ── TWO PORTALS ─────────────────────────────────────────────── */}
-            <section className="py-20 bg-white border-t border-slate-200">
-                <div className="container mx-auto px-6 max-w-5xl">
-                    <div className="mb-12 text-center">
-                        <div className="text-xs font-semibold text-corporate-primary uppercase tracking-wider mb-3">Two Portals</div>
-                        <h2 className="text-2xl font-bold text-slate-900 mb-2">Built for Both Admins and Members</h2>
-                        <p className="text-slate-500 text-sm max-w-xl mx-auto">Separate, secure portals ensure members only access what they own, while admins have full operational control.</p>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-6">
-                        {/* Member Portal */}
-                        <div className="border border-slate-200 rounded p-6">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="w-9 h-9 bg-emerald-50 rounded flex items-center justify-center">
-                                    <Globe className="h-4.5 w-4.5 text-emerald-600" />
-                                </div>
-                                <div>
-                                    <div className="text-sm font-bold text-slate-900">Member Portal</div>
-                                    <div className="text-xs text-slate-400">Self-service for SACCO members</div>
-                                </div>
-                            </div>
-                            <ul className="space-y-2">
-                                {[
-                                    "Savings deposit via M-Pesa STK Push",
-                                    "Loan application and eligibility check",
-                                    "Guarantor request accept / decline",
-                                    "Account statements per module",
-                                    "Next of Kin management",
-                                    "Notification emails on key events",
-                                ].map(item => (
-                                    <li key={item} className="flex items-start gap-2 text-xs text-slate-600">
-                                        <CheckCircle className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Admin Portal */}
-                        <div className="border border-slate-200 rounded p-6">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="w-9 h-9 bg-slate-100 rounded flex items-center justify-center">
-                                    <Settings className="h-4.5 w-4.5 text-slate-600" />
-                                </div>
-                                <div>
-                                    <div className="text-sm font-bold text-slate-900">Admin Portal</div>
-                                    <div className="text-xs text-slate-400">Full operational control</div>
-                                </div>
-                            </div>
-                            <ul className="space-y-2">
-                                {[
-                                    "Bulk CSV upload for savings, fees, and loans",
-                                    "Loan appraisal, approval, and disbursement",
-                                    "Member directory with financial summaries",
-                                    "GL reports: Balance Sheet, P&L, Trial Balance",
-                                    "Year-filtered SACCO summary dashboard",
-                                    "Active member list export for audit",
-                                ].map(item => (
-                                    <li key={item} className="flex items-start gap-2 text-xs text-slate-600">
-                                        <CheckCircle className="h-3.5 w-3.5 text-corporate-primary flex-shrink-0 mt-0.5" />
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* ── CTA ─────────────────────────────────────────────────────── */}
-            <section className="py-16 px-6 bg-white">
-                <div className="max-w-5xl mx-auto bg-slate-900 rounded p-10 md:p-14 text-center relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-corporate-primary/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
-                    <div className="relative z-10">
-                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                            Ready to Digitise Your SACCO?
-                        </h2>
-                        <p className="text-slate-300 text-sm mb-8 max-w-lg mx-auto">
-                            Corban Technologies delivers end-to-end implementation, configuration, and training. Get in touch with us or visit the Wananchi Mali platform page for full feature documentation.
-                        </p>
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Link
-                                href="/contact"
-                                className="inline-flex items-center gap-2 px-7 py-3 bg-corporate-primary hover:bg-orange-600 text-white text-sm font-semibold rounded transition-colors shadow-lg shadow-orange-900/20"
-                            >
-                                Contact Us <ArrowRight className="h-4 w-4" />
-                            </Link>
-                            <Link
-                                href="https://www.wananchimali.com"
-                                target="_blank"
-                                className="inline-flex items-center gap-2 px-7 py-3 bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium rounded ring-1 ring-slate-700 transition-colors"
-                            >
-                                Visit Wananchi Mali <ExternalLink className="h-4 w-4" />
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <Link
+                href="/contact"
+                className="px-5 py-2.5 rounded bg-corporate-primary hover:bg-orange-600 text-white text-xs font-semibold transition-colors shadow-sm inline-flex items-center gap-1.5"
+              >
+                Request SACCO Onboarding Demo <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <Link
+                href="https://wananchimali.co.ke"
+                target="_blank"
+                className="px-5 py-2.5 rounded bg-slate-50 hover:bg-slate-100 text-slate-800 border border-slate-200 text-xs font-semibold transition-colors inline-flex items-center gap-1.5"
+              >
+                Visit Wananchi Mali Portal <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+              </Link>
+            </div>
+          </div>
         </div>
-    )
+      </section>
+
+      {/* ── HIGHLIGHTS ────────────────────────────────────────────────── */}
+      <section className="py-12 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {highlights.map((h, idx) => (
+              <div
+                key={idx}
+                className="bg-white border border-slate-200 rounded p-4 flex flex-col gap-2.5 shadow-sm"
+              >
+                <div className="w-7 h-7 bg-slate-50 border border-slate-200 rounded flex items-center justify-center text-corporate-primary">
+                  <h.icon className="h-3.5 w-3.5" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-slate-900">{h.label}</p>
+                  <p className="text-[11px] text-slate-600 mt-0.5 leading-relaxed">{h.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── ONBOARDING STEPS ──────────────────────────────────────────── */}
+      <section className="py-14 bg-white border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="mb-8 pb-3 border-b border-slate-200">
+            <p className="text-xs font-semibold text-corporate-primary uppercase tracking-wider mb-1">
+              Onboarding Process
+            </p>
+            <h2 className="text-lg font-semibold text-slate-900">
+              From Setup to Go-Live in 5 Structured Steps
+            </h2>
+            <p className="text-xs text-slate-600 mt-1 max-w-xl">
+              Our engineering team handles configuration and data migration. Your administrative staff are fully trained before go-live.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+            {onboardingSteps.map((s) => (
+              <div
+                key={s.step}
+                className="border border-slate-200 rounded p-4 bg-slate-50 flex flex-col justify-between"
+              >
+                <div className="text-xl font-semibold text-slate-400 mb-2 font-mono">
+                  {s.step}
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-slate-900 mb-1">{s.title}</p>
+                  <p className="text-[11px] text-slate-600 leading-relaxed">{s.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── MODULES ───────────────────────────────────────────────────── */}
+      <section className="py-14 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="mb-8 pb-3 border-b border-slate-200">
+            <p className="text-xs font-semibold text-corporate-primary uppercase tracking-wider mb-1">
+              Core Modules
+            </p>
+            <h2 className="text-lg font-semibold text-slate-900">
+              Everything a Cooperative SACCO Needs in One Unified System
+            </h2>
+            <p className="text-xs text-slate-600 mt-1 max-w-xl">
+              All modules share the same double-entry database. An M-Pesa deposit instantly reconciles balances, posts to the GL, and notifies the member.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {modules.map((m) => (
+              <div
+                key={m.title}
+                className="bg-white border border-slate-200 rounded p-4 shadow-sm space-y-3"
+              >
+                <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+                  <div className="w-6 h-6 rounded bg-slate-50 border border-slate-200 flex items-center justify-center text-corporate-primary">
+                    <m.icon className="h-3.5 w-3.5" />
+                  </div>
+                  <p className="text-xs font-semibold text-slate-900">{m.title}</p>
+                </div>
+                <ul className="space-y-1.5">
+                  {m.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-[11px] text-slate-600 leading-relaxed">
+                      <CheckCircle className="h-3 w-3 text-corporate-primary shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TWO PORTALS ───────────────────────────────────────────────── */}
+      <section className="py-14 bg-white border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="mb-8 pb-3 border-b border-slate-200">
+            <p className="text-xs font-semibold text-corporate-primary uppercase tracking-wider mb-1">
+              System Architecture
+            </p>
+            <h2 className="text-lg font-semibold text-slate-900">
+              Two Dedicated Portals: Member Self-Service &amp; Branch Administration
+            </h2>
+            <p className="text-xs text-slate-600 mt-1 max-w-xl">
+              Strict role-based isolation guarantees member privacy while empowering administrators with executive operational tools.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Member Portal */}
+            <div className="border border-slate-200 rounded p-6 bg-slate-50 space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-white border border-slate-200 rounded flex items-center justify-center text-emerald-600">
+                  <Globe className="h-4 w-4" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">Member Portal (Mobile &amp; Web)</p>
+                  <p className="text-[11px] text-slate-500">Self-service for SACCO members</p>
+                </div>
+              </div>
+              <ul className="space-y-2">
+                {[
+                  "Savings deposit via Safaricom Daraja STK Push",
+                  "Loan application with automated savings eligibility check",
+                  "Guarantor request accept / decline notifications",
+                  "Account statement generation per savings pot",
+                  "Next of Kin (NOK) beneficiary management",
+                  "Instant email and SMS notification receipts",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-xs text-slate-700">
+                    <CheckCircle className="h-3.5 w-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Admin Portal */}
+            <div className="border border-slate-200 rounded p-6 bg-slate-50 space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-white border border-slate-200 rounded flex items-center justify-center text-corporate-primary">
+                  <Settings className="h-4 w-4" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">Branch Administration Workspace</p>
+                  <p className="text-[11px] text-slate-500">Full operational and financial control</p>
+                </div>
+              </div>
+              <ul className="space-y-2">
+                {[
+                  "Bulk CSV upload for deposits, fee collections, and journals",
+                  "Loan appraisal, guarantor review, and B2C disbursement",
+                  "Member directory with real-time financial summaries",
+                  "GL reports: Balance Sheet, Trial Balance, Profit & Loss",
+                  "Annual AGM dividend batch computation and distribution",
+                  "Active member audit export and balance sheets",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-xs text-slate-700">
+                    <CheckCircle className="h-3.5 w-3.5 text-corporate-primary shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── ONBOARDING CTA ────────────────────────────────────────────── */}
+      <section className="py-14 bg-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="p-8 rounded bg-slate-900 text-white flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="space-y-1 max-w-xl">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-corporate-primary">
+                3 SACCOs Live in Production
+              </span>
+              <h3 className="text-base font-semibold text-white">
+                Ready to Deploy the Platform for Your Cooperative?
+              </h3>
+              <p className="text-xs text-slate-300">
+                Corban Technologies handles migration, configuration, staff training, and dedicated GCP cloud hosting.
+              </p>
+            </div>
+            <div className="flex items-center gap-3 shrink-0">
+              <Link
+                href="/contact"
+                className="px-5 py-2.5 rounded bg-corporate-primary hover:bg-orange-600 text-white text-xs font-semibold transition-colors shadow-sm inline-flex items-center gap-1.5"
+              >
+                Schedule SACCO Consultation <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }
