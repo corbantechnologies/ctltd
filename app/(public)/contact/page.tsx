@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, MapPin, Phone, Send, Clock, ArrowRight } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Clock, ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 export default function Contact() {
   const [loading, setLoading] = useState(false);
@@ -19,6 +19,8 @@ export default function Contact() {
       type: "contact",
       userName: formData.get("name"),
       email: formData.get("email"),
+      phone: formData.get("phone"),
+      productInterest: formData.get("productInterest"),
       message: formData.get("message"),
     };
 
@@ -38,14 +40,14 @@ export default function Contact() {
       } else {
         const errorData = await response.json();
         throw new Error(
-          errorData.message || "Something went wrong. Please try again.",
+          errorData.message || "Something went wrong. Please try again."
         );
       }
     } catch (err) {
       setError(
         err instanceof Error
           ? err.message
-          : "Submission failed. Check your connection.",
+          : "Submission failed. Check your connection."
       );
     } finally {
       setLoading(false);
@@ -53,181 +55,216 @@ export default function Contact() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-white">
       {/* Contact Hero */}
-      <section className="relative pt-12 pb-24 lg:pt-40 lg:pb-32 overflow-hidden border-b border-slate-200 bg-white">
-        <div className="absolute inset-0 bg-grid-slate-100 pointer-events-none opacity-40 mx-auto max-w-7xl" />
-        <div className="container mx-auto px-6 relative z-10 text-center lg:text-left max-w-6xl flex flex-col items-center lg:items-start">
-          <span className="mb-6 inline-flex items-center rounded bg-slate-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-corporate-primary border border-slate-200 shadow-sm">
-            Contact Us
-          </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-slate-900 mb-8 leading-[1.1]">
-            Let&apos;s <span className="text-corporate-primary">Connect.</span>
-          </h1>
-          <p className="text-slate-500 text-lg md:text-xl max-w-2xl leading-relaxed text-center lg:text-left">
-            Have a project in mind or need technical consultation? Our experts
-            are ready to help you scale.
-          </p>
+      <section className="relative pt-16 pb-14 border-b border-slate-200 bg-white">
+        <div className="w-full px-6 sm:px-10 lg:px-16">
+          <div className="max-w-4xl space-y-4">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-slate-100 border border-slate-200 text-xs font-semibold text-corporate-primary">
+              <Mail className="w-3.5 h-3.5" />
+              Client Onboarding &amp; Inquiries
+            </span>
+            <h1 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 leading-snug">
+              Start Your Platform Onboarding With Corban Technologies
+            </h1>
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl">
+              Whether you are a cooperative SACCO looking to deploy core banking, a retailer seeking a reliable POS, or an enterprise needing dedicated cloud hosting — our engineering team is ready to scope and deploy your solution.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Contact Form & Info */}
-      <section className="py-24 bg-slate-50 flex-grow">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-            {/* Contact Info */}
-            <div className="lg:col-span-5 space-y-12">
-              <div className="space-y-8">
-                <h2 className="text-3xl font-bold tracking-tight text-slate-900">
-                  Reach Out Directly
-                </h2>
-                <div className="space-y-6">
-                  <div className="flex items-start gap-5 group">
-                    <div className="w-12 h-12 rounded bg-white border border-slate-200 flex items-center justify-center text-corporate-primary shadow-sm group-hover:border-corporate-primary/30 transition-all">
-                      <Mail className="w-6 h-6" />
+      {/* Form & Info Section */}
+      <section className="py-14 bg-slate-50 flex-grow">
+        <div className="w-full px-6 sm:px-10 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            {/* Contact Details */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="p-6 sm:p-8 rounded bg-white border border-slate-200 shadow-sm space-y-6">
+                <div>
+                  <h2 className="text-base font-semibold text-slate-900">
+                    Direct Corporate Office
+                  </h2>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Headquartered in Mombasa, Kenya. Serving East Africa.
+                  </p>
+                </div>
+
+                <div className="space-y-4 text-xs">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded bg-slate-50 border border-slate-200 text-corporate-primary shrink-0">
+                      <Mail className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-wider font-semibold text-slate-500 mb-1">
-                        Email Us
-                      </p>
-                      <p className="text-lg font-medium text-slate-900">
-                        info@corbantechnologies.org
-                      </p>
+                      <p className="font-semibold text-slate-900">Corporate Email</p>
+                      <p className="text-slate-600 mt-0.5">info@corbantechnologies.org</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-5 group">
-                    <div className="w-12 h-12 rounded bg-white border border-slate-200 flex items-center justify-center text-corporate-primary shadow-sm group-hover:border-corporate-primary/30 transition-all">
-                      <Phone className="w-6 h-6" />
+
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded bg-slate-50 border border-slate-200 text-corporate-primary shrink-0">
+                      <Phone className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-wider font-semibold text-slate-500 mb-1">
-                        Call Anywhere
-                      </p>
-                      <p className="text-lg font-medium text-slate-900">
-                        +254 768 978 865
-                      </p>
+                      <p className="font-semibold text-slate-900">Phone / WhatsApp</p>
+                      <p className="text-slate-600 mt-0.5">+254 768 978 865</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-5 group">
-                    <div className="w-12 h-12 rounded bg-white border border-slate-200 flex items-center justify-center text-corporate-primary shadow-sm group-hover:border-corporate-primary/30 transition-all">
-                      <MapPin className="w-6 h-6" />
+
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded bg-slate-50 border border-slate-200 text-corporate-primary shrink-0">
+                      <MapPin className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-wider font-semibold text-slate-500 mb-1">
-                        Visit Hub
-                      </p>
-                      <p className="text-lg font-medium text-slate-900">
-                        Mombasa, Kenya
-                      </p>
+                      <p className="font-semibold text-slate-900">Office Location</p>
+                      <p className="text-slate-600 mt-0.5">Mombasa, Kenya</p>
                     </div>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-slate-100 flex items-center gap-3">
+                  <div className="p-2 rounded bg-slate-100 border border-slate-200 text-corporate-primary">
+                    <Clock className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate-900">Fast Response Guarantee</p>
+                    <p className="text-[11px] text-slate-500">Replies within 1 business day</p>
                   </div>
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8 bg-slate-900 rounded shadow-lg relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-corporate-primary/20 rounded blur-3xl translate-x-1/2 -translate-y-1/2" />
-                <div className="relative z-10 flex items-center gap-6">
-                  <div className="w-12 h-12 rounded bg-corporate-primary/20 border border-corporate-primary/30 flex items-center justify-center text-corporate-primary">
-                    <Clock className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <p className="text-white font-bold text-lg">
-                      1 Hour Reply
-                    </p>
-                    <p className="text-slate-400 text-xs font-medium">
-                      Within Business Hours
-                    </p>
-                  </div>
+              {/* Verified Trust Card */}
+              <div className="p-6 rounded bg-slate-900 text-white space-y-2">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-corporate-primary" />
+                  <p className="text-xs font-semibold text-white">Full Regulatory &amp; SLA Backing</p>
                 </div>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  All deployments are covered by data isolation guarantees, KRA/SASRA compliance support, and 99.9% cloud uptime SLAs.
+                </p>
               </div>
             </div>
 
-            {/* Form */}
+            {/* Ingestion / Scoping Form */}
             <div className="lg:col-span-7">
-              <div className="bg-white p-6 sm:p-10 rounded border border-slate-200 shadow-sm">
+              <div className="p-6 sm:p-8 rounded bg-white border border-slate-200 shadow-sm space-y-6">
+                <div>
+                  <h2 className="text-base font-semibold text-slate-900">
+                    Schedule Technical Scoping &amp; Demo
+                  </h2>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Tell us about your organization and which platform you want to deploy.
+                  </p>
+                </div>
+
                 {success && (
-                  <div className="mb-8 bg-green-50 border border-green-200 text-green-700 rounded p-4 flex items-center gap-3">
-                    <Send className="w-5 h-5" />
-                    <span className="font-medium text-sm">Thanks! Your message has been sent. We&apos;ll reply within 24 hours.</span>
-                  </div>
-                )}
-                {error && (
-                  <div className="mb-8 bg-red-50 border border-red-200 text-red-700 rounded p-4 flex items-center gap-3">
-                    <span className="font-medium text-sm">{error}</span>
+                  <div className="p-3.5 rounded bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center gap-2.5 text-xs">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>Thank you! Your request has been received. Our team will contact you within 24 hours.</span>
                   </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Honeypot field - hidden from users */}
+                {error && (
+                  <div className="p-3.5 rounded bg-red-50 border border-red-200 text-red-800 text-xs">
+                    {error}
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Honeypot field */}
                   <input
                     name="website_url"
                     className="hidden absolute opacity-0 w-0 h-0 p-0 m-0 -z-50"
                     tabIndex={-1}
                     autoComplete="off"
                   />
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="name"
-                        className="text-sm font-semibold text-slate-700 ml-1 block"
-                      >
-                        Full Name
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label htmlFor="name" className="text-xs font-semibold text-slate-700 block">
+                        Full Name / Contact Person *
                       </label>
                       <input
                         id="name"
                         name="name"
-                        placeholder="John Doe"
-                        className="w-full h-12 rounded border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-corporate-primary/20 focus:border-corporate-primary transition-all px-4 font-medium text-slate-900"
+                        type="text"
+                        placeholder="e.g. John Kamau"
+                        className="w-full h-10 px-3 rounded border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-corporate-primary text-xs text-slate-900"
                         required
                       />
                     </div>
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="email"
-                        className="text-sm font-semibold text-slate-700 ml-1 block"
-                      >
-                        Work Email
+
+                    <div className="space-y-1">
+                      <label htmlFor="email" className="text-xs font-semibold text-slate-700 block">
+                        Official Work Email *
                       </label>
                       <input
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="john@company.com"
-                        className="w-full h-12 rounded border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-corporate-primary/20 focus:border-corporate-primary transition-all px-4 font-medium text-slate-900"
+                        placeholder="e.g. john@sacco.co.ke"
+                        className="w-full h-10 px-3 rounded border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-corporate-primary text-xs text-slate-900"
                         required
                       />
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="message"
-                      className="text-sm font-semibold text-slate-700 ml-1 block"
-                    >
-                      Project Details
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label htmlFor="phone" className="text-xs font-semibold text-slate-700 block">
+                        Phone / WhatsApp Number *
+                      </label>
+                      <input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        placeholder="e.g. 0768978865"
+                        className="w-full h-10 px-3 rounded border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-corporate-primary text-xs text-slate-900"
+                        required
+                      />
+                    </div>
+
+                    <div className="space-y-1">
+                      <label htmlFor="productInterest" className="text-xs font-semibold text-slate-700 block">
+                        Platform of Interest *
+                      </label>
+                      <select
+                        id="productInterest"
+                        name="productInterest"
+                        className="w-full h-10 px-3 rounded border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-corporate-primary text-xs text-slate-900"
+                        required
+                      >
+                        <option value="sacco">1. SACCO Core Banking Platform (Wananchi Mali)</option>
+                        <option value="finance">2. Finance Intelligence &amp; SME Bookkeeping (FedhaHub / MannaBooks)</option>
+                        <option value="retail">3. Omnichannel Commerce &amp; POS (GearHouse)</option>
+                        <option value="marketing">4. Marketing CRM &amp; Telecom Suite (LJK)</option>
+                        <option value="logistics">5. Freight &amp; Fleet Logistics OS (CT Logistics)</option>
+                        <option value="events">6. Digital Event Ticketing &amp; Passes (Sherehe Tickets)</option>
+                        <option value="cloud-hosting">Dedicated Cloud Hosting &amp; Custom Architecture</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label htmlFor="message" className="text-xs font-semibold text-slate-700 block">
+                      Project Requirements &amp; Timeline *
                     </label>
                     <textarea
                       id="message"
                       name="message"
-                      rows={5}
-                      placeholder="Tell us about your technical requirements..."
-                      className="w-full rounded border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-corporate-primary/20 focus:border-corporate-primary transition-all p-4 font-medium min-h-[160px] resize-y text-slate-900"
+                      rows={4}
+                      placeholder="Describe your current setup, number of members/users, timeline, and any specific custom requirements..."
+                      className="w-full p-3 rounded border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-corporate-primary text-xs text-slate-900 resize-y"
                       required
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-corporate-primary hover:bg-orange-600 text-white font-medium py-3.5 rounded shadow-sm transition-colors flex items-center justify-center gap-2 group/btn disabled:opacity-70 disabled:cursor-not-allowed mt-2"
                     disabled={loading}
+                    className="w-full bg-corporate-primary hover:bg-orange-600 text-white text-xs font-semibold py-2.5 rounded transition-colors shadow-sm inline-flex items-center justify-center gap-1.5 disabled:opacity-70"
                   >
-                    {loading ? (
-                      "Transmitting..."
-                    ) : (
-                      <>
-                        Send Message{" "}
-                        <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
-                      </>
-                    )}
+                    {loading ? "Transmitting Scoping Request..." : "Submit Scoping Request"} <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </form>
               </div>

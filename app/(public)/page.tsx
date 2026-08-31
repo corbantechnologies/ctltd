@@ -1,128 +1,125 @@
 "use client";
 
-import { ArrowRight, Building2, Terminal, Code2, Globe } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
-import { useFetchPublicDivisions } from "@/hooks/divisions/actions";
+import { ArrowRight, ShieldCheck, Server, Sparkles, Building2, CheckCircle2, ChevronRight } from "lucide-react";
+import TrustMetricsBar from "@/components/landing/TrustMetricsBar";
+import ClientTrustWall from "@/components/landing/ClientTrustWall";
+import MockupStudio from "@/components/landing/MockupStudio";
+import IndustryNavigator from "@/components/landing/IndustryNavigator";
+import CloudPartnersGrid from "@/components/landing/CloudPartnersGrid";
+import HostingArchitecture from "@/components/landing/HostingArchitecture";
 
 export default function Home() {
-  const { data: divisions, isLoading } = useFetchPublicDivisions();
-
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative w-full bg-slate-900 text-white py-24 sm:py-32 overflow-hidden">
-        {/* Decorative background gradient */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-b from-corporate-primary/10 to-transparent blur-3xl opacity-30 transform rotate-12" />
-        </div>
-
-        <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
-          <div className="mb-8">
-            <div className="inline-flex items-center rounded bg-slate-800 px-3 py-1 text-xs font-semibold text-corporate-primary border border-slate-700">
-              MOMBASA'S LEADING TECH PARTNER
+    <div className="flex flex-col min-h-screen bg-white">
+      {/* ── 1. CORPORATE HERO SECTION (FULL WIDTH) ──────────────────────── */}
+      <section className="relative w-full bg-white border-b border-slate-200 pt-16 pb-16 overflow-hidden">
+        <div className="w-full px-6 sm:px-10 lg:px-16 relative z-10">
+          <div className="max-w-4xl space-y-6">
+            {/* Top Micro-Badges */}
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-slate-100 border border-slate-200 text-xs font-semibold text-corporate-primary">
+                <Building2 className="w-3.5 h-3.5" />
+                Corban Technologies LTD · Mombasa, Kenya
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-700">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                Enterprise Software &amp; Cloud Infrastructure
+              </span>
             </div>
-          </div>
 
-          <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6">
-            Innovating <span className="text-corporate-primary">Secure</span> &amp;{" "}
-            <br className="hidden sm:block" /> Scalable Solutions.
-          </h1>
+            {/* Main Headline */}
+            <h1 className="text-xl sm:text-2xl font-semibold text-slate-900 tracking-tight leading-snug">
+              We Build, Refine &amp; Cloud-Host Mission-Critical Software Platforms Across East Africa
+            </h1>
 
-          <p className="text-lg sm:text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
-            From digital core banking for SACCOs to enterprise cloud infrastructure, we build the technology that drives East Africa forward.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white px-8 py-3.5 rounded font-medium transition-colors shadow-lg shadow-orange-900/20"
-            >
-              Launch Your Project <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-            <Link
-              href="/divisions"
-              className="w-full sm:w-auto inline-flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-white px-8 py-3.5 rounded font-medium transition-colors ring-1 ring-slate-700"
-            >
-              Explore Divisions
-            </Link>
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* Enterprise Divisions Grid */}
-      <section id="divisions" className="py-20 bg-slate-50 flex-grow">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Enterprise Divisions</h2>
-            <p className="text-slate-500 max-w-2xl mx-auto text-lg">
-              Explore our specialized technology divisions handling everything from
-              financial ecosystems to robust infrastructure.
+            {/* Value Proposition */}
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl">
+              From digital core banking powering 3 Kenyan SACCOs to high-throughput telecom marketing engines, omnichannel retail POS, and logistics operating systems — Corban Technologies delivers custom architecture, dedicated cloud infrastructure, and 24/7 reliability.
             </p>
-          </div>
 
-          {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="h-64 bg-white rounded border border-slate-200 animate-pulse" />
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {divisions?.map((division) => (
-                <Link
-                  key={division.reference}
-                  href={`/divisions/${division.reference}`}
-                  className="group bg-white p-8 rounded shadow-sm border border-slate-200 hover:shadow-md transition-all hover:border-orange-200 flex flex-col h-full"
-                >
-                  <div className="bg-slate-50 w-14 h-14 rounded flex items-center justify-center mb-6 border border-slate-100 group-hover:scale-110 transition-all overflow-hidden p-2">
-                    {division.logo ? (
-                      <img src={division.logo} alt={division.name} className="w-full h-full object-contain" />
-                    ) : (
-                      <Building2 className="h-7 w-7 text-corporate-primary" />
-                    )}
-                  </div>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3">{division.name}</h3>
-                  <p className="text-slate-500 line-clamp-3 mb-6 flex-grow">
-                    {/* Fallback description text since we render markdown inside, we just want a plain snippet */}
-                    {division.description?.substring(0, 150).replace(/[#*`_]/g, '') || "View division details and projects."}
-                  </p>
-
-                  <div className="flex items-center text-sm font-medium text-corporate-primary mt-auto">
-                    Explore Division <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-      {/* Removed Flagship Product Showcase & Grid in favor of Dynamic Divisions */}
-
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-6xl mx-auto bg-slate-900 rounded p-12 md:p-16 text-center relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-corporate-primary/10 rounded blur-[80px] -translate-y-1/2 translate-x-1/2" />
-          <div className="relative z-10 space-y-8">
-            <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight max-w-3xl mx-auto">
-              Ready to <span className="text-corporate-primary">Future-Proof</span> Your Business?
-            </h2>
-            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-              Join dozens of financial institutions and enterprises already leveraging Corban platforms.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            {/* CTAs */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
               <Link
                 href="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white px-8 py-3.5 rounded font-medium transition-colors shadow-lg shadow-orange-900/20"
+                className="px-5 py-2.5 rounded bg-corporate-primary hover:bg-orange-600 text-white text-xs font-semibold transition-colors shadow-sm inline-flex items-center gap-1.5"
               >
-                Get Started Now
+                Start Client Onboarding <ArrowRight className="w-3.5 h-3.5" />
               </Link>
               <Link
-                href="/divisions"
-                className="w-full sm:w-auto inline-flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-white px-8 py-3.5 rounded font-medium transition-colors ring-1 ring-slate-700"
+                href="#products"
+                className="px-5 py-2.5 rounded bg-slate-50 hover:bg-slate-100 text-slate-800 border border-slate-200 text-xs font-semibold transition-colors inline-flex items-center gap-1.5"
               >
-                View Divisions
+                Explore 6 Core Platforms <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+              </Link>
+            </div>
+
+            {/* Quick Proof Highlights */}
+            <div className="pt-4 border-t border-slate-100 grid grid-cols-3 gap-6 text-xs text-slate-600 max-w-2xl">
+              <div className="space-y-0.5">
+                <p className="font-semibold text-slate-900">3 Live SACCOs</p>
+                <p className="text-[11px] text-slate-500">M-Pesa &amp; GL Banking</p>
+              </div>
+              <div className="space-y-0.5">
+                <p className="font-semibold text-slate-900">99.9% Uptime</p>
+                <p className="text-[11px] text-slate-500">Dedicated Cloud Hosting</p>
+              </div>
+              <div className="space-y-0.5">
+                <p className="font-semibold text-slate-900">100% Kenyan</p>
+                <p className="text-[11px] text-slate-500">KRA &amp; SASRA Compliant</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 2. TRUST METRICS STRIP ───────────────────────────────────── */}
+      <TrustMetricsBar />
+
+      {/* ── 3. CLIENT TRUST WALL ─────────────────────────────────────── */}
+      <ClientTrustWall />
+
+      {/* ── 4. 6-PILLAR INTERACTIVE MOCKUP STUDIO ────────────────────── */}
+      <MockupStudio />
+
+      {/* ── 5. CLIENT JOURNEY & INDUSTRY NAVIGATOR ───────────────────── */}
+      <IndustryNavigator />
+
+      {/* ── 6. CLOUD & TECH PARTNERS ─────────────────────────────────── */}
+      <CloudPartnersGrid />
+
+      {/* ── 7. HOSTING ARCHITECTURE & 24/7 SLA ───────────────────────── */}
+      <HostingArchitecture />
+
+      {/* ── 8. CLOSING ONBOARDING CALL TO ACTION ─────────────────────── */}
+      <section className="w-full bg-slate-50 py-16">
+        <div className="w-full px-6 sm:px-10 lg:px-16">
+          <div className="p-8 rounded bg-white border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="space-y-2 max-w-3xl">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-xs font-semibold text-corporate-primary">
+                <Sparkles className="w-3.5 h-3.5" />
+                Begin Your Digital Transformation
+              </div>
+              <h2 className="text-lg font-semibold text-slate-900 tracking-tight">
+                Ready to Onboard Your Cooperative, Retail Business, or Enterprise?
+              </h2>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Our engineering and cloud operations teams are ready to deploy, customize, and manage the right platform for your organization.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full md:w-auto">
+              <Link
+                href="/contact"
+                className="w-full sm:w-auto px-6 py-3 rounded bg-corporate-primary hover:bg-orange-600 text-white text-xs font-semibold transition-colors shadow-sm text-center inline-flex items-center justify-center gap-1.5"
+              >
+                Schedule Technical Scoping <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <Link
+                href="/products"
+                className="w-full sm:w-auto px-5 py-3 rounded bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 text-xs font-semibold transition-colors text-center inline-flex items-center justify-center"
+              >
+                View All 6 Platforms
               </Link>
             </div>
           </div>
