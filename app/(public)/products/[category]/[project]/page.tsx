@@ -42,6 +42,7 @@ import {
   getProjectBySlug,
   getCategoryBySlug,
 } from "@/lib/data/products";
+import LivePlatformPreview from "@/components/products/LivePlatformPreview";
 
 interface ProjectPageProps {
   params: Promise<{ category: string; project: string }>;
@@ -56,7 +57,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: ProjectPageProps) {
-  const { category: categorySlug, project: projectSlug } = await params;
+  const resolvedParams = await Promise.resolve(params);
+  const categorySlug = resolvedParams?.category;
+  const projectSlug = resolvedParams?.project;
   const project = getProjectBySlug(categorySlug, projectSlug);
 
   if (!project) {
@@ -99,7 +102,9 @@ const iconMap: Record<string, typeof Building2> = {
 };
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
-  const { category: categorySlug, project: projectSlug } = await params;
+  const resolvedParams = await Promise.resolve(params);
+  const categorySlug = resolvedParams?.category;
+  const projectSlug = resolvedParams?.project;
   const project = getProjectBySlug(categorySlug, projectSlug);
 
   if (!project) {
@@ -344,92 +349,14 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               </div>
             </div>
 
-            {/* Right Sidebar: Mockup & Specifications (4 cols) */}
+            {/* Right Sidebar: Authentic Live Production Screen & Specifications (4 cols) */}
             <div className="lg:col-span-4 space-y-6">
-              {/* Interactive Mockup Window */}
-              <div className="rounded border border-slate-800 bg-slate-900 p-5 text-white shadow-sm space-y-4">
-                {/* Browser Header */}
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-rose-500/80" />
-                    <span className="w-2 h-2 rounded-full bg-amber-500/80" />
-                    <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
-                  </div>
-                  <span className="font-mono text-[10px] text-slate-400 truncate max-w-[170px]">
-                    {project.mockup.browserUrl}
-                  </span>
-                  <span className="text-[9px] text-emerald-400 font-mono">LIVE</span>
-                </div>
-
-                {/* Window Title */}
-                <div>
-                  <span className="text-[10px] font-mono text-slate-400">INTERFACE MOCKUP</span>
-                  <h4 className="text-xs font-semibold text-white tracking-tight mt-0.5">
-                    {project.mockup.windowTitle}
-                  </h4>
-                </div>
-
-                {/* Metrics */}
-                <div className="grid grid-cols-2 gap-2">
-                  {project.mockup.metrics.map((metric, mIdx) => (
-                    <div
-                      key={mIdx}
-                      className="p-2 rounded bg-slate-800/80 border border-slate-700/80 space-y-0.5"
-                    >
-                      <span className="text-[9px] text-slate-400 block truncate">
-                        {metric.label}
-                      </span>
-                      <span className="text-xs font-semibold text-white block">
-                        {metric.value}
-                      </span>
-                      {metric.trend && (
-                        <span className="text-[9px] text-emerald-400 block font-mono">
-                          {metric.trend}
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-
-                {/* Ledger Items */}
-                <div className="space-y-2 pt-1">
-                  {project.mockup.ledgerItems.map((item, lIdx) => (
-                    <div
-                      key={lIdx}
-                      className="p-2 rounded bg-slate-800/50 border border-slate-700/60 flex items-center justify-between text-xs"
-                    >
-                      <div className="space-y-0.5">
-                        <p className="font-medium text-slate-200 text-[11px]">{item.title}</p>
-                        <p className="text-[10px] text-slate-400">{item.subtitle}</p>
-                      </div>
-                      {item.amount && (
-                        <div className="text-right shrink-0 ml-2">
-                          <span className="font-mono font-semibold text-[11px] text-emerald-400 block">
-                            {item.amount}
-                          </span>
-                          {item.status && (
-                            <span className="text-[9px] text-slate-400 block uppercase">
-                              {item.status}
-                            </span>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-
-                {/* Direct Platform Link */}
-                <div className="pt-3 border-t border-slate-800">
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-2 px-3 rounded bg-corporate-primary hover:bg-orange-600 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
-                  >
-                    Open {project.liveDomain} <ExternalLink className="w-3 h-3" />
-                  </a>
-                </div>
-              </div>
+              {/* Authentic Live Production Screen */}
+              <LivePlatformPreview
+                slug={project.slug}
+                liveUrl={project.liveUrl}
+                liveDomain={project.liveDomain}
+              />
 
               {/* Technical Specifications Card */}
               <div className="p-5 rounded border border-slate-200 bg-slate-50/50 space-y-4">

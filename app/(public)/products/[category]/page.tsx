@@ -39,6 +39,7 @@ import {
   getCategoryBySlug,
   getProjectsByCategory,
 } from "@/lib/data/products";
+import LivePlatformPreview from "@/components/products/LivePlatformPreview";
 
 interface CategoryPageProps {
   params: Promise<{ category: string }>;
@@ -52,7 +53,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: CategoryPageProps) {
-  const { category: categorySlug } = await params;
+  const resolvedParams = await Promise.resolve(params);
+  const categorySlug = resolvedParams?.category;
   const category = getCategoryBySlug(categorySlug);
 
   if (!category) {
@@ -95,7 +97,8 @@ const iconMap: Record<string, typeof Building2> = {
 };
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-  const { category: categorySlug } = await params;
+  const resolvedParams = await Promise.resolve(params);
+  const categorySlug = resolvedParams?.category;
   const category = getCategoryBySlug(categorySlug);
 
   if (!category) {
@@ -266,92 +269,13 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                       </div>
                     </div>
 
-                    {/* Right Column: High-Fidelity Mockup Studio Preview */}
-                    <div className="lg:col-span-5 bg-slate-900 p-6 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-slate-800 text-white">
-                      <div className="space-y-4">
-                        {/* Browser Bar */}
-                        <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                          <div className="flex items-center gap-1.5">
-                            <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
-                            <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                          </div>
-                          <span className="font-mono text-[11px] text-slate-400 truncate max-w-[220px]">
-                            {project.mockup.browserUrl}
-                          </span>
-                          <span className="text-[10px] text-emerald-400 font-mono">LIVE</span>
-                        </div>
-
-                        {/* Mockup Title */}
-                        <div>
-                          <p className="text-[11px] font-mono text-slate-400">INTERFACE PREVIEW</p>
-                          <h4 className="text-sm font-semibold text-white tracking-tight mt-0.5">
-                            {project.mockup.windowTitle}
-                          </h4>
-                        </div>
-
-                        {/* Mockup Metrics Cards */}
-                        <div className="grid grid-cols-3 gap-2">
-                          {project.mockup.metrics.map((metric, mIdx) => (
-                            <div
-                              key={mIdx}
-                              className="p-2.5 rounded bg-slate-800/80 border border-slate-700/80 space-y-0.5"
-                            >
-                              <span className="text-[10px] text-slate-400 block truncate">
-                                {metric.label}
-                              </span>
-                              <span className="text-xs font-semibold text-white block">
-                                {metric.value}
-                              </span>
-                              {metric.trend && (
-                                <span className="text-[9px] text-emerald-400 block font-mono">
-                                  {metric.trend}
-                                </span>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-
-                        {/* Mockup Ledger Items */}
-                        <div className="space-y-2 pt-2">
-                          {project.mockup.ledgerItems.map((item, lIdx) => (
-                            <div
-                              key={lIdx}
-                              className="p-2.5 rounded bg-slate-800/50 border border-slate-700/60 flex items-center justify-between text-xs"
-                            >
-                              <div className="space-y-0.5">
-                                <p className="font-medium text-slate-200 text-[11px]">
-                                  {item.title}
-                                </p>
-                                <p className="text-[10px] text-slate-400">{item.subtitle}</p>
-                              </div>
-                              {item.amount && (
-                                <div className="text-right shrink-0 ml-2">
-                                  <span className="font-mono font-semibold text-[11px] text-emerald-400 block">
-                                    {item.amount}
-                                  </span>
-                                  {item.status && (
-                                    <span className="text-[9px] text-slate-400 block uppercase">
-                                      {item.status}
-                                    </span>
-                                  )}
-                                </div>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Mockup Footer */}
-                      <div className="pt-4 mt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 font-mono">
-                        <span>Domain: {project.liveDomain}</span>
-                        <Link
-                          href={`/products/${category.slug}/${project.slug}`}
-                          className="text-corporate-primary hover:underline font-semibold"
-                        >
-                          Deep Dive →
-                        </Link>
-                      </div>
+                    {/* Right Column: Authentic Live Production Screen Preview */}
+                    <div className="lg:col-span-5 p-4 sm:p-6 bg-slate-900 flex flex-col justify-center border-t lg:border-t-0 lg:border-l border-slate-800">
+                      <LivePlatformPreview
+                        slug={project.slug}
+                        liveUrl={project.liveUrl}
+                        liveDomain={project.liveDomain}
+                      />
                     </div>
                   </div>
                 </div>

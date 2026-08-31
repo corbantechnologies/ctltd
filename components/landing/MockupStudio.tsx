@@ -15,6 +15,7 @@ import {
   Lock,
   ExternalLink,
 } from "lucide-react";
+import LivePlatformPreview from "@/components/products/LivePlatformPreview";
 
 export default function MockupStudio() {
   const categories = getAllCategories();
@@ -229,92 +230,13 @@ export default function MockupStudio() {
                 </div>
               </div>
 
-              {/* Right: High-Fidelity UI Browser Mockup */}
-              <div className="lg:col-span-7 p-6 bg-slate-50/70 flex flex-col justify-center">
-                <div className="rounded border border-slate-300 bg-white overflow-hidden shadow-sm">
-                  {/* Browser Window Chrome */}
-                  <div className="bg-slate-100 px-4 py-2 border-b border-slate-200 flex items-center justify-between">
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-slate-300" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-slate-300" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-slate-300" />
-                    </div>
-                    <div className="flex-1 max-w-sm mx-auto bg-white border border-slate-200 rounded px-2.5 py-0.5 flex items-center justify-between text-[11px] font-mono text-slate-600">
-                      <span className="truncate">{primaryProject.mockup.browserUrl}</span>
-                      <Lock className="w-2.5 h-2.5 text-emerald-600 shrink-0 ml-2" />
-                    </div>
-                  </div>
-
-                  {/* Mockup Canvas Screen */}
-                  <div className="p-5 bg-white space-y-4">
-                    {/* Mockup Header */}
-                    <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                      <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-wider text-corporate-primary">
-                          System Interface Preview
-                        </p>
-                        <p className="text-xs font-semibold text-slate-900">
-                          {primaryProject.mockup.windowTitle}
-                        </p>
-                      </div>
-                      <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold">
-                        Live Production
-                      </span>
-                    </div>
-
-                    {/* KPI Mini-Dashboard */}
-                    <div className="grid grid-cols-3 gap-3">
-                      {primaryProject.mockup.metrics.map((metric, idx) => (
-                        <div
-                          key={idx}
-                          className="p-2.5 rounded bg-slate-50 border border-slate-200"
-                        >
-                          <p className="text-[10px] font-semibold text-slate-500 truncate">
-                            {metric.label}
-                          </p>
-                          <p className="text-sm font-semibold text-slate-900 mt-0.5">
-                            {metric.value}
-                          </p>
-                          {metric.trend && (
-                            <p className="text-[10px] font-medium text-emerald-700 mt-0.5 font-mono">
-                              {metric.trend}
-                            </p>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* UI Representation Table / Cards */}
-                    <div className="rounded border border-slate-200 overflow-hidden text-xs">
-                      <div className="bg-slate-50 px-3 py-1.5 font-semibold text-slate-700 border-b border-slate-200 flex items-center justify-between text-[11px]">
-                        <span>Active Transaction Stream &amp; Module Ledger</span>
-                        <span className="text-corporate-primary font-mono text-[10px]">
-                          Operational
-                        </span>
-                      </div>
-
-                      <div className="divide-y divide-slate-100">
-                        {primaryProject.mockup.ledgerItems.map((item, idx) => (
-                          <div key={idx} className="p-2.5 flex items-center justify-between bg-white text-xs">
-                            <div>
-                              <p className="font-semibold text-slate-900">
-                                {item.title}
-                              </p>
-                              <p className="text-[11px] text-slate-500">
-                                {item.subtitle}
-                              </p>
-                            </div>
-                            {item.amount && (
-                              <span className="font-mono font-semibold text-emerald-700">
-                                {item.amount}
-                              </span>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              {/* Right: Authentic Live Production Screen Preview */}
+              <div className="lg:col-span-7 p-6 bg-slate-900 flex flex-col justify-center border-t lg:border-t-0 lg:border-l border-slate-800">
+                <LivePlatformPreview
+                  slug={primaryProject.slug}
+                  liveUrl={primaryProject.liveUrl}
+                  liveDomain={primaryProject.liveDomain}
+                />
               </div>
             </div>
           </div>

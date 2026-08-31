@@ -1295,16 +1295,39 @@ export const PROJECTS_DATA: ProjectItem[] = [
   },
 ];
 
+export function normalizeSlug(val: string): string {
+  return val.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
 export function getAllCategories(): CategoryItem[] {
   return CATEGORIES_DATA;
 }
 
 export function getCategoryBySlug(slug: string): CategoryItem | undefined {
-  return CATEGORIES_DATA.find((c) => c.slug === slug || c.id === slug);
+  if (!slug) return undefined;
+  const target = normalizeSlug(slug);
+  return CATEGORIES_DATA.find((c) => {
+    const cSlug = normalizeSlug(c.slug);
+    const cId = normalizeSlug(c.id);
+    const cFolder = normalizeSlug(c.folderName);
+    return (
+      cSlug === target ||
+      cId === target ||
+      cFolder === target ||
+      (target === "retail" && cSlug === "giftshop") ||
+      (target === "finance" && cSlug === "finance") ||
+      (target === "sacco" && cSlug === "sacco") ||
+      (target === "marketing" && cSlug === "marketing") ||
+      (target === "logistics" && cSlug === "logistics") ||
+      (target === "events" && cSlug === "events")
+    );
+  });
 }
 
 export function getProjectsByCategory(categorySlug: string): ProjectItem[] {
-  return PROJECTS_DATA.filter((p) => p.categorySlug === categorySlug);
+  const category = getCategoryBySlug(categorySlug);
+  if (!category) return [];
+  return PROJECTS_DATA.filter((p) => p.categorySlug === category.slug);
 }
 
 export function getAllProjects(): ProjectItem[] {
@@ -1312,11 +1335,32 @@ export function getAllProjects(): ProjectItem[] {
 }
 
 export function getProjectBySlug(categorySlug: string, projectSlug: string): ProjectItem | undefined {
+  if (!projectSlug) return undefined;
+  const normProject = normalizeSlug(projectSlug);
+  
+  // First match project directly
+  const directMatch = PROJECTS_DATA.find((p) => {
+    const pSlug = normalizeSlug(p.slug);
+    const pId = normalizeSlug(p.id);
+    const pTag = normalizeSlug(p.shortTag);
+    return pSlug === normProject || pId === normProject || pTag === normProject;
+  });
+
+  if (directMatch) return directMatch;
+
+  // Otherwise filter by category
+  const category = getCategoryBySlug(categorySlug);
+  if (!category) return undefined;
+
   return PROJECTS_DATA.find(
-    (p) => (p.categorySlug === categorySlug || p.categorySlug === categorySlug.replace("-", "")) && (p.slug === projectSlug || p.id === projectSlug)
+    (p) => p.categorySlug === category.slug && normalizeSlug(p.slug) === normProject
   );
 }
 
 export function findProject(slugOrId: string): ProjectItem | undefined {
-  return PROJECTS_DATA.find((p) => p.slug === slugOrId || p.id === slugOrId);
+  if (!slugOrId) return undefined;
+  const norm = normalizeSlug(slugOrId);
+  return PROJECTS_DATA.find(
+    (p) => normalizeSlug(p.slug) === norm || normalizeSlug(p.id) === norm || normalizeSlug(p.shortTag) === norm
+  );
 }
