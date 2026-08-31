@@ -66,9 +66,28 @@ export async function generateMetadata({ params }: ProjectPageProps) {
     return { title: "Project Not Found | Corban Technologies LTD" };
   }
 
+  const pageUrl = `https://www.corbantechnologies.org/products/${project.categorySlug}/${project.slug}`;
+
   return {
     title: `${project.name} | Corban Technologies LTD`,
     description: project.summary,
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      type: "website",
+      locale: "en_KE",
+      url: pageUrl,
+      title: `${project.name} | Corban Technologies LTD`,
+      description: project.summary,
+      siteName: "Corban Technologies LTD",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.name} | Corban Technologies LTD`,
+      description: project.summary,
+      creator: "@corbantechltd",
+    },
   };
 }
 
@@ -113,8 +132,66 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
   const category = getCategoryBySlug(project.categorySlug);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        name: project.name,
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Cloud Web Application",
+        description: project.summary,
+        url: `https://www.corbantechnologies.org/products/${project.categorySlug}/${project.slug}`,
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "KES",
+          description: project.pricing.model,
+        },
+        provider: {
+          "@type": "Organization",
+          name: "Corban Technologies LTD",
+          url: "https://www.corbantechnologies.org",
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://www.corbantechnologies.org",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Products & Divisions",
+            item: "https://www.corbantechnologies.org/products",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: category?.name || project.categoryName,
+            item: `https://www.corbantechnologies.org/products/${project.categorySlug}`,
+          },
+          {
+            "@type": "ListItem",
+            position: 4,
+            name: project.name,
+            item: `https://www.corbantechnologies.org/products/${project.categorySlug}/${project.slug}`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="w-full bg-white min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Breadcrumb Navigation Bar */}
       <div className="w-full bg-slate-50 border-b border-slate-200 py-3 overflow-x-auto">
         <div className="w-full px-4 sm:px-8 lg:px-16 flex items-center gap-2 text-xs text-slate-500 font-medium whitespace-nowrap min-w-max">

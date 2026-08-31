@@ -18,9 +18,28 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "SACCO & Cooperative Platform | Corban Technologies LTD",
+  title: "SACCO & Cooperative Core Banking Platform | Corban Technologies LTD",
   description:
-    "The Wananchi Mali SACCO Platform — a complete digital cooperative management system powering 3 live SACCOs across Kenya. Built and cloud-hosted by Corban Technologies.",
+    "Wananchi Mali SACCO Core Banking Platform — a complete digital cooperative management system powering Kenyan SACCOs. Multi-pot savings, dual loan engines, automated double-entry GL, and Safaricom Daraja M-Pesa.",
+  alternates: {
+    canonical: "https://www.corbantechnologies.org/sacco-platform",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_KE",
+    url: "https://www.corbantechnologies.org/sacco-platform",
+    title: "SACCO & Cooperative Core Banking Platform | Corban Technologies LTD",
+    description:
+      "Wananchi Mali SACCO Core Banking Platform — complete digital cooperative core banking powering SACCOs across Kenya with multi-pot savings, loans, and Daraja M-Pesa.",
+    siteName: "Corban Technologies LTD",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SACCO & Cooperative Core Banking Platform | Corban Technologies LTD",
+    description:
+      "Wananchi Mali SACCO Core Banking Platform — complete digital cooperative core banking powering SACCOs across Kenya.",
+    creator: "@corbantechltd",
+  },
 };
 
 const highlights = [

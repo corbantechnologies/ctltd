@@ -17,7 +17,26 @@ import { getAllCategories, getProjectsByCategory } from "@/lib/data/products";
 export const metadata = {
   title: "Products & Systems Directory | Corban Technologies LTD",
   description:
-    "Explore our full suite of enterprise software divisions: SACCO core banking, SME general ledgers & finance, retail POS & e-commerce, telecom marketing, fleet logistics, and digital event ticketing.",
+    "Explore Corban Technologies' 6 core enterprise divisions: SACCO core banking platforms, SME double-entry accounting ledgers, omnichannel cashier POS registers, marketing telecom engines, fleet logistics, and digital event ticketing.",
+  alternates: {
+    canonical: "https://www.corbantechnologies.org/products",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_KE",
+    url: "https://www.corbantechnologies.org/products",
+    title: "Products & Systems Directory | Corban Technologies LTD",
+    description:
+      "Explore Corban Technologies' 6 core enterprise divisions: SACCO core banking platforms, SME double-entry accounting ledgers, omnichannel cashier POS registers, marketing telecom engines, fleet logistics, and digital event ticketing.",
+    siteName: "Corban Technologies LTD",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Products & Systems Directory | Corban Technologies LTD",
+    description:
+      "Explore Corban Technologies' 6 core enterprise divisions: SACCO core banking platforms, SME double-entry accounting ledgers, omnichannel cashier POS registers, marketing telecom engines, fleet logistics, and digital event ticketing.",
+    creator: "@corbantechltd",
+  },
 };
 
 const iconMap: Record<string, typeof Building2> = {

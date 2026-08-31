@@ -10,13 +10,32 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
   if (!career) {
     return {
-      title: "Role Not Found",
+      title: "Role Not Found | Corban Technologies LTD",
     };
   }
 
+  const pageUrl = `https://www.corbantechnologies.org/careers/${career.id}`;
+
   return {
-    title: career.title,
+    title: `${career.title} | Careers at Corban Technologies LTD`,
     description: career.about.substring(0, 160) + "...",
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      type: "website",
+      locale: "en_KE",
+      url: pageUrl,
+      title: `${career.title} | Careers at Corban Technologies LTD`,
+      description: career.about.substring(0, 160) + "...",
+      siteName: "Corban Technologies LTD",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${career.title} | Careers at Corban Technologies LTD`,
+      description: career.about.substring(0, 160) + "...",
+      creator: "@corbantechltd",
+    },
   };
 }
 

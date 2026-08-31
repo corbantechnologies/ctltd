@@ -61,9 +61,28 @@ export async function generateMetadata({ params }: CategoryPageProps) {
     return { title: "Division Not Found | Corban Technologies LTD" };
   }
 
+  const pageUrl = `https://www.corbantechnologies.org/products/${category.slug}`;
+
   return {
     title: `${category.name} | Corban Technologies LTD`,
     description: category.description,
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      type: "website",
+      locale: "en_KE",
+      url: pageUrl,
+      title: `${category.name} | Corban Technologies LTD`,
+      description: category.description,
+      siteName: "Corban Technologies LTD",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${category.name} | Corban Technologies LTD`,
+      description: category.description,
+      creator: "@corbantechltd",
+    },
   };
 }
 
@@ -108,8 +127,37 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const projects = getProjectsByCategory(category.slug);
   const CategoryIcon = iconMap[category.iconName] || Building2;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.corbantechnologies.org",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Products & Divisions",
+        item: "https://www.corbantechnologies.org/products",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: category.name,
+        item: `https://www.corbantechnologies.org/products/${category.slug}`,
+      },
+    ],
+  };
+
   return (
     <div className="w-full bg-white min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Breadcrumb Bar */}
       <div className="w-full bg-slate-50 border-b border-slate-200 py-3 overflow-x-auto">
         <div className="w-full px-4 sm:px-8 lg:px-16 flex items-center gap-2 text-xs text-slate-500 font-medium whitespace-nowrap min-w-max">

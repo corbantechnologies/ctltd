@@ -13,8 +13,8 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* ── 1. CORPORATE HERO SECTION (FULL WIDTH) ──────────────────────── */}
-      <section className="relative w-full bg-white border-b border-slate-200 pt-16 pb-16 overflow-hidden">
-        <div className="w-full px-6 sm:px-10 lg:px-16 relative z-10">
+      <section className="relative w-full bg-white border-b border-slate-200 pt-12 sm:pt-16 pb-12 sm:pb-16 overflow-hidden">
+        <div className="w-full px-4 sm:px-8 lg:px-16 relative z-10">
           <div className="max-w-4xl space-y-6">
             {/* Top Micro-Badges */}
             <div className="flex flex-wrap items-center gap-2">
@@ -92,8 +92,8 @@ export default function Home() {
       <HostingArchitecture />
 
       {/* ── 8. CLOSING ONBOARDING CALL TO ACTION ─────────────────────── */}
-      <section className="w-full bg-slate-50 py-16">
-        <div className="w-full px-6 sm:px-10 lg:px-16">
+      <section className="w-full bg-slate-50 py-12 sm:py-16">
+        <div className="w-full px-4 sm:px-8 lg:px-16">
           <div className="p-8 rounded bg-white border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="space-y-2 max-w-3xl">
               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-xs font-semibold text-corporate-primary">

@@ -4,8 +4,28 @@ import careers from "@/careers/careers";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Careers",
-  description: "Join our team at Corban Technologies LTD. Explore our open positions and help build the future of digital infrastructure in East Africa.",
+  title: "Engineering & Careers | Corban Technologies LTD",
+  description:
+    "Explore engineering and technology roles at Corban Technologies LTD in Mombasa & Nairobi. Build mission-critical core banking, finance, and cloud platforms for East Africa.",
+  alternates: {
+    canonical: "https://www.corbantechnologies.org/careers",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_KE",
+    url: "https://www.corbantechnologies.org/careers",
+    title: "Engineering & Careers | Corban Technologies LTD",
+    description:
+      "Join the engineering team building future-proof digital infrastructure and enterprise software across East Africa.",
+    siteName: "Corban Technologies LTD",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Engineering & Careers | Corban Technologies LTD",
+    description:
+      "Join the engineering team building future-proof digital infrastructure across East Africa.",
+    creator: "@corbantechltd",
+  },
 };
 
 export default function CareersPage() {

@@ -5,7 +5,26 @@ import { Users, History, Building2, Globe, CheckCircle2, ArrowRight } from "luci
 export const metadata: Metadata = {
   title: "About Us | Corban Technologies LTD",
   description:
-    "Corban Technologies LTD is a Kenyan software engineering and enterprise cloud hosting company based in Mombasa. We build, deploy, and manage mission-critical platforms.",
+    "Corban Technologies LTD is a Kenyan software engineering and enterprise cloud hosting company based in Mombasa. We design, deploy, and cloud-host mission-critical software platforms across East Africa.",
+  alternates: {
+    canonical: "https://www.corbantechnologies.org/about",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_KE",
+    url: "https://www.corbantechnologies.org/about",
+    title: "About Us | Corban Technologies LTD",
+    description:
+      "Kenyan software engineering and enterprise cloud hosting company based in Mombasa, powering mission-critical platforms across East Africa.",
+    siteName: "Corban Technologies LTD",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | Corban Technologies LTD",
+    description:
+      "Kenyan software engineering and enterprise cloud hosting company based in Mombasa, powering mission-critical platforms across East Africa.",
+    creator: "@corbantechltd",
+  },
 };
 
 export default function About() {
