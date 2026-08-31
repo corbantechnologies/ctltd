@@ -1,6 +1,8 @@
 import { ImageResponse } from "next/og";
+import fs from "fs";
+import path from "path";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 export const alt = "Corban Technologies LTD — Enterprise Software & Cloud Infrastructure";
 export const size = {
   width: 1200,
@@ -9,6 +11,10 @@ export const size = {
 export const contentType = "image/png";
 
 export default async function Image() {
+  const logoPath = path.join(process.cwd(), "public", "logo.png");
+  const logoBase64 = fs.readFileSync(logoPath).toString("base64");
+  const logoDataUri = `data:image/png;base64,${logoBase64}`;
+
   return new ImageResponse(
     (
       <div
@@ -19,71 +25,54 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "space-between",
-          backgroundColor: "#0f172a",
+          backgroundColor: "#ffffff",
           padding: "60px 80px",
           fontFamily: "sans-serif",
+          border: "16px solid #f1f5f9",
         }}
       >
-        {/* Top Bar */}
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+        {/* Top Header with Official Logo & Badge */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={logoDataUri}
+            alt="Corban Technologies LTD Logo"
+            style={{ width: "220px", height: "auto" }}
+          />
+
           <div
             style={{
-              width: "48px",
-              height: "48px",
-              borderRadius: "10px",
-              backgroundColor: "#ea580c",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              color: "#ffffff",
-              fontSize: "26px",
-              fontWeight: "bold",
-            }}
-          >
-            CT
-          </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <span
-              style={{
-                color: "#ffffff",
-                fontSize: "24px",
-                fontWeight: "bold",
-                letterSpacing: "-0.5px",
-              }}
-            >
-              Corban Technologies LTD
-            </span>
-            <span style={{ color: "#94a3b8", fontSize: "15px" }}>
-              Mombasa &bull; Nairobi, Kenya
-            </span>
-          </div>
-        </div>
-
-        {/* Center Headline */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "950px" }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              padding: "6px 14px",
+              padding: "8px 16px",
               borderRadius: "6px",
-              backgroundColor: "rgba(234, 88, 12, 0.15)",
-              border: "1px solid rgba(234, 88, 12, 0.4)",
-              color: "#ea580c",
-              fontSize: "15px",
+              backgroundColor: "#f8fafc",
+              border: "1px solid #cbd5e1",
+              color: "#0f172a",
+              fontSize: "14px",
               fontWeight: 600,
-              width: "fit-content",
             }}
           >
             Enterprise Software &bull; Cloud Infrastructure
           </div>
+        </div>
+
+        {/* Center Headline */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px", maxWidth: "980px" }}>
           <h1
             style={{
-              color: "#ffffff",
+              color: "#0f172a",
               fontSize: "46px",
-              fontWeight: 700,
+              fontWeight: 800,
               lineHeight: 1.15,
-              letterSpacing: "-1px",
+              letterSpacing: "-1.5px",
               margin: 0,
             }}
           >
@@ -91,13 +80,13 @@ export default async function Image() {
           </h1>
           <p
             style={{
-              color: "#94a3b8",
+              color: "#475569",
               fontSize: "20px",
               lineHeight: 1.4,
               margin: 0,
             }}
           >
-            SACCO Core Banking &bull; Double-Entry SME Finance &bull; Omnichannel POS &bull; Telecom Messaging
+            SACCO Core Banking &bull; Double-Entry SME Finance &bull; Omnichannel Retail POS &bull; Telecom &amp; Logistics
           </p>
         </div>
 
@@ -109,15 +98,15 @@ export default async function Image() {
             justifyContent: "space-between",
             width: "100%",
             paddingTop: "24px",
-            borderTop: "1px solid #334155",
+            borderTop: "1.5px solid #e2e8f0",
           }}
         >
-          <div style={{ display: "flex", gap: "24px", color: "#cbd5e1", fontSize: "16px", fontWeight: 600 }}>
-            <span>✓ 3 Live SACCOs</span>
-            <span>✓ 99.9% Uptime SLA</span>
-            <span>✓ Safaricom Daraja M-Pesa</span>
+          <div style={{ display: "flex", gap: "24px", color: "#334155", fontSize: "16px", fontWeight: 600 }}>
+            <span>&bull; 3 Live SACCOs</span>
+            <span>&bull; 99.9% Uptime SLA</span>
+            <span>&bull; Safaricom Daraja Rails</span>
           </div>
-          <div style={{ color: "#ea580c", fontSize: "18px", fontWeight: 700, letterSpacing: "-0.5px" }}>
+          <div style={{ color: "#ea580c", fontSize: "18px", fontWeight: 700 }}>
             corbantechnologies.org
           </div>
         </div>
