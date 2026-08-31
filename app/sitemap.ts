@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { getAllCategories, getAllProjects } from "@/lib/data/products";
+import careers from "@/careers/careers";
 
 const baseUrl = "https://www.corbantechnologies.org";
 
@@ -44,13 +45,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.75,
     },
-    {
-      url: `${baseUrl}/careers/14567854ABCVGH`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
   ];
+
+  // Map any active career postings dynamically
+  const careerRoutes: MetadataRoute.Sitemap = (careers || []).map((c) => ({
+    url: `${baseUrl}/careers/${c.id}`,
+    lastModified: currentDate,
+    changeFrequency: "weekly",
+    priority: 0.6,
+  }));
 
   // 2. All 6 Division / Category Pages
   const categories = getAllCategories();
@@ -70,5 +73,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  return [...staticRoutes, ...categoryRoutes, ...projectRoutes];
+  return [...staticRoutes, ...categoryRoutes, ...projectRoutes, ...careerRoutes];
 }

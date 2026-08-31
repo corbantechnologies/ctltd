@@ -1,12 +1,12 @@
-import { MapPin, Briefcase, ArrowRight } from "lucide-react";
+import { Briefcase, ArrowRight, Mail, Users, Code, ShieldCheck, Sparkles, Building2 } from "lucide-react";
 import Link from "next/link";
-import careers from "@/careers/careers";
 import { Metadata } from "next";
+import careers from "@/careers/careers";
 
 export const metadata: Metadata = {
   title: "Engineering & Careers | Corban Technologies LTD",
   description:
-    "Explore engineering and technology roles at Corban Technologies LTD in Mombasa & Nairobi. Build mission-critical core banking, finance, and cloud platforms for East Africa.",
+    "Engineering and technology roles at Corban Technologies LTD in Mombasa & Nairobi. Building mission-critical core banking, finance, retail POS, and cloud platforms for East Africa.",
   alternates: {
     canonical: "https://www.corbantechnologies.org/careers",
   },
@@ -29,69 +29,123 @@ export const metadata: Metadata = {
 };
 
 export default function CareersPage() {
+  const openPositions = careers || [];
+
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Careers Hero */}
-      <section className="relative pt-12 pb-24 lg:pt-40 lg:pb-32 overflow-hidden border-b border-slate-200 bg-white">
-        <div className="absolute inset-0 bg-grid-slate-100 pointer-events-none opacity-40 mx-auto max-w-7xl" />
-        <div className="container mx-auto px-6 relative z-10 text-center lg:text-left max-w-6xl flex flex-col items-center lg:items-start">
-          <span className="mb-6 inline-flex items-center rounded bg-slate-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-corporate-primary border border-slate-200 shadow-sm">
-            Join Our Team
-          </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-slate-900 mb-8 leading-[1.1]">
-            Build the <span className="text-corporate-primary">Future.</span>
-          </h1>
-          <p className="text-slate-500 text-lg md:text-xl max-w-2xl leading-relaxed text-center lg:text-left">
-            Help us build the foundational infrastructure for modern financial operations and cloud systems. We are looking for driven individuals to join our growing team.
-          </p>
+    <div className="w-full bg-white min-h-screen">
+      {/* ── 1. CAREERS HERO HEADER ─────────────────────────────────────── */}
+      <section className="w-full bg-slate-50/80 border-b border-slate-200 py-10 sm:py-14">
+        <div className="w-full px-4 sm:px-8 lg:px-16">
+          <div className="max-w-4xl space-y-4">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-white border border-slate-200 text-xs font-semibold text-corporate-primary">
+              <Briefcase className="w-3.5 h-3.5" />
+              Talent &amp; Engineering Careers
+            </div>
+            <h1 className="text-xl sm:text-2xl font-semibold text-slate-900 tracking-tight">
+              Build Mission-Critical Infrastructure in East Africa
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
+              At Corban Technologies, we design and cloud-host the foundational software powering financial cooperatives, SME accounting, retail point-of-sale systems, and telecom engines across Kenya.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Positions List */}
-      <section className="py-20 lg:py-32 bg-slate-50 flex-grow">
-        <div className="container max-w-5xl mx-auto px-6">
-          <div className="mb-12 text-center lg:text-left">
-            <h2 className="text-3xl font-semibold text-slate-900 tracking-tight">Open Positions</h2>
-            <p className="text-slate-500 mt-3 text-lg">Explore our current opportunities and find your next role.</p>
+      {/* ── 2. POSITIONS STATUS / LISTING ──────────────────────────────── */}
+      <section className="w-full py-12 sm:py-16">
+        <div className="w-full px-4 sm:px-8 lg:px-16 space-y-10">
+          <div className="border-b border-slate-200 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-semibold text-slate-900 tracking-tight">
+                Current Openings ({openPositions.length})
+              </h2>
+              <p className="text-xs text-slate-500 mt-0.5">
+                All full-time engineering and commercial roles are currently filled.
+              </p>
+            </div>
+            <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-slate-100 border border-slate-200 text-slate-700 self-start sm:self-auto">
+              Hiring Status: Fully Staffed
+            </span>
           </div>
-          
-          <div className="flex flex-col gap-6">
-            {careers.map((job) => (
-              <Link 
-                key={job.id} 
-                href={`/careers/${job.id}`} 
-                className="group block bg-white p-8 rounded shadow-sm border border-slate-200 hover:shadow-md transition-all hover:border-corporate-primary"
-              >
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+
+          {openPositions.length === 0 ? (
+            <div className="rounded border border-slate-200 bg-white p-8 sm:p-12 text-center space-y-4 max-w-3xl mx-auto shadow-2xs">
+              <div className="w-12 h-12 rounded bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 mx-auto">
+                <Briefcase className="w-6 h-6 text-corporate-primary" />
+              </div>
+              <div className="space-y-1.5">
+                <h3 className="text-base font-semibold text-slate-900">
+                  No Active Vacancies at This Time
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed max-w-lg mx-auto">
+                  We currently have no open positions. Our core engineering, DevOps, and commercial teams are fully staffed. However, we are always eager to meet top-tier Kenyan software engineers and domain experts.
+                </p>
+              </div>
+
+              <div className="pt-2">
+                <a
+                  href="mailto:careers@corbantechnologies.org?subject=General%20Talent%20Inquiry%20-%20Corban%20Technologies"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition-colors shadow-xs"
+                >
+                  <Mail className="w-3.5 h-3.5" /> Submit CV for Future Openings
+                </a>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-4">
+              {openPositions.map((job) => (
+                <Link
+                  key={job.id}
+                  href={`/careers/${job.id}`}
+                  className="p-5 rounded border border-slate-200 bg-white hover:border-corporate-primary transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs"
+                >
                   <div>
-                    <h3 className="text-2xl font-semibold text-slate-900 mb-4 group-hover:text-corporate-primary transition-colors">
+                    <h3 className="text-sm font-semibold text-slate-900 mb-1">
                       {job.title}
                     </h3>
-                    <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-slate-600">
-                      <div className="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded border border-slate-100">
-                        <MapPin className="w-4 h-4 text-corporate-primary" />
-                        {job.location}
-                      </div>
-                      <div className="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded border border-slate-100">
-                        <Briefcase className="w-4 h-4 text-corporate-primary" />
-                        {job.type}
-                      </div>
-                    </div>
+                    <p className="text-xs text-slate-500">
+                      {job.location} &bull; {job.type}
+                    </p>
                   </div>
-                  <div className="flex-shrink-0 mt-2 md:mt-0">
-                    <span className="inline-flex items-center justify-center bg-slate-50 text-slate-700 px-6 py-3 rounded text-sm font-semibold border border-slate-200 group-hover:bg-corporate-primary group-hover:text-white group-hover:border-corporate-primary transition-colors">
-                      View Role <ArrowRight className="ml-2 w-4 h-4" />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-            
-            {careers.length === 0 && (
-              <div className="text-center py-20 bg-white border border-slate-200 rounded">
-                <p className="text-slate-500 text-lg">No open positions at the moment. Please check back later!</p>
+                  <span className="text-xs font-semibold text-corporate-primary inline-flex items-center gap-1">
+                    View Role <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* ── 3. TALENT POOL & CULTURE OVERVIEW ───────────────────────── */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-slate-200">
+            <div className="p-4 rounded border border-slate-200 bg-slate-50/50 space-y-2">
+              <div className="flex items-center gap-2 text-slate-900 font-semibold text-xs">
+                <Code className="w-4 h-4 text-corporate-primary" />
+                <span>Modern Engineering Stack</span>
               </div>
-            )}
+              <p className="text-xs text-slate-600 leading-relaxed">
+                We work with Next.js, TypeScript, PostgreSQL, Drizzle ORM, Google Cloud Platform, and direct Safaricom Daraja telecom APIs.
+              </p>
+            </div>
+
+            <div className="p-4 rounded border border-slate-200 bg-slate-50/50 space-y-2">
+              <div className="flex items-center gap-2 text-slate-900 font-semibold text-xs">
+                <Building2 className="w-4 h-4 text-corporate-primary" />
+                <span>Real Kenyan Impact</span>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Our code powers genuine Kenyan enterprises, managing millions in member savings and daily retail commerce.
+              </p>
+            </div>
+
+            <div className="p-4 rounded border border-slate-200 bg-slate-50/50 space-y-2">
+              <div className="flex items-center gap-2 text-slate-900 font-semibold text-xs">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <span>High Autonomy &amp; Ownership</span>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                We value disciplined software craftsmanship, rigorous financial accuracy, and direct architectural ownership.
+              </p>
+            </div>
           </div>
         </div>
       </section>

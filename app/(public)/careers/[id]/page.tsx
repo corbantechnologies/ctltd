@@ -96,105 +96,114 @@ export default async function CareerDetail({ params }: { params: Promise<{ id: s
             <hr className="border-slate-100" />
 
             {/* Compensation */}
-            <div>
-              <h2 className="text-2xl font-semibold text-slate-900 mb-4">Compensation & Structure</h2>
-              <p className="text-slate-600 mb-6 leading-relaxed text-lg">{career.compensation.structure}</p>
-              <div className="space-y-6">
-                {career.compensation.phases.map((phase, index) => (
-                  <div key={index} className="bg-slate-50 rounded p-6 border border-slate-100">
-                    <h3 className="font-semibold text-slate-900 mb-4 text-lg">{phase.name}</h3>
-                    <ul className="space-y-3">
-                      {phase.details.map((detail, idx) => (
-                        <li key={idx} className="flex items-start gap-3 text-slate-600">
-                          <div className="flex-shrink-0 w-2 h-2 rounded-full bg-corporate-primary mt-2" />
-                          <span className="leading-relaxed">{detail}</span>
-                        </li>
-                      ))}
-                    </ul>
+            {career.compensation && (
+              <>
+                <div>
+                  <h2 className="text-2xl font-semibold text-slate-900 mb-4">Compensation & Structure</h2>
+                  <p className="text-slate-600 mb-6 leading-relaxed text-lg">{career.compensation.structure}</p>
+                  <div className="space-y-6">
+                    {career.compensation.phases?.map((phase, index) => (
+                      <div key={index} className="bg-slate-50 rounded p-6 border border-slate-100">
+                        <h3 className="font-semibold text-slate-900 mb-4 text-lg">{phase.name}</h3>
+                        <ul className="space-y-3">
+                          {phase.details?.map((detail, idx) => (
+                            <li key={idx} className="flex items-start gap-3 text-slate-600">
+                              <div className="flex-shrink-0 w-2 h-2 rounded-full bg-corporate-primary mt-2" />
+                              <span className="leading-relaxed">{detail}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
-
-            <hr className="border-slate-100" />
+                </div>
+                <hr className="border-slate-100" />
+              </>
+            )}
 
             {/* Responsibilities */}
-            <div>
-              <h2 className="text-2xl font-semibold text-slate-900 mb-6">Key Responsibilities</h2>
-              <div className="space-y-10">
-                {career.responsibilities.map((group, index) => (
-                  <div key={index}>
-                    <h3 className="font-semibold text-slate-900 mb-4 text-xl">{group.category}</h3>
-                    <ul className="space-y-4">
-                      {group.items.map((item, idx) => {
-                        const [title, ...desc] = item.split(': ');
-                        return (
-                          <li key={idx} className="flex items-start gap-3 text-slate-600 bg-slate-50/50 p-4 rounded border border-slate-100">
-                            <div className="flex-shrink-0 w-2 h-2 rounded-full bg-corporate-primary mt-2" />
-                            <span className="leading-relaxed">
-                              {desc.length > 0 ? (
-                                <>
-                                  <strong className="text-slate-900 font-semibold">{title}:</strong> {desc.join(': ')}
-                                </>
-                              ) : (
-                                item
-                              )}
-                            </span>
-                          </li>
-                        );
-                      })}
-                    </ul>
+            {career.responsibilities && (
+              <>
+                <div>
+                  <h2 className="text-2xl font-semibold text-slate-900 mb-6">Key Responsibilities</h2>
+                  <div className="space-y-10">
+                    {career.responsibilities.map((group, index) => (
+                      <div key={index}>
+                        <h3 className="font-semibold text-slate-900 mb-4 text-xl">{group.category}</h3>
+                        <ul className="space-y-4">
+                          {group.items?.map((item, idx) => {
+                            const [title, ...desc] = item.split(': ');
+                            return (
+                              <li key={idx} className="flex items-start gap-3 text-slate-600 bg-slate-50/50 p-4 rounded border border-slate-100">
+                                <div className="flex-shrink-0 w-2 h-2 rounded-full bg-corporate-primary mt-2" />
+                                <span className="leading-relaxed">
+                                  {desc.length > 0 ? (
+                                    <>
+                                      <strong className="text-slate-900 font-semibold">{title}:</strong> {desc.join(': ')}
+                                    </>
+                                  ) : (
+                                    item
+                                  )}
+                                </span>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
-
-            <hr className="border-slate-100" />
+                </div>
+                <hr className="border-slate-100" />
+              </>
+            )}
 
             {/* Requirements */}
-            <div>
-              <h2 className="text-2xl font-semibold text-slate-900 mb-6">Who You Are</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {career.requirements.map((req, index) => (
-                  <div key={index} className="bg-slate-50 p-6 rounded border border-slate-100">
-                    <h3 className="font-semibold text-slate-900 mb-3 text-lg">{req.title}</h3>
-                    <p className="text-slate-600 leading-relaxed">{req.description}</p>
-                  </div>
-                ))}
+            {career.requirements && (
+              <div>
+                <h2 className="text-2xl font-semibold text-slate-900 mb-6">Who You Are</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {career.requirements.map((req, index) => (
+                    <div key={index} className="bg-slate-50 p-6 rounded border border-slate-100">
+                      <h3 className="font-semibold text-slate-900 mb-3 text-lg">{req.title}</h3>
+                      <p className="text-slate-600 leading-relaxed">{req.description}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Apply Now */}
-            <div className="bg-slate-900 text-white rounded p-6 md:p-12 text-center mt-12 relative overflow-hidden">
-               <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-corporate-primary/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
-               <div className="relative z-10">
-                 <h2 className="text-2xl md:text-3xl font-semibold mb-4">Ready to Apply?</h2>
-                 <p className="text-slate-300 mb-6 max-w-2xl mx-auto leading-relaxed text-lg">
-                   {career.howToApply.instruction}
-                 </p>
-                 
-                 {/* Instruction Box with clean layout and dedicated email display */}
-                 <div className="text-white font-medium block bg-slate-800 p-5 sm:p-6 rounded border border-slate-700 text-left mb-8 max-w-2xl mx-auto space-y-4">
-                   <p className="leading-relaxed text-slate-200 break-words">
-                     Please send us a brief introduction highlighting your background in business development or sales. In your note, briefly walk us through the strategy or approach you would take to get our financial core infrastructure in front of your first three institutional clients.
-                   </p>
-                   <div className="pt-2 border-t border-slate-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                     <span className="text-xs uppercase tracking-wider text-slate-400">Submit via Email:</span>
-                     <span className="text-corporate-primary font-mono select-all break-all text-sm sm:text-base">
-                       {career.howToApply.email}
-                     </span>
-                   </div>
-                 </div>
+            {career.howToApply && (
+              <div className="bg-slate-900 text-white rounded p-6 md:p-12 text-center mt-12 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-corporate-primary/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+                <div className="relative z-10">
+                  <h2 className="text-2xl md:text-3xl font-semibold mb-4">Ready to Apply?</h2>
+                  <p className="text-slate-300 mb-6 max-w-2xl mx-auto leading-relaxed text-lg">
+                    {career.howToApply.instruction}
+                  </p>
 
-                 <a 
-                   href={`mailto:${career.howToApply.email}?subject=Application: ${career.title}`}
-                   className="inline-flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white px-8 py-4 rounded font-semibold transition-colors shadow-lg shadow-orange-900/20 max-w-full w-full sm:w-auto"
-                 >
-                   <Mail className="mr-2 w-5 h-5 flex-shrink-0" />
-                   <span>Email Your Application</span>
-                 </a>
-               </div>
-            </div>
+                  <div className="text-white font-medium block bg-slate-800 p-5 sm:p-6 rounded border border-slate-700 text-left mb-8 max-w-2xl mx-auto space-y-4">
+                    <p className="leading-relaxed text-slate-200 break-words">
+                      {career.howToApply.prompt}
+                    </p>
+                    <div className="pt-2 border-t border-slate-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <span className="text-xs uppercase tracking-wider text-slate-400">Submit via Email:</span>
+                      <span className="text-corporate-primary font-mono select-all break-all text-sm sm:text-base">
+                        {career.howToApply.email}
+                      </span>
+                    </div>
+                  </div>
+
+                  <a
+                    href={`mailto:${career.howToApply.email}?subject=Application: ${career.title}`}
+                    className="inline-flex items-center justify-center bg-corporate-primary hover:bg-orange-600 text-white px-8 py-4 rounded font-semibold transition-colors shadow-lg shadow-orange-900/20 max-w-full w-full sm:w-auto"
+                  >
+                    <Mail className="mr-2 w-5 h-5 flex-shrink-0" />
+                    <span>Email Your Application</span>
+                  </a>
+                </div>
+              </div>
+            )}
 
           </div>
         </div>
