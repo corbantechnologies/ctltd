@@ -68,17 +68,17 @@ export default function Footer() {
             <ul className="space-y-2 text-xs text-slate-400">
               <li>
                 <Link href="/products/sacco" className="hover:text-corporate-primary transition-colors">
-                  1. SACCO Platform
+                  1. SACCO Platform (Wananchi Mali)
                 </Link>
               </li>
               <li>
                 <Link href="/products/finance" className="hover:text-corporate-primary transition-colors">
-                  2. Finance (FedhaHub)
+                  2. Finance &amp; GL (MannaBooks)
                 </Link>
               </li>
               <li>
                 <Link href="/products/retail" className="hover:text-corporate-primary transition-colors">
-                  3. Retail &amp; POS (GearHouse)
+                  3. Retail &amp; E-Shop (GearHouse &amp; Clate)
                 </Link>
               </li>
               <li>

@@ -33,11 +33,12 @@ const clientStories: ClientStory[] = [
     icon: Send,
   },
   {
-    name: "GearHouse Kenya",
-    category: "Omnichannel Retail & E-Commerce",
-    status: "Live Client Deployment",
+    name: "GearHouse Kenya & Clate Cosmetics",
+    category: "Omnichannel Retail & Cosmetics Commerce",
+    status: "Live Client Deployments",
     scope: "E-commerce storefront catalog, integrated barcode Point-of-Sale (POS) terminal, and real-time inventory synchronization.",
-    impact: "Multi-channel sales management with direct M-Pesa payment receipts and stock control.",
+    impact: "Multi-channel retail management powering physical counter checkout and online customer sales across Kenya.",
+    domain: "gearhouse.co.ke · clatecosmetics.com",
     icon: ShoppingBag,
   },
   {

@@ -35,12 +35,12 @@ const tracks: IndustryTrack[] = [
   {
     id: "retail",
     name: "Retailers & E-Commerce",
-    audience: "Boutiques, supermarket branches, beauty & gear retailers.",
-    recommendedPlatform: "GearHouse Omnichannel POS & Storefront",
+    audience: "Boutiques, online beauty shops (e.g. Clate Cosmetics), and gear retailers (e.g. GearHouse).",
+    recommendedPlatform: "GearHouse POS & Clate-Grade E-Commerce Storefronts",
     deploymentTime: "1 to 2 Weeks",
     hostingSetup: "Vercel Edge Frontend + High-Speed Django Product API",
     deliverables: [
-      "Online customer shopping catalog & cart",
+      "Online customer shopping catalog & mobile cart",
       "Cashier Barcode POS terminal interface",
       "Direct M-Pesa STK Push payments at checkout",
       "Real-time inventory stock level tracking & alerts",
@@ -68,7 +68,7 @@ const tracks: IndustryTrack[] = [
     id: "finance",
     name: "SMEs & Corporate Finance",
     audience: "Founders, finance directors, and accounting firms.",
-    recommendedPlatform: "FedhaHub Analytics & MannaBooks Accounting",
+    recommendedPlatform: "MannaBooks Double-Entry SME Accounting Suite",
     deploymentTime: "3 to 5 Days",
     hostingSetup: "High-Availability Relational PostgreSQL Database",
     deliverables: [
