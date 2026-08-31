@@ -111,25 +111,25 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   return (
     <div className="w-full bg-white min-h-screen">
       {/* Breadcrumb Bar */}
-      <div className="w-full bg-slate-50 border-b border-slate-200 py-3">
-        <div className="w-full px-6 sm:px-10 lg:px-16 flex items-center gap-2 text-xs text-slate-500 font-medium">
+      <div className="w-full bg-slate-50 border-b border-slate-200 py-3 overflow-x-auto">
+        <div className="w-full px-4 sm:px-8 lg:px-16 flex items-center gap-2 text-xs text-slate-500 font-medium whitespace-nowrap min-w-max">
           <Link href="/" className="hover:text-slate-900 transition-colors">
             Home
           </Link>
-          <ChevronRight className="w-3.5 h-3.5" />
+          <ChevronRight className="w-3.5 h-3.5 shrink-0" />
           <Link href="/products" className="hover:text-slate-900 transition-colors">
             Products &amp; Divisions
           </Link>
-          <ChevronRight className="w-3.5 h-3.5" />
+          <ChevronRight className="w-3.5 h-3.5 shrink-0" />
           <span className="text-slate-900 font-semibold">{category.name}</span>
         </div>
       </div>
 
       {/* Category Header */}
-      <section className="w-full bg-slate-50/50 border-b border-slate-200 py-12">
-        <div className="w-full px-6 sm:px-10 lg:px-16">
+      <section className="w-full bg-slate-50/50 border-b border-slate-200 py-10 sm:py-12">
+        <div className="w-full px-4 sm:px-8 lg:px-16">
           <div className="max-w-4xl space-y-3">
-            <div className="flex items-center gap-2.5">
+            <div className="flex flex-wrap items-center gap-2.5">
               <div className="p-2 rounded bg-white border border-slate-200 text-corporate-primary">
                 <CategoryIcon className="w-5 h-5" />
               </div>
@@ -141,10 +141,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-slate-900 tracking-tight">
               {category.name}
             </h1>
-            <p className="text-sm text-slate-600 leading-relaxed max-w-3xl">
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
               {category.description}
             </p>
           </div>
@@ -152,8 +152,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       </section>
 
       {/* Projects List with Brief and Mockup Preview */}
-      <section className="w-full py-12">
-        <div className="w-full px-6 sm:px-10 lg:px-16 space-y-12">
+      <section className="w-full py-10 sm:py-12">
+        <div className="w-full px-4 sm:px-8 lg:px-16 space-y-12">
           <div className="space-y-2">
             <h2 className="text-xl font-semibold text-slate-900 tracking-tight">
               Platforms &amp; Systems in this Division ({projects.length})

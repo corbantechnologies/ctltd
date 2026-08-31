@@ -97,7 +97,7 @@ const clientStories: ClientStory[] = [
     id: "ctdrive",
     name: "CT Drive Logistics",
     category: "Freight, Waybills & Fleet OS",
-    status: "Enterprise Logistics Platform",
+    status: "In Development · Pilot Testing",
     scope: "Automated waybill Code-128 barcode issuance, milestone tracking timeline, fleet truck manifests, and digital POD with OTP verification.",
     impact: "Streamlines parcel intake, depot route dispatch from Mombasa to Nairobi, and verified OTP delivery receipts.",
     domain: "ctdrive.co.ke",
@@ -142,8 +142,8 @@ export default function ClientTrustWall() {
   };
 
   return (
-    <section className="w-full bg-white py-14 border-b border-slate-200">
-      <div className="w-full px-6 sm:px-10 lg:px-16">
+    <section className="w-full bg-white py-12 sm:py-14 border-b border-slate-200">
+      <div className="w-full px-4 sm:px-8 lg:px-16">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200 gap-4">
           <div>

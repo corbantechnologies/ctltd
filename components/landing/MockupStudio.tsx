@@ -26,10 +26,10 @@ export default function MockupStudio() {
   const primaryProject: ProjectItem | undefined = categoryProjects[0];
 
   return (
-    <section id="products" className="w-full bg-white py-16 border-b border-slate-200">
-      <div className="w-full px-6 sm:px-10 lg:px-16">
+    <section id="products" className="w-full bg-white py-12 sm:py-16 border-b border-slate-200">
+      <div className="w-full px-4 sm:px-8 lg:px-16">
         {/* Header */}
-        <div className="mb-10 pb-4 border-b border-slate-200 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div className="mb-8 sm:mb-10 pb-4 border-b border-slate-200 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 border border-slate-200 text-xs font-semibold text-corporate-primary mb-2">
               <Layers className="w-3.5 h-3.5" />
@@ -38,7 +38,7 @@ export default function MockupStudio() {
             <h2 className="text-xl font-semibold text-slate-900 tracking-tight">
               Our Core Software Platforms &amp; Systems
             </h2>
-            <p className="text-sm text-slate-600 mt-1 max-w-3xl">
+            <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-3xl">
               Over the past year, Corban Technologies has built, refined, and deployed 6 core enterprise divisions. Explore the live platforms powering businesses across East Africa.
             </p>
           </div>
@@ -52,7 +52,7 @@ export default function MockupStudio() {
         </div>
 
         {/* Tab Selector Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5 mb-8">
           {categories.map((category) => {
             const isActive = activeTab === category.slug;
             return (

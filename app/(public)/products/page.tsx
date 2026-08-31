@@ -35,26 +35,26 @@ export default function ProductsPage() {
   return (
     <div className="w-full bg-white min-h-screen">
       {/* Top Banner Header */}
-      <section className="w-full bg-slate-50/80 border-b border-slate-200 py-12">
-        <div className="w-full px-6 sm:px-10 lg:px-16">
+      <section className="w-full bg-slate-50/80 border-b border-slate-200 py-10 sm:py-12">
+        <div className="w-full px-4 sm:px-8 lg:px-16">
           <div className="max-w-4xl space-y-3">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-white border border-slate-200 text-xs font-semibold text-corporate-primary">
               <FolderTree className="w-3.5 h-3.5" />
               Corporate Systems Portfolio
             </div>
-            <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-slate-900 tracking-tight">
               Enterprise Software &amp; Platform Divisions
             </h1>
-            <p className="text-sm text-slate-600 leading-relaxed max-w-3xl">
-              Over the year, Corban Technologies has built, refined, and deployed mission-critical production platforms across key East African industries. Click on any division or specific project below to explore architectures, verified features, mockups, and live platform links.
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
+              Over the year, Corban Technologies has built, refined, and deployed mission-critical production platforms across key East African industries. Click on any division or specific project below to explore architectures, verified features, live screens, and platform access.
             </p>
           </div>
         </div>
       </section>
 
       {/* Categories / Folders Grid */}
-      <section className="w-full py-12">
-        <div className="w-full px-6 sm:px-10 lg:px-16 space-y-8">
+      <section className="w-full py-10 sm:py-12">
+        <div className="w-full px-4 sm:px-8 lg:px-16 space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((category) => {
               const Icon = iconMap[category.iconName] || Building2;
@@ -145,9 +145,9 @@ export default function ProductsPage() {
           </div>
 
           {/* Bottom Trust Assurance Bar */}
-          <div className="p-6 rounded bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="p-5 sm:p-6 rounded bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded bg-white border border-slate-200 text-emerald-600">
+              <div className="p-2 rounded bg-white border border-slate-200 text-emerald-600 shrink-0">
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
@@ -161,7 +161,7 @@ export default function ProductsPage() {
             </div>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition-colors shrink-0 shadow-sm"
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition-colors shrink-0 shadow-sm"
             >
               Request Custom Enterprise Deployment <ArrowRight className="w-3.5 h-3.5" />
             </Link>

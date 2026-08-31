@@ -84,8 +84,8 @@ const tracks: IndustryTrack[] = [
     id: "logistics",
     name: "Logistics & Fleet Operators",
     audience: "Courier agencies, freight companies, and fleet dispatchers.",
-    recommendedPlatform: "CT Logistics Management System",
-    deploymentTime: "2 Weeks",
+    recommendedPlatform: "CT Drive Logistics OS (In Development · Private Pilot)",
+    deploymentTime: "Private Pilot Onboarding",
     hostingSetup: "Dedicated Cloud Server with Real-time Event Queue",
     deliverables: [
       "Waybill issuance with barcode generation",
@@ -119,8 +119,8 @@ export default function IndustryNavigator() {
   const currentTrack = tracks.find((t) => t.id === selectedId) || tracks[0];
 
   return (
-    <section className="w-full bg-slate-50 py-16 border-b border-slate-200">
-      <div className="w-full px-6 sm:px-10 lg:px-16">
+    <section className="w-full bg-slate-50 py-12 sm:py-16 border-b border-slate-200">
+      <div className="w-full px-4 sm:px-8 lg:px-16">
         {/* Header */}
         <div className="mb-10 pb-4 border-b border-slate-200">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-white border border-slate-200 text-xs font-semibold text-corporate-primary mb-2">

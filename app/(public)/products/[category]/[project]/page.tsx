@@ -116,30 +116,30 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   return (
     <div className="w-full bg-white min-h-screen">
       {/* Breadcrumb Navigation Bar */}
-      <div className="w-full bg-slate-50 border-b border-slate-200 py-3">
-        <div className="w-full px-6 sm:px-10 lg:px-16 flex items-center gap-2 text-xs text-slate-500 font-medium">
+      <div className="w-full bg-slate-50 border-b border-slate-200 py-3 overflow-x-auto">
+        <div className="w-full px-4 sm:px-8 lg:px-16 flex items-center gap-2 text-xs text-slate-500 font-medium whitespace-nowrap min-w-max">
           <Link href="/" className="hover:text-slate-900 transition-colors">
             Home
           </Link>
-          <ChevronRight className="w-3.5 h-3.5" />
+          <ChevronRight className="w-3.5 h-3.5 shrink-0" />
           <Link href="/products" className="hover:text-slate-900 transition-colors">
             Products &amp; Divisions
           </Link>
-          <ChevronRight className="w-3.5 h-3.5" />
+          <ChevronRight className="w-3.5 h-3.5 shrink-0" />
           <Link
             href={`/products/${project.categorySlug}`}
             className="hover:text-slate-900 transition-colors"
           >
             {category?.name || project.categoryName}
           </Link>
-          <ChevronRight className="w-3.5 h-3.5" />
+          <ChevronRight className="w-3.5 h-3.5 shrink-0" />
           <span className="text-slate-900 font-semibold">{project.shortTag}</span>
         </div>
       </div>
 
       {/* Hero Header */}
-      <section className="w-full bg-slate-50/70 border-b border-slate-200 py-12">
-        <div className="w-full px-6 sm:px-10 lg:px-16">
+      <section className="w-full bg-slate-50/70 border-b border-slate-200 py-10 sm:py-12">
+        <div className="w-full px-4 sm:px-8 lg:px-16">
           <div className="max-w-4xl space-y-4">
             {/* Badges Row */}
             <div className="flex flex-wrap items-center gap-2">
@@ -160,12 +160,12 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             </div>
 
             {/* Title */}
-            <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-slate-900 tracking-tight">
               {project.name}
             </h1>
 
             {/* Hero Subtitle */}
-            <p className="text-sm font-medium text-corporate-primary">
+            <p className="text-xs sm:text-sm font-medium text-corporate-primary">
               {project.heroHeadline}
             </p>
 
@@ -197,8 +197,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
       </section>
 
       {/* Main Content Layout */}
-      <section className="w-full py-12">
-        <div className="w-full px-6 sm:px-10 lg:px-16">
+      <section className="w-full py-10 sm:py-12">
+        <div className="w-full px-4 sm:px-8 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {/* Left Content Column (8 cols) */}
             <div className="lg:col-span-8 space-y-12">

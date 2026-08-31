@@ -148,7 +148,7 @@ export const CATEGORIES_DATA: CategoryItem[] = [
     description:
       "Operating system for freight forwarders, couriers, and regional transporters. Simplifies parcel waybill intake, fleet route manifests between Mombasa and Nairobi, driver trip sheets, and recipient digital proof of delivery.",
     iconName: "Truck",
-    statusBadge: "CT Drive Platform",
+    statusBadge: "In Development · Private Beta",
     projectCount: 1,
     projectSlugs: ["ct-drive"],
   },
@@ -1001,13 +1001,13 @@ export const PROJECTS_DATA: ProjectItem[] = [
     categoryName: "Logistics & Fleet OS",
     name: "CT Drive — Freight, Waybills & Fleet Logistics OS",
     shortTag: "CT Drive Logistics",
-    statusBadge: "CT Drive Platform",
-    statusTone: "blue",
+    statusBadge: "In Development · Private Beta",
+    statusTone: "amber",
     liveDomain: "ctdrive.co.ke",
     liveUrl: "https://www.ctdrive.co.ke/",
     heroHeadline: "Waybill Barcode Automation, Fleet Dispatch & Real-Time Cargo Tracking",
     summary:
-      "CT Drive (ctdrive.co.ke) is Corban Technologies' logistics operating system engineered for cargo transporters, parcel couriers, and regional fleet operators. Simplifies automated waybill issuance with Code-128 barcodes, transport corridor routes (Mombasa to Nairobi), fleet dispatch manifests, driver trip sheets, real-time milestone checkpoints, and OTP digital proof of delivery.",
+      "CT Drive (ctdrive.co.ke) is Corban Technologies' logistics and fleet operating system currently under active engineering and private pilot development for regional freight forwarders and transporters. Simplifies automated waybill issuance with Code-128 barcodes, transport corridor routes (Mombasa to Nairobi), fleet dispatch manifests, driver trip sheets, real-time milestone checkpoints, and OTP digital proof of delivery.",
     benefits: [
       {
         title: "Automated Waybill Generation",

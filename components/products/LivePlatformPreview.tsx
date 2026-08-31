@@ -627,21 +627,27 @@ export default function LivePlatformPreview({
             <Lock className="w-3 h-3 text-emerald-600" />
             <span>https://app.ctdrive.co.ke/admin/dispatch</span>
           </div>
-          <span className="text-[10px] font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded">
-            DISPATCH WATCHTOWER &bull; LIVE
+          <span className="text-[10px] font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded">
+            IN DEVELOPMENT &bull; PRIVATE BETA
           </span>
         </div>
 
         {/* CT Drive Logistics Dispatch UI */}
         <div className="p-4 sm:p-5 space-y-3 bg-slate-50/60">
+          {/* In Development Notice */}
+          <div className="flex items-center gap-2 px-3 py-2 rounded bg-amber-50/90 border border-amber-200 text-amber-900 text-[11px]">
+            <Clock className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+            <span><strong>Platform in Development:</strong> Dispatch watchtower, corridor routing, and waybill engine currently in private pilot testing.</span>
+          </div>
+
           <div className="flex items-center justify-between pb-2.5 border-b border-slate-200">
             <div>
               <h4 className="text-sm font-semibold text-slate-900">Dispatch Watchtower</h4>
               <p className="text-[11px] text-slate-500">Mombasa Port &rarr; Voi Depot &rarr; Nairobi Central Hub</p>
             </div>
             <div className="flex items-center gap-1.5 text-xs text-slate-500 font-mono">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Live Feed Active</span>
+              <span className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+              <span>Pilot Build Active</span>
             </div>
           </div>
 
