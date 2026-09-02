@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import NextAuthProvider from "@/providers/NextAuthProvider";
 import TanstackQueryProvider from "@/providers/TanstackQueryProvider";
+
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "react-hot-toast";
@@ -146,14 +146,13 @@ export default function RootLayout({
         className={`${inter.className} min-h-screen bg-slate-50 text-slate-900 selection:bg-corporate-primary selection:text-white antialiased`}
       >
         <Toaster position="top-center" />
-        <NextAuthProvider>
-          <TanstackQueryProvider>
-            <main className="relative">{children}</main>
-          </TanstackQueryProvider>
-        </NextAuthProvider>
+        <TanstackQueryProvider>
+          <main className="relative">{children}</main>
+        </TanstackQueryProvider>
         <Analytics />
         <SpeedInsights />
       </body>
+
     </html>
   );
 }
