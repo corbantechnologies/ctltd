@@ -128,11 +128,11 @@ export const CATEGORIES_DATA: CategoryItem[] = [
     id: "marketing",
     slug: "marketing",
     rank: 4,
-    name: "Marketing & WhatsApp Telecom Engine",
+    name: "Marketing & Telecom Engine",
     folderName: "Marketing",
-    tagline: "Official Meta WhatsApp Business Cloud API, Alphanumeric SMS & Audience CRM",
+    tagline: "Alphanumeric Sender ID dispatch, prepaid SMS wallets & audience CRM funnels",
     description:
-      "Enterprise customer communication and telecom messaging engine. In live client pilot with LJK Marketing Agency, delivering official Meta WhatsApp Business Cloud API integration, certified alphanumeric sender ID routes, 1-click CSV audience imports, and automated M-Pesa billing.",
+      "High-throughput telecom messaging and marketing operations engine. In live client pilot with LJK Marketing Agency, delivering certified alphanumeric sender ID routes, 1-click CSV audience imports, and automated M-Pesa billing.",
     iconName: "Send",
     statusBadge: "Client Pilot (LJK Marketing)",
     projectCount: 1,
@@ -844,20 +844,16 @@ export const PROJECTS_DATA: ProjectItem[] = [
     slug: "ljk-marketing",
     categorySlug: "marketing",
     categoryName: "Marketing & Telecom Engine",
-    name: "LJK Marketing Agency – Meta WhatsApp Business API & Telecom Engine",
+    name: "LJK Marketing Agency — Business Telecom Engine",
     shortTag: "LJK Marketing",
     statusBadge: "Client Pilot (LJK Marketing)",
     statusTone: "amber",
     liveDomain: "ljkmarketingagency.co.ke",
     liveUrl: "https://www.ljkmarketingagency.co.ke/",
-    heroHeadline: "Official Meta WhatsApp Business Cloud API, Alphanumeric SMS & Audience CRM",
+    heroHeadline: "Alphanumeric Telecom Broadcasts, Prepaid SMS Wallets & Audience CRM",
     summary:
-      "LJK Marketing Agency (ljkmarketingagency.co.ke) is Corban Technologies' enterprise customer communication and telecom operations platform. Integrates official Meta WhatsApp Business Cloud API (marketing broadcasts, transactional utility notifications, interactive quick-reply buttons), certified 11-character alphanumeric SMS sender ID dispatch with Safaricom and Airtel Kenya, unified prepaid credit wallets with self-service M-Pesa STK top-ups, audience directory management, automated campaign broadcast schedulers, CA sending window compliance (7:00 AM – 8:00 PM), and developer REST APIs.",
+      "LJK Marketing Agency (ljkmarketingagency.co.ke) is a business messaging operations engine. In live client pilot, it delivers certified 11-character alphanumeric sender ID dispatch with Safaricom and Airtel Kenya, dual-channel prepaid SMS wallets with self-service M-Pesa STK top-ups, 1-click CSV audience imports, dynamic campaign broadcast schedulers, CA sending window compliance (7:00 AM – 8:00 PM), and developer REST APIs.",
     benefits: [
-      {
-        title: "Official Meta WhatsApp Cloud API",
-        desc: "Direct integration with Meta Graph API v19.0 for verified WhatsApp marketing campaigns, transactional order alerts, and rich interactive buttons.",
-      },
       {
         title: "Whitelisted Brand Sender IDs",
         desc: "Replace generic numbers with your official 11-character corporate name on Safaricom and Airtel Kenya.",
@@ -867,16 +863,15 @@ export const PROJECTS_DATA: ProjectItem[] = [
         desc: "Fund your messaging balance directly from the dashboard via Daraja STK Push with automated VAT receipts.",
       },
       {
-        title: "Omnichannel Unified Wallet",
-        desc: "Unified credit accounting enabling businesses to dispatch WhatsApp Business messages, Bulk SMS, and Email from a single wallet balance.",
+        title: "1-Click CSV Audience Wizard",
+        desc: "Upload customer directories with automatic E.164 phone formatting and tag-based group segmentation.",
+      },
+      {
+        title: "CA Anti-Spam Sending Windows",
+        desc: "Automatic enforcement of Communications Authority rules (7:00 AM – 8:00 PM) and carrier opt-out suppression.",
       },
     ],
     highlights: [
-      {
-        iconName: "Smartphone",
-        title: "Official Meta WhatsApp Business Gateway",
-        desc: "Author and dispatch Meta-approved HSM templates with dynamic parameters, media headers, and real-time blue tick (READ) delivery telemetry.",
-      },
       {
         iconName: "Radio",
         title: "Alphanumeric Sender ID Registration",
@@ -884,7 +879,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
       },
       {
         iconName: "Wallet",
-        title: "Prepaid Omnichannel Wallet & M-Pesa",
+        title: "Prepaid SMS Wallet & M-Pesa Top-Up",
         desc: "Instant wallet funding via Safaricom M-Pesa STK push with real-time credit balance tracking and automated tax invoices.",
       },
       {
@@ -898,25 +893,19 @@ export const PROJECTS_DATA: ProjectItem[] = [
         desc: "Inject dynamic tags ({first_name}, {balance}, {account_no}) into messages with live smartphone preview and bulk scheduling.",
       },
       {
+        iconName: "Lock",
+        title: "CA Regulations & Anti-Spam Compliance",
+        desc: "Enforces 7:00 AM – 8:00 PM promotional sending windows and automated carrier opt-out (STOP) suppression lists.",
+      },
+      {
         iconName: "BarChart3",
         title: "Delivery Receipts (DLR) & Analytics",
-        desc: "Real-time delivery status metrics (Sent, Delivered, Read Blue Ticks, Failed) with carrier and Meta webhooks.",
+        desc: "Real-time delivery status metrics (Sent, Delivered, Failed, Bounced) with carrier delivery receipts.",
       },
     ],
     modules: [
       {
-        title: "Meta WhatsApp Business API Gateway",
-        desc: "Direct cloud infrastructure connected to Meta's enterprise WhatsApp messaging network.",
-        items: [
-          "Direct Meta Cloud API v19.0 integration with zero intermediary markups",
-          "HSM Template creation, submission, and automated status synchronization",
-          "Rich interactive messages with Call-to-Action and Quick Reply buttons",
-          "Real-time webhook telemetry tracking Sent, Delivered, and Read (Blue Tick) events",
-          "Embedded Signup onboarding allowing client businesses to connect their WABA in 60 seconds",
-        ],
-      },
-      {
-        title: "Telecom SMS Messaging & Broadcast Engine",
+        title: "Telecom Messaging & Broadcast Engine",
         desc: "Engineered for marketing agencies requiring dependable high-speed message delivery.",
         items: [
           "High-throughput telecom queue processing up to 500 messages per second",
@@ -944,7 +933,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
           "Self-service M-Pesa STK Push wallet top-ups directly within the dashboard",
           "Automated VAT tax invoices generated upon credit replenishment",
           "Low-balance alert triggers warning managers before credits deplete",
-          "Unified credit deductions for WhatsApp, SMS, and Email",
+          "Per-unit SMS credit deduction on campaign dispatch",
           "Real-time ledger statements detailing every credit deduction",
         ],
       },
@@ -962,44 +951,43 @@ export const PROJECTS_DATA: ProjectItem[] = [
     ],
     specs: [
       { label: "Pilot Domain", value: "ljkmarketingagency.co.ke" },
-      { label: "WhatsApp Gateway", value: "Official Meta Cloud API v19.0" },
-      { label: "SMS Sender IDs", value: "11-Char Alphanumeric Whitelist" },
       { label: "Throughput", value: "500 Messages / Second" },
+      { label: "Sender IDs", value: "11-Char Alphanumeric Whitelist" },
       { label: "Billing", value: "Prepaid M-Pesa STK Push Wallet" },
-      { label: "Compliance", value: "Meta Approved HSM & CA Windows" },
+      { label: "Compliance", value: "CA Sending Windows (7AM-8PM)" },
+      { label: "Carrier Rails", value: "Safaricom & Airtel Certified" },
     ],
     pricing: {
-      model: "Pay-As-You-Go Omnichannel Credits & Volume Bundles",
+      model: "Pay-As-You-Go SMS Credits & Volume Bundles",
       description:
-        "Transparent tiered pricing per message unit across WhatsApp and SMS with zero monthly platform maintenance fees.",
+        "Transparent tiered pricing per SMS unit with zero monthly platform maintenance fees.",
       featuresIncluded: [
-        "Official Meta WhatsApp Business Cloud API Access",
         "11-Character Alphanumeric Sender ID Whitelisting",
         "Prepaid M-Pesa STK Push Wallet Top-Ups",
         "Unlimited CSV Audience Directory Uploads",
-        "Full DLR Delivery Receipts, Read Blue Ticks & Webhook APIs",
+        "Full DLR Delivery Receipts & Webhook APIs",
         "Dedicated Account Management & Compliance Support",
       ],
     },
-    techStack: ["Next.js 15", "Django REST", "PostgreSQL", "Meta Cloud API", "Africa's Talking"],
+    techStack: ["Next.js 15", "Django REST", "PostgreSQL", "Telecom Gateways"],
     mockup: {
       browserUrl: "https://www.ljkmarketingagency.co.ke/business/dashboard",
-      windowTitle: "LJK Marketing Agency – Business Telecom Workspace",
+      windowTitle: "LJK Marketing Agency — Business Telecom Workspace",
       metrics: [
-        { label: "WhatsApp Read Rate", value: "84.2%", trend: "Blue Ticks" },
+        { label: "Messages Sent", value: "128,400", trend: "99.2% Delivery" },
         { label: "Active Sender ID", value: "LJKAGENCY", trend: "Verified" },
         { label: "Credit Balance", value: "48,500 Units", trend: "Prepaid" },
       ],
       ledgerItems: [
         {
-          title: "WhatsApp Broadcast – Official Meta HSM",
-          subtitle: "Batch #WA-904 • 18,500 Delivered Messages",
-          amount: "99.1% Delivery",
+          title: "LJK Telecom Broadcast — Alphanumeric Sender",
+          subtitle: "Batch #LJK-774 · 24,000 Delivered SMS",
+          amount: "99.4% Delivery",
           status: "Dispatched",
         },
         {
           title: "Prepaid Wallet Top-up via M-Pesa STK",
-          subtitle: "Wallet Credited • Tax Invoice #INV-882",
+          subtitle: "Wallet Credited · Tax Invoice #INV-882",
           amount: "+KES 20,000.00",
           status: "Cleared",
         },
